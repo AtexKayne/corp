@@ -3,6 +3,7 @@ import MainSlider from '../components/MainSlider'
 import KaleidoscopeElem from '../components/KaleidoscopeElem'
 import Title from '../components/Title'
 import RangeLine from '../components/RangeLine'
+import { mainItems } from '../components/helpers/constants'
 
 export default function Home({ slides }) {
   return (
@@ -22,8 +23,13 @@ export default function Home({ slides }) {
 }
 
 export async function getServerSideProps({req}) {
-  const resp = await fetch(`${process.env.API_URL}/main`)
-  const json = await resp.json()
+  let resp, json
+  try {
+    resp = await fetch(`${process.env.API_URL}/main`)
+    json = await resp.json()
+  } catch (error) {
+    json = mainItems
+  }
 
   return {
     props: {

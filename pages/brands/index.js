@@ -23,12 +23,12 @@ export default function Brands({ items }) {
 
 export async function getServerSideProps({req}) {
     let resp, json
-    // try {
-    //     resp = await fetch(`${process.env.API_URL}/brands`)
-    //     json = await resp.json()
-    // } catch (error) {
+    try {
+        resp = await fetch(`${process.env.API_URL}/brands`)
+        json = await resp.json()
+    } catch (error) {
         json = brandItems
-    // }
+    }
   
     return {
         props: {
