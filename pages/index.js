@@ -23,9 +23,10 @@ export default function Home({ slides }) {
 }
 
 export async function getServerSideProps({req}) {
+  console.log(mainItems);
   let resp, json
   try {
-    resp = await fetch(`${process.env.API_URL}/main`)
+    resp = await fetch(`${process.env.API_URL}/mainxczxc`)
     json = await resp.json()
   } catch (error) {
     json = mainItems
@@ -33,7 +34,7 @@ export async function getServerSideProps({req}) {
 
   return {
     props: {
-      slides: json.slider
+      slides: mainItems.slider
     }
   }
 }
