@@ -1,0 +1,177 @@
+/**
+ * Utility classnames
+ */
+
+$utilities: () !default;
+
+$utilities: map-merge((
+    /*
+     * Generates text align classnames
+     *   .align-baseline, .align-top, ...
+     */
+    // 'align': (
+    //     property: vertical-align,
+    //     class: align,
+    //     values: baseline top middle bottom text-bottom text-top,
+    // ),
+
+    /*
+     * Generates text align classnames
+     *   .text-left, .text-center, .text-right
+     */
+    // 'text-align': (
+    //     responsive: true,
+    //     property: text-align,
+    //     values: left center right,
+    //     class: text,
+    // ),
+
+    /*
+     * Generates position classnames
+     *   .p-relative
+     */
+    'position': (
+        property: position,
+        values: relative,
+        class: p,
+    ),
+
+    /*
+     * Generates overflow classnames
+     *   .o-hidden
+     */
+    'overflow': (
+        property: overflow,
+        values: hidden,
+        class: o,
+    ),
+
+    /*
+     * Generates padding utility classnames
+     *   .pt-0, .pt-1, ..., .pt-0:sm, .pt-1:sm, ..., .py-0, ...
+     *   .pb-0, .pb-1, ..., .pb-0:sm, .pb-1:sm, ...
+     *   .pl-0, ..., .px-0, ...
+     *   .pr-0, ...
+     */
+    'padding-top': (
+        responsive: true,
+        property: padding-top,
+        class: pt py,
+        values: $spacing-classname-list,
+    ),
+    'padding-bottom': (
+        responsive: true,
+        property: padding-bottom,
+        class: pb py,
+        values: $spacing-classname-list,
+    ),
+    'padding-left': (
+        responsive: true,
+        property: padding-left,
+        class: pl px,
+        values: $spacing-classname-list,
+    ),
+    'padding-right': (
+        responsive: true,
+        property: padding-right,
+        class: pr px,
+        values: $spacing-classname-list,
+    ),
+
+    /*
+     * Generates margin utility classnames
+     *   .mt-0, .mt-1, ..., .mt-0:sm, .mt-1:sm, ..., .my-0, ...
+     *   .mb-0, .mb-1, ..., .mb-0:sm, .mb-1:sm, ...
+     *   .ml-0, ..., .mx-0, ...
+     *   .mr-0, ...
+     *   .ml-auto, .mr-auto, .mt-auto, .mx-auto, .ml-auto:sm, ...
+     */
+    'margin-top': (
+        responsive: true,
+        property: margin-top,
+        class: mt my,
+        use: reset-first-child,
+        values: map-merge($spacing-classname-list, (auto: auto)),
+    ),
+    'margin-bottom': (
+        responsive: true,
+        property: margin-bottom,
+        class: mb my,
+        use: reset-last-child,
+        values: map-merge($spacing-classname-list, (auto: auto)),
+    ),
+    'margin-left': (
+        responsive: true,
+        property: margin-left,
+        class: ml mx,
+        values: map-merge($spacing-classname-list, (auto: auto)),
+    ),
+    'margin-right': (
+        responsive: true,
+        property: margin-right,
+        class: mr mx,
+        values: map-merge($spacing-classname-list, (auto: auto)),
+    ),
+
+    /*
+     * Generates width and height utility classnames
+     *   .w-1, .w-2, ..., .w-4:lg, ...
+     *   .h-1, .h-2, ..., .h-4:lg, ...
+     */
+    // 'width': (
+    //     responsive: true,
+    //     property: width,
+    //     class: w,
+    //     values: $size-list,
+    // ),
+    // 'height': (
+    //     responsive: true,
+    //     property: height,
+    //     class: h,
+    //     values: $size-list,
+    // ),
+
+    // 'left': (
+    //     responsive: true,
+    //     property: left,
+    //     class: l,
+    //     values: $size-list,
+    // ),
+    // 'right': (
+    //     responsive: true,
+    //     property: right,
+    //     class: r,
+    //     values: $size-list,
+    // ),
+
+    /**
+     * Generates classnames with different values for different breakpoints, but all
+     * breakpoints will use the same classname, making the classname responsive without
+     * generating per breakpoint classnames
+     */
+
+    /*
+    'form-group-top': (
+        property: margin-top,
+        class: form-group,
+        use: reset-first-child,
+        values: (
+            xs: calc(var(--spacer-4) + 4px),
+        )
+    ),
+
+    'form-group-bottom': (
+        property: margin-bottom,
+        class: form-group,
+        use: reset-last-child,
+        values: (
+            xs: calc(var(--spacer-4) + 4px),
+        )
+    ),
+    */
+
+), $utilities);
+
+// Breakpoint which to use for utilities
+// $utilities-breakpoints: $media-breakpoints !default;
+$utilities-breakpoints: xs sm md xxxl !default;

@@ -1,0 +1,27 @@
+@mixin paddings ($paddings, $reset-first-last: false) {
+    @include margins($paddings, $reset-first-last, padding);
+}
+
+@mixin paddings-top ($paddings) {
+    // Top padding only, rest paddings are untouched
+    $top-index: 1; // in CSS 1st property is top
+    @include paddings(breakpoint-pick-css-nth($paddings, $top-index));
+}
+
+@mixin paddings-bottom ($paddings) {
+    // Bottom padding only, rest paddings are untouched
+    $bottom-index: 3; // in CSS 3rd property is bottom
+    @include paddings(breakpoint-pick-css-nth($paddings, $bottom-index));
+}
+
+@mixin paddings-right ($paddings) {
+    // Right padding only, rest paddings are untouched
+    $right-index: 2; // in CSS 2nth property is right
+    @include paddings(breakpoint-pick-css-nth($paddings, $right-index));
+}
+
+@mixin paddings-left ($paddings) {
+    // Left padding only, rest paddings are untouched
+    $left-index: 4; // in CSS 4th property is left
+    @include paddings(breakpoint-pick-css-nth($paddings, $left-index));
+}

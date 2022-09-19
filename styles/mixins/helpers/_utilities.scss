@@ -1,0 +1,140 @@
+@import "../lib/escape-selector";
+
+
+/**
+ * Convert classnames into CSS selector with breakpoint and postfix and add non-breakpoint prefixed selector for 'xs'
+ *
+ * @example
+ *     get-utility-classname(foo bar, 'xs', '3'); // => ".foo-3,.bar-3,.foo-xs-3,.bar-xs-3"
+ *     get-utility-classname(foo bar, 'md', '3'); // => ".foo-md-3,.bar-md-3"
+ */
+
+@function get-utility-selector ($classnames, $breakpoint: '', $postfix: '') {
+    $selectors: ();
+
+    @each $classname in $classnames {
+        @if $breakpoint and $breakpoint != '' {
+            $sub-selector: escape-selector('#{ $classname }#{ $postfix }:#{ $breakpoint }');
+            $selectors: append($selectors, '.#{ $sub-selector }', comma);
+        }
+
+        @if $breakpoint == '' or $breakpoint == 'xs' {
+            $sub-selector: escape-selector('#{ $classname }#{ $postfix }');
+            $selectors: append($selectors, '.#{ $sub-selector }', comma);
+        }
+    }
+
+    @return zip($selectors);
+}
+
+
+/**
+ * Generate utility classnames
+ */
+
+@mixin generate-utility ($utility, $breakpoint, $values-override: false) {
+    $class: map-get($utility, class);
+    $values: map-get($utility, values);
+    $properties: map-get($utility, property);
+
+    @if $values-override {
+        $values: $values-override;
+    }
+
+    $type: type-of($values);
+
+    @if $type == 'map' or $type == 'list' or $type == 'string' {
+        @each $key, $value in $values {
+            // If values is a list instead of a map then $value is null
+            // @if type-of($value) == 'null' {
+            //     $value: $key;
+            // }
+
+            // If values is a list instead of a map then $value is null
+            @if $type == 'list' or $type == 'string' {
+                $value: $key;
+            }
+
+            $selector: get-utility-selector($class, $breakpoint, '-#{ $key }');
+
+            #{ $selector } {
+                @include generate-utility-properties($properties, $value, $utility);
+            }
+        }
+    } @else {
+        // A property value instead of a map of (classPostfix: value)
+        $selector: get-utility-selector($class, $breakpoint);
+
+        #{ $selector } {
+            @include generate-utility-properties($properties, $values, $utility);
+        }
+    }
+}
+
+@mixin generate-utility-properties ($properties, $value, $utility) {
+    @if type-of($properties) == 'list' {
+        // A list of properties, eg. 'padding-top padding-bottom'
+        @each $property in $properties {
+            #{ $property }: #{ $value };
+        }
+    } @else {
+        // Single property
+        #{ $properties }: #{ $value };
+    }
+
+    // Apply use
+    @include apply-use($utility);
+}
+
+
+@mixin apply-use ($utility) {
+    $use: map-get($utility, use);
+
+    @if $use and type-of($use) == 'string' {
+        $use: str-split($use, " ");
+    }
+
+    @if index($use, reset-first-child) {
+        @include use-reset-first-child($utility);
+    }@else if index($use, reset-last-child) {
+        @include use-reset-last-child($utility);
+    }
+}
+
+/**
+ * Modifiers to reset value if element is first child
+ */
+@mixin use-reset-first-child ($utility) {
+    $properties: map-get($utility, property);
+
+    &:first-child {
+        @if type-of($properties) == 'list' {
+            // A list of properties, eg. 'padding-top padding-bottom'
+            @each $property in $properties {
+                #{ $property }: 0;
+            }
+        } @else {
+            // Single property
+            #{ $properties }: 0;
+        }
+    }
+}
+
+/**
+ * Modifiers to reset value if element is last child
+ */
+@mixin use-reset-last-child ($utility) {
+    $properties: map-get($utility, property);
+
+    &:last-child {
+        @if type-of($properties) == 'list' {
+            // A list of properties, eg. 'padding-top padding-bottom'
+            @each $property in $properties {
+                #{ $property }: 0;
+            }
+        } @else {
+            // Single property
+            #{ $properties }: 0;
+        }
+    }
+}

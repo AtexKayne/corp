@@ -1,0 +1,27 @@
+/*
+ * Custom fonts
+ */
+
+@font-face {
+    font-family: 'TT Commons';
+    src: url('#{$path-fonts}/tt-commons/TT-Commons-Pro-Light.woff2') format('woff2'), url('#{$path-fonts}/tt-commons/TT-Commons-Pro-Light.woff') format('woff');
+    font-weight: $medium;
+    font-style: normal;
+    font-display: block;
+}
+
+@font-face {
+    font-family: 'TT Commons';
+    src: url('#{$path-fonts}/tt-commons/TT-Commons-Pro-Regular.woff2') format('woff2'), url('#{$path-fonts}/tt-commons/TT-Commons-Pro-Regular.woff') format('woff');
+    font-weight: $book;
+    font-style: normal;
+    font-display: block;
+}
+
+@font-face {
+    font-family: 'TT Commons';
+    src: url('#{$path-fonts}/tt-commons/TT-Commons-Pro-Bold.woff2') format('woff2'), url('#{$path-fonts}/tt-commons/TT-Commons-Pro-Bold.woff') format('woff');
+    font-weight: $medium;
+    font-style: normal;
+    font-display: block;
+}

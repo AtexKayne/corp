@@ -1,0 +1,59 @@
+html {
+    font-size: 62.5%; // 1rem === 10px
+}
+
+body {
+    @extend %text--size-default;
+}
+
+body,
+input,
+textarea,
+button {
+    // Color
+    font-kerning: normal;
+    color: color-use(text);
+    font-feature-settings: "kern" 1;
+    text-rendering: optimizeLegibility;
+
+    @extend %text--style-default;
+}
+
+small {
+    @extend %text--size-small;
+}
+
+/*
+ * Headings
+ */
+
+h1, h2, h3, h4, h5 {
+    color: color-use(heading);
+    @extend %text--style-heading;
+}
+
+h1 {
+    @extend %text--size-h1;
+}
+h2 {
+    @extend %text--size-h2;
+}
+h3 {
+    @extend %text--size-h3;
+}
+h4 {
+    @extend %text--size-h4;
+}
+h5 {
+    @extend %text--size-h5;
+}
+
+/*
+ * Margins and paddings
+ */
+
+h1, h2, h3, h4, h5,
+hr, p, blockquote, table, iframe, object, pre,
+figure {
+    margin: 0;
+}

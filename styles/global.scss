@@ -1,0 +1,28 @@
+/**
+ * @page styles Style Guide
+ * @group settings 0 Settings
+ * @group components 1 Components
+ * @group modules 2 Modules
+ *
+ * Global styles which are included in all pages
+ */
+
+@import "imports";
+
+@import "base/spacing";
+@import "base/base";
+@import "base/color";
+@import "base/helpers";
+@import "base/fonts";
+@import "base/links";
+
+@import "components/preloader";
+@import "components/text/typography";
+@import "components/text/styles";
+@import "components/themes";
+@import "components/utilities";
+@import "components/hidden";
+@import "components/menu";
+@import "components/breadcrumbs";
+@import "components/container";
+@import "components/title";

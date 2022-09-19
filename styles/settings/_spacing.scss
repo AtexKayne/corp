@@ -1,0 +1,111 @@
+/*
+ * From these values is created `--spacing` CSS variable
+ * @see html/src/stylesheets/base/_spacing.scss
+ */
+
+$spacing-css-variable: (
+    xs:   20px,
+    md:   60px,
+    xxxl: 80px,
+);
+
+$spacing-css-sm-variable: (
+    xs:   20px,
+    md:   40px,
+    xxxl: 60px,
+);
+
+
+/*
+ * Spacing utility classnames
+ * From these are generated classnames pt-0, pt-1, pt-2, pt-3, pb-, mt-, mb-, py-, my-, ...
+ * See settings/_utilities.scss
+ */
+
+$spacing-classname-list: (
+    '0': 0px,
+
+    '0.5': calc(var(--spacing) * 0.5),
+    '1': var(--spacing),
+    '1.5': calc(var(--spacing) * 1.5),
+    '2': calc(var(--spacing) * 2),
+    '2.5': calc(var(--spacing) * 2.5),
+    '2.6': calc(var(--spacing) * 2.666),
+    '3': calc(var(--spacing) * 3),
+    '3.5': calc(var(--spacing) * 3.5),
+    '4': calc(var(--spacing) * 4),
+    '4.5': calc(var(--spacing) * 4.5),
+    '5': calc(var(--spacing) * 5),
+    '5.5': calc(var(--spacing) * 5.5),
+    '6': calc(var(--spacing) * 6),
+    '6.5': calc(var(--spacing) * 6.5),
+    '7': calc(var(--spacing) * 7),
+    '8': calc(var(--spacing) * 8),
+    '9': calc(var(--spacing) * 9),
+    '15': calc(var(--spacing) * 15),
+
+    'sm-0.5': calc(var(--spacing-sm) * 0.5),
+    'sm-1': var(--spacing-sm),
+    'sm-1.5': calc(var(--spacing-sm) * 1.5),
+    'sm-2': calc(var(--spacing-sm) * 2),
+    'sm-3': calc(var(--spacing-sm) * 3),
+    'sm-4': calc(var(--spacing-sm) * 4),
+    'sm-5': calc(var(--spacing-sm) * 5),
+);
+
+
+/**
+ * Element spacings
+ *
+ * Settings for spacing between most of the elements
+ *
+ * @see html/src/stylesheets/components/form/_footer.scss
+ * @see html/src/stylesheets/components/form/_group.scss
+ * @see html/src/stylesheets/components/text/_typography.scss
+ * @see html/src/stylesheets/components/text/_lists.scss
+ * @demo
+ *   @include margins($spacing);
+ *   @include margins($spacing-medium);
+ *   @include margins-top($spacing);
+ *   @include margins-bottom($spacing);
+ *   @include margins-top-bottom($spacing);
+ *   @include paddings($spacing);
+ */
+
+$spacing: (
+    xs:  var(--spacing),
+);
+
+$spacing-none: (
+    xs:  0,
+);
+
+// Spacing for headings inside the .text classname
+$spacing-heading: (
+    xs:  calc(var(--spacing) * #{ 144 / 60 }) 0 var(--spacing),
+    md:  calc(var(--spacing) * #{ 108 / 60 }) 0 calc(var(--spacing) * #{ 40 / 60 }),
+);
+
+// Spacing for text inside the .text classname
+$spacing-text: (
+    xs:  var(--spacing),
+    md:  calc(var(--spacing) * #{ 10 / 60 }) 0,
+);
+
+// Spacing for text inside the .text classname
+$spacing-blockquote: (
+    xs:  calc(var(--spacing) * #{ 150 / 60 }) 0 calc(var(--spacing) * #{ 150 / 60 }),
+    md:  calc(var(--spacing) * #{ 108 / 60 }) 0 calc(var(--spacing) * #{ 96 / 60 }),
+);
+
+// Spacing for lists inside the .text classname
+$spacing-list: (
+    xs:  calc(var(--spacing) * #{ 40 / 60 }) 0,
+    md:  calc(var(--spacing) * #{ 40 / 60 }) 0,
+);
+$spacing-list-item: (
+    xs: 5px 0,
+    md: 0,
+);
+
+

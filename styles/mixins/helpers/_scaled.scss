@@ -1,0 +1,44 @@
+@import "../lib/strip-unit";
+
+/**
+ * Returns value which is scaled using --scale
+ *
+ * @property {number} $value Value
+ * @returns {number|string} Scaled value
+ */
+@function scaled ($value) {
+    $type: type-of($value);
+
+    @if $type == 'list' {
+        $out: ();
+        @each $item in $value {
+            $out: append($out, scaled($item));
+        }
+        @return $out;
+    } @else if $type == 'map' {
+        $out: ();
+        @each $key, $item in $value {
+            $out: map-merge($out, ($key: scaled($item)));
+        }
+        @return $out;
+    } @else if $type == 'number' {
+        $unit: unit($value);
+        $unitless-value: strip-unit($value);
+
+        @if $unitless-value == 0 {
+            @return $value;
+        } @else {
+            @if $unit == 'px' {
+                @return calc(var(--scale-px) * #{ $unitless-value });
+            } @else if $unit == 'rem' {
+                @return calc(var(--scale-rem) * #{ $unitless-value });
+            // } @else if $unit == '%' {
+            //     @error '"scaled(#{ $value })" can\'t be used with percentage value';
+            } @else {
+                @return $value;
+            }
+        }
+    } @else {
+        @return $value;
+    }
+}

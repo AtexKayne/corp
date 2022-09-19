@@ -1,0 +1,18 @@
+// @import "mixins/lib/str-replace";
+
+
+/**
+ * Escapes string for use as CSS selector
+ *
+ * @param {string} $selector CSS selector
+ * @return {string} Escaped selector
+ * @group core/utils/str
+ * @example scss
+ *   @use "core/utils/str";
+ *
+ *   str.escape-selector('100%')
+ *   // '100\%'
+ */
+@function escape-selector($selector) {
+    @return str-replace(str-replace($selector, ':', '\\:'), '.', '\\.');
+}

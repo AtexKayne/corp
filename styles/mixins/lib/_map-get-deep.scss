@@ -1,0 +1,22 @@
+/**
+ * Returns deeply nested property from a map
+ *
+ * @function map-get-deep Deep get for sass maps
+ * @author https://css-tricks.com/snippets/sass/deep-getset-maps/
+ * @param {Map} $map - Map
+ * @param {Arglist} $keys - Key chain
+ *
+ * @example
+ *   $paddings: map-get-deep($containers, default, paddings, xs);
+ */
+
+@function map-get-deep($map, $keys...) {
+    @each $key in $keys {
+        @if type-of($map) == 'map' {
+            $map: map-get($map, $key);
+        } @else {
+            @return null;
+        }
+    }
+    @return $map;
+}

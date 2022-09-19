@@ -1,0 +1,48 @@
+/**
+ * Link styles
+ *
+ * Settings for the anchor elements
+ * For each link style is generated "%link--style-NAME" placeholder selector
+ * For each decoration is generated "%link--decoration-NAME" placeholder selector
+ *
+ * See extends/_links.scss
+ * See mixins/components/_link.scss
+ *
+ * @demo
+ *   @extend %link--style-heading;
+ */
+
+$link-styles: (
+    // Default link style
+    'default': (
+        normal:             color-use(link-normal),
+        hover:              color-use(link-hover),
+        active:             color-use(link-hover),
+    ),
+
+    'small': (
+        normal:             color-use(link-small),
+        hover:              color-use(link-normal),
+        active:             color-use(link-normal),
+    ),
+
+    // Link which doesn't change color
+    'static': (
+        normal:             color-use(link-normal),
+        hover:              color-use(link-normal),
+        active:             color-use(link-normal),
+    )
+);
+
+$link-decorations: (
+    'default': (
+        normal:             none,
+        hover:              none,
+        active:             none,
+    ),
+    'none': (
+        normal:             none,
+        hover:              none,
+        active:             none,
+    )
+);

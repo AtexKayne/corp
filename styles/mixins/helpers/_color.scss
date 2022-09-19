@@ -1,0 +1,111 @@
+/**
+ * Returns CSS variable name for a color
+ *
+ * @param {string} $name Name from $color-design-system or $color-themes
+ * @param {number} $alpha [1] Alpha value
+ * @returns {string} CSS variable name
+ */
+@function color-variable ($name, $alpha: 1) {
+    @if map-has-key($color-design-system, $name) {
+        // From design system
+        @if $alpha == 1 {
+            @return '--c-#{ $name }';
+        } @else {
+            @return '--c-#{ $name }-rgb';
+        }
+    } @else {
+        // From theme
+        @if $alpha == 1 {
+            @return '--t-#{ $name }';
+        } @else {
+            @return '--t-#{ $name }-rgb';
+        }
+    }
+}
+
+/**
+ * Outputs CSS variables with values
+ *
+ * @param {map} $colors List of colors
+ * @private
+ */
+@mixin color-theme-output ($colors) {
+    @each $name, $color in $colors {
+        // Define --t-...: var(...);
+        #{ color-variable($name) }: $color;
+
+        @if str-index($color, 'rgba(') == null {
+            // Define --t-...-rgb: var(...);
+            // This is hacky, but works
+            #{ color-variable($name) }-rgb: str-replace($color, ')', '-rgb)');
+        }
+    }
+}
+
+/**
+ * Output CSS variables for colors and theme classnames
+ */
+@mixin color-base () {
+    :root {
+        @each $name, $color in $color-design-system {
+            #{ color-variable($name) }: $color;
+            #{ color-variable($name, 0) }: #{ red($color) }, #{ green($color) }, #{ blue($color) };
+        }
+
+        $default-theme-set: false;
+        @each $themeName, $colors in $color-themes {
+            @if not $default-theme-set {
+                $default-theme-set: true;
+                @include color-theme-output($colors);
+            }
+        }
+    }
+
+    @each $themeName, $colors in $color-themes {
+        .ui-#{ $themeName } {
+            @include color-theme-output($colors);
+
+            // Apply text color for .ui-... classname
+            color: color-use(text);
+        }
+        .ui-#{ $themeName }-background {
+            background: map-get($colors, background);
+        }
+    }
+}
+
+/**
+ * Returns CSS value for a color
+ * Returns value is a CSS variable including `var()`
+ *
+ * @param {string} $name Name from $color-design-system or $color-themes
+ * @param {number} $alpha [1] Alpha value
+ * @returns {string} CSS value
+ */
+@function color-use ($name, $alpha: 1) {
+    @if $alpha == 1 {
+        @return var(#{ color-variable($name) });
+    } @else {
+        @return rgba(var(#{ color-variable($name, $alpha) }), #{ $alpha });
+    }
+}
+
+/**
+ * Returns whether or not $color is a color, including color defined using var()
+ *
+ * @param {string} $color Color
+ * @returns {boolean} True if color, otherwise false
+ */
+@function color-is ($color) {
+    @if (type-of($color) == 'color' or $color == currentColor) {
+        @return true;
+    } @else if (type-of($color) == 'string') {
+        @if str-index($color, 'var(--t') != null or str-index($color, 'var(--c') != null {
+            @return true;
+        } @else {
+            @return false;
+        }
+    } @else {
+        @return false;
+    }
+}

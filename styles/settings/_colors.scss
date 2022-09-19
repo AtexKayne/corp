@@ -1,0 +1,98 @@
+@import "../mixins/helpers/color";
+
+
+/*
+ * Color Palette
+ *
+ * To apply color from design system use
+ *     color: color-use(cold-1);
+ *     color: color-use(warm-2);
+ *     color: color-use(green);
+ */
+
+$color-design-system: (
+    violet:           #8712FC,
+    white:            #F5F5F5,
+    black:            #112233,
+    gray:             #808080,
+    light-gray:       #DADFEA,
+    dark-lines:       #11244D,
+    dark-gray:        #1E1E1E,
+    disabled:         #C5C5C5,
+    yellow:           #FFA900,
+
+    print:            #000000,
+    error:            #d9534f,
+);
+
+
+/*
+ * Color themes
+ *
+ * To apply theme specific color use:
+ *     background: color-use(background);
+ *     color: color-use(text);
+ *     color: color-use(heading);
+ *
+ * To apply color with opacity use opacity as second argument:
+ *     background: color-use(background, 0.2);
+ *     color: color-use(text), 0.2;
+ *     color: color-use(heading, 0.2);
+ */
+
+$color-themes: (
+    // "Light" theme
+    light: (
+        background:    color-use(white),
+        line:          color-use(black, 0.15),
+        line-gray:     color-use(black, 0.2),
+        line-violet:   color-use(violet, 0.3),
+        small:         color-use(gray),
+        smallish:      color-use(black, 0.3),
+        text:          color-use(black),
+        heading:       color-use(black),
+        primary:       color-use(violet),
+        lighter:       color-use(light-gray),
+        tetriary:      color-use(yellow),
+
+        link-normal:   color-use(black),
+        link-small:    color-use(gray),
+        link-hover:    color-use(violet),
+        link-heading:  color-use(violet),
+    ),
+
+    // "Dark" theme
+    dark: (
+        background:    color-use(black),
+        line:          color-use(white, 0.15),
+        line-gray:     color-use(white, 0.2),
+        line-violet:   color-use(violet, 0.3),
+        small:         color-use(gray),
+        smallish:      color-use(white, 0.3),
+        text:          color-use(white),
+        heading:       color-use(violet),
+        primary:       color-use(violet),
+        lighter:       color-use(light-gray),
+        tetriary:      color-use(yellow),
+
+        link-normal:   color-use(white),
+        link-small:    color-use(gray),
+        link-hover:    color-use(violet),
+        link-heading:  color-use(violet),
+    ),
+
+    // "violet" theme
+    violet: (
+        background:    color-use(violet),
+        line:          color-use(black),
+        small:         color-use(black),
+        text:          color-use(black),
+        heading:       color-use(black),
+        primary:       color-use(black),
+        lighter:       color-use(light-gray),
+        tetriary:      color-use(yellow),
+
+        link-normal:   color-use(black),
+        link-hover:    color-use(white),
+    ),
+);

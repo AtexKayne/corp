@@ -1,0 +1,65 @@
+@import "../mixins/helpers/adaptive-value";
+@import "../mixins/helpers/responsive-value";
+
+:root {
+    // Scale can be used to change icon scale if some breakpoint is a % of another breakpoint, eg.
+    // From md to xxl all UI just scales
+    --scale-px: 1px;
+    --scale-rem: 1rem;
+    --scale-em: 1em;
+
+    // Spacing CSS variable
+    #{ --spacing }: adaptive-value($spacing-css-variable);
+    #{ --spacing-sm }: adaptive-value($spacing-css-sm-variable);
+
+    // Make spacing CSS variable responsive
+    @include media-breakpoint(md-up) {
+        @include media-breakpoint(xl-down) {
+            #{ --scale-px }: responsive-value(md, xxl, 0.5px, 1px);
+            #{ --scale-em }: responsive-value(md, xxl, 0.5em, 1em);
+            #{ --scale-rem }: responsive-value(md, xxl, 0.5rem, 1rem);
+        }
+    }
+}
+
+
+/*
+ * Media breakpoint properties
+ * Used by adaptive-value function which is internally used by margins / paddings
+ * We tell postcss to ignore it to prevent postcss from removing white space from ": ;"
+ *
+ * 1. We use @media to prevent this definition from being moved by cssnano
+ * 2. We use additional media query to prevent this definition from being merged with other media queries
+ */
+
+@media all and (min-width: 1px) { // 1.
+    /* postcss-ignore */
+    :root {
+        @each $breakpoint in $media-breakpoints {
+            @if $breakpoint != 'xs' {
+                --#{ $breakpoint }: ;
+                --n-#{ $breakpoint }: initial;
+            }
+        }
+    }
+}
+
+@each $breakpoint in $media-breakpoints {
+    @if $breakpoint != 'xs' {
+        @include media-breakpoint(#{ $breakpoint }-up) {
+            @include media-breakpoint('min-width:1px') { // 2.
+                /* postcss-ignore */
+                :root {
+                    --n-#{ $breakpoint }: ;
+                    --#{ $breakpoint }: initial;
+                }
+            }
+        }
+    }
+}
+
+// Legacy name
+@mixin text-sizes ($name) {
+    @include text--size($name);
+}
+

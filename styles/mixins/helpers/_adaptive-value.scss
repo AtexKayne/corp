@@ -1,0 +1,56 @@
+@import "../helpers/scaled";
+
+
+/**
+ * Returns value which is different for different resolutions
+ *
+ * @property {map} List of (breakpoint: value)
+ * @returns {string} CSS value
+ *
+ * @example
+ *    padding: adaptive-value((
+ *        xs: 10px 0,
+ *        xl: 10px 0,
+ *    ));
+ */
+
+@function adaptive-value ($values) {
+    $out: '';
+    $type: type-of($values);
+
+    // Convert map with only 'xs' into simple value
+    @if $type == 'map' and length($values) == 1 and map-has-key($values, 'xs') {
+        $values: map-get($values, 'xs');
+        $type: type-of($values);
+    }
+
+    @if $type == 'map' {
+        @each $breakpoint in $media-breakpoints {
+            @if is-valid-media-breakpoint('#{$breakpoint}-up') {
+                @if map-has-key($values, $breakpoint) {
+                    $value: map-get($values, $breakpoint);
+
+                    @if $breakpoint == 'xs' {
+                        $out: $value;
+                    } @else {
+                        // This is a modified version to use scaled only on 'md', 'lg' and 'xl'
+                        @if $breakpoint == 'md' or $breakpoint == 'lg' or $breakpoint == 'xl' {
+                            $value: scaled($value);
+                        }
+
+                        @if $out {
+                            $out: ', #{ $out }';
+                        }
+                        $out: 'var(--#{ $breakpoint }, #{ $value }) var(--n-#{ $breakpoint } #{ $out })';
+                    }
+                }
+            } @else {
+                @error "Media query with name '#{ $name }' is not valid, definition not found!";
+            }
+        }
+    } @else {
+        $out: $values;
+    }
+
+    @return #{ $out };
+}

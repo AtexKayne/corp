@@ -1,0 +1,15 @@
+.breadcrumbs {
+    width: 50px;
+    height: 100vh;
+    padding: 20px;
+    display: flex;
+    min-width: 50px;
+    align-items: center;
+    flex-direction: column;
+    justify-content: space-around;
+    background-color: color-use(background);
+  
+    &__text {
+      transform: rotate(-90deg);
+    }
+  }

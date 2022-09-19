@@ -1,0 +1,112 @@
+// CSS variable names
+$leading-trim-font-offset-start-name: '--fos' !default;
+$leading-trim-font-offset-end-name: '--foe' !default;
+
+/*
+ * Calculate start offset
+ */
+@function leading-trim-font-offset-start ($fontMetrics) {
+    $unitsPerEm: map-get($fontMetrics, unitsPerEm);
+    $ascent: map-get($fontMetrics, ascent);
+    $descent: map-get($fontMetrics, descent);
+    $capHeight: map-get($fontMetrics, capHeight);
+    $diff: ($ascent - $descent - $unitsPerEm) / 2;
+
+    @return ($ascent - $capHeight - $diff) / -$unitsPerEm + "em";
+}
+
+/*
+ * Calculate end offset
+ */
+@function leading-trim-font-offset-end ($fontMetrics) {
+    $unitsPerEm: map-get($fontMetrics, unitsPerEm);
+    $ascent: map-get($fontMetrics, ascent);
+    $descent: map-get($fontMetrics, descent);
+    $diff: ($ascent - $descent - $unitsPerEm) / 2;
+
+    @return ($diff + $descent) / $unitsPerEm + "em";
+}
+
+
+/**
+ * Leading trim
+ *
+ * Crop top and bottom of the text so that letters are aligned with container element
+ * boundaries
+ *
+ * Font metrics depend on the font, tool to calculate font metrics: https://seek-oss.github.io/capsize/
+ * Source: https://github.com/MathGeniusJodie/tailwindcss-leading-trim
+ *
+ * @code
+ *     .my-heading {
+ *         @include leading-trim-base();
+ *         @include leading-trim($text-heading-font-metrics);
+ *     }
+ *     .my-text {
+ *         @include leading-trim-base();
+ *         @include leading-trim($text-default-font-metrics);
+ *     }
+ *
+ * @code
+ *     <h1 class="leading-trim"></h1>
+ */
+
+@mixin leading-trim ($fontMetrics) {
+    @if $fontMetrics {
+        @if map-has-key($fontMetrics, win) {
+            $other: map-get($fontMetrics, other);
+            $win: map-get($fontMetrics, win);
+
+            #{ $leading-trim-font-offset-start-name }: #{ leading-trim-font-offset-start($other) };
+            #{ $leading-trim-font-offset-end-name }: #{ leading-trim-font-offset-end($other) };
+
+            .is-win & {
+                #{ $leading-trim-font-offset-start-name }: #{ leading-trim-font-offset-start($win) };
+                #{ $leading-trim-font-offset-end-name }: #{ leading-trim-font-offset-end($win) };
+            }
+        } @else {
+            #{ $leading-trim-font-offset-start-name }: #{ leading-trim-font-offset-start($fontMetrics) };
+            #{ $leading-trim-font-offset-end-name }: #{ leading-trim-font-offset-end($fontMetrics) };
+        }
+    }
+}
+
+
+/**
+ * Apply base leading-trim styles
+ */
+
+@mixin leading-trim-base () {
+    &:before,
+    &:after {
+        content: "";
+        display: block;
+        height: 0;
+        overflow: hidden;
+        position: relative;
+    }
+    &:before {
+        margin-bottom: calc((var(--lh) - 1em) / -2 + var(#{ $leading-trim-font-offset-start-name },0em));
+    }
+    &:after {
+        margin-top: calc((var(--lh) - 1em) / -2 + var(#{ $leading-trim-font-offset-end-name },0em));
+    }
+}
+
+
+/**
+ * Unset leading trim
+ */
+
+@mixin leading-trim-unset () {
+    &:before,
+    &:after {
+        display: none;
+    }
+    &:before {
+        margin-top: 0;
+    }
+    &:after {
+        margin-bottom: 0;
+    }
+}

@@ -1,0 +1,212 @@
+@import "../mixins/lib/map-get-deep";
+@import "../mixins/lib/str-split";
+@import "../mixins/helpers/media";
+
+
+/**
+ * Layout order constants
+ */
+
+$z-index-content: unset;
+$z-index-popover: 2;
+$z-index-under-header: 9;
+$z-index-header: 10;
+$z-index-modal: 11;
+$z-index-ajax-loader: 12;
+$z-index-browser-message: 13;
+
+
+/**
+ * Percentage based grid system
+ *
+ * Grid system settings
+ * All resolution styles cascade up from mobile to desktop
+ *
+ * @demo
+ *   <div class="row">
+ *      <div class="col col--xs-12 col--sm-6 col--md-9 col--lg-12 col--xl-12">Column</div>
+ *      <div class="col col--xs-12 col--sm-6 col--md-9 col--lg-12 col--xl-12">Column</div>
+ *   </div>
+ *
+ * @demo
+ *   <div class="row row--pad">
+ *      <div class="col col--xs-12 col--sm-6 col--md-9 col--lg-12 col--xl-12">Column with padding</div>
+ *      <div class="col col--xs-12 col--sm-6 col--md-9 col--lg-12 col--xl-12">Column with padding</div>
+ *   </div>
+ *
+ * @demo
+ *   <div class="row">
+ *      <div class="col col--xs-12 col--sm-6 offset--sm-6 col--md-9 offset--sm-9 col--lg-24 offset--lg-0">
+ *        Column with left offset
+ *      </div>
+ *   </div>
+ */
+
+ $grid-columns: (
+    // Mobile portrait
+    xs: (
+        // Count
+        columns: 6,
+        // Full size, all column sum, must use number + unit
+        unit: 100%,
+        // Spacing between columns
+        gutter: 20px,
+    ),
+
+    // Mobile landscape
+    sm: (
+        columns: 6,
+        unit: 100%,
+        gutter: 20px,
+    ),
+
+    // Tablet portrait
+    md: (
+        columns: 12,
+        unit: 100%,
+        gutter: 20px,
+    ),
+
+    // Tablet landscape + small desktop
+    // lg: (
+    //     columns: 12,
+    //     unit: 100%,
+    //     // gutter: 30px,
+    // ),
+
+    // Large desktop, 1200+
+    // xl: (
+    //     columns: 12,
+    //     unit: 100%,
+    //     // gutter: 30px,
+    // ),
+
+    // Very large desktop, 1440+
+    // xxl: (
+    //     columns: 12,
+    //     unit: 100%,
+    //     // gutter: 30px,
+    // ),
+
+    // Extremely large desktop, 1920+
+    xxxl: (
+        columns: 12,
+        unit: 100%,
+        gutter: 20px,
+    ),
+);
+
+
+/**
+ * For every container defined below, the build process generates a separate CSS class.
+ * The class name is forming in the following way: `container-NAME`.
+ * The `default` container has the class name "container".
+ *
+ * 'paddings' property uses 'padding' mixin and allows 'inherit' property value.
+ * For example 'xs: 0 inherit' will set only top and bottom paddings and 'xs: inherit 0'
+ * will set left and right paddings.
+ *
+ * @demo
+ *   <div class="container"></div>
+ *   <div class="container container-footer"></div>
+ */
+
+$containers: (
+    // Generates 'container-h', a container with left and right paddings
+    // which has size of 1 column
+    'h': (
+        'paddings': (
+            xs:  inherit var(--spacing),
+        )
+    ),
+
+    // Mobile only left and right padding
+    'h-mob': (
+        'paddings': (
+            xs:  inherit var(--spacing),
+            md:  inherit 0,
+        )
+    ),
+
+    // Desktop only left and right padding
+    'h-desktop': (
+        'paddings': (
+            xs:  inherit 0,
+            md:  inherit var(--spacing),
+        )
+    ),
+
+    // Generates 'container-v', a container with top and bottom paddings
+    // which has size of 1 column
+    'v': (
+        'paddings': (
+            xs:  calc(var(--spacing) * 1.5) inherit,
+            md:  var(--spacing) inherit,
+        )
+    ),
+
+    'v-xs-bottom-desktop': (
+        'paddings': (
+            xs:  inherit inherit 0,
+            md:  inherit inherit calc(var(--spacing) / 8),
+        )
+    ),
+
+    'v-sm-bottom': (
+        'paddings': (
+            xs:  inherit inherit calc(var(--spacing) * 1),
+        )
+    ),
+
+    'v-md': (
+        'paddings': (
+            xs:  calc(var(--spacing) * 3) inherit,
+            // md:  calc(var(--spacing) * 4) inherit, // @TODO
+        )
+    ),
+
+    'v-md-top': (
+        'paddings': (
+            xs:  calc(var(--spacing) * 3) inherit inherit,
+        )
+    ),
+
+    'v-lg': (
+        'paddings': (
+            xs:  calc(var(--spacing) * 6) inherit,
+            md:  calc(var(--spacing) * 4) inherit,
+        )
+    ),
+
+    'v-lg-top': (
+        'paddings': (
+            xs:  calc(var(--spacing) * 6) inherit inherit,
+            md:  calc(var(--spacing) * 4) inherit inherit,
+        )
+    ),
+
+    'v-lg-bottom': (
+        'paddings': (
+            xs:  inherit inherit calc(var(--spacing) * 6),
+            md:  inherit inherit calc(var(--spacing) * 4),
+        )
+    ),
+);
+
+
+/**
+ * Column size, used for containers, spacing, etc.
+ */
+
+$size-x1-xs: 1 / map-get-deep($grid-columns, 'xs', 'columns') * map-get-deep($grid-columns, 'xs', 'unit');
+$size-x1-sm: 1 / map-get-deep($grid-columns, 'sm', 'columns') * map-get-deep($grid-columns, 'sm', 'unit');
+$size-x1-md: 1 / map-get-deep($grid-columns, 'md', 'columns') * map-get-deep($grid-columns, 'md', 'unit');
+$size-x1-xl: $size-x1-md;
+$size-x1-xxl: $size-x1-md;
+
+$size-x1: (
+    xs: $size-x1-xs,
+    sm: $size-x1-sm,
+    md: $size-x1-md,
+    xxxl: $size-x1-md,
+);

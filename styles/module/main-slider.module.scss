@@ -1,0 +1,153 @@
+.slider {
+    width: 100%;
+    display: flex;
+    max-width: 100%;
+    overflow: visible;
+    position: relative;
+    flex-direction: column;
+    background-color: var(--t-background);
+    min-height: calc(4rem + var(--spacing) * 3);
+    margin: calc(var(--spacing) * 1.7) 0 calc(var(--spacing) * 1.2);
+
+    &::after {
+        content: '';
+    }
+
+    &::before {
+        content: '';
+    }
+}
+
+.slides {
+    width: 100%;
+    overflow: hidden;
+    position: relative;
+    min-height: calc(4rem + var(--spacing));
+    margin-bottom: calc(var(--spacing) * 0.5);
+}
+
+.sliderItem {
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    opacity: 0;
+    min-width: 100%;
+    position: absolute;
+    background-color: var(--t-background);
+    transition: .8s cubic-bezier(.6,0,.1,1);
+
+    div {
+        transition: 1.4s cubic-bezier(.6,0,.1,1);
+
+        &:first-child {
+            transform: translateX(-100%);
+        }
+
+        &:last-child {
+            transform: translateX(100%);
+        }
+    }
+
+    &[data-active="active"] {
+        z-index: 1;
+        opacity: 1;
+        position: relative;
+        transition-delay: .4s;
+    
+        div {
+            &:first-child {
+                transform: translateX(0%);
+            }
+    
+            &:last-child {
+                transform: translateX(0%);
+            }
+        }
+    }
+}
+
+.pagination {
+    position: relative;
+    width: fit-content;
+    // transform: scale(.6);
+}
+
+.paginationItems {
+    display: flex;
+    min-height: 20px;
+    width: fit-content;
+    position: relative;
+    justify-content: flex-start;
+}
+
+.paginationItem {
+    z-index: 1;
+    width: 10px;
+    height: 14px;
+    padding: 5px;
+    position: relative;
+    margin-right: 50px;
+
+    &::after {
+        top: -5px;
+        left: 3px;
+        right: 5px;
+        width: 4px;
+        bottom: 5px;
+        height: 4px;
+        content: '';
+        transition: .3s;
+        position: absolute;
+        transform: rotate(45deg);
+        background-color: var(--c-light-gray);
+    }
+
+
+    &:nth-child(2n) {
+        align-self: flex-end;
+    }
+
+    &:last-child {
+        margin-right: 35px;
+    }
+
+    &:hover::after {
+        transform: rotate(45deg ) scale(1.8);
+        background-color: var(--c-yellow);
+    }
+
+    &[data-active="active"]::after {
+        background-color: var(--c-yellow);
+    }
+}
+
+.paginationLine,
+.paginationProgress {
+    right: 0;
+    bottom: 0;
+    top: -5px;
+    left: 5px;
+    position: absolute;
+    pointer-events: none;
+
+    line {
+        stroke: var(--c-light-gray);
+    }
+}
+
+.paginationLine {
+    line {
+        stroke: var(--c-light-gray);
+    }
+}
+
+.paginationProgress {
+    width: calc(25% - 5px);
+    transition: .5s;
+    overflow: hidden;
+
+    line {
+        stroke: var(--c-yellow);
+    }
+}
