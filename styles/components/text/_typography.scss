@@ -23,37 +23,7 @@ small {
     @extend %text--size-small;
 }
 
-/*
- * Headings
- */
-
-h1, h2, h3, h4, h5 {
-    color: color-use(heading);
-    @extend %text--style-heading;
-}
-
-h1 {
-    @extend %text--size-h1;
-}
-h2 {
-    @extend %text--size-h2;
-}
-h3 {
-    @extend %text--size-h3;
-}
-h4 {
-    @extend %text--size-h4;
-}
-h5 {
-    @extend %text--size-h5;
-}
-
-/*
- * Margins and paddings
- */
-
-h1, h2, h3, h4, h5,
-hr, p, blockquote, table, iframe, object, pre,
-figure {
-    margin: 0;
+a {
+    color: inherit;
+    text-decoration: none;
 }

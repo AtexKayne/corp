@@ -1,25 +1,4 @@
 /*
- * Viewport height CSS property, overwritten with "px" value in iOS because 100vh includes
- * toolbar and navigation bar, which we may not want
- *
- * Should be used whenever 100vh shouldn't include toolbar / navbar
- */
-
-:root {
-    --viewport-height: 100vh;
-    --viewport-height-actual: 100vh;
-    --header-height: 60px;
-
-    @include media-breakpoint(md-up) {
-        --header-height: #{ scaled(100px) };
-    }
-    @include media-breakpoint(xxxl-up) {
-        --header-height: 110px;
-    }
-}
-
-
-/*
  * Body styles
  */
 
@@ -33,44 +12,6 @@ html, body {
 }
 
 /*
- * All content wrapper, including footer
- * This element may be used for smooth scrolling
- */
-
-.page-content {
-    min-height: 100vh; // fallback
-    min-height: var(--viewport-height);
-
-    // Make sure grid doesn't get broken during transitions
-    width: 100vw;
-
-    // Move content to the right to offset scrollbar, needed to prevent "vw" unit grid
-    // from breaking when scrollbar appears
-    @if (unit(map-get-deep($grid-columns, 'xs', 'unit')) == 'vw') {
-        position: relative;
-        margin-right: calc(100% - 100vw);
-    }
-}
-
-
-/*
- * 1. IE11 main element doesn't have default browser styles
- */
-
-main {
-    display: block; // 1.
-}
-
-
-/*
- * Reset
- */
-
-dl, dd, dt, blockquote {
-    margin: 0;
-}
-
-/*
  * Fix box sizing nightmare
  */
 
@@ -80,42 +21,4 @@ dl, dd, dt, blockquote {
     &:before {
         box-sizing: border-box;
     }
-}
-
-
-/*
- * Images
- */
-
-picture {
-    display: block;
-}
-
-img {
-    user-select: none;
-    vertical-align: top;
-}
-
-img[draggable="false"] {
-    pointer-events: none;
-    -webkit-user-drag: none;
-}
-
-
-/*
- * Iframe size
- */
-
-iframe {
-    display: block;
-    border: 0;
-}
-
-
-/*
- * Hide browser-sync text
- */
-
-#__bs_notify__ {
-    display: none !important;
 }

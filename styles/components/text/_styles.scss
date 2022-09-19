@@ -5,22 +5,22 @@
  *     <h2 class="h1">Looks like first level heading</h2>
  */
 
-.h1 {
-    @extend h1;
-}
-.h2 {
-    @extend h2;
-}
-.h3 {
-    @extend h3;
-}
-.h4 {
-    @extend h4;
-}
-.h5 {
-    @extend h5;
+h1, .h1 { @extend h1; }
+h2, .h2 { @extend h2; }
+h3, .h3 { @extend h3; }
+h4, .h4 { @extend h4; }
+h5, .h5 { @extend h5; }
+
+h1, h2, h3, h4, h5 {
+    color: color-use(heading);
+    @extend %text--style-heading;
 }
 
+h1, h2, h3, h4, h5,
+hr, p, blockquote, table, iframe, object, pre,
+figure {
+    margin: 0;
+}
 
 /**
  * Font family / style
@@ -29,50 +29,13 @@
  *     <p class="text--heading">Text with same style as heading</p>
  */
 
-.text--heading {
-    @extend %text--style-heading;
-}
-
-.text--default {
-    @extend %text--style-default;
-}
-
-.text--color-primary {
-    color: color-use(primary);
-}
-
-.text--color-heading {
-    color: color-use(heading);
-}
-
-.text--color-small {
-    color: color-use(small);
-}
-
-.text--color-smallish {
-    color: color-use(smallish);
-}
-
-.text--color-text {
-    color: color-use(text);
-}
-
-.text--color-primary-bold b {
-    color: color-use(primary);
-    font-weight: inherit;
-}
-
-@include media-breakpoint(print) {
-    .text--color-primary,
-    .text--color-secondary,
-    .text--color-heading,
-    .text--color-small,
-    .text--color-text {
-        & {
-            color: color-use(print);
-        }
-    }
-}
+.text--heading { @extend %text--style-heading; }
+.text--default { @extend %text--style-default; }
+.text--color-primary { color: color-use(primary); }
+.text--color-heading { color: color-use(heading); }
+.text--color-small { color: color-use(small); }
+.text--color-smallish { color: color-use(smallish); }
+.text--color-text { color: color-use(text); }
 
 .text {
     &--p1 { @extend %text--size-p1; }
@@ -92,15 +55,9 @@
     &--c5 { @extend %text--size-c5; }
 }
 
-.text--left {
-    text-align: left;
-}
-.text--right {
-    text-align: right;
-}
-.text--center {
-    text-align: center;
-}
+.text--left { text-align: left;}
+.text--right { text-align: right; }
+.text--center { text-align: center; }
 
 @include media-breakpoint(md-up) {
     .text--left\:md {
@@ -125,9 +82,7 @@
  *     </p>
  */
 
-.text--nowrap {
-    white-space: nowrap !important;
-}
+.text--nowrap { white-space: nowrap !important; }
 
 
 /**

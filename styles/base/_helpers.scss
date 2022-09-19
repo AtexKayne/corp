@@ -7,8 +7,6 @@
     position: absolute !important;
     white-space: nowrap;
     width: 1px;
-
-    // Prevent scrollbars if it's last item on the page
     margin-top: -1px;
 }
 
@@ -17,35 +15,12 @@
     pointer-events: none;
 }
 
-.js .is-invisible--js {
-    opacity: 0;
-    pointer-events: none;
-}
-.js .is-invisible--md-up-js {
-    @include media-breakpoint(md-up) {
-        opacity: 0;
-        pointer-events: none;
-    }
-}
-
 .is-decorative {
     pointer-events: none;
 }
 
 .is-not-decorative {
     pointer-events: all;
-}
-
-.js .is-decorative--js {
-    pointer-events: none;
-}
-
-.overlay {
-    @extend %layout-position-overlay;
-
-    // Make invisible without preventing interaction
-    background: #fff;
-    opacity: 0;
 }
 
 .disable-smooth-scrolling {
