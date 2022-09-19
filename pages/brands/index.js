@@ -2,6 +2,7 @@ import Cloud from "../../components/Cloud"
 import KaleidoscopeElem from "../../components/KaleidoscopeElem"
 import Title from "../../components/Title"
 import MainLayout from "../../layout/MainLayout"
+import { brandItems } from './helpers/constants'
 
 export default function Brands({ items }) {
     return (
@@ -21,8 +22,13 @@ export default function Brands({ items }) {
 }
 
 export async function getServerSideProps({req}) {
-    const resp = await fetch(`${process.env.API_URL}/brands`)
-    const json = await resp.json()
+    let resp, json
+    try {
+        resp = await fetch(`${process.env.API_URL}/brands`)
+        json = await resp.json()
+    } catch (error) {
+        json = brandItems
+    }
   
     return {
         props: {

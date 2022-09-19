@@ -4,52 +4,15 @@
  * Settings for text, fonts, sizes
  */
 
-$text-default-font:         "TT Common", "Helvetica Neue", Helvetica, Arial, sans-serif;
-$text-default-weight:       $medium;
-$text-default-transform:    none;
-$text-default-font-metrics: ( // Font specific metrics, use https://seek-oss.github.io/capsize/
-    win: (
-        capHeight: 667,
-        ascent: 882,
-        descent: -300,
-        lineGap: 0,
-        unitsPerEm: 1000
-    ),
-    other: (
-        capHeight: 667,
-        ascent: 982,
-        descent: -300,
-        lineGap: 0,
-        unitsPerEm: 1000,
-    ),
-);
-
-$text-heading-font:         "Neutraface Condensed Custom", "Helvetica Neue", Helvetica, Arial, sans-serif;
-$text-heading-weight:       $medium;
-$text-heading-transform:    uppercase;
-$text-heading-font-metrics: ( // Font specific metrics, use https://seek-oss.github.io/capsize/
-    win: (
-        capHeight: 700,
-        ascent: 750,
-        descent: -90,
-        lineGap: 30,
-        unitsPerEm: 1000
-    ),
-    other: (
-        capHeight: 700,
-        ascent: 750,
-        descent: -250,
-        lineGap: 0,
-        unitsPerEm: 1000,
-    ),
-
-    // OSX
-    // descent: -250,
-    // lineGap: 0,
-);
+$text-default-font:      "TT Common", "Helvetica Neue", Helvetica, Arial, sans-serif;
+$text-default-weight:    $light;
+$text-default-transform: none;
+$text-heading-font:      "TT Common", "Helvetica Neue", Helvetica, Arial, sans-serif;
+$text-heading-weight:    $light;
+$text-heading-transform: uppercase;
 
 $text-wysiwyg-transform: none;
-$text-code-font:            Consolas, "Liberation Mono", Menlo, Courier, monospace;
+$text-code-font: Consolas, "Liberation Mono", Menlo, Courier, monospace;
 
 $text-styles: (
     default:    ( font-family: $text-default-font, font-weight: $text-default-weight, text-transform: $text-default-transform ),
@@ -69,42 +32,40 @@ $text-styles: (
  * Settings for text, fonts, sizes
  */
 
-$text-default-weight:       medium;
-$text-heading-weight:       medium;
-$text-default-transform:    uppercase;
-$text-heading-transform:    uppercase;
-$text-code-font:            "Liberation Mono", Menlo, Courier, monospace;
-$text-default-font:         "TT Common", "Helvetica Neue", Helvetica, Arial, sans-serif;
-$text-heading-font:         "TT Common", "Helvetica Neue", Helvetica, Arial, sans-serif;
+$text-default-weight: light;
+$text-heading-weight: light;
+$text-code-font:      "Liberation Mono", Menlo, Courier, monospace;
+$text-default-font:   "TT Common", "Helvetica Neue", Helvetica, Arial, sans-serif;
+$text-heading-font:   "TT Common", "Helvetica Neue", Helvetica, Arial, sans-serif;
 
 // TT Common
-$text-h1:      ( font-size: 5.6rem,  line-height: 60 / 57 * 1em,    letter-spacing: 0.03em );
-$text-h2:      ( font-size: 5.0rem,  line-height: 60 / 58 * 1em,    letter-spacing: 0.03em );
-$text-h3:      ( font-size: 4.4rem,  line-height: 45 / 43 * 1em,    letter-spacing: 0.03em );
-$text-h4:      ( font-size: 3.6rem,  line-height: 35 / 29 * 1em,    letter-spacing: 0.03em );
-$text-h5:      ( font-size: 3.2rem,  line-height: 30 / 26 * 1em,    letter-spacing: 0.03em );
-$text-h6:      ( font-size: 2.6rem,  line-height: 22 / 18 * 1em,    letter-spacing: 0.03em );
+$text-h1:      ( font-size: 5.6rem,  line-height: 60 / 57 * 1em, letter-spacing: 0.03em );
+$text-h2:      ( font-size: 5.0rem,  line-height: 60 / 58 * 1em, letter-spacing: 0.03em );
+$text-h3:      ( font-size: 4.4rem,  line-height: 45 / 43 * 1em, letter-spacing: 0.03em );
+$text-h4:      ( font-size: 3.6rem,  line-height: 35 / 29 * 1em, letter-spacing: 0.03em );
+$text-h5:      ( font-size: 3.2rem,  line-height: 30 / 26 * 1em, letter-spacing: 0.03em );
+$text-h6:      ( font-size: 2.6rem,  line-height: 22 / 18 * 1em, letter-spacing: 0.03em );
 
 // TT Common
-$text-p1:      ( font-size: 1.8rem,  line-height: 30 / 18 * 1em,    letter-spacing: 0.03em );
-$text-p2:      ( font-size: 1.5rem,  line-height: 25 / 15 * 1em,    letter-spacing: 0.03em );
-$text-p3:      ( font-size: 1.2rem,  line-height: 20 / 12 * 1em,    letter-spacing: 0.03em );
-$text-p4:      ( font-size: 1.0rem,  line-height: 18 / 12 * 1em,    letter-spacing: 0.03em );
-$text-p5:      ( font-size: 1.0rem,  line-height: 18 / 12 * 1em,    letter-spacing: 0.03em );
+$text-p1:      ( font-size: 1.8rem,  line-height: 30 / 18 * 1em, letter-spacing: 0.03em );
+$text-p2:      ( font-size: 1.5rem,  line-height: 25 / 15 * 1em, letter-spacing: 0.03em );
+$text-p3:      ( font-size: 1.2rem,  line-height: 20 / 12 * 1em, letter-spacing: 0.03em );
+$text-p4:      ( font-size: 1.0rem,  line-height: 18 / 12 * 1em, letter-spacing: 0.03em );
+$text-p5:      ( font-size: 1.0rem,  line-height: 18 / 12 * 1em, letter-spacing: 0.03em );
 
 // TT Common
-$text-t1:      ( font-size: 2.4rem,  line-height: 25 / 24 * 1em,    letter-spacing: 0.03em );
-$text-t2:      ( font-size: 2.0rem,  line-height: 25 / 20 * 1em,    letter-spacing: 0.03em );
-$text-t3:      ( font-size: 1.5rem,  line-height: 20 / 15 * 1em,    letter-spacing: 0.03em );
-$text-t4:      ( font-size: 1.5rem,  line-height: 20 / 15 * 1em,    letter-spacing: 0.03em );
-$text-t5:      ( font-size: 1.5rem,  line-height: 20 / 15 * 1em,    letter-spacing: 0.03em );
+$text-t1:      ( font-size: 2.4rem,  line-height: 25 / 24 * 1em, letter-spacing: 0.03em );
+$text-t2:      ( font-size: 2.0rem,  line-height: 25 / 20 * 1em, letter-spacing: 0.03em );
+$text-t3:      ( font-size: 1.5rem,  line-height: 20 / 15 * 1em, letter-spacing: 0.03em );
+$text-t4:      ( font-size: 1.5rem,  line-height: 20 / 15 * 1em, letter-spacing: 0.03em );
+$text-t5:      ( font-size: 1.5rem,  line-height: 20 / 15 * 1em, letter-spacing: 0.03em );
 
 // TT Common
-$text-c1:      ( font-size: 3.2rem,  line-height: 20 / 15 * 1em,    letter-spacing: 0.03em );
-$text-c2:      ( font-size: 3.0rem,  line-height: 20 / 15 * 1em,    letter-spacing: 0.03em );
-$text-c3:      ( font-size: 2.8rem,  line-height: 16 / 12 * 1em,    letter-spacing: 0.03em );
-$text-c4:      ( font-size: 2.6rem,  line-height: 14 / 10 * 1em,    letter-spacing: 0.03em );
-$text-c5:      ( font-size: 2.4rem,  line-height: 14 / 10 * 1em,    letter-spacing: 0.03em );
+$text-c1:      ( font-size: 3.2rem,  line-height: 20 / 15 * 1em, letter-spacing: 0.03em );
+$text-c2:      ( font-size: 3.0rem,  line-height: 20 / 15 * 1em, letter-spacing: 0.03em );
+$text-c3:      ( font-size: 2.8rem,  line-height: 16 / 12 * 1em, letter-spacing: 0.03em );
+$text-c4:      ( font-size: 2.6rem,  line-height: 14 / 10 * 1em, letter-spacing: 0.03em );
+$text-c5:      ( font-size: 2.4rem,  line-height: 14 / 10 * 1em, letter-spacing: 0.03em );
 
 $text-sizes: (
     xs: (

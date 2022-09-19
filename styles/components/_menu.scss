@@ -62,14 +62,18 @@
     }
 
     &__nav {
+        width: 50%;
         height: 100%;
         display: flex;
+        min-width: 50%;
         flex-direction: column;
         justify-content: space-between;
 
-        > * {
+        > a {
             opacity: 0;
-            transition: .2s;
+            padding: 5px;
+            display: block;
+            transition: .2s .4s;
             transform: translateX(-100px);
 
             @include text--size(h4);
@@ -80,22 +84,19 @@
         top: 0;
         height: 100vh;
         display: flex;
-        transition: .5s;
         position: absolute;
+        transition: .5s .5s;
         transform: translateX(-100vw);
         left: calc(var(--spacing) * 2);
         padding: calc(var(--spacing) * 2);
         width: calc(100vw - var(--spacing) * 2);
         background-color: color-use(background);
-
-        a {
-            display: block;
-            padding: 5px;
-        }
+        border-right: 1px solid color-use(light-gray);
     }
 
     &[data-active="menu"] {
         .menu__wrapper {
+            transition: .8s;
             transform: translateX(0);
         }
 
@@ -120,11 +121,20 @@
         }
 
         .menu__nav {
-            > * {
+            > a {
                 opacity: 1;
                 transform: translateX(0);
-                transition: .7s cubic-bezier(.5,-0.5,.5,2) .2s;
+                transition: .8s cubic-bezier(0.5,-2,0.5,2);
             }
+
+            > a:nth-child(1) { transition-delay: .10s; }
+            > a:nth-child(2) { transition-delay: .15s; }
+            > a:nth-child(3) { transition-delay: .25s; }
+            > a:nth-child(4) { transition-delay: .30s; }
+            > a:nth-child(5) { transition-delay: .35s; }
+            > a:nth-child(6) { transition-delay: .40s; }
+            > a:nth-child(7) { transition-delay: .45s; }
+            > a:nth-child(8) { transition-delay: .50s; }
         }
     }
 }
@@ -139,4 +149,13 @@
     justify-content: space-around;
     background-color: color-use(background);
     border-right: 1px solid color-use(light-gray);
+}
+
+.menu-preloader {
+    height: 100%;
+    
+    svg {
+        width: 100%;
+        height: 100%;
+    }
 }

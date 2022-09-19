@@ -45,7 +45,7 @@ function MyApp({ Component, pageProps }) {
 
   return (
     <div className='content'>
-      {/* <Preloader /> */}
+      <Preloader />
       <Menu className={'ui-light'}/>
       <motion.div 
         key={router.route}
