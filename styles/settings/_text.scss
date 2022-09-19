@@ -51,16 +51,10 @@ $text-heading-font-metrics: ( // Font specific metrics, use https://seek-oss.git
 $text-wysiwyg-transform: none;
 $text-code-font:            Consolas, "Liberation Mono", Menlo, Courier, monospace;
 
-
-/**
- * Text styles, eg. heading,
- * 'leading-trim' property is special, it's used to setup .leading-trim styles for each font style
- */
-
 $text-styles: (
-    default:    ( font-family: $text-default-font, font-weight: $text-default-weight, leading-trim: $text-default-font-metrics, text-transform: $text-default-transform ),
-    heading:    ( font-family: $text-heading-font, font-weight: $text-heading-weight, leading-trim: $text-heading-font-metrics, text-transform: $text-heading-transform ),
-    wysiwyg:    ( font-family: $text-default-font, font-weight: $text-default-weight, leading-trim: $text-default-font-metrics, text-transform: $text-wysiwyg-transform ),
+    default:    ( font-family: $text-default-font, font-weight: $text-default-weight, text-transform: $text-default-transform ),
+    heading:    ( font-family: $text-heading-font, font-weight: $text-heading-weight, text-transform: $text-heading-transform ),
+    wysiwyg:    ( font-family: $text-default-font, font-weight: $text-default-weight, text-transform: $text-wysiwyg-transform ),
     code:       ( font-family: $text-code-font ),
 );
 

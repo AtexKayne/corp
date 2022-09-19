@@ -1,5 +1,3 @@
-@import "../mixins/helpers/leading-trim";
-
 /**
  * Text style mixin and placeholder classnames
  *
@@ -21,11 +19,7 @@
         $styles: map-get($text-styles, $name);
 
         @each $prop, $value in $styles {
-            @if $prop == 'leading-trim' {
-                @include leading-trim($value);
-            } @else {
-                #{ $prop }: #{ $value };
-            }
+            #{ $prop }: #{ $value };
         }
     } @else {
         @error 'Missing text style "#{ $name }", see settings/_text.scss';
