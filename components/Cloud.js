@@ -26,7 +26,6 @@ export default function Cloud({items}) {
         }
         const callback = entries => {
             const target = entries[0].target
-            console.log('ee');
             target.firstChild.setAttribute('data-show', entries[0].isIntersecting)
             if (!entries[0].isIntersecting && refCloud.current.style.transform) {
                 const position = (+/\d+/.exec(target.style.transform) ?? 0) + refClientWidth.current

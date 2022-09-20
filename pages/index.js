@@ -23,7 +23,6 @@ export default function Home({ slides }) {
 }
 
 export async function getServerSideProps({req}) {
-  console.log(mainItems);
   let resp, json
   try {
     resp = await fetch(`${process.env.API_URL}/mainxczxc`)

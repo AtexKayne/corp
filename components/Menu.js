@@ -6,7 +6,7 @@ import MenuPreloader from "./MenuPreloader";
 
 export default function Menu ({className}) {
     const [active, setActive] = useState(false)
-    const clickHandler = (e) => {
+    const clickHandler = (event) => {
         const activeState = active === 'menu' ? 'false' : 'menu'
         setActive(activeState)
     }
@@ -23,7 +23,7 @@ export default function Menu ({className}) {
 
             </div>
             <div className='menu__wrapper'>
-                <nav className='menu__nav'>
+                <nav onClick={ clickHandler } className='menu__nav'>
                     { menuItems.map( item => <A key={item.text} href={item.link} text={item.text} /> )}
                 </nav>
                 
