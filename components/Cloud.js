@@ -1,9 +1,8 @@
 import styles from '../styles/module/cloud.module.scss'
-import { useRouter } from 'next/router'
 import { useRef, useEffect } from 'react'
 import Image from 'next/image'
-import A from './A'
 import Link from 'next/link'
+import { motion } from 'framer-motion'
 
 export default function Cloud({items}) {
     const refScrollWidth = useRef(null)
@@ -53,19 +52,21 @@ export default function Cloud({items}) {
 
     return (
         <div onMouseDown={mouseDownHandler} className={`${styles.cloudContainer} c-dragh`}>
-            <div ref={refCloud} className={styles.cloudWrapper}>
-                {items.map(item => (
-                    <Link key={item.name} href={`/brand/${item.name}`}>
-                        <div className={styles.cloudItemWrapper}>
-                            <div className={`${styles.cloudItem} c-hover`}>
-                                <svg className={styles.cloudShapeWrapper} height='80' width='80'>
-                                    <rect className={styles.cloudShape} height='80' width='80'></rect>
-                                </svg>
-                                <Image src={item.logo} width='120' height='120' alt={item.name}/>
+            <div ref={refCloud} >
+                <motion.div drag={'x'} className={styles.cloudWrapper}>
+                    {items.map(item => (
+                        <Link key={item.name} href={`/brand/${item.name}`}>
+                            <div className={styles.cloudItemWrapper}>
+                                <div className={`${styles.cloudItem} c-hover`}>
+                                    <svg className={styles.cloudShapeWrapper} height='80' width='80'>
+                                        <rect className={styles.cloudShape} height='80' width='80'></rect>
+                                    </svg>
+                                    <Image src={item.logo} width='120' height='120' alt={item.name}/>
+                                </div>
                             </div>
-                        </div>
-                    </Link>
-                ))}
+                        </Link>
+                    ))}
+                </motion.div>
             </div>
             <div className={styles.cloudBackground}/>
         </div>
