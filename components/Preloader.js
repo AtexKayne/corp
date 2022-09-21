@@ -1,8 +1,13 @@
 import { motion } from 'framer-motion'
+// clip-path: polygon(45% 33%, 44% 42%, 40% 45%, 42% 52%, 41% 60%, 45% 61%, 47% 70%, 51% 64%, 56% 68%, 57% 59%, 61% 56%, 58% 49%, 60% 40%, 55% 39%, 53% 32%, 49% 37%);
+// clip-path: polygon(0 0, 0 25%, 0 50%, 0 75%, 0 100%, 25% 100%, 50% 100%, 75% 100%, 100% 100%, 100% 75%, 100% 50%, 100% 25%, 100% 0, 75% 0, 50% 0, 25% 0);
 
 export default function Preloader() {
     return (
-        <motion.div className='preloader' initial={{scale: 1, opacity: 1}} animate={{scale: 0.7, opacity: [1, 1, 1, 1, 0], transition: {delay: 6, duration: 1}}}>
+        <motion.div className='preloader' 
+            initial={{width: '100vw'}} 
+            animate={{width: '120px', 
+            transition: {delay: 6, duration: 1}}}>
             <motion.div className='preloader__container' initial={{rotate: 30 }} animate={{rotate: [30, 120, 80], transition: {duration: 4}}}>
                 <motion.div className='preloader__line' initial={{width: 0, rotate: 45 }} animate={{width: '50vw', rotate: 45,  transition: {delay: 0.1, duration: 2}}}/>
                 <motion.div className='preloader__line' initial={{width: 0, rotate: 90 }} animate={{width: '50vw', rotate: 90,  transition: {delay: 0.3, duration: 2}}}/>
@@ -54,6 +59,7 @@ export default function Preloader() {
                 <motion.path initial={{pathLength: 0}} animate={{pathLength: 1, transition: {delay: 4, duration: 2}}} d='M328.456 803.877L294.34 794.736L319.315 769.761L328.456 803.877Z' stroke='#DADFEA' strokeWidth='3'/>
                 <motion.path initial={{pathLength: 0}} animate={{pathLength: 1, transition: {delay: 4, duration: 2}}} d='M500.555 25.133L534.671 34.2743L509.696 59.2488L500.555 25.133Z' stroke='#DADFEA' strokeWidth='3'/>
             </svg>
+            
         </motion.div>
     );
 }
