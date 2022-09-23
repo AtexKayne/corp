@@ -44,48 +44,66 @@ function MyApp({ Component, pageProps }) {
   });
 
   return (
-    <div className='content'>
+    <main className='content'>
       <Preloader />
       <Menu className={'ui-light'}/>
+      <div className='page-transitor'>
+        {/* <motion.div 
+          key={router.route}
+          variants={{
+            hidden: { x: '-100vw' },
+            shown: { x: '0' },
+          }}
+          transition={{duration: 1}}
+          animate={pageTransition} 
+          exit={{ x: '-100vw' }}
+          className='preloader-wrapper'>
+        </motion.div> */}
+
+        <motion.div 
+          className='page-transitor__top'
+          animate={pageTransition}
+          transition={{duration: 1}}
+          variants={{
+            hidden: { y: '-100vh' },
+            shown: { y: '-33.33vh' },
+          }}/>
+        <motion.div 
+          className='page-transitor__left'
+          animate={pageTransition}
+          transition={{duration: 1}}
+          variants={{
+            hidden: { x: '-100vw' },
+            shown: { x: '-66.66vw' },
+          }}/>
+        <motion.div 
+          className='page-transitor__bottom'
+          animate={pageTransition}
+          transition={{duration: 1}}
+          variants={{
+            hidden: { y: '100vh' },
+            shown: { y: '66.66vh' },
+          }}/>
+        <motion.div 
+          className='page-transitor__right'
+          animate={pageTransition}
+          transition={{duration: 1}}
+          variants={{
+            hidden: { x: '100vw', y: '0' },
+            shown:  { x: '33.33vw',  y: '66.66vh' },
+          }}/>
+      </div>
       <motion.div 
-        key={router.route}
-        variants={{
-          hidden: { x: '-100vw' },
-          shown: { x: '0' },
-        }}
+        className='main-container'
+        animate={pageTransition}
         transition={{duration: 1}}
-        animate={pageTransition} 
-        exit={{ x: '-100vw' }}
-        className='preloader-wrapper'>
-          <svg width="800" height="600">
-            <motion.path 
-              d="m115.18239,315.30926l226.52352,-0.35808l48.74546,-48.38704l48.38704,48.02862" 
-              stroke="#8712FC" 
-              fill="none"
-              strokeWidth="2"
-              initial={{ pathLength: 0, pathOffset: 0 }}
-              animate={pageTransition}
-              strokeLinecap="round"
-              variants={{
-                hidden: { pathLength: 0, transition: {duration: 0.5, delay: 0.5} },
-                shown:  { pathLength: 1, transition: {duration: 0.5, delay: 0} },
-              }}/>
-            <motion.path 
-              d="m342.21177,315.1628l47.95146,47.9513l48.36057,-48.7704l227.86844,0" 
-              stroke="#8712FC" 
-              fill="none"
-              strokeWidth="2"
-              initial={{ pathLength: 0, pathOffset: 0 }}
-              animate={pageTransition}
-              strokeLinecap="round"
-              variants={{
-                hidden: { pathLength: 0, transition: {duration: 0.5, delay: 0} },
-                shown:  { pathLength: 1, transition: {duration: 0.5, delay: 0.5} },
-              }}/>
-          </svg>
+        variants={{
+          hidden: { scale: 1 },
+          shown:  { scale: 0.5 },
+        }}>
+        <Component {...pageProps} />
       </motion.div>
-      <Component {...pageProps} />
-    </div>
+    </main>
   )
 }
 

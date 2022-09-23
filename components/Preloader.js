@@ -1,22 +1,39 @@
-import { motion } from 'framer-motion'
+import { motion, useAnimationControls } from 'framer-motion'
 // clip-path: polygon(45% 33%, 44% 42%, 40% 45%, 42% 52%, 41% 60%, 45% 61%, 47% 70%, 51% 64%, 56% 68%, 57% 59%, 61% 56%, 58% 49%, 60% 40%, 55% 39%, 53% 32%, 49% 37%);
 // clip-path: polygon(0 0, 0 25%, 0 50%, 0 75%, 0 100%, 25% 100%, 50% 100%, 75% 100%, 100% 100%, 100% 75%, 100% 50%, 100% 25%, 100% 0, 75% 0, 50% 0, 25% 0);
 
 export default function Preloader() {
+    const animation = useAnimationControls()
+    animation.start({
+        width: '120px',
+        transition: {
+            delay: 6,
+            duration: 1
+        }
+    }).then(() => animation.start({
+        opacity: 0,
+        pointerEvents: 'none',
+        transition: {
+            delay: 0.1,
+            duration: 0.2
+        }
+    }))
+
     return (
         <motion.div 
             className='preloader' 
             initial={{width: '100vw'}} 
-            animate={{width: '120px', transition: {delay: 6, duration: 1}}}>
+            animate={animation}>
             <motion.div 
                 className='preloader__wrapper' 
                 initial={{scale: 1}} 
                 animate={{
-                    scale: 0.05, y: '-45vh',
-                    opacity: [1,1,1,1,1,1,1,0],
+                    x: '-500px',
+                    rotate: -180,
+                    opacity: [1,1,1,1,1,1,0],
                     transition: {delay: 6, duration: 1}
                 }}>
-                <motion.div initial={{rotate: 30 }} animate={{rotate: [30, 120, 80], transition: {duration: 4}}}>
+                <motion.div initial={{rotate: 30 }} animate={{rotate: [30, 120, 60], transition: {duration: 5}}}>
                     <motion.div className='preloader__line' initial={{width: 0, rotate: 45 }} animate={{width: '60vw', rotate: 45,  transition: {delay: 0.1, duration: 2}}}/>
                     <motion.div className='preloader__line' initial={{width: 0, rotate: 90 }} animate={{width: '60vw', rotate: 90,  transition: {delay: 0.3, duration: 2}}}/>
                     <motion.div className='preloader__line' initial={{width: 0, rotate: 135}} animate={{width: '60vw', rotate: 135, transition: {delay: 0.6, duration: 2}}}/>
@@ -67,20 +84,6 @@ export default function Preloader() {
                     <motion.path initial={{pathLength: 0}} animate={{pathLength: 1, transition: {delay: 4, duration: 2}}} d='M328.456 803.877L294.34 794.736L319.315 769.761L328.456 803.877Z' stroke='#DADFEA' strokeWidth='3'/>
                     <motion.path initial={{pathLength: 0}} animate={{pathLength: 1, transition: {delay: 4, duration: 2}}} d='M500.555 25.133L534.671 34.2743L509.696 59.2488L500.555 25.133Z' stroke='#DADFEA' strokeWidth='3'/>
                 </svg> 
-            </motion.div>
-
-            <motion.div 
-                className='preloader__menu'
-                initial={{width: '0'}} 
-                animate={{width: '120px', transition: {delay: 7, duration: 0.5}}}>
-                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <rect x="2.07935" y="4.65063" width="10.2961" height="1.41013" fill="#11244D"/>
-                    <rect x="12.3755" y="17.9391" width="9.5453" height="1.41013" fill="#11244D"/>
-                    <rect x="12.3755" y="10.9424" width="9.5453" height="1.41013" fill="#11244D"/>
-                    <rect x="12.3755" y="3.94568" width="9.5453" height="1.41013" fill="#11244D"/>
-                    <rect x="2.07935" y="18.6443" width="10.2961" height="1.41013" fill="#11244D"/>
-                    <rect x="2.07935" y="11.6475" width="10.2961" height="1.41013" fill="#11244D"/>
-                </svg>
             </motion.div>
         </motion.div>
     );

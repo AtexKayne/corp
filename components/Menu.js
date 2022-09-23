@@ -20,16 +20,16 @@ export default function Menu ({className}) {
                     <div /><div /><div />
                 </div>
 
-
+                { menuItems.map( (item, id) => <A key={item.text} href={item.link} text={id} /> )}
             </div>
             <div className='menu__wrapper'>
                 <nav onClick={ clickHandler } className='menu__nav'>
                     { menuItems.map( item => <A key={item.text} href={item.link} text={item.text} /> )}
                 </nav>
                 
-                <div className='menu__preload'>
+                {/* <div className='menu__preload'>
                     <MenuPreloader state={active} />
-                </div>
+                </div> */}
             </div>
         </div>
     )
