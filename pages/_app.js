@@ -1,14 +1,17 @@
 import '../styles/global.scss'
 import { motion, useAnimationControls, AnimatePresence } from 'framer-motion'
 import { useRouter } from 'next/router'
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import Menu from '../components/Menu'
 import Preloader from '../components/Preloader';
+import Breadcrumbs from '../components/Breadcrumbs';
 
 
 function MyApp({ Component, pageProps }) {
   const pageTransition = useAnimationControls()
   const router         = useRouter()
+  const [leftPosition, setLeftPosition] = useState('-100vw')
+  const changePosition = (value) => setLeftPosition(value) 
 
   useEffect(() => {
     let isShown = false
@@ -47,6 +50,7 @@ function MyApp({ Component, pageProps }) {
     <main className='content'>
       <Preloader />
       <Menu className={'ui-light'}/>
+      <Breadcrumbs className={'ui-light'} onAfterEffect={changePosition} pageTransition={pageTransition}/>
       <div className='page-transitor'>
         {/* <motion.div 
           key={router.route}
@@ -66,15 +70,15 @@ function MyApp({ Component, pageProps }) {
           transition={{duration: 1}}
           variants={{
             hidden: { y: '-100vh' },
-            shown: { y: '-33.33vh' },
+            shown: { y: '-50vh' },
           }}/>
         <motion.div 
           className='page-transitor__left'
           animate={pageTransition}
           transition={{duration: 1}}
           variants={{
-            hidden: { x: '-100vw' },
-            shown: { x: '-66.66vw' },
+            hidden: { x: leftPosition },
+            shown: { x: '-65vw' },
           }}/>
         <motion.div 
           className='page-transitor__bottom'
@@ -82,15 +86,15 @@ function MyApp({ Component, pageProps }) {
           transition={{duration: 1}}
           variants={{
             hidden: { y: '100vh' },
-            shown: { y: '66.66vh' },
+            shown: { y: '70vh' },
           }}/>
         <motion.div 
           className='page-transitor__right'
           animate={pageTransition}
           transition={{duration: 1}}
           variants={{
-            hidden: { x: '100vw', y: '0' },
-            shown:  { x: '33.33vw',  y: '66.66vh' },
+            hidden: { x: '100vw', y: '0vh' },
+            shown:  { x: '50vw',  y: '50vh' },
           }}/>
       </div>
       <motion.div 
@@ -98,8 +102,8 @@ function MyApp({ Component, pageProps }) {
         animate={pageTransition}
         transition={{duration: 1}}
         variants={{
-          hidden: { scale: 1 },
-          shown:  { scale: 0.5 },
+          hidden: { scale: 1, filter: 'brightness(100%)' },
+          shown:  { scale: 0.5, filter: 'brightness(0%)' },
         }}>
         <Component {...pageProps} />
       </motion.div>

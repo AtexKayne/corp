@@ -1,5 +1,3 @@
-import { MotionConfig } from 'framer-motion'
-import Preloader from '../../components/Preloader'
 import Title from '../../components/Title'
 import MainLayout from '../../layout/MainLayout'
 

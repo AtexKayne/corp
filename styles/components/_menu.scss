@@ -1,6 +1,6 @@
 .menu {
     opacity: 1;
-    z-index: 3;
+    z-index: 4;
     height: 100vh;
     position: relative;
     width: calc(var(--spacing) * 2);
@@ -132,18 +132,6 @@
             > a { transition: .5s ease; transform: translateY(0); }
         }
     }
-}
-
-.breadcrumbs {
-    width: 50px;
-    height: 100vh;
-    display: flex;
-    min-width: 50px;
-    align-items: center;
-    flex-direction: column;
-    justify-content: space-around;
-    background-color: color-use(background);
-    border-right: 1px solid color-use(light-gray);
 }
 
 .menu-preloader {
