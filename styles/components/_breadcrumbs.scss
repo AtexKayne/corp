@@ -1,18 +1,25 @@
 .breadcrumbs {
   z-index: 3;
-  width: 50px;
   height: 100vh;
-  padding: 20px;
   display: flex;
+  max-width: 50px;
   min-width: 50px;
   overflow: hidden;
   position: relative;
-  align-items: center;
-  flex-direction: column;
-  justify-content: space-around;
-  background-color: color-use(background);
+  
+  &__wrapper {
+    width: 50px;
+    height: 100%;
+    padding: 20px;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    justify-content: center;
+    background-color: color-use(background);
+  }
 
   &__text {
+    position: absolute;
     transform: rotate(-90deg);
   }
 }

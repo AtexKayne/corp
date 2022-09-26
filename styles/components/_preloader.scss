@@ -29,10 +29,9 @@
         left: 0;
         bottom: 0;
         z-index: 2;
-        position: relative;
         border-right: 1px solid color-use(light-gray);
         border-right: 4px solid color-use(tetriary);
-
+        
         &::after {
             top: 0;
             bottom: 0;

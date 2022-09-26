@@ -1,8 +1,6 @@
 import Title from '../../components/Title'
 import MainLayout from '../../layout/MainLayout'
 
-
-
 export default function Work() {
     return (
         <MainLayout className='ui-light'>
@@ -11,7 +9,6 @@ export default function Work() {
             </div>
             <div className='col'>
             </div>
-            {/* <Preloader /> */}
         </MainLayout>
     )
 }
