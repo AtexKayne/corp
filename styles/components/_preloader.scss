@@ -29,17 +29,17 @@
         left: 0;
         bottom: 0;
         z-index: 2;
-        border-right: 1px solid color-use(light-gray);
-        border-right: 4px solid color-use(tetriary);
+        // border-right: 1px solid color-use(light-gray);
+        // border-right: 4px solid color-use(tetriary);
         
-        &::after {
-            top: 0;
-            bottom: 0;
-            right: -5px;
-            content: '';
-            position: absolute;
-            border-right: 1px solid color-use(light-gray);
-        }
+        // &::after {
+        //     top: 0;
+        //     bottom: 0;
+        //     right: -5px;
+        //     content: '';
+        //     position: absolute;
+        //     border-right: 1px solid color-use(light-gray);
+        // }
     }
 
     .page-transitor__bottom {

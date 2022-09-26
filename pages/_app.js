@@ -21,16 +21,18 @@ function MyApp({ Component, pageProps }) {
     const pathArray = linkPath.map((path, i) => {
       return { breadcrumb: path, href: '/' + linkPath.slice(0, i + 1).join('/') }
     })
-    const newPosition = `-${(window.innerWidth - 120 - pathArray.filter(path => path.href !== '/').length * 50)}px`
+    const newPosition = `-${(window.innerWidth - 121 - pathArray.filter(path => path.href !== '/').length * 50)}px`
     setLeftPosition(newPosition)
     setBreadcrumbs(pathArray)
   }
 
-  useEffect(() => {  
+  useEffect(() => {
+    console.log('1');
     breadcrumbsSetting()
   }, []);
 
   useEffect(() => {
+    console.log('2');
     const hidePreload  = () => pageTransition.start('hidden')
     const showPreload  = () => pageTransition.start('shown')
     const startHandler = (url) => {
@@ -63,13 +65,13 @@ function MyApp({ Component, pageProps }) {
       <Breadcrumbs className={'ui-light'} breadcrumbs={breadcrumbs} />
       <PageTransitor pageTransition={pageTransition} leftPosition={leftPosition} />
       <motion.div 
-        className='main-container'
+        className='motion-container'
         initial={{ scale: 1, filter: 'brightness(100%)' }}
         animate={pageTransition}
         transition={{duration: 1}}
         variants={{
-          hidden: { scale: 1, filter: 'brightness(100%)' },
-          shown:  { scale: 0.5, filter: 'brightness(0%)' },
+          hidden: { scale: 1, filter: 'brightness(100%) blur(0px)' },
+          shown:  { scale: 0.5, filter: 'brightness(60%) blur(5px)' },
         }}>
         <Component {...pageProps} />
       </motion.div>

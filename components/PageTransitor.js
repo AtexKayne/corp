@@ -18,8 +18,8 @@ export default function PageTransitor({ pageTransition, leftPosition}) {
                 animate={pageTransition}
                 transition={{duration: 1}}
                 variants={{
-                    hidden: { x: leftPosition },
-                    shown: { x: '-65vw' },
+                    hidden: { x: leftPosition, borderRight: '1px solid #DADFEA' },
+                    shown: { x: '-65vw', borderRight: '4px solid #FFA900' },
                 }}/>
             <motion.div 
                 className='page-transitor__bottom'
