@@ -17,7 +17,7 @@ const Breadcrumbs = ({className, onAfterEffect, pageTransition}) => {
             })
 
             setBreadcrumbs(pathArray)
-            const newPosition = `-${(window.innerWidth - 121 - pathArray.filter(path => path.href !== '/').length * 50)}px`
+            const newPosition = `-${(window.innerWidth - 120 - pathArray.filter(path => path.href !== '/').length * 50)}px`
             onAfterEffect(newPosition)
         }
     }, [router])
@@ -27,7 +27,16 @@ const Breadcrumbs = ({className, onAfterEffect, pageTransition}) => {
     }
 
     return (
-        <div className={`${className} breadcrumbs`} aria-label='breadcrumbs'>
+        <motion.div 
+            className={`${className} breadcrumbs`} 
+            aria-label='breadcrumbs'
+            initial={{backgroundColor: 'var(--c-white)'}}
+            animate={pageTransition}
+            variants={{
+                hidden: { backgroundColor: 'var(--c-white)' },
+                shown: { backgroundColor: 'transparent' }
+            }}
+            >
             {breadcrumbs.map((breadcrumb, i) => {
                 return (
                     <motion.div 
@@ -44,7 +53,7 @@ const Breadcrumbs = ({className, onAfterEffect, pageTransition}) => {
                     </motion.div>
                 )
             })}
-        </div>
+        </motion.div>
     )
 }
 

@@ -10,41 +10,46 @@ import Breadcrumbs from '../components/Breadcrumbs';
 function MyApp({ Component, pageProps }) {
   const pageTransition = useAnimationControls()
   const router         = useRouter()
+  const [isFirstLoad,  setIsFirstLoad]  = useState(true)
   const [leftPosition, setLeftPosition] = useState('-100vw')
-  const changePosition = (value) => setLeftPosition(value) 
-
+  const changePosition = (value) => setLeftPosition(value)
+  
   useEffect(() => {
-    let isShown = false
+    let isShown
     const hidePreload = () => pageTransition.start('hidden')
-    const showPreload = () => pageTransition.start('shown')
+    const showPreload = () => isShown = pageTransition.start('shown')
 
     const startHandler = url => {
+      console.log('start', isShown, url, router.asPath);
       if (url !== router.asPath) {
-        isShown = false
-        showPreload().then(() => isShown = true)
+        showPreload()
       }
     }
 
     const completeHandler = url => {
-      if (url === router.asPath) {
-        if (isShown) {
-          hidePreload()
-        } else {
-          showPreload().then(hidePreload)
-        }
+      console.log('end', isShown, url, router.asPath);
+      if (url === router.asPath && !isShown) {
+        hidePreload()
+      } else if (isShown) {
+        isShown.then(hidePreload)
       }
     }
 
-    hidePreload()    
+    // if (isFirstLoad) {
+      hidePreload()
+      console.log('hide');
+    // }
 
     router.events.on('routeChangeStart',    startHandler)
     router.events.on('routeChangeComplete', completeHandler)
+
+    setIsFirstLoad(false)
 
     return () => {
       router.events.off('routeChangeStart',     startHandler)
       router.events.off('routeChangeComplete',  completeHandler)
     }
-  });
+  }, []);
 
   return (
     <main className='content'>
