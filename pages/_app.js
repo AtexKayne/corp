@@ -1,7 +1,7 @@
 import '../styles/global.scss'
 import { motion, useAnimationControls, AnimatePresence } from 'framer-motion'
 import { useRouter } from 'next/router'
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useRef } from 'react';
 import Menu from '../components/Menu'
 import Preloader from '../components/Preloader';
 import Breadcrumbs from '../components/Breadcrumbs';
@@ -10,52 +10,56 @@ import Breadcrumbs from '../components/Breadcrumbs';
 function MyApp({ Component, pageProps }) {
   const pageTransition = useAnimationControls()
   const router         = useRouter()
-  const [isFirstLoad,  setIsFirstLoad]  = useState(true)
+  const refIsShown     = useRef()
   const [leftPosition, setLeftPosition] = useState('-100vw')
-  const changePosition = (value) => setLeftPosition(value)
-  
+  const [breadcrumbs,  setBreadcrumbs] = useState(null)
+
   useEffect(() => {
-    let isShown
     const hidePreload = () => pageTransition.start('hidden')
-    const showPreload = () => isShown = pageTransition.start('shown')
-
-    const startHandler = url => {
-      console.log('start', isShown, url, router.asPath);
+    const showPreload = () => pageTransition.start('shown')
+    const startHandler = (url) => {
       if (url !== router.asPath) {
-        showPreload()
+        refIsShown.current = showPreload()
+        
       }
     }
 
-    const completeHandler = url => {
-      console.log('end', isShown, url, router.asPath);
-      if (url === router.asPath && !isShown) {
-        hidePreload()
-      } else if (isShown) {
-        isShown.then(hidePreload)
+    const completeHandler = (url) => {
+      if (url === router.asPath && refIsShown.current) {
+        const linkPath = router.asPath.split('/')
+        linkPath.shift()
+        const pathArray = linkPath.map((path, i) => {
+          return { breadcrumb: path, href: '/' + linkPath.slice(0, i + 1).join('/') }
+        })
+        setBreadcrumbs(pathArray)
+        const newPosition = `-${(window.innerWidth - 120 - pathArray.filter(path => path.href !== '/').length * 50)}px`
+        setLeftPosition(newPosition)
+
+        refIsShown.current.then(hidePreload)
       }
     }
-
-    // if (isFirstLoad) {
-      hidePreload()
-      console.log('hide');
-    // }
 
     router.events.on('routeChangeStart',    startHandler)
     router.events.on('routeChangeComplete', completeHandler)
+    router.events.on('routeChangeError', completeHandler)
 
-    setIsFirstLoad(false)
+    // setIsFirstLoad(false)
 
     return () => {
       router.events.off('routeChangeStart',     startHandler)
       router.events.off('routeChangeComplete',  completeHandler)
+      router.events.off('routeChangeError',  completeHandler)
     }
-  }, []);
+  }, [router]);
 
   return (
     <main className='content'>
-      <Preloader />
+      {/* <Preloader /> */}
       <Menu className={'ui-light'}/>
-      <Breadcrumbs className={'ui-light'} onAfterEffect={changePosition} pageTransition={pageTransition}/>
+      <Breadcrumbs 
+        className={'ui-light'} 
+        breadcrumbs={breadcrumbs} 
+        pageTransition={pageTransition}/>
       <div className='page-transitor'>
         {/* <motion.div 
           key={router.route}
@@ -71,6 +75,7 @@ function MyApp({ Component, pageProps }) {
 
         <motion.div 
           className='page-transitor__top'
+          initial={{ y: '-100vh' }}
           animate={pageTransition}
           transition={{duration: 1}}
           variants={{
@@ -79,6 +84,7 @@ function MyApp({ Component, pageProps }) {
           }}/>
         <motion.div 
           className='page-transitor__left'
+          initial={{ x: leftPosition }}
           animate={pageTransition}
           transition={{duration: 1}}
           variants={{
@@ -87,6 +93,7 @@ function MyApp({ Component, pageProps }) {
           }}/>
         <motion.div 
           className='page-transitor__bottom'
+          initial={{ y: '100vh' }}
           animate={pageTransition}
           transition={{duration: 1}}
           variants={{
@@ -95,6 +102,7 @@ function MyApp({ Component, pageProps }) {
           }}/>
         <motion.div 
           className='page-transitor__right'
+          initial={{ x: '100vw', y: '0vh' }}
           animate={pageTransition}
           transition={{duration: 1}}
           variants={{
@@ -104,6 +112,7 @@ function MyApp({ Component, pageProps }) {
       </div>
       <motion.div 
         className='main-container'
+        initial={{ scale: 1, filter: 'brightness(100%)' }}
         animate={pageTransition}
         transition={{duration: 1}}
         variants={{

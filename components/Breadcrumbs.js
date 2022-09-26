@@ -3,25 +3,7 @@ import { useRouter } from 'next/router'
 import A from './A'
 import {motion} from 'framer-motion'
 
-const Breadcrumbs = ({className, onAfterEffect, pageTransition}) => {
-    const router = useRouter()
-    const [breadcrumbs, setBreadcrumbs] = useState(null)
-
-    useEffect(() => {
-        if (router) {
-            const linkPath = router.asPath.split('/')
-            linkPath.shift()
-
-            const pathArray = linkPath.map((path, i) => {
-                return { breadcrumb: path, href: '/' + linkPath.slice(0, i + 1).join('/') }
-            })
-
-            setBreadcrumbs(pathArray)
-            const newPosition = `-${(window.innerWidth - 120 - pathArray.filter(path => path.href !== '/').length * 50)}px`
-            onAfterEffect(newPosition)
-        }
-    }, [router])
-
+const Breadcrumbs = ({className, breadcrumbs, pageTransition}) => {
     if (!breadcrumbs || !breadcrumbs[0].breadcrumb) {
         return null
     }
