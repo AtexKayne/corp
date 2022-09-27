@@ -1,16 +1,29 @@
 import Image from 'next/image'
 import { motion, useDragControls } from 'framer-motion'
 import style from '../styles/module/brand-list.module.scss'
+import { useRef, useState } from 'react'
 
 export default function BrandList({ items }) {
     const steps = items.length
+    const [sliderActive, setSliderActive] = useState(false)
     const soringItems = items.sort()
-
+    const refSlider = useRef(null)
     const controls = useDragControls()
 
-    function startDrag(event) {
+    const startDrag = event => {
         console.log(controls, event);
+        setSliderActive(true)
         controls.start(event)
+        console.log(
+            refSlider.current.offsetHeight
+
+        );
+    }
+
+    const endDrag = event => {
+        // console.log(controls, event);
+        setSliderActive(false)
+        // controls.start(event)
     }
 
     return (
@@ -32,17 +45,17 @@ export default function BrandList({ items }) {
                 </div>
             </div>
 
-            <div className={style.brandListSlider}>
+            <div ref={refSlider} data-active={sliderActive} className={style.brandListSlider}>
                 <motion.div 
                     drag="y" 
-                    dragConstraints={{top: 0, bottom: 400}}
+                    dragConstraints={{top: 0, bottom: refSlider.current ? refSlider.current.clientHeight - 60 : 600}}
                     dragElastic={0.2}
                     // dragSnapToOrigin={true}
                     // dragTransition={{ bounceStiffness: 600, bounceDamping: 10 }}
-                    // dragT
                     // dragTransition={{}}
                     // dragMomentum={false}
-                    onPointerDown={startDrag}
+                    onPanStart={startDrag}
+                    onPanEnd={endDrag}
                     dragControls={controls}
                     className={`${style.brandListSliderItem} text--p2 c-dragv`}>
                         AZ
