@@ -1,22 +1,13 @@
-import Cloud from '../../components/Cloud'
-import KaleidoscopeElem from '../../components/KaleidoscopeElem'
-import Title from '../../components/Title'
+import BrandList from '../../components/BrandList'
 import MainLayout from '../../layout/MainLayout'
 import { brandItems } from '../../components/helpers/constants'
 
 export default function Brands({ items }) {
     return (
         <MainLayout className='ui-light'>
-            <div className='col col--between'>
-                <Title text='Brands' hover='Бренды'/>
-                <div className='text--c3'>
-                    14 брендов лучшей косметики для парикмахеров, стилистов, колористов
-                </div>
-                <Cloud items={items} />
-            </div>
-            <div className='col col--center'>
-                <KaleidoscopeElem />
-            </div>
+            <BrandList>
+
+            </BrandList>
         </MainLayout>
     )
 }

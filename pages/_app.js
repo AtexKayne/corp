@@ -27,12 +27,10 @@ function MyApp({ Component, pageProps }) {
   }
 
   useEffect(() => {
-    console.log('1');
     breadcrumbsSetting()
   }, []);
 
   useEffect(() => {
-    console.log('2');
     const hidePreload  = () => pageTransition.start('hidden')
     const showPreload  = () => pageTransition.start('shown')
     const startHandler = (url) => {
@@ -59,7 +57,7 @@ function MyApp({ Component, pageProps }) {
   }, [router]);
 
   return (
-    <main className='content'>
+    <>
       {/* <Preloader /> */}
       <Menu className={'ui-light'} />
       <Breadcrumbs className={'ui-light'} breadcrumbs={breadcrumbs} />
@@ -75,7 +73,7 @@ function MyApp({ Component, pageProps }) {
         }}>
         <Component {...pageProps} />
       </motion.div>
-    </main>
+    </>
   )
 }
 
