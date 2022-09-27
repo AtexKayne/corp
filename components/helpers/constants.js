@@ -12,43 +12,53 @@ export const menuItems = [
 export const brandItems = {
     'items': [
         {
-            'name': 'test-1',
+            'name': 'Derby',
+            'text': 'Основан известным испанским косметическим производителем — компанией CAROBELS COSMETICS и принадлежит одной семье уже более 35 лет',
             'logo': '/assets/img/logos/brand-1.png'
         },
         {
-            'name': 'test-2',
+            'name': 'DS',
+            'text': 'Более 50 лет, профессиональные средства Система 4 разрабатываются лучшими учеными и специалистами по здоровью волос и кожи головы.',
             'logo': '/assets/img/logos/brand-2.png'
         },
         {
-            'name': 'test-3',
+            'name': 'Mizutani',
+            'text': 'Основан известным испанским косметическим производителем — компанией CAROBELS COSMETICS и принадлежит одной семье уже более 35 лет',
             'logo': '/assets/img/logos/brand-3.png'
         },
         {
-            'name': 'test-4',
+            'name': 'Lock Stock & Barrel',
+            'text': 'Более 50 лет, профессиональные средства Система 4 разрабатываются лучшими учеными и специалистами по здоровью волос и кожи головы.',
             'logo': '/assets/img/logos/brand-4.png'
         },
         {
-            'name': 'test-5',
+            'name': 'Layrite',
+            'text': 'Основан известным испанским косметическим производителем — компанией CAROBELS COSMETICS и принадлежит одной семье уже более 35 лет',
             'logo': '/assets/img/logos/brand-5.png'
         },
         {
-            'name': 'test-6',
+            'name': 'Forme Essentials',
+            'text': 'Более 50 лет, профессиональные средства Система 4 разрабатываются лучшими учеными и специалистами по здоровью волос и кожи головы.',
             'logo': '/assets/img/logos/brand-1.png'
         },
         {
             'name': 'test-7',
+            'text': 'Основан известным испанским косметическим производителем — компанией CAROBELS COSMETICS и принадлежит одной семье уже более 35 лет',
             'logo': '/assets/img/logos/brand-2.png'
         },
         {
-            'name': 'test-8',
+            'name': 'Feather',
+            'text': 'Более 50 лет, профессиональные средства Система 4 разрабатываются лучшими учеными и специалистами по здоровью волос и кожи головы.',
             'logo': '/assets/img/logos/brand-3.png'
         },
         {
-            'name': 'test-9',
+            'name': 'Slick Gorilla',
+            'text': 'Основан известным испанским косметическим производителем — компанией CAROBELS COSMETICS и принадлежит одной семье уже более 35 лет',
             'logo': '/assets/img/logos/brand-4.png'
         },
         {
-            'name': 'test-10',
+            'name': 'System4',
+            'text': 'Более 50 лет, профессиональные средства Система 4 разрабатываются лучшими учеными и специалистами по здоровью волос и кожи головы.',
             'logo': '/assets/img/logos/brand-5.png'
         }
     ]

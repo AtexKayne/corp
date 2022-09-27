@@ -53,6 +53,11 @@ figure {
     &--c3 { @extend %text--size-c3; }
     &--c4 { @extend %text--size-c4; }
     &--c5 { @extend %text--size-c5; }
+    &--h1 { @extend %text--size-h1; }
+    &--h2 { @extend %text--size-h2; }
+    &--h3 { @extend %text--size-h3; }
+    &--h4 { @extend %text--size-h4; }
+    &--h5 { @extend %text--size-h5; }
 }
 
 .text--left { text-align: left;}

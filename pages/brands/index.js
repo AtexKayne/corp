@@ -5,7 +5,7 @@ import { brandItems } from '../../components/helpers/constants'
 export default function Brands({ items }) {
     return (
         <MainLayout className='ui-light'>
-            <BrandList>
+            <BrandList items={brandItems.items}>
 
             </BrandList>
         </MainLayout>
