@@ -48,12 +48,13 @@ export default function BrandList({ items }) {
             <div ref={refSlider} data-active={sliderActive} className={style.brandListSlider}>
                 <motion.div 
                     drag="y" 
-                    dragConstraints={{top: 0, bottom: refSlider.current ? refSlider.current.clientHeight - 60 : 600}}
+                    dragConstraints={refSlider}
                     dragElastic={0.2}
                     // dragSnapToOrigin={true}
                     // dragTransition={{ bounceStiffness: 600, bounceDamping: 10 }}
                     // dragTransition={{}}
                     // dragMomentum={false}
+                    
                     onPanStart={startDrag}
                     onPanEnd={endDrag}
                     dragControls={controls}
