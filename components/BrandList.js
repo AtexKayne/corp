@@ -5,8 +5,8 @@ import { useEffect, useRef, useState } from 'react'
 
 export default function BrandList({ items }) {
     const [sliderActive, setSliderActive] = useState(false)
+    const [activeElem, setActiveElem]     = useState(false)
     const [letter, setLetter]             = useState('AZ')
-    const [activeElem, setActiveElem]     = useState(-1)
     
     const steps          = items.length
     const soringItems    = items.sort()
@@ -23,11 +23,15 @@ export default function BrandList({ items }) {
         setSliderActive(true)
     }
 
-    const endDrag = (event, info) => {
-        console.log(info);
+    const endDrag = (_, info) => {
         if (info.point.y <= 150) {
             setSliderActive(false)
         }
+    }
+
+    const clickHandler = (event) => {
+        console.log(event.target.closest(`.${style.brandListSliderContentItem}`));
+        setActiveElem(event.target.closest(`.${style.brandListSliderContentItem}`))
     }
 
     const moveDrag = (event, info) => {
@@ -41,6 +45,7 @@ export default function BrandList({ items }) {
         } else if(!soringItems[index] && letter !== 'AZ') {
             console.log(letter);
             setLetter('AZ')
+            setActiveElem(false)
         }
         // console.log(info.point.y);
     }
@@ -67,23 +72,12 @@ export default function BrandList({ items }) {
             <div ref={refSlider} data-active={sliderActive} className={style.brandListSlider}>
                 <motion.div 
                     drag="y" 
-                    // style={ y }
                     dragConstraints={refSlider}
                     ref={refSliderItem}
-                    // dragElastic={0.2}
-                    // dragSnapToOrigin={true}
-                    // dragTransition={{ bounceStiffness: 600, bounceDamping: 10 }}
-                    // dragTransition={{}}
                     dragMomentum={false}
-                    
                     onPanStart={startDrag}
-                    // onDrag={moveDrag}
                     onUpdate={moveDrag}
-                    // onPanSessionStart={moveDrag}
-                    // onPointerMoveCapture={moveDrag}
-                    // onPan={moveDrag}
                     onPanEnd={endDrag}
-                    // dragControls={controls}
                     className={`${style.brandListSliderItem} text--p2 c-dragv`}>
                         {letter}
                     </motion.div>
@@ -105,7 +99,11 @@ export default function BrandList({ items }) {
             <div className={style.brandListSliderContent}>
                 <motion.div animate={animateScroll} ref={refContent} className={style.brandListSliderContentInner}>
                     {soringItems.map((item) => (
-                        <div key={item.name} data-active={activeElem == item} className={style.brandListSliderContentItem}>
+                        <div 
+                            key={item.name}
+                            data-active={activeElem == item}
+                            onClick={clickHandler}
+                            className={`${style.brandListSliderContentItem} c-hover`}>
                             <div className={`${style.brandListSliderContentItemTitle} text--h4`}>{item.name}</div>
                             <div className={`${style.brandListSliderContentItemLink} text--h1`}>{item.name}</div>
                             <div className={style.brandListSliderContentItemText}>{item.text}</div>

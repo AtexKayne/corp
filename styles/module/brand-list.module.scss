@@ -5,7 +5,7 @@
     grid-gap: 20px;
     grid-template-columns: 80px 1fr;
     grid-template-rows: 60px 80px 1fr;
-    grid-template-areas: 
+    grid-template-areas:
         "empty title title"
         "scroll tag tag"
         "scroll content content";
@@ -50,8 +50,13 @@
     flex-direction: column;
 
     &[data-active="true"] {
-        .brandListSliderArrow { opacity: 0; }
-        .brandListSliderLine { height: 100%; }
+        .brandListSliderArrow {
+            opacity: 0;
+        }
+
+        .brandListSliderLine {
+            height: 100%;
+        }
     }
 }
 
@@ -107,21 +112,13 @@
     transition: .4s .2s;
     grid-template-columns: 1fr 1fr;
     grid-template-rows: 60px 1fr;
-    grid-template-areas: 
+    grid-template-areas:
         "title image"
         "text image";
-    
+
     &[data-active="false"] {
         width: 50%;
         height: 60px;
-
-        .brandListSliderContentItemLink {
-            opacity: 0;
-        }
-
-        .brandListSliderContentItemImage {
-            opacity: 0;
-        }
     }
 
     &[data-active="true"] {
@@ -132,23 +129,55 @@
         .brandListSliderContentItemTitle {
             opacity: 0;
         }
+
+        .brandListSliderContentItemImage {
+            opacity: 1;
+            transition: .2s .5s;
+        }
+
+        .brandListSliderContentItemText {
+            opacity: 1;
+            transition: .2s .5s;
+        }
+
+        .brandListSliderContentItemLink {
+            opacity: 1;
+            grid-area: title;
+            white-space: nowrap;
+        }
     }
 }
 
 .brandListSliderContentItemLink {
+    opacity: 0;
+    transition: .1s;
     grid-area: title;
     white-space: nowrap;
 }
 
 .brandListSliderContentItemTitle {
+    opacity: 1;
     grid-area: title;
     white-space: nowrap;
 }
 
 .brandListSliderContentItemText {
+    opacity: 0;
     grid-area: text;
+    transition: .1s;
 }
 
 .brandListSliderContentItemImage {
+    opacity: 0;
+    transition: .1s;
     grid-area: image;
+    min-width: 240px;
+    min-height: 240px;
+    align-self: center;
+    justify-self: center;
+
+    > span {
+        min-width: 240px;
+        min-height: 240px;
+    }
 }
