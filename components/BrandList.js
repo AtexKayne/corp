@@ -7,47 +7,34 @@ export default function BrandList({ items }) {
     const [sliderActive, setSliderActive] = useState(false)
     const [activeElem, setActiveElem]     = useState(false)
     const [letter, setLetter]             = useState('AZ')
-    
     const steps          = items.length
     const soringItems    = items.sort()
     const refSlider      = useRef(null)
     const refSliderItem  = useRef(null)
     const refCurrentItem = useRef(null)
     const refContent     = useRef(null)
-    const controls       = useDragControls()
     const animateScroll  = useAnimation()
-
-    const y = useMotionValue(0)
-    const tickPathA = useTransform(y, [0, 100, 200,300,400,500, 600], [0, 100, 200,300,400,500, 600]);
-    const startDrag = event => {
+    const animateItem    = useAnimation()
+    const startDrag      = () => setSliderActive(true)
+    const clickHandler   = index => {
         setSliderActive(true)
+        const position = index * refSlider.current.clientHeight / steps + 10
+        animateItem.start({y: position, transition: {type: 'tween'}})
     }
-
-    const endDrag = (_, info) => {
-        if (info.point.y <= 150) {
-            setSliderActive(false)
-        }
-    }
-
-    const clickHandler = (event) => {
-        console.log(event.target.closest(`.${style.brandListSliderContentItem}`));
-        setActiveElem(event.target.closest(`.${style.brandListSliderContentItem}`))
-    }
-
-    const moveDrag = (event, info) => {
+    const moveDrag = event => {
         const index = Math.floor(event.y / (refSlider.current.clientHeight / steps))
-        if (soringItems[index] && refCurrentItem.current !== soringItems[index].name) {
-            setActiveElem(soringItems[index])
+        console.log(sliderActive);
+        if (soringItems[index] && refCurrentItem.current !== soringItems[index].name && sliderActive) {
             refCurrentItem.current = soringItems[index].name
+            animateScroll.start({y: index * -60, transition: {type: 'tween'}})
+            setActiveElem(soringItems[index])
             setLetter(refCurrentItem.current[0].toUpperCase())
-            animateScroll.start({y: index * -60})
-            // console.log(refCurrentItem.current);
         } else if(!soringItems[index] && letter !== 'AZ') {
-            console.log(letter);
+            refCurrentItem.current = false
             setLetter('AZ')
             setActiveElem(false)
+            setSliderActive(false)
         }
-        // console.log(info.point.y);
     }
 
     return (
@@ -71,13 +58,13 @@ export default function BrandList({ items }) {
 
             <div ref={refSlider} data-active={sliderActive} className={style.brandListSlider}>
                 <motion.div 
+                    animate={animateItem}
                     drag="y" 
                     dragConstraints={refSlider}
                     ref={refSliderItem}
                     dragMomentum={false}
                     onPanStart={startDrag}
                     onUpdate={moveDrag}
-                    onPanEnd={endDrag}
                     className={`${style.brandListSliderItem} text--p2 c-dragv`}>
                         {letter}
                     </motion.div>
@@ -98,11 +85,11 @@ export default function BrandList({ items }) {
 
             <div className={style.brandListSliderContent}>
                 <motion.div animate={animateScroll} ref={refContent} className={style.brandListSliderContentInner}>
-                    {soringItems.map((item) => (
+                    {soringItems.map((item, index) => (
                         <div 
                             key={item.name}
                             data-active={activeElem == item}
-                            onClick={clickHandler}
+                            onClick={() => clickHandler(index)}
                             className={`${style.brandListSliderContentItem} c-hover`}>
                             <div className={`${style.brandListSliderContentItemTitle} text--h4`}>{item.name}</div>
                             <div className={`${style.brandListSliderContentItemLink} text--h1`}>{item.name}</div>
