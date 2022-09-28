@@ -32,7 +32,7 @@ export const brandItems = {
             'logo': '/assets/img/logos/brand-4.png'
         },
         {
-            'name': 'Layrite',
+            'name': 'layrite',
             'text': 'Основан известным испанским косметическим производителем — компанией CAROBELS COSMETICS и принадлежит одной семье уже более 35 лет',
             'logo': '/assets/img/logos/brand-5.png'
         },
