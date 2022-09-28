@@ -69,7 +69,7 @@ function MyApp({ Component, pageProps }) {
         transition={{duration: 1}}
         variants={{
           hidden: { scale: 1, filter: 'brightness(100%) blur(0px)' },
-          shown:  { scale: 0.5, filter: 'brightness(60%) blur(5px)' },
+          shown:  { scale: 0.8, filter: 'brightness(80%) blur(2px)' },
         }}>
         <Component {...pageProps} />
       </motion.div>

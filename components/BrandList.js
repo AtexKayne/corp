@@ -1,29 +1,48 @@
 import Image from 'next/image'
-import { motion, useDragControls } from 'framer-motion'
+import { motion, useDragControls, useTransform, useMotionValue, useAnimation } from 'framer-motion'
 import style from '../styles/module/brand-list.module.scss'
-import { useRef, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 
 export default function BrandList({ items }) {
-    const steps = items.length
     const [sliderActive, setSliderActive] = useState(false)
-    const soringItems = items.sort()
-    const refSlider = useRef(null)
-    const controls = useDragControls()
+    const [letter, setLetter]             = useState('AZ')
+    const [activeElem, setActiveElem]     = useState(-1)
+    
+    const steps          = items.length
+    const soringItems    = items.sort()
+    const refSlider      = useRef(null)
+    const refSliderItem  = useRef(null)
+    const refCurrentItem = useRef(null)
+    const refContent     = useRef(null)
+    const controls       = useDragControls()
+    const animateScroll  = useAnimation()
 
+    const y = useMotionValue(0)
+    const tickPathA = useTransform(y, [0, 100, 200,300,400,500, 600], [0, 100, 200,300,400,500, 600]);
     const startDrag = event => {
-        console.log(controls, event);
         setSliderActive(true)
-        controls.start(event)
-        console.log(
-            refSlider.current.offsetHeight
-
-        );
     }
 
-    const endDrag = event => {
-        // console.log(controls, event);
-        setSliderActive(false)
-        // controls.start(event)
+    const endDrag = (event, info) => {
+        console.log(info);
+        if (info.point.y <= 150) {
+            setSliderActive(false)
+        }
+    }
+
+    const moveDrag = (event, info) => {
+        const index = Math.floor(event.y / (refSlider.current.clientHeight / steps))
+        if (soringItems[index] && refCurrentItem.current !== soringItems[index].name) {
+            setActiveElem(soringItems[index])
+            refCurrentItem.current = soringItems[index].name
+            setLetter(refCurrentItem.current[0].toUpperCase())
+            animateScroll.start({y: index * -60})
+            // console.log(refCurrentItem.current);
+        } else if(!soringItems[index] && letter !== 'AZ') {
+            console.log(letter);
+            setLetter('AZ')
+        }
+        // console.log(info.point.y);
     }
 
     return (
@@ -48,18 +67,25 @@ export default function BrandList({ items }) {
             <div ref={refSlider} data-active={sliderActive} className={style.brandListSlider}>
                 <motion.div 
                     drag="y" 
+                    // style={ y }
                     dragConstraints={refSlider}
-                    dragElastic={0.2}
+                    ref={refSliderItem}
+                    // dragElastic={0.2}
                     // dragSnapToOrigin={true}
                     // dragTransition={{ bounceStiffness: 600, bounceDamping: 10 }}
                     // dragTransition={{}}
-                    // dragMomentum={false}
+                    dragMomentum={false}
                     
                     onPanStart={startDrag}
+                    // onDrag={moveDrag}
+                    onUpdate={moveDrag}
+                    // onPanSessionStart={moveDrag}
+                    // onPointerMoveCapture={moveDrag}
+                    // onPan={moveDrag}
                     onPanEnd={endDrag}
-                    dragControls={controls}
+                    // dragControls={controls}
                     className={`${style.brandListSliderItem} text--p2 c-dragv`}>
-                        AZ
+                        {letter}
                     </motion.div>
                 <svg className={style.brandListSliderArrow} width='25' height='72' viewBox='0 0 25 72' fill='none'>
                     <path fillRule='evenodd' clipRule='evenodd' d='M22.5234 7.98413L13.493 17.0146L12.4947 16.0163L21.5252 6.98586L22.5234 7.98413Z' fill='#6C7996' />
@@ -77,9 +103,9 @@ export default function BrandList({ items }) {
             </div>
 
             <div className={style.brandListSliderContent}>
-                <div className={style.brandListSliderContentInner}>
+                <motion.div animate={animateScroll} ref={refContent} className={style.brandListSliderContentInner}>
                     {soringItems.map((item) => (
-                        <div key={item.name} data-active='false' className={style.brandListSliderContentItem}>
+                        <div key={item.name} data-active={activeElem == item} className={style.brandListSliderContentItem}>
                             <div className={`${style.brandListSliderContentItemTitle} text--h4`}>{item.name}</div>
                             <div className={`${style.brandListSliderContentItemLink} text--h1`}>{item.name}</div>
                             <div className={style.brandListSliderContentItemText}>{item.text}</div>
@@ -88,7 +114,7 @@ export default function BrandList({ items }) {
                             </div>
                         </div>
                     ))}
-                </div>
+                </motion.div>
             </div>
         </div>
     )
