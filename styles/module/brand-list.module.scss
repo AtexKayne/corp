@@ -168,6 +168,10 @@
     &[data-active="false"] {
         width: 50%;
         height: 60px;
+
+        .brandListSliderContentItemLink {
+            font-size: 3.6rem;
+        }
     }
 
     &[data-active="true"] {
@@ -177,6 +181,7 @@
 
         .brandListSliderContentItemTitle {
             opacity: 0;
+            font-size: 5.6rem;
         }
 
         .brandListSliderContentItemImage {
@@ -191,7 +196,6 @@
 
         .brandListSliderContentItemLink {
             opacity: 1;
-            grid-area: title;
             white-space: nowrap;
         }
     }
@@ -199,13 +203,14 @@
 
 .brandListSliderContentItemLink {
     opacity: 0;
-    transition: .1s;
+    transition: .2s;
     grid-area: title;
     white-space: nowrap;
 }
 
 .brandListSliderContentItemTitle {
     opacity: 1;
+    transition: .2s;
     color: #6C7996;
     grid-area: title;
     white-space: nowrap;

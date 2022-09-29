@@ -1,5 +1,5 @@
 import Image from 'next/image'
-import { motion, useDragControls, useTransform, useMotionValue, useAnimation } from 'framer-motion'
+import { motion, useDragControls, useAnimationControls , useTransform, useMotionValue, useAnimation } from 'framer-motion'
 import style from '../styles/module/brand-list.module.scss'
 import { useEffect, useRef, useState } from 'react'
 
@@ -18,7 +18,9 @@ export default function BrandList({ items }) {
     const refContent     = useRef(null)
     const refTagInner    = useRef(null)
     const animateScroll  = useAnimation()
-    const animateItem    = useAnimation()
+    const animateItemY   = useMotionValue(0)
+    const animateItem    = useAnimationControls()
+    // const animateControl = useAnimationControls()
 
     const clickHandler = index => {
         setSliderActive(true)
@@ -29,6 +31,8 @@ export default function BrandList({ items }) {
     const moveDrag = event => {
         const index = Math.floor(event.y / (refSlider.current.clientHeight / steps))
         const currentElement = elements[index]
+        animateItemY.set(event.y)
+
         if (currentElement && refCurrentItem.current !== currentElement.name && sliderActive) {
             refCurrentItem.current = currentElement.name
             
@@ -49,12 +53,7 @@ export default function BrandList({ items }) {
         }
     }
 
-    const tagsStartDrag = event => {
-        // console.log(event);
-        setIsDragging('start')
-    }
-
-    const tagsEndDrag = (event, info, ...atr) => {
+    const tagsEndDrag = () => {
         const transform = refTagInner.current.style.transform
         let positionName = 'center'
         if (transform === 'none') {
@@ -65,6 +64,18 @@ export default function BrandList({ items }) {
             else if (position <= scrollWidth) positionName = 'right'
         }
         setIsDragging(positionName)
+    }
+
+    const wheelHandler = event => {
+        const scrollPixels = refSlider.current.clientHeight / steps
+        const scrollDirection = event.deltaY > 0 ? scrollPixels : scrollPixels * -1
+        let scrollTo = scrollDirection + animateItemY.current - 10
+
+        if (scrollTo < 0) scrollTo = -1
+        else if (scrollTo >= refSlider.current.clientHeight - 60) scrollTo = refSlider.current.clientHeight - 10
+        if (scrollTo > 0) setSliderActive(true)
+        console.log(scrollTo, refSlider.current.clientHeight - 60);
+        animateItem.start({y: scrollTo, transition: {type: 'tween'}})
     }
 
     useEffect(() => {
@@ -84,10 +95,10 @@ export default function BrandList({ items }) {
             </h1>
             <div data-dragging={ isDragging } className={style.brandListTagsContainer}>
                 <motion.div 
-                    drag="x" 
-                    ref={ refTagInner } 
+                    drag="x"
+                    ref={ refTagInner }
                     onPanEnd={ tagsEndDrag } 
-                    onPanStart={ tagsStartDrag } 
+                    onPanStart={ () => setIsDragging('start') } 
                     dragConstraints={ {left: scrollWidth, right: 0} } 
                     className={ `${style.brandListTagsInner} c-dragh` }>
                         <div>Барберинг</div>
@@ -131,7 +142,7 @@ export default function BrandList({ items }) {
                 <div className={style.brandListSliderLine}></div>
             </div>
 
-            <div className={style.brandListSliderContent}>
+            <div onWheel={wheelHandler} className={style.brandListSliderContent}>
                 <motion.div animate={animateScroll} ref={refContent} className={style.brandListSliderContentInner}>
                     {elements.map((item, index) => (
                         <div 
