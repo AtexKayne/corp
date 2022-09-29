@@ -8,26 +8,37 @@ export default function BrandList({ items }) {
     const [activeElem, setActiveElem]     = useState(false)
     const [elements, setElements]         = useState(items)
     const [letter, setLetter]             = useState('AZ')
+    const [scrollWidth, setScrollWidth]   = useState(-100)
     const steps          = items.length
     const refSlider      = useRef(null)
     const refSliderItem  = useRef(null)
     const refCurrentItem = useRef(null)
     const refContent     = useRef(null)
+    const refTagInner    = useRef(null)
     const animateScroll  = useAnimation()
     const animateItem    = useAnimation()
-    const startDrag      = () => setSliderActive(true)
-    const clickHandler   = index => {
+
+    const clickHandler = index => {
         setSliderActive(true)
         const position = index * refSlider.current.clientHeight / steps + 10
         animateItem.start({y: position, transition: {type: 'tween'}})
     }
+
     const moveDrag = event => {
         const index = Math.floor(event.y / (refSlider.current.clientHeight / steps))
-        if (elements[index] && refCurrentItem.current !== elements[index].name && sliderActive) {
-            refCurrentItem.current = elements[index].name
-            animateScroll.start({y: index * -60, transition: {type: 'tween'}})
-            setActiveElem(elements[index])
+        const currentElement = elements[index]
+        if (currentElement && refCurrentItem.current !== currentElement.name && sliderActive) {
+            refCurrentItem.current = currentElement.name
+            
+            setActiveElem(currentElement)
             setLetter(refCurrentItem.current[0].toUpperCase())
+
+            animateScroll.start({
+                y: index * -60,
+                transition: {
+                    type: 'tween'
+                }
+            })
         } else if(!elements[index] && letter !== 'AZ') {
             refCurrentItem.current = false
             setLetter('AZ')
@@ -44,15 +55,15 @@ export default function BrandList({ items }) {
             if (xName > yName) { return 1  }
             return 0
         }))
+        setScrollWidth(refTagInner.current.clientWidth - refTagInner.current.scrollWidth)
     }, [items])
-
     return (
         <div className={style.brandList}>
             <h1 className={style.brandListTitle}>
                 Бренды
             </h1>
             <div className={style.brandListTagsContainer}>
-                <motion.div dragConstraints={{left: -127, right: 0}} drag="x" className={`${style.brandListTagsInner} c-dragh`}>
+                <motion.div ref={refTagInner} dragConstraints={{left: scrollWidth, right: 0}} drag="x" className={`${style.brandListTagsInner} c-dragh`}>
                     <div>Барберинг</div>
                     <div>Женские стрижки</div>
                     <div>Окрашивание волос</div>
@@ -67,15 +78,15 @@ export default function BrandList({ items }) {
 
             <div ref={refSlider} data-active={sliderActive} className={style.brandListSlider}>
                 <motion.div 
-                    animate={animateItem}
                     drag="y" 
-                    dragConstraints={refSlider}
-                    ref={refSliderItem}
-                    dragMomentum={false}
-                    onPanStart={startDrag}
-                    onUpdate={moveDrag}
+                    ref={ refSliderItem }
+                    onUpdate={ moveDrag }
+                    dragMomentum={ false }
+                    animate={ animateItem }
+                    dragConstraints={ refSlider }
+                    onPanStart={() => setSliderActive(true)}
                     className={`${style.brandListSliderItem} text--p2 c-dragv`}>
-                        {letter}
+                        { letter }
                     </motion.div>
                 <svg className={style.brandListSliderArrow} width='25' height='72' viewBox='0 0 25 72' fill='none'>
                     <g>
