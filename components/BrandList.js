@@ -9,6 +9,8 @@ export default function BrandList({ items }) {
     const [elements, setElements]         = useState(items)
     const [letter, setLetter]             = useState('AZ')
     const [scrollWidth, setScrollWidth]   = useState(-100)
+    const [isDragging, setIsDragging]     = useState(-100)
+    
     const steps          = items.length
     const refSlider      = useRef(null)
     const refSliderItem  = useRef(null)
@@ -47,6 +49,24 @@ export default function BrandList({ items }) {
         }
     }
 
+    const tagsStartDrag = event => {
+        // console.log(event);
+        setIsDragging('start')
+    }
+
+    const tagsEndDrag = (event, info, ...atr) => {
+        const transform = refTagInner.current.style.transform
+        let positionName = 'center'
+        if (transform === 'none') {
+            positionName = 'left'
+        } else if (transform.includes('translateX')) {
+            const position = +transform.split('translateX(')[1].split('px)')[0]
+            if (position >= 0) positionName = 'left'
+            else if (position <= scrollWidth) positionName = 'right'
+        }
+        setIsDragging(positionName)
+    }
+
     useEffect(() => {
         setElements(items.sort((x, y) => {
             const xName = x.name.toUpperCase()
@@ -62,17 +82,23 @@ export default function BrandList({ items }) {
             <h1 className={style.brandListTitle}>
                 Бренды
             </h1>
-            <div className={style.brandListTagsContainer}>
-                <motion.div ref={refTagInner} dragConstraints={{left: scrollWidth, right: 0}} drag="x" className={`${style.brandListTagsInner} c-dragh`}>
-                    <div>Барберинг</div>
-                    <div>Женские стрижки</div>
-                    <div>Окрашивание волос</div>
-                    <div>Укладки и прически</div>
-                    <div>Барберинг</div>
-                    <div>Барберинг</div>
-                    <div>Барберинг</div>
-                    <div>Барберинг</div>
-                    <div>Барберинг</div>
+            <div data-dragging={ isDragging } className={style.brandListTagsContainer}>
+                <motion.div 
+                    drag="x" 
+                    ref={ refTagInner } 
+                    onPanEnd={ tagsEndDrag } 
+                    onPanStart={ tagsStartDrag } 
+                    dragConstraints={ {left: scrollWidth, right: 0} } 
+                    className={ `${style.brandListTagsInner} c-dragh` }>
+                        <div>Барберинг</div>
+                        <div>Женские стрижки</div>
+                        <div>Окрашивание волос</div>
+                        <div>Укладки и прически</div>
+                        <div>Барберинг</div>
+                        <div>Барберинг</div>
+                        <div>Барберинг</div>
+                        <div>Барберинг</div>
+                        <div>Барберинг</div>
                 </motion.div>
             </div>
 
