@@ -5,7 +5,7 @@ import { brandItems } from '../../components/helpers/constants'
 export default function Brands({ items }) {
     return (
         <MainLayout className='ui-light'>
-            <BrandList items={brandItems.items}>
+            <BrandList items={brandItems.items} tags={brandItems.tags}>
 
             </BrandList>
         </MainLayout>
@@ -23,7 +23,8 @@ export async function getServerSideProps({req}) {
   
     return {
         props: {
-            items: json.items
+            items: json.items,
+            // tags: json.tags
         }
     }
 }

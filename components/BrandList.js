@@ -3,13 +3,14 @@ import { motion, useDragControls, useAnimationControls , useTransform, useMotion
 import style from '../styles/module/brand-list.module.scss'
 import { useEffect, useRef, useState } from 'react'
 
-export default function BrandList({ items }) {
+export default function BrandList({ items, tags }) {
     const [sliderActive, setSliderActive] = useState(false)
-    const [activeElem, setActiveElem]     = useState(false)
-    const [elements, setElements]         = useState(items)
-    const [letter, setLetter]             = useState('AZ')
     const [scrollWidth, setScrollWidth]   = useState(-100)
     const [isDragging, setIsDragging]     = useState(-100)
+    const [activeElem, setActiveElem]     = useState(false)
+    const [tagActive, setTagActive]       = useState([])
+    const [elements, setElements]         = useState(items)
+    const [letter, setLetter]             = useState('AZ')
     
     const steps          = items.length
     const refSlider      = useRef(null)
@@ -26,6 +27,18 @@ export default function BrandList({ items }) {
         setSliderActive(true)
         const position = index * refSlider.current.clientHeight / steps + 10
         animateItem.start({y: position, transition: {type: 'tween'}})
+    }
+
+    const tagClickHandler = (index) => {
+        
+        if (tagActive.includes(index)) {
+            const tagSplice = [...tagActive]
+            tagSplice[tagActive.indexOf(index)] = false
+            const filteredTags = tagSplice.filter(element => element !== false)
+            setTagActive(filteredTags)
+        } else {
+            setTagActive([...tagActive, index])
+        }
     }
 
     const moveDrag = event => {
@@ -101,15 +114,11 @@ export default function BrandList({ items }) {
                     onPanStart={ () => setIsDragging('start') } 
                     dragConstraints={ {left: scrollWidth, right: 0} } 
                     className={ `${style.brandListTagsInner} c-dragh` }>
-                        <div>Барберинг</div>
-                        <div>Женские стрижки</div>
-                        <div>Окрашивание волос</div>
-                        <div>Укладки и прически</div>
-                        <div>Барберинг</div>
-                        <div>Барберинг</div>
-                        <div>Барберинг</div>
-                        <div>Барберинг</div>
-                        <div>Барберинг</div>
+                        {tags.map((tag, index) => (
+                            <div data-active={ tagActive.includes(index) } key={ tag } onClick={() => tagClickHandler(index)}> 
+                                { tag } <div className={style.brandListTagClose} />
+                            </div>
+                        ))}
                 </motion.div>
             </div>
 

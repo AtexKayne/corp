@@ -25,7 +25,7 @@
         top: 0;
         right: 0;
         bottom: 0;
-        width: 50%;
+        width: 30%;
         z-index: 1;
         content: '';
         height: 100%;
@@ -58,8 +58,10 @@
 
     > div {
         display: flex;
+        transition: .3s;
         user-select: none;
         padding: 15px 20px;
+        position: relative;
         margin-right: 12px;
         align-items: center;
         white-space: nowrap;
@@ -71,7 +73,46 @@
         &:last-child {
             margin-right: 0;
         }
+
+        &[data-active="true"] {
+            color: white;
+            padding-right: 50px;
+            background-color: var(--t-dark-violet);
+
+            .brandListTagClose { opacity: 1; }
+            .brandListTagClose::after,
+            .brandListTagClose::before {
+                width: 16px;
+                transition-delay: 0;
+            }
+        }
     }
+}
+
+.brandListTagClose {
+    top: 0;
+    right: 0;
+    bottom: 0;
+    opacity: 0;
+    width: 50px;
+    display: flex;
+    position: absolute;
+    align-items: center;
+    justify-content: center;
+
+    &::before,
+    &::after {
+        width: 0px;
+        height: 2px;
+        content: '';
+        position: absolute;
+        transition: .3s .3s;
+        transform-origin: top;
+        background-color: white;
+    }
+
+    &::after { transform: rotate(45deg); }
+    &::before { transform: rotate(-45deg) translate(-1px, -1px); }
 }
 
 .brandListSlider {
