@@ -2,6 +2,7 @@ import Image from 'next/image'
 import { motion, useDragControls, useAnimationControls , useTransform, useMotionValue, useAnimation } from 'framer-motion'
 import style from '../styles/module/brand-list.module.scss'
 import { useEffect, useRef, useState } from 'react'
+import A from './A'
 
 export default function BrandList({ items, tags }) {
     const [sliderActive, setSliderActive] = useState(false)
@@ -30,7 +31,6 @@ export default function BrandList({ items, tags }) {
     }
 
     const tagClickHandler = (index) => {
-        
         if (tagActive.includes(index)) {
             const tagSplice = [...tagActive]
             tagSplice[tagActive.indexOf(index)] = false
@@ -39,6 +39,8 @@ export default function BrandList({ items, tags }) {
         } else {
             setTagActive([...tagActive, index])
         }
+
+        setScrollWidth(refTagInner.current.clientWidth - refTagInner.current.scrollWidth)
     }
 
     const moveDrag = event => {
@@ -160,7 +162,7 @@ export default function BrandList({ items, tags }) {
                             onClick={() => clickHandler(index)}
                             className={`${style.brandListSliderContentItem} c-hover`}>
                             <div className={`${style.brandListSliderContentItemTitle} text--h4`}>{item.name}</div>
-                            <div className={`${style.brandListSliderContentItemLink} text--h1`}>{item.name}</div>
+                            <A externalClass={`${style.brandListSliderContentItemLink} text--h1`} href={`brand/${item.name}`} text={item.name}/>
                             <div className={style.brandListSliderContentItemText}>{item.text}</div>
                             <div className={style.brandListSliderContentItemImage}>
                                 <Image src={item.logo} alt={item.name} width='100%' height='100%' />

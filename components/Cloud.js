@@ -33,7 +33,7 @@ export default function Cloud({items}) {
                     target.style.marginTop = `${getRandomNumber(100)}px`
                 }, 3000)
             }
-        };
+        }
         refCloud.current.childNodes.forEach(el => {
             el.style.marginTop = `${getRandomNumber(100)}px`
             el.style.marginLeft = `${getRandomNumber(10)}px`

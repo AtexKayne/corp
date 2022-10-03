@@ -212,6 +212,7 @@
 
         .brandListSliderContentItemLink {
             font-size: 3.6rem;
+            pointer-events: none;
         }
     }
 
@@ -223,6 +224,7 @@
         .brandListSliderContentItemTitle {
             opacity: 0;
             font-size: 5.6rem;
+            pointer-events: none;
         }
 
         .brandListSliderContentItemImage {

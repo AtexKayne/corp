@@ -1,4 +1,5 @@
 import '../styles/global.scss'
+// import 'overlayscrollbars/overlayscrollbars.css';
 import { motion, useAnimationControls } from 'framer-motion'
 import { useRouter } from 'next/router'
 import { useEffect, useState, useRef } from 'react';

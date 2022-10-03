@@ -27,11 +27,13 @@
 @import "components/title";
 
 
-.range-slider {
-
+h1.mt-2 {
+    padding-top: 40px!important;
+    padding-bottom: 400px!important;
+    display: block!important;
+    border: 1px solid black;
 }
 
-.box {
-    width: 94px;
-    height: 94px;
+h1.mt-1 {
+    border: 1px solid black;
 }

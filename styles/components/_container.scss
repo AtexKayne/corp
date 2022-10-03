@@ -19,6 +19,11 @@ body > div {
     width: calc(100% - var(--spacing) * 2);
     background-color: color-use(background);
     padding: calc(var(--spacing) * 1.7) calc(var(--spacing) * 2);
+
+    &.no-padding {
+        padding-top: 0;
+        padding-bottom: 0;
+    }
 }
 
 .col {
