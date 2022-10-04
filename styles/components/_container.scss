@@ -13,8 +13,8 @@ body > div {
 
 .container {
     z-index: 1;
-    display: flex;
-    flex-wrap: nowrap;
+    // display: flex;
+    // flex-wrap: nowrap;
     position: relative;
     width: calc(100% - var(--spacing) * 2);
     background-color: color-use(background);

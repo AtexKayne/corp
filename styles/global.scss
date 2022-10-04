@@ -28,12 +28,87 @@
 
 
 h1.mt-2 {
-    padding-top: 40px!important;
-    padding-bottom: 400px!important;
-    display: block!important;
+    padding-top: 40px !important;
+    padding-bottom: 400px !important;
+    display: block !important;
     border: 1px solid black;
 }
 
 h1.mt-1 {
     border: 1px solid black;
+}
+
+html.has-scroll-dragging {
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+
+.has-scroll-smooth [data-scroll-container] {
+    min-height: 80vh;
+}
+
+.c-scrollbar {
+    position: absolute;
+    right: 0;
+    top: 0;
+    width: 11px;
+    height: 100%;
+    transform-origin: center right;
+    transition: transform 0.3s, opacity 0.3s;
+    opacity: 0;
+}
+
+.c-scrollbar:hover {
+    transform: scaleX(1.45);
+}
+
+.c-scrollbar:hover,
+.has-scroll-scrolling .c-scrollbar,
+.has-scroll-dragging .c-scrollbar {
+    opacity: 1;
+}
+
+.c-scrollbar_thumb {
+    position: absolute;
+    top: 0;
+    right: 0;
+    background-color: black;
+    opacity: 0.5;
+    width: 7px;
+    border-radius: 10px;
+    margin: 2px;
+    cursor: -webkit-grab;
+    cursor: grab;
+}
+
+.has-scroll-dragging .c-scrollbar_thumb {
+    cursor: -webkit-grabbing;
+    cursor: grabbing;
+}
+
+body {
+    font-family: "Helvetica", sans-serif;
+}
+
+p {
+    line-height: 1.5;
+}
+
+.containers {
+    padding: 30px 40px;
+}
+
+.picture-container {
+    margin: 40px 0;
+    width: 100%;
+    height: 400px;
+    overflow: hidden;
+}
+
+.picture {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
 }

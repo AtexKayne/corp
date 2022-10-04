@@ -46,7 +46,7 @@
     transition: 1s cursor;
 }
 
-.c-dragv {
-    cursor: url('#{$path-cursors}/drag-v.svg') 0 18, auto;
+.c-dragv, .c-scrollbar_thumb {
+    cursor: url('#{$path-cursors}/drag-v.svg') 0 18, auto!important;
     transition: 1s cursor;
 }

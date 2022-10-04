@@ -4,7 +4,7 @@ export const menuItems = [
     {link: '/projects', text: 'Проекты'},
     {link: '/', text: 'Партнерам'},
     {link: '/', text: 'Поставщикам'},
-    {link: '/', text: 'Работа у нас'},
+    {link: '/about', text: 'Работа у нас'},
     {link: '/', text: 'Команда'},
     {link: '/', text: 'Контакты'},
 ]
@@ -110,4 +110,63 @@ export const mainItems = {
             'image': ''
         }
     ]
+}
+
+export const brandDetail = {
+    about: {
+        name: 'Lock Stock & Barrel',
+        country: 'Финляндия',
+        description: `Независимая марка Lock Stock & Barrel — это команда энтузиастов и экспертов, которые придумывают и производят премиальную мужскую косметику. 
+            Производство находится в Англии. Функциональные и качественные средства для волос и бороды изготавливаются из натуральных ингредиентов и не тестируются на животных. 
+            В 2015 году был выдан международный сертификат Leaping Bunny, который подтверждает, что никакие тесты на животных не проводились при разработке продукции.`,
+    },
+    numbers: [
+        { number: 6, text: 'Стайлингов' },
+        { number: 3, text: 'Жидких стайлинга' },
+        { number: 2, text: 'Шампуня' },
+        { number: 3, text: 'Помады' },
+        { number: 2, text: 'Средства для бороды и усов' }
+    ],
+    ambasadors: [
+        { name: 'test-1', image: '/assets/img/brand/ambasadors/ambasador-1.png' },
+        { name: 'test-2', image: '/assets/img/brand/ambasadors/ambasador-2.png' },
+        { name: 'test-3', image: '/assets/img/brand/ambasadors/ambasador-3.png' },
+        { name: 'test-4', image: '/assets/img/brand/ambasadors/ambasador-4.png' },
+        { name: 'test-5', image: '/assets/img/brand/ambasadors/ambasador-5.png' },
+        { name: 'test-6', image: '/assets/img/brand/ambasadors/ambasador-6.png' },
+    ],
+    successHistory: [
+        { name: 'Сид Соттунг', city: 'Москва', place: 'Салон “Персона”', image: '/assets/img/brand/history/history-1.png' },
+        { name: 'Элина Хюггериён', city: 'Тюмень', place: 'Салон "test-1"', image: '/assets/img/brand/history/history-2.png' },
+        { name: 'Кати Чиз', city: 'Муратпаша', place: 'Салон "test-2"', image: '/assets/img/brand/history/history-3.png' },
+        { name: 'Ирина Леондова', city: 'Москва', place: 'Салон "test-3"', image: '/assets/img/brand/history/history-1.png' },
+    ],
+    additional: { 
+        title: 'Акцент на состав', 
+        description: [
+            `System4 эффективно борется с выпадением и поредением волос любого типа благодаря активным компонентам в составе, без гормонов и антибиотиков.`,
+            `В линии средств представлены шампуни по типу кожи головы, а также средства для решения проблем зуда, шелушения и увлажнения кожи головы и тела.`
+        ]
+    },
+    media: [
+        '/assets/img/brand/media/media-1.png',
+        '/assets/img/brand/media/media-2.png',
+        '/assets/img/brand/media/media-3.png',
+        '/assets/img/brand/media/media-4.png',
+        '/assets/img/brand/media/media-5.png',
+        '/assets/img/brand/media/media-2.png',
+        '/assets/img/brand/media/media-3.png',
+        '/assets/img/brand/media/media-4.png',
+    ],
+    contacts: {
+        site: 'sim.fi/en/system-4',
+        markets: [ 'redhare market', 'ozon', 'wildberries' ]
+    },
+    documents: [
+        { icon: '', name: 'Логотип в EPS', url: '' },
+        { icon: '', name: 'Логотип в PSD', url: '' },
+        { icon: '', name: 'Сертификат соответствия', url: '' },
+        { icon: '', name: 'Регистрация товарного знака', url: '' },
+    ]
+
 }
