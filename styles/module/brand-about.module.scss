@@ -1,0 +1,16 @@
+.container {
+    height: 100%;
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.title {
+    flex-basis: 100%;
+    text-transform: none!important;
+}
+
+.country {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+}

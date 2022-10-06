@@ -39,6 +39,8 @@ $text-default-font:   "TT Common", "Helvetica Neue", Helvetica, Arial, sans-seri
 $text-heading-font:   "TT Common", "Helvetica Neue", Helvetica, Arial, sans-serif;
 
 // TT Common
+$text-g2:      ( font-size: 14rem,   line-height: 80 / 56 * 1em, letter-spacing: 0.03em );
+
 $text-h1:      ( font-size: 5.6rem,  line-height: 60 / 57 * 1em, letter-spacing: 0.03em );
 $text-h2:      ( font-size: 5.0rem,  line-height: 60 / 58 * 1em, letter-spacing: 0.03em );
 $text-h3:      ( font-size: 4.4rem,  line-height: 45 / 43 * 1em, letter-spacing: 0.03em );
@@ -74,6 +76,8 @@ $text-sizes: (
         'default-xs':   $text-c3,
         'small':        $text-c4,
         'lead':         $text-p2,
+
+        'g2':           $text-h2,
         // Headings
         'h1':           $text-h3,
         'h2':           $text-h4,
@@ -107,6 +111,8 @@ $text-sizes: (
         'default-md':   $text-p3,
         'small':        $text-p3,
         'lead':         $text-p1,
+
+        'g2':           $text-g2,
         // Headings
         'h1':           $text-h1,
         'h2':           $text-h2,
