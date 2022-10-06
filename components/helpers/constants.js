@@ -136,7 +136,7 @@ export const brandDetail = {
         { name: 'test-5', image: '/assets/img/brand/ambasadors/ambasador-5.png' },
         { name: 'test-6', image: '/assets/img/brand/ambasadors/ambasador-6.png' },
     ],
-    successHistory: [
+    history: [
         { name: 'Сид Соттунг', city: 'Москва', place: 'Салон “Персона”', image: '/assets/img/brand/history/history-1.png' },
         { name: 'Элина Хюггериён', city: 'Тюмень', place: 'Салон "test-1"', image: '/assets/img/brand/history/history-2.png' },
         { name: 'Кати Чиз', city: 'Муратпаша', place: 'Салон "test-2"', image: '/assets/img/brand/history/history-3.png' },

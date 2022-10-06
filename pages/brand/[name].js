@@ -4,6 +4,7 @@ import MainLayout from '../../layout/MainLayout'
 import BrandAbout from './BrandAbout'
 import { brandDetail } from '../../components/helpers/constants'
 import BrandNumbers from './BrandNumbers'
+import BrandHistory from './BrandHistory'
 
 export default function Brand() {
 
@@ -11,7 +12,8 @@ export default function Brand() {
         <MainLayout className='no-padding'>
             <SmoothScrollProvider options={{ smooth: true }}>
                 <BrandAbout about={brandDetail.about} />
-                <BrandNumbers numbers={brandDetail.numbers} />
+                {/* <BrandNumbers numbers={brandDetail.numbers} /> */}
+                <BrandHistory history={brandDetail.history} />
                 {/* <Scrollbar scrollContext={scroll} /> */}
             </SmoothScrollProvider>
         </MainLayout>

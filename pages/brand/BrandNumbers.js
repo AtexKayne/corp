@@ -1,7 +1,7 @@
 import style from '../../styles/module/brand-numbers.module.scss'
 import { SmoothScrollContext } from '../../components/helpers/SmoothScroll.context'
 import { useEffect, useRef, useContext } from 'react'
-import { motion, useAnimationControls, useTransform } from 'framer-motion'
+import { motion, useAnimationControls } from 'framer-motion'
 
 export default function BrandNumbers({ numbers }) {
     const refCardList = useRef(null)
@@ -16,9 +16,7 @@ export default function BrandNumbers({ numbers }) {
         const animation = useAnimationControls()
         animations.push(animation)
     }
-    function getRandomInt(max) {
-        return Math.floor(Math.random() * max);
-      }
+
     useEffect(() => {
         if (!scroll) return
 
@@ -26,10 +24,18 @@ export default function BrandNumbers({ numbers }) {
         const scrollHandler = event => {
             if (!refContainer.current.classList.contains('is-inview')) return
             if (!refStartPos.current) refStartPos.current = Math.floor(event.scroll.y)
-            if (refStartPos.current > event.scroll.y + 20 || refContainer.current.clientHeight > event.scroll.y) return
+            if (refStartPos.current > event.scroll.y + 20 || refSection.current.clientHeight + 100 < event.scroll.y) return
 
             const maxScrollHeight = refSection.current.clientHeight - refStartPos.current + 50
-            const indexCard = Math.max(-1, Math.floor((event.scroll.y - refStartPos.current) / (maxScrollHeight / numbers.length)))
+            const indexCard = Math.min(
+                numbers.length - 1,
+                Math.max(
+                    -1, 
+                    Math.floor(
+                        ( event.scroll.y - refStartPos.current ) / ( maxScrollHeight / numbers.length )
+                    )
+                )
+            )
 
             if (currentCard === indexCard) return
 
