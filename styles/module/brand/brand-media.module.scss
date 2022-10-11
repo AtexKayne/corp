@@ -1,0 +1,49 @@
+.wrapper {
+    overflow: hidden;
+    position: relative;
+    height: calc(100vh - var(--spacing) * 4);
+    margin: 0 calc(var(--spacing) * -1) 0 calc(var(--spacing) * -2);
+}
+
+.inner {
+    height: 100%;
+    display: flex;
+}
+
+.image {
+    width: 15vw;
+    height: 15vw;
+    flex-shrink: 0;
+    overflow: hidden;
+    position: relative;
+    margin-left: -30px;
+    clip-path: polygon(50% 0%, 100% 50%, 50% 100%, 0% 50%);
+
+    &:nth-child(3n + 1) {
+        top: 10vw;
+        margin-left: -6vw;
+    }
+
+    &:nth-child(3n + 2) {
+        top: 1vw;
+        margin-left: -6vw;
+    }
+
+    &:nth-child(3n + 3) {
+        top: 19vw;
+        margin-left: -15vw;
+    }
+
+    &:first-child {
+        margin-left: 0;
+    }
+}
+
+.background {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(90deg, rgba(245, 245, 245, 0) 0%, rgba(245, 245, 245, 0) 10%, rgba(245, 245, 245, 0) 50%, rgba(245, 245, 245, 0) 90%, rgba(245, 245, 245, 1) 100%);
+}

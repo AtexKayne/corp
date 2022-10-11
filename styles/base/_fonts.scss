@@ -1,26 +1,54 @@
-/*
- * Custom fonts
- */
+/**
+ * @license
+ * MyFonts Webfont Build ID 4184008, 2021-09-23T08:14:22-0400
+ * 
+ * The fonts listed in this notice are subject to the End User License
+ * Agreement(s) entered into by the website owner. All other parties are 
+ * explicitly restricted from using the Licensed Webfonts(s).
+ * 
+ * You may obtain a valid license at the URLs below.
+ * 
+ * Webfont: TTCommonsPro-Lt by TypeType
+ * URL: https://www.myfonts.com/fonts/type-type/tt-commons/light/
+ * 
+ * Webfont: TTCommonsPro-Rg by TypeType
+ * URL: https://www.myfonts.com/fonts/type-type/tt-commons/regular/
+ * 
+ * Webfont: TTCommonsPro-Bd by TypeType
+ * URL: https://www.myfonts.com/fonts/type-type/tt-commons/bold/
+ * 
+ * 
+ * Webfonts copyright: Copyright (c) 2018-2021 by TypeType. All rights reserved.
+ * 
+ * © 2021 MyFonts Inc
+*/
+
+
+/* @import must be at top of file, otherwise CSS will not work */
+// @import url("//hello.myfonts.net/count/3fd7c8");
 
 @font-face {
-    font-family: 'TT Commons';
-    src: url('#{$path-fonts}/tt-commons/TT-Commons-Pro-Light.woff2') format('woff2'), url('#{$path-fonts}/tt-commons/TT-Commons-Pro-Light.woff') format('woff');
+    font-family: "TTCommonsPro";
+    src: url('#{$path-fonts}/tt-commons/TT-Commons-Pro-Light.woff2') format('woff2'),
+    url('#{$path-fonts}/tt-commons/TT-Commons-Pro-Light.woff') format('woff');
     font-weight: $light;
     font-style: normal;
     font-display: block;
 }
 
 @font-face {
-    font-family: 'TT Commons';
-    src: url('#{$path-fonts}/tt-commons/TT-Commons-Pro-Regular.woff2') format('woff2'), url('#{$path-fonts}/tt-commons/TT-Commons-Pro-Regular.woff') format('woff');
+    font-family: "TTCommonsPro";
+    src: url('#{$path-fonts}/tt-commons/TT-Commons-Pro-Regular.woff2') format('woff2'),
+    url('#{$path-fonts}/tt-commons/TT-Commons-Pro-Regular.woff') format('woff');
     font-weight: $book;
     font-style: normal;
     font-display: block;
 }
 
 @font-face {
-    font-family: 'TT Commons';
-    src: url('#{$path-fonts}/tt-commons/TT-Commons-Pro-Bold.woff2') format('woff2'), url('#{$path-fonts}/tt-commons/TT-Commons-Pro-Bold.woff') format('woff');
+    font-family: "TTCommonsPro";
+    src: url('#{$path-fonts}/tt-commons/TT-Commons-Pro-Bold.woff2') format('woff2'),
+    url('#{$path-fonts}/tt-commons/TT-Commons-Pro-Bold.woff') format('woff');
     font-weight: $medium;
     font-style: normal;
     font-display: block;

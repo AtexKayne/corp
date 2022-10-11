@@ -4,25 +4,21 @@ import KaleidoscopeElem from '../components/KaleidoscopeElem'
 import Title from '../components/Title'
 import Cloud from '../components/Cloud'
 import RangeLine from '../components/RangeLine'
-import ScrollContainer from '../components/ScrollContainer'
 import { mainItems, brandItems } from '../components/helpers/constants'
 
 export default function Home({ slides, items }) {
   return (
-    <MainLayout className='ui-light'>
-      <ScrollContainer>
-        <>
-          <div className='col col--between'>
-            <Title image='/assets/img/textlogo.svg' hover='Расскажем, кто мы' />
-            <MainSlider slides={slides} />
-            <RangeLine />
-          </div>
-          <div className='col col--center'>
-            <KaleidoscopeElem isMain={true} />
-          </div>
-        </>
+    <MainLayout className='ui-light container--flex'>
+        <div className='col col--between'>
+          <Title image='/assets/img/textlogo.svg' hover='Расскажем, кто мы' />
+          <MainSlider slides={slides} />
+          <RangeLine />
+        </div>
+        <div className='col col--center'>
+          <KaleidoscopeElem isMain={true} />
+        </div>
 
-        <>
+      {/* <>
           <div className='col col--between'>
             <Title text='Brands' hover='Бренды' />
             <div className='text--c3'>
@@ -33,8 +29,7 @@ export default function Home({ slides, items }) {
           <div className='col col--center'>
             <KaleidoscopeElem />
           </div>
-        </>
-      </ScrollContainer>
+        </> */}
 
     </MainLayout>
   )

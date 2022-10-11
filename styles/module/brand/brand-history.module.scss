@@ -2,6 +2,7 @@
     display: flex;
     min-height: 85vh;
     flex-direction: column;
+    position: relative;
     padding-top: var(--spacing);
     justify-content: flex-start;
 }
@@ -17,28 +18,43 @@
 
 .historyContainer {
     width: 100%;
+    overflow: hidden;
     position: relative;
-    background-color: black;
     min-height: calc(85vh - 5em);
-}
-
-.historyWrapper {
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    padding: 30px;
-    position: absolute;
     background-color: var(--t-background);
 }
 
-.historyImage {
+.historyWrapper {
+    top: 0px;
+    bottom: 0px;
+    width: 100vw;
+    overflow: hidden;
     position: absolute;
-    top: 0;
-    left: 0;
+    will-change: transform;
+    transform-origin: bottom;
+    left: calc(var(--spacing) * -4);
+    background-color: var(--t-background);
+}
+
+.historyInner {
+    top: 0px;
+    left: calc(var(--spacing) * 4);
+    right: calc(var(--spacing) * 4);
+    bottom: 0px;
+    padding: 40px;
+    // overflow: hidden;
+    position: absolute;
+    will-change: transform;
+    transform-origin: bottom;
+}
+
+.historyImage {
+    top: 40px;
+    left: 40px;
+    right: 40px;
+    bottom: 0px;
     z-index: 1;
-    width: 100%;
-    height: 100%;
+    position: absolute;
 
     > span {
         width: 100%!important;
@@ -48,4 +64,18 @@
             object-fit: contain;
         }
     }
+}
+
+.lines {
+    left: 50%;
+    bottom: 0;
+    width: 1px;
+    z-index: 90;
+    height: 100vw;
+    overflow: visible;
+    position: absolute;
+    text-align: center;
+    transform-origin: bottom;
+    transform: rotate(-90deg);
+    background-color: var(--t-dark-violet);
 }

@@ -4,12 +4,12 @@
  * Settings for text, fonts, sizes
  */
 
-$text-default-font:      "TT Common", "Helvetica Neue", Helvetica, Arial, sans-serif;
+$text-default-font:      "TTCommonsPro", "Helvetica Neue", Helvetica, Arial, sans-serif;
 $text-default-weight:    $light;
 $text-default-transform: none;
-$text-heading-font:      "TT Common", "Helvetica Neue", Helvetica, Arial, sans-serif;
+$text-heading-font:      "TTCommonsPro", "Helvetica Neue", Helvetica, Arial, sans-serif;
 $text-heading-weight:    $light;
-$text-heading-transform: uppercase;
+$text-heading-transform: none;
 
 $text-wysiwyg-transform: none;
 $text-code-font: Consolas, "Liberation Mono", Menlo, Courier, monospace;
@@ -32,15 +32,14 @@ $text-styles: (
  * Settings for text, fonts, sizes
  */
 
-$text-default-weight: light;
-$text-heading-weight: light;
-$text-code-font:      "Liberation Mono", Menlo, Courier, monospace;
+$text-default-weight: $light;
+$text-heading-weight: $light;
 $text-default-font:   "TT Common", "Helvetica Neue", Helvetica, Arial, sans-serif;
 $text-heading-font:   "TT Common", "Helvetica Neue", Helvetica, Arial, sans-serif;
 
 // TT Common
 $text-g2:      ( font-size: 14rem,   line-height: 80 / 56 * 1em, letter-spacing: 0.03em );
-$text-g4:      ( font-size: 8.0rem,  line-height: 70 / 56 * 1em, letter-spacing: 0.03em );
+$text-g4:      ( font-size: 8.0rem,  line-height: 51 / 64 * 1em, letter-spacing: 0.03em );
 
 $text-h1:      ( font-size: 5.6rem,  line-height: 60 / 57 * 1em, letter-spacing: 0.03em );
 $text-h2:      ( font-size: 5.0rem,  line-height: 60 / 58 * 1em, letter-spacing: 0.03em );

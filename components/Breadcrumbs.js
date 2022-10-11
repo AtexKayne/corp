@@ -1,9 +1,8 @@
 import A from './A'
 import {motion, AnimatePresence} from 'framer-motion'
 
-const Breadcrumbs = ({className, breadcrumbs, pageTransition}) => {
+export default function Breadcrumbs({className, breadcrumbs, pageTransition}) {
     const width = (breadcrumbs && breadcrumbs.filter(path => path.href !== '/').length) ? breadcrumbs.length * 50 : 0
-    console.log(width);
     if (!breadcrumbs) {
         return null
     }
@@ -34,5 +33,3 @@ const Breadcrumbs = ({className, breadcrumbs, pageTransition}) => {
         </div>
     )
 }
-
-export default Breadcrumbs

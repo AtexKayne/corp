@@ -13,8 +13,6 @@ body > div {
 
 .container {
     z-index: 1;
-    // display: flex;
-    // flex-wrap: nowrap;
     position: relative;
     width: calc(100% - var(--spacing) * 2);
     background-color: color-use(background);
@@ -23,6 +21,10 @@ body > div {
     &.no-padding {
         padding-top: 0;
         padding-bottom: 0;
+    }
+
+    &--flex {
+        display: flex;
     }
 }
 

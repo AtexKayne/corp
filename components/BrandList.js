@@ -1,6 +1,6 @@
-import Image from 'next/image'
-import { motion, useDragControls, useAnimationControls , useTransform, useMotionValue, useAnimation } from 'framer-motion'
 import style from '../styles/module/brand-list.module.scss'
+import Image from 'next/image'
+import { motion, useAnimationControls, useMotionValue, useAnimation } from 'framer-motion'
 import { useEffect, useRef, useState } from 'react'
 import A from './A'
 

@@ -1,0 +1,19 @@
+.catalog {
+    display: flex;
+    align-items: center;
+}
+
+.catalogImage {
+    position: relative;
+
+    > *:last-child {
+        right: 12px;
+        bottom: 23px;
+        position: absolute!important;
+    }
+}
+
+.catalogText {
+    max-width: 300px;
+    margin-left: 30px;
+}

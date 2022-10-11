@@ -1,5 +1,5 @@
+import style from '../../styles/module/brand/brand-about.module.scss'
 import Image from 'next/image'
-import style from '../../styles/module/brand-about.module.scss'
 
 export default function BrandAbout({ about }) {
 
