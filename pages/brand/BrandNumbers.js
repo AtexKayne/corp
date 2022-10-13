@@ -50,7 +50,7 @@ export default function BrandNumbers({ numbers }) {
         const observerHandler = entries => {
             entries.forEach(entry => {
                 if (!entry.isIntersecting) refContainer.current.classList.remove('is-inview')
-                else if(refStartPos.current) refContainer.current.classList.add('is-inview')
+                else if (refStartPos.current) refContainer.current.classList.add('is-inview')
             })
         }
         const observer = new IntersectionObserver(observerHandler, { threshold: 0 })

@@ -60,7 +60,7 @@ function MyApp({ Component, pageProps }) {
   return (
     <>
       {/* <Preloader /> */}
-      <Menu className={'ui-light'} />
+      <Menu className={'ui-transparent'} />
       <Breadcrumbs className={'ui-light'} breadcrumbs={breadcrumbs} />
       <PageTransitor pageTransition={pageTransition} leftPosition={leftPosition} />
       <motion.div 

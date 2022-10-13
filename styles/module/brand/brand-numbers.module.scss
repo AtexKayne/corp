@@ -16,6 +16,12 @@
 .cardWrapper {
     width: 250px;
     height: 300px;
+    transition: .3s;
+
+    &:hover {
+        z-index: 2;
+        transform: scale(1.1);
+    }
 }
 
 .card {

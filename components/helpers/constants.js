@@ -113,6 +113,7 @@ export const mainItems = {
 }
 
 export const brandDetail = {
+    image: '/assets/img/brand/main.jpg',
     about: {
         name: 'Lock Stock & Barrel',
         country: 'Финляндия',
@@ -183,13 +184,13 @@ export const brandDetail = {
     ],
     contacts: {
         site: 'sim.fi/en/system-4',
-        markets: [ 'redhare market', 'ozon', 'wildberries' ]
+        markets: 'redhare market, ozon, wildberries'
     },
     documents: [
-        { icon: '', name: 'Логотип в EPS', url: '' },
-        { icon: '', name: 'Логотип в PSD', url: '' },
-        { icon: '', name: 'Сертификат соответствия', url: '' },
-        { icon: '', name: 'Регистрация товарного знака', url: '' },
+        { icon: '/assets/img/icons/icon-eps.svg', name: 'Логотип в EPS', url: '' },
+        { icon: '/assets/img/icons/icon-psd.svg', name: 'Логотип в PSD', url: '' },
+        { icon: '/assets/img/icons/icon-sertificate.svg', name: 'Сертификат соответствия', url: '' },
+        { icon: '/assets/img/icons/icon-r.svg', name: 'Регистрация товарного знака', url: '' },
     ]
 
 }

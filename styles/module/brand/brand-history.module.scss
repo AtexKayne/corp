@@ -7,9 +7,6 @@
     justify-content: flex-start;
 }
 
-.title {
-
-}
 .historyInfo {
     z-index: 2;
     max-width: 250px;
@@ -25,27 +22,28 @@
 }
 
 .historyWrapper {
-    top: 0px;
-    bottom: 0px;
-    width: 100vw;
+    left: -300px;
+    right: -300px;
+    bottom: 0;
+    height: 120vh;
+    transition: 1.4s;
     overflow: hidden;
     position: absolute;
     will-change: transform;
     transform-origin: bottom;
-    left: calc(var(--spacing) * -4);
     background-color: var(--t-background);
 }
 
 .historyInner {
-    top: 0px;
-    left: calc(var(--spacing) * 4);
-    right: calc(var(--spacing) * 4);
-    bottom: 0px;
+    left: 300px;
+    right: 300px;
+    bottom: 1px;
     padding: 40px;
-    // overflow: hidden;
+    transition: 1.4s;
     position: absolute;
     will-change: transform;
     transform-origin: bottom;
+    top: calc(var(--spacing) * 7);
 }
 
 .historyImage {
@@ -53,12 +51,13 @@
     left: 40px;
     right: 40px;
     bottom: 0px;
-    z-index: 1;
+    z-index:  1;
+    user-select: none;
     position: absolute;
 
-    > span {
-        width: 100%!important;
-        height: 100%!important;
+    >span {
+        width: 100% !important;
+        height: 100% !important;
 
         img {
             object-fit: contain;
@@ -66,16 +65,55 @@
     }
 }
 
-.lines {
+.lines, .lastLine {
     left: 50%;
-    bottom: 0;
     width: 1px;
-    z-index: 90;
-    height: 100vw;
+    bottom: 1px;
+    z-index: 10;
+    height: 50vw;
+    display: flex;
     overflow: visible;
     position: absolute;
     text-align: center;
+    align-items: center;
+    justify-content: center;
     transform-origin: bottom;
-    transform: rotate(-90deg);
     background-color: var(--t-dark-violet);
+    
+    > * {
+        display: block;
+        margin-top: -18vw;
+        white-space: nowrap;
+        transition: .3s opacity;
+    }
+
+    &[data-active="true"] {
+        background-color: var(--t-tetriary);
+        > * { opacity: 0; }
+    }
+
+    &[data-active="move"] {
+        > * {
+            margin-left: -50px;
+            transform: rotate(90deg);
+        }
+    }
+}
+
+.lines {
+    transform: rotate(90deg);
+
+    > * {
+        margin-left: -30px;
+        transform: rotate(-90deg);
+    }
+}
+
+.lastLine {
+    transform: rotate(-90deg);
+
+    > * {
+        margin-left: 30px;
+        transform: rotate(90deg);
+    }
 }

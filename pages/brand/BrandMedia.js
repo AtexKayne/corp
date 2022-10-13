@@ -4,7 +4,7 @@ import Image from 'next/image'
 import Link from 'next/link'
 import Arrow from '../../components/Arrow'
 import { SmoothScrollContext } from '../../components/helpers/SmoothScroll.context'
-import { motion, useAnimationControls, useTransform, useMotionValue } from 'framer-motion'
+import { motion, useTransform, useMotionValue } from 'framer-motion'
 
 export default function BrandMedia({ media }) {
     const refContainer = useRef(null)
@@ -17,18 +17,37 @@ export default function BrandMedia({ media }) {
 
     useEffect(() => {
         if (!scroll) return
-
+        let isScrolling = false
+        const images = Array.from(refWrapper.current.childNodes)
+        function getRandomInt(max) {
+            return Math.floor(Math.random() * max);
+        }
+        images.forEach((image, index) => {
+            const rect = image
+            image.style.marginTop = getRandomInt(40) + 'px'
+        })
         const scrollHandler = event => {
             if (!refContainer.current.classList.contains('is-inview')) return
             if (!refStartPos.current) refStartPos.current = Math.floor(event.scroll.y)
-            console.log(event, scroll);
             y.set(event.scroll.y - refStartPos.current)
+            if (!isScrolling) {
+                isScrolling = true
+                setTimeout(() => {
+                    images.forEach((image, index) => {
+                        const rect = image
+                        if (index === 0) {
+                            console.log(rect);
+                        }
+                    })
+                    isScrolling = false
+                }, 1000)
+            }
         }
 
         const observerHandler = entries => {
             entries.forEach(entry => {
                 if (!entry.isIntersecting) refContainer.current.classList.remove('is-inview')
-                else if(refStartPos.current) refContainer.current.classList.add('is-inview')
+                else if (refStartPos.current) refContainer.current.classList.add('is-inview')
             })
         }
         const observer = new IntersectionObserver(observerHandler, { threshold: 0 })
@@ -50,14 +69,15 @@ export default function BrandMedia({ media }) {
                 </h2>
 
                 <div className={style.wrapper}>
-                    <motion.div ref={refWrapper} style={{x: scrollPosition, width: `calc(15vw * ${media.length / 2})`}} className={style.inner}>
+                    <motion.div ref={refWrapper} style={{ x: scrollPosition, width: `calc(15vw * ${media.length / 2})` }} className={style.inner}>
                         {media.map((element, index) => (
-                            <div className={ style.image } key={index}>
-                                <Image src={element} alt='media' width='276' height='276'/>
+                            // @TODO Replace key
+                            <div className={`${style.image} c-hover`} key={index}>
+                                <Image src={element} alt='media' width='276' height='276' />
                             </div>
                         ))}
                     </motion.div>
-                    <div className={style.background}/>
+                    <div className={style.background} />
                 </div>
             </div>
         </section>

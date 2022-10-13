@@ -50,3 +50,7 @@
     cursor: url('#{$path-cursors}/drag-v.svg') 0 18, auto!important;
     transition: 1s cursor;
 }
+
+.d-none { display: none; }
+.d-flex { display: flex; }
+.d-block { display: block; }
