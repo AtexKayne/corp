@@ -13,6 +13,7 @@ function MyApp({ Component, pageProps }) {
   const pageTransition = useAnimationControls()
   const router         = useRouter()
   const refIsShown     = useRef()
+  const [theme, setTheme]               = useState('ui-light')
   const [leftPosition, setLeftPosition] = useState('-100vw')
   const [breadcrumbs,  setBreadcrumbs]  = useState(null)
   
@@ -60,19 +61,19 @@ function MyApp({ Component, pageProps }) {
   return (
     <>
       {/* <Preloader /> */}
-      <Menu className={'ui-transparent'} />
-      <Breadcrumbs className={'ui-light'} breadcrumbs={breadcrumbs} />
-      <PageTransitor pageTransition={pageTransition} leftPosition={leftPosition} />
+      <Menu className={ theme } />
+      <Breadcrumbs className={ theme } breadcrumbs={ breadcrumbs } />
+      <PageTransitor pageTransition={ pageTransition } leftPosition={ leftPosition } />
       <motion.div 
         className='motion-container'
         initial={{ scale: 1, filter: 'brightness(100%)' }}
-        animate={pageTransition}
-        transition={{duration: 1}}
+        animate={ pageTransition }
+        transition={{ duration: 1 }}
         variants={{
           hidden: { scale: 1, filter: 'brightness(100%) blur(0px)' },
           shown:  { scale: 0.8, filter: 'brightness(80%) blur(2px)' },
         }}>
-        <Component {...pageProps} />
+        <Component { ...pageProps } setTheme={ setTheme } />
       </motion.div>
     </>
   )

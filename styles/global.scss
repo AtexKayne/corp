@@ -11,14 +11,12 @@
 
 @import "base/spacing";
 @import "base/base";
-@import "base/color";
 @import "base/helpers";
 @import "base/fonts";
 
 @import "components/preloader";
 @import "components/text/typography";
 @import "components/text/styles";
-@import "components/themes";
 @import "components/utilities";
 @import "components/hidden";
 @import "components/menu";
@@ -26,18 +24,6 @@
 @import "components/container";
 @import "components/title";
 @import "components/arrow";
-
-
-h1.mt-2 {
-    padding-top: 40px !important;
-    padding-bottom: 400px !important;
-    display: block !important;
-    border: 1px solid black;
-}
-
-h1.mt-1 {
-    border: 1px solid black;
-}
 
 html.has-scroll-dragging {
     -webkit-user-select: none;
@@ -59,6 +45,7 @@ html.has-scroll-dragging {
     transform-origin: center right;
     transition: transform 0.3s, opacity 0.3s;
     opacity: 0;
+    display: none!important;
 }
 
 .c-scrollbar:hover {

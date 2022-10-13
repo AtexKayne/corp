@@ -9,6 +9,7 @@ html, body {
     height: 100%;
     overflow: hidden;
     scroll-behavior: smooth;
+    background-color: color-use(background);
 }
 
 /*
@@ -22,3 +23,5 @@ html, body {
         box-sizing: border-box;
     }
 }
+
+@include color-base();

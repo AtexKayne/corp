@@ -19,7 +19,7 @@
         flex-grow: 0;
         flex-shrink: 0;
         position: relative;
-        background-color: black;
+        background-color: var(--t-lighter);
     }
 
     div:nth-child(2n + 1) {
@@ -36,26 +36,65 @@
     }
 
     &[data-active] div {
-        background-color: yellow;
+        background-color: var(--t-tetriary);
     }
 }
 
 .scrollLink {
     width: 5px;
     height: 5px;
+    display: block;
+    transition: .4s;
+    position: relative;
     margin-bottom: 57.5px;
     transform: rotate(45deg);
-    background-color: black;
+    background-color: var(--t-lighter);
 
     &:nth-child(2n + 1) {
-        margin-left: 9px;
+        margin-left: 12px;
     }
 
     &:nth-child(2n + 2) {
-        margin-left: -5px;
+        margin-left: -8px;
+    }
+
+    &::after {
+        top: -10px;
+        left: -10px;
+        content: '';
+        right: -10px;
+        bottom: -10px;
+        position: absolute;
+    }
+
+    &:hover {
+        color: var(--t-primary);
+        background-color: var(--t-primary);
+        // transform: rotate(45deg) scale(1.5);
     }
 
     &[data-active="true"] {
-        background-color: green;
+        color: var(--t-tetriary);
+        background-color: var(--t-tetriary);
+
+        > div:last-child {
+            opacity: 1;
+        }
+    }
+
+    > div {
+        opacity: 0;
+        width: 17px;
+        height: 20px;
+        transition: .3s;
+        position: absolute;
+        filter: invert(0.1);
+        background-size: cover;
+        background-repeat: no-repeat;
+        transform: rotate(-45deg) translate(-1px, -11px);
+
+        &:first-child {
+            opacity: 1;
+        }
     }
 }

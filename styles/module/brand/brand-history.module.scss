@@ -14,10 +14,10 @@
 }
 
 .historyContainer {
-    width: 100%;
     overflow: hidden;
     position: relative;
     min-height: calc(85vh - 5em);
+    width: calc(100% - var(--spacing));
     background-color: var(--t-background);
 }
 

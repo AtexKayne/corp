@@ -1,42 +1,42 @@
 import style from '../styles/module/scrollbar.module.scss'
 import { SmoothScrollContext } from './helpers/SmoothScroll.context'
 import React, { useContext, useEffect, useState, useRef } from 'react'
-import { motion, useTransform, useMotionValue } from 'framer-motion'
+import { useTransform, useMotionValue } from 'framer-motion'
 
-export default function Scrollbar({ scrollComponents }) {
-    const { scroll } = useContext(SmoothScrollContext)
-    const y = useMotionValue(0)
-    const [links, setLinks] = useState([])
-    const refLinksContainer = useRef()
-    const limit = 10127
-    const scrollPosition = useTransform(y, [0, limit], ['0px', `${scrollComponents.length * 60}px`])
-    // const scrollPosition = useTransform(y, [0, media.length * 150], ['-80%', '20%'])
-    const scrollHandler = event => {
-        event.deltaY > 0 && scroll && scroll.scrollTo('#about')
+export default function Scrollbar({ scrollComponents, setTheme }) {
+    const { scroll }                           = useContext(SmoothScrollContext)
+    const refLinksContainer                    = useRef()
+    const y                                    = useMotionValue(0)
+    const [links, setLinks]                    = useState([0])
+    const [sectionOffsets, setSectionOffsets]  = useState([0,1])
+    const [scrollPositions, setScrollPosition] = useState([0,1])
+    const scrollPosition                       = useTransform(y, sectionOffsets, scrollPositions)
+
+
+    const clickHandler = event => {
+        event.preventDefault()
+        scroll && scroll.scrollTo(event.target.dataset.href)
     }
 
     useEffect(() => {
         if (!scroll) return
         let isScrolling
-        const sections = scrollComponents.map(element => {
+        const sectionsClientTop = scrollComponents.map(element => {
             return document.querySelector(`#${element.id}`).getBoundingClientRect().top
         })
+        const newScrollPositions = scrollComponents.map((_, index) => `${(index + 1) * 60}px`)
 
-        sections.forEach(element => {
-
-        });
+        setSectionOffsets([...sectionsClientTop])
+        setScrollPosition([...newScrollPositions])
 
         const scrollHandler = event => {
-            if (!isScrolling) {
-                isScrolling = true
-                setTimeout(() => {
-                    y.set(event.scroll.y)
-                    console.log(scrollPosition);
-                    const activeLinks = sections.map((element, index) => (element <= event.scroll.y) ? index : null)
-                    setLinks([...activeLinks])
-                    isScrolling = false
-                }, 400)
-            }
+            if (isScrolling) return
+            isScrolling = true
+            y.set(event.scroll.y)
+            const activeLinks = sectionsClientTop.map((element, index) => (element <= event.scroll.y + 3) ? index : null)
+            setLinks(activeLinks)
+            setTheme(event.scroll.y >= window.innerHeight - 20 ? 'ui-light' : 'ui-transparent')
+            setTimeout(() => isScrolling = false, 400)
         }
 
 
@@ -59,19 +59,22 @@ export default function Scrollbar({ scrollComponents }) {
                     <React.Fragment key={element.id}> <div /><div /><div /> </React.Fragment>
                 ))}
             </div>
-            {/* <svg className={style.scrollbarDefault} width='11' height='422' viewBox='0 0 11 422' fill='none'>
-                <path d='M1.49995 1.15674L9.49995 21.1567L1.49995 41.1567L9.49995 61.1567L1.49995 81.1567L9.49995 101.157L1.49995 121.157L9.49995 141.157L1.49995 161.157L9.49994 181.157L1.49995 201.157L9.49994 221.157L1.49994 241.157L9.49997 261.157L1.49997 281.157L9.49997 301.157L1.49997 321.157L9.49997 341.157L1.49997 361.157L9.49998 381.157L1.49998 401.157L9.49998 421.157' stroke='#DADFEA' strokeWidth='2' />
-            </svg>
-            <svg className={style.scrollbarActive} width='11' height='422' viewBox='0 0 11 422' fill='none'>
-                <motion.path
-                    d='M1.49995 1.15674L9.49995 21.1567L1.49995 41.1567L9.49995 61.1567L1.49995 81.1567L9.49995 101.157L1.49995 121.157L9.49995 141.157L1.49995 161.157L9.49994 181.157L1.49995 201.157L9.49994 221.157L1.49994 241.157L9.49997 261.157L1.49997 281.157L9.49997 301.157L1.49997 321.157L9.49997 341.157L1.49997 361.157L9.49998 381.157L1.49998 401.157L9.49998 421.157'
-                    stroke='#FFA900'
-                    style={{ pathLength: scrollPosition }}
-                    strokeWidth='2' />
-            </svg> */}
             <div ref={refLinksContainer}>
                 {scrollComponents.map((element, index) => (
-                    <div key={element.id} data-active={links.includes(index)} className={style.scrollLink}></div>
+                    <a 
+                        onClick={clickHandler} 
+                        data-href={`#${element.id}`} 
+                        key={element.id} 
+                        data-active={links.includes(index)} 
+                        className={`${style.scrollLink} c-hover`}>
+                            {element.icon 
+                                ? (
+                                    <>
+                                        <div style={{backgroundImage: `url(${element.icon}-default.svg)`}}/>
+                                        <div style={{backgroundImage: `url(${element.icon}-active.svg)`}}/>
+                                    </>
+                                ) : ''}
+                    </a>
                 ))}
             </div>
         </div>

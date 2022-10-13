@@ -5,7 +5,7 @@
     position: relative;
     width: calc(var(--spacing) * 2);
     min-width: calc(var(--spacing) * 2);
-    // background-color: color-use(background);
+    background-color: color-use(background);
     
     &::after {
         top: 0;
@@ -27,7 +27,7 @@
         flex-direction: column;
         justify-content: space-between;
         padding: calc(var(--spacing) / 1.5);
-        // background-color: color-use(background);
+        background-color: color-use(background);
     }
 
     &__burger {
@@ -46,7 +46,7 @@
             transition: .4s;
             position: relative;
             transform-origin: center left;
-            background-color: color-use(dark-lines);
+            background-color: color-use(dark-violet);
 
             &::after {
                 top: -1px;
@@ -56,7 +56,7 @@
                 right: -100%;
                 transition: .4s;
                 position: absolute;
-                background-color: color-use(dark-lines);
+                background-color: color-use(dark-violet);
             }
         }
     }

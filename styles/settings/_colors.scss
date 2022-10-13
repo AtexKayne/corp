@@ -96,4 +96,25 @@ $color-themes: (
         link-normal:   color-use(black),
         link-hover:    color-use(white),
     ),
+
+    // transparent theme
+    transparent: (
+        background:    color-use(white, 0),
+        line:          color-use(black, 0.15),
+        line-gray:     color-use(black, 0.2),
+        line-violet:   color-use(violet, 0.3),
+        small:         color-use(gray),
+        smallish:      color-use(black, 0.3),
+        text:          color-use(white),
+        heading:       color-use(white),
+        primary:       color-use(violet),
+        lighter:       color-use(light-gray),
+        tetriary:      color-use(yellow),
+        dark-violet:   color-use(white),
+
+        link-normal:   color-use(white),
+        link-small:    color-use(gray),
+        link-hover:    color-use(violet),
+        link-heading:  color-use(violet),
+    ),
 );
