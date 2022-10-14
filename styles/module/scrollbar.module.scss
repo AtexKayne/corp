@@ -38,6 +38,10 @@
     &[data-active] div {
         background-color: var(--t-tetriary);
     }
+
+    div:last-child {
+        opacity: 0;
+    }
 }
 
 .scrollLink {

@@ -1,5 +1,6 @@
 import style from '../../styles/module/brand/brand-footer.module.scss'
 import Image from 'next/image'
+import InfoLine from '../../components/InfoLine'
 
 export default function BrandFooter({ info, documents }) {
 
@@ -13,11 +14,8 @@ export default function BrandFooter({ info, documents }) {
                         <a className='c-hover' href={info ? info.site : ''} rel='noreferrer' target='_blank'>info.site</a>
                     </span>
                 </div>
-                <div className={`${style.info} mb-0.5`}>
-                    <span className='text--t2 text--bold'>Где купить</span>
-                    <div className={style.delim} />
-                    <span className='text--t2'>{info ? info.markets : ''}</span>
-                </div>
+                <InfoLine textBold={'Где купить'} textThin={info ? info.markets : ''}/>
+                
                 <h1 className={`${style.title} text--h1 py-2`}>Документы</h1>
                 <div className={style.documentWrapper}>
                     {documents 

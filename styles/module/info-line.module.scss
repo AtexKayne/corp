@@ -1,0 +1,35 @@
+.info {
+    width: 100%;
+    display: flex;
+    align-items: center;
+
+    > span {
+        flex-grow: 0;
+        flex-shrink: 0;
+    }
+}
+
+.delim {
+    width: 100%;
+    margin: 0 30px;
+    position: relative;
+
+    &::after,
+    &::before {
+        width: 50%;
+        content: '';
+        height: 2px;
+        position: absolute;
+        background-color: var(--t-dark-violet);
+    }
+
+    &::after {
+        right: 0;
+        transform: translateY(-1px);
+    }
+
+    &::before {
+        left: 0;
+        transform: translateY(1px);
+    }
+}
