@@ -34,14 +34,14 @@ export default function Brand({ setTheme, detail }) {
     return (
         <MainLayout className='no-padding'>
             <SmoothScrollProvider options={{ smooth: true }}>
-                <BrandImage image={brandDetail.image} />
+                {/* <BrandImage image={brandDetail.image} />
                 <BrandAbout about={brandDetail.about} />
                 <BrandNumbers numbers={brandDetail.numbers} />
                 <BrandCatalog about={brandDetail.about} />
                 <BrandHistory history={brandDetail.history} />
                 <BrandMedia media={brandDetail.media} />
                 <BrandFooter info={brandDetail.contacts} documents={brandDetail.documents} />
-                <Scrollbar scrollComponents={sectons} setTheme={ setTheme } />
+                <Scrollbar scrollComponents={sectons} setTheme={ setTheme } /> */}
             </SmoothScrollProvider>
         </MainLayout>
     )
