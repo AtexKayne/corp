@@ -12,7 +12,7 @@ import Scrollbar from '../../components/Scrollbar'
 import { useEffect } from 'react';
 
 
-export default function Brand({ setTheme }) {
+export default function Brand({ setTheme, detail }) {
     const sectons = [
         { id: 'image', icon: '' },
         { id: 'about', icon: '' },
@@ -46,3 +46,19 @@ export default function Brand({ setTheme }) {
         </MainLayout>
     )
 }
+
+export async function getServerSideProps({ req }) {
+    let resp, json
+    try {
+      resp = await fetch(`${process.env.API_URL}/mainxczxc`)
+      json = await resp.json()
+    } catch (error) {
+      json = brandDetail
+    }
+  
+    return {
+      props: {
+        detail: json,
+      }
+    }
+  }
