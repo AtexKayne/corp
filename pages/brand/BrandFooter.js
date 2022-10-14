@@ -10,13 +10,13 @@ export default function BrandFooter({ info, documents }) {
                     <span className='text--t2 text--bold'>Официальный сайт</span>
                     <div className={style.delim} />
                     <span className='text--t2'>
-                        <a className='c-hover' href={info.site} rel='noreferrer' target='_blank'>info.site</a>
+                        <a className='c-hover' href={info ? info.site : ''} rel='noreferrer' target='_blank'>info.site</a>
                     </span>
                 </div>
                 <div className={`${style.info} mb-0.5`}>
                     <span className='text--t2 text--bold'>Где купить</span>
                     <div className={style.delim} />
-                    <span className='text--t2'>{info.markets}</span>
+                    <span className='text--t2'>{info ? info.markets : ''}</span>
                 </div>
                 <h1 className={`${style.title} text--h1 py-2`}>Документы</h1>
                 <div className={style.documentWrapper}>

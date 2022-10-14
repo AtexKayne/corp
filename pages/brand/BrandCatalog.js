@@ -11,10 +11,10 @@ export default function BrandCatalog({ about }) {
                     <a className={`${style.catalog} c-hover`}>
                         <div className={style.catalogImage}>
                             <Image src='/assets/img/brand/catalog.svg' alt='catalog icon' width='100' height='100' />
-                            <Image src={about.image} alt='catalog icon' width='60' height='60' />
+                            <Image src={about ? about.image: ''} alt='catalog icon' width='60' height='60' />
                         </div>
                         <div className={`${style.catalogText} text--h5`}>
-                            Полный каталог<br />товаров {about.name}
+                            Полный каталог<br />товаров {about? about.name : ''}
                         </div>
                         <Arrow />
                     </a>

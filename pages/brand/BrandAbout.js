@@ -10,18 +10,18 @@ export default function BrandAbout({ about }) {
     }
     return (
         <section data-scroll-speed='10' onWheel={scrollHandler} id='about' data-scroll-section className={style.container}>
-            <h1 className={`${style.title} text--h1 pb-1`}>{ about.name }</h1>
+            <h1 className={`${style.title} text--h1 pb-1`}>{ about ? about.name : '' }</h1>
             <div className='col col--60 pr-1'>
                 <div className={`${style.country} pb-1`}>
                     <span className='text--t2 text--bold'>Страна происхождения</span>
                     <div className={style.delim} />
-                    <span className='text--t2'>{ about.country }</span>
+                    <span className='text--t2'>{ about ? about.country : '' }</span>
                 </div>
-                <p className='text--t2'>{ about.description }</p>
+                <p className='text--t2'>{ about ? about.description : '' }</p>
             </div>
             <div className='col col--40 col--center'>
                 <div className={style.image}>
-                    <Image src={about.image} width='240' height='240' alt={ about.name }/>
+                    <Image src={about ? about.image : ''} width='240' height='240' alt={ about ? about.name : '' }/>
                 </div>
             </div>
         </section>
