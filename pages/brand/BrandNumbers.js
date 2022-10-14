@@ -37,7 +37,7 @@ function Number({number, index, numbersCount, scrollPosition, listAnimation}) {
     )
 }
 
-export default function BrandNumbers({ numbers }) {
+export default function BrandNumbers({ numbers = [] }) {
     const refContainer = useRef(null)
     const refStartPos = useRef(null)
     const refSection = useRef(null)
@@ -81,15 +81,17 @@ export default function BrandNumbers({ numbers }) {
             <div ref={refContainer} data-scroll data-scroll-sticky data-scroll-target='#numbers' className={style.container}>
                 <h2 className={`${style.title} text--h1 pb-1`}>Цифры</h2>
                 <motion.div initial={{ x: `${numbers.length * 100}px` }} animate={listAnimation} className={style.cardList}>
-                    {numbers.map((number, index) => (
-                        <Number 
-                            key={number.text}
-                            number={number}
-                            index={index}
-                            listAnimation={listAnimation}
-                            scrollPosition={scrollPosition}
-                            numbersCount={numbers.length}/>
-                    ))}
+                    {numbers.length ?
+                        numbers.map((number, index) => (
+                            <Number 
+                                key={number.text}
+                                number={number}
+                                index={index}
+                                listAnimation={listAnimation}
+                                scrollPosition={scrollPosition}
+                                numbersCount={numbers.length}/>
+                        )) : ''
+                    }
                 </motion.div>
             </div>
 

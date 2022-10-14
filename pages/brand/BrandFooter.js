@@ -20,12 +20,15 @@ export default function BrandFooter({ info, documents }) {
                 </div>
                 <h1 className={`${style.title} text--h1 py-2`}>Документы</h1>
                 <div className={style.documentWrapper}>
-                    {documents.map(document => (
-                        <div key={document.name} className={`${style.document} text--p3 c-hover`}>
-                            <Image src={document.icon} width='24' height='24' alt={document.name} />
-                            <span>{document.name}</span>
-                        </div>
-                    ))}
+                    {documents 
+                        ? documents.map(document => (
+                            <div key={document.name} className={`${style.document} text--p3 c-hover`}>
+                                <Image src={document.icon} width='24' height='24' alt={document.name} />
+                                <span>{document.name}</span>
+                            </div>
+                        ))
+                        : ''
+                    }
                 </div>
             </div>
         </section>

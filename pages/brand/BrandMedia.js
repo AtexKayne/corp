@@ -6,7 +6,7 @@ import Arrow from '../../components/Arrow'
 import { SmoothScrollContext } from '../../components/helpers/SmoothScroll.context'
 import { motion, useTransform, useMotionValue } from 'framer-motion'
 
-export default function BrandMedia({ media }) {
+export default function BrandMedia({ media = [] }) {
     const refContainer = useRef(null)
     const refSection = useRef(null)
     const refWrapper = useRef(null)
@@ -70,12 +70,14 @@ export default function BrandMedia({ media }) {
 
                 <div className={style.wrapper}>
                     <motion.div ref={refWrapper} style={{ x: scrollPosition, width: `calc(15vw * ${media.length / 2})` }} className={style.inner}>
-                        {media.map((element, index) => (
-                            // @TODO Replace key
-                            <div className={`${style.image} c-hover`} key={index}>
-                                <Image src={element} alt='media' width='276' height='276' />
-                            </div>
-                        ))}
+                        {media ?
+                            media.map((element, index) => (
+                                // @TODO Replace key
+                                <div className={`${style.image} c-hover`} key={index}>
+                                    <Image src={element} alt='media' width='276' height='276' />
+                                </div>
+                            )) : ''
+                        }
                     </motion.div>
                     <div className={style.background} />
                 </div>

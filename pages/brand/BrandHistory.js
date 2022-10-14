@@ -74,9 +74,12 @@ export default function BrandHistory({ history }) {
                 <h2 className={`${style.title} text--h1 pb-1`}>История успеха</h2>
 
                 <div className={style.historyContainer}>
-                    {history.map((element, index) => (
-                        <HistoryImage element={element} historyCount={history.length} y={y} index={index} key={element.name} />
-                    ))}
+                    {history ?
+                        history.map((element, index) => (
+                            <HistoryImage element={element} historyCount={history.length} y={y} index={index} key={element.name} />
+                        ))
+                        : ''
+                    }
                     <div className={style.lastLine} />
                 </div>
             </div>
