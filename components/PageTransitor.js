@@ -1,44 +1,80 @@
 import { motion } from 'framer-motion'
 
-export default function PageTransitor({ pageTransition, leftPosition}) {
+export default function PageTransitor({ pageTransition, leftPosition }) {
     return (
         <div className='page-transitor'>
-            <motion.div 
+            <motion.div
                 className='page-transitor__top'
                 initial={{ y: '-100vh' }}
                 animate={pageTransition}
-                transition={{duration: 1}}
+                transition={{ duration: 2, ease: [0.1, 0.7, 0.8, 0.9] }}
                 variants={{
-                    hidden: { y: '-100vh' },
-                    shown: { y: '-50vh' },
-                }}/>
-            <motion.div 
+                    hidden: { y: '-100vh', borderWidth: '1px' },
+                    shown: { y: '-50vh', borderWidth: ['6px', '1px', '6px'] },
+                }}>
+                <motion.div
+                    initial={{ height: '1px' }}
+                    animate={pageTransition}
+                    transition={{ duration: 1, ease: [0.1, 1, 0.1, 1] }}
+                    variants={{
+                        hidden: { height: '1px' },
+                        shown: { height: '1px' },
+                    }} />
+            </motion.div>
+            <motion.div
                 className='page-transitor__left'
                 initial={{ x: leftPosition }}
                 animate={pageTransition}
-                transition={{duration: 1}}
+                transition={{ duration: 2, ease: [0.1, 0.7, 0.8, 0.9] }}
                 variants={{
-                    hidden: { x: leftPosition, borderRight: '1px solid #DADFEA' },
-                    shown: { x: '-65vw', borderRight: '4px solid #FFA900' },
-                }}/>
-            <motion.div 
+                    hidden: { x: leftPosition, borderColor: '#DADFEA' },
+                    shown: { x: '-60vw', borderWidth: ['6px', '1px', '6px'], borderColor: '#FFA900' },
+                }}>
+                <motion.div
+                    initial={{ width: '1px' }}
+                    animate={pageTransition}
+                    transition={{ duration: 1, ease: [0.1, 1, 0.1, 1] }}
+                    variants={{
+                        hidden: { width: '1px' },
+                        shown: { width: '1px' },
+                    }} />
+            </motion.div>
+            <motion.div
                 className='page-transitor__bottom'
                 initial={{ y: '100vh' }}
                 animate={pageTransition}
-                transition={{duration: 1}}
+                transition={{ duration: 2, ease: [0.1, 0.7, 0.8, 0.9] }}
                 variants={{
-                    hidden: { y: '100vh' },
-                    shown: { y: '70vh' },
-                }}/>
-            <motion.div 
+                    hidden: { y: '100vh', borderWidth: '1px' },
+                    shown: { y: '50vh', borderWidth: ['6px', '1px', '6px'] },
+                }}>
+                <motion.div
+                    initial={{ height: '1px' }}
+                    animate={pageTransition}
+                    transition={{ duration: 1, ease: [0.1, 1, 0.1, 1] }}
+                    variants={{
+                        hidden: { height: '1px' },
+                        shown: { height: '1px' },
+                    }} />
+            </motion.div>
+            <motion.div
                 className='page-transitor__right'
-                initial={{ x: '100vw', y: '0vh' }}
+                initial={{ x: '100vw' }}
                 animate={pageTransition}
-                transition={{duration: 1}}
+                transition={{ duration: 2, ease: [0.1, 0.7, 0.8, 0.9] }}
                 variants={{
-                    hidden: { x: '100vw', y: '0vh' },
-                    shown:  { x: '50vw',  y: '50vh' },
-            }}/>
+                    hidden: { x: '100vw', borderWidth: '1px' },
+                    shown: { x: '60vw', borderWidth: ['6px', '1px', '6px'] },
+                }} >
+                <motion.div
+                    initial={{ width: '1px' }}
+                    animate={pageTransition}
+                    transition={{ duration: 1, ease: [0.1, 1, 0.1, 1] }}
+                    variants={{
+                        hidden: { width: '1px' },
+                        shown: { width: '1px' },
+                    }} />
+            </motion.div>
         </div>
     )
 }

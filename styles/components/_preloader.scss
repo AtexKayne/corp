@@ -19,36 +19,50 @@
         top: 0;
         right: 0;
         bottom: 0;
-        z-index: 4;
-        border-left: 1px solid color-use(light-gray);
-        border-left: 4px solid color-use(tetriary);
+        z-index: 1;
+
+        div {
+            top: 0;
+            left: 0;
+            bottom: 0;
+            // filter: blur(3px);
+            position: absolute;
+            background-color: color-use(tetriary);
+        }
+        // border-left: 1px solid color-use(tetriary);
     }
 
     .page-transitor__left {
         top: 0;
         left: 0;
         bottom: 0;
-        z-index: 2;
-        // border-right: 1px solid color-use(light-gray);
-        // border-right: 4px solid color-use(tetriary);
-        
-        // &::after {
-        //     top: 0;
-        //     bottom: 0;
-        //     right: -5px;
-        //     content: '';
-        //     position: absolute;
-        //     border-right: 1px solid color-use(light-gray);
-        // }
+        z-index: 3;
+
+        div {
+            top: 0;
+            right: 0;
+            bottom: 0;
+            // filter: blur(3px);
+            position: absolute;
+            background-color: color-use(tetriary);
+        }
     }
 
     .page-transitor__bottom {
         left: 0;
         right: 0;
         bottom: 0;
-        z-index: 3;
-        border-top: 1px solid color-use(light-gray);
-        border-top: 4px solid color-use(primary);
+        z-index: 2;
+
+        div {
+            top: 0;
+            left: 0;
+            right: 0;
+            // filter: blur(3px);
+            position: absolute;
+            background-color: color-use(primary);
+        }
+        // border-top: 1px solid color-use(primary);
         
     }
 
@@ -56,9 +70,17 @@
         top: 0;
         left: 0;
         right: 0;
-        z-index: 1;
-        border-bottom: 1px solid color-use(light-gray);
-        border-bottom: 4px solid color-use(primary);
+        z-index: 2;
+
+        div {
+            left: 0;
+            right: 0;
+            bottom: 0;
+            // filter: blur(3px);
+            position: absolute;
+            background-color: color-use(primary);
+        }
+        // border-bottom: 1px solid color-use(primary);
     }
 }
 
