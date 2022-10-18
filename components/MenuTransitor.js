@@ -6,7 +6,7 @@ import { menuItems } from './helpers/constants'
 import { useRouter } from 'next/router'
 // import MenuPreloader from "./MenuPreloader";
 
-export default function MenuTransitor({ setTheme, className }) {
+export default function MenuTransitor({ setTheme, animateContent, className }) {
     const router = useRouter()
     const isAnimated = useRef(false)
     const isMenuOpened = useRef(false)
@@ -79,16 +79,18 @@ export default function MenuTransitor({ setTheme, className }) {
             isMenuOpened.current = true
             if (menuState === 'close') {
                 setMenuState('open')
+                animateContent.start('start')
                 await showTransitor()
                 animateNav.start('shown')
                 animateImage.start('shown')
-                await animateWrapper.start('shown')
+                await animateWrapper.start('fastShown')
                 await animateWrapper.start('hidden')
                 isMenuOpened.current = false
             } else {
                 setMenuState('close')
                 animateImage.start('hidden')
                 await animateWrapper.start('smash')
+                animateContent.start('end')
                 await animateNav.start('hidden')
                 animateWrapper.start('fastHidden')
                 await hideTransitor()
@@ -103,12 +105,14 @@ export default function MenuTransitor({ setTheme, className }) {
         await animateWrapper.start('smash')
         await animateNav.start('hidden')
         animateWrapper.start('fastHidden')
-        await hideTransitor()
         isMenuOpened.current = false
     }
 
     useEffect(() => {
-        if (isAnimated.current) isAnimated.current.then(hideTransitor)
+        if (isAnimated.current) {
+            isAnimated.current.then(hideTransitor)
+            animateContent.start('end')
+        }
     }, [leftPosition, breadcrumbs])
 
     useEffect(() => {
@@ -119,6 +123,7 @@ export default function MenuTransitor({ setTheme, className }) {
 
         const startHandler = (url) => {
             if (url !== router.asPath) {
+                animateContent.start('start')
                 isAnimated.current = showTransitor()
             }
         }
@@ -143,54 +148,57 @@ export default function MenuTransitor({ setTheme, className }) {
     return (
         <div data-state={menuState} className={`${className} menu-wrapper`}>
             <div className='menu'>
-                <div onClick={ clickHandler } className='menu__burger c-hover'>
+                <div onClick={clickHandler} className='menu__burger c-hover'>
                     <div /><div /><div />
                 </div>
                 {menuItems.map((item, id) => <A key={item.text} href={item.link} text={id} />)}
             </div>
 
             <motion.nav
-                onClick={ clickNavHandler }
+                onClick={clickNavHandler}
                 animate={animateNav}
-                initial={{x: '-100vw', zIndex: 0}}
-                transition={{duration: 0}}
+                initial={{ x: '-100vw', zIndex: 0 }}
+                transition={{ duration: 0 }}
                 variants={{
-                    shown: { x: '-40vw', zIndex: 4, transition: {delay: 1.5, duration: 0} },
+                    shown: { x: '-40vw', zIndex: 4, transition: { delay: 0.2, duration: 0 } },
                     hidden: { zIndex: 0, x: '-100vw' }
                 }}
                 className='menu__nav'>
-                { menuItems.map( item => <A key={item.text} externalClass='text--h4' href={item.link} text={item.text} /> )}
-                <motion.img 
+                {menuItems.map(item => <A key={item.text} externalClass='text--h4' href={item.link} text={item.text} />)}
+                <motion.div
+                    className='menu__nav__image'
                     animate={animateImage}
-                    variants={{shown: {opacity: 1}, hidden: {opacity: 0}}}
-                    transition={{duration: 1}}
-                    src={transitors[3].image}
-                    className='menu__nav__image' alt='' />
+                    initial={{x: '600px'}}
+                    variants={{ shown: { x: 0 }, hidden: { x: '600px' } }}
+                    transition={{ duration: 1 }}>
+                    <img src={transitors[3].image} alt='' />
+                </motion.div>
             </motion.nav>
 
             <motion.div
                 animate={animateWrapper}
-                initial={{x: '-40vw', zIndex: 0}}
+                initial={{ x: '-40vw', zIndex: 0 }}
                 variants={{
                     shown: { x: '-40vw', zIndex: 0 },
+                    fastShown: { x: '-40vw', zIndex: 0, transition: { duration: 0 } },
                     hidden: { zIndex: [4, 4], x: ['-40vw', '-40vw', '-100vw'] },
-                    smash: {zIndex: 4, x: '-40vw'},
-                    fastHidden: {zIndex: 0, x: '-100vw', transition: {duration: 0}}
+                    smash: { zIndex: 4, x: '-40vw', transition: { duration: 0.5 } },
+                    fastHidden: { zIndex: 0, x: '-100vw', transition: { duration: 0 } }
                 }}
-                transition={{duration: 1}}
+                transition={{ duration: 1 }}
                 className='menu__wrapper'>
             </motion.div>
 
-            
+
 
             <div className='bread'>
                 {breadcrumbs.map((breadcrumb, i) => {
                     return (
-                        <motion.div 
+                        <motion.div
                             animate={animateBreadcrumbs}
-                            initial={{x: 200}}
-                            variants={{hidden: {x: -200}, shown: {x: 0}}}
-                            transition={{duration: 1}}
+                            initial={{ x: 200 }}
+                            variants={{ hidden: { x: -200 }, shown: { x: 0 } }}
+                            transition={{ duration: 1, delay: 0 }}
                             className='bread__text'
                             key={breadcrumb.href}>
                             <A href={breadcrumb.href} text={breadcrumb.breadcrumb.toUpperCase()} />
@@ -204,7 +212,7 @@ export default function MenuTransitor({ setTheme, className }) {
                 <motion.div
                     animate={animate}
                     key={transitor.position}
-                    transition={{ duration: 2 }}
+                    transition={{ duration: 1 }}
                     initial={transitor.initial}
                     variants={transitor.variants}
                     className={`transitor transitor--${transitor.position}`}>
@@ -213,12 +221,17 @@ export default function MenuTransitor({ setTheme, className }) {
                         variants={{ shown: { width: '8px' }, hidden: { width: '1px' } }}
                         initial={{ width: '1px' }}
                         className='transitor__line' />
-                    <motion.img 
+                    <motion.div
                         animate={animateImage}
-                        variants={{shown: {opacity: 1}, hidden: {opacity: 0}}}
-                        transition={{duration: 1}}
-                        src={transitor.image}
-                        className='transitor__image' alt='' />
+                        initial={{ x: '-500px', y: transitor.position === 'top' ? '500px' : '-500px' }}
+                        variants={{
+                            shown: { y: 0, x: 0 },
+                            hidden: { x: '-500px', y: transitor.position === 'top' ? '500px' : '-500px' }
+                        }}
+                        transition={{ duration: 1 }}
+                        className='transitor__image' >
+                        <img src={transitor.image} alt='' />
+                    </motion.div>
                 </motion.div>
             ))}
         </div>

@@ -24,10 +24,10 @@ export default function Brand({ setTheme, detail }) {
   ]
 
   useEffect(() => {
-    // setTheme('ui-transparent')
+    setTheme('ui-transparent')
 
     return () => {
-      // setTheme('ui-light')
+      setTheme('ui-light')
     }
   }, []);
 

@@ -181,13 +181,16 @@ html.has-scroll-dragging {
         border-right: 1px solid color-use(light-gray);
 
         &__image {
-            opacity: 0;
             width: 538px;
             right: -240px;
             height: 538px;
             position: absolute;
             top: calc(50% - 270px);
-            animation: rotateTransitorImage 60s linear infinite;
+            img {
+                width: 100%;
+                height: 100%;
+                animation: rotateTransitorImage 60s linear infinite;
+            }
         }
     }
 }
@@ -253,10 +256,13 @@ html.has-scroll-dragging {
     }
 
     &__image {
-        opacity: 0;
         position: absolute;
-        animation: rotateTransitorImage 60s linear infinite;
-        // animation: name duration timing-function delay iteration-count direction fill-mode;
+
+        img {
+            width: 100%;
+            height: 100%;
+            animation: rotateTransitorImage 60s linear infinite;
+        }
     }
 }
 
