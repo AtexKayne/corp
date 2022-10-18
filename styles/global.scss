@@ -124,7 +124,7 @@ html.has-scroll-dragging {
     color: color-use(text);
     flex-direction: column;
     justify-content: space-around;
-    transition: 1s background-color, 1s color;
+    transition: 1s background-color, 0.5s color;
     background-color: color-use(background);
     border-right: 1px solid color-use(light-gray);
 
@@ -166,7 +166,7 @@ html.has-scroll-dragging {
         width: 100vw;
         height: 100vh;
         position: absolute;
-        transition: 1s background-color, 1s color;
+        transition: 1s background-color, 0.5s color;
         background-color: color-use(background);
         border-right: 1px solid color-use(primary);
     }
@@ -185,7 +185,7 @@ html.has-scroll-dragging {
         padding: 120px 0 120px 50vw;
         transform: translateX(100vw);
         justify-content: space-between;
-        transition: 1s background-color, 1s color;
+        transition: 1s background-color, 0.5s color;
         background-color: color-use(background);
         border-right: 1px solid color-use(light-gray);
 
@@ -211,7 +211,7 @@ html.has-scroll-dragging {
     height: 100vh;
     overflow: hidden;
     position: absolute;
-    transition: 1s background-color, 1s color;
+    transition: 1s background-color, 0.5s color;
     background-color: color-use(background);
 
     &--top {
@@ -314,7 +314,7 @@ html.has-scroll-dragging {
     height: 100vh;
     display: flex;
     overflow: hidden;
-    transition: 1s background-color, 1s color;
+    transition: 1s background-color, 0.5s color;
     background-color: color-use(background);
 
     &__text {

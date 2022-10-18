@@ -19,8 +19,11 @@
     transition: .3s;
 
     &:hover {
-        z-index: 2;
-        transform: scale(1.1);
+        transform: translateX(-80px);
+    }
+
+    &:last-child:hover {
+        transform: translateX(0px);
     }
 }
 
