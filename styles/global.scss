@@ -79,6 +79,10 @@ html.has-scroll-dragging {
 .has-scroll-smooth [data-scroll-section] {
     min-height: 100vh;
     padding: var(--spacing) 0;
+
+    &:first-child {
+        padding: 0;
+    }
 }
 
 .menu-wrapper {
@@ -159,7 +163,7 @@ html.has-scroll-dragging {
         width: 100vw;
         height: 100vh;
         position: absolute;
-        background-color: color-use(white);
+        background-color: color-use(background);
         border-right: 1px solid color-use(primary);
     }
 
@@ -177,7 +181,7 @@ html.has-scroll-dragging {
         padding: 120px 0 120px 50vw;
         transform: translateX(100vw);
         justify-content: space-between;
-        background-color: color-use(white);
+        background-color: color-use(background);
         border-right: 1px solid color-use(light-gray);
 
         &__image {
@@ -201,7 +205,8 @@ html.has-scroll-dragging {
     height: 100vh;
     overflow: hidden;
     position: absolute;
-    background-color: color-use(white);
+    background-color: color-use(background);
+
     &--top {
         left: 0;
         right: 0;

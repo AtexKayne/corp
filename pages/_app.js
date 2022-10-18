@@ -7,14 +7,16 @@ function MyApp({ Component, pageProps }) {
   const [theme, setTheme] = useState('ui-light')
   const [contentWidth, setContentWidth] = useState('100%')
   const animateContent = useAnimationControls()
-
-  useEffect(() => {
+  const setContainerWidth = () => {
     if (document) setContentWidth(window.innerWidth - document.querySelector('.menu-wrapper').clientWidth + 'px')
+  }
+  useEffect(() => {
+    setContainerWidth()
   }, [])
 
   return (
     <>
-      <MenuTransitor animateContent={animateContent} setTheme={setTheme} className={ theme }/>
+      <MenuTransitor animateContent={animateContent} setContainerWidth={setContainerWidth} setTheme={setTheme} className={ theme }/>
       <motion.div 
         initial={{scale: 1, opacity: 1}}
         animate={animateContent}

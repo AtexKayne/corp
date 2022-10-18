@@ -6,7 +6,7 @@ import { menuItems } from './helpers/constants'
 import { useRouter } from 'next/router'
 // import MenuPreloader from "./MenuPreloader";
 
-export default function MenuTransitor({ setTheme, animateContent, className }) {
+export default function MenuTransitor({ setTheme, setContainerWidth, animateContent, className }) {
     const router = useRouter()
     const isAnimated = useRef(false)
     const isMenuOpened = useRef(false)
@@ -66,9 +66,13 @@ export default function MenuTransitor({ setTheme, animateContent, className }) {
         const newPosition = `-${(window.innerWidth - 121 - pathArray.filter(path => path.href !== '/').length * 50)}px`
         setLeftPosition(newPosition)
         setBreadcrumbs(pathArray)
+        setContainerWidth()
     }
 
-    const hideTransitor = () => animate.start('hidden').then(() => animateBreadcrumbs.start('shown'))
+    const hideTransitor = () => {
+        animate.start('hidden')
+        return animateBreadcrumbs.start('shown')
+    }
     const showTransitor = () => {
         animateBreadcrumbs.start('hidden')
         return animate.start('shown')
@@ -177,7 +181,7 @@ export default function MenuTransitor({ setTheme, animateContent, className }) {
 
             <motion.div
                 animate={animateWrapper}
-                initial={{ x: '-40vw', zIndex: 0 }}
+                initial={{ x: '-100vw', zIndex: 0 }}
                 variants={{
                     shown: { x: '-40vw', zIndex: 0 },
                     fastShown: { x: '-40vw', zIndex: 0, transition: { duration: 0 } },
@@ -189,8 +193,6 @@ export default function MenuTransitor({ setTheme, animateContent, className }) {
                 className='menu__wrapper'>
             </motion.div>
 
-
-
             <div className='bread'>
                 {breadcrumbs.map((breadcrumb, i) => {
                     return (
@@ -198,7 +200,7 @@ export default function MenuTransitor({ setTheme, animateContent, className }) {
                             animate={animateBreadcrumbs}
                             initial={{ x: 200 }}
                             variants={{ hidden: { x: -200 }, shown: { x: 0 } }}
-                            transition={{ duration: 1, delay: 0 }}
+                            transition={{ duration: 1 }}
                             className='bread__text'
                             key={breadcrumb.href}>
                             <A href={breadcrumb.href} text={breadcrumb.breadcrumb.toUpperCase()} />
@@ -206,7 +208,6 @@ export default function MenuTransitor({ setTheme, animateContent, className }) {
                     )
                 })}
             </div>
-
 
             {transitors.map((transitor) => (
                 <motion.div
