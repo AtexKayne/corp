@@ -2,11 +2,17 @@ import '../styles/global.scss'
 import MenuTransitor from '../components/MenuTransitor';
 import { useState, useEffect } from 'react';
 import { motion, useAnimationControls } from 'framer-motion'
+import Preloader from '../components/Preloader';
 
 function MyApp({ Component, pageProps }) {
   const [theme, setTheme] = useState('ui-light')
+  const [preloaderState, setPreloaderState] = useState();
   const [contentWidth, setContentWidth] = useState('100%')
   const animateContent = useAnimationControls()
+  const animatePreloader = useAnimationControls()
+  const setPrSt = (value) => {
+    if (document) setPreloaderState(value)
+  }
   const setContainerWidth = () => {
     if (document) setContentWidth(window.innerWidth - document.querySelector('.menu-wrapper').clientWidth + 'px')
   }
@@ -16,7 +22,8 @@ function MyApp({ Component, pageProps }) {
 
   return (
     <>
-      <MenuTransitor animateContent={animateContent} setContainerWidth={setContainerWidth} theme={theme} setTheme={setTheme} className={ theme }/>
+      <Preloader animatePreloader={animatePreloader} setPreloaderState={setPrSt}/>
+      <MenuTransitor animateContent={animateContent} preloaderState={preloaderState} setContainerWidth={setContainerWidth} theme={theme} setTheme={setTheme} className={ theme }/>
       <motion.div 
         initial={{scale: 1, opacity: 1}}
         animate={animateContent}

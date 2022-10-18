@@ -1,12 +1,12 @@
 /* eslint-disable @next/next/no-img-element */
 import A from "./A";
 import { useState, useEffect, useRef } from "react";
-import { motion, useAnimationControls } from 'framer-motion'
+import { motion, useAnimationControls, useDomEvent } from 'framer-motion'
 import { menuItems } from './helpers/constants'
 import { useRouter } from 'next/router'
 // import MenuPreloader from "./MenuPreloader";
 
-export default function MenuTransitor({ theme, setTheme, setContainerWidth, animateContent, className }) {
+export default function MenuTransitor({ theme, preloaderState, setTheme, setContainerWidth, animateContent, className }) {
     const router = useRouter()
     const refTheme = useRef(theme)
     const isAnimated = useRef(false)
@@ -74,7 +74,7 @@ export default function MenuTransitor({ theme, setTheme, setContainerWidth, anim
         setTheme('ui-light')
         animate.start('hidden')
         await animateBreadcrumbs.start('shown')
-        console.log(refTheme.current, theme);
+
         if (refTheme.current !== theme) {
             setTheme(refTheme.current)
         }
@@ -124,7 +124,27 @@ export default function MenuTransitor({ theme, setTheme, setContainerWidth, anim
     }
 
     useEffect(() => {
-        if (theme !== refTheme.current) refTheme.current = theme
+        // const preloaderInit = () => {
+        //     setTimeout(() => {
+        //         console.log(preloaderState);
+        //         if (!preloaderState || !preloaderState.then) return preloaderInit()
+        //         animate.start('shown')
+        //     }, 100);
+        // }
+
+        // preloaderInit()
+        if (preloaderState === false) {
+            animate.start('hidden').then(() => {
+                setTheme(refTheme.current)
+            })
+        } else if (preloaderState === true) {
+            setTheme('ui-light')
+            animate.start('shown')
+        }
+    }, [preloaderState])
+
+    useEffect(() => {
+        if (preloaderState !== undefined && theme !== refTheme.current) refTheme.current = theme
     }, [theme])
 
     useEffect(() => {
