@@ -1,4 +1,4 @@
-import React, { createContext, useEffect, useState } from 'react'
+import React, { createContext, useEffect, useState, useRef } from 'react'
 
 export const SmoothScrollContext = createContext({
   scroll: null,
@@ -6,16 +6,16 @@ export const SmoothScrollContext = createContext({
 
 export const SmoothScrollProvider = ({ children, options }) => {
   const [scroll, setScroll] = useState(null)
+  const refScrollContainer = useRef(null)
 
   useEffect(() => {
     if (!scroll) {
-      ; (async () => {
+      (async () => {
         try {
           const LocomotiveScroll = (await import('locomotive-scroll')).default
-
           setScroll(
             new LocomotiveScroll({
-              el: document.querySelector('[data-scroll-container]') ?? undefined,
+              el: refScrollContainer.current,
               ...options,
             })
           )
@@ -32,7 +32,7 @@ export const SmoothScrollProvider = ({ children, options }) => {
 
   return (
     <SmoothScrollContext.Provider value={{ scroll }}>
-      <div data-scroll-container>
+      <div ref={refScrollContainer} data-scroll-container>
         {children}
       </div>
     </SmoothScrollContext.Provider>

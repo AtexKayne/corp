@@ -22,13 +22,13 @@ function MyApp({ Component, pageProps }) {
 
   return (
     <>
-      <Preloader animatePreloader={animatePreloader} setPreloaderState={setPrSt}/>
+      {/* <Preloader animatePreloader={animatePreloader} setPreloaderState={setPrSt}/> */}
       <MenuTransitor animateContent={animateContent} preloaderState={preloaderState} setContainerWidth={setContainerWidth} theme={theme} setTheme={setTheme} className={ theme }/>
       <motion.div 
         initial={{scale: 1, opacity: 1}}
         animate={animateContent}
         variants={{
-          start: {scale: 0.7, opacity: 0.1},
+          start: {scale: 1, opacity: 0.1},
           end: {scale: 1, opacity: 1}
         }}
         transition={{duration: 0.5}}

@@ -124,15 +124,6 @@ export default function MenuTransitor({ theme, preloaderState, setTheme, setCont
     }
 
     useEffect(() => {
-        // const preloaderInit = () => {
-        //     setTimeout(() => {
-        //         console.log(preloaderState);
-        //         if (!preloaderState || !preloaderState.then) return preloaderInit()
-        //         animate.start('shown')
-        //     }, 100);
-        // }
-
-        // preloaderInit()
         if (preloaderState === false) {
             animate.start('hidden').then(() => {
                 setTheme(refTheme.current)
