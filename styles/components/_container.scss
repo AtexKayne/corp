@@ -13,6 +13,7 @@ body > div {
 
 .container {
     z-index: 1;
+    min-height: 100%;
     position: relative;
     width: calc(100% - var(--spacing) * 2);
     background-color: color-use(background);
