@@ -9,8 +9,8 @@ export default function BrandImage({ image }) {
     }
         
     return (
-        <section id='image' data-scroll-section>
-            <div data-scroll data-scroll-speed='10' onWheel={scrollHandler} className={style.image} style={{ backgroundImage: `url(${image})` }}>
+        <section id='image' data-scroll-section className='p-relative'>
+            <div onWheel={scrollHandler} className={style.image} style={{ backgroundImage: `url(${image})` }}>
 
             </div>
         </section>

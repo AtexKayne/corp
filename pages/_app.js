@@ -16,7 +16,7 @@ function MyApp({ Component, pageProps }) {
 
   return (
     <>
-      <MenuTransitor animateContent={animateContent} setContainerWidth={setContainerWidth} setTheme={setTheme} className={ theme }/>
+      <MenuTransitor animateContent={animateContent} setContainerWidth={setContainerWidth} theme={theme} setTheme={setTheme} className={ theme }/>
       <motion.div 
         initial={{scale: 1, opacity: 1}}
         animate={animateContent}

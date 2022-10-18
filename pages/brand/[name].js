@@ -24,7 +24,9 @@ export default function Brand({ setTheme, detail }) {
   ]
 
   useEffect(() => {
-    setTheme('ui-transparent')
+    setTimeout(() => {
+      setTheme('ui-transparent')
+    }, 1500);
 
     return () => {
       setTheme('ui-light')

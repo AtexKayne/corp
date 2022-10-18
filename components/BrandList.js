@@ -24,7 +24,8 @@ export default function BrandList({ items, tags }) {
     const animateItem    = useAnimationControls()
     // const animateControl = useAnimationControls()
 
-    const clickHandler = index => {
+    const clickHandler = (index, isActive) => {
+        if (isActive) return
         setSliderActive(true)
         const position = index * refSlider.current.clientHeight / steps + 10
         animateItem.start({y: position, transition: {type: 'tween'}})
@@ -158,8 +159,8 @@ export default function BrandList({ items, tags }) {
                     {elements.map((item, index) => (
                         <div 
                             key={item.name}
-                            data-active={activeElem == item}
-                            onClick={() => clickHandler(index)}
+                            data-active={activeElem === item}
+                            onClick={() => clickHandler(index, activeElem === item)}
                             className={`${style.brandListSliderContentItem} c-hover`}>
                             <div className={`${style.brandListSliderContentItemTitle} text--h4`}>{item.name}</div>
                             <A externalClass={`${style.brandListSliderContentItemLink} text--h1`} href={`brand/${item.name}`} text={item.name}/>

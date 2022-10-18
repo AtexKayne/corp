@@ -6,8 +6,9 @@ import { menuItems } from './helpers/constants'
 import { useRouter } from 'next/router'
 // import MenuPreloader from "./MenuPreloader";
 
-export default function MenuTransitor({ setTheme, setContainerWidth, animateContent, className }) {
+export default function MenuTransitor({ theme, setTheme, setContainerWidth, animateContent, className }) {
     const router = useRouter()
+    const refTheme = useRef(theme)
     const isAnimated = useRef(false)
     const isMenuOpened = useRef(false)
     const animate = useAnimationControls()
@@ -69,18 +70,28 @@ export default function MenuTransitor({ setTheme, setContainerWidth, animateCont
         setContainerWidth()
     }
 
-    const hideTransitor = () => {
+    const hideTransitor = async () => {
+        setTheme('ui-light')
         animate.start('hidden')
-        return animateBreadcrumbs.start('shown')
+        await animateBreadcrumbs.start('shown')
+        console.log(refTheme.current, theme);
+        if (refTheme.current !== theme) {
+            setTheme(refTheme.current)
+        }
     }
-    const showTransitor = () => {
+    const showTransitor = async () => {
+        const currentTheme = refTheme.current
+        setTheme('ui-light')
         animateBreadcrumbs.start('hidden')
-        return animate.start('shown')
+        const awaitAnimation = await animate.start('shown')
+        refTheme.current = currentTheme
+        return awaitAnimation
     }
 
     const clickHandler = async () => {
         if (!isMenuOpened.current) {
             isMenuOpened.current = true
+            setTheme('ui-light')
             if (menuState === 'close') {
                 setMenuState('open')
                 animateContent.start('start')
@@ -113,6 +124,10 @@ export default function MenuTransitor({ setTheme, setContainerWidth, animateCont
     }
 
     useEffect(() => {
+        if (theme !== refTheme.current) refTheme.current = theme
+    }, [theme])
+
+    useEffect(() => {
         if (isAnimated.current) {
             isAnimated.current.then(hideTransitor)
             animateContent.start('end')
@@ -127,6 +142,8 @@ export default function MenuTransitor({ setTheme, setContainerWidth, animateCont
 
         const startHandler = (url) => {
             if (url !== router.asPath) {
+                setTheme('ui-light')
+                refTheme.current = 'ui-light'
                 animateContent.start('start')
                 isAnimated.current = showTransitor()
             }
