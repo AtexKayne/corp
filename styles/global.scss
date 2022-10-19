@@ -229,8 +229,8 @@ html.has-scroll-dragging {
         }
 
         .transitor__image {
-            bottom: 0;
-            left: 60vw;
+            bottom: 10px;
+            left: calc(60vw + 10px);
             width: 275px;
             height: 275px;
         }

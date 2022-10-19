@@ -45,7 +45,6 @@ export default function Preloader({ animatePreloader, setPreloaderState }) {
                 className='preloader__wrapper'
                 initial={{ scale: 1 }}
                 animate={{
-                    scale: 0.9,
                     x: '200px',
                     transition: { delay: 5.5, duration: 1 }
                 }}>
