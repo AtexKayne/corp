@@ -98,7 +98,8 @@ html.has-scroll-dragging {
                 transform: rotate(45deg);
 
                 &::after {
-                    transform: translateY(1px);
+                    top: 0;
+                    transform: scaleX(1.2);
                 }
             }
 
@@ -106,7 +107,8 @@ html.has-scroll-dragging {
                 transform: rotate(-45deg);
 
                 &::after {
-                    transform: translateY(1px);
+                    top: 0;
+                    transform: scaleX(1.2);
                 }
             }
         }
@@ -124,8 +126,8 @@ html.has-scroll-dragging {
     color: color-use(text);
     flex-direction: column;
     justify-content: space-around;
-    transition: 1s background-color, 0.5s color;
     background-color: color-use(background);
+    transition: 1s background-color, 0.5s color;
     border-right: 1px solid color-use(light-gray);
 
     &__burger {
@@ -140,7 +142,7 @@ html.has-scroll-dragging {
 
         >div {
             width: 50%;
-            height: 2px;
+            height: 1px;
             transition: .4s;
             position: relative;
             transform-origin: center left;
@@ -149,7 +151,7 @@ html.has-scroll-dragging {
             &::after {
                 top: -1px;
                 width: 100%;
-                height: 2px;
+                height: 1px;
                 content: '';
                 right: -100%;
                 transition: .4s;
@@ -229,10 +231,11 @@ html.has-scroll-dragging {
         }
 
         .transitor__image {
-            bottom: 30px;
-            left: calc(60vw + 30px);
             width: 275px;
+            bottom: 30px;
             height: 275px;
+            left: calc(60vw + 30px);
+            animation-direction: alternate;
         }
     }
 
@@ -284,7 +287,7 @@ html.has-scroll-dragging {
             width: 470px;
             height: 470px;
             left: calc(40vw + 200px);
-            animation-direction: alternate;
+            
         }
 
         .transitor__line {
