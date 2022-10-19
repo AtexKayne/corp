@@ -28,8 +28,8 @@ export default function MenuTransitor({ theme, preloaderState, setTheme, setCont
                 hidden: { x: '100vw' },
             },
             line: {
-                shown: { width: ['1px', '12px', '1px'] },
-                hidden: { width: ['1px', '12px', '1px'] },
+                shown: { width: ['1px', '20px', '1px'] },
+                hidden: { width: ['1px', '20px', '1px'] },
             },
             image: '/assets/img/transitor-right.svg'
         },
@@ -41,8 +41,8 @@ export default function MenuTransitor({ theme, preloaderState, setTheme, setCont
                 hidden: { y: '-100vh' },
             },
             line: {
-                shown: { height: ['1px', '12px', '1px'] },
-                hidden: { height: ['1px', '12px', '1px'] },
+                shown: { height: ['1px', '20px', '1px'] },
+                hidden: { height: ['1px', '20px', '1px'] },
             },
             image: '/assets/img/transitor-top.svg'
         },
@@ -54,8 +54,8 @@ export default function MenuTransitor({ theme, preloaderState, setTheme, setCont
                 hidden: { y: '100vh' },
             },
             line: {
-                shown: { height: ['1px', '12px', '1px'] },
-                hidden: { height: ['1px', '12px', '1px'] },
+                shown: { height: ['1px', '20px', '1px'] },
+                hidden: { height: ['1px', '20px', '1px'] },
             },
             image: '/assets/img/transitor-bottom.svg'
         },
@@ -67,8 +67,8 @@ export default function MenuTransitor({ theme, preloaderState, setTheme, setCont
                 hidden: { x: leftPosition },
             },
             line: {
-                shown: { width: ['1px', '12px', '1px'] },
-                hidden: { width: ['1px', '12px', '1px'] },
+                shown: { width: ['1px', '20px', '1px'] },
+                hidden: { width: ['1px', '20px', '1px'] },
             },
             image: '/assets/img/transitor-left.svg'
         }
