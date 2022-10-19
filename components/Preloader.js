@@ -22,6 +22,7 @@ export default function Preloader({ animatePreloader, setPreloaderState }) {
                 setPreloaderState(false)
                 animatePre.start({
                     x: '-100vw',
+                    zIndex: 4,
                     transition: {
                         duration: 1
                     }
