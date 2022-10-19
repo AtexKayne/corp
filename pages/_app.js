@@ -29,7 +29,7 @@ function MyApp({ Component, pageProps }) {
         animate={animateContent}
         variants={{
           start: {scale: 1, opacity: 0.1},
-          end: {scale: 1, opacity: 1}
+          end: {scale: 1, opacity: 1, transition: {duration: 1}}
         }}
         transition={{duration: 0.5}}
         style={{width: contentWidth, flexBasis: contentWidth}}
