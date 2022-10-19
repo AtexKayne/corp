@@ -27,6 +27,10 @@ export default function MenuTransitor({ theme, preloaderState, setTheme, setCont
                 shown: { x: '60vw' },
                 hidden: { x: '100vw' },
             },
+            line: {
+                shown: { width: ['1px', '8px', '1px'] },
+                hidden: { width: ['1px', '8px', '1px'] },
+            },
             image: '/assets/img/transitor-right.svg'
         },
         {
@@ -35,6 +39,10 @@ export default function MenuTransitor({ theme, preloaderState, setTheme, setCont
             variants: {
                 shown: { y: '-50vh' },
                 hidden: { y: '-100vh' },
+            },
+            line: {
+                shown: { height: ['1px', '8px', '1px'] },
+                hidden: { height: ['1px', '8px', '1px'] },
             },
             image: '/assets/img/transitor-top.svg'
         },
@@ -45,6 +53,10 @@ export default function MenuTransitor({ theme, preloaderState, setTheme, setCont
                 shown: { y: '50vh' },
                 hidden: { y: '100vh' },
             },
+            line: {
+                shown: { height: ['1px', '8px', '1px'] },
+                hidden: { height: ['1px', '8px', '1px'] },
+            },
             image: '/assets/img/transitor-bottom.svg'
         },
         {
@@ -53,6 +65,10 @@ export default function MenuTransitor({ theme, preloaderState, setTheme, setCont
             variants: {
                 shown: { x: '-40vw' },
                 hidden: { x: leftPosition },
+            },
+            line: {
+                shown: { width: ['1px', '8px', '1px'] },
+                hidden: { width: ['1px', '8px', '1px'] },
             },
             image: '/assets/img/transitor-left.svg'
         }
@@ -200,7 +216,7 @@ export default function MenuTransitor({ theme, preloaderState, setTheme, setCont
                 <motion.div
                     className='menu__nav__image'
                     animate={animateImage}
-                    initial={{x: '600px'}}
+                    initial={{ x: '600px' }}
                     variants={{ shown: { x: 0 }, hidden: { x: '600px' } }}
                     transition={{ duration: 1 }}>
                     <img src={transitors[3].image} alt='' />
@@ -241,14 +257,13 @@ export default function MenuTransitor({ theme, preloaderState, setTheme, setCont
                 <motion.div
                     animate={animate}
                     key={transitor.position}
-                    transition={{ duration: 1 }}
+                    transition={{ duration: 1, easings: ["easeIn", "easeOut"] }}
                     initial={transitor.initial}
                     variants={transitor.variants}
                     className={`transitor transitor--${transitor.position}`}>
                     <motion.div
                         animate={animate}
-                        variants={{ shown: { width: '8px' }, hidden: { width: '1px' } }}
-                        initial={{ width: '1px' }}
+                        variants={transitor.line}
                         className='transitor__line' />
                     <motion.div
                         animate={animateImage}
@@ -257,7 +272,7 @@ export default function MenuTransitor({ theme, preloaderState, setTheme, setCont
                             shown: { y: 0, x: 0 },
                             hidden: { x: '-500px', y: transitor.position === 'top' ? '500px' : '-500px' }
                         }}
-                        transition={{ duration: 1 }}
+                        transition={{ duration: 1, easings: ["easeIn", "easeOut"] }}
                         className='transitor__image' >
                         <img src={transitor.image} alt='' />
                     </motion.div>

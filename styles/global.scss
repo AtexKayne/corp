@@ -166,7 +166,7 @@ html.has-scroll-dragging {
         width: 100vw;
         height: 100vh;
         position: absolute;
-        transition: 1s background-color, 0.5s color;
+        transition: 1s background-color;
         background-color: color-use(background);
         border-right: 1px solid color-use(primary);
     }
@@ -185,8 +185,8 @@ html.has-scroll-dragging {
         padding: 120px 0 120px 50vw;
         transform: translateX(100vw);
         justify-content: space-between;
-        transition: 1s background-color, 0.5s color;
         background-color: color-use(background);
+        transition: 1s background-color, 0.5s color;
         border-right: 1px solid color-use(light-gray);
 
         &__image {
@@ -211,14 +211,22 @@ html.has-scroll-dragging {
     height: 100vh;
     overflow: hidden;
     position: absolute;
-    transition: 1s background-color, 0.5s color;
+    transition: 1s background-color;
     background-color: color-use(background);
 
     &--top {
         left: 0;
         right: 0;
         bottom: 0;
-        border-bottom: 1px solid color-use(tetriary);
+
+        .transitor__line {
+            left: 0;
+            right: 0;
+            bottom: 0;
+            // transform: rotate(-90deg);
+            // transform-origin: bottom;
+            background-color: color-use(tetriary);
+        }
 
         .transitor__image {
             bottom: 0;
@@ -232,14 +240,20 @@ html.has-scroll-dragging {
         top: 0;
         right: 0;
         bottom: 0;
-        border-right: 1px solid color-use(primary);
 
         .transitor__image {
             display: none;
         }
 
-        .ui-transparent & {
-            border-right: 1px solid color-use(light-gray);
+        .transitor__line {
+            top: 0;
+            right: 0;
+            bottom: 0;
+            background-color: color-use(primary);
+        }
+
+        .ui-transparent & .transitor__line {
+            background-color: color-use(light-gray);
         }
     }
 
@@ -247,10 +261,16 @@ html.has-scroll-dragging {
         top: 0;
         left: 0;
         bottom: 0;
-        border-left: 1px solid color-use(primary);
 
         .transitor__image {
             display: none;
+        }
+
+        .transitor__line {
+            top: 0;
+            left: 0;
+            bottom: 0;
+            background-color: color-use(primary);
         }
     }
 
@@ -258,7 +278,6 @@ html.has-scroll-dragging {
         top: 0;
         left: 0;
         right: 0;
-        border-top: 1px solid color-use(tetriary);
 
         .transitor__image {
             top: -200px;
@@ -267,11 +286,19 @@ html.has-scroll-dragging {
             left: calc(40vw + 200px);
             animation-direction: alternate;
         }
+
+        .transitor__line {
+            top: 0;
+            left: 0;
+            right: 0;
+            // transform-origin: top;
+            // transform: rotate(90deg);
+            background-color: color-use(tetriary);
+        }
     }
 
     &__line {
         position: absolute;
-        background-color: red;
     }
 
     &__image {
