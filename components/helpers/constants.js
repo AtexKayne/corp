@@ -1,3 +1,5 @@
+import { title } from "process"
+
 export const menuItems = [
     {link: '/', text: 'Главная'},
     {link: '/brands', text: 'Бренды'},
@@ -193,4 +195,51 @@ export const brandDetail = {
         { icon: '/assets/img/icons/icon-r.svg', name: 'Регистрация товарного знака', url: '' },
     ]
 
+}
+
+export const contacts = {
+    pagename: 'Контакты',
+    adress: {
+        city: 'Москва',
+        metro: 'Бауманская',
+        street: 'Улица Бауманская, 6с2',
+        house: 'БЦ “Виктория плаза”',
+        maps: [
+            {name: 'yandex', link: '/testya'},
+            {name: 'google', link: '/testgg'}
+        ],
+        social: {
+            title: 'Связаться с нами',
+            icons: [
+                {name: 'Telegram', link: '/testtg'},
+                {name: 'Вконтакте', link: '/testvk'}
+            ]
+        },
+        bots: {
+            title: 'Бот поддержки:',
+            icons: [
+                {name: 'whatsapp', link: '/testwa'},
+                {name: 'telegram', link: '/testtg'}
+            ]
+        }
+    },
+    departments: {
+        title: 'Важные подразделения',
+        items: [
+            {name: 'Приёмная', phone: '+7 (495) 589-34-81', mail: 'info@simrussia.ru'},
+            {name: 'Отдел оптовых продаж', phone: '+7 (495) 589-34-81', mail: 'opt@simrussia.ru'},
+            {name: 'Отдел по работе с барбершопами и салонами красоты', phone: '+7 (495) 589-34-81', mail: 'info@simrussia.ru'},
+            {name: 'Маркетплейс RedHare Market', phone: '+7 (495) 589-34-81', mail: 'info@simrussia.ru'},
+            {name: 'Маркетинг', phone: '+7 (495) 589-34-81', mail: 'info@simrussia.ru'},
+            {name: 'Поддержка приложения RedHare', phone: '+7 (495) 589-34-81', mail: 'info@simrussia.ru'}
+        ]
+    },
+    documents: {
+        title: 'Документы',
+        items: [
+            {name: 'Карточка ООО Константа', icon: 'sertificate'},
+            {name: 'Публичная оферта', icon: 'base'},
+            {name: 'Политика конфиденциальности', icon: 'base'}
+        ]
+    }
 }

@@ -113,6 +113,22 @@ html.has-scroll-dragging {
             }
         }
     }
+
+    &[data-state="awaiting"] {
+        .transitor--top .transitor__line,
+        .transitor--bottom .transitor__line {
+            height: 1px!important;
+            background-color: color-use(light-gray)!important;
+        }
+    }
+
+    &[data-state="open"] {
+        .transitor--top .transitor__line,
+        .transitor--bottom .transitor__line {
+            transition: .1s background-color 1.5s;
+            background-color: color-use(light-gray)!important;
+        }
+    }
 }
 
 .menu {
@@ -203,6 +219,11 @@ html.has-scroll-dragging {
                 height: 100%;
                 animation: rotateTransitorImage 60s linear infinite;
             }
+        }
+
+        a.active {
+            color: color-use(tetriary);
+            pointer-events: none;
         }
     }
 }

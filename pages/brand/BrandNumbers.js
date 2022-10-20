@@ -3,12 +3,14 @@ import { SmoothScrollContext } from '../../components/helpers/SmoothScroll.conte
 import { useEffect, useRef, useContext, useState } from 'react'
 import { motion, useAnimationControls } from 'framer-motion'
 
+const scrollCardHeight = 200
+
 function Number({number, index, numbersCount, scrollPosition, listAnimation}) {
     const animation = useAnimationControls()
     const isAnimated = useRef(false)
 
     useEffect(() => {
-        if (scrollPosition >= index * 100) {
+        if (scrollPosition >= index * scrollCardHeight) {
             if (!isAnimated.current) {
                 isAnimated.current = true
                 animation.start({ y: '-50%', transition: { duration: 1 } })
@@ -77,7 +79,7 @@ export default function BrandNumbers({ numbers = [] }) {
     }, [scroll]);
 
     return (
-        <section ref={refSection} id='numbers' style={{ height: `calc(100vh + ${numbers.length * 100}px)` }} data-scroll-section>
+        <section ref={refSection} id='numbers' style={{ height: `calc(100vh + ${numbers.length * scrollCardHeight}px)` }} data-scroll-section>
             <div ref={refContainer} data-scroll data-scroll-sticky data-scroll-target='#numbers' className={style.container}>
                 <h2 className={`${style.title} text--h1 pb-1`}>Цифры</h2>
                 <motion.div initial={{ x: `${numbers.length * 100}px` }} animate={listAnimation} className={style.cardList}>

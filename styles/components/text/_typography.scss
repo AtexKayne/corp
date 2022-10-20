@@ -25,6 +25,15 @@ small {
 
 a {
     color: inherit;
+    transition: 1.3s;
     font-weight: $light;
     text-decoration: none;
+
+    &.c-hover {
+        transition: 0.3s;
+
+        &:hover {
+            color: color-use(primary);
+        }
+    }
 }

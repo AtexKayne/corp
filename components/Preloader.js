@@ -49,14 +49,14 @@ export default function Preloader({ animatePreloader, setPreloaderState }) {
                     transition: { delay: 5.5, duration: 1 }
                 }}>
                 <motion.div initial={{ rotate: 30 }} animate={{ rotate: [30, 120, 60], transition: { duration: 5 } }}>
-                    <motion.div className='preloader__line' initial={{ width: 0, rotate: 45 }} animate={{ width: '60vw', rotate: 45, transition: { delay: 0.1, duration: 2 } }} />
-                    <motion.div className='preloader__line' initial={{ width: 0, rotate: 90 }} animate={{ width: '60vw', rotate: 90, transition: { delay: 0.3, duration: 2 } }} />
-                    <motion.div className='preloader__line' initial={{ width: 0, rotate: 135 }} animate={{ width: '60vw', rotate: 135, transition: { delay: 0.6, duration: 2 } }} />
-                    <motion.div className='preloader__line' initial={{ width: 0, rotate: 180 }} animate={{ width: '60vw', rotate: 180, transition: { delay: 0.9, duration: 2 } }} />
-                    <motion.div className='preloader__line' initial={{ width: 0, rotate: 225 }} animate={{ width: '60vw', rotate: 225, transition: { delay: 0.1, duration: 2 } }} />
-                    <motion.div className='preloader__line' initial={{ width: 0, rotate: 270 }} animate={{ width: '60vw', rotate: 270, transition: { delay: 0.3, duration: 2 } }} />
-                    <motion.div className='preloader__line' initial={{ width: 0, rotate: 315 }} animate={{ width: '60vw', rotate: 315, transition: { delay: 0.6, duration: 2 } }} />
-                    <motion.div className='preloader__line' initial={{ width: 0, rotate: 360 }} animate={{ width: '60vw', rotate: 360, transition: { delay: 0.9, duration: 2 } }} />
+                    <motion.div className='preloader__line' initial={{ width: '0vw', rotate: 45 }}  animate={{ width: ['0vw', '60vw', '60vw', '60vw', '0vw'], rotate: 45,  transition: { delay: 0.1, duration: 4 } }} />
+                    <motion.div className='preloader__line' initial={{ width: '0vw', rotate: 90 }}  animate={{ width: ['0vw', '60vw', '60vw', '60vw', '0vw'], rotate: 90,  transition: { delay: 0.3, duration: 4 } }} />
+                    <motion.div className='preloader__line' initial={{ width: '0vw', rotate: 135 }} animate={{ width: ['0vw', '60vw', '60vw', '60vw', '0vw'], rotate: 135, transition: { delay: 0.6, duration: 4 } }} />
+                    <motion.div className='preloader__line' initial={{ width: '0vw', rotate: 180 }} animate={{ width: ['0vw', '60vw', '60vw', '60vw', '0vw'], rotate: 180, transition: { delay: 0.9, duration: 4 } }} />
+                    <motion.div className='preloader__line' initial={{ width: '0vw', rotate: 225 }} animate={{ width: ['0vw', '60vw', '60vw', '60vw', '0vw'], rotate: 225, transition: { delay: 0.1, duration: 4 } }} />
+                    <motion.div className='preloader__line' initial={{ width: '0vw', rotate: 270 }} animate={{ width: ['0vw', '60vw', '60vw', '60vw', '0vw'], rotate: 270, transition: { delay: 0.3, duration: 4 } }} />
+                    <motion.div className='preloader__line' initial={{ width: '0vw', rotate: 315 }} animate={{ width: ['0vw', '60vw', '60vw', '60vw', '0vw'], rotate: 315, transition: { delay: 0.6, duration: 4 } }} />
+                    <motion.div className='preloader__line' initial={{ width: '0vw', rotate: 360 }} animate={{ width: ['0vw', '60vw', '60vw', '60vw', '0vw'], rotate: 360, transition: { delay: 0.9, duration: 4 } }} />
                 </motion.div>
                 <svg width='100%' height='100%' viewBox='0 0 1440 788' fill='none'>
                     <motion.path
@@ -64,7 +64,7 @@ export default function Preloader({ animatePreloader, setPreloaderState }) {
                         stroke='#DADFEA'
                         strokeWidth='1'
                         initial={{ pathLength: 0, rotate: 45 }}
-                        animate={{ pathLength: 1, rotate: 305, transition: { delay: 2.0, duration: 2 } }}
+                        animate={{ pathLength: [0, 1, 1, 0], rotate: 305, transition: { delay: 2.0, duration: 3 } }}
                     />
                 </svg>
                 <svg width='829' height='829' viewBox='0 0 829 829' fill='none'>

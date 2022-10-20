@@ -67,8 +67,8 @@ export default function MenuTransitor({ theme, preloaderState, setTheme, setCont
                 hidden: { x: leftPosition },
             },
             line: {
-                shown: { width: ['1px', '20px', '1px'] },
-                hidden: { width: ['1px', '20px', '1px'] },
+                shown: { width: ['1px', '20px', '1px'], backgroundColor: '#8712FC' },
+                hidden: { width: ['1px', '20px', '1px'], backgroundColor: ['#8712FC', '#8712FC', '#8712FC', '#DADFEA'] },
             },
             image: '/assets/img/transitor-left.svg'
         }
@@ -83,7 +83,6 @@ export default function MenuTransitor({ theme, preloaderState, setTheme, setCont
         const newPosition = `-${(window.innerWidth - 121 - pathArray.filter(path => path.href !== '/').length * 50)}px`
         setLeftPosition(newPosition)
         setBreadcrumbs(pathArray)
-        setContainerWidth()
     }
 
     const hideTransitor = async () => {
@@ -131,36 +130,43 @@ export default function MenuTransitor({ theme, preloaderState, setTheme, setCont
     }
 
     const clickNavHandler = async () => {
-        setMenuState('close')
+        setMenuState('awaiting')
         animateImage.start('hidden')
         await animateWrapper.start('smash')
         await animateNav.start('hidden')
-        animateWrapper.start('fastHidden')
+        await animateWrapper.start('fastHidden')
         isMenuOpened.current = false
+        setTimeout(() => setMenuState('close'), 200)
     }
 
+    // Preloader state change
     useEffect(() => {
         if (preloaderState === false) {
             animate.start('hidden').then(() => {
+                animateBreadcrumbs.start('shown')
                 setTheme(refTheme.current)
             })
         } else if (preloaderState === true) {
             setTheme('ui-light')
-            animate.start('shown')
+            animate.start('shown').then(() => animateBreadcrumbs.start('hidden'))
         }
     }, [preloaderState])
 
+    // Theme change
     useEffect(() => {
         if (preloaderState !== undefined && theme !== refTheme.current) refTheme.current = theme
     }, [theme])
 
+    // Breadcrambs change
     useEffect(() => {
         if (isAnimated.current) {
             isAnimated.current.then(hideTransitor)
             animateContent.start('end')
         }
+        setContainerWidth()
     }, [leftPosition, breadcrumbs])
 
+    // Router change
     useEffect(() => {
         if (!isAnimated.current) {
             breadcrumbsSetting()
@@ -212,7 +218,7 @@ export default function MenuTransitor({ theme, preloaderState, setTheme, setCont
                     hidden: { zIndex: 0, x: '-100vw' }
                 }}
                 className='menu__nav'>
-                {menuItems.map(item => <A key={item.text} externalClass='text--h4' href={item.link} text={item.text} />)}
+                {menuItems.map(item => <A key={item.text} externalClass={`${router.asPath === item.link? 'active' : ''} text--h4`} href={item.link} text={item.text} />)}
                 <motion.div
                     className='menu__nav__image'
                     animate={animateImage}

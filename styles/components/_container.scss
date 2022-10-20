@@ -13,9 +13,9 @@ body > div {
 
 .container {
     z-index: 1;
+    width: 100%;
     min-height: 100%;
     position: relative;
-    width: calc(100% - var(--spacing) * 2);
     background-color: color-use(background);
     padding: calc(var(--spacing) * 1.7) calc(var(--spacing) * 2);
 
