@@ -1,0 +1,30 @@
+.container {
+
+}
+
+.line {
+    width: 100%;
+    position: relative;
+
+    > span {
+        margin-right: 50px;
+    }
+}
+
+.lineImage {
+    top: 60px;
+    height: 20px;
+    overflow: visible;
+    position: absolute;
+    width: calc(100% + 20px + var(--spacing) * 2);
+
+    &::before {
+        left: 0;
+        content: '';
+        width: 20px;
+        height: 20px;
+        position: absolute;
+        transform: translateY(0px) rotate(45deg);
+        background-color: var(--t-tetriary);
+    }
+}

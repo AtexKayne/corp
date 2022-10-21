@@ -8,6 +8,19 @@
     position: relative;
 }
 
+.adressInfo > * {
+    margin-bottom: 17px;
+}
+
+.metro {
+    display: flex;
+    align-items: center;
+    
+    > *:last-child {
+        margin-left: 15px;
+    }
+}
+
 .layout {
     top: 0;
     left: 0;
