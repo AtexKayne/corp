@@ -1,7 +1,7 @@
 import style from '../../styles/module/brand/brand-footer.module.scss'
 import Image from 'next/image'
 
-export default function ContactsDocuments({ documents }) {
+export default function ContactsDocuments({ documents = {} }) {
 
     return (
         <section style={{minHeight: '0'}} data-scroll-section>

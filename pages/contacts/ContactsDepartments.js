@@ -2,7 +2,7 @@ import style from '../../styles/module/contacts/contacts-departments.module.scss
 import { useRef, useEffect } from "react"
 import { motion, useAnimationControls, useInView } from "framer-motion"
 
-function Line({ department }) {
+function Line({ department = {} }) {
     const refLine = useRef(null)
     const isInView = useInView(refLine, { margin: '100px 100px 150px 200px' })
     const animateLine = useAnimationControls()
@@ -44,7 +44,7 @@ function Line({ department }) {
 export default function ContactsDepartments({ departments }) {
     return (
         <section data-scroll-section>
-            {departments.items
+            {departments && departments.items
                 ? departments.items.map(department => (
                     <Line key={department.name} department={department} />
                 )) : ''}
