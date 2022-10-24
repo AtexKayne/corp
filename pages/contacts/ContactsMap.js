@@ -44,70 +44,73 @@ export default function ContactsMap({ adress = {} }) {
     return (
         <section ref={refSection} id='map' style={{ height: `calc(100vh + 1500px)` }} data-scroll-section>
             <div className={style.container}>
-                <div id='info' style={{minHeight: 'calc(100vh + 300px)'}} className='col col--30'>
-                    <div 
-                        data-scroll
-                        data-scroll-sticky
-                        // data-scroll-position='bottom'
-                        data-scroll-target='#info'
-                        // data-scroll-offset='-20%'
-                        data-scroll-speed='-1'
-                        className='pt-1'>
-                        <div className='text--h2 pb-0.5'>{adress.city}</div>
-                        <div className={`${style.adressInfo} mb-0.5`}>
-                            <div className={style.metro}>
-                                <Image src='/assets/img/icons/icon-metro.svg' width='30' height='30' alt='metro' />
-                                <div className='text--t2'>{adress.metro}</div>
+                <div id='info' style={{ minHeight: 'calc(100vh + 300px)' }} className='col col--30'>
+                    {adress && adress.city
+                        ? (
+                            <div
+                                data-scroll
+                                data-scroll-sticky
+                                // data-scroll-position='bottom'
+                                data-scroll-target='#info'
+                                // data-scroll-offset='-20%'
+                                data-scroll-speed='-1'
+                                className='pt-1'>
+                                <div className='text--h2 pb-0.5'>{adress.city}</div>
+                                <div className={`${style.adressInfo} mb-0.5`}>
+                                    <div className={style.metro}>
+                                        <Image src='/assets/img/icons/icon-metro.svg' width='30' height='30' alt='metro' />
+                                        <div className='text--t2'>{adress.metro}</div>
+                                    </div>
+                                    <div className='text--t2'>{adress.street}</div>
+                                    <div className='text--t2'>{adress.house}</div>
+                                </div>
+
+                                <div className={`${style.links} mb-2`}>
+                                    {adress.maps
+                                        ? adress.maps.map(link => (
+                                            <a
+                                                href={link.link}
+                                                target='_blank'
+                                                rel='noreferrer'
+                                                key={link.name}
+                                                className={`${style.linkItem} c-hover`}>
+                                                <Image width='40' height='40' alt='' src={`/assets/img/contacts/${link.name}-map.svg`} />
+                                            </a>
+                                        )) : ''}
+                                </div>
+
+                                <div className='text--h4 pb-1'>{adress.social.title}</div>
+
+                                <div className={`${style.links} mb-1`}>
+                                    {adress.social.icons
+                                        ? adress.social.icons.map(link => (
+                                            <a
+                                                href={link.link}
+                                                target='_blank'
+                                                rel='noreferrer'
+                                                key={link.name}
+                                                className={`${style.socialsItem} text--t2 c-hover`}>
+                                                {link.name}
+                                            </a>
+                                        )) : ''}
+                                </div>
+
+                                <div className={`${style.links} mb-0.5`}>
+                                    <div className='text--t2'>{adress.bots.title}</div>
+                                    {adress.bots.icons
+                                        ? adress.bots.icons.map(link => (
+                                            <a
+                                                href={link.link}
+                                                target='_blank'
+                                                rel='noreferrer'
+                                                key={link.name}
+                                                className={`${style.botsItem} c-hover`}>
+                                                <Image width='25' height='25' alt='' src={`/assets/img/icons/icon-${link.name}.svg`} />
+                                            </a>
+                                        )) : ''}
+                                </div>
                             </div>
-                            <div className='text--t2'>{adress.street}</div>
-                            <div className='text--t2'>{adress.house}</div>
-                        </div>
-
-                        <div className={`${style.links} mb-2`}>
-                            {adress.maps
-                                ? adress.maps.map(link => (
-                                    <a
-                                        href={link.link}
-                                        target='_blank'
-                                        rel='noreferrer'
-                                        key={link.name}
-                                        className={`${style.linkItem} c-hover`}>
-                                        <Image width='40' height='40' alt='' src={`/assets/img/contacts/${link.name}-map.svg`} />
-                                    </a>
-                                )) : ''}
-                        </div>
-
-                        <div className='text--h4 pb-1'>{adress.social.title}</div>
-
-                        <div className={`${style.links} mb-1`}>
-                            {adress.social.icons
-                                ? adress.social.icons.map(link => (
-                                    <a
-                                        href={link.link}
-                                        target='_blank'
-                                        rel='noreferrer'
-                                        key={link.name}
-                                        className={`${style.socialsItem} text--t2 c-hover`}>
-                                        {link.name}
-                                    </a>
-                                )) : ''}
-                        </div>
-
-                        <div className={`${style.links} mb-0.5`}>
-                            <div className='text--t2'>{adress.bots.title}</div>
-                            {adress.bots.icons
-                                ? adress.bots.icons.map(link => (
-                                    <a
-                                        href={link.link}
-                                        target='_blank'
-                                        rel='noreferrer'
-                                        key={link.name}
-                                        className={`${style.botsItem} c-hover`}>
-                                        <Image width='25' height='25' alt='' src={`/assets/img/icons/icon-${link.name}.svg`} />
-                                    </a>
-                                )) : ''}
-                        </div>
-                    </div>
+                        ) : ''}
                 </div>
                 <div ref={refContainer} data-scroll data-scroll-sticky data-scroll-target='#map' className='col col--70 pt-1 pl-1'>
                     <motion.div className={style.map} style={{ opacity: opacityRoad }}>
