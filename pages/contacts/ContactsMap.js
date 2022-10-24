@@ -10,9 +10,9 @@ export default function ContactsMap({ adress = {} }) {
     const refSection = useRef(null)
     const { scroll } = useContext(SmoothScrollContext)
     const y = useMotionValue(0)
-    const transformRoadA = useTransform(y, [100, 800], [0, 1])
-    const transformRoadB = useTransform(y, [200, 800], [0, 1])
-    const transformRoadC = useTransform(y, [500, 800], [0, 1])
+    const transformRoadA = useTransform(y, [100, 1500], [0, 1])
+    const transformRoadB = useTransform(y, [200, 1500], [0, 1])
+    const transformRoadC = useTransform(y, [500, 1500], [0, 1])
     const opacityRoad = useTransform(y, [0, 100], [0, 1])
 
     useEffect(() => {
@@ -42,7 +42,7 @@ export default function ContactsMap({ adress = {} }) {
     }, [scroll]);
 
     return (
-        <section ref={refSection} id='map' style={{ height: `calc(100vh + 800px)` }} data-scroll-section>
+        <section ref={refSection} id='map' style={{ height: `calc(100vh + 1500px)` }} data-scroll-section>
             <div className={style.container}>
                 <div id='info' style={{minHeight: 'calc(100vh + 300px)'}} className='col col--30'>
                     <div 

@@ -5,6 +5,7 @@ import ContactsMap from './ContactsMap'
 import ContactsIntro from './ContactsIntro'
 import { useEffect } from 'react'
 import ContactsDepartments from './ContactsDepartments'
+import ContactsDocuments from './ContactsDocuments'
 
 
 export default function Brand({ setTheme, detail }) {
@@ -14,12 +15,10 @@ export default function Brand({ setTheme, detail }) {
     return (
         <MainLayout className='no-padding'>
             <SmoothScrollProvider options={{ smooth: true }}>
-                <ContactsIntro title={detail.pagename}/>
-                <ContactsMap adress={detail.adress}/>
-                <ContactsDepartments departments={detail.departments}/>
-                <section data-scroll-section>
-                    <h1 className='sr-only'>{detail.pagename}</h1>
-                </section>
+                <ContactsIntro title={detail.pagename} />
+                <ContactsMap adress={detail.adress} />
+                <ContactsDepartments departments={detail.departments} />
+                <ContactsDocuments documents={detail.documents} />
             </SmoothScrollProvider>
         </MainLayout>
     )

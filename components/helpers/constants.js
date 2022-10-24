@@ -238,8 +238,8 @@ export const contacts = {
         title: 'Документы',
         items: [
             {name: 'Карточка ООО Константа', icon: 'sertificate'},
-            {name: 'Публичная оферта', icon: 'base'},
-            {name: 'Политика конфиденциальности', icon: 'base'}
+            {name: 'Публичная оферта', icon: 'base-doc'},
+            {name: 'Политика конфиденциальности', icon: 'base-doc'}
         ]
     }
 }

@@ -4,21 +4,31 @@ import { useState, useEffect, useRef } from "react";
 import { motion, useAnimationControls, useDomEvent } from 'framer-motion'
 import { menuItems } from './helpers/constants'
 import { useRouter } from 'next/router'
+import Search from "./Search";
+import Image from "next/image";
+import MenuContacts from "./MenuContacts";
 // import MenuPreloader from "./MenuPreloader";
 
 export default function MenuTransitor({ theme, preloaderState, setTheme, setContainerWidth, animateContent, className }) {
     const router = useRouter()
     const refTheme = useRef(theme)
+    const refBurger = useRef(null) 
+    const refControls = useRef(null) 
     const isAnimated = useRef(false)
     const isMenuOpened = useRef(false)
     const animate = useAnimationControls()
     const animateBreadcrumbs = useAnimationControls()
     const animateWrapper = useAnimationControls()
+    const animateSearch = useAnimationControls()
+    const animateLang = useAnimationControls()
     const animateImage = useAnimationControls()
+    const animatePhone = useAnimationControls()
     const animateNav = useAnimationControls()
     const [breadcrumbs, setBreadcrumbs] = useState([])
     const [leftPosition, setLeftPosition] = useState('-100vw')
     const [menuState, setMenuState] = useState('close')
+    const [currentLang, setCurrentLang] = useState('RU')
+
     const transitors = [
         {
             position: 'right',
@@ -103,11 +113,14 @@ export default function MenuTransitor({ theme, preloaderState, setTheme, setCont
         return awaitAnimation
     }
 
-    const clickHandler = async () => {
+    const clickHandler = async (event) => {
         if (!isMenuOpened.current) {
             isMenuOpened.current = true
             setTheme('ui-light')
             if (menuState === 'close') {
+                refControls.current.style.pointerEvents = 'none'
+                event.target.classList.remove('icon--menu')
+                event.target.classList.add('icon--close')
                 setMenuState('open')
                 animateContent.start('start')
                 await showTransitor()
@@ -117,6 +130,9 @@ export default function MenuTransitor({ theme, preloaderState, setTheme, setCont
                 await animateWrapper.start('hidden')
                 isMenuOpened.current = false
             } else {
+                refControls.current.style.pointerEvents = 'all'
+                event.target.classList.remove('icon--close')
+                event.target.classList.add('icon--menu')
                 setMenuState('close')
                 animateImage.start('hidden')
                 await animateWrapper.start('smash')
@@ -137,6 +153,110 @@ export default function MenuTransitor({ theme, preloaderState, setTheme, setCont
         await animateWrapper.start('fastHidden')
         isMenuOpened.current = false
         setTimeout(() => setMenuState('close'), 200)
+    }
+
+    const clickSearchHandler = async (event) => {
+        if (!isMenuOpened.current) {
+            isMenuOpened.current = true
+            setTheme('ui-light')
+            if (menuState === 'close') {
+                refControls.current.style.pointerEvents = 'none'
+                refBurger.current.style.pointerEvents = 'none'
+                event.target.classList.remove('icon--search')
+                event.target.classList.add('icon--close')
+                setMenuState('search')
+                animateContent.start('start')
+                await showTransitor()
+                animateSearch.start('shown')
+                animateImage.start('shown')
+                await animateWrapper.start('fastShown')
+                await animateWrapper.start('hidden')
+                isMenuOpened.current = false
+            } else {
+                refControls.current.style.pointerEvents = 'all'
+                refBurger.current.style.pointerEvents = 'all'
+                event.target.classList.remove('icon--close')
+                event.target.classList.add('icon--search')
+                setMenuState('close')
+                animateImage.start('hidden')
+                await animateWrapper.start('smash')
+                animateContent.start('end')
+                await animateSearch.start('hidden')
+                animateWrapper.start('fastHidden')
+                await hideTransitor()
+                isMenuOpened.current = false
+            }
+        }
+    }
+
+    const clickLangHandler = async (event) => {
+        if (!isMenuOpened.current) {
+            isMenuOpened.current = true
+            setTheme('ui-light')
+            if (menuState === 'close') {
+                refControls.current.style.pointerEvents = 'none'
+                refBurger.current.style.pointerEvents = 'none'
+                event.target.classList.remove('icon--lang')
+                event.target.classList.add('icon--close')
+                setCurrentLang('')
+                setMenuState('lang')
+                animateContent.start('start')
+                await showTransitor()
+                animateLang.start('shown')
+                animateImage.start('shown')
+                await animateWrapper.start('fastShown')
+                await animateWrapper.start('hidden')
+                isMenuOpened.current = false
+            } else {
+                refControls.current.style.pointerEvents = 'all'
+                refBurger.current.style.pointerEvents = 'all'
+                event.target.classList.remove('icon--close')
+                event.target.classList.add('icon--lang')
+                setCurrentLang('RU')
+                setMenuState('close')
+                animateImage.start('hidden')
+                await animateWrapper.start('smash')
+                animateContent.start('end')
+                await animateLang.start('hidden')
+                animateWrapper.start('fastHidden')
+                await hideTransitor()
+                isMenuOpened.current = false
+            }
+        }
+    }
+
+    const clickPhoneHandler = async (event) => {
+        if (!isMenuOpened.current) {
+            isMenuOpened.current = true
+            setTheme('ui-light')
+            if (menuState === 'close') {
+                refControls.current.style.pointerEvents = 'none'
+                refBurger.current.style.pointerEvents = 'none'
+                event.target.classList.remove('icon--phone')
+                event.target.classList.add('icon--close')
+                setMenuState('phone')
+                animateContent.start('start')
+                await showTransitor()
+                animatePhone.start('shown')
+                animateImage.start('shown')
+                await animateWrapper.start('fastShown')
+                await animateWrapper.start('hidden')
+                isMenuOpened.current = false
+            } else {
+                refControls.current.style.pointerEvents = 'all'
+                refBurger.current.style.pointerEvents = 'all'
+                event.target.classList.remove('icon--close')
+                event.target.classList.add('icon--phone')
+                setMenuState('close')
+                animateImage.start('hidden')
+                await animateWrapper.start('smash')
+                animateContent.start('end')
+                await animatePhone.start('hidden')
+                animateWrapper.start('fastHidden')
+                await hideTransitor()
+                isMenuOpened.current = false
+            }
+        }
     }
 
     // Preloader state change
@@ -202,10 +322,20 @@ export default function MenuTransitor({ theme, preloaderState, setTheme, setCont
     return (
         <div data-state={menuState} className={`${className} menu-wrapper`}>
             <div className='menu'>
-                <div onClick={clickHandler} className='menu__burger c-hover'>
-                    <div /><div /><div />
+                <div ref={refBurger} onClick={clickHandler} className='icon icon--menu c-hover' />
+
+                <div ref={refControls} className='menu__controls'>
+                    <div onClick={clickSearchHandler} className='icon icon--search c-hover' />
+                    <div onClick={clickLangHandler} className='icon icon--lang text--t2 c-hover'>{currentLang}</div>
+                    <div onClick={clickPhoneHandler} className='icon icon--phone c-hover' />
                 </div>
-                {menuItems.map((item, id) => <A key={item.text} href={item.link} text={id} />)}
+
+                <Image src='/assets/img/icons/icon-logo.svg' width='31' height='153' alt='Simrussia logo' />
+
+                <div className='menu__social'>
+                    <div className='c-hover'>VK</div>
+                    <div className='c-hover'>TG</div>
+                </div>
             </div>
 
             <motion.nav
@@ -218,7 +348,7 @@ export default function MenuTransitor({ theme, preloaderState, setTheme, setCont
                     hidden: { zIndex: 0, x: '-100vw' }
                 }}
                 className='menu__nav'>
-                {menuItems.map(item => <A key={item.text} externalClass={`${router.asPath === item.link? 'active' : ''} text--h4`} href={item.link} text={item.text} />)}
+                {menuItems.map(item => <A key={item.text} externalClass={`${router.asPath === item.link ? 'active' : ''} text--h4`} href={item.link} text={item.text} />)}
                 <motion.div
                     className='menu__nav__image'
                     animate={animateImage}
@@ -228,6 +358,73 @@ export default function MenuTransitor({ theme, preloaderState, setTheme, setCont
                     <img src={transitors[3].image} alt='' />
                 </motion.div>
             </motion.nav>
+
+            <motion.div
+                animate={animateSearch}
+                initial={{ x: '-100vw', zIndex: 0 }}
+                transition={{ duration: 0 }}
+                variants={{
+                    shown: { x: '-40vw', zIndex: 4, transition: { delay: 0.2, duration: 0 } },
+                    hidden: { zIndex: 0, x: '-100vw' }
+                }}
+                className='menu__nav'>
+                <Search />
+                <motion.div
+                    className='menu__nav__image'
+                    animate={animateImage}
+                    initial={{ x: '600px' }}
+                    variants={{ shown: { x: 0 }, hidden: { x: '600px' } }}
+                    transition={{ duration: 1 }}>
+                    <img src={transitors[3].image} alt='' />
+                </motion.div>
+            </motion.div>
+
+            <motion.div
+                animate={animateLang}
+                initial={{ x: '-100vw', zIndex: 0 }}
+                transition={{ duration: 0 }}
+                variants={{
+                    shown: { x: '-40vw', zIndex: 4, transition: { delay: 0.2, duration: 0 } },
+                    hidden: { zIndex: 0, x: '-100vw' }
+                }}
+                className='menu__nav'>
+                <div className='menu__lang text--h4'>
+                    <div className='c-hover' data-active='true'>Русский</div>
+                    <div className='c-hover'>English</div>
+                    <div className='c-hover'>Türkçe</div>
+                    <div className='c-hover'>中文</div>
+                </div>
+                <motion.div
+                    className='menu__nav__image'
+                    animate={animateImage}
+                    initial={{ x: '600px' }}
+                    variants={{ shown: { x: 0 }, hidden: { x: '600px' } }}
+                    transition={{ duration: 1 }}>
+                    <img src={transitors[3].image} alt='' />
+                </motion.div>
+            </motion.div>
+
+            <motion.div
+                animate={animatePhone}
+                initial={{ x: '-100vw', zIndex: 0 }}
+                transition={{ duration: 0 }}
+                variants={{
+                    shown: { x: '-40vw', zIndex: 4, transition: { delay: 0.2, duration: 0 } },
+                    hidden: { zIndex: 0, x: '-100vw' }
+                }}
+                className='menu__nav'>
+                <div className='menu__lang text--h4'>
+                    <MenuContacts />
+                </div>
+                <motion.div
+                    className='menu__nav__image'
+                    animate={animateImage}
+                    initial={{ x: '600px' }}
+                    variants={{ shown: { x: 0 }, hidden: { x: '600px' } }}
+                    transition={{ duration: 1 }}>
+                    <img src={transitors[3].image} alt='' />
+                </motion.div>
+            </motion.div>
 
             <motion.div
                 animate={animateWrapper}
