@@ -27,8 +27,6 @@ export default function MenuTransitor({ theme, preloaderState, setTheme, setCont
     const [breadcrumbs, setBreadcrumbs] = useState([])
     const [leftPosition, setLeftPosition] = useState('-100vw')
     const [menuState, setMenuState] = useState('close')
-    const [currentLang, setCurrentLang] = useState('RU')
-
     const transitors = [
         {
             position: 'right',
@@ -104,6 +102,7 @@ export default function MenuTransitor({ theme, preloaderState, setTheme, setCont
             setTheme(refTheme.current)
         }
     }
+
     const showTransitor = async () => {
         const currentTheme = refTheme.current
         setTheme('ui-light')
@@ -111,38 +110,6 @@ export default function MenuTransitor({ theme, preloaderState, setTheme, setCont
         const awaitAnimation = await animate.start('shown')
         refTheme.current = currentTheme
         return awaitAnimation
-    }
-
-    const clickHandler = async (event) => {
-        if (!isMenuOpened.current) {
-            isMenuOpened.current = true
-            setTheme('ui-light')
-            if (menuState === 'close') {
-                refControls.current.style.pointerEvents = 'none'
-                event.target.classList.remove('icon--menu')
-                event.target.classList.add('icon--close')
-                setMenuState('open')
-                animateContent.start('start')
-                await showTransitor()
-                animateNav.start('shown')
-                animateImage.start('shown')
-                await animateWrapper.start('fastShown')
-                await animateWrapper.start('hidden')
-                isMenuOpened.current = false
-            } else {
-                refControls.current.style.pointerEvents = 'all'
-                event.target.classList.remove('icon--close')
-                event.target.classList.add('icon--menu')
-                setMenuState('close')
-                animateImage.start('hidden')
-                await animateWrapper.start('smash')
-                animateContent.start('end')
-                await animateNav.start('hidden')
-                animateWrapper.start('fastHidden')
-                await hideTransitor()
-                isMenuOpened.current = false
-            }
-        }
     }
 
     const clickNavHandler = async () => {
@@ -155,106 +122,40 @@ export default function MenuTransitor({ theme, preloaderState, setTheme, setCont
         setTimeout(() => setMenuState('close'), 200)
     }
 
-    const clickSearchHandler = async (event) => {
+    const toggleMenu = async (animation, type) => {
         if (!isMenuOpened.current) {
             isMenuOpened.current = true
             setTheme('ui-light')
             if (menuState === 'close') {
-                refControls.current.style.pointerEvents = 'none'
-                refBurger.current.style.pointerEvents = 'none'
-                event.target.classList.remove('icon--search')
-                event.target.classList.add('icon--close')
-                setMenuState('search')
+                setMenuState(type)
                 animateContent.start('start')
                 await showTransitor()
-                animateSearch.start('shown')
+                animation.start('shown')
                 animateImage.start('shown')
                 await animateWrapper.start('fastShown')
                 await animateWrapper.start('hidden')
                 isMenuOpened.current = false
             } else {
-                refControls.current.style.pointerEvents = 'all'
-                refBurger.current.style.pointerEvents = 'all'
-                event.target.classList.remove('icon--close')
-                event.target.classList.add('icon--search')
-                setMenuState('close')
-                animateImage.start('hidden')
-                await animateWrapper.start('smash')
-                animateContent.start('end')
-                await animateSearch.start('hidden')
-                animateWrapper.start('fastHidden')
-                await hideTransitor()
-                isMenuOpened.current = false
-            }
-        }
-    }
-
-    const clickLangHandler = async (event) => {
-        if (!isMenuOpened.current) {
-            isMenuOpened.current = true
-            setTheme('ui-light')
-            if (menuState === 'close') {
-                refControls.current.style.pointerEvents = 'none'
-                refBurger.current.style.pointerEvents = 'none'
-                event.target.classList.remove('icon--lang')
-                event.target.classList.add('icon--close')
-                setCurrentLang('')
-                setMenuState('lang')
-                animateContent.start('start')
-                await showTransitor()
-                animateLang.start('shown')
-                animateImage.start('shown')
-                await animateWrapper.start('fastShown')
-                await animateWrapper.start('hidden')
-                isMenuOpened.current = false
-            } else {
-                refControls.current.style.pointerEvents = 'all'
-                refBurger.current.style.pointerEvents = 'all'
-                event.target.classList.remove('icon--close')
-                event.target.classList.add('icon--lang')
-                setCurrentLang('RU')
-                setMenuState('close')
-                animateImage.start('hidden')
-                await animateWrapper.start('smash')
-                animateContent.start('end')
-                await animateLang.start('hidden')
-                animateWrapper.start('fastHidden')
-                await hideTransitor()
-                isMenuOpened.current = false
-            }
-        }
-    }
-
-    const clickPhoneHandler = async (event) => {
-        if (!isMenuOpened.current) {
-            isMenuOpened.current = true
-            setTheme('ui-light')
-            if (menuState === 'close') {
-                refControls.current.style.pointerEvents = 'none'
-                refBurger.current.style.pointerEvents = 'none'
-                event.target.classList.remove('icon--phone')
-                event.target.classList.add('icon--close')
-                setMenuState('phone')
-                animateContent.start('start')
-                await showTransitor()
-                animatePhone.start('shown')
-                animateImage.start('shown')
-                await animateWrapper.start('fastShown')
-                await animateWrapper.start('hidden')
-                isMenuOpened.current = false
-            } else {
-                refControls.current.style.pointerEvents = 'all'
-                refBurger.current.style.pointerEvents = 'all'
-                event.target.classList.remove('icon--close')
-                event.target.classList.add('icon--phone')
-                setMenuState('close')
-                animateImage.start('hidden')
-                await animateWrapper.start('smash')
-                animateContent.start('end')
-                await animatePhone.start('hidden')
-                animateWrapper.start('fastHidden')
-                await hideTransitor()
-                isMenuOpened.current = false
+                if (menuState === type) {
+                    setMenuState('close')
+                    animateImage.start('hidden')
+                    await animateWrapper.start('smash')
+                    animateContent.start('end')
+                    await animation.start('hidden')
+                    animateWrapper.start('fastHidden')
+                    await hideTransitor()
+                    isMenuOpened.current = false
+                } else {
+                    await animateWrapper.start('smash')
+                    if (menuState === 'menu') animateNav.start('hidden')
+                    else if (menuState === 'lang') animateLang.start('hidden')
+                    else if (menuState === 'phone') animatePhone.start('hidden')
+                    else if (menuState === 'search') animateSearch.start('hidden')
+                    await animation.start('shown')
+                    animateWrapper.start('hidden')
+                    isMenuOpened.current = false
+                    setMenuState(type)
+                }
             }
         }
     }
@@ -322,12 +223,12 @@ export default function MenuTransitor({ theme, preloaderState, setTheme, setCont
     return (
         <div data-state={menuState} className={`${className} menu-wrapper`}>
             <div className='menu'>
-                <div ref={refBurger} onClick={clickHandler} className='icon icon--menu c-hover' />
+                <div ref={refBurger} onClick={() => toggleMenu(animateNav, 'menu')} className={`icon ${menuState !== 'menu' ? 'icon--menu' : 'icon--close'} c-hover`} />
 
                 <div ref={refControls} className='menu__controls'>
-                    <div onClick={clickSearchHandler} className='icon icon--search c-hover' />
-                    <div onClick={clickLangHandler} className='icon icon--lang text--t2 c-hover'>{currentLang}</div>
-                    <div onClick={clickPhoneHandler} className='icon icon--phone c-hover' />
+                    <div onClick={() => toggleMenu(animateSearch, 'search')} className={`icon ${menuState !== 'search' ? 'icon--search' : 'icon--close'} c-hover`} />
+                    <div onClick={() => toggleMenu(animateLang, 'lang')} className={`icon ${menuState !== 'lang' ? 'icon--lang' : 'icon--close'} c-hover`} />
+                    <div onClick={() => toggleMenu(animatePhone, 'phone')} className={`icon ${menuState !== 'phone' ? 'icon--phone' : 'icon--close'} c-hover`} />
                 </div>
 
                 <Image src='/assets/img/icons/icon-logo.svg' width='31' height='153' alt='Simrussia logo' />

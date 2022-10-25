@@ -8,7 +8,7 @@ export const menuItems = [
     {link: '/', text: 'Поставщикам'},
     {link: '/about', text: 'Работа у нас'},
     {link: '/', text: 'Команда'},
-    {link: '/', text: 'Контакты'},
+    {link: '/contacts', text: 'Контакты'},
 ]
 
 export const brandItems = {
