@@ -12,11 +12,12 @@
 }
 
 .lineImage {
-    top: 60px;
+    top: 70px;
+    left: -10px;
     height: 20px;
     overflow: visible;
     position: absolute;
-    width: calc(100% + 20px + var(--spacing) * 2);
+    width: calc(100% + 30px + var(--spacing) * 2);
 
     &::before {
         left: 0;
