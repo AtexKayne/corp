@@ -1,14 +1,18 @@
 import style from '../../styles/module/contacts/map.module.scss'
 import { SmoothScrollContext } from '../../components/helpers/SmoothScroll.context'
-import { useEffect, useRef, useContext } from 'react'
+import { useEffect, useRef, useContext, useState } from 'react'
 import { motion, useMotionValue, useTransform } from 'framer-motion'
+import useDeviceDetect from '../../components/helpers/useDeviceDetect'
 import Image from 'next/image'
 
 export default function ContactsMap({ adress = {} }) {
+    const { isMobile } = useDeviceDetect()
+    console.log(isMobile);
     const refContainer = useRef(null)
     const refStartPos = useRef(null)
     const refSection = useRef(null)
     const { scroll } = useContext(SmoothScrollContext)
+    const [ mapHeight, setMapHeight ] = useState('calc(100vh + 800px)')
     const y = useMotionValue(0)
     const transformRoadA = useTransform(y, [100, 800], [0, 1])
     const transformRoadB = useTransform(y, [200, 800], [0, 1])
@@ -39,10 +43,14 @@ export default function ContactsMap({ adress = {} }) {
             scroll.off('scroll', scrollHandler)
             observer.disconnect()
         }
-    }, [scroll]);
+    }, [scroll])
+
+    useEffect(() => {
+        !isMobile ? setMapHeight('calc(100vh + 800px)') : setMapHeight('auto')
+    }, [isMobile]);
 
     return (
-        <section ref={refSection} id='map' style={{ height: `calc(100vh + 800px)` }} data-scroll-section>
+        <section ref={refSection} id='map' style={{ height: mapHeight }} data-scroll-section>
             <div className={style.container}>
                 <div id='info' style={{ minHeight: 'calc(100vh + 300px)' }} className='col col--30'>
                     {adress && adress.city

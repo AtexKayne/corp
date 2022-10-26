@@ -113,22 +113,19 @@ export default function MenuTransitor({ theme, preloaderState, setTheme, setCont
     }
 
     const clickNavHandler = async (event) => {
-        console.log(event.target.tagName);
-        if (event.target.tagName.toUpperCase() === 'A') {
-            console.log('sd');
-            const currentState = menuState
-            setMenuState('awaiting')
-            animateImage.start('hidden')
-            await animateWrapper.start('smash')
-            if (currentState === 'menu') await animateNav.start('hidden')
-            else if (currentState === 'lang') await animateLang.start('hidden')
-            else if (currentState === 'phone') await animatePhone.start('hidden')
-            else if (currentState === 'search') await animateSearch.start('hidden')
-            animateContent.start('end')
-            await animateWrapper.start('fastHidden')
-            isMenuOpened.current = false
-            setTimeout(() => setMenuState('close'), 200)
-        }
+        if (event.target.tagName.toUpperCase() !== 'A') return
+        const currentState = menuState
+        setMenuState('awaiting')
+        animateImage.start('hidden')
+        await animateWrapper.start('smash')
+        if (currentState === 'menu') await animateNav.start('hidden')
+        else if (currentState === 'lang') await animateLang.start('hidden')
+        else if (currentState === 'phone') await animatePhone.start('hidden')
+        else if (currentState === 'search') await animateSearch.start('hidden')
+        animateContent.start('end')
+        await animateWrapper.start('fastHidden')
+        isMenuOpened.current = false
+        setTimeout(() => setMenuState('close'), 200)
     }
 
     const toggleMenu = async (animation, type) => {

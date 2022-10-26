@@ -7,9 +7,12 @@ html, body {
     padding: 0;
     width: 100%;
     height: 100%;
-    overflow: hidden;
-    scroll-behavior: smooth;
     background-color: color-use(background);
+    
+    @include media-breakpoint(md-up) {
+        overflow: hidden;
+        scroll-behavior: smooth;
+    }
 }
 
 /*
