@@ -12,8 +12,8 @@ import MenuContacts from "./MenuContacts";
 export default function MenuTransitor({ theme, preloaderState, setTheme, setContainerWidth, animateContent, className }) {
     const router = useRouter()
     const refTheme = useRef(theme)
-    const refBurger = useRef(null) 
-    const refControls = useRef(null) 
+    const refBurger = useRef(null)
+    const refControls = useRef(null)
     const isAnimated = useRef(false)
     const isMenuOpened = useRef(false)
     const animate = useAnimationControls()
@@ -112,14 +112,23 @@ export default function MenuTransitor({ theme, preloaderState, setTheme, setCont
         return awaitAnimation
     }
 
-    const clickNavHandler = async () => {
-        setMenuState('awaiting')
-        animateImage.start('hidden')
-        await animateWrapper.start('smash')
-        await animateNav.start('hidden')
-        await animateWrapper.start('fastHidden')
-        isMenuOpened.current = false
-        setTimeout(() => setMenuState('close'), 200)
+    const clickNavHandler = async (event) => {
+        console.log(event.target.tagName);
+        if (event.target.tagName.toUpperCase() === 'A') {
+            console.log('sd');
+            const currentState = menuState
+            setMenuState('awaiting')
+            animateImage.start('hidden')
+            await animateWrapper.start('smash')
+            if (currentState === 'menu') await animateNav.start('hidden')
+            else if (currentState === 'lang') await animateLang.start('hidden')
+            else if (currentState === 'phone') await animatePhone.start('hidden')
+            else if (currentState === 'search') await animateSearch.start('hidden')
+            animateContent.start('end')
+            await animateWrapper.start('fastHidden')
+            isMenuOpened.current = false
+            setTimeout(() => setMenuState('close'), 200)
+        }
     }
 
     const toggleMenu = async (animation, type) => {
@@ -314,7 +323,7 @@ export default function MenuTransitor({ theme, preloaderState, setTheme, setCont
                     hidden: { zIndex: 0, x: '-100vw' }
                 }}
                 className='menu__nav'>
-                <div className='menu__lang text--h4'>
+                <div onClick={clickNavHandler} className='menu__lang text--h4'>
                     <MenuContacts />
                 </div>
                 <motion.div
@@ -344,15 +353,19 @@ export default function MenuTransitor({ theme, preloaderState, setTheme, setCont
             <div className='bread'>
                 {breadcrumbs.map((breadcrumb, i) => {
                     return (
-                        <motion.div
-                            animate={animateBreadcrumbs}
-                            initial={{ x: 200 }}
-                            variants={{ hidden: { x: -200 }, shown: { x: 0 } }}
-                            transition={{ duration: 1 }}
-                            className='bread__text'
-                            key={breadcrumb.href}>
-                            <A href={breadcrumb.href} text={breadcrumb.breadcrumb.toUpperCase()} />
-                        </motion.div>
+                        <div className='bread__line' key={breadcrumb.href}>
+                            <div className='bread__filler--1' />
+                            <div className='bread__filler--2' />
+                            <motion.div
+                                animate={animateBreadcrumbs}
+                                initial={{ x: 200 }}
+                                variants={{ hidden: { x: -200 }, shown: { x: 0 } }}
+                                transition={{ duration: 1 }}
+                                className='bread__text'>
+                                <A href={breadcrumb.href} text={breadcrumb.breadcrumb.toUpperCase()} />
+                            </motion.div>
+                            <div className='bread__filler--3' />
+                        </div>
                     )
                 })}
             </div>
