@@ -7,7 +7,6 @@ import Image from 'next/image'
 
 export default function ContactsMap({ adress = {} }) {
     const { isMobile } = useDeviceDetect()
-    console.log(isMobile);
     const refContainer = useRef(null)
     const refStartPos = useRef(null)
     const refSection = useRef(null)

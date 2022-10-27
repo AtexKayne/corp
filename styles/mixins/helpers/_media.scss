@@ -1,3 +1,5 @@
+@import "../lib/str-split";
+
 /**
  * Breakpoints for devices / orientations / screens
  *
@@ -45,7 +47,6 @@ $media-breakpoint-sm:       568px !default;
 
 // Minimal viewport size, not actually used anywhere
 $media-breakpoint-xs:       360px !default;
-
 
 // Min vertical height on md, if vertical size is smaller then "sm" will apply
 $media-breakpoint-md-min-height: 416px !default;

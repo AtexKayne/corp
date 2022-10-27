@@ -3,15 +3,11 @@ import MainLayout from '../../layout/MainLayout'
 import { contacts } from '../../components/helpers/constants'
 import ContactsMap from './ContactsMap'
 import ContactsIntro from './ContactsIntro'
-import { useEffect } from 'react'
 import ContactsDepartments from './ContactsDepartments'
 import ContactsDocuments from './ContactsDocuments'
 
 
 export default function Brand({ setTheme, detail }) {
-    useEffect(() => {
-        console.log(detail);
-    }, []);
     return (
         <MainLayout className='no-padding'>
             <SmoothScrollProvider options={{ smooth: true }}>

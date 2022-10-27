@@ -1,12 +1,13 @@
 /* eslint-disable @next/next/no-img-element */
 import A from "./A";
 import { useState, useEffect, useRef } from "react";
-import { motion, useAnimationControls, useDomEvent } from 'framer-motion'
+import { motion, useAnimationControls } from 'framer-motion'
 import { menuItems } from './helpers/constants'
 import { useRouter } from 'next/router'
 import Search from "./Search";
 import Image from "next/image";
 import MenuContacts from "./MenuContacts";
+import useDeviceDetect from '../components/helpers/useDeviceDetect'
 // import MenuPreloader from "./MenuPreloader";
 
 export default function MenuTransitor({ theme, preloaderState, setTheme, setContainerWidth, animateContent, className }) {
@@ -27,6 +28,7 @@ export default function MenuTransitor({ theme, preloaderState, setTheme, setCont
     const [breadcrumbs, setBreadcrumbs] = useState([])
     const [leftPosition, setLeftPosition] = useState('-100vw')
     const [menuState, setMenuState] = useState('close')
+    const { isMobile } = useDeviceDetect()
     const transitors = [
         {
             position: 'right',
@@ -190,7 +192,7 @@ export default function MenuTransitor({ theme, preloaderState, setTheme, setCont
             isAnimated.current.then(hideTransitor)
             animateContent.start('end')
         }
-        setContainerWidth()
+        if (!isMobile) setContainerWidth()
     }, [leftPosition, breadcrumbs])
 
     // Router change

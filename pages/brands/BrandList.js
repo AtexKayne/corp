@@ -1,20 +1,21 @@
 import style from '../../styles/module/brands/brand-list.module.scss'
 import Image from 'next/image'
-import { motion, useAnimationControls, useMotionValue, useAnimation } from 'framer-motion'
+import { motion, useAnimationControls, useMotionValue } from 'framer-motion'
 import { useEffect, useRef, useState } from 'react'
 import A from '../../components/A'
 import PrevButton from '../../components/PrevButton'
 import KaleidoscopeImage from '../../components/KaleidoscopeImage'
+import useDeviceDetect from '../../components/helpers/useDeviceDetect'
 
 export default function BrandList({ items, tags }) {
     const [sliderActive, setSliderActive] = useState(false)
     const [scrollWidth, setScrollWidth] = useState(-100)
-    const [isDragging, setIsDragging] = useState(-100)
+    const [isDragging, setIsDragging] = useState(false)
     const [activeElem, setActiveElem] = useState(false)
     const [tagActive, setTagActive] = useState([])
     const [elements, setElements] = useState(items)
     const [letter, setLetter] = useState('AZ')
-
+    
     const steps = items ? items.length : 1
     const refSlider = useRef(null)
     const refContent = useRef(null)
@@ -23,15 +24,18 @@ export default function BrandList({ items, tags }) {
     const refCurrentItem = useRef(null)
     const refTagContainer = useRef(null)
     const refIsTitleShown = useRef('start')
-    const animateScroll = useAnimation()
+    const { isMobile } = useDeviceDetect()
     const animateItemY = useMotionValue(0)
     const animateNav = useAnimationControls()
     const animateItem = useAnimationControls()
     const animateTitle = useAnimationControls()
     const animateBlock = useAnimationControls()
+    const animateScroll = useAnimationControls()
     const animateTagInner = useAnimationControls()
     const animateTagRemote = useAnimationControls()
     const animateTagsContainer = useAnimationControls()
+    const kaleidoscopeHeight = isMobile ? 452 : 900
+    const itemHeight = isMobile ? 52 : 70
 
     const clickHandler = (index, isActive) => {
         if (isActive) return
@@ -53,6 +57,7 @@ export default function BrandList({ items, tags }) {
     }
 
     const tagClickHandler = (index) => {
+        if (isDragging) return
         if (tagActive.includes(index)) {
             const tagSplice = [...tagActive]
             tagSplice[tagActive.indexOf(index)] = false
@@ -77,7 +82,7 @@ export default function BrandList({ items, tags }) {
             setLetter(refCurrentItem.current[0].toUpperCase())
 
             animateScroll.start({
-                y: index * -60,
+                y: index * itemHeight * -1,
                 transition: {
                     type: 'tween'
                 }
@@ -85,9 +90,9 @@ export default function BrandList({ items, tags }) {
 
             if (refIsTitleShown.current === 'start' || (refIsTitleShown.current === 'end' && index < 3)) {
                 refIsTitleShown.current = 'next'
-                animateNav.start({ y: -40, transition: { duration: 1 } })
-                animateTitle.start({ y: -40, transition: { duration: 1 } })
-                animateBlock.start({ y: 260, height: '290px', transition: { duration: 1 } })
+                animateNav.start({ y: isMobile ? 0 : -40, transition: { duration: 1 } })
+                animateTitle.start({ y: isMobile ? -60 : -40, transition: { duration: 1 } })
+                animateBlock.start({ y: isMobile ? 220 : 260, height: isMobile ? '50vh' : '290px', transition: { duration: 1 } })
                 animateTagsContainer.start({ y: -80, opacity: 0, pointerEvents: 'none', transition: { duration: 1 } })
             }
 
@@ -116,10 +121,11 @@ export default function BrandList({ items, tags }) {
         if (transform === 'none' || position >= 0) {
             animateTagRemote.start({ x: -100, opacity: 0, pointerEvents: 'none', transition: { duration: 0.5 } })
         }
+        setTimeout(() => setIsDragging(false), 50)
     }
 
     const tagsStartDrag = () => {
-        setIsDragging('start')
+        setIsDragging(true)
         animateTagRemote.start({ x: 0, opacity: 1, pointerEvents: 'all', transition: { duration: 0.2 } })
     }
 
@@ -129,7 +135,7 @@ export default function BrandList({ items, tags }) {
         let scrollTo = scrollDirection + animateItemY.current - 10
 
         if (scrollTo < 0) scrollTo = -1
-        else if (scrollTo >= refSlider.current.clientHeight - 60) scrollTo = refSlider.current.clientHeight - 10
+        else if (scrollTo >= refSlider.current.clientHeight - itemHeight) scrollTo = refSlider.current.clientHeight - 10
         if (scrollTo > 0) setSliderActive(true)
         animateItem.start({ y: scrollTo, transition: { type: 'tween' } })
     }
@@ -151,10 +157,10 @@ export default function BrandList({ items, tags }) {
             <motion.div initial={{ height: '0px' }} className={style.filterBlock} animate={animateBlock} />
             <motion.div animate={animateNav} className={style.brandListNav}>
                 <PrevButton text='SIMRUSSIA' />
-                <span>Поделиться</span>
+                <span className='is-hidden--md-down'>Поделиться</span>
             </motion.div>
             <div className={style.brandList}>
-                <motion.h1 animate={animateTitle} className={style.brandListTitle}>
+                <motion.h1 animate={animateTitle} className={`${style.brandListTitle} text--h4`}>
                     Бренды
                 </motion.h1>
                 <motion.div ref={refTagContainer} animate={animateTagsContainer} data-dragging={isDragging} className={style.brandListTagsContainer}>
@@ -178,7 +184,7 @@ export default function BrandList({ items, tags }) {
                     </motion.div>
                 </motion.div>
 
-                <div ref={refSlider} data-active={sliderActive} className={style.brandListSlider}>
+                <div ref={refSlider} data-active={sliderActive} className={`${style.brandListSlider}`}>
                     <motion.div
                         drag="y"
                         ref={refSliderItem}
@@ -203,7 +209,7 @@ export default function BrandList({ items, tags }) {
                                     data-active={activeElem === item}
                                     onClick={() => clickHandler(index, activeElem === item)}
                                     className={`${style.brandListSliderContentItem} c-hover`}>
-                                    <div className={`${style.brandListSliderContentItemTitle} text--h4`}>{item.name}</div>
+                                    <div className={`${style.brandListSliderContentItemTitle} text--c2`}>{item.name}</div>
                                     <A externalClass={`${style.brandListSliderContentItemLink} text--h1`} href={`brand/${item.name}`} text={item.name} />
                                     <div className={style.brandListSliderContentItemText}>{item.text}</div>
                                     <div className={style.brandListSliderContentItemImage}>
@@ -216,7 +222,7 @@ export default function BrandList({ items, tags }) {
             </div>
 
             <div className={style.kaleidoscope}>
-                <KaleidoscopeImage height='900' />
+                <KaleidoscopeImage height={kaleidoscopeHeight} />
             </div>
         </div>
     )

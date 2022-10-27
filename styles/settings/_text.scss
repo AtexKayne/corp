@@ -38,36 +38,36 @@ $text-default-font:   "TT Common", "Helvetica Neue", Helvetica, Arial, sans-seri
 $text-heading-font:   "TT Common", "Helvetica Neue", Helvetica, Arial, sans-serif;
 
 // TT Common
-$text-g2:      ( font-size: 14rem,   line-height: 80 / 56 * 1em, letter-spacing: 0.03em );
-$text-g4:      ( font-size: 8.0rem,  line-height: 51 / 64 * 1em, letter-spacing: 0.03em );
+$text-g2:      ( font-size: 14rem,   line-height: 80 / 56 * 1em );
+$text-g4:      ( font-size: 8.0rem,  line-height: 51 / 64 * 1em );
 
-$text-h1:      ( font-size: 5.6rem,  line-height: 60 / 57 * 1em, letter-spacing: 0.03em );
-$text-h2:      ( font-size: 4.8rem,  line-height: 60 / 58 * 1em, letter-spacing: 0.03em );
-$text-h3:      ( font-size: 4.4rem,  line-height: 45 / 43 * 1em, letter-spacing: 0.03em );
-$text-h4:      ( font-size: 3.6rem,  line-height: 35 / 29 * 1em, letter-spacing: 0.03em );
-$text-h5:      ( font-size: 3.2rem,  line-height: 30 / 26 * 1em, letter-spacing: 0.03em );
-$text-h6:      ( font-size: 2.6rem,  line-height: 22 / 18 * 1em, letter-spacing: 0.03em );
-
-// TT Common
-$text-p1:      ( font-size: 1.8rem,  line-height: 30 / 18 * 1em, letter-spacing: 0.03em );
-$text-p2:      ( font-size: 1.6rem,  line-height: 25 / 15 * 1em, letter-spacing: 0.03em );
-$text-p3:      ( font-size: 1.4rem,  line-height: 20 / 12 * 1em, letter-spacing: 0.03em );
-$text-p4:      ( font-size: 1.2rem,  line-height: 18 / 12 * 1em, letter-spacing: 0.03em );
-$text-p5:      ( font-size: 1.0rem,  line-height: 12 / 12 * 1em, letter-spacing: 0.03em );
+$text-h1:      ( font-size: 5.6rem,  line-height: 60 / 57 * 1em );
+$text-h2:      ( font-size: 4.8rem,  line-height: 60 / 58 * 1em );
+$text-h3:      ( font-size: 4.4rem,  line-height: 45 / 43 * 1em );
+$text-h4:      ( font-size: 3.6rem,  line-height: 35 / 29 * 1em );
+$text-h5:      ( font-size: 3.2rem,  line-height: 30 / 26 * 1em );
+$text-h6:      ( font-size: 2.6rem,  line-height: 22 / 18 * 1em );
 
 // TT Common
-$text-t1:      ( font-size: 2.4rem,  line-height: 25 / 24 * 1em, letter-spacing: 0.03em );
-$text-t2:      ( font-size: 2.0rem,  line-height: 25 / 20 * 1em, letter-spacing: 0.03em );
-$text-t3:      ( font-size: 1.5rem,  line-height: 20 / 15 * 1em, letter-spacing: 0.03em );
-$text-t4:      ( font-size: 1.5rem,  line-height: 20 / 15 * 1em, letter-spacing: 0.03em );
-$text-t5:      ( font-size: 1.5rem,  line-height: 20 / 15 * 1em, letter-spacing: 0.03em );
+$text-p1:      ( font-size: 1.8rem,  line-height: 30 / 18 * 1em );
+$text-p2:      ( font-size: 1.6rem,  line-height: 15 / 15 * 1em );
+$text-p3:      ( font-size: 1.4rem,  line-height: 20 / 12 * 1em );
+$text-p4:      ( font-size: 1.2rem,  line-height: 18 / 12 * 1em );
+$text-p5:      ( font-size: 1.0rem,  line-height: 12 / 12 * 1em );
 
 // TT Common
-$text-c1:      ( font-size: 3.2rem,  line-height: 20 / 15 * 1em, letter-spacing: 0.03em );
-$text-c2:      ( font-size: 3.0rem,  line-height: 20 / 15 * 1em, letter-spacing: 0.03em );
-$text-c3:      ( font-size: 2.8rem,  line-height: 16 / 12 * 1em, letter-spacing: 0.03em );
-$text-c4:      ( font-size: 2.6rem,  line-height: 14 / 10 * 1em, letter-spacing: 0.03em );
-$text-c5:      ( font-size: 2.4rem,  line-height: 14 / 10 * 1em, letter-spacing: 0.03em );
+$text-t1:      ( font-size: 2.4rem,  line-height: 25 / 24 * 1em );
+$text-t2:      ( font-size: 2.0rem,  line-height: 25 / 20 * 1em );
+$text-t3:      ( font-size: 1.5rem,  line-height: 20 / 15 * 1em );
+$text-t4:      ( font-size: 1.5rem,  line-height: 20 / 15 * 1em );
+$text-t5:      ( font-size: 1.5rem,  line-height: 20 / 15 * 1em );
+
+// TT Common
+$text-c1:      ( font-size: 4.4rem,  line-height: 20 / 15 * 1em );
+$text-c2:      ( font-size: 3.6rem,  line-height: 20 / 15 * 1em );
+$text-c3:      ( font-size: 3.2rem,  line-height: 16 / 12 * 1em );
+$text-c4:      ( font-size: 2.4rem,  line-height: 14 / 10 * 1em );
+$text-c5:      ( font-size: 2.4rem,  line-height: 14 / 10 * 1em );
 
 $text-sizes: (
     xs: (
@@ -80,30 +80,30 @@ $text-sizes: (
         'g2':           $text-h2,
         'g4':           $text-h4,
         // Headings
-        'h1':           $text-h3,
-        'h2':           $text-h4,
-        'h3':           $text-h5,
-        'h4':           $text-h6,
+        'h1':           $text-h1,
+        'h2':           $text-h2,
+        'h3':           $text-h3,
+        'h4':           $text-h4, // used
         'h5':           $text-p1,
         'h6':           $text-p2,
         // Caption
         'c1':           $text-c1,
-        'c2':           $text-c2,
+        'c2':           $text-c4, // used
         'c3':           $text-c3,
         'c4':           $text-c4,
         'c5':           $text-c5,
 
         // Text
-        't1':           $text-t2,
-        't2':           $text-t3,
+        't1':           $text-t1,
+        't2':           $text-t2,
         't3':           $text-t4,
         't4':           $text-t5,
         't5':           $text-t5,
-        'p1':           $text-p3,
-        'p2':           $text-p3,
+        'p1':           $text-p2,
+        'p2':           $text-p2,
         'p3':           $text-p3,
-        'p4':           $text-p3,
-        'p5':           $text-p3,
+        'p4':           $text-p4,
+        'p5':           $text-p5,
     ),
 
     md: (
@@ -124,6 +124,13 @@ $text-sizes: (
         // Text
         't2':           $text-t2,
         'p1':           $text-p1,
+
+        // Caption
+        'c1':           $text-c1,
+        'c2':           $text-c2,
+        'c3':           $text-c3,
+        'c4':           $text-c4,
+        'c5':           $text-c5,
     ),
 
     xxl: (
