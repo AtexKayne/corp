@@ -15,7 +15,7 @@ export default function BrandList({ items, tags }) {
     const [elements, setElements] = useState(items)
     const [letter, setLetter] = useState('AZ')
 
-    const steps = items.length
+    const steps = items ? items.length : 1
     const refSlider = useRef(null)
     const refContent = useRef(null)
     const refTagInner = useRef(null)
