@@ -41,8 +41,8 @@ export default function BrandList({ items, tags }) {
     }
 
     const remoteTagHandler = () => {
-        animateTagInner.start({x: 0})
-        animateTagRemote.start({x: -100, opacity: 0, pointerEvents: 'none', transition: {duration: 0.5}})
+        animateTagInner.start({ x: 0 })
+        animateTagRemote.start({ x: -100, opacity: 0, pointerEvents: 'none', transition: { duration: 0.5 } })
     }
 
     const setTagScrollWidth = () => {
@@ -114,13 +114,13 @@ export default function BrandList({ items, tags }) {
         const transform = refTagInner.current.style.transform
         const position = +transform.split('translateX(')[1].split('px)')[0]
         if (transform === 'none' || position >= 0) {
-            animateTagRemote.start({x: -100, opacity: 0, pointerEvents: 'none', transition: {duration: 0.5}})
+            animateTagRemote.start({ x: -100, opacity: 0, pointerEvents: 'none', transition: { duration: 0.5 } })
         }
     }
 
     const tagsStartDrag = () => {
         setIsDragging('start')
-        animateTagRemote.start({x: 0, opacity: 1, pointerEvents: 'all', transition: {duration: 0.2}})
+        animateTagRemote.start({ x: 0, opacity: 1, pointerEvents: 'all', transition: { duration: 0.2 } })
     }
 
     const wheelHandler = event => {
@@ -142,13 +142,13 @@ export default function BrandList({ items, tags }) {
             if (xName > yName) { return 1 }
             return 0
         }))
-        
+
         setTagScrollWidth()
-        
+
     }, [items])
     return (
         <div className={style.brandListWrapper}>
-            <motion.div initial={{height: '0px'}} className={style.filterBlock} animate={animateBlock} />
+            <motion.div initial={{ height: '0px' }} className={style.filterBlock} animate={animateBlock} />
             <motion.div animate={animateNav} className={style.brandListNav}>
                 <PrevButton text='SIMRUSSIA' />
                 <span>Поделиться</span>
@@ -158,7 +158,7 @@ export default function BrandList({ items, tags }) {
                     Бренды
                 </motion.h1>
                 <motion.div ref={refTagContainer} animate={animateTagsContainer} data-dragging={isDragging} className={style.brandListTagsContainer}>
-                    <motion.div onClick={remoteTagHandler} animate={animateTagRemote} initial={{x: -100, opacity: 0, pointerEvents: 'none'}} className={`${style.brandListTagRemote} c-hover`}/>
+                    <motion.div onClick={remoteTagHandler} animate={animateTagRemote} initial={{ x: -100, opacity: 0, pointerEvents: 'none' }} className={`${style.brandListTagRemote} c-hover`} />
                     <motion.div
                         drag='x'
                         ref={refTagInner}
@@ -167,12 +167,14 @@ export default function BrandList({ items, tags }) {
                         onPanStart={tagsStartDrag}
                         dragConstraints={{ left: scrollWidth, right: 0 }}
                         className={`${style.brandListTagsInner} c-dragh text--p2`}>
-                        {tags.map((tag, index) => (
-                            <div className={style.brandListTag} data-active={tagActive.includes(index)} key={tag} onClick={() => tagClickHandler(index)}>
-                                <span>{tag}</span>
-                                <span className={style.brandListTagClose} />
-                            </div>
-                        ))}
+                        {tags ?
+                            tags.map((tag, index) => (
+                                <div className={style.brandListTag} data-active={tagActive.includes(index)} key={tag} onClick={() => tagClickHandler(index)}>
+                                    <span>{tag}</span>
+                                    <span className={style.brandListTagClose} />
+                                </div>
+                            )) : ''
+                        }
                     </motion.div>
                 </motion.div>
 
@@ -194,26 +196,27 @@ export default function BrandList({ items, tags }) {
 
                 <div onWheel={wheelHandler} className={style.brandListSliderContent}>
                     <motion.div animate={animateScroll} ref={refContent} className={style.brandListSliderContentInner}>
-                        {elements.map((item, index) => (
-                            <div
-                                key={item.name}
-                                data-active={activeElem === item}
-                                onClick={() => clickHandler(index, activeElem === item)}
-                                className={`${style.brandListSliderContentItem} c-hover`}>
-                                <div className={`${style.brandListSliderContentItemTitle} text--h4`}>{item.name}</div>
-                                <A externalClass={`${style.brandListSliderContentItemLink} text--h1`} href={`brand/${item.name}`} text={item.name} />
-                                <div className={style.brandListSliderContentItemText}>{item.text}</div>
-                                <div className={style.brandListSliderContentItemImage}>
-                                    <Image src={item.logo} alt={item.name} width='100%' height='100%' />
+                        {elements ?
+                            elements.map((item, index) => (
+                                <div
+                                    key={item.name}
+                                    data-active={activeElem === item}
+                                    onClick={() => clickHandler(index, activeElem === item)}
+                                    className={`${style.brandListSliderContentItem} c-hover`}>
+                                    <div className={`${style.brandListSliderContentItemTitle} text--h4`}>{item.name}</div>
+                                    <A externalClass={`${style.brandListSliderContentItemLink} text--h1`} href={`brand/${item.name}`} text={item.name} />
+                                    <div className={style.brandListSliderContentItemText}>{item.text}</div>
+                                    <div className={style.brandListSliderContentItemImage}>
+                                        <Image src={item.logo} alt={item.name} width='100%' height='100%' />
+                                    </div>
                                 </div>
-                            </div>
-                        ))}
+                            )) : ''}
                     </motion.div>
                 </div>
             </div>
 
             <div className={style.kaleidoscope}>
-                <KaleidoscopeImage height='900'/>
+                <KaleidoscopeImage height='900' />
             </div>
         </div>
     )
