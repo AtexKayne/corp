@@ -21,7 +21,7 @@ body > div {
     min-height: 100%;
     position: relative;
     background-color: color-use(background);
-    padding: calc(var(--spacing) * 1.7) calc(var(--spacing) * 2);
+    padding: calc(var(--spacing) * 1.7) var(--spacing);
 
     
     &.no-padding {

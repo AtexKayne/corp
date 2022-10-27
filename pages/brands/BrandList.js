@@ -85,8 +85,8 @@ export default function BrandList({ items, tags }) {
 
             if (refIsTitleShown.current === 'start' || (refIsTitleShown.current === 'end' && index < 3)) {
                 refIsTitleShown.current = 'next'
-                animateNav.start({ y: -60, transition: { duration: 1 } })
-                animateTitle.start({ y: -60, transition: { duration: 1 } })
+                animateNav.start({ y: -40, transition: { duration: 1 } })
+                animateTitle.start({ y: -40, transition: { duration: 1 } })
                 animateBlock.start({ y: 260, height: '290px', transition: { duration: 1 } })
                 animateTagsContainer.start({ y: -80, opacity: 0, pointerEvents: 'none', transition: { duration: 1 } })
             }

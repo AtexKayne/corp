@@ -88,7 +88,7 @@ export default function MenuTransitor({ theme, preloaderState, setTheme, setCont
         const pathArray = linkPath.map((path, i) => {
             return { breadcrumb: path, href: '/' + linkPath.slice(0, i + 1).join('/') }
         })
-        const newPosition = `-${(window.innerWidth - 121 - pathArray.filter(path => path.href !== '/').length * 50)}px`
+        const newPosition = `-${(window.innerWidth - 101 - pathArray.filter(path => path.href !== '/').length * 50)}px`
         setLeftPosition(newPosition)
         setBreadcrumbs(pathArray)
     }
