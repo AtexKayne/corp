@@ -1,13 +1,11 @@
-import BrandList from '../../components/BrandList'
+import BrandList from './BrandList'
 import MainLayout from '../../layout/MainLayout'
 import { brandItems } from '../../components/helpers/constants'
 
 export default function Brands({ items }) {
     return (
-        <MainLayout className='ui-light'>
-            <BrandList items={brandItems.items} tags={brandItems.tags}>
-
-            </BrandList>
+        <MainLayout className='ui-light no-padding'>
+            <BrandList items={brandItems.items} tags={brandItems.tags} />
         </MainLayout>
     )
 }

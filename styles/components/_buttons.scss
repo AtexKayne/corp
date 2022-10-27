@@ -25,6 +25,14 @@
             left: 70%;
             transform: translateY(10px);
         }
+
+        &:hover {
+
+            &::before,
+            &::after {
+                background-color: color-use(primary);
+            }
+        }
     }
 }
 
