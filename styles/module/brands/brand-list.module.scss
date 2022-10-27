@@ -57,8 +57,16 @@
     max-height: 60px;
     position: relative;
     align-items: center;
-    border-radius: 60px 0 0 60px;
-    width: calc(100% + var(--spacing) * 2);
+    padding-left: var(--spacing);
+    margin-left: calc(var(--spacing) * -1);
+    width: calc(100% + var(--spacing) * 3);
+
+    @include media-breakpoint(md-up) {
+        margin-left: 0;
+        padding-left: 0;
+        border-radius: 60px 0 0 60px;
+        width: calc(100% + var(--spacing) * 2);
+    }
 }
 
 .brandListTagRemote {
@@ -241,11 +249,17 @@
     max-height: 100%;
     position: relative;
     grid-area: content;
+    // overflow: hidden scroll;
+    // max-height: calc(100vh - 200px - var(--spacing) * 3.5 - 3rem);
+
+    // @include media-breakpoint(md-up) {
+    //     overflow: auto;
+    // }
 }
 
 .brandListSliderContentInner {
     display: flex;
-    padding-top: 51px;
+    padding-top: 32px;
     flex-direction: column;
 
     @include media-breakpoint(md-up) {
@@ -282,7 +296,7 @@
 
         .brandListSliderContentItemTitle {
             opacity: 0;
-            font-size: 5.6rem;
+            font-size: 3.6rem;
             pointer-events: none;
         }
 
@@ -298,6 +312,7 @@
 
         .brandListSliderContentItemLink {
             opacity: 1;
+            font-size: 3.6rem;
             white-space: nowrap;
         }
     }
@@ -314,15 +329,34 @@
             width: 100%;
             height: 290px;
             padding: 50px 0;
+
+            .brandListSliderContentItemTitle {
+                font-size: 5.6rem;
+            }
+
+            .brandListSliderContentItemLink {
+                font-size: 5.6rem;
+            }
         }
     }
 }
 
 .brandListSliderContentItemLink {
     opacity: 0;
+    display: flex;
     transition: .2s;
     grid-area: title;
+    align-items: center;
     white-space: nowrap;
+
+    svg {
+        transition: .2s;
+        margin-left: 20px;
+    }
+
+    &:hover {
+        color: var(--t-primary);
+    }
 }
 
 .brandListSliderContentItemTitle {

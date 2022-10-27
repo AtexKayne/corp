@@ -7,12 +7,12 @@ html, body {
     padding: 0;
     width: 100vw;
     height: 100vh;
+    overflow: hidden;
+    scroll-behavior: smooth;
     background-color: color-use(background);
     
-    @include media-breakpoint(md-up) {
-        overflow: hidden;
-        scroll-behavior: smooth;
-    }
+    // @include media-breakpoint(md-up) {
+    // }
 }
 
 /*
