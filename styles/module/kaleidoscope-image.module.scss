@@ -21,7 +21,7 @@
             transition: .4s;
             object-fit: cover;
             animation-timing-function: linear;
-            animation: rotateKaleidoscopeImage 180s infinite;
+            animation: rotateKaleidoscopeImage 240s infinite;
         }
 
         &:nth-child(odd)  span { transform: scale(-1, 1); }

@@ -54,8 +54,8 @@
     background-color: white;
     background-position: center;
     background-repeat: no-repeat;
-    box-shadow: 0px 4px 4px 0px #B1BBC740, -5px 0px 0px -1px var(--c-white);
     background-image: url('/assets/img/icons/icon-left.svg');
+    box-shadow: 0px 4px 4px 0px #B1BBC740, -5px 0px 0px -1px var(--c-white);
 
 }
 
@@ -88,22 +88,21 @@
 
     &[data-active="true"] {
         color: white;
-        padding-right: 50px;
+        padding-right: 60px;
         background-color: var(--t-dark-violet);
 
-        .brandListTagClose { opacity: 1; }
-        .brandListTagClose::after,
-        .brandListTagClose::before {
-            width: 16px;
-            transition-delay: 0;
+        .brandListTagClose {
+            opacity: 1;
+            transform: scale(1);
         }
+
     }
 
     &[data-active="false"]:hover {
         color: var(--t-primary);
         box-shadow: 0px 4px 4px 0px #8712FC26;
     }
-    
+
     &[data-active="true"]:hover {
         transform: scaleY(1.1);
 
@@ -115,28 +114,16 @@
 
 .brandListTagClose {
     top: 0;
-    right: 0;
     bottom: 0;
     opacity: 0;
-    width: 50px;
-    display: flex;
+    right: 20px;
+    width: 24px;
     position: absolute;
-    align-items: center;
-    justify-content: center;
-
-    &::before,
-    &::after {
-        width: 0px;
-        height: 2px;
-        content: '';
-        position: absolute;
-        transition: .3s .3s;
-        transform-origin: top;
-        background-color: white;
-    }
-
-    &::after { transform: rotate(45deg); }
-    &::before { transform: rotate(-45deg) translate(-1px, -1px); }
+    transform: scale(0);
+    background-size: 24px;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-image: url('/assets/img/icons/icon-success.svg');
 }
 
 .brandListSlider {
@@ -182,18 +169,34 @@
     g {
         animation: lightning 2s infinite;
 
-        &:nth-child(1) { animation-delay: 0.0s; }
-        &:nth-child(2) { animation-delay: 0.3s; }
-        &:nth-child(3) { animation-delay: 0.6s; }
+        &:nth-child(1) {
+            animation-delay: 0.0s;
+        }
+
+        &:nth-child(2) {
+            animation-delay: 0.3s;
+        }
+
+        &:nth-child(3) {
+            animation-delay: 0.6s;
+        }
     }
 
 
 }
 
 @keyframes lightning {
-    0% { opacity: 1.0; }
-    50% { opacity: 0.2; }
-    100% { opacity: 1.0; }
+    0% {
+        opacity: 1.0;
+    }
+
+    50% {
+        opacity: 0.2;
+    }
+
+    100% {
+        opacity: 1.0;
+    }
 }
 
 .brandListSliderLine {
@@ -302,7 +305,7 @@
     align-self: center;
     justify-self: center;
 
-    > span {
+    >span {
         min-width: 240px;
         min-height: 240px;
     }
