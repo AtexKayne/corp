@@ -376,3 +376,19 @@
         }
     }
 }
+
+.menu-mobile {
+    top: 0;
+    left: 0;
+    z-index: 4;
+    width: 100vw;
+    height: 100vh;
+    position: fixed;
+    pointer-events: none;
+
+    &__top {
+        display: flex;
+        padding: var(--spacing);
+        justify-content: space-between;
+    }
+}

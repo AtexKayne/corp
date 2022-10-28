@@ -7,11 +7,9 @@ import { useRouter } from 'next/router'
 import Search from "./Search";
 import Image from "next/image";
 import MenuContacts from "./MenuContacts";
-import useDeviceDetect from '../components/helpers/useDeviceDetect'
 // import MenuPreloader from "./MenuPreloader";
 
 export default function MenuTransitor({ theme, preloaderState, setTheme, setContainerWidth, animateContent, className }) {
-    const { isMobile } = useDeviceDetect()
     const router = useRouter()
     const refTheme = useRef(theme)
     const refBurger = useRef(null)
@@ -192,7 +190,7 @@ export default function MenuTransitor({ theme, preloaderState, setTheme, setCont
             isAnimated.current.then(hideTransitor)
             animateContent.start('end')
         }
-        if (!isMobile) setContainerWidth()
+        setContainerWidth()
     }, [leftPosition, breadcrumbs])
 
     // Router change
@@ -227,8 +225,6 @@ export default function MenuTransitor({ theme, preloaderState, setTheme, setCont
             router.events.off('routeChangeError', completeHandler)
         }
     }, [router])
-
-    if (isMobile) return
 
     return (
         <div data-state={menuState} className={`${className} menu-wrapper`}>

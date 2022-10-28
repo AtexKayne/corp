@@ -9,7 +9,6 @@ import useDeviceDetect from '../../components/helpers/useDeviceDetect'
 
 export default function BrandList({ items, tags }) {
     const [sliderActive, setSliderActive] = useState(false)
-    const [scrollHeight, setScrollHeight] = useState(-100)
     const [scrollWidth, setScrollWidth] = useState(-100)
     const [isDragging, setIsDragging] = useState(false)
     const [activeElem, setActiveElem] = useState(false)
@@ -25,8 +24,9 @@ export default function BrandList({ items, tags }) {
     const refCurrentItem = useRef(null)
     const refTagContainer = useRef(null)
     const refSliderContent = useRef(null)
-    const refIsContentScroll = useRef(false)
     const refIsTitleShown = useRef('start')
+    const refStartContentTouch = useRef(false)
+    const refContentCurrentTouch = useRef(0)
     const { isMobile } = useDeviceDetect()
     const animateItemY = useMotionValue(0)
     const animateNav = useAnimationControls()
@@ -59,14 +59,6 @@ export default function BrandList({ items, tags }) {
         setScrollWidth(refTagContainer.current.clientWidth - scrollWidth)
     }
 
-    const setContainerScrollHeight = () => {
-        let scrollHeight = 0
-        const innerElements = Array.from(refSliderContent.current.childNodes)
-        innerElements.forEach(el => scrollHeight += el.offsetHeight + 20)
-        setScrollWidth(refTagContainer.current.clientHeight - scrollHeight)
-        setScrollHeight(scrollHeight)
-    }
-
     const tagClickHandler = (index) => {
         if (isDragging) return
         if (tagActive.includes(index)) {
@@ -81,11 +73,6 @@ export default function BrandList({ items, tags }) {
         setTagScrollWidth()
     }
 
-    const containerStartDragHandler = () => {
-        setActiveElem(false)
-        animateBlock.start({ y: 0, height: '0px', transition: { duration: 1 } })
-    }
-
     const containerEndDragHandler = () => {
         setTimeout(() => {
             const transform = refContent.current.style.transform
@@ -94,15 +81,28 @@ export default function BrandList({ items, tags }) {
         }, 300)
     }
 
-    const containerDragHandler = () => {
-        if (refIsContentScroll.current) return
-        refIsContentScroll.current = true
-        const transform = refContent.current.style.transform
-        const position = +transform.split('translateY(')[1].split('px)')[0]
-        if (position <= -50 && position > -150 && refIsTitleShown.current !== 'next') startAnimateTags()
-        else if (position <= -150 && refIsTitleShown.current !== 'end') endAnimateTags()
-        else if (position > -50 && refIsTitleShown.current !== 'start') showAnimateTags()
-        setTimeout(() => refIsContentScroll.current = false, 100)
+    const containerTouchMoveHandler = event => {
+        const position = refContentCurrentTouch.current + refStartContentTouch.current - event.touches[0].screenY
+        console.log(position)
+        animateItem.start({ y: position, transition: { type: 'tween' } })
+        // if (refIsContentScroll.current) return
+        // refIsContentScroll.current = true
+        // const transform = refContent.current.style.transform
+        // const position = +transform.split('translateY(')[1].split('px)')[0]
+        // if (position <= -50 && position > -150 && refIsTitleShown.current !== 'next') startAnimateTags()
+        // else if (position <= -150 && refIsTitleShown.current !== 'end') endAnimateTags()
+        // else if (position > -50 && refIsTitleShown.current !== 'start') showAnimateTags()
+        // setTimeout(() => refIsContentScroll.current = false, 100)
+    }
+
+    const containerTouchEndHandler = event => {
+        const position = refContentCurrentTouch.current + refStartContentTouch.current - event.changedTouches[0].screenY
+        refContentCurrentTouch.current = position
+    }
+
+    const containerTouchStartHandler = event => {
+        setSliderActive(true)
+        refStartContentTouch.current = event.touches[0].screenY
     }
 
     const startAnimateTags = () => {
@@ -194,7 +194,6 @@ export default function BrandList({ items, tags }) {
         }))
 
         setTagScrollWidth()
-        if (isMobile) setContainerScrollHeight()
     }, [items])
     return (
         <div className={style.brandListWrapper}>
@@ -246,11 +245,13 @@ export default function BrandList({ items, tags }) {
 
                 <div ref={refSliderContent} onWheel={wheelHandler} className={style.brandListSliderContent}>
                     <motion.div
-                        drag={isMobile ? 'y' : 'none'}
-                        onPan={isMobile ? containerDragHandler : null}
-                        onPanStart={isMobile ? containerStartDragHandler : null}
-                        onPanEnd={isMobile ? containerEndDragHandler : null}
-                        dragConstraints={{ top: scrollHeight, bottom: 0 }}
+                        // drag={isMobile ? 'y' : 'none'}
+                        onTouchMove={isMobile ? containerTouchMoveHandler : null}
+                        onTouchStart={isMobile ? containerTouchStartHandler : null}
+                        onTouchEnd={isMobile ? containerTouchEndHandler : null}
+                        // onPanStart={isMobile ? containerStartDragHandler : null}
+                        // onPanEnd={isMobile ? containerEndDragHandler : null}
+                        // dragConstraints={{ top: scrollHeight, bottom: 0 }}
                         animate={animateScroll}
                         ref={refContent}
                         className={style.brandListSliderContentInner}>

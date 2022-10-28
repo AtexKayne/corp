@@ -41,7 +41,7 @@
     grid-area: title;
     position: relative;
     transform-origin: left;
-    padding: calc(var(--spacing) * 3.5) 0 0;
+    padding: 225px 0 0;
 
     @include media-breakpoint(md-up) {
         padding: calc(var(--spacing) / 2) 0;
@@ -405,8 +405,8 @@
 
 .kaleidoscope {
     position: fixed;
-    top: calc(50% - 150px);
-    right: calc(-200px - var(--spacing) * 2);
+    top: calc(-234px + var(--spacing) * 2);
+    right: calc(-153px - var(--spacing) * 2);
 
     @include media-breakpoint (md-up) {
         top: auto;
