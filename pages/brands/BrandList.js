@@ -25,6 +25,7 @@ export default function BrandList({ items, tags }) {
     const refTagContainer = useRef(null)
     const refSliderContent = useRef(null)
     const refIsTitleShown = useRef('start')
+    const refIsContentShown = useRef(true)
     const refStartContentTouch = useRef(false)
     const refContentCurrentTouch = useRef(0)
     const { isMobile } = useDeviceDetect()
@@ -34,6 +35,7 @@ export default function BrandList({ items, tags }) {
     const animateTitle = useAnimationControls()
     const animateBlock = useAnimationControls()
     const animateScroll = useAnimationControls()
+    const animateContent = useAnimationControls()
     const animateTagInner = useAnimationControls()
     const animateTagRemote = useAnimationControls()
     const animateTagsContainer = useAnimationControls()
@@ -41,7 +43,7 @@ export default function BrandList({ items, tags }) {
     const itemHeight = isMobile ? 52 : 70
 
     const clickHandler = (index, isActive) => {
-        if (isActive) return
+        if (isActive || isMobile) return
         setSliderActive(true)
         const position = index * refSlider.current.clientHeight / steps + 10
         animateItem.start({ y: position, transition: { type: 'tween' } })
@@ -83,21 +85,32 @@ export default function BrandList({ items, tags }) {
 
     const containerTouchMoveHandler = event => {
         const position = refContentCurrentTouch.current + refStartContentTouch.current - event.touches[0].screenY
-        console.log(position)
-        animateItem.start({ y: position, transition: { type: 'tween' } })
-        // if (refIsContentScroll.current) return
-        // refIsContentScroll.current = true
-        // const transform = refContent.current.style.transform
-        // const position = +transform.split('translateY(')[1].split('px)')[0]
-        // if (position <= -50 && position > -150 && refIsTitleShown.current !== 'next') startAnimateTags()
-        // else if (position <= -150 && refIsTitleShown.current !== 'end') endAnimateTags()
-        // else if (position > -50 && refIsTitleShown.current !== 'start') showAnimateTags()
-        // setTimeout(() => refIsContentScroll.current = false, 100)
+        if (position > -10 && position + 10 < steps * 65) {
+            animateItem.start({ y: position })
+            if (refIsContentShown.current) {
+                refIsContentShown.current = false
+                animateContent.start({y: -250, transition: {duration: 0.5}})
+            }
+        } 
+
+        if (position <= -1) {
+            if (!refIsContentShown.current) {
+                refIsContentShown.current = true
+                animateContent.start({y: 0, transition: {duration: 0.5}})
+            }
+        }
     }
 
     const containerTouchEndHandler = event => {
         const position = refContentCurrentTouch.current + refStartContentTouch.current - event.changedTouches[0].screenY
-        refContentCurrentTouch.current = position
+        if (position > -10 && position + 10 < steps * 70) {
+            refContentCurrentTouch.current = position
+        } else if (position < 0) {
+            refContentCurrentTouch.current = -1
+        } else if (position + 10 >= steps * 70) {
+            refContentCurrentTouch.current = steps * 70 - 10
+        }
+        
     }
 
     const containerTouchStartHandler = event => {
@@ -107,15 +120,15 @@ export default function BrandList({ items, tags }) {
 
     const startAnimateTags = () => {
         refIsTitleShown.current = 'next'
-        animateNav.start({ y: isMobile ? 0 : -40, transition: { duration: 0.4 } })
-        animateTitle.start({ y: isMobile ? -60 : -40, transition: { duration: 0.4 } })
+        animateNav.start({ y: isMobile ? -50 : -40, transition: { duration: 0.4 } })
+        animateTitle.start({ y: isMobile ? -260 : -40, transition: { duration: 0.4 } })
         animateTagsContainer.start({ y: -80, opacity: 0, pointerEvents: 'none', transition: { duration: 0.4 } })
     }
 
     const endAnimateTags = () => {
         refIsTitleShown.current = 'end'
         animateNav.start({ y: -200, transition: { duration: 0.4 } })
-        animateTitle.start({ y: -200, transition: { duration: 0.4 } })
+        animateTitle.start({ y: isMobile ? -500 : -200, transition: { duration: 0.4 } })
     }
 
     const showAnimateTags = () => {
@@ -147,15 +160,15 @@ export default function BrandList({ items, tags }) {
             if (titlePosition === 'start' || (titlePosition === 'end' && index < 3)) startAnimateTags()
             else if (titlePosition === 'next' && index >= 3) endAnimateTags()
 
-            animateBlock.start({ y: isMobile ? 220 : 260, height: isMobile ? '50vh' : '290px', transition: { duration: 1 } })
+            animateBlock.start({ y: isMobile ? -50 : 260, height: isMobile ? '110vh' : '290px', transition: { duration: 1 } })
 
         } else if (!elements[index] && letter !== 'AZ') {
             refCurrentItem.current = false
             setLetter('AZ')
             showAnimateTags()
             setActiveElem(false)
-            setSliderActive(false)
-            animateBlock.start({ y: 0, height: '0px', transition: { duration: 1 } })
+            if (!isMobile) setSliderActive(false)
+            animateBlock.start({ y: isMobile ? -50 : 0, height: '0px', transition: { duration: 1 } })
         }
     }
 
@@ -243,7 +256,7 @@ export default function BrandList({ items, tags }) {
                     <div className={style.brandListSliderLine}></div>
                 </div>
 
-                <div ref={refSliderContent} onWheel={wheelHandler} className={style.brandListSliderContent}>
+                <motion.div animate={animateContent} ref={refSliderContent} onWheel={wheelHandler} className={style.brandListSliderContent}>
                     <motion.div
                         // drag={isMobile ? 'y' : 'none'}
                         onTouchMove={isMobile ? containerTouchMoveHandler : null}
@@ -278,7 +291,7 @@ export default function BrandList({ items, tags }) {
                                 </div>
                             )) : ''}
                     </motion.div>
-                </div>
+                </motion.div>
             </div>
 
             <div className={style.kaleidoscope}>
