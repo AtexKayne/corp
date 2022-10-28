@@ -11,6 +11,7 @@ import useDeviceDetect from '../components/helpers/useDeviceDetect'
 // import MenuPreloader from "./MenuPreloader";
 
 export default function MenuTransitor({ theme, preloaderState, setTheme, setContainerWidth, animateContent, className }) {
+    const { isMobile } = useDeviceDetect()
     const router = useRouter()
     const refTheme = useRef(theme)
     const refBurger = useRef(null)
@@ -28,7 +29,6 @@ export default function MenuTransitor({ theme, preloaderState, setTheme, setCont
     const [breadcrumbs, setBreadcrumbs] = useState([])
     const [leftPosition, setLeftPosition] = useState('-100vw')
     const [menuState, setMenuState] = useState('close')
-    const { isMobile } = useDeviceDetect()
     const transitors = [
         {
             position: 'right',
@@ -227,6 +227,8 @@ export default function MenuTransitor({ theme, preloaderState, setTheme, setCont
             router.events.off('routeChangeError', completeHandler)
         }
     }, [router])
+
+    if (isMobile) return
 
     return (
         <div data-state={menuState} className={`${className} menu-wrapper`}>

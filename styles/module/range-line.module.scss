@@ -9,6 +9,7 @@
     height: 94px;
     padding: 10px;
     flex-shrink: 0;
+    overflow: hidden;
     position: relative;
     text-align: center;
     border-radius: 50%;
@@ -22,24 +23,41 @@
     left: 0px;
     right: 0px;
     bottom: 0px;
+    display: flex;
     user-select: none;
-    position: absolute;
+    position: relative;
+    align-items: center;
     pointer-events: none;
+    flex-direction: column;
+    justify-content: center;
     transition: .4s ease-out;
-    
-    svg {
-        user-select: none;
-        pointer-events: none;
+
+    > div {
+        position: absolute;
     }
 }
 
 .iconStart {
-    top: -5px;
+    > div:first-child {
+        top: 0;
+    }
+
+    > div:last-child {
+        top: 25px;
+    }
 }
 
 .iconEnd {
-    top: 5px;
+    > div:first-child {
+        top: 10px;
+    }
+
+    > div:last-child {
+        top: 48px;
+    }
 }
+
+
 
 .moveTrack {
     width: 100%;

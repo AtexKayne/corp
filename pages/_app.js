@@ -3,8 +3,10 @@ import MenuTransitor from '../components/MenuTransitor';
 import { useState, useEffect } from 'react';
 import { motion, useAnimationControls } from 'framer-motion'
 import Preloader from '../components/Preloader';
+import useDeviceDetect from '../components/helpers/useDeviceDetect'
 
 function MyApp({ Component, pageProps }) {
+  const { isMobile } = useDeviceDetect()
   const [theme, setTheme] = useState('ui-light')
   const [preloaderState, setPreloaderState] = useState();
   const [contentWidth, setContentWidth] = useState('100%')
@@ -22,7 +24,7 @@ function MyApp({ Component, pageProps }) {
 
   return (
     <>
-      {/* <Preloader animatePreloader={animatePreloader} setPreloaderState={setPrSt}/> */}
+      {isMobile ? null : <Preloader animatePreloader={animatePreloader} setPreloaderState={setPrSt}/>}
       <MenuTransitor animateContent={animateContent} preloaderState={preloaderState} setContainerWidth={setContainerWidth} theme={theme} setTheme={setTheme} className={ theme }/>
       <motion.div 
         initial={{scale: 1, opacity: 1}}
