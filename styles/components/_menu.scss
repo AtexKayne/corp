@@ -288,16 +288,6 @@
     }
 }
 
-@keyframes rotateTransitorImage {
-    from {
-        transform: rotate(0);
-    }
-
-    to {
-        transform: rotate(360deg);
-    }
-}
-
 .animate-container {
     filter: none;
     flex-grow: 0;
@@ -384,11 +374,202 @@
     width: 100vw;
     height: 100vh;
     position: fixed;
+    overflow: hidden;
     pointer-events: none;
 
     &__top {
+        z-index: 5;
         display: flex;
         padding: var(--spacing);
         justify-content: space-between;
+        background-color: color-use(white);
+
+        .icon {
+            pointer-events: all;
+        }
+    }
+
+    &__additional {
+        display: flex;
+        align-items: center;
+
+        >* {
+            margin-right: var(--spacing);
+        }
+    }
+
+    &__mechs {
+        left: 0;
+        right: 0;
+        top: 10vh;
+        bottom: 10vh;
+        display: flex;
+        position: absolute;
+        pointer-events: none;
+        flex-direction: column;
+
+        >* {
+            position: absolute;
+            animation: rotateTransitorImage 60s linear infinite;
+        }
+
+        >*:nth-child(1) {
+            right: -155px;
+        }
+
+        >*:nth-child(2) {
+            right: -100px;
+        }
+
+        >*:nth-child(3) {
+            right: -164px;
+        }
+    }
+
+    &[data-state="close"] {
+        .menu-mobile__top {
+            background-color: transparent;
+        }
+        .menu-mobile__mechs {
+            opacity: 0;
+            pointer-events: none;
+        }
+    }
+
+    // TODO Объединить стили
+    &__nav {
+        left: 0;
+        opacity: 0;
+        width: 100%;
+        height: 100%;
+        display: flex;
+        position: absolute;
+        pointer-events: none;
+        flex-direction: column;
+        padding: var(--spacing);
+        background-color: color-use(white);
+        top: calc(1.5em + var(--spacing) * 2);
+
+        >* {
+            margin-bottom: var(--spacing);
+        }
+    }
+
+    &[data-state="menu"] {
+        .menu-mobile__nav {
+            opacity: 1;
+            pointer-events: all;
+        }
+    }
+
+    &__search {
+        left: 0;
+        opacity: 0;
+        width: 100%;
+        height: 100%;
+        position: absolute;
+        pointer-events: none;
+        padding: var(--spacing);
+        background-color: color-use(white);
+        top: calc(1.5em + var(--spacing) * 2);
+    }
+
+    &[data-state="search"] {
+        .menu-mobile__search {
+            opacity: 1;
+            pointer-events: all;
+        }
+
+        .menu-mobile__mechs {
+            transform: translateX(100vw);
+        }
+    }
+
+    &__lang {
+        left: 0;
+        opacity: 0;
+        width: 100%;
+        height: 100%;
+        display: flex;
+        position: absolute;
+        pointer-events: none;
+        flex-direction: column;
+        padding: var(--spacing);
+        background-color: color-use(white);
+        top: calc(1.1em + var(--spacing) * 1);
+
+        >* {
+            margin-bottom: calc(var(--spacing) * 2);
+        }
+    }
+
+    &[data-state="lang"] {
+        .menu-mobile__lang {
+            opacity: 1;
+            pointer-events: all;
+        }
+    }
+
+    &__phone {
+        left: 0;
+        opacity: 0;
+        width: 100%;
+        height: 100%;
+        position: absolute;
+        pointer-events: none;
+        padding: var(--spacing);
+        background-color: color-use(white);
+        top: calc(1.1em + var(--spacing) * 1);
+    }
+
+    &[data-state="phone"] {
+        .menu-mobile__phone {
+            opacity: 1;
+            pointer-events: all;
+        }
+    }
+
+    &__transitor {
+        top: 0;
+        left: 0;
+        z-index: 4;
+        width: 100vw;
+        height: 100vh;
+        position: absolute;
+        background-color: color-use(white);
+        border-top: 0px solid color-use(tetriary);
+    }
+
+    &__footer {
+        left: 0;
+        right: 0;
+        bottom: 0;
+        z-index: 5;
+        position: absolute;
+        background-color: color-use(white);
+    
+    
+        &__nav {
+            display: flex;
+            align-items: center;
+            padding: var(--spacing);
+            justify-content: space-between;
+            border-top: 1px solid color-use(light-gray);
+
+            >div * {
+                margin-left: var(--spacing);
+            }
+        }
+    }
+}
+
+
+@keyframes rotateTransitorImage {
+    from {
+        transform: rotate(0);
+    }
+
+    to {
+        transform: rotate(360deg);
     }
 }

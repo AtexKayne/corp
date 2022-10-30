@@ -54,7 +54,7 @@ function Line({ department = {} }) {
 export default function ContactsDepartments({ departments }) {
     return (
         <section data-scroll-section>
-            {departments && departments.items
+            {departments && departments.items && departments.items.length
                 ? departments.items.map(department => (
                     <Line key={department.name} department={department} />
                 )) : ''}

@@ -4,10 +4,10 @@
         display: flex;
         transition: .3s;
         position: relative;
-        align-items: center;
         margin-bottom: 20px;
         color: color-use(text);
-
+        flex-direction: column;
+        
         &__sub {
             top: 0;
             position: absolute;
@@ -27,6 +27,20 @@
             * {
                 margin-top: 0;
             }
+        }
+    }
+
+    @include media-breakpoint(sm-down) {
+        svg {
+            color: color-use(primary);
+            margin-top: calc(var(--spacing) / 2);
+        }
+    }
+
+    @include media-breakpoint(md-up) {
+        &__item {
+            flex-direction: row;
+            align-items: center;
         }
     }
 }

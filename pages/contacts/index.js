@@ -23,9 +23,8 @@ export default function Brand({ setTheme, detail }) {
 export async function getServerSideProps({ req }) {
     let resp, json
     try {
-        // resp = await fetch(`${process.env.API_URL}/mainxczxc`)
-        // json = await resp.json()
-        json = contacts
+        resp = await fetch(`${process.env.API_URL}/contacts/?lang=ru`)
+        json = await resp.json()
     } catch (error) {
         json = contacts
     }

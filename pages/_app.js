@@ -5,6 +5,7 @@ import { motion, useAnimationControls } from 'framer-motion'
 import Preloader from '../components/Preloader';
 import useDeviceDetect from '../components/helpers/useDeviceDetect'
 import MobileMenuTransitor from '../components/MobileMenuTransior';
+import MobilePreloader from '../components/MobilePreloader';
 
 function MyApp({ Component, pageProps }) {
   const { isMobile } = useDeviceDetect()
@@ -25,7 +26,9 @@ function MyApp({ Component, pageProps }) {
 
   return (
     <>
-      {isMobile ? null : <Preloader animatePreloader={animatePreloader} setPreloaderState={setPrSt}/>}
+      {isMobile
+        ? <MobilePreloader animatePreloader={animatePreloader} setPreloaderState={setPrSt}/>
+        : <Preloader animatePreloader={animatePreloader} setPreloaderState={setPrSt}/>}
       {isMobile
         ? <MobileMenuTransitor animateContent={animateContent} theme={theme} setTheme={setTheme} className={ theme } />
         : <MenuTransitor animateContent={animateContent} preloaderState={preloaderState} setContainerWidth={setContainerWidth} theme={theme} setTheme={setTheme} className={ theme }/>

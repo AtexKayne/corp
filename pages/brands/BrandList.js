@@ -55,7 +55,7 @@ export default function BrandList({ items, tags }) {
     }
 
     const setTagScrollWidth = () => {
-        let scrollWidth = 0
+        let scrollWidth = isMobile ? -20 : 0
         const innerElements = Array.from(refTagInner.current.childNodes)
         innerElements.forEach(el => scrollWidth += el.offsetWidth + 20)
         setScrollWidth(refTagContainer.current.clientWidth - scrollWidth)
@@ -73,14 +73,6 @@ export default function BrandList({ items, tags }) {
         }
 
         setTagScrollWidth()
-    }
-
-    const containerEndDragHandler = () => {
-        setTimeout(() => {
-            const transform = refContent.current.style.transform
-            const position = +transform.split('translateY(')[1].split('px)')[0]
-            if (position <= -50 && position > -150 && refIsTitleShown.current !== 'next') startAnimateTags()
-        }, 300)
     }
 
     const containerTouchMoveHandler = event => {
@@ -205,8 +197,7 @@ export default function BrandList({ items, tags }) {
             if (xName > yName) { return 1 }
             return 0
         }))
-
-        setTagScrollWidth()
+        setTimeout(setTagScrollWidth, 500)
     }, [items])
     return (
         <div className={style.brandListWrapper}>
