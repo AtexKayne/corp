@@ -1,4 +1,5 @@
-import {useRef} from 'react';
+import Image from 'next/image';
+import {useRef, useEffect} from 'react';
 import style from '../styles/module/main-slider.module.scss'
 import Loading from './Loading';
 
@@ -22,20 +23,30 @@ export default function MainSlider({slides}) {
         }
     }
 
+    useEffect(() => {
+        const item = refSlider.current.querySelectorAll(style.paginationItems)[0]
+        if (item) item.click()
+        refProgress.current.style.width = `calc(${(100 / slides.length)}% - 5px)`
+    }, [slides]);
+
     if (!slides) {
         return (
             <Loading />
         )
     }
     return (
-        <div className={style.slider}>
+        <div data-slides={slides.length} className={style.slider}>
             <div ref={refSlider} className={style.slides}>
                 {slides.map((slide, index) => (
                     <div 
                         className={`${style.sliderItem} text--c2`} 
-                        key={slide.id}
+                        key={slide.text[0]}
                         data-active={!index ? 'active' : 'false'}>
                         <div>{slide.text[0]}</div>
+                        {slide.image
+                            ? <Image src={slide.image} width='150' height='150' alt='director'/>
+                            : ''
+                        }
                         <div>{slide.text[1]}</div>
                     </div>
                 ))}
@@ -46,7 +57,7 @@ export default function MainSlider({slides}) {
                         <div 
                             data-active={!index ? 'active' : 'false'} 
                             data-link={index} 
-                            key={slide.id} 
+                            key={slide.text[0]} 
                             className={style.paginationItem}>
                         </div>
                     ))}

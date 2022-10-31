@@ -4,7 +4,7 @@ import { motion, useAnimation, useMotionValue, useTransform } from 'framer-motio
 import Image from 'next/image';
 
 
-export default function RangeLine() {
+export default function RangeLine({setCurrentSlides, slides}) {
     const [position, setPosition] = useState('start')
     const x = useMotionValue(0)
     const scaleA = useTransform(x, [50, 210], [1, 0])
@@ -19,9 +19,11 @@ export default function RangeLine() {
         if (x.current >= 130) {
             animation.start({ x: 260 })
             setPosition('end')
+            setCurrentSlides(slides.stateTwo)
         } else {
             animation.start({ x: 0 })
             setPosition('start')
+            setCurrentSlides(slides.stateOne)
         }
     }
 

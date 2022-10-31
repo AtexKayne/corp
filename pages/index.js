@@ -7,17 +7,18 @@ import RangeLine from '../components/RangeLine'
 import { mainItems, brandItems } from '../components/helpers/constants'
 import useDeviceDetect from '../components/helpers/useDeviceDetect'
 import KaleidoscopeImage from '../components/KaleidoscopeImage'
+import { useState } from 'react'
 
-export default function Home({ slides, items }) {
+export default function Home({ slides = {}, items }) {
   const { isMobile } = useDeviceDetect()
-
+  const [ currentSlides, setCurrentSlides ] = useState(slides.stateOne)
 
   return (
     <MainLayout className='ui-light container--flex'>
       <div style={isMobile ? { height: '100%', paddingTop: '300px' } : { paddingTop: '0px' }} className='col col--between'>
         <Title image='/assets/img/textlogo.svg' hover='Расскажем, кто мы' />
-        <MainSlider slides={slides} />
-        <RangeLine />
+        <MainSlider slides={currentSlides} />
+        <RangeLine setCurrentSlides={setCurrentSlides} slides={slides} />
       </div>
 
       {
