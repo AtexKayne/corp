@@ -15,6 +15,7 @@ export default function BrandList({ items, tags }) {
     const [tagActive, setTagActive] = useState([])
     const [elements, setElements] = useState(items)
     const [letter, setLetter] = useState('AZ')
+    const [blur, setBlur] = useState(false)
 
     const steps = items ? items.length : 1
     const refSlider = useRef(null)
@@ -43,7 +44,7 @@ export default function BrandList({ items, tags }) {
     const itemHeight = isMobile ? 52 : 70
 
     const clickHandler = (index, isActive) => {
-        if (isActive || isMobile) return
+        if (isActive) return
         setSliderActive(true)
         const position = index * refSlider.current.clientHeight / steps + 10
         animateItem.start({ y: position, transition: { type: 'tween' } })
@@ -89,6 +90,7 @@ export default function BrandList({ items, tags }) {
             if (!refIsContentShown.current) {
                 refIsContentShown.current = true
                 animateContent.start({y: 0, transition: {duration: 0.5}})
+                setBlur(false)
             }
         }
     }
@@ -107,6 +109,7 @@ export default function BrandList({ items, tags }) {
 
     const containerTouchStartHandler = event => {
         setSliderActive(true)
+        setBlur(true)
         refStartContentTouch.current = event.touches[0].screenY
     }
 
@@ -249,13 +252,9 @@ export default function BrandList({ items, tags }) {
 
                 <motion.div animate={animateContent} ref={refSliderContent} onWheel={wheelHandler} className={style.brandListSliderContent}>
                     <motion.div
-                        // drag={isMobile ? 'y' : 'none'}
                         onTouchMove={isMobile ? containerTouchMoveHandler : null}
                         onTouchStart={isMobile ? containerTouchStartHandler : null}
                         onTouchEnd={isMobile ? containerTouchEndHandler : null}
-                        // onPanStart={isMobile ? containerStartDragHandler : null}
-                        // onPanEnd={isMobile ? containerEndDragHandler : null}
-                        // dragConstraints={{ top: scrollHeight, bottom: 0 }}
                         animate={animateScroll}
                         ref={refContent}
                         className={style.brandListSliderContentInner}>
@@ -285,7 +284,7 @@ export default function BrandList({ items, tags }) {
                 </motion.div>
             </div>
 
-            <div className={style.kaleidoscope}>
+            <div className={style.kaleidoscope} data-blur={blur}>
                 <KaleidoscopeImage height={kaleidoscopeHeight} />
             </div>
         </div>

@@ -249,12 +249,6 @@
     max-height: 100%;
     position: relative;
     grid-area: content;
-    // overflow: hidden scroll;
-    // max-height: calc(100vh - 200px - var(--spacing) * 3.5 - 3rem);
-
-    // @include media-breakpoint(md-up) {
-    //     overflow: auto;
-    // }
 }
 
 .brandListSliderContentInner {
@@ -293,16 +287,20 @@
         width: 100%;
         height: 50vh;
         padding: 50px 0;
+        transition-delay: 1.2s;
 
         .brandListSliderContentItemTitle {
             opacity: 0;
             font-size: 3.6rem;
             pointer-events: none;
+            color: var(--t-primary);
+            transition: 0s opacity 1.2s, 0s font-size 1.2s;
         }
 
         .brandListSliderContentItemImage {
             opacity: 1;
-            transition: .2s .5s;
+            transition: .2s;
+            transition-delay: 1.2s;
         }
 
         .brandListSliderContentItemText {
@@ -313,7 +311,7 @@
         .brandListSliderContentItemLink {
             opacity: 1;
             font-size: 3.6rem;
-            white-space: nowrap;
+            transition-delay: 1.2s;
         }
     }
 
@@ -329,13 +327,22 @@
             width: 100%;
             height: 290px;
             padding: 50px 0;
+            transition-delay: 0s;
+
+            .brandListSliderContentItemImage {
+                opacity: 1;
+                transition: .2s;
+                transition-delay: .5s;
+            }
 
             .brandListSliderContentItemTitle {
                 font-size: 5.6rem;
+                transition-delay: 0s;
             }
 
             .brandListSliderContentItemLink {
                 font-size: 5.6rem;
+                transition-delay: 0s;
             }
         }
     }
@@ -412,13 +419,21 @@
         top: auto;
         bottom: -450px;
     }
+
+    &[data-blur="true"] {
+        filter: blur(4px);
+    }
 }
 
 .filterBlock {
     z-index: 1;
     width: 100%;
-    opacity: 0.9;
+    opacity: 0.1;
     position: fixed;
     pointer-events: none;
     background-color: var(--c-white);
+
+    @include media-breakpoint(md-up) {
+        opacity: 0.9;
+    }
 }

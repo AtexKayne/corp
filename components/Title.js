@@ -3,23 +3,7 @@ import { motion } from 'framer-motion';
 
 export default function Title({image, text, hover}) {
     return (
-        <motion.div 
-            initial='hidden'
-            animate='visible'
-            className='title c-hover'
-            variants={{
-                hidden: {
-                    scale: .8,
-                    opacity: 0
-                },
-                visible: {
-                    scale: 1,
-                    opacity: 1,
-                    transition: {
-                        delay: .3
-                    }
-                }
-            }}>
+        <motion.div className='title c-hover'>
             <div className='title__text'>
                 {image
                     ? ( <>

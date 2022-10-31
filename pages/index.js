@@ -15,7 +15,7 @@ export default function Home({ slides = {}, items }) {
 
   return (
     <MainLayout className='ui-light container--flex'>
-      <div style={isMobile ? { height: '100%', paddingTop: '300px' } : { paddingTop: '0px' }} className='col col--between'>
+      <div style={isMobile ? { height: '100%', paddingTop: '250px' } : { paddingTop: '0px' }} className='col col--between'>
         <Title image='/assets/img/textlogo.svg' hover='Расскажем, кто мы' />
         <MainSlider slides={currentSlides} />
         <RangeLine setCurrentSlides={setCurrentSlides} slides={slides} />
