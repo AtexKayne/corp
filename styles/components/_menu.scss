@@ -372,10 +372,11 @@
     left: 0;
     z-index: 4;
     width: 100vw;
-    height: 100vh;
     position: fixed;
     overflow: hidden;
+    min-height: 100vh;
     pointer-events: none;
+    min-height: -webkit-fill-available;
 
     &__top {
         z-index: 5;
