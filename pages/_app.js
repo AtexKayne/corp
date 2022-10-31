@@ -4,8 +4,8 @@ import { useState, useEffect } from 'react';
 import { motion, useAnimationControls } from 'framer-motion'
 import Preloader from '../components/Preloader';
 import useDeviceDetect from '../components/helpers/useDeviceDetect'
-import MobileMenuTransitor from '../components/MobileMenuTransior';
-import MobilePreloader from '../components/MobilePreloader';
+import MobileMenuTransitor from '../components/MobileMenuTransior'
+import MobilePreloader from '../components/MobilePreloader'
 
 function MyApp({ Component, pageProps }) {
   const { isMobile } = useDeviceDetect()

@@ -387,6 +387,10 @@
         .icon {
             pointer-events: all;
         }
+
+        .icon--menu {
+            pointer-events: all!important;
+        }
     }
 
     &__additional {
@@ -428,6 +432,10 @@
     }
 
     &[data-state="close"] {
+        .icon {
+            pointer-events: none;
+        }
+
         .menu-mobile__top {
             background-color: transparent;
         }
@@ -574,7 +582,7 @@
 .mobile-bread {
     display: flex;
     flex-direction: column-reverse;
-    
+
     &__line {
         width: 100%;
         border-top: 1px solid color-use(light-gray);

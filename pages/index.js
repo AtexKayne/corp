@@ -5,18 +5,27 @@ import Title from '../components/Title'
 import Cloud from '../components/Cloud'
 import RangeLine from '../components/RangeLine'
 import { mainItems, brandItems } from '../components/helpers/constants'
+import useDeviceDetect from '../components/helpers/useDeviceDetect'
+import KaleidoscopeImage from '../components/KaleidoscopeImage'
 
 export default function Home({ slides, items }) {
+  const { isMobile } = useDeviceDetect()
+
+
   return (
     <MainLayout className='ui-light container--flex'>
-        <div className='col col--between'>
-          <Title image='/assets/img/textlogo.svg' hover='Расскажем, кто мы' />
-          <MainSlider slides={slides} />
-          <RangeLine />
-        </div>
-        <div className='col col--center'>
-          <KaleidoscopeElem isMain={true} />
-        </div>
+      <div style={isMobile ? { height: '100%', paddingTop: '300px' } : { paddingTop: '0px' }} className='col col--between'>
+        <Title image='/assets/img/textlogo.svg' hover='Расскажем, кто мы' />
+        <MainSlider slides={slides} />
+        <RangeLine />
+      </div>
+
+      {
+        isMobile
+          ? <div style={{ position: 'fixed', top: '-250px', left: '-250px', pointerEvents: 'none' }}><KaleidoscopeImage height={519} /></div>
+          : <div className='col col--center'><KaleidoscopeElem isMain={true} /></div>
+      }
+
 
       {/* <>
           <div className='col col--between'>

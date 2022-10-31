@@ -65,20 +65,20 @@
     &::after {
         left: 0;
         right: 30%;
-        transform: translateY(11px);
+        transform: translateY(0);
     }
 
     &::before {
         right: 0;
         left: 70%;
-        transform: translateY(10px);
+        transform: translateY(-1px);
     }
 
     input {
         border: 0;
         width: 100%;
         outline: none;
-        padding: 10px 0;
+        padding: 10px 0 0;
         background-color: color-use(background);
     }
 
@@ -93,5 +93,19 @@
     &[data-focus="true"] span {
         @extend %text--size-p3;
         transform: translateY(0);
+    }
+
+    @include media-breakpoint(md-up) {
+        &::after {
+            transform: translateY(11px);
+        }
+    
+        &::before {
+            transform: translateY(10px);
+        }
+
+        input {
+            padding: 10px 0;
+        }
     }
 }

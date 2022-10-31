@@ -35,7 +35,7 @@ export default function MenuContacts() {
                     </svg>
                 </a>
 
-                <a href='mail:info@simrussia.ru' className='search__item search__item--single c-hover my-1'>
+                <a href='mail:info@simrussia.ru' className='search__item search__item--single c-hover my-2.5 my-1:md-up'>
                     <div className='search__item__main text--t1'>info@simrussia.ru</div>
                     <svg width='61' height='16' viewBox='0 0 61 16' fill='none' >
                         <line y1='10' x2='30' y2='10' stroke='currentColor' strokeWidth='2' />
@@ -44,7 +44,7 @@ export default function MenuContacts() {
                     </svg>
                 </a>
 
-                <A text='Все контакты' href='/contacts' externalClass='mt-0.5 text--t2 link link--underline'/>
+                <A text='Все контакты' href='/contacts' externalClass='mt-2 mt-0.5:md-up text--t2 link link--underline'/>
             </div>
         </div>
     )

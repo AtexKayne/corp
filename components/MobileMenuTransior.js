@@ -7,6 +7,7 @@ import { menuItems } from './helpers/constants'
 import Search from "./Search"
 import MenuContacts from "./MenuContacts"
 
+// TODO Реорганизовать меню в отдельные папки
 export default function MobileMenuTransitor({ className }) {
     const [menuState, setMenuState] = useState('close')
     const [breadcrumbs, setBreadcrumbs] = useState([])
