@@ -9,8 +9,8 @@ html, body {
     height: 100vh;
     overflow: hidden;
     scroll-behavior: smooth;
+    min-height: -webkit-fill-available;
     background-color: color-use(background);
-    
     // @include media-breakpoint(md-up) {
     // }
 }
