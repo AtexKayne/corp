@@ -419,6 +419,7 @@
 
         >*:nth-child(2) {
             right: -100px;
+            animation-direction: alternate;
         }
 
         >*:nth-child(3) {
@@ -545,7 +546,9 @@
         right: 0;
         bottom: 0;
         z-index: 5;
+        display: flex;
         position: absolute;
+        flex-direction: column-reverse;
         background-color: color-use(white);
     
     
@@ -561,8 +564,23 @@
             }
         }
     }
+
+    .active {
+        pointer-events: none;
+        color: color-use(tetriary);
+    }
 }
 
+.mobile-bread {
+    display: flex;
+    flex-direction: column-reverse;
+    
+    &__line {
+        width: 100%;
+        border-top: 1px solid color-use(light-gray);
+        padding: calc(var(--spacing) / 2) var(--spacing);
+    }
+}
 
 @keyframes rotateTransitorImage {
     from {

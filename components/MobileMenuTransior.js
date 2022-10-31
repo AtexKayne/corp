@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react"
+import { useState, useEffect, useRef } from "react"
 import { motion, useAnimationControls } from 'framer-motion'
 import { useRouter } from 'next/router'
 import Image from "next/image"
@@ -13,94 +13,113 @@ export default function MobileMenuTransitor({ className }) {
     const animateTransitor = useAnimationControls()
     const animateFooter = useAnimationControls()
     const router = useRouter()
+    const isAnimated = useRef(false)
 
-    // useEffect(() => {
-    //     if (!isAnimated.current) {
-    //         breadcrumbsSetting()
-    //         setTimeout(hideTransitor, 100)
-    //     }
+    useEffect(() => {
+        if (!isAnimated.current) {
+            breadcrumbsSetting()
+        }
 
-    //     const startHandler = (url) => {
-    //         if (url !== router.asPath) {
-    //             setTheme('ui-light')
-    //             refTheme.current = 'ui-light'
-    //             animateContent.start('start')
-    //             isAnimated.current = showTransitor()
-    //         }
-    //     }
-    //     const completeHandler = (url) => {
-    //         if (url === router.asPath && isAnimated.current) {
-    //             breadcrumbsSetting(url)
-    //             // isAnimated.current.then(hideTransitor)
-    //         }
-    //     }
+        const startHandler = (url) => {
+            if (url !== router.asPath) {
+                isAnimated.current = animateTransitor.start({
+                    y: '0vh', borderWidth: [0, 15, 0],
+                    transitionTimingFunction: 'ease',
+                    transition: { duration: 1 }
+                })
+            }
+        }
 
-    //     router.events.on('routeChangeStart', startHandler)
-    //     router.events.on('routeChangeComplete', completeHandler)
-    //     router.events.on('routeChangeError', completeHandler)
+        const completeHandler = (url) => {
+            if (url === router.asPath && isAnimated.current) {
+                isAnimated.current.then(() => {
+                    setMenuState('close')
+                    animateFooter.start({ y: 301, transition: { duration: 0.5 } }).then(breadcrumbsSetting)
+                    isAnimated.current = animateTransitor.start({
+                        y: '100vh', borderWidth: [0, 15, 0],
+                        transitionTimingFunction: 'ease',
+                        transition: { duration: 1 }
+                    })
+                })
+            }
+        }
 
-    //     return () => {
-    //         router.events.off('routeChangeStart', startHandler)
-    //         router.events.off('routeChangeComplete', completeHandler)
-    //         router.events.off('routeChangeError', completeHandler)
-    //     }
-    // }, [router])
+        router.events.on('routeChangeStart', startHandler)
+        router.events.on('routeChangeComplete', completeHandler)
+        router.events.on('routeChangeError', completeHandler)
+
+        return () => {
+            router.events.off('routeChangeStart', startHandler)
+            router.events.off('routeChangeComplete', completeHandler)
+            router.events.off('routeChangeError', completeHandler)
+        }
+    }, [router])
 
 
-    const breadcrumbsSetting = (url = router.asPath) => {
-        const linkPath = url.split('/')
-        linkPath.shift()
-        const pathArray = linkPath.map((path, i) => {
-            return { breadcrumb: path, href: '/' + linkPath.slice(0, i + 1).join('/') }
-        })
-        setBreadcrumbs(pathArray)
+    const breadcrumbsSetting = () => {
+        const url = router.asPath
+        const linkPath = url.split('/').filter(link => !!link)
+        if (linkPath.length) {
+            const pathArray = linkPath.map((path, i) => {
+                return { breadcrumb: path, href: '/' + linkPath.slice(0, i + 1).join('/') }
+            })
+            setBreadcrumbs(pathArray)
+        } else {
+            setBreadcrumbs([])
+        }
+    }
+
+    const clickNavHandler = async (event) => {
+        if (event.target.tagName.toUpperCase() !== 'A') return
+        await animateTransitor.start({ y: '0vh', borderWidth: [0, 15, 0], transitionTimingFunction: 'ease', transition: { duration: 1 } })
+        setMenuState('close')
     }
 
     const menuClickHandler = async () => {
         if (menuState !== 'menu') {
             await animateFooter.start({ y: 0, transition: { duration: 0.5 } })
-            await animateTransitor.start({ y: '0vh', borderWidth: [1, 15, 1], transitionTimingFunction: 'ease', transition: { duration: 1 } })
+            await animateTransitor.start({ y: '0vh', borderWidth: [0, 15, 0], transitionTimingFunction: 'ease', transition: { duration: 1 } })
             setMenuState('menu')
-            animateTransitor.start({ y: '100vh', borderWidth: [1, 15, 1], transitionTimingFunction: 'ease', transition: { duration: 1 } })
+            animateTransitor.start({ y: '100vh', borderWidth: [0, 15, 0], transitionTimingFunction: 'ease', transition: { duration: 1 } })
         } else {
             await animateTransitor.start({
-                y: '0vh', borderWidth: [1, 15, 1],
+                y: '0vh', borderWidth: [0, 15, 0],
                 transitionTimingFunction: 'ease',
                 transition: { duration: 1 }
             })
             setMenuState('close')
             await animateTransitor.start({
-                y: '100vh', borderWidth: [1, 15, 1],
+                y: '100vh', borderWidth: [0, 15, 0],
                 transitionTimingFunction: 'ease',
                 transition: { duration: 1 }
             })
-            animateFooter.start({ y: 150, transition: { duration: 0.5 } })
+            animateFooter.start({ y: 301, transition: { duration: 0.5 } })
         }
     }
 
     const additionClickHandler = async type => {
         if (type !== menuState) {
             await animateTransitor.start({
-                y: '0vh', borderWidth: [1, 15, 1],
+                y: '0vh', borderWidth: [0, 15, 0],
                 transitionTimingFunction: 'ease',
                 transition: { duration: 1 }
             })
             setMenuState(type)
             animateTransitor.start({
-                y: '100vh', borderWidth: [1, 15, 1],
+                y: '100vh', borderWidth: [0, 15, 0],
                 transition: { duration: 1, type: 'tween' }
             })
         } else {
             await animateTransitor.start({
-                y: '0vh', borderWidth: [1, 15, 1],
+                y: '0vh', borderWidth: [0, 15, 0],
                 transition: { duration: 1, type: 'tween' }
             })
             setMenuState('close')
             await animateTransitor.start({
-                y: '100vh', borderWidth: [1, 15, 1],
+                y: '100vh', borderWidth: [0, 15, 0],
                 transition: { duration: 1, type: 'tween' }
             })
-            animateFooter.start({ y: 150, transition: { duration: 0.5 } })
+            animateFooter.start({ y: 301, transition: { duration: 0.5 } })
         }
     }
 
@@ -116,7 +135,7 @@ export default function MobileMenuTransitor({ className }) {
                 <div onClick={menuClickHandler} className={`icon ${menuState !== 'menu' ? 'icon--menu' : 'icon--close'} c-hover`} />
             </div>
 
-            <nav className='menu-mobile__nav'>
+            <nav onClick={clickNavHandler} className='menu-mobile__nav'>
                 {menuItems.map(item => <A key={item.text} externalClass={`${router.asPath === item.link ? 'active' : ''} text--t1`} href={item.link} text={item.text} />)}
             </nav>
 
@@ -141,7 +160,7 @@ export default function MobileMenuTransitor({ className }) {
                 <Image src='/assets/img/transitor-mobile-bottom.svg' width='164' height='164' alt='simrussia logo' />
             </div>
 
-            <motion.div animate={animateFooter} initial={{ y: 150 }} className='menu-mobile__footer'>
+            <motion.div animate={animateFooter} initial={{ y: 301 }} className='menu-mobile__footer'>
                 <div className='menu-mobile__footer__nav'>
                     <Image src='/assets/img/logo-mobile.svg' width='152' height='31' alt='simrussia logo' />
 
