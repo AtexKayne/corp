@@ -41,10 +41,10 @@ function Line({ department = {} }) {
                     <rect width='100%' height='40' transform='translate(-15, -12)' fill='url(#a)' />
                 </motion.svg>
             </motion.div>
-            <motion.span animate={animateTextB} className='text--t1'>
+            <motion.span animate={animateTextB} className='text--c4'>
                 <a href={`tel:${department.phone}`} className='c-hover'>{department.phone}</a>
             </motion.span>
-            <motion.span animate={animateTextC} className='text--t1 text--transparent'>
+            <motion.span animate={animateTextC} className='text--c4 text--transparent'>
                 <a href={`mail:${department.mail}`} className='c-hover'>{department.mail}</a>
             </motion.span>
         </div>
