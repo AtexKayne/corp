@@ -29,8 +29,8 @@ function Line({ department = {} }) {
     }, [isInView])
 
     return (
-        <div ref={refLine} className={`${style.line} mb-1.5`}>
-            <motion.div animate={animateTextA} className='text--h4 mb-1'>{department.name}</motion.div>
+        <div ref={refLine} className={`${style.line} mb-2.5 mb-1.5:md-up`}>
+            <motion.div animate={animateTextA} className='text--h4'>{department.name}</motion.div>
             <motion.div animate={animateCube} className={style.lineImage}>
                 <motion.svg animate={animateLine} id='patternId' width='100%' height='100%'>
                     <defs>
@@ -54,6 +54,7 @@ function Line({ department = {} }) {
 export default function ContactsDepartments({ departments }) {
     return (
         <section data-scroll-section>
+            <h2 className='text--h2 pt-5 pt-1:md-up pb-3.5 pb-1:md-up'>{departments.title}</h2>
             {departments && departments.items && departments.items.length
                 ? departments.items.map(department => (
                     <Line key={department.name} department={department} />

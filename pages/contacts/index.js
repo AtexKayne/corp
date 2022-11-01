@@ -25,6 +25,7 @@ export async function getServerSideProps({ req }) {
     try {
         resp = await fetch(`${process.env.API_URL}/contacts/?lang=ru`)
         json = await resp.json()
+        json = contacts
     } catch (error) {
         json = contacts
     }
