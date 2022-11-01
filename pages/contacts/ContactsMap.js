@@ -43,9 +43,9 @@ export default function ContactsMap({ adress = {} }) {
                         ? (
                             <div className={isMobile ? 'd-flex flex--column-reverse' : 'pt-1'}>
                                 <div>
-                                    <div className='text--h2 pb-2 pb-0.5:md-up'>{adress.city}</div>
+                                    <div className='text--h2 pb-2 pb-0.5:md'>{adress.city}</div>
 
-                                    <div className={`${style.adressInfo} mb-2 mb-0.5:md-up`}>
+                                    <div className={`${style.adressInfo} mb-2 mb-0.5:md`}>
                                         <div className={style.metro}>
                                             <Image src='/assets/img/icons/icon-metro.svg' width='30' height='30' alt='metro' />
                                             <div className='text--t2'>{adress.metro}</div>
@@ -54,7 +54,7 @@ export default function ContactsMap({ adress = {} }) {
                                         <div className='text--t2'>{adress.house}</div>
                                     </div>
 
-                                    <div className={`${style.links} pb-3.5 pb-2:md-up`}>
+                                    <div className={`${style.links} pb-3.5 pb-2:md`}>
                                         {adress.maps
                                             ? adress.maps.map(link => (
                                                 <a
@@ -68,10 +68,10 @@ export default function ContactsMap({ adress = {} }) {
                                             )) : ''}
                                     </div>
                                 </div>
-                                <div className='pt-2 pt-0:md-up'>
-                                    <div className='text--h2 pb-2.5 pb-1:md-up'>{adress.social.title}</div>
+                                <div className='pt-2 pt-0:md'>
+                                    <div className='text--h2 pb-2.5 pb-1:md'>{adress.social.title}</div>
 
-                                    <div className={`${style.links} mb-2 mb-1:md-up`}>
+                                    <div className={`${style.links} mb-2 mb-1:md`}>
                                         {adress.social.icons
                                             ? adress.social.icons.map(link => (
                                                 <a
@@ -85,7 +85,7 @@ export default function ContactsMap({ adress = {} }) {
                                             )) : ''}
                                     </div>
 
-                                    <div className={`${style.links} pb-4 pb-0.5:md-up`}>
+                                    <div className={`${style.links} pb-4 pb-0.5:md`}>
                                         <div className='text--t2'>{adress.bots.title}</div>
                                         {adress.bots.icons
                                             ? adress.bots.icons.map(link => (
@@ -104,7 +104,7 @@ export default function ContactsMap({ adress = {} }) {
                         ) : ''}
                 </div>
                 <div className={isMobile ? '' : 'col col--70'}>
-                    <div className='pt-2 pt-1:md-up pl-1:md-up p-relative'>
+                    <div className='pt-2 pt-1:md pl-1:md p-relative'>
                         <div data-scroll data-scroll-sticky data-scroll-target='#map' className={style.map}>
                             <div data-active={mapItemActive} className={style.mapNav}>
                                 <div className='c-hover' onClick={zoomIn}><span style={{height: '3.1rem'}}>+</span></div>

@@ -23,7 +23,7 @@ export default function Search() {
                 </label>
             </form>
 
-            <div className='search__results pt-1:md-up pt-3.5'>
+            <div className='search__results pt-1:md pt-3.5'>
                 <div className='search__item c-hover mt-0.5'>
                     <div className='search__item__sub text--p3'>Бренды</div>
                     <div className='search__item__main text--t1'>Reuzel</div>
