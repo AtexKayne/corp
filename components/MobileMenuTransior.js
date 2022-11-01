@@ -36,6 +36,7 @@ export default function MobileMenuTransitor({ className }) {
             if (url === router.asPath && isAnimated.current) {
                 isAnimated.current.then(() => {
                     setMenuState('close')
+                    animateBread.start({ y: 301, transition: { duration: 0.5 } })
                     animateFooter.start({ y: 301, transition: { duration: 0.5 } }).then(breadcrumbsSetting)
                     isAnimated.current = animateTransitor.start({
                         y: '100vh', borderWidth: [0, 15, 0],
