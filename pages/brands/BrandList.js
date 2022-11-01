@@ -202,6 +202,7 @@ export default function BrandList({ items, tags }) {
         }))
         setTimeout(setTagScrollWidth, 500)
     }, [items])
+    
     return (
         <div className={style.brandListWrapper}>
             <motion.div initial={{ height: '0px' }} className={style.filterBlock} animate={animateBlock} />

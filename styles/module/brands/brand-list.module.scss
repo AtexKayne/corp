@@ -1,7 +1,10 @@
 @import "../../mixins/helpers/media";
 
 .brandListWrapper {
-    padding-top: calc(var(--spacing) * 1.2);
+    overflow: hidden;
+    max-height: 100vh;
+    margin: 0 calc(var(--spacing) * -1);
+    padding: calc(var(--spacing) * 1.2) var(--spacing) 0;
 }
 
 .brandListNav {

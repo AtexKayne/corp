@@ -13,6 +13,7 @@ export default function MobileMenuTransitor({ className }) {
     const [breadcrumbs, setBreadcrumbs] = useState([])
     const animateTransitor = useAnimationControls()
     const animateFooter = useAnimationControls()
+    const animateBread = useAnimationControls()
     const router = useRouter()
     const isAnimated = useRef(false)
 
@@ -81,8 +82,10 @@ export default function MobileMenuTransitor({ className }) {
             await animateFooter.start({ y: 0, transition: { duration: 0.5 } })
             await animateTransitor.start({ y: '0vh', borderWidth: [0, 15, 0], transitionTimingFunction: 'ease', transition: { duration: 1 } })
             setMenuState('menu')
-            animateTransitor.start({ y: '100vh', borderWidth: [0, 15, 0], transitionTimingFunction: 'ease', transition: { duration: 1 } })
+            await animateTransitor.start({ y: '100vh', borderWidth: [0, 15, 0], transitionTimingFunction: 'ease', transition: { duration: 1 } })
+            animateBread.start({ y: 0, transition: { duration: 0.5 } })
         } else {
+            await animateBread.start({ y: 301, transition: { duration: 0.5 } })
             await animateTransitor.start({
                 y: '0vh', borderWidth: [0, 15, 0],
                 transitionTimingFunction: 'ease',
@@ -120,6 +123,7 @@ export default function MobileMenuTransitor({ className }) {
                 y: '100vh', borderWidth: [0, 15, 0],
                 transition: { duration: 1, type: 'tween' }
             })
+            await animateBread.start({ y: 301, transition: { duration: 0.5 } })
             animateFooter.start({ y: 301, transition: { duration: 0.5 } })
         }
     }
@@ -170,7 +174,7 @@ export default function MobileMenuTransitor({ className }) {
                         <a href='#' className='c-hover'>TG</a>
                     </div>
                 </div>
-                <div className='mobile-bread'>
+                <motion.div animate={animateBread} initial={{ y: 301 }} className='mobile-bread'>
                     {breadcrumbs.map((breadcrumb, i) => {
                         return (
                             <div className='mobile-bread__line' key={breadcrumb.href}>
@@ -178,7 +182,7 @@ export default function MobileMenuTransitor({ className }) {
                             </div>
                         )
                     })}
-                </div>
+                </motion.div>
             </motion.div>
 
             <motion.div animate={animateTransitor} initial={{ y: '100vh' }} className='menu-mobile__transitor' />

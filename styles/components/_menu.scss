@@ -558,14 +558,16 @@
         display: flex;
         position: absolute;
         flex-direction: column-reverse;
-        background-color: color-use(white);
     
     
         &__nav {
+            z-index: 2;
             display: flex;
+            position: relative;
             align-items: center;
             padding: var(--spacing);
             justify-content: space-between;
+            background-color: color-use(white);
             border-top: 1px solid color-use(light-gray);
 
             >div * {
@@ -581,7 +583,9 @@
 }
 
 .mobile-bread {
+    z-index: 1;
     display: flex;
+    position: relative;
     flex-direction: column-reverse;
 
     &__line {
