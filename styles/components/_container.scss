@@ -22,7 +22,7 @@ body > div {
     background-color: color-use(background);
     padding: calc(var(--spacing) * 1.7) var(--spacing);
 
-    @media (min-aspect-ratio: 16/9) {
+    @media (min-aspect-ratio: 18/9) {
         padding: calc(var(--spacing) * 0.5) var(--spacing);
     }
     
