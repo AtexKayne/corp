@@ -7,7 +7,7 @@ import Image from 'next/image'
 
 export default function ContactsMap({ adress = {} }) {
     const { isMobile } = useDeviceDetect()
-    const [mapItemActive, setMapItemActive] = useState('middle')
+    const [mapItemActive, setMapItemActive] = useState('max')
 
     const zoomIn = () => {
         if (mapItemActive === 'min') {
@@ -107,8 +107,8 @@ export default function ContactsMap({ adress = {} }) {
                     <div className='pt-2 pt-1:md pl-1:md p-relative'>
                         <div data-scroll data-scroll-sticky data-scroll-target='#map' className={style.map}>
                             <div data-active={mapItemActive} className={style.mapNav}>
-                                <div className='c-hover' onClick={zoomIn}><span style={{height: '3.1rem'}}>+</span></div>
-                                <div className='c-hover' onClick={zoomOut}><span style={{height: '4.1rem'}}>-</span></div>
+                                <div className='c-hover' onClick={zoomIn}><span style={{height: isMobile ? '2.5rem' : '3.1rem'}}>+</span></div>
+                                <div className='c-hover' onClick={zoomOut}><span style={{height: isMobile ? '3.5rem' : '4.1rem' }}>-</span></div>
                             </div>
                             <div data-active={mapItemActive === 'max'} className={style.mapItem}>
                                 <Image src='/assets/img/contacts/map-image-max.svg' alt='' layout='fill'/>
