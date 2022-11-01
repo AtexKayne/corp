@@ -5,6 +5,10 @@
     max-height: 100vh;
     margin: 0 calc(var(--spacing) * -1);
     padding: calc(var(--spacing) * 1.2) var(--spacing) 0;
+    
+    @include media-breakpoint(sm-down) {
+        height: -webkit-fill-available;
+    }
 }
 
 .brandListNav {
