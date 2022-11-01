@@ -1,7 +1,10 @@
 import Image from 'next/image'
-import { motion } from 'framer-motion';
+import { motion } from 'framer-motion'
+import useDeviceDetect from '../components/helpers/useDeviceDetect'
 
 export default function Title({image, text, hover}) {
+    const { isMobile } = useDeviceDetect()
+
     return (
         <motion.div className='title c-hover'>
             <div className='title__text'>

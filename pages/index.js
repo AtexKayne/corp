@@ -8,6 +8,7 @@ import { mainItems, brandItems } from '../components/helpers/constants'
 import useDeviceDetect from '../components/helpers/useDeviceDetect'
 import KaleidoscopeImage from '../components/KaleidoscopeImage'
 import { useState } from 'react'
+import MainTitle from './main/MainTitle'
 
 export default function Home({ slides = {}, items }) {
   const { isMobile } = useDeviceDetect()
@@ -16,7 +17,7 @@ export default function Home({ slides = {}, items }) {
   return (
     <MainLayout className='ui-light container--flex'>
       <div style={isMobile ? { height: '100%', paddingTop: '250px' } : { paddingTop: '0px' }} className='col col--between'>
-        <Title image='/assets/img/textlogo.svg' hover='Расскажем, кто мы' />
+        <MainTitle text='Расскажем, кто мы' />
         <MainSlider slides={currentSlides} />
         <RangeLine setCurrentSlides={setCurrentSlides} slides={slides} />
       </div>

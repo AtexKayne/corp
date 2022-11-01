@@ -37,6 +37,6 @@
     }
 
     @include media-breakpoint(md-up) {
-        border-right: 1px solid color-use(line);
+        // border-right: 1px solid color-use(line);
     }
 }

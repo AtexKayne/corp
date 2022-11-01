@@ -56,6 +56,8 @@ export default function BrandList({ items, tags }) {
     }
 
     const setTagScrollWidth = () => {
+        const offsetX = refTagContainer.current.getBoundingClientRect()
+        refTagContainer.current.style.width = `${window.innerWidth - offsetX.x}px`
         let scrollWidth = isMobile ? -20 : 0
         const innerElements = Array.from(refTagInner.current.childNodes)
         innerElements.forEach(el => scrollWidth += el.offsetWidth + 20)
@@ -134,11 +136,12 @@ export default function BrandList({ items, tags }) {
     }
 
     const moveDrag = event => {
-        const index = Math.floor(event.y / ((refSlider.current.clientHeight - 20) / steps))
+        const index = Math.floor((event.y - 10) / ((refSlider.current.clientHeight - 20) / steps))
         const currentElement = elements[index]
         animateItemY.set(event.y)
 
-        if (currentElement && refCurrentItem.current !== currentElement.name && sliderActive) {
+        if (currentElement && refCurrentItem.current !== currentElement.name) {
+            setSliderActive(true)
             const titlePosition = refIsTitleShown.current
             refCurrentItem.current = currentElement.name
 
@@ -164,6 +167,9 @@ export default function BrandList({ items, tags }) {
             setActiveElem(false)
             if (!isMobile) setSliderActive(false)
             animateBlock.start({ y: isMobile ? -50 : 0, height: '0px', transition: { duration: 1 } })
+        } else if (!elements[index]) {
+            refCurrentItem.current = false
+            if (!isMobile) setSliderActive(false)
         }
     }
 
@@ -185,9 +191,8 @@ export default function BrandList({ items, tags }) {
         const scrollPixels = refSlider.current.clientHeight / steps
         const scrollDirection = event.deltaY > 0 ? scrollPixels : scrollPixels * -1
         let scrollTo = scrollDirection + animateItemY.current - 10
-
         if (scrollTo < 0) scrollTo = -1
-        else if (scrollTo >= refSlider.current.clientHeight - itemHeight) scrollTo = refSlider.current.clientHeight - 10
+        else if (scrollTo >= refSlider.current.clientHeight - itemHeight) scrollTo = refSlider.current.clientHeight - itemHeight + 10
         if (scrollTo > 0) setSliderActive(true)
         animateItem.start({ y: scrollTo, transition: { type: 'tween' } })
     }

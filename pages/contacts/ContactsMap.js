@@ -7,7 +7,7 @@ import Image from 'next/image'
 
 export default function ContactsMap({ adress = {} }) {
     const { isMobile } = useDeviceDetect()
-    const [mapItemActive, setMapItemActive] = useState('max')
+    const [mapItemActive, setMapItemActive] = useState('min')
 
     const zoomIn = () => {
         if (mapItemActive === 'min') {
