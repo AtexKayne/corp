@@ -53,7 +53,7 @@ function Line({ department = {} }) {
 export default function ContactsDepartments({ departments }) {
     return (
         <section data-scroll-section>
-            <h2 className='text--h2 pt-5 pt-1:md pb-3.5 pb-1:md'>{departments && departments.title ? departments.title : 'undefined'}</h2>
+            <h2 className='text--h2 pt-5 pt-1.5:md pb-3.5 pb-1:md'>{departments && departments.title ? departments.title : 'undefined'}</h2>
             {departments && departments.items && departments.items.length
                 ? departments.items.map((department, index) => (
                     <Line key={department.name ? department.name : index} department={department} />

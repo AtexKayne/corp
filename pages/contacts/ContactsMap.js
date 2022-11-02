@@ -88,7 +88,7 @@ export default function ContactsMap({ adress = {} }) {
                                             )) : ''}
                                     </div>
 
-                                    <div className={`${style.links} pb-4 pb-0.5:md`}>
+                                    <div className={`${style.links} pb-4 pb-0:md`}>
                                         <div className='text--t2'>{adress.bots.title}</div>
                                         {adress.bots.icons
                                             ? adress.bots.icons.map(link => (
