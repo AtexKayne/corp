@@ -39,8 +39,8 @@ export default function ContactsMap({ adress = {} }) {
     }, [])
 
     return (
-        <section data-scroll-section>
-            <div id='map' className={style.container}>
+        <section  id='map' style={{minHeight: '0px'}} data-scroll-section>
+            <div className={style.container}>
                 <div className={isMobile ? '' : 'col col--30'}>
                     {adress && adress.city
                         ? (
@@ -107,8 +107,8 @@ export default function ContactsMap({ adress = {} }) {
                         ) : ''}
                 </div>
                 <div className={isMobile ? '' : 'col col--70'}>
-                    <div className='pt-1:md pl-1:md p-relative'>
-                        <div data-scroll data-scroll-sticky data-scroll-target='#map' className={style.map}>
+                    <div data-scroll data-scroll-sticky data-scroll-target='#map' className='pt-1:md pl-1:md p-relative'>
+                        <div className={`${style.map}`}>
                             <div data-active={mapItemActive} className={style.mapNav}>
                                 <div className='c-hover' onClick={zoomIn}><span style={{ height: isMobile ? '2.5rem' : '3.1rem' }}>+</span></div>
                                 <div className='c-hover' onClick={zoomOut}><span style={{ height: isMobile ? '3.5rem' : '4.1rem' }}>-</span></div>
@@ -123,6 +123,8 @@ export default function ContactsMap({ adress = {} }) {
                                 <ContactsMapMin />
                             </div>
                         </div>
+
+                        <div/>
                     </div>
                 </div>
             </div>

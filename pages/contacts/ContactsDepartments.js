@@ -1,16 +1,21 @@
 import style from '../../styles/module/contacts/contacts-departments.module.scss'
-import { useRef, useEffect } from 'react'
+import { useRef, useEffect, useState } from 'react'
 import { motion, useAnimationControls, useInView } from 'framer-motion'
 
 function Line({ department = {} }) {
     const refLine = useRef(null)
     const isInView = useInView(refLine, { margin: '100px 100px 150px 200px' })
+    const [lineWidth, setLineWidth] = useState(0)
     const animateLine = useAnimationControls()
     const animateTextA = useAnimationControls()
     const animateTextB = useAnimationControls()
     const animateTextC = useAnimationControls()
     const animateCube = useAnimationControls()
-    
+
+    useEffect(() => {
+        const offsetX = refLine.current.getBoundingClientRect()
+        setLineWidth(window.innerWidth - offsetX.x + 50)
+    }, [])
 
     useEffect(() => {
         if (isInView) {
@@ -25,7 +30,7 @@ function Line({ department = {} }) {
     return (
         <div ref={refLine} className={`${style.line} mb-2.5 mb-1.5:md`}>
             <motion.div animate={animateTextA} initial={{opacity: 0}} className='text--h4'>{department.name ? department.name : 'undefined'}</motion.div>
-            <motion.div animate={animateCube} initial={{opacity: 0}} className={style.lineImage}>
+            <motion.div animate={animateCube} style={{width: `${lineWidth}px`}} initial={{opacity: 0}} className={style.lineImage}>
                 <motion.svg animate={animateLine} initial={{width: '0%'}} id='patternId' width='100%' height='100%'>
                     <defs>
                         <pattern id='a' patternUnits='userSpaceOnUse' width='40' height='20' patternTransform='scale(2) rotate(0)'>

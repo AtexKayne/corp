@@ -1,5 +1,13 @@
+@import "../mixins/helpers/media";
+
 .prevButton {
     span {
-        margin-left: 20px;
+        margin-left: 35px;
+    }
+
+    @include media-breakpoint(xxxl-up) {
+        span {
+            margin-left: 20px;
+        }
     }
 }
