@@ -19,20 +19,14 @@ function Line({ department = {} }) {
             animateTextB.start({ opacity: 1, transition: { duration: 1, delay: 1.0 } })
             animateTextC.start({ opacity: 1, transition: { duration: 1, delay: 1.5 } })
             animateLine.start({ width: '100%', transition: { duration: 1.5, delay: 0.5 } })
-        } else {
-            animateCube.start({ opacity: 0, transition: { duration: 0.2 } })
-            animateTextA.start({ opacity: 0, transition: { duration: 1 } })
-            animateTextB.start({ opacity: 0, transition: { duration: 1 } })
-            animateTextC.start({ opacity: 0, transition: { duration: 1 } })
-            animateLine.start({ width: '0%', transition: { duration: 1.5 } })
         }
     }, [isInView])
 
     return (
         <div ref={refLine} className={`${style.line} mb-2.5 mb-1.5:md`}>
-            <motion.div animate={animateTextA} className='text--h4'>{department.name ? department.name : 'undefined'}</motion.div>
-            <motion.div animate={animateCube} className={style.lineImage}>
-                <motion.svg animate={animateLine} id='patternId' width='100%' height='100%'>
+            <motion.div animate={animateTextA} initial={{opacity: 0}} className='text--h4'>{department.name ? department.name : 'undefined'}</motion.div>
+            <motion.div animate={animateCube} initial={{opacity: 0}} className={style.lineImage}>
+                <motion.svg animate={animateLine} initial={{width: '0%'}} id='patternId' width='100%' height='100%'>
                     <defs>
                         <pattern id='a' patternUnits='userSpaceOnUse' width='40' height='20' patternTransform='scale(2) rotate(0)'>
                             <path d='M-10 7.5l20 5 20-5 20 5' strokeLinecap='square' strokeWidth='1' stroke='#FFA900' fill='none' />
@@ -41,10 +35,10 @@ function Line({ department = {} }) {
                     <rect width='100%' height='40' transform='translate(-15, -12)' fill='url(#a)' />
                 </motion.svg>
             </motion.div>
-            <motion.span animate={animateTextB} className='text--c4'>
+            <motion.span animate={animateTextB} initial={{opacity: 0}} className='text--c4'>
                 <a href={`tel:${department.phone}`} className='c-hover'>{department.phone}</a>
             </motion.span>
-            <motion.span animate={animateTextC} className='text--c4 text--transparent'>
+            <motion.span animate={animateTextC} initial={{opacity: 0}} className='text--c4 text--transparent'>
                 <a href={`mail:${department.mail}`} className='c-hover'>{department.mail}</a>
             </motion.span>
         </div>

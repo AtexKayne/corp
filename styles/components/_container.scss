@@ -28,6 +28,10 @@ body > div {
     @media (min-aspect-ratio: 18/9) {
         padding: calc(var(--spacing) * 0.5) var(--spacing);
     }
+
+    @include media-breakpoint(md-up) {
+        padding: calc(var(--spacing) * 1.7) calc(var(--spacing) * 2);
+    }
     
     &.no-padding {
         padding-top: 0;

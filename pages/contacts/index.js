@@ -11,7 +11,7 @@ export default function Brand({ setTheme, detail }) {
     return (
         <MainLayout className='no-padding'>
             <SmoothScrollProvider options={{ smooth: true }}>
-                <ContactsIntro title={detail.pagename} />
+                {/* <ContactsIntro title={detail.pagename} /> */}
                 <ContactsMap adress={detail.adress} />
                 <ContactsDepartments departments={detail.departments} />
                 <ContactsDocuments documents={detail.documents} />

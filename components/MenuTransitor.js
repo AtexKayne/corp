@@ -83,8 +83,7 @@ export default function MenuTransitor({ theme, preloaderState, setTheme, setCont
     ]
 
     const breadcrumbsSetting = (url = router.asPath) => {
-        const linkPath = url.split('/')
-        linkPath.shift()
+        const linkPath = url.split('/').filter(link => !!link)
         const pathArray = linkPath.map((path, i) => {
             return { breadcrumb: path, href: '/' + linkPath.slice(0, i + 1).join('/') }
         })

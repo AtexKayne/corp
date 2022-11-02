@@ -64,7 +64,7 @@ $text-t5:      ( font-size: 1.5rem,  line-height: 20 / 15 * 1em );
 
 // TT Common
 $text-c1:      ( font-size: 4.4rem,  line-height: 20 / 15 * 1em );
-$text-c2:      ( font-size: 3.6rem,  line-height: 20 / 15 * 1em );
+$text-c2:      ( font-size: 3.6rem,  line-height: 18 / 16 * 1em );
 $text-c3:      ( font-size: 3.2rem,  line-height: 16 / 12 * 1em );
 $text-c4:      ( font-size: 2.4rem,  line-height: 14 / 10 * 1em );
 $text-c5:      ( font-size: 2.0rem,  line-height: 14 / 10 * 1em );
@@ -146,10 +146,10 @@ $text-sizes: (
         'h5':           $text-h5,
 
         // Caption
-        'c1':           $text-c2,
-        'c2':           $text-c3,
-        'c3':           $text-c4,
-        'c4':           $text-c5,
+        'c1':           $text-c1,
+        'c2':           $text-c2,
+        'c3':           $text-c3,
+        'c4':           $text-c4,
         'c5':           $text-c5,
     ),
 
