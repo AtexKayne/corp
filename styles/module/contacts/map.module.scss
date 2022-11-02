@@ -11,8 +11,12 @@
 
 .map {
     width: 100%;
-    min-height: 422px;
+    min-height: 228px;
     position: relative;
+
+    @include media-breakpoint(md-up) {
+        min-height: 422px;
+    }
 }
 
 .mapItem {
@@ -24,7 +28,7 @@
     user-select: none;
     position: absolute;
     pointer-events: none;
-    transform: translateX(100vw);
+    transform: translateX(200vw);
     margin: 0 calc(var(--spacing) * -1);
 
     &[data-active="true"] {
@@ -38,15 +42,11 @@
     }
 
     img {
-        object-fit: cover;
+        object-fit: contain;
     }
 
     @include media-breakpoint(md-up) {
         margin: 0;
-
-        img {
-            object-fit: contain;
-        }
     }
 }
 
