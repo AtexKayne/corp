@@ -69,3 +69,35 @@
         // }
     }
 }
+
+.ui-transparent {
+    .icon {
+        &--menu {
+            background-image: url('#{ $path-images }/icons/icon-menu-white.svg');
+        }
+
+        &--search {
+            background-image: url('#{ $path-images }/icons/icon-search-white.svg');
+        }
+
+        &--phone {
+            background-image: url('#{ $path-images }/icons/icon-phone-white.svg');
+        }
+
+        &--close {
+            background-image: url('#{ $path-images }/icons/icon-close-white.svg');
+        }
+
+        &--lang {
+            background-image: url('#{ $path-images }/icons/icon-lang-white.svg');
+        }
+
+        // &--sertificate {
+        //     background-image: url('#{ $path-images }/icons/icon-sertificate.svg');
+        // }
+
+        // &--base-doc {
+        //     background-image: url('#{ $path-images }/icons/icon-base-doc.svg');
+        // }
+    }
+}
