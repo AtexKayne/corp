@@ -1,8 +1,15 @@
 import BrandList from './BrandList'
+import { useContext, useEffect } from 'react'
 import MainLayout from '../../layout/MainLayout'
 import { brandItems } from '../../components/helpers/constants'
+import { ThemeContext } from '../../components/helpers/ThemeContext'
 
 export default function Brands({ items }) {
+    const {setTheme} = useContext(ThemeContext)
+    useEffect(() => {
+        setTheme('ui-light')
+    }, [])
+
     return (
         <MainLayout className='ui-light no-padding'>
             <BrandList items={brandItems.items} tags={brandItems.tags} />

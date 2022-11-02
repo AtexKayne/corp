@@ -1,13 +1,18 @@
-import { SmoothScrollProvider } from '../../components/helpers/SmoothScroll.context'
-import MainLayout from '../../layout/MainLayout'
-import { contacts } from '../../components/helpers/constants'
 import ContactsMap from './ContactsMap'
-import ContactsIntro from './ContactsIntro'
-import ContactsDepartments from './ContactsDepartments'
+import { useContext, useEffect } from 'react'
+import MainLayout from '../../layout/MainLayout'
 import ContactsDocuments from './ContactsDocuments'
+import ContactsDepartments from './ContactsDepartments'
+import { contacts } from '../../components/helpers/constants'
+import { ThemeContext } from '../../components/helpers/ThemeContext'
+import { SmoothScrollProvider } from '../../components/helpers/SmoothScroll.context'
 
 
-export default function Brand({ setTheme, detail }) {
+export default function Brand({ detail }) {
+    const { setTheme } = useContext(ThemeContext)
+    useEffect(() => {
+        setTheme('ui-light')
+    }, [])
     return (
         <MainLayout className='no-padding'>
             <SmoothScrollProvider options={{ smooth: true }}>

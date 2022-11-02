@@ -1,18 +1,16 @@
-import { SmoothScrollProvider } from '../../components/helpers/SmoothScroll.context'
-import MainLayout from '../../layout/MainLayout'
 import BrandAbout from './BrandAbout'
-import { brandDetail } from '../../components/helpers/constants'
+import BrandMedia from './BrandMedia'
+import BrandImage from './BrandImage'
+import BrandFooter from './BrandFooter'
 import BrandNumbers from './BrandNumbers'
 import BrandHistory from './BrandHistory'
 import BrandCatalog from './BrandCatalog'
-import BrandMedia from './BrandMedia'
-import BrandFooter from './BrandFooter'
-import BrandImage from './BrandImage'
+import MainLayout from '../../layout/MainLayout'
 import Scrollbar from '../../components/Scrollbar'
-import { useEffect } from 'react';
+import { brandDetail } from '../../components/helpers/constants'
+import { SmoothScrollProvider } from '../../components/helpers/SmoothScroll.context'
 
-
-export default function Brand({ setTheme, detail }) {
+export default function Brand({ detail }) {
   const sectons = [
     { id: 'image', icon: '' },
     { id: 'about', icon: '' },
@@ -22,16 +20,6 @@ export default function Brand({ setTheme, detail }) {
     { id: 'media', icon: '' },
     { id: 'footer', icon: '' }
   ]
-
-  useEffect(() => {
-    setTimeout(() => {
-      setTheme('ui-transparent')
-    }, 1500);
-
-    return () => {
-      setTheme('ui-light')
-    }
-  }, []);
 
   return (
     <MainLayout className='no-padding'>
@@ -43,7 +31,7 @@ export default function Brand({ setTheme, detail }) {
         <BrandHistory history={brandDetail.history} />
         <BrandMedia media={brandDetail.media} />
         <BrandFooter info={brandDetail.contacts} documents={brandDetail.documents} />
-        <Scrollbar scrollComponents={sectons} setTheme={setTheme} />
+        <Scrollbar scrollComponents={sectons} />
       </SmoothScrollProvider>
     </MainLayout>
   )

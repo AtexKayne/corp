@@ -1,18 +1,22 @@
-import MainLayout from '../layout/MainLayout'
-import MainSlider from '../components/MainSlider'
-import KaleidoscopeElem from '../components/KaleidoscopeElem'
-import Title from '../components/Title'
-import Cloud from '../components/Cloud'
-import RangeLine from '../components/RangeLine'
-import { mainItems, brandItems } from '../components/helpers/constants'
-import useDeviceDetect from '../components/helpers/useDeviceDetect'
-import KaleidoscopeImage from '../components/KaleidoscopeImage'
-import { useState } from 'react'
 import MainTitle from './main/MainTitle'
+import MainLayout from '../layout/MainLayout'
+import RangeLine from '../components/RangeLine'
+import MainSlider from '../components/MainSlider'
+import { useState, useContext, useEffect } from 'react'
+import KaleidoscopeElem from '../components/KaleidoscopeElem'
+import KaleidoscopeImage from '../components/KaleidoscopeImage'
+import { ThemeContext } from '../components/helpers/ThemeContext'
+import useDeviceDetect from '../components/helpers/useDeviceDetect'
+import { mainItems, brandItems } from '../components/helpers/constants'
 
 export default function Home({ slides = {}, items }) {
+  const { setTheme } = useContext(ThemeContext)
+  useEffect(() => {
+    setTheme('ui-light')
+  }, [])
+
   const { isMobile } = useDeviceDetect()
-  const [ currentSlides, setCurrentSlides ] = useState(slides.stateOne)
+  const [currentSlides, setCurrentSlides] = useState(slides.stateOne)
 
   return (
     <MainLayout className='ui-light container--flex'>

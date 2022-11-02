@@ -35,7 +35,6 @@ export default function Scrollbar({ scrollComponents, setTheme }) {
             y.set(event.scroll.y)
             const activeLinks = sectionsClientTop.map((element, index) => (element <= event.scroll.y + 3) ? index : null)
             setLinks(activeLinks)
-            setTheme(event.scroll.y >= window.innerHeight - 20 ? 'ui-light' : 'ui-transparent')
             setTimeout(() => isScrolling = false, 400)
         }
 

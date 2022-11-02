@@ -1,15 +1,14 @@
-/* eslint-disable @next/next/no-img-element */
-import A from './A';
-import { useState, useEffect, useRef } from 'react';
+import { useState, useEffect, useRef, useContext } from 'react'
 import { motion, useAnimationControls } from 'framer-motion'
+import { ThemeContext } from './helpers/ThemeContext'
 import { menuItems } from './helpers/constants'
+import MenuContacts from './MenuContacts'
 import { useRouter } from 'next/router'
-import Search from './Search';
-import Image from 'next/image';
-import MenuContacts from './MenuContacts';
-// import MenuPreloader from './MenuPreloader';
+import Search from './Search'
+import A from './A'
 
-export default function MenuTransitor({ theme, preloaderState, setTheme, setContainerWidth, animateContent, className }) {
+export default function MenuTransitor({ preloaderState, setContainerWidth, animateContent, className }) {
+    const { theme, setTheme } = useContext(ThemeContext)
     const router = useRouter()
     const refTheme = useRef(theme)
     const refBurger = useRef(null)
@@ -93,21 +92,16 @@ export default function MenuTransitor({ theme, preloaderState, setTheme, setCont
     }
 
     const hideTransitor = async () => {
-        setTheme('ui-light')
+        setTheme('light')
         animate.start('hidden')
         await animateBreadcrumbs.start('shown')
-
-        if (refTheme.current !== theme) {
-            setTheme(refTheme.current)
-        }
+        setTheme(refTheme.current)
     }
 
     const showTransitor = async () => {
-        const currentTheme = refTheme.current
-        setTheme('ui-light')
+        setTheme('light')
         animateBreadcrumbs.start('hidden')
         const awaitAnimation = await animate.start('shown')
-        refTheme.current = currentTheme
         return awaitAnimation
     }
 
@@ -130,7 +124,6 @@ export default function MenuTransitor({ theme, preloaderState, setTheme, setCont
     const toggleMenu = async (animation, type) => {
         if (!isMenuOpened.current) {
             isMenuOpened.current = true
-            setTheme('ui-light')
             if (menuState === 'close') {
                 setMenuState(type)
                 animateContent.start('start')
@@ -173,15 +166,12 @@ export default function MenuTransitor({ theme, preloaderState, setTheme, setCont
                 setTheme(refTheme.current)
             })
         } else if (preloaderState === true) {
-            setTheme('ui-light')
-            animate.start('shown').then(() => animateBreadcrumbs.start('hidden'))
+            setTheme('light')
+            animate.start('shown').then(() => {
+                animateBreadcrumbs.start('hidden')
+            })
         }
     }, [preloaderState])
-
-    // Theme change
-    useEffect(() => {
-        if (preloaderState !== undefined && theme !== refTheme.current) refTheme.current = theme
-    }, [theme])
 
     // Breadcrambs change
     useEffect(() => {
@@ -201,8 +191,6 @@ export default function MenuTransitor({ theme, preloaderState, setTheme, setCont
 
         const startHandler = (url) => {
             if (url !== router.asPath) {
-                setTheme('ui-light')
-                refTheme.current = 'ui-light'
                 animateContent.start('start')
                 isAnimated.current = showTransitor()
             }
@@ -224,6 +212,12 @@ export default function MenuTransitor({ theme, preloaderState, setTheme, setCont
             router.events.off('routeChangeError', completeHandler)
         }
     }, [router])
+
+    useEffect(() => {
+        if (theme.includes('ui')) {
+            refTheme.current = theme
+        }
+    }, [theme])
 
     return (
         <div data-state={menuState} className={`${className} menu-wrapper`}>
@@ -360,19 +354,19 @@ export default function MenuTransitor({ theme, preloaderState, setTheme, setCont
             <div className='bread'>
                 {breadcrumbs.map((breadcrumb, i) => {
                     return (
-                        <div className='bread__line' key={breadcrumb.href}>
+                        <motion.div
+                            animate={animateBreadcrumbs}
+                            initial={{ x: 200 }}
+                            variants={{ hidden: { x: -200 }, shown: { x: 0 } }}
+                            transition={{ duration: 1 }}
+                            className='bread__line' key={breadcrumb.href}>
                             <div className='bread__filler--1' />
                             <div className='bread__filler--2' />
-                            <motion.div
-                                animate={animateBreadcrumbs}
-                                initial={{ x: 200 }}
-                                variants={{ hidden: { x: -200 }, shown: { x: 0 } }}
-                                transition={{ duration: 1 }}
-                                className='bread__text'>
+                            <div className='bread__text'>
                                 <A href={breadcrumb.href} text={breadcrumb.breadcrumb.toUpperCase()} />
-                            </motion.div>
+                            </div>
                             <div className='bread__filler--3' />
-                        </div>
+                        </motion.div>
                     )
                 })}
             </div>

@@ -361,16 +361,27 @@
     display: flex;
     transition: .2s;
     grid-area: title;
-    align-items: center;
     white-space: nowrap;
+    flex-direction: column;
+    align-items: flex-start;
 
     svg {
         transition: .2s;
-        margin-left: 20px;
+        margin-top: 20px;
     }
 
     &:hover {
         color: var(--t-primary);
+    }
+
+    @include media-breakpoint(md-up) {
+        align-items: center;
+        flex-direction: row;
+
+        svg {
+            margin-top: 0;
+            margin-left: 20px;
+        }
     }
 }
 
@@ -425,6 +436,8 @@
 
     @include media-breakpoint (md-up) {
         top: auto;
+        left: 50vw;
+        right: auto;
         bottom: -450px;
     }
 
