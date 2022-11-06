@@ -4,7 +4,7 @@ import MainLayout from '../../layout/MainLayout'
 import { brandItems } from '../../components/helpers/constants'
 import { ThemeContext } from '../../components/helpers/ThemeContext'
 
-export default function Brands({ items }) {
+export default function Brands({ brandlist }) {
     const {setTheme} = useContext(ThemeContext)
     useEffect(() => {
         setTheme('ui-light')
@@ -12,7 +12,7 @@ export default function Brands({ items }) {
 
     return (
         <MainLayout className='ui-light no-padding'>
-            <BrandList items={brandItems.items} tags={brandItems.tags} />
+            <BrandList items={brandlist.items} tags={brandlist.tags} />
         </MainLayout>
     )
 }
@@ -20,7 +20,7 @@ export default function Brands({ items }) {
 export async function getServerSideProps({req}) {
     let resp, json
     try {
-        resp = await fetch(`${process.env.API_URL}/brands`)
+        resp = await fetch(`${process.env.API_URL}/brands/?lang=ru`)
         json = await resp.json()
     } catch (error) {
         json = brandItems
@@ -28,8 +28,7 @@ export async function getServerSideProps({req}) {
   
     return {
         props: {
-            items: json.items,
-            // tags: json.tags
+            brandlist: json,
         }
     }
 }

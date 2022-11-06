@@ -3,12 +3,11 @@ import { motion, useAnimationControls } from 'framer-motion'
 import { useRouter } from 'next/router'
 import Image from "next/image"
 import A from "./A"
-import { menuItems } from './helpers/constants'
 import Search from "./Search"
 import MenuContacts from "./MenuContacts"
 
 // TODO Реорганизовать меню в отдельные папки
-export default function MobileMenuTransitor({ className }) {
+export default function MobileMenuTransitor({ className, menuItems, animateContent }) {
     const [menuState, setMenuState] = useState('close')
     const [breadcrumbs, setBreadcrumbs] = useState([])
     const animateTransitor = useAnimationControls()
@@ -81,6 +80,7 @@ export default function MobileMenuTransitor({ className }) {
     const menuClickHandler = async () => {
         if (menuState !== 'menu') {
             await animateFooter.start({ y: 0, transition: { duration: 0.5 } })
+            animateContent.start({filter: 'brightness(70%)', transition: {duration: 0.5, delay: 0.1}})
             await animateTransitor.start({ y: '0vh', borderWidth: [0, 15, 0], transitionTimingFunction: 'ease', transition: { duration: 1 } })
             setMenuState('menu')
             await animateTransitor.start({ y: '100vh', borderWidth: [0, 15, 0], transitionTimingFunction: 'ease', transition: { duration: 1 } })
@@ -93,6 +93,7 @@ export default function MobileMenuTransitor({ className }) {
                 transition: { duration: 1 }
             })
             setMenuState('close')
+            animateContent.start({filter: 'brightness(100%)', transition: {duration: 0.5, delay: 0.1}})
             await animateTransitor.start({
                 y: '100vh', borderWidth: [0, 15, 0],
                 transitionTimingFunction: 'ease',

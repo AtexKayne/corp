@@ -11,6 +11,7 @@ import { ThemeContext } from '../components/helpers/ThemeContext';
 function MyApp({ Component, pageProps }) {
   const { isMobile } = useDeviceDetect()
   const [theme, setTheme] = useState('ui-light')
+  const [menuItems, setMenuItems] = useState([])
   const [preloaderState, setPreloaderState] = useState();
   const [contentWidth, setContentWidth] = useState('100%')
   const animateContent = useAnimationControls()
@@ -23,16 +24,22 @@ function MyApp({ Component, pageProps }) {
   }
   useEffect(() => {
     setContainerWidth()
+    getMenuItems().then(response => setMenuItems(response))
   }, [])
 
+  const getMenuItems = async () => {
+    const resp = await fetch(`${process.env.API_URL}/menu/?lang=ru`)
+    return await resp.json()
+  }
+
   return (
-    <ThemeContext.Provider value={{theme, setTheme}}>
+    <ThemeContext.Provider value={{ theme, setTheme }}>
       {isMobile
         ? <MobilePreloader animatePreloader={animatePreloader} setPreloaderState={setPrSt} />
         : <Preloader animatePreloader={animatePreloader} setPreloaderState={setPrSt} />}
       {isMobile
-        ? <MobileMenuTransitor animateContent={animateContent} className={theme} />
-        : <MenuTransitor animateContent={animateContent} preloaderState={preloaderState} setContainerWidth={setContainerWidth} className={theme} />
+        ? <MobileMenuTransitor animateContent={animateContent} menuItems={menuItems} className={theme} />
+        : <MenuTransitor animateContent={animateContent} menuItems={menuItems} preloaderState={preloaderState} setContainerWidth={setContainerWidth} className={theme} />
       }
       <motion.div
         initial={{ scale: 1, opacity: 1 }}
@@ -49,5 +56,15 @@ function MyApp({ Component, pageProps }) {
     </ThemeContext.Provider>
   )
 }
-
+export async function getInitialProps(ctx) {
+  let resp, json
+  try {
+    resp = await fetch(`${process.env.API_URL}/menu/?lang=ru`)
+    json = await resp.json()
+    console.log(json);
+  } catch (error) {
+    // json = menuItems
+  }
+  return { menuItems: json }
+}
 export default MyApp

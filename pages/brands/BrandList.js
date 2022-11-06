@@ -198,14 +198,16 @@ export default function BrandList({ items, tags }) {
     }
 
     useEffect(() => {
-        setElements(items.sort((x, y) => {
-            const xName = x.name.toUpperCase()
-            const yName = y.name.toUpperCase()
-            if (xName < yName) { return -1 }
-            if (xName > yName) { return 1 }
-            return 0
-        }))
-        setTimeout(setTagScrollWidth, 500)
+        if (items && items.length) {
+            setElements(items.sort((x, y) => {
+                const xName = x.name.toUpperCase()
+                const yName = y.name.toUpperCase()
+                if (xName < yName) { return -1 }
+                if (xName > yName) { return 1 }
+                return 0
+            }))
+            setTimeout(setTagScrollWidth, 500)
+        }
     }, [items])
     
     return (

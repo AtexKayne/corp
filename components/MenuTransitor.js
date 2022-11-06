@@ -1,13 +1,13 @@
+/* eslint-disable @next/next/no-img-element */
 import { useState, useEffect, useRef, useContext } from 'react'
 import { motion, useAnimationControls } from 'framer-motion'
 import { ThemeContext } from './helpers/ThemeContext'
-import { menuItems } from './helpers/constants'
 import MenuContacts from './MenuContacts'
 import { useRouter } from 'next/router'
 import Search from './Search'
 import A from './A'
 
-export default function MenuTransitor({ preloaderState, setContainerWidth, animateContent, className }) {
+export default function MenuTransitor({ preloaderState, menuItems, setContainerWidth, animateContent, className }) {
     const { theme, setTheme } = useContext(ThemeContext)
     const router = useRouter()
     const refTheme = useRef(theme)
@@ -259,7 +259,11 @@ export default function MenuTransitor({ preloaderState, setContainerWidth, anima
                     hidden: { zIndex: 0, x: '-100vw' }
                 }}
                 className='menu__nav'>
-                {menuItems.map(item => <A key={item.text} externalClass={`${router.asPath === item.link ? 'active' : ''} text--h4`} href={item.link} text={item.text} />)}
+                { menuItems && menuItems.length
+                    ? menuItems.map(item => <A key={item.text} externalClass={`${router.asPath === item.link ? 'active' : ''} text--h4`}
+                        href={item.link} text={item.text} />)
+                    : ''
+                }
                 <motion.div
                     className='menu__nav__image'
                     animate={animateImage}

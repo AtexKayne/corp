@@ -9,7 +9,7 @@ export default function MainSlider({slides}) {
     const clickHandler  = (e) => {
         const target = e.target
         const link   = target.getAttribute('data-link')
-        if (link) {
+        if (link && refSlider.current) {
             const sliderItems      = refSlider.current.children
             const activeSlide      = refSlider.current.querySelector('[data-active="active"]')
             const activePagination = target.parentNode.querySelector('[data-active="active"]')
@@ -24,6 +24,7 @@ export default function MainSlider({slides}) {
     }
 
     useEffect(() => {
+        if (!refSlider.current) return
         const item = refSlider.current.querySelectorAll(style.paginationItems)[0]
         if (item) item.click()
         refProgress.current.style.width = `calc(${(100 / slides.length)}% - 5px)`

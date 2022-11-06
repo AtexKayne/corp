@@ -7,6 +7,9 @@ const nextConfig = {
   },
   reactStrictMode: false,
   swcMinify: true,
+  images: {
+    domains: ['backend.simrussia.ru'],
+  },
 }
 
 module.exports = nextConfig
