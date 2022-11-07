@@ -5,8 +5,8 @@ import style from '../../styles/module/brand/brand-catalog.module.scss'
 
 export default function BrandCatalog({ about }) {
     return (
-        <section id='catalog' data-scroll-section>
-            <div className='py-4'>
+        <section id='catalog' style={{minHeight: 0}} data-scroll-section>
+            <div className='py-2'>
                 <Link href='/' pathHref>
                     <a className={`${style.catalog} c-hover`}>
                         <div className={style.catalogImage}>

@@ -6,7 +6,7 @@ export default function BrandFooter({ info, documents }) {
 
     return (
         <section id='footer' data-scroll-section className='d-flex'>
-            <div className='col col--60 pt-2 pr-1'>
+            <div className='col col--70 pt-2 pr-1'>
                 <div className={`${style.info} mb-0.5`}>
                     <span className='text--t2 text--bold'>Официальный сайт</span>
                     <div className={style.delim} />

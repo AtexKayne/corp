@@ -34,7 +34,7 @@ export default function BrandImage({ image, about }) {
         setTimeout(() => {
             const offsetX = refImage.current.getBoundingClientRect().x
             setLeftPosititon(-offsetX)
-        }, 400)
+        }, 700)
     }, []);
 
     return (

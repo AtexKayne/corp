@@ -5,15 +5,15 @@ import { useTransform, useMotionValue } from 'framer-motion'
 import { ThemeContext } from './helpers/ThemeContext'
 import Image from 'next/image'
 
-export default function Scrollbar({ scrollComponents, about }) {
-    const { scroll }                           = useContext(SmoothScrollContext)
-    const refLinksContainer                    = useRef()
-    const y                                    = useMotionValue(0)
-    const [links, setLinks]                    = useState([0])
+export default function Scrollbar({ scrollComponents, about, imagePosition, setImagePosition }) {
+    const { scroll }        = useContext(SmoothScrollContext)
+    const y                 = useMotionValue(0)
+    const refLinksContainer = useRef()
+    const [links, setLinks] = useState([0])
+    const { theme }         = useContext(ThemeContext)
     const [sectionOffsets, setSectionOffsets]  = useState([0,1])
     const [scrollPositions, setScrollPosition] = useState([0,1])
-    const scrollPosition                       = useTransform(y, sectionOffsets, scrollPositions)
-    const { theme, setTheme }                  = useContext(ThemeContext)
+    const scrollPosition = useTransform(y, sectionOffsets, scrollPositions)
 
 
     const clickHandler = event => {
@@ -51,7 +51,7 @@ export default function Scrollbar({ scrollComponents, about }) {
 
     return (
         <div className={`${style.scrollbar} ${theme === 'ui-transparent' ? 'is-hidden' : ''}`}>
-            <div className={style.image}>
+            <div data-position={imagePosition} className={style.image}>
                 <Image src={about ? about.image : ''} width='40' height='40' alt={ about ? about.name : '' }/>
             </div>
             <div className={style.pathContainer}>

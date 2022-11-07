@@ -13,3 +13,19 @@
     display: flex;
     justify-content: space-between;
 }
+
+.image {
+    top: 0;
+    right: 50px;
+    transition: .5s;
+    position: absolute;
+    transform-origin: center right;
+
+    &[data-position="scrollbar"] {
+        opacity: 0;
+        // top: 100px;
+        transform: scale(0.18);
+        right: calc(var(--spacing) * -2);
+        // transition: .5s top, .5s right, 0s opacity .4s;
+    }
+}
