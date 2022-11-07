@@ -2,8 +2,10 @@ import style from '../styles/module/scrollbar.module.scss'
 import { SmoothScrollContext } from './helpers/SmoothScroll.context'
 import React, { useContext, useEffect, useState, useRef } from 'react'
 import { useTransform, useMotionValue } from 'framer-motion'
+import { ThemeContext } from './helpers/ThemeContext'
+import Image from 'next/image'
 
-export default function Scrollbar({ scrollComponents, setTheme }) {
+export default function Scrollbar({ scrollComponents, about }) {
     const { scroll }                           = useContext(SmoothScrollContext)
     const refLinksContainer                    = useRef()
     const y                                    = useMotionValue(0)
@@ -11,6 +13,7 @@ export default function Scrollbar({ scrollComponents, setTheme }) {
     const [sectionOffsets, setSectionOffsets]  = useState([0,1])
     const [scrollPositions, setScrollPosition] = useState([0,1])
     const scrollPosition                       = useTransform(y, sectionOffsets, scrollPositions)
+    const { theme, setTheme }                  = useContext(ThemeContext)
 
 
     const clickHandler = event => {
@@ -47,7 +50,10 @@ export default function Scrollbar({ scrollComponents, setTheme }) {
     }, [scroll]);
 
     return (
-        <div className={style.scrollbar}>
+        <div className={`${style.scrollbar} ${theme === 'ui-transparent' ? 'is-hidden' : ''}`}>
+            <div className={style.image}>
+                <Image src={about ? about.image : ''} width='40' height='40' alt={ about ? about.name : '' }/>
+            </div>
             <div className={style.pathContainer}>
                 {scrollComponents.map((element, index) => (
                     <React.Fragment key={element.id}> <div /><div /><div /> </React.Fragment>

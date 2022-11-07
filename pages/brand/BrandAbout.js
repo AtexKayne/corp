@@ -5,13 +5,18 @@ import { useContext } from 'react'
 import InfoLine from '../../components/InfoLine'
 
 export default function BrandAbout({ about }) {
-    const { scroll } = useContext(SmoothScrollContext)
-    const scrollHandler = event => {
-        event.deltaY < 0 && scroll && scroll.scrollTo('#image')
-    }
+    // const { scroll } = useContext(SmoothScrollContext)
+    // const scrollHandler = event => {
+    //     event.deltaY < 0 && scroll && scroll.scrollTo('#image')
+    // }
     return (
-        <section data-scroll-speed='10' onWheel={scrollHandler} id='about' data-scroll-section className={style.container}>
-            <h1 className={`${style.title} text--h1 pb-1`}>{ about ? about.name : '' }</h1>
+        <section 
+            data-scroll-speed='10'
+            // onWheel={scrollHandler}
+            id='about'
+            data-scroll-section
+            className={style.container}>
+            {/* <h1 className={`${style.title} text--h1 pb-1`}>{ about ? about.name : '' }</h1> */}
             <div className='col col--60 pr-1'>
                 <InfoLine textBold={'Страна происхождения'} textThin={about ? about.country : ''}/>
                 <p className='text--t2'>{ about ? about.description : '' }</p>

@@ -1,3 +1,4 @@
+import { useState } from 'react'
 import BrandAbout from './BrandAbout'
 import BrandMedia from './BrandMedia'
 import BrandImage from './BrandImage'
@@ -11,6 +12,7 @@ import { brandDetail } from '../../components/helpers/constants'
 import { SmoothScrollProvider } from '../../components/helpers/SmoothScroll.context'
 
 export default function Brand({ detail }) {
+  const [imagePosition, setImagePosition] = useState('about')
   const sectons = [
     { id: 'image', icon: '' },
     { id: 'about', icon: '' },
@@ -24,14 +26,14 @@ export default function Brand({ detail }) {
   return (
     <MainLayout className='no-padding'>
       <SmoothScrollProvider options={{ smooth: true }}>
-        <BrandImage image={brandDetail.image} />
+        <BrandImage image={brandDetail.image} about={brandDetail.about} />
         <BrandAbout about={brandDetail.about} />
         <BrandNumbers numbers={brandDetail.numbers} />
         <BrandCatalog about={brandDetail.about} />
         <BrandHistory history={brandDetail.history} />
         <BrandMedia media={brandDetail.media} />
         <BrandFooter info={brandDetail.contacts} documents={brandDetail.documents} />
-        <Scrollbar scrollComponents={sectons} />
+        <Scrollbar scrollComponents={sectons} about={brandDetail.about} />
       </SmoothScrollProvider>
     </MainLayout>
   )

@@ -6,6 +6,12 @@
     bottom: calc(var(--spacing) * 3);
 }
 
+.image {
+    width: 40px;
+    height: 40px;
+    margin: -20px 0 20px -20px;
+}
+
 .pathContainer {
     width: 20px;
     display: flex;

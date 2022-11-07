@@ -5,3 +5,9 @@
     background-size: cover;
     background-repeat: no-repeat;
 }
+
+.title {
+    left: 0;
+    position: absolute;
+    bottom: var(--spacing);
+}
