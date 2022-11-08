@@ -1,8 +1,7 @@
-import style from '../../styles/module/brand/brand-history.module.scss'
-import { SmoothScrollContext } from '../../components/helpers/SmoothScroll.context'
-import { useEffect, useRef, useContext } from 'react'
-import { motion, useAnimationControls, useTransform, useMotionValue } from 'framer-motion'
 import Image from 'next/image'
+import { useRef } from 'react'
+import { motion, useTransform, useMotionValue } from 'framer-motion'
+import style from '../../styles/module/brand/brand-history.module.scss'
 
 function HistoryImage({ index, y, historyCount, element }) {
     const anglesPos = [0, -90, -180]
@@ -18,10 +17,13 @@ function HistoryImage({ index, y, historyCount, element }) {
             const line = element.querySelector('[data-active]')
             if (line) {
                 if (index === i) {
+                    element.setAttribute('data-active', 'true')
                     line.setAttribute('data-active', 'true')
                 } else if (index < i) {
+                    element.setAttribute('data-active', 'move')
                     line.setAttribute('data-active', 'move')
                 } else {
+                    element.setAttribute('data-active', 'false')
                     line.setAttribute('data-active', 'false')
                 }
             }
@@ -42,9 +44,10 @@ function HistoryImage({ index, y, historyCount, element }) {
 
     return (
         <motion.div
-            onClick={() => clickHandler(index)}
-            style={{ rotate: rotatePos }}
             ref={refWrapper}
+            style={{ rotate: rotatePos }}
+            onClick={() => clickHandler(index)}
+            data-active={index === historyCount - 1}
             className={`${style.historyWrapper} c-hover`}>
             <motion.div
                 className={style.historyInner}

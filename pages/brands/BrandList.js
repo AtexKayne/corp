@@ -1,11 +1,11 @@
-import style from '../../styles/module/brands/brand-list.module.scss'
 import Image from 'next/image'
-import { motion, useAnimationControls, useMotionValue } from 'framer-motion'
-import { useEffect, useRef, useState } from 'react'
 import A from '../../components/A'
+import { useEffect, useRef, useState } from 'react'
 import PrevButton from '../../components/PrevButton'
 import KaleidoscopeImage from '../../components/KaleidoscopeImage'
+import style from '../../styles/module/brands/brand-list.module.scss'
 import useDeviceDetect from '../../components/helpers/useDeviceDetect'
+import { motion, useAnimationControls, useMotionValue } from 'framer-motion'
 
 export default function BrandList({ items, tags }) {
     const [sliderActive, setSliderActive] = useState(false)
@@ -24,8 +24,8 @@ export default function BrandList({ items, tags }) {
     const refSliderItem = useRef(null)
     const refCurrentItem = useRef(null)
     const refTagContainer = useRef(null)
-    const refSliderContent = useRef(null)
     const refIsTitleShown = useRef('start')
+    const refSliderContent = useRef(null)
     const refIsContentShown = useRef(true)
     const refStartContentTouch = useRef(false)
     const refContentCurrentTouch = useRef(0)

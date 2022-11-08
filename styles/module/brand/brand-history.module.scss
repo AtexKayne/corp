@@ -24,9 +24,9 @@
 }
 
 .historyWrapper {
+    bottom: 0;
     left: -300px;
     right: -300px;
-    bottom: 0;
     height: 120vh;
     transition: 1.4s;
     overflow: hidden;
@@ -34,6 +34,18 @@
     will-change: transform;
     transform-origin: bottom;
     background-color: var(--t-background);
+
+    .historyImage {
+        opacity: 0;
+        transition: .5s;
+        transition-delay: 1s;
+    }
+
+    &[data-active="true"] .historyImage {
+        opacity: 1;
+        transition: 0s;
+        transition-delay: 0s;
+    }
 }
 
 .historyInner {
@@ -62,7 +74,7 @@
         height: 100% !important;
 
         img {
-            object-fit: contain;
+            object-fit: cover;
         }
     }
 }

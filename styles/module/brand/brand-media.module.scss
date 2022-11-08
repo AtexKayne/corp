@@ -17,12 +17,12 @@
     overflow: hidden;
     position: relative;
     height: calc(100vh - var(--spacing) * 4);
-    margin: 0 calc(var(--spacing) * -1) 0 calc(var(--spacing) * -2);
 }
 
 .inner {
     height: 100%;
     display: flex;
+    padding: 0 30px;
 }
 
 .image {
@@ -30,6 +30,7 @@
     height: 15vw;
     flex-shrink: 0;
     overflow: hidden;
+    user-select: none;
     position: relative;
     margin-left: -30px;
     clip-path: polygon(50% 0%, 100% 50%, 50% 100%, 0% 50%);
@@ -51,6 +52,33 @@
 
     &:first-child {
         margin-left: 0;
+    }
+
+    * {
+        user-select: none;
+    }
+
+    img {
+        pointer-events: none;
+    }
+}
+
+.allMedia {
+    width: 10vw;
+    height: 10vw;
+    display: flex;
+    flex-shrink: 0;
+    clip-path: none;
+    overflow: hidden;
+    user-select: none;
+    position: relative;
+    align-items: center;
+    justify-content: center;
+    border: 2px solid var(--c-yellow);
+    transform: rotate(45deg) translate(60px, 0px);
+
+    > div {
+        transform: rotate(-45deg);
     }
 }
 

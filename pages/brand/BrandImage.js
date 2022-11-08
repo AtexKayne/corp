@@ -25,7 +25,7 @@ export default function BrandImage({ image, imageMobile, about }) {
             else if (scrollY <= 200 && theme !== 'ui-transparent') setTheme('ui-transparent')
         }
 
-        const mobileScrollHandler = event => {
+        const mobileScrollHandler = () => {
             const scrollY = document.body.scrollTop
             y.set(scrollY)
             if (scrollY > 200 && theme !== 'ui-light') setTheme('ui-light')
