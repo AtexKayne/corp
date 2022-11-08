@@ -1,21 +1,46 @@
+@import "../../mixins/helpers/media";
+
 .container {
     display: flex;
-    min-height: 85vh;
     flex-direction: column;
-    padding-top: var(--spacing);
-    justify-content: space-between;
+    padding: var(--spacing) 0 calc(var(--spacing) * 3);
+    
+    @include media-breakpoint(md-up) {
+        min-height: 85vh;
+        padding: var(--spacing) 0 0;
+        justify-content: space-between;
+    }
+}
+
+.title {
+    opacity: 0;
+    pointer-events: none;
+    padding-bottom: 80px;
+
+    @include media-breakpoint(md-up) {
+        opacity: 1;
+        padding-bottom: 0;
+        pointer-events: all;
+    }
 }
 
 .cardList {
     width: 100%;
-    display: flex;
-    transform: translateX(10vw);
-    justify-content: flex-end;
+    
+    @include media-breakpoint(md-up) {
+        display: flex;
+        justify-content: flex-end;
+        transform: translateX(10vw);
+    }
+
+    @include media-breakpoint(sm-down) {
+        transform: none!important;
+    }
 }
 
 .cardWrapper {
-    width: 250px;
-    height: 300px;
+    width: 100%;
+    height: 178px;
     transition: .3s;
 
     &:hover {
@@ -25,6 +50,21 @@
     &:last-child:hover {
         transform: translateX(0px);
     }
+
+    @include media-breakpoint(md-up) {
+        width: 250px;
+        height: 300px;
+    }
+
+    @include media-breakpoint(sm-down) {
+        &:nth-child(odd) .card {
+            transform: rotate(7deg)!important;
+        }
+
+        &:nth-child(even) .card {
+            transform: rotate(-4deg)!important;
+        }
+    }
 }
 
 .card {
@@ -33,7 +73,12 @@
     padding: 30px;
     border-radius: 20px;
     border: 2px solid var(--t-line);
+    margin-top: calc(var(--spacing) * -1);
     background-color: var(--t-background);
+
+    @include media-breakpoint(md-up) {
+        margin-top: 0;
+    }
 }
 
 .title {

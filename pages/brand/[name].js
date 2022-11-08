@@ -8,11 +8,15 @@ import BrandHistory from './BrandHistory'
 import BrandCatalog from './BrandCatalog'
 import MainLayout from '../../layout/MainLayout'
 import Scrollbar from '../../components/Scrollbar'
+import BrandHistoryMobile from './BrandHistoryMobile'
 import { brandDetail } from '../../components/helpers/constants'
+import useDeviceDetect from '../../components/helpers/useDeviceDetect'
 import { SmoothScrollProvider } from '../../components/helpers/SmoothScroll.context'
 
 export default function Brand({ detail }) {
+  const { isMobile } = useDeviceDetect()
   const [imagePosition, setImagePosition] = useState('about')
+
   const sectons = [
     { id: 'image', icon: '' },
     { id: 'about', icon: '' },
@@ -26,14 +30,20 @@ export default function Brand({ detail }) {
   return (
     <MainLayout className='no-padding'>
       <SmoothScrollProvider options={{ smooth: true }}>
-        <BrandImage image={brandDetail.image} about={brandDetail.about} />
+        <BrandImage image={brandDetail.image} imageMobile={brandDetail.imageMobile} about={brandDetail.about} />
         <BrandAbout about={brandDetail.about} imagePosition={imagePosition} setImagePosition={setImagePosition} />
         <BrandNumbers numbers={brandDetail.numbers} />
         <BrandCatalog about={brandDetail.about} />
-        <BrandHistory history={brandDetail.history} />
-        <BrandMedia media={brandDetail.media} />
+        {isMobile
+          ? <BrandHistoryMobile history={brandDetail.history} />
+          : <BrandHistory history={brandDetail.history} />
+        }
+        {isMobile
+          ? null
+          : <BrandMedia media={brandDetail.media} />
+        }
         <BrandFooter info={brandDetail.contacts} documents={brandDetail.documents} />
-        <Scrollbar scrollComponents={sectons} about={brandDetail.about} imagePosition={imagePosition} setImagePosition={setImagePosition}/>
+        <Scrollbar scrollComponents={sectons} about={brandDetail.about} imagePosition={imagePosition} setImagePosition={setImagePosition} />
       </SmoothScrollProvider>
     </MainLayout>
   )

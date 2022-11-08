@@ -142,6 +142,7 @@ export const mainItems = {
 
 export const brandDetail = {
     image: '/assets/img/brand/main.jpg',
+    imageMobile: '/assets/img/brand/main-mobile.jpg',
     about: {
         name: 'Lock Stock & Barrel',
         country: 'Финляндия',

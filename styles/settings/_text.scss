@@ -84,7 +84,7 @@ $text-sizes: (
         'h2':           $text-h2,
         'h3':           $text-h3,
         'h4':           $text-h4, // used
-        'h5':           $text-p1,
+        'h5':           $text-h5, // used
         'h6':           $text-p2,
         // Caption
         'c1':           $text-c1,
@@ -94,8 +94,8 @@ $text-sizes: (
         'c5':           $text-c5,
 
         // Text
-        't1':           $text-t1,
-        't2':           $text-t2,
+        't1':           $text-t1, // used
+        't2':           $text-t2, // used
         't3':           $text-t4,
         't4':           $text-t5,
         't5':           $text-t5,

@@ -23,7 +23,7 @@
 
     &[data-slides="4"] .sliderItem {
         div {
-            max-width: 457px;
+            max-width: 500px;
         }
 
         &:nth-child(odd) {
@@ -64,17 +64,25 @@
             }
         }
 
+        &:last-child {
+            > div {
+                max-width: 650px;
+            }
+        }
+
         > div {
+            max-width: 480px;
+            padding-top: 10px;
             position: relative;
         }
 
         > div::before{
-            top: 0.5em;
             width: 10px;
             content: '';
             height: 10px;
             position: absolute;
             margin-left: -25px;
+            top: calc(0.5em + 10px);
             transform: rotate(45deg);
             border: 1px solid var(--t-tetriary);
         }

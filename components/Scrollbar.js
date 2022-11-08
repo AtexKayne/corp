@@ -4,6 +4,7 @@ import React, { useContext, useEffect, useState, useRef } from 'react'
 import { useTransform, useMotionValue } from 'framer-motion'
 import { ThemeContext } from './helpers/ThemeContext'
 import Image from 'next/image'
+import useDeviceDetect from '../components/helpers/useDeviceDetect'
 
 export default function Scrollbar({ scrollComponents, about, imagePosition, setImagePosition }) {
     const { scroll }        = useContext(SmoothScrollContext)
@@ -11,6 +12,7 @@ export default function Scrollbar({ scrollComponents, about, imagePosition, setI
     const refLinksContainer = useRef()
     const [links, setLinks] = useState([0])
     const { theme }         = useContext(ThemeContext)
+    const { isMobile }      = useDeviceDetect()
     const [sectionOffsets, setSectionOffsets]  = useState([0,1])
     const [scrollPositions, setScrollPosition] = useState([0,1])
     const scrollPosition = useTransform(y, sectionOffsets, scrollPositions)
@@ -22,7 +24,7 @@ export default function Scrollbar({ scrollComponents, about, imagePosition, setI
     }
 
     useEffect(() => {
-        if (!scroll) return
+        if (!scroll || isMobile) return
         let isScrolling
         const sectionsClientTop = scrollComponents.map(element => {
             return document.querySelector(`#${element.id}`).getBoundingClientRect().top
@@ -49,6 +51,8 @@ export default function Scrollbar({ scrollComponents, about, imagePosition, setI
         }
     }, [scroll]);
 
+    if (isMobile) return null
+    
     return (
         <div className={`${style.scrollbar} ${theme === 'ui-transparent' ? 'is-hidden' : ''}`}>
             <div data-position={imagePosition} className={style.image}>

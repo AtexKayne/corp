@@ -1,19 +1,33 @@
+@import "../../mixins/helpers/media";
+
 .catalog {
     display: flex;
-    align-items: center;
+    flex-direction: column;
+
+    @include media-breakpoint(md-up) {
+        align-items: center;
+        flex-direction: row;
+    }
 }
 
 .catalogImage {
     position: relative;
 
     > *:last-child {
-        right: 12px;
+        left: 26px;
         bottom: 23px;
         position: absolute!important;
+    }
+
+    @include media-breakpoint(md-up) {
+        > *:last-child {
+            left: auto;
+            right: 12px;
+            bottom: 23px;
+        }
     }
 }
 
 .catalogText {
     max-width: 300px;
-    margin-left: 30px;
 }

@@ -2,13 +2,14 @@ import style from '../../styles/module/brand/brand-numbers.module.scss'
 import { SmoothScrollContext } from '../../components/helpers/SmoothScroll.context'
 import { useEffect, useRef, useContext, useState } from 'react'
 import { motion, useAnimationControls } from 'framer-motion'
+import useDeviceDetect from '../../components/helpers/useDeviceDetect'
 
 const scrollCardHeight = 200
 
-function Number({number, index, numbersCount, scrollPosition, listAnimation}) {
+function Number({ number, index, numbersCount, scrollPosition, listAnimation }) {
     const animation = useAnimationControls()
     const isAnimated = useRef(false)
-
+    
     useEffect(() => {
         if (scrollPosition >= index * scrollCardHeight) {
             if (!isAnimated.current) {
@@ -32,7 +33,7 @@ function Number({number, index, numbersCount, scrollPosition, listAnimation}) {
                 initial={{ y: '100%', x: `${index * -100}px`, rotate: (index - numbersCount / 2) * 5 }}
                 animate={animation}
                 className={style.card}>
-                <div className={`${style.cardNumber} text--g2`}>{number.number}</div>
+                <div className={`${style.cardNumber} text--g2 pb-1 pb-0:md`}>{number.number}</div>
                 <div className={`${style.cardText} text--t2`}>{number.text}</div>
             </motion.div>
         </div>
@@ -46,6 +47,7 @@ export default function BrandNumbers({ numbers = [] }) {
     const { scroll } = useContext(SmoothScrollContext)
     const listAnimation = useAnimationControls()
     const [scrollPosition, setScrollPosition] = useState(-10)
+    const { isMobile } = useDeviceDetect()
 
     useEffect(() => {
         if (!scroll) return
@@ -79,19 +81,19 @@ export default function BrandNumbers({ numbers = [] }) {
     }, [scroll]);
 
     return (
-        <section ref={refSection} id='numbers' style={{ height: `calc(100vh + ${numbers.length * scrollCardHeight}px)` }} data-scroll-section>
+        <section ref={refSection} id='numbers' style={{ height: isMobile ? 'auto' : `calc(100vh + ${numbers.length * scrollCardHeight}px)` }} data-scroll-section>
             <div ref={refContainer} data-scroll data-scroll-sticky data-scroll-target='#numbers' className={style.container}>
                 <h2 className={`${style.title} text--h1 pb-1`}>Цифры</h2>
                 <motion.div initial={{ x: `${numbers.length * 100}px` }} animate={listAnimation} className={style.cardList}>
                     {numbers.length ?
                         numbers.map((number, index) => (
-                            <Number 
+                            <Number
                                 key={number.text}
                                 number={number}
                                 index={index}
                                 listAnimation={listAnimation}
                                 scrollPosition={scrollPosition}
-                                numbersCount={numbers.length}/>
+                                numbersCount={numbers.length} />
                         )) : ''
                     }
                 </motion.div>

@@ -26,6 +26,11 @@ export default function MainSlider({slides}) {
     useEffect(() => {
         if (!refSlider.current) return
         const item = refSlider.current.querySelectorAll(style.paginationItems)[0]
+        // const activeSlide = refSlider.current.querySelector('[data-active="active"]')
+        // if (activeSlide) {
+        //     activeSlide.setAttribute('data-active', 'false')
+        //     setTimeout(() => activeSlide.setAttribute('data-active', 'active'), 500)
+        // }
         if (item) item.click()
         refProgress.current.style.width = `calc(${(100 / slides.length)}% - 5px)`
     }, [slides]);

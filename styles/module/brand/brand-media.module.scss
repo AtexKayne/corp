@@ -1,3 +1,18 @@
+@import "../../mixins/helpers/media";
+
+.title {
+    width: 100%;
+    display: flex;
+    min-width: 100%;
+    flex-basis: 100px;
+    flex-direction: column;
+
+    @include media-breakpoint(md-up) {
+        flex-direction: row;
+        // align-items: center;
+    }
+}
+
 .wrapper {
     overflow: hidden;
     position: relative;
@@ -47,4 +62,17 @@
     position: absolute;
     pointer-events: none;
     // background: linear-gradient(90deg, rgba(245,245,245,1) 0%, rgba(245,245,245,0) 10%, rgba(245,245,245,0) 50%, rgba(245,245,245,0) 90%, rgba(245,245,245,1) 100%);
+}
+
+.container {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.imageNew {
+    margin: 30px 0;
+
+    &:nth-child(2n + 1) {
+        margin: 30px;
+    }
 }

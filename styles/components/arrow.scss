@@ -1,30 +1,48 @@
 .arrow {
     overflow: visible;
-    margin-left: 20px;
     vertical-align: text-top;
-    color: var(--t-dark-violet);
+    color: color-use(primary);
 
     svg {
         overflow: visible;
         
         > * { transition: .3s; }
     }
+
+    @include media-breakpoint(sm-down) {
+        svg {   
+            line:nth-child(2) {
+                transform: scaleX(3) translateX(-20px);
+            }
+    
+            path {
+                transform: translateX(60px);
+            }
+        }
+    }
+
+    @include media-breakpoint(md-up) {
+        margin-left: 20px;
+        color: var(--t-dark-violet);
+    }
 }
 
 .c-hover:hover .arrow {
-    color: var(--t-primary);
-
-    svg {        
-        line:nth-child(1) {
-            transform: scaleX(0.8);
-        }
-
-        line:nth-child(2) {
-            transform: scaleX(1.4) translateX(-13px);
-        }
-
-        path {
-            transform: translateX(7px);
+    @include media-breakpoint(md-up) {
+        color: var(--t-primary);
+    
+        svg {        
+            line:nth-child(1) {
+                transform: scaleX(0.8);
+            }
+    
+            line:nth-child(2) {
+                transform: scaleX(1.4) translateX(-13px);
+            }
+    
+            path {
+                transform: translateX(7px);
+            }
         }
     }
 }

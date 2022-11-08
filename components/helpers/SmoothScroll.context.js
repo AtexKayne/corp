@@ -17,6 +17,14 @@ export const SmoothScrollProvider = ({ children, options }) => {
             new LocomotiveScroll({
               el: refScrollContainer.current,
               ...options,
+              mobile: {
+                smooth: true
+              },
+              tablet: {
+                smooth: true
+              },
+              scrollFromAnywhere: true,
+              reloadOnContextChange: true,
             })
           )
         } catch (error) {

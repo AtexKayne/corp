@@ -1,3 +1,5 @@
+@import "../../mixins/helpers/media";
+
 .container {
     display: flex;
     min-height: 85vh;
@@ -50,7 +52,7 @@
     top: 40px;
     left: 40px;
     right: 40px;
-    bottom: 0px;
+    bottom: -20px;
     z-index:  1;
     user-select: none;
     position: absolute;
@@ -82,7 +84,7 @@
     
     > * {
         display: block;
-        margin-bottom: 8vw;
+        margin-bottom: 0;
         white-space: nowrap;
         transition: .3s opacity;
     }
@@ -96,6 +98,12 @@
         > * {
             margin-left: -50px;
             transform: rotate(90deg);
+        }
+    }
+
+    @include media-breakpoint(xxxl) {
+        > * {
+            margin-bottom: 8vw;
         }
     }
 }
