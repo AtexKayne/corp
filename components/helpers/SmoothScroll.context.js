@@ -4,7 +4,7 @@ export const SmoothScrollContext = createContext({
   scroll: null,
 })
 
-export const SmoothScrollProvider = ({ children, options }) => {
+export const SmoothScrollProvider = ({ children, options, externalClass = '' }) => {
   const [scroll, setScroll] = useState(null)
   const refScrollContainer = useRef(null)
 
@@ -40,7 +40,7 @@ export const SmoothScrollProvider = ({ children, options }) => {
 
   return (
     <SmoothScrollContext.Provider value={{ scroll }}>
-      <div ref={refScrollContainer} data-scroll-container>
+      <div className={externalClass} ref={refScrollContainer} data-scroll-container>
         {children}
       </div>
     </SmoothScrollContext.Provider>

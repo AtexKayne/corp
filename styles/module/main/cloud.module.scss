@@ -1,11 +1,12 @@
+@import "../../mixins/helpers/media";
+
 .cloudContainer {
-    width: 100%;
-    height: 240px;
-    padding: 30px 0;
-    max-width: 100%;
-    max-width: 100%;
+    width: 40vw;
+    height: 440px;
+    max-width: 40vw;
     overflow: hidden;
     position: relative;
+    margin-bottom: -200px;
 }
 
 .cloudWrapper {
@@ -14,7 +15,7 @@
     display: flex;
     flex-shrink: 0;
     flex-wrap: nowrap;
-    transition: 1s linear;
+    transition: .2s linear;
     flex-direction: row-reverse;
     transform: translateX(-300%);
 }
@@ -28,29 +29,48 @@
     position: absolute;
     pointer-events: none;
     background: transparent;
-    background: linear-gradient(90deg, rgba(245,245,245,1) 0%, rgba(245,245,245,0) 50%, rgba(245,245,245,1) 100%);
+    background: linear-gradient(90deg, rgba(245, 245, 245, 0) 50%, rgba(245, 245, 245, 1) 100%);
 }
 
 .cloudItemWrapper {
-    width: 100px;
+    width: 160px;
     position: relative;
+
+    @include media-breakpoint(md-up) {
+        &:nth-child(3n + 1) {
+            top: 80px;
+            margin-left: -80px;
+        }
+
+        &:nth-child(3n + 2) {
+            top: -10px;
+            margin-left: -5px;
+        }
+
+        &:nth-child(3n + 3) {
+            top: 170px;
+            margin-left: -240px;
+        }
+    }
 }
 
 .cloudItem {
     left: 0;
-    width: 80px;
-    height: 80px;
-    padding: 20px;
-    transition: 3.5s;
+    width: 160px;
+    height: 160px;
+    display: flex;
+    transition: 1.5s;
     position: relative;
+    align-items: center;
+    justify-content: center;
     border: 1px solid var(--t-line);
     transform: scale(0.6) rotate(45deg);
-    
-    &[data-show="true"] {
-        transform: scale(1) rotate(45deg);
-    }
 
-    > span {
+    // &[data-show="true"] {
+    //     transform: scale(1) rotate(45deg);
+    // }
+
+    >span {
         transform: rotate(-45deg);
     }
 
@@ -101,6 +121,7 @@
     0% {
         transform: translateX(-100%);
     }
+
     100% {
         transform: translateX(100%);
     }

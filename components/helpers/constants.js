@@ -61,10 +61,35 @@ export const brandItems = {
             logo: '/assets/img/logos/brand-4.png'
         },
         {
-            name: 'System4',
+            name: 'Derby',
+            text: 'Основан известным испанским косметическим производителем — компанией CAROBELS COSMETICS и принадлежит одной семье уже более 35 лет',
+            logo: '/assets/img/logos/brand-1.png' // Image size min 250x192
+        },
+        {
+            name: 'DS',
             text: 'Более 50 лет, профессиональные средства Система 4 разрабатываются лучшими учеными и специалистами по здоровью волос и кожи головы.',
+            logo: '/assets/img/logos/brand-2.png'
+        },
+        {
+            name: 'Mizutani',
+            text: 'Основан известным испанским косметическим производителем — компанией CAROBELS COSMETICS и принадлежит одной семье уже более 35 лет',
+            logo: '/assets/img/logos/brand-3.png'
+        },
+        {
+            name: 'Lock Stock & Barrel',
+            text: 'Более 50 лет, профессиональные средства Система 4 разрабатываются лучшими учеными и специалистами по здоровью волос и кожи головы.',
+            logo: '/assets/img/logos/brand-4.png'
+        },
+        {
+            name: 'layrite',
+            text: 'Основан известным испанским косметическим производителем — компанией CAROBELS COSMETICS и принадлежит одной семье уже более 35 лет',
             logo: '/assets/img/logos/brand-5.png'
-        }
+        },
+        {
+            name: 'Forme Essentials',
+            text: 'Более 50 лет, профессиональные средства Система 4 разрабатываются лучшими учеными и специалистами по здоровью волос и кожи головы.',
+            logo: '/assets/img/logos/brand-1.png'
+        },
     ],
     'tags': [
         'Барберинг',
