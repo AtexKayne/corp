@@ -39,7 +39,7 @@ export default function Brand({ detail }) {
           : <BrandHistory history={brandDetail.history} />
         }
         {isMobile
-          ? null
+          ? <BrandMedia media={brandDetail.media} />
           : <BrandMedia media={brandDetail.media} />
         }
         <BrandFooter info={brandDetail.contacts} documents={brandDetail.documents} />

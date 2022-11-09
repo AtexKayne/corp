@@ -22,11 +22,15 @@
     }
 
     @include media-breakpoint(md-up) {
+        margin-top: 10px;
         margin-left: 20px;
+        align-items: center;
+        display: inline-flex;
         color: var(--t-dark-violet);
     }
 }
 
+.c-hover[data-hover="true"] .arrow,
 .c-hover:hover .arrow {
     @include media-breakpoint(md-up) {
         color: var(--t-primary);

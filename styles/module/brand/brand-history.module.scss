@@ -65,7 +65,7 @@
     left: 40px;
     right: 40px;
     bottom: -20px;
-    z-index:  1;
+    z-index: 1;
     user-select: none;
     position: absolute;
 
@@ -79,7 +79,8 @@
     }
 }
 
-.lines, .lastLine {
+.lines,
+.lastLine {
     left: 50%;
     width: 1px;
     bottom: 1px;
@@ -89,33 +90,55 @@
     overflow: visible;
     position: absolute;
     text-align: center;
-    align-items: center;
     justify-content: center;
     transform-origin: bottom;
     background-color: var(--t-dark-violet);
-    
-    > * {
+
+    >* {
+        width: 50px;
         display: block;
-        margin-bottom: 0;
         white-space: nowrap;
         transition: .3s opacity;
     }
 
+    &[data-active="false"] {
+        align-items: flex-end;
+
+        >* {
+            margin-bottom: 22vw;
+        }
+    }
+
+
     &[data-active="true"] {
         background-color: var(--t-tetriary);
-        > * { opacity: 0; }
+
+        >* {
+            opacity: 0;
+        }
     }
 
     &[data-active="move"] {
-        > * {
+        align-items: flex-start;
+
+        >* {
+            margin-top: 22vw;
             margin-left: -50px;
             transform: rotate(90deg);
         }
     }
 
     @include media-breakpoint(xxxl) {
-        > * {
-            margin-bottom: 8vw;
+        &[data-active="false"] {
+            >* {
+                margin-bottom: 16vw;
+            }
+        }
+
+        &[data-active="move"] {
+            >* {
+                margin-top: 26vw;
+            }
         }
     }
 }
@@ -123,7 +146,7 @@
 .lines {
     transform: rotate(90deg);
 
-    > * {
+    >* {
         margin-left: -30px;
         transform: rotate(-90deg);
     }
@@ -132,7 +155,7 @@
 .lastLine {
     transform: rotate(-90deg);
 
-    > * {
+    >* {
         margin-left: 30px;
         transform: rotate(90deg);
     }

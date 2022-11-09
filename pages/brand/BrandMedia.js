@@ -1,47 +1,67 @@
-import style from '../../styles/module/brand/brand-media.module.scss'
-import { useEffect, useRef, useContext, useState } from 'react'
 import Image from 'next/image'
-import Link from 'next/link'
 import Arrow from '../../components/Arrow'
-import { SmoothScrollContext } from '../../components/helpers/SmoothScroll.context'
-import { motion, useTransform, useMotionValue } from 'framer-motion'
+import { useEffect, useRef, useState } from 'react'
+import { motion, useAnimationControls, useInView } from 'framer-motion'
+import style from '../../styles/module/brand/brand-media.module.scss'
+import useDeviceDetect from '../../components/helpers/useDeviceDetect'
 
 export default function BrandMedia({ media = [] }) {
-    const y = useMotionValue(0)
     const refInner = useRef(null)
     const refSection = useRef(null)
     const refWrapper = useRef(null)
+    const { isMobile } = useDeviceDetect()
+    const [hover, setHover] = useState(false)
     const [margin, setMargin] = useState('0')
+    const animateWrapper = useAnimationControls()
     const [maxRange, setMaxRange] = useState(-240)
-    const { scroll } = useContext(SmoothScrollContext)
-    const scrollPosition = useTransform(y, [0, media.length * 150], ['-80%', '20%'])
+    const isInView = useInView(refInner, { once: true })
 
     useEffect(() => {
-        const clientRect = refWrapper.current.getBoundingClientRect()
-        setMargin(`0 -${clientRect.x - 200}px`)
+        if (isInView) {
+            animateWrapper.start({ x: -150, pointerEvents: 'none', transition: { duration: 0.5, delay: 0.5 } })
+                .then(() => animateWrapper.start({ x: 0, pointerEvents: 'all', transition: { duration: 0.5, delay: 0.5 } }))
+                .then(() => animateWrapper.start({ x: maxRange * 1.1, transition: { duration: 60, delay: 1, type: 'tween' } }))
+        }
+    }, [isInView]);
+
+    useEffect(() => {
+        setTimeout(() => {
+            const clientRect = refWrapper.current.getBoundingClientRect()
+            if (isMobile) setMargin('30px calc(var(--spacing) * -1)')
+            else setMargin(`0 -${clientRect.x - 200}px`)
+        }, 300)
     }, [])
+
+    useEffect(() => {
+        if (isMobile) setMargin('30px calc(var(--spacing) * -1)')
+    }, [isMobile])
 
     useEffect(() => {
         let scrollWidth = 0
         const innerElements = Array.from(refInner.current.childNodes)
         innerElements.forEach(el => scrollWidth += el.offsetWidth + 20)
-        setMaxRange(refWrapper.current.clientWidth - 70 - scrollWidth / 2.5)
+        if (isMobile) setMaxRange(refWrapper.current.clientWidth - 40 - scrollWidth / 2.7)
+        else setMaxRange(refWrapper.current.clientWidth - 90 - scrollWidth / 2.5)
     }, [margin])
 
     return (
         <section ref={refSection} id='media' data-scroll-section>
             <div className={style.container}>
-                <h2 className={`${style.title} text--h1 pb-1 c-hover`}>
+                <h2 data-hover={hover} className={`${style.title} text--h1 pb-1 c-hover`}>
                     Медиа
                     <Arrow />
                 </h2>
 
                 <div ref={refWrapper} style={{ margin: margin }} className={`${style.wrapper} c-dragh`}>
-                    <motion.div ref={refInner} drag='x' dragConstraints={{ left: maxRange, right: 0 }} className={style.inner}>
+                    <motion.div animate={animateWrapper} ref={refInner} drag='x' dragConstraints={{ left: maxRange, right: 0 }} className={style.inner}>
                         {media ?
                             media.map((element, index) => (
                                 // @TODO Replace key
-                                <div className={`${style.image} c-hover`} key={index}>
+                                <div
+                                    onMouseEnter={() => setHover(true)}
+                                    onMouseLeave={() => setHover(false)}
+                                    className={`${style.image} c-dragh`}
+                                    key={index}>
                                     <Image src={element} alt='media' width='276' height='276' />
                                 </div>
                             )) : ''

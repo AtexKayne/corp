@@ -22,6 +22,14 @@
         padding-bottom: 0;
         pointer-events: all;
     }
+
+    &[data-hover="true"] {
+        color: var(--t-primary)!important;
+
+        svg {
+            color: var(--t-primary)!important;
+        }
+    }
 }
 
 .cardList {
@@ -42,18 +50,19 @@
     width: 100%;
     height: 178px;
     transition: .3s;
-
-    &:hover {
-        transform: translateX(-80px);
-    }
-
-    &:last-child:hover {
-        transform: translateX(0px);
-    }
+    pointer-events: none;
 
     @include media-breakpoint(md-up) {
         width: 250px;
         height: 300px;
+
+        &:hover {
+            transform: translateX(-80px);
+        }
+
+        &:last-child:hover {
+            transform: translateX(0px);
+        }
     }
 
     @include media-breakpoint(sm-down) {
@@ -72,6 +81,7 @@
     height: 100%;
     padding: 30px;
     border-radius: 20px;
+    pointer-events: all;
     border: 2px solid var(--t-line);
     margin-top: calc(var(--spacing) * -1);
     background-color: var(--t-background);

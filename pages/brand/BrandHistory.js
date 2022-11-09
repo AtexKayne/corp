@@ -62,7 +62,7 @@ function HistoryImage({ index, y, historyCount, element }) {
             </motion.div>
 
             <motion.div data-active={index === historyCount - 1} className={style.lines}>
-                <span>{element.name}</span>
+                <span className='text--t2'>{element.name}</span>
             </motion.div>
         </motion.div>
     )
@@ -74,7 +74,7 @@ export default function BrandHistory({ history }) {
     return (
         <section id='history' data-scroll-section>
             <div className={style.container}>
-                <h2 className={`${style.title} text--h1 pb-1`}>История успеха</h2>
+                <h2 className={`${style.title} text--h1 pb-0 pb-1:xxl`}>История успеха</h2>
 
                 <div className={style.historyContainer}>
                     {history ?

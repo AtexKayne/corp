@@ -1,19 +1,19 @@
-import style from '../../styles/module/brand/brand-image.module.scss'
-import { SmoothScrollContext } from '../../components/helpers/SmoothScroll.context'
-import { ThemeContext } from '../../components/helpers/ThemeContext'
 import { useContext, useEffect, useState, useRef } from 'react'
+import { ThemeContext } from '../../components/helpers/ThemeContext'
 import { motion, useTransform, useMotionValue } from 'framer-motion'
+import style from '../../styles/module/brand/brand-image.module.scss'
 import useDeviceDetect from '../../components/helpers/useDeviceDetect'
+import { SmoothScrollContext } from '../../components/helpers/SmoothScroll.context'
 
 export default function BrandImage({ image, imageMobile, about }) {
+    const y = useMotionValue(0)
+    const refImage = useRef(null)
+    const { isMobile } = useDeviceDetect()
     const { scroll } = useContext(SmoothScrollContext)
     const { theme, setTheme } = useContext(ThemeContext)
     const [leftPosition, setLeftPosititon] = useState(0)
-    const refImage = useRef(null)
-    const y = useMotionValue(0)
     const scaleTransform = useTransform(y, [0, 400], [1, 0.7])
     const yTransform = useTransform(y, [400, 550], [0, -400])
-    const { isMobile } = useDeviceDetect()
 
     useEffect(() => {
         if (!scroll) return
@@ -37,7 +37,7 @@ export default function BrandImage({ image, imageMobile, about }) {
 
 
         return () => {
-            if (typeof window !== 'undefined') document.body.addEventListener('scroll', mobileScrollHandler)
+            if (typeof window !== 'undefined') document.body.removeEventListener('scroll', mobileScrollHandler)
             scroll.off('scroll', scrollHandler)
         }
     }, [scroll])
@@ -50,6 +50,11 @@ export default function BrandImage({ image, imageMobile, about }) {
             setLeftPosititon(-offsetX)
         }, 700)
     }, [])
+
+    useEffect(() => {
+        if (!isMobile) return
+        setTheme('ui-transparent')
+    }, [isMobile])
 
     const wheelHandler = event => {
         if (!scroll && !isMobile) return
