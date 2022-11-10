@@ -295,7 +295,9 @@
     max-width: 100%;
     transition: .5s;
     flex-basis: 100%;
+    min-height: 100vh;
     transform: scale(1);
+    min-height: -webkit-fill-available;;
 
     &[data-show="transition-start"] {
         transform: scale(0.8);

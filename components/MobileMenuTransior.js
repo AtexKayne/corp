@@ -37,6 +37,7 @@ export default function MobileMenuTransitor({ className, menuItems, animateConte
                     setMenuState('close')
                     animateBread.start({ y: 301, transition: { duration: 0.5 } })
                     animateFooter.start({ y: 301, transition: { duration: 0.5 } }).then(breadcrumbsSetting)
+                    animateContent.start({filter: 'brightness(100%)', transition: {duration: 0.5, delay: 0.1}})
                     isAnimated.current = animateTransitor.start({
                         y: '100vh', borderWidth: [0, 15, 0],
                         transitionTimingFunction: 'ease',
@@ -92,8 +93,8 @@ export default function MobileMenuTransitor({ className, menuItems, animateConte
                 transitionTimingFunction: 'ease',
                 transition: { duration: 1 }
             })
-            setMenuState('close')
             animateContent.start({filter: 'brightness(100%)', transition: {duration: 0.5, delay: 0.1}})
+            setMenuState('close')
             await animateTransitor.start({
                 y: '100vh', borderWidth: [0, 15, 0],
                 transitionTimingFunction: 'ease',
