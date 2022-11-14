@@ -58,10 +58,36 @@ body>div {
         max-height: -webkit-fill-available;
 
         section {
+            opacity: 0;
             width: 100%;
+            transition: 1.5s;
             position: absolute;
+            pointer-events: none;
             background-color: color-use(background);
             height: calc(100vh - var(--spacing) * 3.4);
+
+            >*>* {
+                opacity: 0;
+                transition: .7s;
+
+                &:nth-child(odd) {
+                    transform: translateX(-300px);
+                }
+
+                &:nth-child(even) {
+                    transform: translateX(300px);
+                }
+            }
+
+            &[data-active="true"] {
+                opacity: 1;
+                pointer-events: all;
+
+                >*>* {
+                    opacity: 1;
+                    transform: translateX(0);
+                }
+            }
         }
 
         @media (min-aspect-ratio: 18/9) {

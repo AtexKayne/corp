@@ -14,8 +14,10 @@ function Items({ params, width, direction }) {
 
     useEffect(() => {
         if (isInView) {
+            console.log('in');
             //
         } else {
+            console.log('out');
             if (direction === 'right') {
                 setPosition(width * refCurrentTimes.current * -1)
                 refCurrentTimes.current++
@@ -107,9 +109,11 @@ export default function Cloud({ items }) {
                 // dragConstraints={{ left: 0, right: 0 }}
                 className={styles.cloudWrapper}>
                 {// @TODO Replace key
+                    items ?
                     items.map((item, index) => (
                         <Items width={width} direction={direction} key={index} params={item} />
-                    ))}
+                    )) : ''
+                }
             </motion.div>
             <div className={styles.cloudBackground} />
         </div>

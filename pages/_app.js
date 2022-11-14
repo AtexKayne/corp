@@ -7,6 +7,7 @@ import useDeviceDetect from '../components/helpers/useDeviceDetect'
 import MobileMenuTransitor from '../components/MobileMenuTransior'
 import MobilePreloader from '../components/MobilePreloader'
 import { ThemeContext } from '../components/helpers/ThemeContext';
+import {menuItems as menuI} from '../components/helpers/constants'
 
 function MyApp({ Component, pageProps }) {
   const { isMobile } = useDeviceDetect()
@@ -28,15 +29,20 @@ function MyApp({ Component, pageProps }) {
   }, [])
 
   const getMenuItems = async () => {
-    const resp = await fetch(`${process.env.API_URL}/menu/?lang=ru`)
-    return await resp.json()
+    try {
+      const resp = await fetch(`${process.env.API_URL}/menu/?lang=ru`)
+      return await resp.json()
+    } catch (error) {
+      return menuI
+    }
   }
 
   return (
     <ThemeContext.Provider value={{ theme, setTheme }}>
-      {isMobile
+      {/* {isMobile
         ? <MobilePreloader animatePreloader={animatePreloader} setPreloaderState={setPrSt} />
-        : <Preloader animatePreloader={animatePreloader} setPreloaderState={setPrSt} />}
+        : <Preloader animatePreloader={animatePreloader} setPreloaderState={setPrSt} />
+      } */}
       {isMobile
         ? <MobileMenuTransitor animateContent={animateContent} menuItems={menuItems} className={theme} />
         : <MenuTransitor animateContent={animateContent} menuItems={menuItems} preloaderState={preloaderState} setContainerWidth={setContainerWidth} className={theme} />
