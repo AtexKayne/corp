@@ -3,6 +3,11 @@
     display: inline-flex;
     justify-content: center;
 
+    &--xxs {
+        margin-left: 5px;
+        margin-right: 5px;
+    }
+
     &--xs {
         margin-left: 10px;
         margin-right: 10px;

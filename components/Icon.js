@@ -7,6 +7,7 @@ export default function Icon({ name, width = 16, height = 16, size }) {
         // const path = `../public/icons/icon-${iconName}.svg`
         const dynamicComponents = {
             navigation: dynamic(() => import('../public/icons/icon-navigation.svg'), { ssr: false }),
+            navigationXS: dynamic(() => import('../public/icons/icon-navigation-xs.svg'), { ssr: false }),
             heartMD: dynamic(() => import('../public/icons/icon-heart-md.svg'), { ssr: false }),
             searchMD: dynamic(() => import('../public/icons/icon-search-md.svg'), { ssr: false }),
             search: dynamic(() => import('../public/icons/icon-search.svg'), { ssr: false }),

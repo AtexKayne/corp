@@ -32,15 +32,33 @@
 }
 
 .middle {
+    top: 0;
     z-index: 2;
     display: flex;
-    padding: 32px 0;
-    position: relative;
+    position: absolute;
+    transform: translateY(96px);
     justify-content: space-between;
 }
 
+.middleFixed {
+    left: 0;
+    right: 0;
+    z-index: 3;
+    width: 100%;
+    position: fixed;
+    max-width: none;
+    padding: 18px 120px;
+    transform: translateY(-400px);
+    background-color: var(--t-background);
+    
+    &[data-active="true"] {
+        transition: .5s;
+        transform: translateY(0);
+    }
+}
+
 .bottom {
-    z-index: 2;
+    z-index: 1;
     display: flex;
     max-width: 560px;
     flex-basis: 100%;
@@ -108,3 +126,17 @@
     position: absolute;
 }
 
+.rabbit {
+    top: 20px;
+    width: 56px;
+    height: 56px;
+    position: fixed;
+    transition: .5s;
+    border-radius: 50%;
+    left: calc(50vw - 28px);
+    transform: translateY(-400px);
+}
+
+.rabbitFixed {
+    transform: translateY(0);
+}

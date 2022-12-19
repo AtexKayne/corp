@@ -1,8 +1,38 @@
-import Image from 'next/image'
-import style from '../styles/module/Header.module.scss'
 import Icon from './Icon'
+import Image from 'next/image'
+import { useState, useEffect, useRef } from 'react'
+import style from '../styles/module/Header.module.scss'
+
 
 export default function Header() {
+    const refFixed = useRef(null)
+    const refRabbit = useRef(null)
+    const [isHeaderFixed, setIsHeaderFixed] = useState(false)
+
+    const hoverEnterHandler = () => setIsHeaderFixed(true)
+    const hoverLeaveHandler = () => setIsHeaderFixed(false)
+
+    useEffect(() => {
+        const scrollHandler = event => {
+            const scrollTop = window.scrollY
+
+            if (scrollTop > 250) {
+                refFixed.current.classList.add(style.middleFixed)
+                refRabbit.current.classList.add(style.rabbitFixed)
+            } else {
+                refFixed.current.classList.remove(style.middleFixed)
+                refRabbit.current.classList.remove(style.rabbitFixed)
+
+            }
+        }
+
+        document.addEventListener('scroll', scrollHandler)
+
+        return () => {
+            document.removeEventListener('scroll', scrollHandler)
+        }
+    }, [])
+
     return (
         <header className={style.header}>
             <div className={`container ${style.container}`}>
@@ -16,7 +46,7 @@ export default function Header() {
                         </div>
                     </div>
                     <div className={style.group}>
-                    <div className='is-hidden--sm-down'>
+                        <div className='is-hidden--sm-down'>
                             <Image src='/images/layout/logo-md.svg' width='242' height='45' alt='RedHair market' />
                         </div>
                         <div className='is-hidden--md-up'>
@@ -39,7 +69,10 @@ export default function Header() {
                         <a className='link' href='#' rel='nofollow'>RedHare Обучение</a>
                     </div>
                     <div className={style.group}>
-                        <a className='link' href='#' rel='nofollow'><Icon name='navigation' size='xs' /> Петропавловск-Камчатский</a>
+                        <a className='link btn' href='#' rel='nofollow'>
+                            <Icon name='navigationXS' width='12' height='12' size='xxs' />
+                            <span>Петропавловск-Камчатский</span>
+                        </a>
                         <a className='link is-hidden--xl-up' href='#'>Контакты</a>
                         <a className='link is-hidden--xl-down' href='tel:+74959833542'>+7 (495) 983-35-42</a>
                     </div>
@@ -50,9 +83,14 @@ export default function Header() {
                     </div>
                 </div>
 
-                <div className={`${style.middle} is-hidden--md-down`}>
+                <div
+                    ref={refFixed}
+                    data-active={isHeaderFixed}
+                    onMouseLeave={hoverLeaveHandler}
+                    onMouseEnter={hoverEnterHandler}
+                    className={`${style.middle} is-hidden--md-down container`}>
+                        
                     <div className={`${style.groupMD} text--t1`}>
-
                         <div className='is-hidden--xxl-down' style={{ width: 297, height: 52 }}>
                             <Image src='/images/layout/logo-xxl.svg' width='297' height='52' alt='RedHair market' />
                         </div>
@@ -97,6 +135,10 @@ export default function Header() {
                         </div>
                     </div>
                 </div>
+            </div>
+
+            <div ref={refRabbit} onMouseEnter={hoverEnterHandler} onMouseLeave={hoverLeaveHandler} className={style.rabbit}>
+                <Image src='/images/layout/logo-lg.svg' layout='fill' alt='RedHair market' />
             </div>
         </header>
     )
