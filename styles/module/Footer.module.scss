@@ -3,7 +3,7 @@
 
 .footer {
     position: relative;
-    padding: 32px 0 5px;
+    padding: 32px 0 70px;
 }
 
 .container {
@@ -24,4 +24,30 @@
     flex-shrink: 0;
     flex-basis: 25%;
     flex-direction: column;
+}
+
+.copy {
+    left: 0;
+    right: 0;
+    bottom: 0;
+    padding: 10px 0;
+    margin-top: 40px;
+    position: absolute;
+    background-color: rgba(#797979, 0.1);
+}
+
+.group {
+    display: flex;
+    align-items: center;
+    
+    >* {
+        margin-right: adaptive-value((
+            lg: 8px,
+            xxl: 16px,
+        ));
+    }
+
+    >*:last-child {
+        margin-right: 0;
+    }
 }

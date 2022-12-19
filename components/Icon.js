@@ -18,6 +18,8 @@ export default function Icon({ name, width = 16, height = 16, size }) {
             arrowRight: dynamic(() => import('../public/icons/icon-arrow-right.svg'), { ssr: false }),
             burger: dynamic(() => import('../public/icons/icon-three-bars.svg'), { ssr: false }),
             person: dynamic(() => import('../public/icons/icon-person.svg'), { ssr: false }),
+            VK: dynamic(() => import('../public/icons/icon-vk-fill.svg'), { ssr: false }),
+            telegram: dynamic(() => import('../public/icons/icon-telegram-fill.svg'), { ssr: false }),
         }
         const Component = dynamicComponents[iconName]
         setLoadedIcon(Component)
