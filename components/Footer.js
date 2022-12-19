@@ -28,7 +28,7 @@ export default function Footer() {
                     <a className='link text--p2 mt-0.5'>+7 (495) 983-35-42</a>
                     <a className='link text--p4'>info@redhare.ru</a>
                     <div className='text--t6 text--color-small pt-2 text--upper'>Наш адрес:</div>
-                    <div className='text--p5 pt-0.5'>Москва, ул. Бауманская 6/2, «Виктория Плаза», 6-й этаж. Метро «Бауманская»</div>
+                    <div className='text--p5 pt-0.5 pr-2'>Москва, ул. Бауманская 6/2, «Виктория Плаза», 6-й этаж. Метро «Бауманская»</div>
                 </div>
                 <div className={style.column}>
                     <div className='text--t6 text--color-small text--upper'>Ищите нас в соц сетях</div>
