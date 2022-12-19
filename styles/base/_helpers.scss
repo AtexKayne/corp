@@ -1,13 +1,13 @@
 .is-visually-hidden,
 .sr-only {
-    clip: rect(0 0 0 0);
-    clip-path: inset(100%);
+    width: 1px;
     height: 1px;
     overflow: hidden;
-    position: absolute !important;
-    white-space: nowrap;
-    width: 1px;
     margin-top: -1px;
+    clip: rect(0 0 0 0);
+    white-space: nowrap;
+    clip-path: inset(100%);
+    position: absolute !important;
 }
 
 .is-invisible {
@@ -31,36 +31,26 @@
     @extend %overflow-fix;
 }
 
-.c-hover {
-    cursor: url('#{$path-cursors}/hover.svg') 0 0, pointer;
-    transition: 1s cursor;
-}
-
-.c-auto {
-    cursor: url('#{$path-cursors}/auto.svg') 0 0, auto;
-    transition: 1s cursor;
-}
-
-.c-dragh {
-    cursor: url('#{$path-cursors}/drag-h.svg') 18 0, auto;
-    transition: 1s cursor;
-}
-
-.c-dragv, .c-scrollbar_thumb {
-    cursor: url('#{$path-cursors}/drag-v.svg') 0 18, auto!important;
-    transition: 1s cursor;
-}
-
 .d-none { display: none; }
 .d-flex { display: flex; }
 .d-block { display: block; }
 .d-inline {display: inline; }
 
 .flex {
-    &--between {
-        justify-content: space-between;
+    &--wrap { flex-wrap: wrap; }
+    &--column { flex-direction: column; }
+    &--between { justify-content: space-between; }
+    &--column-reverse { flex-direction: column-reverse; }
+    &--center { align-items: center; justify-content: center; }
+    &--end { align-items: flex-end; justify-content: flex-end; }
+    &--wrap-sm-down {
+        @include media-breakpoint(sm-down) {
+            flex-wrap: wrap;
+        }
     }
-    &--column-reverse {
-        flex-direction: column-reverse;
+    &--end-md-up {
+        @include media-breakpoint(md-up) {
+            align-items: flex-end;
+        }
     }
 }

@@ -9,11 +9,10 @@
 
 $z-index-content: unset;
 $z-index-popover: 2;
-$z-index-under-header: 9;
-$z-index-header: 10;
-$z-index-modal: 11;
-$z-index-ajax-loader: 12;
-$z-index-browser-message: 13;
+$z-index-under-header: 4;
+$z-index-header: 5;
+$z-index-modal: 6;
+$z-index-ajax-loader: 7;
 
 
 /**
@@ -42,7 +41,7 @@ $z-index-browser-message: 13;
  *   </div>
  */
 
- $grid-columns: (
+$grid-columns: (
     // Mobile portrait
     xs: (
         // Count
@@ -68,145 +67,47 @@ $z-index-browser-message: 13;
     ),
 
     // Tablet landscape + small desktop
-    // lg: (
-    //     columns: 12,
-    //     unit: 100%,
-    //     // gutter: 30px,
-    // ),
+    lg: (
+        columns: 12,
+        unit: 100%,
+        gutter: 30px,
+    ),
 
     // Large desktop, 1200+
-    // xl: (
-    //     columns: 12,
-    //     unit: 100%,
-    //     // gutter: 30px,
-    // ),
+    xl: (
+        columns: 12,
+        unit: 100%,
+        gutter: 30px,
+    ),
 
     // Very large desktop, 1440+
-    // xxl: (
-    //     columns: 12,
-    //     unit: 100%,
-    //     // gutter: 30px,
-    // ),
+    xxl: (
+        columns: 12,
+        unit: 100%,
+        gutter: 30px,
+    ),
 
     // Extremely large desktop, 1920+
     xxxl: (
         columns: 12,
         unit: 100%,
-        gutter: 20px,
+        gutter: 40px,
     ),
 );
 
-
-/**
- * For every container defined below, the build process generates a separate CSS class.
- * The class name is forming in the following way: `container-NAME`.
- * The `default` container has the class name "container".
- *
- * 'paddings' property uses 'padding' mixin and allows 'inherit' property value.
- * For example 'xs: 0 inherit' will set only top and bottom paddings and 'xs: inherit 0'
- * will set left and right paddings.
- *
- * @demo
- *   <div class="container"></div>
- *   <div class="container container-footer"></div>
- */
-
-$containers: (
-    // Generates 'container-h', a container with left and right paddings
-    // which has size of 1 column
-    'h': (
-        'paddings': (
-            xs:  inherit var(--spacing),
-        )
-    ),
-
-    // Mobile only left and right padding
-    'h-mob': (
-        'paddings': (
-            xs:  inherit var(--spacing),
-            md:  inherit 0,
-        )
-    ),
-
-    // Desktop only left and right padding
-    'h-desktop': (
-        'paddings': (
-            xs:  inherit 0,
-            md:  inherit var(--spacing),
-        )
-    ),
-
-    // Generates 'container-v', a container with top and bottom paddings
-    // which has size of 1 column
-    'v': (
-        'paddings': (
-            xs:  calc(var(--spacing) * 1.5) inherit,
-            md:  var(--spacing) inherit,
-        )
-    ),
-
-    'v-xs-bottom-desktop': (
-        'paddings': (
-            xs:  inherit inherit 0,
-            md:  inherit inherit calc(var(--spacing) / 8),
-        )
-    ),
-
-    'v-sm-bottom': (
-        'paddings': (
-            xs:  inherit inherit calc(var(--spacing) * 1),
-        )
-    ),
-
-    'v-md': (
-        'paddings': (
-            xs:  calc(var(--spacing) * 3) inherit,
-            // md:  calc(var(--spacing) * 4) inherit, // @TODO
-        )
-    ),
-
-    'v-md-top': (
-        'paddings': (
-            xs:  calc(var(--spacing) * 3) inherit inherit,
-        )
-    ),
-
-    'v-lg': (
-        'paddings': (
-            xs:  calc(var(--spacing) * 6) inherit,
-            md:  calc(var(--spacing) * 4) inherit,
-        )
-    ),
-
-    'v-lg-top': (
-        'paddings': (
-            xs:  calc(var(--spacing) * 6) inherit inherit,
-            md:  calc(var(--spacing) * 4) inherit inherit,
-        )
-    ),
-
-    'v-lg-bottom': (
-        'paddings': (
-            xs:  inherit inherit calc(var(--spacing) * 6),
-            md:  inherit inherit calc(var(--spacing) * 4),
-        )
-    ),
-);
-
-
-/**
- * Column size, used for containers, spacing, etc.
- */
 
 $size-x1-xs: 1 / map-get-deep($grid-columns, 'xs', 'columns') * map-get-deep($grid-columns, 'xs', 'unit');
 $size-x1-sm: 1 / map-get-deep($grid-columns, 'sm', 'columns') * map-get-deep($grid-columns, 'sm', 'unit');
 $size-x1-md: 1 / map-get-deep($grid-columns, 'md', 'columns') * map-get-deep($grid-columns, 'md', 'unit');
-$size-x1-xl: $size-x1-md;
-$size-x1-xxl: $size-x1-md;
+$size-x1-xl: 1 / map-get-deep($grid-columns, 'xl', 'columns') * map-get-deep($grid-columns, 'xl', 'unit');
+$size-x1-xxl: 1 / map-get-deep($grid-columns, 'xxl', 'columns') * map-get-deep($grid-columns, 'xxl', 'unit');
 
 $size-x1: (
     xs: $size-x1-xs,
     sm: $size-x1-sm,
     md: $size-x1-md,
-    xxxl: $size-x1-md,
+    lg: $size-x1-md,
+    xl: $size-x1-xl,
+    xxl: $size-x1-xxl,
+    xxxl: $size-x1-xxl,
 );

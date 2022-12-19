@@ -5,17 +5,6 @@
 html, body {
     margin: 0;
     padding: 0;
-    width: 100vw;
-    height: 100vh;
-    min-height: 100vh;
-    overflow-x: hidden;
-    scroll-behavior: smooth;
-    min-height: -webkit-fill-available;
-    background-color: color-use(background);
-    
-    @include media-breakpoint(md-up) {
-        overflow: hidden;
-    }
 }
 
 /*

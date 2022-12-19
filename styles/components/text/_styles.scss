@@ -48,6 +48,7 @@ figure {
     &--t3 { @extend %text--size-t3; }
     &--t4 { @extend %text--size-t4; }
     &--t5 { @extend %text--size-t5; }
+    &--t6 { @extend %text--size-t6; }
     &--c1 { @extend %text--size-c1; }
     &--c2 { @extend %text--size-c2; }
     &--c3 { @extend %text--size-c3; }
@@ -59,6 +60,7 @@ figure {
     &--h4 { @extend %text--size-h4; }
     &--h5 { @extend %text--size-h5; }
     &--g2 { @extend %text--size-g2; }
+    &--g3 { @extend %text--size-g3; }
     &--g4 { @extend %text--size-g4; }
 }
 
@@ -77,6 +79,18 @@ figure {
         text-align: right;
     }
     .text--center\:md {
+        text-align: center;
+    }
+}
+
+@include media-breakpoint(sm-down) {
+    .text--left\:sm-down {
+        text-align: left;
+    }
+    .text--right\:sm-down {
+        text-align: right;
+    }
+    .text--center\:sm-down {
         text-align: center;
     }
 }

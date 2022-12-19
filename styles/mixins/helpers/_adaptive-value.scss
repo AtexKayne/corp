@@ -33,11 +33,6 @@
                     @if $breakpoint == 'xs' {
                         $out: $value;
                     } @else {
-                        // This is a modified version to use scaled only on 'md', 'lg' and 'xl'
-                        @if $breakpoint == 'md' or $breakpoint == 'lg' or $breakpoint == 'xl' {
-                            $value: scaled($value);
-                        }
-
                         @if $out {
                             $out: ', #{ $out }';
                         }

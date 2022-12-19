@@ -8,11 +8,7 @@
 
 .is-hidden,
 .is-hidden--xs-up,
-.is-hidden--xxxl-down,
-.js .is-hidden--js,
-.no-js .is-hidden--no-js,
-.has-hover .is-hidden--hover,
-.no-hover .is-hidden--no-hover {
+.is-hidden--xxxl-down {
     display: none !important;
 }
 
@@ -53,7 +49,7 @@
  * CSS variables for SVG icons to show different shapes on mobile
  */
 
- :root {
+:root {
     --is-visible--sm-down: block;
     --is-visible--md-xxl: none;
     --is-visible--md-up: none;

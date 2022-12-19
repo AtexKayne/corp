@@ -11,3 +11,19 @@
 
     @return $number;
 }
+
+/**
+ * Checks whether the value is a CSS variable
+ *
+ * @property {string} $value Value
+ */
+
+ @function is-css-variable ($value) {
+    @if type-of($value) == 'string' {
+        @if str-index($value, 'var(') != null {
+            @return true;
+        }
+    }
+
+    @return false;
+}

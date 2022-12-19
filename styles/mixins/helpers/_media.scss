@@ -16,13 +16,13 @@
  */
 
 $media-breakpoints: (
-    xs,
-    sm,
-    md,
-    lg,
-    xl,
-    xxl,
-    xxxl
+    xs, // mob
+    sm, // tablet landscape
+    md, // tablet portrait
+    lg, // small laptop
+    xl, // small pc
+    xxl, // normal pc
+    xxxl // hd pc
 ) !default;
 
 
@@ -30,23 +30,23 @@ $media-breakpoints: (
 $media-breakpoint-xxxl:     1920px !default;
 
 // Resolution at which 'xl' will stop matching and 'xxl' will start matching
-$media-breakpoint-xxl:      1440px !default;
+$media-breakpoint-xxl:      1256px !default;
 
 // Resolution at which 'lg' will stop matching and 'xl' will start matching
-$media-breakpoint-xl:       1200px !default;
+$media-breakpoint-xl:       1024px !default;
 
 // Resolution at which 'md' will stop matching and 'lg' will start matching
-$media-breakpoint-lg:       980px !default;
+$media-breakpoint-lg:       880px !default;
 
 // Resolution at which device will switch from 'sm' (mobile phone) to 'md' (tablet)
-$media-breakpoint-md:       668px !default;
+$media-breakpoint-md:       720px !default;
 
 // Resolution at which device with portrait oriented device will automatically match landscape orientation query 'sm'
 // Resolution at which portrait oriented device will switch from 'xs' (mobile phone) to 'md' (tablet)
 $media-breakpoint-sm:       568px !default;
 
 // Minimal viewport size, not actually used anywhere
-$media-breakpoint-xs:       360px !default;
+$media-breakpoint-xs:       375px !default;
 
 // Min vertical height on md, if vertical size is smaller then "sm" will apply
 $media-breakpoint-md-min-height: 416px !default;
@@ -85,11 +85,11 @@ $media-breakpoint-xs-down:  if($media-breakpoint-sm,  $media-breakpoint-sm - 1px
 $responsive-design-breakpoints: (
     xs:   $media-breakpoint-xs,
     sm:   $media-breakpoint-xs,
-    md:   720px,
+    md:   $media-breakpoint-md,
     lg:   $media-breakpoint-lg,
     xl:   $media-breakpoint-xl,
     xxl:  $media-breakpoint-xxl,
-    xxxl: 2400px,
+    xxxl: $media-breakpoint-xxxl,
 ) !default;
 
 

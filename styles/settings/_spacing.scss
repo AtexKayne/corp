@@ -4,15 +4,15 @@
  */
 
 $spacing-css-variable: (
-    xs:   20px,
-    md:   60px,
-    xxxl: 80px,
+    xs:   16px,
+    md:   16px,
+    xxxl: 16px,
 );
 
 $spacing-css-sm-variable: (
-    xs:   20px,
-    md:   40px,
-    xxxl: 60px,
+    xs:   16px,
+    md:   16px,
+    xxxl: 16px,
 );
 
 
@@ -24,7 +24,6 @@ $spacing-css-sm-variable: (
 
 $spacing-classname-list: (
     '0': 0px,
-
     '0.5': calc(var(--spacing) * 0.5),
     '1': var(--spacing),
     '1.5': calc(var(--spacing) * 1.5),
@@ -42,15 +41,6 @@ $spacing-classname-list: (
     '7': calc(var(--spacing) * 7),
     '8': calc(var(--spacing) * 8),
     '9': calc(var(--spacing) * 9),
-    '15': calc(var(--spacing) * 15),
-
-    'sm-0.5': calc(var(--spacing-sm) * 0.5),
-    'sm-1': var(--spacing-sm),
-    'sm-1.5': calc(var(--spacing-sm) * 1.5),
-    'sm-2': calc(var(--spacing-sm) * 2),
-    'sm-3': calc(var(--spacing-sm) * 3),
-    'sm-4': calc(var(--spacing-sm) * 4),
-    'sm-5': calc(var(--spacing-sm) * 5),
 );
 
 

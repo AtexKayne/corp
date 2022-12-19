@@ -4,7 +4,7 @@ export default function Document() {
     return (
         <Html>
             <Head />
-            <body className='ui-light c-auto'>
+            <body>
                 <Main />
                 <NextScript />
             </body>

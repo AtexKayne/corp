@@ -2,19 +2,15 @@
  * Styles, which don't generate any output and can be safely imported from
  * all root level stylesheets
  */
-
-@import "mixins/helpers/font-weights";
-
 // Settings
 @import "settings/paths";
-@import "settings/animations";
 @import "settings/colors";
-@import "settings/text";
+@import "components/text/text";
 @import "settings/links";
 @import "settings/layout";
-@import "settings/breakpoints";
 @import "settings/spacing";
 @import "settings/utilities";
+@import "settings/grid";
 
 // Mixins
 @import "mixins/lib/list-css-nth";
@@ -26,8 +22,6 @@
 @import "mixins/helpers/color";
 
 // Extends
-@import "extends/animation";
 @import "extends/layout";
 @import "extends/text-styles";
 @import "extends/text-sizes";
-
