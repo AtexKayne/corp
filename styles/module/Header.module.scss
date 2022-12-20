@@ -48,6 +48,10 @@
         xxl: 17px,
         xxxl: 46px,
     ));
+
+    @include media-breakpoint(lg) {
+        margin-right: 8px!important;
+    }
 }
 
 .middleFixed {
@@ -55,16 +59,19 @@
     right: 0;
     z-index: 3;
     width: 100%;
-    position: fixed;
     max-width: none;
     padding: 18px 120px;
+    transition: .5s transform;
     transform: translateY(-400px);
     background-color: var(--t-background);
     
     &[data-active="true"] {
-        transition: .5s;
         transform: translateY(0);
     }
+}
+
+.middleFixedPos {
+    position: fixed;
 }
 
 .bottom {
@@ -147,8 +154,16 @@
     border-radius: 50%;
     left: calc(50vw - 28px);
     transform: translateY(-400px);
+    background-color: var(--t-background);
+    box-shadow: 0px 4px 10px 0px #0000001A;
+
 }
 
 .rabbitFixed {
     transform: translateY(0);
+
+    &[data-active="true"] {
+        transition-delay: .4s;
+        transform: translateY(-400px);
+    }
 }

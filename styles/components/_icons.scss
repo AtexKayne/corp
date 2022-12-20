@@ -41,14 +41,13 @@
     align-items: center;
     white-space: nowrap;
     display: inline-flex;
-    padding: adaptive-value((
-        xs: 8px 12px,
-        xl: 10px 18px 9px,
-        xxl: 10px 18px 9px,
-        xxxl: 14px 18px,
-    ));
+    padding: adaptive-value((xs: 8px 12px,
+                xl: 10px 18px 9px,
+                xxl: 10px 18px 9px,
+                xxxl: 14px 18px,
+            ));
 
-    .icon + .btn__text {
+    .icon+.btn__text {
         margin-left: 8px;
     }
 
@@ -60,7 +59,7 @@
         justify-content: center;
     }
 
-    .btn__text + .icon {
+    .btn__text+.icon {
         margin-left: 8px;
     }
 
@@ -81,10 +80,20 @@
     &--secondary {
         color: color-use(background);
         background-color: color-use(dark);
+
+        &:hover {
+            color: color-use(background);
+            background-color: #11244D;
+        }
     }
 
     &--tetriary {
         background-color: color-use(smallish);
+
+        &:hover {
+            color: color-use(text);
+            background-color: #E5E5E5;
+        }
     }
 
     &--xs {

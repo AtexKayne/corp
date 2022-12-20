@@ -1,5 +1,6 @@
 @import "../mixins/helpers/media";
 @import "../mixins/helpers/adaptive-value";
+@import "../extends/_text-sizes";
 
 .footer {
     position: relative;
@@ -18,12 +19,48 @@
     padding-bottom: 40px;
 }
 
-.column {
+.columnNav,
+.columnInfo1,
+.columnInfo2 {
     flex-grow: 0;
     display: flex;
     flex-shrink: 0;
-    flex-basis: 25%;
     flex-direction: column;
+}
+
+.columnNav {
+    flex-basis: adaptive-value((
+        xs: 100%,
+        md: 50%,
+        lg: 25%,
+        xxl: 27%,
+        xxxl: 27%,
+    ));
+}
+
+.columnInfo1 {
+    flex-basis: adaptive-value((
+        xs: 100%,
+        md: 50%,
+        lg: 25%,
+        xxl: 14%,
+        xxxl: 16%,
+    ));
+}
+
+.columnInfo2 {
+    margin-left: adaptive-value((
+        md: 0,
+        xxl: 9%,
+        xxxl: 11%,
+    ));
+    flex-basis: adaptive-value((
+        xs: 100%,
+        md: 50%,
+        lg: 25%,
+        xxl: 17%,
+        xxxl: 17%,
+    ));
 }
 
 .copy {
@@ -50,4 +87,101 @@
     >*:last-child {
         margin-right: 0;
     }
+}
+
+.texth5 {
+    white-space: nowrap;
+    display: inline-block;
+
+    @include text--size((
+        xs:   $text-h5-sm,
+        md:   $text-h1,
+        lg:   $text-h4,
+        xl:   $text-h4-sm,
+        xxl:  $text-h5,
+        xxxl: $text-h4,
+    ));
+}
+
+.textt2 {
+    white-space: nowrap;
+
+    @include text--size((
+        xs:   $text-t3,
+        md:   $text-h4,
+        lg:   $text-t0-xl,
+        xl:   $text-t1,
+        xxl:  $text-t2,
+        xxxl: $text-t1,
+    ));
+}
+
+.textp2 {
+    white-space: nowrap;
+
+    @include text--size((
+        xs:   $text-p2,
+        md:   $text-p0-xxl,
+        lg:   $text-p1,
+        xl:   $text-p2,
+        xxl:  $text-p2,
+        xxxl: $text-p1,
+    ));
+}
+
+.textp3 {
+    @include text--size((
+        xs:   $text-p4,
+        md:   $text-p0,
+        lg:   $text-p2,
+        xl:   $text-p2-sm,
+        xxl:  $text-p4,
+        xxxl: $text-p3,
+    ));
+}
+
+.textt5 {
+    @include text--size((
+        xs:   $text-t4,
+        md:   $text-t0-xl,
+        lg:   $text-t2,
+        xl:   $text-t5,
+        xxl:  $text-t6,
+        xxxl: $text-t5,
+    ));
+}
+
+.textt6 {
+    @include text--size((
+        xs:   $text-t6,
+        md:   $text-t0-xl,
+        lg:   $text-t2,
+        xl:   $text-t5,
+        xxl:  $text-t6,
+        xxxl: $text-t5,
+    ));
+}
+
+.apps {
+    display: flex;
+    flex-wrap: adaptive-value((
+        lg: wrap,
+        xxxl: nowrap,
+    ));
+
+    > * {
+        margin-right: 12px;
+    }
+
+}
+
+.bottom {
+    margin-top: adaptive-value((
+        xs: 40px,
+        md: 20px,
+        lg: -55px,
+        xl: -50px,
+        xxl: -50px,
+        xxxl: 0,
+    ));
 }

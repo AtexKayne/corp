@@ -65,28 +65,34 @@ $text-g3:      ( font-size: 9.6rem,  line-height: 60 / 57 * 1em );
 $text-g4:      ( font-size: 8.0rem,  line-height: 51 / 64 * 1em );
 
 $text-h1:      ( font-size: 5.2rem,  line-height: 70 / 70 * 1em, font-weight: $bold );
-$text-h2:      ( font-size: 4.8rem,  line-height: 60 / 58 * 1em, font-weight: $bold );
-$text-h3:      ( font-size: 4.4rem,  line-height: 45 / 43 * 1em, font-weight: $bold );
-$text-h4:      ( font-size: 3.6rem,  line-height: 35 / 29 * 1em, font-weight: $bold );
-$text-h5:      ( font-size: 2.8rem,  line-height: 30 / 26 * 1em, font-weight: $bold );
-$text-h6:      ( font-size: 1.6rem,  line-height: 22 / 18 * 1em, font-weight: $bold );
+$text-h2:      ( font-size: 4.8rem,  line-height: 70 / 70 * 1em, font-weight: $bold );
+$text-h3:      ( font-size: 4.4rem,  line-height: 70 / 70 * 1em, font-weight: $bold );
+$text-h4:      ( font-size: 3.6rem,  line-height: 70 / 70 * 1em, font-weight: $bold );
+$text-h4-sm:   ( font-size: 3.2rem,  line-height: 70 / 70 * 1em, font-weight: $bold );
+$text-h5:      ( font-size: 2.8rem,  line-height: 70 / 70 * 1em, font-weight: $bold );
+$text-h5-sm:   ( font-size: 1.9rem,  line-height: 120 / 70 * 1em, font-weight: $bold );
+$text-h6:      ( font-size: 1.6rem,  line-height: 70 / 70 * 1em, font-weight: $bold );
 
 // TT Common
+$text-p0-xxl:  ( font-size: 4.8rem,  line-height: 30 / 18 * 1em );
+$text-p0:      ( font-size: 3.2rem,  line-height: 30 / 18 * 1em );
 $text-p1:      ( font-size: 2.8rem,  line-height: 30 / 18 * 1em );
 $text-p2:      ( font-size: 2.4rem,  line-height: 18 / 15 * 1em );
-$text-p3:      ( font-size: 1.8rem,  line-height: 20 / 12 * 1em );
+$text-p2-sm:   ( font-size: 2.0rem,  line-height: 18 / 15 * 1em );
+$text-p3:      ( font-size: 1.8rem,  line-height: 16 / 12 * 1em );
 $text-p4:      ( font-size: 1.6rem,  line-height: 18 / 12 * 1em );
-$text-p5:      ( font-size: 1.4rem,  line-height: 19 / 12 * 1em );
+$text-p5:      ( font-size: 1.4rem,  line-height: 16 / 12 * 1em );
 $text-p6:      ( font-size: 1.2rem,  line-height: 12 / 12 * 1em );
 
 // TT Common
+$text-t0-xl:   ( font-size: 2.4rem,  line-height: 24 / 24 * 1em, font-weight: $bold );
 $text-t0:      ( font-size: 2.2rem,  line-height: 24 / 24 * 1em, font-weight: $bold );
 $text-t1:      ( font-size: 2.0rem,  line-height: 24 / 24 * 1em, font-weight: $bold );
-$text-t2:      ( font-size: 1.8rem,  line-height: 25 / 20 * 1em, font-weight: $bold );
-$text-t3:      ( font-size: 1.6rem,  line-height: 20 / 15 * 1em, font-weight: $bold );
-$text-t4:      ( font-size: 1.6rem,  line-height: 20 / 15 * 1em, font-weight: $normal );
-$text-t5:      ( font-size: 1.4rem,  line-height: 20 / 15 * 1em, font-weight: $normal );
-$text-t6:      ( font-size: 1.2rem,  line-height: 20 / 15 * 1em, font-weight: $bold );
+$text-t2:      ( font-size: 1.8rem,  line-height: 20 / 20 * 1em, font-weight: $bold );
+$text-t3:      ( font-size: 1.6rem,  line-height: 15 / 15 * 1em, font-weight: $bold );
+$text-t4:      ( font-size: 1.6rem,  line-height: 15 / 15 * 1em, font-weight: $normal );
+$text-t5:      ( font-size: 1.4rem,  line-height: 15 / 15 * 1em, font-weight: $normal );
+$text-t6:      ( font-size: 1.2rem,  line-height: 15 / 15 * 1em, font-weight: $bold );
 
 // TT Common
 $text-c1:      ( font-size: 5.6rem,  line-height: 20 / 15 * 1em );
@@ -139,8 +145,11 @@ $text-sizes: (
         'h5':           $text-h5,
         // Text
         't2':           $text-t2,
+        't6':           $text-t0,
         'p1':           $text-p1,
         'p2':           $text-p1,
+        'p4':           $text-p1,
+        'p5':           $text-p1,
 
         // Caption
         'c1':           $text-c1,
@@ -180,7 +189,7 @@ $text-sizes: (
         'h2':           $text-h2,
         'h3':           $text-h3,
         'h4':           $text-h4,
-        'h5':           $text-h5,
+        'h5':           $text-h4,
         // Text
         't1':           $text-t0,
         't2':           $text-t2,
@@ -206,9 +215,11 @@ $text-sizes: (
         'h5':           $text-h5,
         // Text
         't1':           $text-t2,
+        't4':           $text-t5,
         't6':           $text-t6,
         'p1':           $text-p1,
         'p2':           $text-p3,
+        'p3':           $text-p3,
         'p5':           $text-p5,
 
         // Caption
@@ -225,12 +236,16 @@ $text-sizes: (
         'h2':           $text-h2,
         'h3':           $text-h3,
         'h4':           $text-h4,
-        'h5':           $text-h5,
+        'h5':           $text-h4,
         // Text
         't1':           $text-t1,
+        't2':           $text-t1,
         'p1':           $text-p1,
-        'p2':           $text-p2,
+        'p2':           $text-p1,
+        'p4':           $text-p3,
+        'p5':           $text-p3,
         't4':           $text-t4,
+        't6':           $text-t5,
 
         // Caption
         'c1':           $text-c2,

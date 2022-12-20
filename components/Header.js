@@ -19,10 +19,15 @@ export default function Header() {
             if (scrollTop > 250) {
                 refFixed.current.classList.add(style.middleFixed)
                 refRabbit.current.classList.add(style.rabbitFixed)
+                setTimeout(() => {
+                    if (window.scrollY > 250) {
+                        refFixed.current.classList.add(style.middleFixedPos)
+                    }
+                }, 400)
             } else {
+                refFixed.current.classList.remove(style.middleFixedPos)
                 refFixed.current.classList.remove(style.middleFixed)
                 refRabbit.current.classList.remove(style.rabbitFixed)
-
             }
         }
 
@@ -34,7 +39,7 @@ export default function Header() {
     }, [])
 
     return (
-        <header className={style.header}>
+        <header className={`${style.header} ui-light`}>
             <div className={`container ${style.container}`}>
 
                 <div className={`${style.top} text--t4 is-hidden--lg-up`}>
@@ -151,7 +156,7 @@ export default function Header() {
                     <div>
                         <div className='text--h1'>FORME</div>
                         <div className='text--p2 mt-1'>Специальные цены и остальные преимущества — только для профессионалов</div>
-                        <div className='btn btn--primary btn--lg mt-3'>
+                        <div style={{pointerEvents: 'none'}} className='btn btn--primary btn--lg mt-3'>
                             <span className='text--p5 text--bold text--upper text--sparse btn__text'>Перейти к бренду</span>
                             <Icon name='arrowRight' />
                         </div>
@@ -159,7 +164,12 @@ export default function Header() {
                 </div>
             </div>
 
-            <div ref={refRabbit} onMouseEnter={hoverEnterHandler} onMouseLeave={hoverLeaveHandler} className={style.rabbit}>
+            <div
+                ref={refRabbit}
+                data-active={isHeaderFixed}
+                onMouseEnter={hoverEnterHandler}
+                onMouseLeave={hoverLeaveHandler}
+                className={style.rabbit}>
                 <Image src='/images/layout/logo-lg.svg' layout='fill' alt='RedHair market' />
             </div>
         </header>

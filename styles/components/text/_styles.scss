@@ -65,8 +65,9 @@ figure {
 .text--right { text-align: right; }
 .text--center { text-align: center; }
 
-.text--thin { font-weight: 300; }
-.text--bold { font-weight: 600; }
+.text--thin { font-weight: 300!important; }
+.text--normal { font-weight: 400!important; }
+.text--bold { font-weight: 600!important; }
 
 @include media-breakpoint(md-up) {
     .text--left\:md {
