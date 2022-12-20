@@ -132,7 +132,7 @@ $text-sizes: (
         'p1':           $text-p2,
         'p2':           $text-p2,
         'p3':           $text-p3,
-        'p4':           $text-p4,
+        'p4':           $text-p2,
         'p5':           $text-p5,
     ),
 
@@ -148,7 +148,7 @@ $text-sizes: (
         't6':           $text-t0,
         'p1':           $text-p1,
         'p2':           $text-p1,
-        'p4':           $text-p1,
+        'p4':           $text-p0,
         'p5':           $text-p1,
 
         // Caption
@@ -173,6 +173,7 @@ $text-sizes: (
         't6':           $text-t2,
         'p1':           $text-p1,
         'p2':           $text-p2,
+        'p4':           $text-p2-sm,
         'p5':           $text-p3,
 
         // Caption
@@ -196,6 +197,7 @@ $text-sizes: (
         't4':           $text-t2,
         't6':           $text-t4,
         'p1':           $text-p1,
+        'p4':           $text-p3,
         'p5':           $text-p3,
 
         // Caption
@@ -220,6 +222,7 @@ $text-sizes: (
         'p1':           $text-p1,
         'p2':           $text-p3,
         'p3':           $text-p3,
+        'p4':           $text-p4,
         'p5':           $text-p5,
 
         // Caption
