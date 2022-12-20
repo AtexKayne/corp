@@ -28,28 +28,28 @@
 // @import url("//hello.myfonts.net/count/3fd7c8");
 
 @font-face {
-    font-family: "TTCommonsPro";
-    src: url('#{$path-fonts}/tt-commons/TT-Commons-Pro-Light.woff2') format('woff2'),
-    url('#{$path-fonts}/tt-commons/TT-Commons-Pro-Light.woff') format('woff');
+    font-family: "ProximaNova";
+    src: url('#{$path-fonts}/ProximaNova-Light.ttf') format('ttf'),
+    url('#{$path-fonts}/ProximaNova-Light.woff') format('woff');
     font-weight: $light;
     font-style: normal;
     font-display: block;
 }
 
 @font-face {
-    font-family: "TTCommonsPro";
-    src: url('#{$path-fonts}/tt-commons/TT-Commons-Pro-Regular.woff2') format('woff2'),
-    url('#{$path-fonts}/tt-commons/TT-Commons-Pro-Regular.woff') format('woff');
-    font-weight: $book;
+    font-family: "ProximaNova";
+    src: url('#{$path-fonts}/ProximaNova-Regular.ttf') format('ttf'),
+    url('#{$path-fonts}/ProximaNova-Regular.woff') format('woff');
+    font-weight: $medium;
     font-style: normal;
     font-display: block;
 }
 
 @font-face {
-    font-family: "TTCommonsPro";
-    src: url('#{$path-fonts}/tt-commons/TT-Commons-Pro-Bold.woff2') format('woff2'),
-    url('#{$path-fonts}/tt-commons/TT-Commons-Pro-Bold.woff') format('woff');
-    font-weight: $medium;
+    font-family: "ProximaNova";
+    src: url('#{$path-fonts}/ProximaNova-Bold.ttf') format('ttf'),
+    url('#{$path-fonts}/ProximaNova-Bold.woff') format('woff');
+    font-weight: $book;
     font-style: normal;
     font-display: block;
 }

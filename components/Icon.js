@@ -1,7 +1,7 @@
 import dynamic from "next/dynamic"
 import { useState, useEffect } from 'react'
 
-export default function Icon({ name, width = 16, height = 16, size }) {
+export default function Icon({ name, external = '', width = 16, height = 16, size }) {
     const [LoadedIcon, setLoadedIcon] = useState(false)
     const loadIcon = iconName => {
         // const path = `../public/icons/icon-${iconName}.svg`
@@ -30,7 +30,7 @@ export default function Icon({ name, width = 16, height = 16, size }) {
     }, [])
 
     return (
-        <span className={`icon ${size ? 'icon--' + size : ''}`} style={{ width: +width, height: +height }}>
+        <span className={`icon ${size ? 'icon--' + size : ''} ${external}`} style={{ width: +width, height: +height }}>
             {LoadedIcon ? <LoadedIcon /> : null}
         </span>
     )

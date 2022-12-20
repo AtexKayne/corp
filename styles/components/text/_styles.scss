@@ -59,9 +59,6 @@ figure {
     &--h3 { @extend %text--size-h3; }
     &--h4 { @extend %text--size-h4; }
     &--h5 { @extend %text--size-h5; }
-    &--g2 { @extend %text--size-g2; }
-    &--g3 { @extend %text--size-g3; }
-    &--g4 { @extend %text--size-g4; }
 }
 
 .text--left { text-align: left;}
@@ -127,4 +124,8 @@ figure {
 
 .text--upper {
     text-transform: uppercase;
+}
+
+.text--sparse {
+    letter-spacing: 1.5px;
 }
