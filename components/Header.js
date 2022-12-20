@@ -149,7 +149,7 @@ export default function Header() {
                 </div>
 
                 <div className={style.image}>
-                    <Image src='/images/layout/background-light.jpg' layout='fill' alt='background' />
+                    {/* <Image src='/images/layout/background-light.jpg' layout='fill' alt='background' /> */}
                 </div>
 
                 <div className={style.bottom}>
