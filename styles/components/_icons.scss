@@ -79,20 +79,28 @@
 
     &--secondary {
         color: color-use(background);
-        background-color: color-use(dark);
+        background-color: color-use(secondary);
 
         &:hover {
             color: color-use(background);
-            background-color: #11244D;
+            background-color: color-use(secondary-h);
         }
     }
 
     &--tetriary {
+        color: color-use(dark);
         background-color: color-use(smallish);
 
         &:hover {
-            color: color-use(text);
+            color: color-use(dark);
             background-color: #E5E5E5;
+        }
+    }
+
+    &--label {
+        &:hover {
+            color: color-use(text);
+            background-color: color-use(smallish);
         }
     }
 

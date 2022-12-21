@@ -8,10 +8,17 @@ export default function Header() {
     const refFixed = useRef(null)
     const refRabbit = useRef(null)
     const [isHeaderFixed, setIsHeaderFixed] = useState(false)
+    const [theme, setTheme] = useState('ui-light')
 
     const hoverEnterHandler = () => setIsHeaderFixed(true)
     const hoverLeaveHandler = () => setIsHeaderFixed(false)
 
+    const setThemeLight = () => {
+        setTheme('ui-light ui-light-background')
+    }
+    const setThemeDark = () => {
+        setTheme('ui-light')
+    }
     useEffect(() => {
         const scrollHandler = event => {
             const scrollTop = window.scrollY
@@ -42,7 +49,7 @@ export default function Header() {
         <header className={`${style.header} ui-light`}>
             <div className={`container ${style.container}`}>
 
-                <div className={`${style.top} text--t4 is-hidden--lg-up`}>
+                <div onMouseEnter={setThemeLight} onMouseLeave={setThemeDark} className={`${style.top} ${theme} ${style.textt4} text--regular is-hidden--lg-up`}>
                     <div className={style.groupMD}>
                         <div className='btn btn--empty btn--xs'>
                             {/* <Icon width='21' height='21' external='is-hidden--lg-up' name='burger' /> */}
@@ -75,7 +82,7 @@ export default function Header() {
                     </div>
                 </div>
 
-                <div className={`${style.top} text--t4 is-hidden--md-down`}>
+                <div onMouseEnter={setThemeLight} onMouseLeave={setThemeDark} className={`${style.top} ${theme} ${style.textt4} text--regular is-hidden--md-down`}>
                     <div className={style.group}>
                         <a className='link active' href='#' rel='nofollow'>RedHare Market</a>
                         <a className='link' href='#' rel='nofollow'>RedHare Обучение</a>
@@ -95,13 +102,13 @@ export default function Header() {
                     </div>
                 </div>
 
-                <div className={`${style.middle} is-hidden--md-down container`}
+                <div onMouseEnter={setThemeLight} onMouseLeave={setThemeDark} className={`${style.middle} ${theme} is-hidden--md-down container`}
                     ref={refFixed}
                     data-active={isHeaderFixed}
                     onMouseLeave={hoverLeaveHandler}
                     onMouseEnter={hoverEnterHandler}>
 
-                    <div className={`${style.groupMD} text--t1 text--bold`}>
+                    <div className={`${style.groupMD} ${style.textt1} text--semi`}>
                         <div className='is-hidden--xxl-down' style={{ width: 297, height: 52 }}>
                             <Image src='/images/layout/logo-xxl.svg' width='297' height='52' alt='RedHair market' />
                         </div>
@@ -121,7 +128,7 @@ export default function Header() {
                             <span className='btn__text is-hidden--xxxl-up ml-0.6'>Каталог</span>
                         </div>
 
-                        <div className='btn btn--empty'>
+                        <div className='btn btn--label'>
                             <div className='btn__icon '>
                                 <Icon width='22' height='22' external='is-hidden--lg-down' name='brandsMD' />
                                 <Icon width='18' height='18' external='is-hidden--xl-up' name='brandsMD' />
@@ -129,22 +136,22 @@ export default function Header() {
                             <span className='btn__text'>Бренды</span>
                         </div>
 
-                        <div className='btn btn--empty'>Подборки</div>
-                        <div className='btn btn--empty'>Со скидкой</div>
+                        <div className='btn btn--label'>Подборки</div>
+                        <div className='btn btn--label'>Со скидкой</div>
                     </div>
 
                     <div className={`${style.groupSM} is-hidden--lg-down`}>
                         <div className='btn btn--empty btn--sm'><Icon width='21' height='21' name='searchMD' /></div>
                         <div className='btn btn--empty btn--sm'><Icon width='24' height='21' name='heartMD' /></div>
                         <div className='btn btn--empty btn--sm'><Icon width='27' height='25' name='basketMD' /></div>
-                        <div className='btn btn--tetriary btn--sm text--t6 ml-0.5'>ВОЙТИ</div>
+                        <div className={`${style.textt6} btn btn--tetriary btn--sm text--bold ml-0.5`}>ВОЙТИ</div>
                     </div>
 
                     <div className={`${style.groupSM} is-hidden--xl-up`}>
                         <div className='btn btn--empty btn--sm'><Icon width='18' height='20' name='searchMD' /></div>
                         <div className='btn btn--empty btn--sm'><Icon width='20' height='18' name='heartMD' /></div>
                         <div className='btn btn--empty btn--sm'><Icon width='22' height='21' name='basketMD' /></div>
-                        <div className='btn btn--tetriary btn--sm text--t6 ml-0.5'>ВОЙТИ</div>
+                        <div className={`${style.textt6} btn btn--tetriary btn--sm text--bold ml-0.5`}>ВОЙТИ</div>
                     </div>
                 </div>
 
@@ -169,7 +176,7 @@ export default function Header() {
                 data-active={isHeaderFixed}
                 onMouseEnter={hoverEnterHandler}
                 onMouseLeave={hoverLeaveHandler}
-                className={style.rabbit}>
+                className={`${style.rabbit} ui-light`}>
                 <Image src='/images/layout/logo-lg.svg' layout='fill' alt='RedHair market' />
             </div>
         </header>

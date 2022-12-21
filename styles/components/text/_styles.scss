@@ -67,7 +67,9 @@ figure {
 
 .text--thin { font-weight: 300!important; }
 .text--normal { font-weight: 400!important; }
-.text--bold { font-weight: 600!important; }
+.text--regular { font-weight: 400!important; }
+.text--semi { font-weight: 600!important; }
+.text--bold { font-weight: 700!important; }
 
 @include media-breakpoint(md-up) {
     .text--left\:md {
@@ -129,4 +131,8 @@ figure {
 
 .text--sparse {
     letter-spacing: 1.5px;
+}
+
+.text--underline {
+    text-decoration: underline;
 }

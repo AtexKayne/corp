@@ -58,8 +58,8 @@
         xs: 100%,
         md: 50%,
         lg: 25%,
-        xxl: 17%,
-        xxxl: 17%,
+        xxl: 18%,
+        xxxl: 18%,
     ));
 }
 
@@ -79,7 +79,7 @@
     
     >* {
         margin-right: adaptive-value((
-            lg: 8px,
+            xs: 8px,
             xxl: 16px,
         ));
     }
@@ -94,69 +94,105 @@
     display: inline-block;
 
     @include text--size((
-        xs:   $text-h5-sm,
-        md:   $text-h1,
-        lg:   $text-h4,
-        xl:   $text-h4-sm,
+        xs:   $text-h5-xs,
+        md:   $text-h5,
+        lg:   $text-h5-sm,
+        xl:   $text-h5-sm,
         xxl:  $text-h5,
         xxxl: $text-h4,
     ));
 }
 
-.textt2 {
-    white-space: nowrap;
-
-    @include text--size((
-        xs:   $text-t3,
-        md:   $text-h4,
-        lg:   $text-t0-xl,
-        xl:   $text-t1,
-        xxl:  $text-t2,
-        xxxl: $text-t1,
-    ));
-}
-
 .textp2 {
     white-space: nowrap;
+    font-weight: 400!important;
 
     @include text--size((
         xs:   $text-p2,
-        md:   $text-p0-xxl,
-        lg:   $text-p1,
-        xl:   $text-p2,
+        md:   $text-p2,
+        lg:   $text-p3,
+        xl:   $text-p3,
         xxl:  $text-p2,
         xxxl: $text-p1,
     ));
 }
 
 .textp3 {
+    margin-top: adaptive-value((
+        xs: 16px,
+        md: 12px,
+        lg: 9px,
+        xl: 9px,
+        xxl: 16px,
+        xxxl: 16px,
+    ));
     @include text--size((
         xs:   $text-p4,
-        md:   $text-p0,
-        lg:   $text-p2,
-        xl:   $text-p2-sm,
+        md:   $text-p4,
+        lg:   $text-p4,
+        xl:   $text-p4,
         xxl:  $text-p4,
         xxxl: $text-p3,
     ));
 }
 
+.textp4 {
+    font-weight: 400!important;
+    @include text--size((
+        xs:   $text-p2,
+        md:   $text-t4,
+        lg:   $text-p5,
+        xl:   $text-t5,
+        xxl:  $text-p4,
+        xxxl: $text-p4,
+    ));
+}
+
+.textp5 {
+    font-weight: 400!important;
+    @include text--size((
+        xs:   $text-p4,
+        md:   $text-p5,
+        lg:   $text-p5,
+        xl:   $text-p5,
+        xxl:  $text-p5,
+        xxxl: $text-p3,
+    ));
+}
+
+.textt2 {
+    white-space: nowrap;
+    font-weight: 600!important;
+
+    @include text--size((
+        xs:   $text-t3,
+        md:   $text-t2,
+        lg:   $text-t3,
+        xl:   $text-t3,
+        xxl:  $text-t2,
+        xxxl: $text-t1,
+    ));
+}
+
 .textt5 {
+    font-weight: 400!important;
     @include text--size((
         xs:   $text-t4,
-        md:   $text-t0-xl,
-        lg:   $text-t2,
-        xl:   $text-t5,
+        md:   $text-t6,
+        lg:   $text-t6,
+        xl:   $text-t6,
         xxl:  $text-t6,
         xxxl: $text-t5,
     ));
 }
 
 .textt6 {
+    font-weight: 700!important;
     @include text--size((
         xs:   $text-t6,
-        md:   $text-t0-xl,
-        lg:   $text-t2,
-        xl:   $text-t5,
+        md:   $text-t6,
+        lg:   $text-t6,
+        xl:   $text-t6,
         xxl:  $text-t6,
         xxxl: $text-t5,
     ));

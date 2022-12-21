@@ -10,16 +10,6 @@
 
     // Spacing CSS variable
     #{ --spacing }: adaptive-value($spacing-css-variable);
-    #{ --spacing-sm }: adaptive-value($spacing-css-sm-variable);
-
-    // Make spacing CSS variable responsive
-    @include media-breakpoint(md-up) {
-        @include media-breakpoint(xl-down) {
-            #{ --scale-px }: responsive-value(md, xxl, 0.5px, 1px);
-            #{ --scale-em }: responsive-value(md, xxl, 0.5em, 1em);
-            #{ --scale-rem }: responsive-value(md, xxl, 0.5rem, 1rem);
-        }
-    }
 }
 
 

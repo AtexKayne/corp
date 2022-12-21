@@ -40,7 +40,16 @@
     font-family: "ProximaNova";
     src: url('#{$path-fonts}/ProximaNova-Regular.ttf') format('ttf'),
     url('#{$path-fonts}/ProximaNova-Regular.woff') format('woff');
-    font-weight: $medium;
+    font-weight: $book;
+    font-style: normal;
+    font-display: block;
+}
+
+@font-face {
+    font-family: "ProximaNova";
+    src: url('#{$path-fonts}/ProximaNova-Semibold.ttf') format('ttf'),
+    url('#{$path-fonts}/ProximaNova-Semibold.woff') format('woff');
+    font-weight: $semi-bold;
     font-style: normal;
     font-display: block;
 }
@@ -49,7 +58,7 @@
     font-family: "ProximaNova";
     src: url('#{$path-fonts}/ProximaNova-Bold.ttf') format('ttf'),
     url('#{$path-fonts}/ProximaNova-Bold.woff') format('woff');
-    font-weight: $book;
+    font-weight: $bold;
     font-style: normal;
     font-display: block;
 }

@@ -1,5 +1,6 @@
 @import "../mixins/helpers/media";
 @import "../mixins/helpers/adaptive-value";
+@import "../extends/_text-sizes";
 
 .header {
     width: 100%;
@@ -148,8 +149,8 @@
 
 .rabbit {
     top: 20px;
-    width: 56px;
-    height: 56px;
+    width: 40px;
+    height: 40px;
     position: fixed;
     transition: .5s;
     border-radius: 50%;
@@ -158,6 +159,19 @@
     background-color: var(--t-background);
     box-shadow: 0px 4px 10px 0px #0000001A;
 
+    @include media-breakpoint(xl-up) {
+        width: 45px;
+        height: 45px;
+    }
+
+    @include media-breakpoint(xxxl) {
+        width: 56px;
+        height: 56px;
+    }
+
+    >* {
+        transform: scale(1.05);
+    }
 }
 
 .rabbitFixed {
@@ -167,4 +181,37 @@
         transition-delay: .4s;
         transform: translateY(-400px);
     }
+}
+
+.textt4 {
+    @include text--size((
+        xs:   $text-t5,
+        md:   $text-t5,
+        lg:   $text-t5,
+        xl:   $text-t5,
+        xxl:  $text-t5,
+        xxxl: $text-t4,
+    ));
+}
+
+.textt1 {
+    @include text--size((
+        xs:   $text-t1,
+        md:   $text-t1,
+        lg:   $text-t3,
+        xl:   $text-t2,
+        xxl:  $text-t2,
+        xxxl: $text-t1,
+    ));
+}
+
+.textt6 {
+    @include text--size((
+        xs:   $text-t6,
+        md:   $text-t0,
+        lg:   $text-t6,
+        xl:   $text-t6,
+        xxl:  $text-t6,
+        xxxl: $text-t6,
+    ));
 }
