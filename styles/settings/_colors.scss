@@ -23,6 +23,7 @@ $color-design-system: (
     _purple:           #11244D,
     _print:            #000000,
     _error:            #E21B25,
+    _fixed:            #E5E5E5,
 );
 
 
@@ -46,7 +47,7 @@ $color-themes: (
         background:    color-use(_white),
         line:          color-use(_black, 0.15),
         small:         color-use(_gray),
-        smallish:      color-use(_lightest),
+        smallish:      color-use(_fixed),
         text:          color-use(_black),
         heading:       color-use(_black),
         primary:       color-use(_red),
@@ -59,7 +60,7 @@ $color-themes: (
         link-heading:  color-use(_red),
         secondary:     color-use(_black),
         secondary-h:   color-use(_purple),
-        tetriary:      color-use(_lightest),
+        tetriary:      color-use(_fixed),
         text-invert:   color-use(_white),
         active-link:   color-use(_red),
     ),
@@ -69,7 +70,7 @@ $color-themes: (
         background:    color-use(_black),
         line:          color-use(_black, 0.15),
         small:         color-use(_gray),
-        smallish:      color-use(_lightest),
+        smallish:      color-use(_fixed),
         text:          color-use(_white),
         heading:       color-use(_white),
         primary:       color-use(_red),

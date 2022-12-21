@@ -85,8 +85,8 @@
         background-color: color-use(tetriary);
 
         &:hover {
-            color: color-use(text);
-            background-color: #E5E5E5;
+            color: color-use(background);
+            background-color: color-use(purple);
         }
     }
 
