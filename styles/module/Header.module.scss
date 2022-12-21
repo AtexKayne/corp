@@ -72,6 +72,7 @@
 }
 
 .middleFixedPos {
+    z-index: 6;
     position: fixed;
 }
 
@@ -110,7 +111,7 @@
         margin-right: adaptive-value((
             xs: 0px,
             lg: 0px,
-            xl: 14px,
+            xl: 11px,
             xxl: 14px,
             xxxl: 18px,
         ));
@@ -128,7 +129,8 @@
     >* {
         margin-right: adaptive-value((
             lg: 0px,
-            xl: 0px,
+            xl: -10px,
+            xxl: 0px,
             xxxl: 12px,
         ));
     }
@@ -149,6 +151,7 @@
 
 .rabbit {
     top: 20px;
+    z-index: 5;
     width: 40px;
     height: 40px;
     position: fixed;

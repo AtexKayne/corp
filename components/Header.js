@@ -49,7 +49,7 @@ export default function Header() {
         <header className={`${style.header} ui-light`}>
             <div className={`container ${style.container}`}>
 
-                <div onMouseEnter={setThemeLight} onMouseLeave={setThemeDark} className={`${style.top} ${theme} ${style.textt4} text--regular is-hidden--lg-up`}>
+                <div className={`${style.top} ${theme} ${style.textt4} text--regular is-hidden--lg-up`}>
                     <div className={style.groupMD}>
                         <div className='btn btn--empty btn--xs'>
                             {/* <Icon width='21' height='21' external='is-hidden--lg-up' name='burger' /> */}
@@ -82,7 +82,7 @@ export default function Header() {
                     </div>
                 </div>
 
-                <div onMouseEnter={setThemeLight} onMouseLeave={setThemeDark} className={`${style.top} ${theme} ${style.textt4} text--regular is-hidden--md-down`}>
+                <div className={`${style.top} ${theme} ${style.textt4} text--regular is-hidden--md-down`}>
                     <div className={style.group}>
                         <a className='link active' href='#' rel='nofollow'>RedHare Market</a>
                         <a className='link' href='#' rel='nofollow'>RedHare Обучение</a>
@@ -102,7 +102,7 @@ export default function Header() {
                     </div>
                 </div>
 
-                <div onMouseEnter={setThemeLight} onMouseLeave={setThemeDark} className={`${style.middle} ${theme} is-hidden--md-down container`}
+                <div className={`${style.middle} ${theme} is-hidden--md-down container`}
                     ref={refFixed}
                     data-active={isHeaderFixed}
                     onMouseLeave={hoverLeaveHandler}
@@ -119,16 +119,16 @@ export default function Header() {
                             <Image src='/images/layout/logo-lg.svg' width='44' height='44' alt='RedHair market' />
                         </div>
 
-                        <div className={`${style.catalogBtn} btn btn--secondary`}>
+                        <div className={`${style.catalogBtn} btn btn--md btn--secondary`}>
                             <div className='btn__icon'>
                                 <Icon width='20' height='20' external='is-hidden--lg-down' name='catalogMD' />
                                 <Icon width='16' height='16' external='is-hidden--xl-up' name='catalogMD' />
                             </div>
                             <span className='btn__text is-hidden--xxl-down'>Каталог товаров</span>
-                            <span className='btn__text is-hidden--xxxl-up ml-0.6'>Каталог</span>
+                            <span className='btn__text is-hidden--xxxl-up'>Каталог</span>
                         </div>
 
-                        <div className='btn btn--label'>
+                        <div className='btn btn--label btn--md'>
                             <div className='btn__icon '>
                                 <Icon width='22' height='22' external='is-hidden--lg-down' name='brandsMD' />
                                 <Icon width='18' height='18' external='is-hidden--xl-up' name='brandsMD' />
@@ -136,22 +136,22 @@ export default function Header() {
                             <span className='btn__text'>Бренды</span>
                         </div>
 
-                        <div className='btn btn--label'>Подборки</div>
-                        <div className='btn btn--label'>Со скидкой</div>
+                        <div className='btn btn--label btn--md'>Подборки</div>
+                        <div className='btn btn--label btn--md'>Со скидкой</div>
                     </div>
 
                     <div className={`${style.groupSM} is-hidden--lg-down`}>
                         <div className='btn btn--empty btn--sm'><Icon width='21' height='21' name='searchMD' /></div>
                         <div className='btn btn--empty btn--sm'><Icon width='24' height='21' name='heartMD' /></div>
                         <div className='btn btn--empty btn--sm'><Icon width='27' height='25' name='basketMD' /></div>
-                        <div className={`${style.textt6} btn btn--tetriary btn--sm text--bold ml-0.5`}>ВОЙТИ</div>
+                        <div className={`${style.textt6} btn btn--tetriary btn--md text--bold ml-0.5`}>ВОЙТИ</div>
                     </div>
 
                     <div className={`${style.groupSM} is-hidden--xl-up`}>
                         <div className='btn btn--empty btn--sm'><Icon width='18' height='20' name='searchMD' /></div>
                         <div className='btn btn--empty btn--sm'><Icon width='20' height='18' name='heartMD' /></div>
                         <div className='btn btn--empty btn--sm'><Icon width='22' height='21' name='basketMD' /></div>
-                        <div className={`${style.textt6} btn btn--tetriary btn--sm text--bold ml-0.5`}>ВОЙТИ</div>
+                        <div className={`${style.textt6} btn btn--tetriary btn--md text--bold ml-0.5`}>ВОЙТИ</div>
                     </div>
                 </div>
 

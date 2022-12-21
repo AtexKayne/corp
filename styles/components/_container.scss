@@ -9,4 +9,21 @@
         xxl: 1112px,
         xxxl: 1496px,
     ));
+
+    // padding: adaptive-value((
+    //     xs: 0 16px,
+    //     md: 0 32px,
+    //     lg: 0 48px,
+    //     xl: 0 72px,
+    //     xxl: 0 72px,
+    //     xxxl: 0 16px,
+    // ));
+
+    // @include media-breakpoint(xxxl) {
+    //     max-width: 1496px;
+    // }
+
+    // .container {
+    //     padding: 0;
+    // }
 }
