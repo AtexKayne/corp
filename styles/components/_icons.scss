@@ -61,7 +61,7 @@
     }
 
     &--primary {
-        color: color-use(background);
+        color: color-use(_white);
         background-color: color-use(primary);
 
         &:hover {
@@ -71,21 +71,21 @@
     }
 
     &--secondary {
-        color: color-use(background);
+        color: color-use(_white);
         background-color: color-use(secondary);
 
         &:hover {
-            color: color-use(background);
+            color: color-use(_white);
             background-color: color-use(secondary-h);
         }
     }
 
     &--tetriary {
-        color: color-use(dark);
-        background-color: color-use(smallish);
+        color: color-use(text);
+        background-color: color-use(tetriary);
 
         &:hover {
-            color: color-use(dark);
+            color: color-use(text);
             background-color: #E5E5E5;
         }
     }

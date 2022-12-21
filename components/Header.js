@@ -9,6 +9,7 @@ export default function Header() {
     const refRabbit = useRef(null)
     const [isHeaderFixed, setIsHeaderFixed] = useState(false)
     const [theme, setTheme] = useState('ui-light')
+    const [themeImage, setThemeImage] = useState('ui-dark')
 
     const hoverEnterHandler = () => {
         setIsHeaderFixed(true)
@@ -17,6 +18,12 @@ export default function Header() {
     const hoverLeaveHandler = () => {
         setIsHeaderFixed(false)
         setThemeDark()
+    }
+
+    const themeChanfe = () => {
+        const them = theme === 'ui-light' ? 'ui-dark' : 'ui-light'
+        setTheme(them)
+        setThemeImage(them)
     }
 
     const setThemeLight = (event) => {
@@ -193,11 +200,11 @@ export default function Header() {
                     </div>
                 </div>
 
-                <div className={style.image}>
+                <div className={`${style.image} ${themeImage}`}>
                     {/* <Image src='/images/layout/background-light.jpg' layout='fill' alt='background' /> */}
                 </div>
 
-                <div className={`${style.bottom} ui-dark`}>
+                <div className={`${style.bottom} ${themeImage}`}>
                     <div>
                         <div className='text--h1'>FORME</div>
                         <div className='text--p2 mt-1'>Специальные цены и остальные преимущества — только для профессионалов</div>
@@ -208,6 +215,8 @@ export default function Header() {
                     </div>
                 </div>
             </div>
+
+            <div onClick={themeChanfe} className={style.themechanger}></div>
 
             <div
                 ref={refRabbit}
