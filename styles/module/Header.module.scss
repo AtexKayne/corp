@@ -11,7 +11,9 @@
         xs: 12px 0,
         md: 14px 0,
         lg: 16px 0,
-        xl: 28px 0
+        xl: 18px 0,
+        xxl: 20px 0,
+        xxxl: 14px 0
     ));
 }
 
@@ -51,9 +53,9 @@
     justify-content: space-between;
     transform: adaptive-value((
         lg: translateY(65px),
-        xl: translateY(86px),
-        xxl: translateY(86px),
-        xxxl: translateY(98px),
+        xl: translateY(76px),
+        xxl: translateY(76px),
+        xxxl: translateY(80px),
     ));
 }
 
@@ -249,7 +251,7 @@
         xs: 80px,
         lg: 134px,
         xl: 150px,
-        xxl: 162px,
+        xxl: 158px,
         xxxl: 176px,
     ));
 }
