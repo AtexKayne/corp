@@ -61,6 +61,7 @@ $color-themes: (
         secondary:     color-use(_black),
         secondary-h:   color-use(_purple),
         text-invert:   color-use(_white),
+        active-link:   color-use(_red),
     ),
 
     // "Dark" theme
@@ -82,5 +83,6 @@ $color-themes: (
         secondary:     color-use(_white),
         secondary-h:   color-use(_gray),
         text-invert:   color-use(_black),
+        active-link:   color-use(_white),
     )
 );

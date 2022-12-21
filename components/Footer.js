@@ -32,14 +32,14 @@ export default function Footer() {
                     <div className={`${style.textp5} is-hidden--md pt-0.5 pr-1.5`}>Москва, ул. Бауманская 6/2, «Виктория Плаза», 6-й этаж. Метро «Бауманская»</div>
 
                     <div className={`${style.textt6} is-hidden--lg-up is-hidden--sm-down text--color-small text--upper text--sparse pt-3`}>Ищите нас в соц сетях</div>
-                    <div className={`${style.group}  is-hidden--lg-up is-hidden--sm-down pt-0.5 pb-2.5 pb-2:md`}>
+                    <div className={`${style.group}  is-hidden--lg-up is-hidden--sm-down pt-0.8 pb-2.5 pb-2:md`}>
                         <div className='btn btn--social btn--sm'><Icon width='24' height='24' name='VK' /></div>
                         <div className='btn btn--social btn--sm'><Icon width='24' height='24' name='telegram' /></div>
                     </div>
                 </div>
                 <div className={style.columnInfo2}>
                     <div className={`${style.textt6} text--color-small text--upper text--sparse pt-2.5 pt-0:lg is-hidden--md`}>Ищите нас в соц сетях</div>
-                    <div className={`${style.group} pt-1 pb-2.5 pb-2:md is-hidden--md`}>
+                    <div className={`${style.group} pt-0.8 pb-2.5 pb-2:md is-hidden--md`}>
                         <div className='btn btn--social btn--sm'><Icon width='24' height='24' name='VK' /></div>
                         <div className='btn btn--social btn--sm'><Icon width='24' height='24' name='telegram' /></div>
                     </div>
@@ -48,7 +48,7 @@ export default function Footer() {
                     <div className={`${style.textp5} is-hidden--lg-up is-hidden--sm-down pt-0.5 pr-1.5`}>Москва, ул. Бауманская 6/2, «Виктория Плаза», 6-й этаж. Метро «Бауманская»</div>
 
                     <div className={`${style.textt6} text--color-small text--upper text--sparse pt-4:md pt-0:lg`}>Наше моб. приложение:</div>
-                    <div className={`${style.apps} pt-1`}>
+                    <div className={`${style.apps} pt-0.8`}>
                         <div className><Image src='/icons/icon-app-store.svg' width='125' height='40' alt='' /></div>
                         <div><Image src='/icons/icon-google-play.svg' width='125' height='40' alt='' /></div>
                     </div>

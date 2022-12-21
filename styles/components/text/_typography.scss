@@ -31,6 +31,6 @@ a {
 
     &:hover,
     &.active {
-        color: color-use(primary);
+        color: color-use(active-link);
     }
 }

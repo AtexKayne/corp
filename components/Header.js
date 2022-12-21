@@ -10,14 +10,20 @@ export default function Header() {
     const [isHeaderFixed, setIsHeaderFixed] = useState(false)
     const [theme, setTheme] = useState('ui-light')
 
-    const hoverEnterHandler = () => setIsHeaderFixed(true)
-    const hoverLeaveHandler = () => setIsHeaderFixed(false)
-
-    const setThemeLight = () => {
-        setTheme('ui-light ui-light-background')
+    const hoverEnterHandler = () => {
+        setIsHeaderFixed(true)
+        setThemeLight()
     }
-    const setThemeDark = () => {
+    const hoverLeaveHandler = () => {
+        setIsHeaderFixed(false)
+        setThemeDark()
+    }
+
+    const setThemeLight = (event) => {
         setTheme('ui-light')
+    }
+    const setThemeDark = (event) => {
+        setTheme('ui-dark')
     }
     useEffect(() => {
         const scrollHandler = event => {
@@ -46,10 +52,13 @@ export default function Header() {
     }, [])
 
     return (
-        <header className={`${style.header} ui-light`}>
+        <header className={`${style.header} ${theme}`}>
             <div className={`container ${style.container}`}>
+                <div className={style.hover}></div>
+                <div className={`${style.top} ${style.textt4} text--regular is-hidden--lg-up`}
+                    onMouseEnter={setThemeLight}
+                    onMouseLeave={setThemeDark}>
 
-                <div className={`${style.top} ${theme} ${style.textt4} text--regular is-hidden--lg-up`}>
                     <div className={style.groupMD}>
                         <div className='btn btn--empty btn--xs'>
                             {/* <Icon width='21' height='21' external='is-hidden--lg-up' name='burger' /> */}
@@ -63,12 +72,24 @@ export default function Header() {
                         </div>
                     </div>
                     <div className={style.group}>
-                        <div className='is-hidden--sm-down'>
-                            <Image src='/images/layout/logo-md.svg' width='242' height='45' alt='RedHair market' />
+                        <div className='logo-light'>
+                            <div className='is-hidden--sm-down'>
+                                <Image src='/images/layout/logo-md.svg' width='242' height='45' alt='RedHair market' />
+                            </div>
+                            <div className='is-hidden--md-up'>
+                                <Image src='/images/layout/logo-xs.svg' width='41' height='41' alt='RedHair market' />
+                            </div>
                         </div>
-                        <div className='is-hidden--md-up'>
-                            <Image src='/images/layout/logo-xs.svg' width='41' height='41' alt='RedHair market' />
+
+                        <div className='logo-dark'>
+                            <div className='is-hidden--sm-down'>
+                                <Image src='/images/layout/logo-dark-md.svg' width='242' height='45' alt='RedHair market' />
+                            </div>
+                            <div className='is-hidden--md-up'>
+                                <Image src='/images/layout/logo-dark-xs.svg' width='41' height='41' alt='RedHair market' />
+                            </div>
                         </div>
+
                     </div>
                     <div className={style.groupMD}>
                         <div className='btn btn--empty btn--xs'>
@@ -82,7 +103,10 @@ export default function Header() {
                     </div>
                 </div>
 
-                <div className={`${style.top} ${theme} ${style.textt4} text--regular is-hidden--md-down`}>
+                <div className={`${style.top} ${style.textt4} text--regular is-hidden--md-down`}
+                    onMouseEnter={setThemeLight}
+                    onMouseLeave={setThemeDark}>
+
                     <div className={style.group}>
                         <a className='link active' href='#' rel='nofollow'>RedHare Market</a>
                         <a className='link' href='#' rel='nofollow'>RedHare Обучение</a>
@@ -102,21 +126,35 @@ export default function Header() {
                     </div>
                 </div>
 
-                <div className={`${style.middle} ${theme} is-hidden--md-down container`}
+                <div className={`${style.middle}  is-hidden--md-down container`}
                     ref={refFixed}
                     data-active={isHeaderFixed}
                     onMouseLeave={hoverLeaveHandler}
                     onMouseEnter={hoverEnterHandler}>
 
                     <div className={`${style.groupMD} ${style.textt1} text--semi`}>
-                        <div className='is-hidden--xxl-down' style={{ width: 297, height: 52 }}>
-                            <Image src='/images/layout/logo-xxl.svg' width='297' height='52' alt='RedHair market' />
+                        <div className='logo-light'>
+                            <div className='is-hidden--xxl-down' style={{ width: 297, height: 52 }}>
+                                <Image src='/images/layout/logo-xxl.svg' width='297' height='52' alt='RedHair market' />
+                            </div>
+                            <div className='is-hidden--xxxl-up is-hidden--xl-down' style={{ width: 256, height: 44 }}>
+                                <Image src='/images/layout/logo-xl.svg' width='256' height='44' alt='RedHair market' />
+                            </div>
+                            <div className='is-hidden--xxl-up' style={{ width: 44, height: 44 }}>
+                                <Image src='/images/layout/logo-lg.svg' width='44' height='44' alt='RedHair market' />
+                            </div>
                         </div>
-                        <div className='is-hidden--xxxl-up is-hidden--xl-down' style={{ width: 256, height: 44 }}>
-                            <Image src='/images/layout/logo-xl.svg' width='256' height='44' alt='RedHair market' />
-                        </div>
-                        <div className='is-hidden--xxl-up' style={{ width: 44, height: 44 }}>
-                            <Image src='/images/layout/logo-lg.svg' width='44' height='44' alt='RedHair market' />
+
+                        <div className='logo-dark'>
+                            <div className='is-hidden--xxl-down' style={{ width: 297, height: 52 }}>
+                                <Image src='/images/layout/logo-dark-xxl.svg' width='297' height='52' alt='RedHair market' />
+                            </div>
+                            <div className='is-hidden--xxxl-up is-hidden--xl-down' style={{ width: 256, height: 44 }}>
+                                <Image src='/images/layout/logo-dark-xl.svg' width='256' height='44' alt='RedHair market' />
+                            </div>
+                            <div className='is-hidden--xxl-up' style={{ width: 44, height: 44 }}>
+                                <Image src='/images/layout/logo-dark-lg.svg' width='44' height='44' alt='RedHair market' />
+                            </div>
                         </div>
 
                         <div className={`${style.catalogBtn} btn btn--md btn--secondary`}>
@@ -159,11 +197,11 @@ export default function Header() {
                     {/* <Image src='/images/layout/background-light.jpg' layout='fill' alt='background' /> */}
                 </div>
 
-                <div className={style.bottom}>
+                <div className={`${style.bottom} ui-dark`}>
                     <div>
                         <div className='text--h1'>FORME</div>
                         <div className='text--p2 mt-1'>Специальные цены и остальные преимущества — только для профессионалов</div>
-                        <div style={{pointerEvents: 'none'}} className='btn btn--primary btn--lg mt-3'>
+                        <div style={{ pointerEvents: 'none' }} className='btn btn--primary btn--lg mt-3'>
                             <span className='text--p5 text--bold text--upper text--sparse btn__text'>Перейти к бренду</span>
                             <Icon name='arrowRight' />
                         </div>

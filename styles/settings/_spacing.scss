@@ -26,6 +26,7 @@ $spacing-classname-list: (
     '0': 0px,
     '0.5': calc(var(--spacing) * 0.5),
     '0.6': calc(var(--spacing) * 0.6),
+    '0.8': calc(var(--spacing) * 0.8),
     '1': var(--spacing),
     '1.5': calc(var(--spacing) * 1.5),
     '2': calc(var(--spacing) * 2),
@@ -39,9 +40,6 @@ $spacing-classname-list: (
     '5.5': calc(var(--spacing) * 5.5),
     '6': calc(var(--spacing) * 6),
     '6.5': calc(var(--spacing) * 6.5),
-    '7': calc(var(--spacing) * 7),
-    '8': calc(var(--spacing) * 8),
-    '9': calc(var(--spacing) * 9),
 );
 
 

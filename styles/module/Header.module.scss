@@ -26,6 +26,21 @@
     display: flex;
     position: relative;
     justify-content: space-between;
+
+    &::before {
+        top: -50px;
+        left: -50px;
+        content: '';
+        right: -50px;
+        bottom: -120px;
+        z-index: 1;
+        position: absolute;
+    }
+
+    >* {
+        z-index: 2;
+        position: relative;
+    }
 }
 
 .middle {
@@ -61,10 +76,9 @@
     z-index: 3;
     width: 100%;
     max-width: none;
-    padding: 18px 120px;
+    padding: 18px 80px;
     transition: .5s transform;
     transform: translateY(-400px);
-    background-color: var(--t-background);
     
     &[data-active="true"] {
         transform: translateY(0);
@@ -74,6 +88,7 @@
 .middleFixedPos {
     z-index: 6;
     position: fixed;
+    background-color: var(--c-_white);
 }
 
 .bottom {
@@ -82,6 +97,7 @@
     max-width: 560px;
     flex-basis: 100%;
     position: relative;
+    pointer-events: none;
     flex-direction: column;
     justify-content: center;
 }
@@ -146,7 +162,8 @@
     right: 0;
     bottom: 0;
     position: absolute;
-    background-color: var(--t-background);
+    pointer-events: none;
+    background-color: var(--c-_black);
 }
 
 .rabbit {
@@ -216,5 +233,23 @@
         xl:   $text-t6,
         xxl:  $text-t6,
         xxxl: $text-t6,
+    ));
+}
+
+.hover {
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 1;
+    transition: .1s;
+    position: absolute;
+    pointer-events: none;
+    background-color: var(--t-background);
+    height: adaptive-value((
+        xs: 80px,
+        lg: 134px,
+        xl: 150px,
+        xxl: 150px,
+        xxxl: 162px,
     ));
 }
