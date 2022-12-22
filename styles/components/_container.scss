@@ -62,13 +62,13 @@
 }
 
 header.ui-dark {
-    a, .btn {
+    a, .btn--secondary {
         transition: .3s .1s!important;
     }
 }
 
 header.ui-light {
-    a, .btn {
-        transition: .3s 0s!important;
+    .btn--tetriary {
+        transition: .3s .1s!important;
     }
 }
