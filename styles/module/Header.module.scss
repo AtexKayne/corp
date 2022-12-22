@@ -236,32 +236,14 @@
     ));
 }
 
-.hover {
-    top: 0;
-    left: 0;
-    right: 0;
-    z-index: 1;
-    transition: .1s;
-    position: absolute;
-    pointer-events: none;
-    background-color: var(--t-background);
-    height: adaptive-value((
-        xs: 80px,
-        lg: 134px,
-        xl: 150px,
-        xxl: 158px,
-        xxxl: 176px,
-    ));
-}
-
 .themechanger {
-    cursor: pointer;
-    position: absolute;
-    bottom: 20px;
     left: 20px;
     z-index: 3;
     width: 50px;
     height: 50px;
+    bottom: 20px;
+    cursor: pointer;
+    position: absolute;
     border-radius: 12px;
     border: 2px solid var(--t-primary);
     background-color: var(--t-background);

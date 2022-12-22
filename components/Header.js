@@ -61,7 +61,7 @@ export default function Header() {
     return (
         <header className={`${style.header} ${theme}`}>
             <div className={`container ${style.container}`}>
-                <div className={style.hover}></div>
+                <div className='header-hover'></div>
                 <div className={`${style.top} ${style.textt4} text--regular is-hidden--lg-up`}
                     onMouseEnter={setThemeLight}
                     onMouseLeave={setThemeDark}>

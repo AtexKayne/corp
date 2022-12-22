@@ -35,3 +35,40 @@
 .ui-dark .logo-light {
     display: none;
 }
+
+.header-hover {
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 1;
+    transition: .4s;
+    position: absolute;
+    pointer-events: none;
+    height: adaptive-value((
+        xs: 80px,
+        lg: 134px,
+        xl: 150px,
+        xxl: 158px,
+        xxxl: 176px,
+    ));
+}
+
+.ui-dark .header-hover {
+    background-color: color-use(background, 0);
+}
+
+.ui-light .header-hover {
+    background-color: color-use(background, 1);
+}
+
+header.ui-dark {
+    a, .btn {
+        transition: .3s .1s!important;
+    }
+}
+
+header.ui-light {
+    a, .btn {
+        transition: .3s 0s!important;
+    }
+}
