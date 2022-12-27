@@ -1,0 +1,37 @@
+.breadcrumbs {
+    max-width: 100%;
+    overflow-x: auto;
+}
+
+.inner {
+    display: flex;
+
+    > span {
+        cursor: pointer;
+        margin-right: 8px;
+        position: relative;
+        padding-right: 20px;
+
+        &::after {
+            top: 5px;
+            right: 6px;
+            width: 8px;
+            height: 8px;
+            content: '';
+            // transition: .4s;
+            position: absolute;
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            background-image: url('/icons/icon-chevron-right.svg');
+        }
+
+        &:last-child {
+            pointer-events: none;
+
+            &::after {
+                display: none;
+            }
+        }
+    }
+}
