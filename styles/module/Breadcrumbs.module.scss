@@ -8,6 +8,7 @@
 
     > span {
         cursor: pointer;
+        transition: .3s;
         margin-right: 8px;
         position: relative;
         padding-right: 20px;
@@ -18,7 +19,8 @@
             width: 8px;
             height: 8px;
             content: '';
-            // transition: .4s;
+            opacity: .5;
+            transition: .3s;
             position: absolute;
             background-size: cover;
             background-position: center;
@@ -31,6 +33,14 @@
 
             &::after {
                 display: none;
+            }
+        }
+
+        &:hover {
+            color: var(--t-text);
+
+            &::after {
+                opacity: 1;
             }
         }
     }
