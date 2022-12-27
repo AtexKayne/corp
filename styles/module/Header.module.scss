@@ -4,6 +4,7 @@
 
 .header {
     width: 100%;
+    overflow: hidden;
     position: relative;
     padding: adaptive-value((
         xs: 12px 0,
