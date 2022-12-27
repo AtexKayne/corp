@@ -9,7 +9,7 @@ export default function Header() {
     const refRabbit = useRef(null)
     const [isHeaderFixed, setIsHeaderFixed] = useState(false)
     const [theme, setTheme] = useState('ui-light')
-    const [themeImage, setThemeImage] = useState('ui-dark')
+    const [themeImage, setThemeImage] = useState('ui-light')
 
     const hoverEnterHandler = () => {
         setIsHeaderFixed(true)
@@ -27,10 +27,10 @@ export default function Header() {
     }
 
     const setThemeLight = (event) => {
-        setTheme('ui-light')
+        // setTheme('ui-light')
     }
     const setThemeDark = (event) => {
-        setTheme('ui-dark')
+        // setTheme('ui-dark')
     }
     useEffect(() => {
         const scrollHandler = event => {
@@ -199,24 +199,9 @@ export default function Header() {
                         <div className={`${style.textt6} btn btn--tetriary btn--md text--bold ml-0.5`}>ВОЙТИ</div>
                     </div>
                 </div>
-
-                <div className={`${style.image} ${themeImage}`}>
-                    {/* <Image src='/images/layout/background-light.jpg' layout='fill' alt='background' /> */}
-                </div>
-
-                <div className={`${style.bottom} ${themeImage}`}>
-                    <div>
-                        <div className='text--h1'>FORME</div>
-                        <div className='text--p2 mt-1'>Специальные цены и остальные преимущества — только для профессионалов</div>
-                        <div style={{ pointerEvents: 'none' }} className='btn btn--primary btn--lg mt-3'>
-                            <span className='text--p5 text--bold text--upper text--sparse btn__text'>Перейти к бренду</span>
-                            <Icon name='arrowRight' />
-                        </div>
-                    </div>
-                </div>
             </div>
 
-            <div onClick={themeChanfe} className={style.themechanger}></div>
+            {/* <div onClick={themeChanfe} className={style.themechanger}></div> */}
 
             <div
                 ref={refRabbit}

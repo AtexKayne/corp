@@ -34,6 +34,7 @@ figure {
 .text--color-primary { color: color-use(primary); }
 .text--color-heading { color: color-use(heading); }
 .text--color-small { color: color-use(small); }
+.text--color-smaler { color: color-use(_light-gray); }
 .text--color-smallish { color: color-use(smallish); }
 .text--color-text { color: color-use(text); }
 
@@ -43,6 +44,7 @@ figure {
     &--p3 { @extend %text--size-p3; }
     &--p4 { @extend %text--size-p4; }
     &--p5 { @extend %text--size-p5; }
+    &--p6 { @extend %text--size-p6; }
     &--t1 { @extend %text--size-t1; }
     &--t2 { @extend %text--size-t2; }
     &--t3 { @extend %text--size-t3; }

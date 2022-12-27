@@ -20,6 +20,13 @@ export default function Icon({ name, external = '', width = 16, height = 16, siz
             person: dynamic(() => import('../public/icons/icon-person.svg'), { ssr: false }),
             VK: dynamic(() => import('../public/icons/icon-vk-fill.svg'), { ssr: false }),
             telegram: dynamic(() => import('../public/icons/icon-telegram-fill.svg'), { ssr: false }),
+            chevronUp: dynamic(() => import('../public/icons/icon-chevron-up.svg'), { ssr: false }),
+            chevronDown: dynamic(() => import('../public/icons/icon-chevron-down.svg'), { ssr: false }),
+            link: dynamic(() => import('../public/icons/icon-link.svg'), { ssr: false }),
+            new: dynamic(() => import('../public/icons/icon-new.svg'), { ssr: false }),
+            fire: dynamic(() => import('../public/icons/icon-fire.svg'), { ssr: false }),
+            verified: dynamic(() => import('../public/icons/icon-verified.svg'), { ssr: false }),
+            arrowRight: dynamic(() => import('../public/icons/icon-arrow-right.svg'), { ssr: false }),
         }
         const Component = dynamicComponents[iconName]
         setLoadedIcon(Component)

@@ -49,7 +49,7 @@ export default function Footer() {
 
                     <div className={`${style.textt6} text--color-small text--upper text--sparse pt-4:md pt-0:lg`}>Наше моб. приложение:</div>
                     <div className={`${style.apps} pt-0.8`}>
-                        <div className><Image src='/icons/icon-app-store.svg' width='125' height='40' alt='' /></div>
+                        <div><Image src='/icons/icon-app-store.svg' width='125' height='40' alt='' /></div>
                         <div><Image src='/icons/icon-google-play.svg' width='125' height='40' alt='' /></div>
                     </div>
                 </div>
