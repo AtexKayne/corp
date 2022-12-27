@@ -1,6 +1,10 @@
 .breadcrumbs {
+    z-index: 1;
+    margin: 10px 0;
     max-width: 100%;
     overflow-x: auto;
+    position: relative;
+    padding-bottom: 10px;
 }
 
 .inner {
@@ -11,6 +15,7 @@
         transition: .3s;
         margin-right: 8px;
         position: relative;
+        white-space: nowrap;
         padding-right: 20px;
 
         &::after {
