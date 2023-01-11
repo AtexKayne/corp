@@ -22,11 +22,15 @@ export default function Icon({ name, external = '', width = 16, height = 16, siz
             telegram: dynamic(() => import('../public/icons/icon-telegram-fill.svg'), { ssr: false }),
             chevronUp: dynamic(() => import('../public/icons/icon-chevron-up.svg'), { ssr: false }),
             chevronDown: dynamic(() => import('../public/icons/icon-chevron-down.svg'), { ssr: false }),
+            chevronLeft: dynamic(() => import('../public/icons/icon-chevron-left.svg'), { ssr: false }),
             link: dynamic(() => import('../public/icons/icon-link.svg'), { ssr: false }),
             new: dynamic(() => import('../public/icons/icon-new.svg'), { ssr: false }),
             fire: dynamic(() => import('../public/icons/icon-fire.svg'), { ssr: false }),
             verified: dynamic(() => import('../public/icons/icon-verified.svg'), { ssr: false }),
             arrowRight: dynamic(() => import('../public/icons/icon-arrow-right.svg'), { ssr: false }),
+            close: dynamic(() => import('../public/icons/icon-x.svg'), { ssr: false }),
+            plus: dynamic(() => import('../public/icons/icon-plus.svg'), { ssr: false }),
+            minus: dynamic(() => import('../public/icons/icon-dash.svg'), { ssr: false }),
         }
         const Component = dynamicComponents[iconName]
         setLoadedIcon(Component)

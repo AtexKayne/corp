@@ -72,6 +72,7 @@ figure {
 .text--regular { font-weight: 400!important; }
 .text--semi { font-weight: 600!important; }
 .text--bold { font-weight: 700!important; }
+.text--no-wrap { white-space: nowrap; }
 
 @include media-breakpoint(md-up) {
     .text--left\:md {

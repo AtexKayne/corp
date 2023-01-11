@@ -24,6 +24,7 @@ $color-design-system: (
     _print:            #000000,
     _error:            #E21B25,
     _fixed:            #E5E5E5,
+    _light:            #F5F6FA,
 );
 
 
@@ -63,6 +64,7 @@ $color-themes: (
         tetriary:      color-use(_fixed),
         text-invert:   color-use(_white),
         active-link:   color-use(_red),
+        light:         color-use(_light),
     ),
 
     // "Dark" theme
@@ -85,5 +87,6 @@ $color-themes: (
         text-invert:   color-use(_black),
         active-link:   color-use(_white),
         tetriary:      color-use(_white, 0.15),
+        light:         color-use(_light),
     )
 );

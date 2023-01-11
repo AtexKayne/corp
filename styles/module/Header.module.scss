@@ -4,7 +4,7 @@
 
 .header {
     width: 100%;
-    overflow: hidden;
+    // overflow: hidden;
     position: relative;
     padding: adaptive-value((
         xs: 12px 0,
@@ -14,7 +14,9 @@
     ));
     height: adaptive-value((
         xs: auto,
-        xl: 200px,
+        lg: 150px,
+        xxl: 180px,
+        xxxl: 200px,
     ));
 }
 

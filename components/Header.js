@@ -1,7 +1,9 @@
 import Icon from './Icon'
 import Image from 'next/image'
 import { useState, useEffect, useRef } from 'react'
+import { globalState } from './helpers/globaslState'
 import style from '../styles/module/Header.module.scss'
+import Popover from './usefull/Popover'
 
 
 export default function Header() {
@@ -32,8 +34,21 @@ export default function Header() {
     const setThemeDark = (event) => {
         // setTheme('ui-dark')
     }
+
+    
     useEffect(() => {
-        const scrollHandler = event => {
+        const changeBodyClass = className => {
+            const classList = document.querySelector('body').classList
+            if (classList.contains(className)) classList.remove(className)
+            else classList.add(className)
+        }
+        globalState.headerTheme = {
+            set: setTheme,
+            get: theme
+        }
+        globalState.toggleBodyClass = changeBodyClass
+
+        const scrollHandler = () => {
             const scrollTop = window.scrollY
 
             if (scrollTop > 250) {
@@ -133,7 +148,7 @@ export default function Header() {
                     </div>
                 </div>
 
-                <div className={`${style.middle}  is-hidden--md-down container`}
+                <div className={`${style.middle} header-middle-container is-hidden--md-down container`}
                     ref={refFixed}
                     data-active={isHeaderFixed}
                     onMouseLeave={hoverLeaveHandler}
@@ -211,6 +226,8 @@ export default function Header() {
                 className={`${style.rabbit} ui-light`}>
                 <Image src='/images/layout/logo-lg.svg' layout='fill' alt='RedHair market' />
             </div>
+
+            <Popover/>
         </header>
     )
 }

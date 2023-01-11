@@ -1,12 +1,14 @@
 @import "../../mixins/helpers/media";
 @import "../../mixins/helpers/adaptive-value";
 
+// GALLERY
 .gallery {
     width: 100%;
     flex-grow: 0;
     display: flex;
     flex-shrink: 0;
     margin: 24px 0;
+    min-width: 100%;
     position: relative;
     // padding: 20px 36px;
 
@@ -20,11 +22,14 @@
 }
 
 .nav {
+    left: 51px;
+    z-index: 2;
     flex-grow: 0;
     display: flex;
     flex-shrink: 0;
     min-width: 88px;
     flex-basis: 88px;
+    position: relative;
     flex-direction: column;
     justify-content: center;
 
@@ -76,7 +81,11 @@
     margin: 12px 0;
     transition: .4s;
     cursor: pointer;
-    background-color: black;
+    background-color: white;
+
+    img {
+        object-fit: cover;
+    }
 
     &[data-active="true"],
     &:hover {
@@ -91,6 +100,11 @@
     cursor: pointer;
     transition: .4s;
     text-align: center;
+
+    &[data-disabled="true"] {
+        filter: opacity(0.4);
+        pointer-events: none;
+    }
 }
 
 .navPrev {
@@ -102,35 +116,102 @@
 }
 
 .imageMain {
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 1;
     width: 100%;
     cursor: pointer;
-    margin: 40px 20px;
-    background-color: lightblue;
+    position: absolute;
+    background-color: white;
 
-    @include media-breakpoint(lg-down) {
-        top: 0;
-        left: 0;
-        right: 0;
-        bottom: 0;
-        margin: 0 0 40px;
-        position: absolute;
+    img {
+        object-fit: cover;
     }
 }
 
 .labels {
     z-index: 2;
+    right: 36px;
     margin: 40px 0;
-    position: relative;
+    position: absolute;
     pointer-events: none;
 
     @include media-breakpoint(lg-down) {
-        left: 0;
-        bottom: 0;
-        position: absolute;
+        left: 4px;
+        bottom: 4px;
     }
 }
 
+// GALLERY MODAL
+.galleryModal {
+    top: 0;
+    left: 0;
+    opacity: 0;
+    z-index: 10;
+    width: 100vw;
+    height: 100vh;
+    overflow: auto;
+    position: fixed;
+    transition: .2s;
+    padding-top: 70px;
+    pointer-events: none;
+    background-color: white;
 
+    &[data-open="true"] {
+        opacity: 1;
+        pointer-events: all;
+    }
+}
+
+.modalHeader {
+    top: 0;
+    z-index: 11;
+    display: flex;
+    position: fixed;
+    justify-content: space-between;
+    padding: adaptive-value((
+        xs: 32px 20px,
+        md: 32px 0px 34px 40px,
+        lg: 32px 120px,
+    ));
+}
+
+.imageModal {
+    width: 100%;
+
+    img {
+        object-fit: contain;
+    }
+}
+
+.previewsModal {
+    top: 98px;
+    left: 72px;
+    position: fixed;
+}
+
+.previewModal {
+    width: 88px;
+    height: 88px;
+    opacity: 0.3;
+    margin: 12px 0;
+    transition: .4s;
+    cursor: pointer;
+    background-color: white;
+
+    img {
+        object-fit: cover;
+    }
+
+    &[data-active="true"],
+    &:hover {
+        opacity: 1;
+    }
+}
+
+// DESCRIPTION
 .mainInfo {
     margin: 24px 0;
     margin-left: adaptive-value((
@@ -147,6 +228,7 @@
     span:nth-child(2) {
         margin-left: 12px;
         position: relative;
+        align-self: center;
         color: var(--c-_light-gray);
 
         &::after {
@@ -202,6 +284,8 @@
     }
 }
 
+
+// BUY BUTTON
 .buybtn {
     display: flex;
 
@@ -239,6 +323,84 @@
     }
 }
 
+.btnMain {
+    &[data-open="true"] {
+        display: none;
+    }
+}
+
+.buyOpen {
+    width: 100%;
+    display: none;
+    user-select: none;
+
+    * {
+        user-select: none;
+        white-space: nowrap;
+    }
+
+    .toBasket {
+        flex-basis: 182px;
+    }
+
+    &[data-open="true"] {
+        display: flex;
+    }
+}
+
+.counterInput {
+    width: 100%;
+    display: none;
+    padding: 0 12px;
+    flex-basis: 100%;
+    padding-right: 0;
+    align-items: center;
+    justify-content: center;
+    text-transform: uppercase;
+}
+
+.counterDiv {
+    width: 100%;
+    display: flex;
+    flex-basis: 100%;
+    align-items: center;
+    justify-content: center;
+    text-transform: uppercase;
+}
+
+.countSelector {
+    display: flex;
+    cursor: pointer;
+    margin-left: 8px;
+    flex-basis: 182px;
+    border-radius: 8px;
+    background-color: var(--t-light);
+
+
+    &[data-active="true"] {
+        .counterInput {
+            display: flex;
+        }
+
+        .counterDiv {
+            display: none;
+        }
+    }
+}
+
+.counterBtn {
+    display: flex;
+    min-width: 60px;
+    align-items: center;
+    justify-content: center;
+
+    &[data-disabled="true"] {
+        opacity: .3;
+        pointer-events: none;
+    }
+}
+
+
 .infoline {
     width: 100%;
     display: flex;
@@ -257,7 +419,7 @@
     }
 }
 
-
+// HELPFULL
 .group {
     display: flex;
 
@@ -292,8 +454,13 @@
     }
 }
 
+
+// ACCORDEON
 .accordeon {
     width: 100%;
+    height: 60px;
+    transition: .5s;
+    overflow: hidden;
     
     .accordeonTitle {
         width: 100%;
@@ -316,7 +483,9 @@
         }
     }
 
-    &[data-open="true"] .accordeonTitle::after {
-        transform: rotate(180deg);
+    &[data-open="true"] {        
+        .accordeonTitle::after {
+            transform: rotate(180deg);
+        }
     }
 }

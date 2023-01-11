@@ -31,6 +31,10 @@
     @extend %overflow-fix;
 }
 
+.c-pointer {
+    cursor: pointer;
+}
+
 .d-none { display: none; }
 .d-flex { display: flex; }
 .d-block { display: block; }
