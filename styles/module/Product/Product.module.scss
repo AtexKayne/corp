@@ -172,13 +172,21 @@
     overflow: auto;
     position: fixed;
     transition: .2s;
-    padding-top: 70px;
     pointer-events: none;
     background-color: white;
 
     &[data-open="true"] {
         opacity: 1;
         pointer-events: all;
+    }
+
+    * {
+        user-select: none;
+    }
+
+    .nav {
+        top: 50px;
+        position: fixed;
     }
 }
 
@@ -187,7 +195,7 @@
     z-index: 11;
     display: flex;
     position: fixed;
-    justify-content: space-between;
+    justify-content: flex-end;
     padding: adaptive-value((
         xs: 32px 20px,
         md: 32px 0px 34px 40px,
@@ -382,13 +390,30 @@
 
 .counterInput {
     width: 100%;
+    border: none;
+    outline: none;
     display: none;
     padding: 0 12px;
     flex-basis: 100%;
     padding-right: 0;
+    text-align: center;
     align-items: center;
     justify-content: center;
     text-transform: uppercase;
+    background-color: var(--t-light);
+
+    &[data-shake="true"] {
+        animation: shake 1s ease;
+    }
+}
+
+@keyframes shake {
+    0% { transform: translateX(-20px); }
+    20% { transform: translateX(20px); }
+    40% { transform: translateX(-10px); }
+    60% { transform: translateX(10px); }
+    80% { transform: translateX(-5px); }
+    100% { transform: translateX(0); }
 }
 
 .counterDiv {

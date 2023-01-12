@@ -314,8 +314,8 @@ function ProductGallery({ images = [], alt = '' }) {
 
             <div ref={refModal} data-open={modalOpen} className={style.galleryModal}>
                 <div className='container p-relative'>
+                    <div className='text--t1 text--bold py-2'>{alt}</div>
                     <div className={`${style.modalHeader} container`}>
-                        <div className='text--t1 text--bold'>{alt}</div>
                         <div className='c-pointer' onClick={modalClose}><Icon name='close' width='16' height='16' /></div>
 
                         {/* <div className='c-pointer is-hidden--md-up' onClick={modalClose}>
@@ -330,12 +330,38 @@ function ProductGallery({ images = [], alt = '' }) {
                         </div>
                     ))}
 
-                    <div className={`${style.previewsModal} is-hidden--md-down`}>
+                    {/* <div className={`${style.previewsModal} is-hidden--md-down`}>
                         {images.map((image, index) => (
                             <div onClick={() => choseActive(image.gallery, index)} data-active={activeImage === image.gallery} key={image.preview} className={style.previewModal}>
                                 <Image src={image.preview} width='88' height='88' alt={alt} />
                             </div>
                         ))}
+                    </div> */}
+
+                    <div className={`${style.nav} is-hidden--lg-down`}>
+                        {images.length > 4
+                            ? <div data-disabled={navDisabled === 'up'} onClick={() => slidePreview('up')} className={style.navPrev}>
+                                <Icon name='chevronUp' width='20' height='20' />
+                            </div>
+                            : null
+                        }
+
+                        <div className={`${style.previews}`}>
+                            <motion.div animate={animatePreview}>
+                                {images.map((image, index) => (
+                                    <div onClick={() => choseActive(image.gallery, index)} data-active={activeImage === image.gallery} key={image.gallery} className={style.imagePreview}>
+                                        <Image src={image.preview} width='88' height='88' alt={alt} />
+                                    </div>
+                                ))}
+                            </motion.div>
+                        </div>
+
+                        {images.length > 4
+                            ? <div data-disabled={navDisabled === 'down'} onClick={() => slidePreview('down')} className={style.navNext}>
+                                <Icon name='chevronDown' width='20' height='20' />
+                            </div>
+                            : null
+                        }
                     </div>
                 </div>
             </div>
@@ -364,12 +390,14 @@ function RadioButton({ items = [] }) {
 
 function BuyButton({ children }) {
     const [isSelected, setIsSelected] = useState(false)
+    const [isShaked, setIsShaked] = useState(false)
     const [diabled, setDiabled] = useState(false)
     const [isOpen, setIsOpen] = useState(false)
     const [count, setCount] = useState(1)
     const refCounter = useRef(null)
     const refInput = useRef(null)
     const maxValue = 109
+
 
     const getValue = () => {
         const value = refInput.current.value
@@ -434,6 +462,8 @@ function BuyButton({ children }) {
             globalState.popover.setTextSecondary('Максимум для этого заказа')
             globalState.popover.setIsBasket(false)
             globalState.popover.setIsOpen(true)
+            setIsShaked(true)
+            setTimeout(() => setIsShaked(false), 1000)
         } else {
             setDiabled(false)
         }
@@ -477,6 +507,7 @@ function BuyButton({ children }) {
                         type='text'
                         ref={refInput}
                         placeholder={count}
+                        data-shake={isShaked}
                         onChange={changeHandler}
                         className={`${style.counterInput} text--p5 text--bold`} />
                     <div onClick={counerClick} className={style.counterDiv}>{count} ШТ</div>
