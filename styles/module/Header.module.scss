@@ -14,9 +14,10 @@
     ));
     height: adaptive-value((
         xs: auto,
-        lg: 150px,
-        xxl: 180px,
-        xxxl: 200px,
+        lg: 148px,
+        xl: 168px,
+        xxl: 168px,
+        xxxl: 185px,
     ));
 }
 
@@ -256,14 +257,15 @@
 
 .countBasket {
     top: 5px;
-    right: 2px;
-    width: 18px;
+    left: 27px;
     height: 18px;
     display: flex;
+    min-width: 18px;
     font-size: 10px;
+    padding: 0px 4px;
     font-weight: 700;
     position: absolute;
-    border-radius: 50%;
+    border-radius: 40px;
     align-items: center;
     justify-content: center;
     color: var(--t-background);
@@ -272,6 +274,6 @@
 
     @include media-breakpoint(lg-up) {
         top: 10px;
-        right: 7px;
+        left: 31px;
     }
 }

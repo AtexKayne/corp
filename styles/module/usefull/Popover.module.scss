@@ -1,3 +1,5 @@
+@import "../../mixins/helpers/media";
+
 .popover {
     z-index: 6;
     opacity: 0;
@@ -13,6 +15,10 @@
     &[data-open="true"] {
         opacity: 1;
         pointer-events: all;
+    }
+
+    @include media-breakpoint(xs) {
+        width: calc(100% - 30px);
     }
 }
 
@@ -39,4 +45,9 @@
     margin-bottom: 4px;
     align-self: flex-end;
     color: var(--t-primary);
+
+    @include media-breakpoint(xs) {
+        right: 15px;
+        position: absolute;
+    }
 }

@@ -1,5 +1,6 @@
 @import "../../mixins/helpers/media";
 @import "../../mixins/helpers/adaptive-value";
+@import "../../extends/_text-sizes";
 
 // GALLERY
 .gallery {
@@ -7,9 +8,9 @@
     flex-grow: 0;
     display: flex;
     flex-shrink: 0;
-    margin: 24px 0;
     min-width: 100%;
     position: relative;
+    margin-bottom: 12px;
     // padding: 20px 36px;
 
     @include media-breakpoint(lg-down) {
@@ -129,6 +130,12 @@
     img {
         object-fit: cover;
     }
+
+    @include media-breakpoint(xs) {
+        left: -15px;
+        width: auto;
+        right: -15px;
+    }
 }
 
 .labels {
@@ -223,12 +230,12 @@
 
 // DESCRIPTION
 .mainInfo {
-    margin: 24px 0;
+    top: 32px;
     margin-left: adaptive-value((
         xs: 0,
         lg: 24px,
         xl: 32px,
-        xxxl: 40px
+        xxxl: 25px
     ));
 }
 
@@ -276,7 +283,7 @@
     > * {
         cursor: pointer;
         transition: .3s;
-        padding: 8px 12px;
+        padding: 6px 12px;
         margin-right: 8px;
         border-radius: 4px;
         text-transform: uppercase;
@@ -356,16 +363,19 @@
 
     .toBasket {
         min-height: 60px;
-        flex-basis: 118px;
+        flex-basis: 100%;
     }
 
     &[data-open="true"] {
         display: flex;
     }
 
-    @include media-breakpoint(md-up) {
+    @include media-breakpoint(xxl-up) {
         .toBasket {
-            flex-basis: 182px;
+            flex-basis: 50%;
+        }
+        .countSelector {
+            flex-basis: 50%;
         }
     }
 }
@@ -394,7 +404,7 @@
     display: flex;
     cursor: pointer;
     margin-left: 8px;
-    flex-basis: 182px;
+    flex-basis: 100%;
     border-radius: 8px;
     background-color: var(--t-light);
 
@@ -424,6 +434,11 @@
     @include media-breakpoint(md-up) {
         min-width: 60px;
     }
+}
+
+.favourite {
+    min-width: 60px;
+    min-height: 60px;
 }
 
 
@@ -491,8 +506,13 @@
     .accordeonTitle {
         width: 100%;
         cursor: pointer;
+        transition: .3s;
         position: relative;
-        margin-bottom: 32px;
+        margin-bottom: 20px;
+
+        &:hover {
+            color: var(--t-primary);
+        }
 
         &::after {
             top: 0.5em;
@@ -514,4 +534,92 @@
             transform: rotate(180deg);
         }
     }
+
+    @include media-breakpoint(xxl-up) {
+        .accordeonTitle {
+            margin-bottom: 32px;
+        }
+    }
+}
+
+
+// TEXTS
+.text0 {
+    @include text--size((
+        xs:   $text-p5,
+        md:   $text-p5,
+        lg:   $text-p5,
+        xl:   $text-p5,
+        xxl:  $text-p4,
+    ));
+}
+
+.text1 {
+    @include text--size((
+        xs:   $text-t0,
+        md:   $text-t0,
+        lg:   $text-t0,
+        xl:   $text-t0,
+        xxl:  $text-h4,
+    ));
+}
+
+.text2 {
+    @include text--size((
+        xs:   $text-p0,
+        md:   $text-p0,
+        lg:   $text-p0,
+        xl:   $text-p0,
+        xxl:  $text-h4,
+    ));
+}
+
+.text3 {
+    @include text--size((
+        xs:   $text-p2,
+        md:   $text-p2,
+        lg:   $text-p2,
+        xl:   $text-p2,
+        xxl:  $text-h5,
+    ));
+}
+
+.text4 {
+    @include text--size((
+        xs:   $text-p2-sm,
+        md:   $text-p2-sm,
+        lg:   $text-p2-sm,
+        xl:   $text-p2-sm,
+        xxl:  $text-p1,
+    ));
+}
+
+.text5 {
+    @include text--size((
+        xs:   $text-p4,
+        md:   $text-p4,
+        lg:   $text-p4,
+        xl:   $text-p4,
+        xxl:  $text-p4,
+    ));
+}
+
+.text6 {
+    @include text--size((
+        xs:   $text-t3,
+        md:   $text-t3,
+        lg:   $text-t3,
+        xl:   $text-t3,
+        xxl:  $text-t1,
+    ));
+}
+
+.text7 {
+    @include text--size((
+        xs:   $text-p4,
+        md:   $text-p4,
+        lg:   $text-p5,
+        xl:   $text-p4,
+        xxl:  $text-p4,
+    ));
 }

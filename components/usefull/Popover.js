@@ -16,8 +16,13 @@ export default function Popover() {
     useEffect(() => {
         refContainer.current = document.querySelector('.header-middle-container')
         const rect = refContainer.current.getBoundingClientRect()
-        setTopPosition(rect.top + rect.height + 20)
-        setRightPosition(rect.right - rect.width)
+        if (rect.top === 0 && rect.right === 0) {
+            setTopPosition(60)
+            setRightPosition(15)
+        } else {
+            setTopPosition(rect.top + rect.height + 20)
+            setRightPosition(rect.right - rect.width)
+        }
 
         globalState.popover = {
             setTextSecondary,
@@ -32,8 +37,13 @@ export default function Popover() {
         if (typeof window === 'undefined') return
         const resizeHandler = () => {
             const rect = refContainer.current.getBoundingClientRect()
-            setTopPosition(rect.top + rect.height + 20)
-            setRightPosition(rect.right - rect.width)
+            if (rect.top === 0 && rect.right === 0) {
+                setTopPosition(60)
+                setRightPosition(15)
+            } else {
+                setTopPosition(rect.top + rect.height + 20)
+                setRightPosition(rect.right - rect.width)
+            }
         }
         window.addEventListener('resize', resizeHandler)
 

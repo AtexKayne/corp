@@ -11,6 +11,41 @@ import useDeviceDetect from '../../components/helpers/useDeviceDetect'
 
 export default function Product({ detail }) {
     const { isMobile } = useDeviceDetect()
+    const refSticky = useRef(null)
+
+    useEffect(() => {
+        const footerHeight = document.querySelector('footer').clientHeight
+        const offsetInfo = refSticky.current.getBoundingClientRect().top
+        const stickyHandler = () => {
+            if (window.innerWidth <= 880) return
+
+            const scrollPos = window.scrollY
+            // const documentHeight = document.body.clientHeight - window.innerHeight
+            if (scrollPos > offsetInfo) {
+                refSticky.current.style.position = 'fixed'
+            } else {
+                refSticky.current.style.position = 'static'
+            }
+
+            // if (documentHeight - scrollPos < 183) {
+            //     // const rect = refSticky.current.getBoundingClientRect()
+            //     refSticky.current.style.position = 'absolute'
+            //     refSticky.current.style.top = `${scrollPos}px`
+            // } else {
+            //     refSticky.current.style.bottom = 'auto'
+            // }
+        }
+
+        if (window.innerWidth > 880) {
+            window.addEventListener('scroll', stickyHandler)
+        }
+
+        return () => {
+            window.removeEventListener('scroll', stickyHandler)
+        }
+    }, [])
+
+
     const radioItems = [
         { status: '', text: '100 мл' },
         { status: '', text: '200 мл' },
@@ -28,15 +63,15 @@ export default function Product({ detail }) {
                 </div>
 
                 <div className='col col--xs-6 col--lg-5'>
-                    <div className={style.mainInfo}>
-                        <div className='text--p4 text--upper mb-0.8'>{product.names.secondary}</div>
-                        <h1 className='text--h4 text--regular mb-0.8'>{product.names.primary}</h1>
-                        <div className='text--p4 text--color-small mb-2'>Артикул: {product.art}</div>
+                    <div ref={refSticky} className={style.mainInfo}>
+                        <div className={`${style.text0} text--normal text--upper mb-0.8`}>{product.names.secondary}</div>
+                        <h1 className={`${style.text1} text--regular mb-0.8`}>{product.names.primary}</h1>
+                        <div className='text--p4 text--color-small mb-1 mb-2:xxl'>Артикул: {product.art}</div>
                         <div className={`${style.price} is-hidden--md`}>
-                            <span className='text--h4'>{product.price.actual} ₽</span>
-                            <span className='text--h5'>{product.price.old} ₽</span>
+                            <span className={`${style.text2} text--bold`}>{product.price.actual} ₽</span>
+                            <span className={`${style.text3} text--bold`}>{product.price.old} ₽</span>
                         </div>
-                        <div className='text--p6 text--upper mt-0.8 mb-2 is-hidden--md'>
+                        <div className='text--p6 text--upper mt-0.8:xxl mb-1 mb-2:xxl is-hidden--md'>
                             <span className='mr-0.5'>Вы получите</span>
                             <span className='text--bold'>{product.bonuses} Red-бонуса</span>
                         </div>
@@ -47,10 +82,10 @@ export default function Product({ detail }) {
 
                         <BuyButton>
                             <div className={`${style.price} text--h4`}>
-                                <span className='text--h4'>{product.price.actual} ₽</span>
-                                <span className='text--h5'>{product.price.old} ₽</span>
+                                <span className={`${style.text2} text--bold`}>{product.price.actual} ₽</span>
+                                <span className={`${style.text2} text--bold`}>{product.price.old} ₽</span>
                             </div>
-                            <div className='text--p6 text--upper mt-0.8'>
+                            <div className='text--p6 text--upper mt-0.8 mt-0:md mt-0.8:lg'>
                                 <span className='mr-0.5'>Вы получите</span>
                                 <span className='text--bold'>{product.bonuses} Red-бонуса</span>
                             </div>
@@ -58,10 +93,10 @@ export default function Product({ detail }) {
 
                         <div className='mb-2' />
                         <div className='text--p6 mb-1'>Поделиться:</div>
-                        <div className={`${style.group} pt-0.8 pb-2.5 pb-2:md is-hidden--md`}>
-                            <div className='btn btn--social btn--sm'><Icon width='24' height='24' name='VK' /></div>
-                            <div className='btn btn--social btn--sm'><Icon width='24' height='24' name='telegram' /></div>
-                            <div className='btn btn--social btn--sm'><Icon width='24' height='24' name='link' /></div>
+                        <div className={`${style.group} pb-2.5 pb-2:md`}>
+                            <div className='btn btn--grey btn--sm'><Icon width='18' height='18' name='VK' /></div>
+                            <div className='btn btn--grey btn--sm'><Icon width='18' height='18' name='telegram' /></div>
+                            <div className='btn btn--grey btn--sm'><Icon width='18' height='18' name='link' /></div>
                         </div>
                     </div>
                 </div>
@@ -71,20 +106,20 @@ export default function Product({ detail }) {
                 <div className='col col--xs-6 col--lg-7'>
                     <div className={style.additionInfo}>
                         <div className={style.topInfo}>
-                            <div className='text--h5'>Доставка</div>
+                            <div className={`${style.text4} text--bold pb-0.6:xl pb-0:xxl`}>Доставка</div>
                             <a href='#' className='link active text--p5 text--upper text--bold'>Подробнее</a>
                         </div>
-                        <div className='text--p5 mt-0.5 mb-2'>в город Москва</div>
+                        <div className='text--p5 mb-1.5 mb-2:xxl'>в город Москва</div>
 
                         <InfoLine text='сегодня' title='Фирменный магазин' />
                         <InfoLine text='с 13 октября' title='Доставка в ПВЗ' />
                         <InfoLine text='с 12 октября' title='Курьер' />
 
-                        <div className='pt-2.5 pt-5:lg' />
+                        <div className='pt-1.5 pt-2.5:md pt-2:xl pt3:xxl' />
 
                         <Accordeon title='Описание' open={true}>
-                            <div className='text--t1 mb-1'>Лечение жирных волос и кожи головы</div>
-                            <p className='text--p4 mb-2'>
+                            <div className={`${style.text6} mb-0.8`}>Лечение жирных волос и кожи головы</div>
+                            <p className={`${style.text7} text--normal mb-2`}>
                                 Специально для людей с активными сальными железами был разработан терапевтический шампунь № 4.
                                 Если беспокоят такие проблемы, как быстро пачкающиеся волосы, зуд, отсутствие объема,
                                 выпадение волос и перхоть, то это шампунь станет настоящим спасением.
@@ -95,13 +130,13 @@ export default function Product({ detail }) {
                                 Частота использования 2–3 раза в неделю, рекомендованный курс 1–2 месяца.
                             </p>
 
-                            <div className='text--t1 mb-1'>Применение</div>
-                            <p className='text--p4 mb-2'>
+                            <div className={`${style.text6} mb-0.8`}>Применение</div>
+                            <p className={`${style.text7} text--normal mb-2`}>
                                 Нанести на влажные волосы, слегка массируя кожу головы в течение 2–3 минут, затем смойте.
                             </p>
 
-                            <div className='text--t1 mb-1'>Состав</div>
-                            <p className='text--p4 mb-2'>
+                            <div className={`${style.text6} mb-0.8`}>Состав</div>
+                            <p className={`${style.text7} text--normal mb-2`}>
                                 Вода, натрия лауретсульфат, лаурилгиксеид, кокамидопропилбетаин, натрия кокамфодиацетат,
                                 кокоглюксеид, глицерилолеат, сланцевого масла натрия сульфонат, розмарин, ментол,
                                 лимонная кислота, феноксиэтанол, йодопропинила бутилкарбамат, бутилциклогексан.
@@ -132,13 +167,13 @@ export default function Product({ detail }) {
                         <div className='pt-2.5 pt-4:lg' />
 
                         <Accordeon title='О бренде'>
-                            <Image src='/images/product/brand-logo.png' width='100' height='100' alt='' />
+                            <Image src='/images/product/brand-logo.svg' width='100' height='100' alt='' />
 
-                            <div className='text--t1 mt-2 mb-1'>System 4</div>
-                            <p className='text--p4 mb-2'>
-                                Вода, натрия лауретсульфат, лаурилгиксеид, кокамидопропилбетаин, натрия кокамфодиацетат,
-                                кокоглюксеид, глицерилолеат, сланцевого масла натрия сульфонат, розмарин, ментол,
-                                лимонная кислота, феноксиэтанол, йодопропинила бутилкарбамат, бутилциклогексан.
+                            <div className='text--t1 mt-1.5 mb-1'>System 4</div>
+                            <p className={`${style.text7} text--normal mb-2`}>
+                                Более 50 лет, профессиональные средства Система 4 разрабатываются лучшими
+                                учеными и специалистами по здоровью волос и кожи головы. Каждая формула проходит
+                                серьезные исследования и тестирование, прежде чем поступить в продажу.
                             </p>
                             <a href='#' className='text--p5 text--bold text--upper btn btn--xxs btn--empty'>
                                 <span className='mr-0.5'>подробнее о бренде</span>
@@ -193,7 +228,7 @@ function ProductGallery({ images = [], alt = '' }) {
     }
 
     const nextHandler = () => {
-        const index =  images.findIndex(image => image.gallery === activeImage)
+        const index = images.findIndex(image => image.gallery === activeImage)
         const nextImageObj = images[index + 1]
         const nextImage = nextImageObj ? nextImageObj.gallery : images[0].gallery
         setActiveImage(nextImage)
@@ -313,7 +348,7 @@ function RadioButton({ items = [] }) {
     const [active, setActive] = useState(0)
 
     return (
-        <div className={style.radio}>
+        <div className={`${style.radio} text--p4`}>
             {items.map((item, index) => (
                 <div
                     key={item.text}
@@ -372,7 +407,6 @@ function BuyButton({ children }) {
         globalState.popover.setTextSecondary('ТЕПЕРЬ В КОРЗИНЕ')
         globalState.popover.setIsBasket(true)
         globalState.popover.setIsOpen(true)
-        globalState.basket.setBasketCount(1)
     }
 
     const changeHandler = () => {
@@ -391,7 +425,6 @@ function BuyButton({ children }) {
             globalState.popover.setTextSecondary('БОЛЬШЕ НЕ В КОРЗИНЕ')
             globalState.popover.setIsBasket(true)
             globalState.popover.setIsOpen(true)
-            globalState.basket.setBasketCount(0)
         } else if (count >= maxValue) {
             setDiabled('plus')
             setCount(maxValue)
@@ -404,6 +437,7 @@ function BuyButton({ children }) {
         } else {
             setDiabled(false)
         }
+        globalState.basket.setBasketCount(count)
     }, [count])
 
 
@@ -413,20 +447,22 @@ function BuyButton({ children }) {
                 {children}
             </div>
 
-            <div className='btn btn--md btn--shadow'>
+            <div className={`${style.favourite} btn btn--md btn--shadow`}>
                 <Icon name='heartMD' width='18' height='16' />
             </div>
 
             <div onClick={buyHandler} data-open={isOpen} className={`${style.btnMain} btn btn--md btn--fill btn--primary`}>
-                <span className='text--upper text--p5 text--bold mr-0.8'>Добавить в корзину</span>
+                <span className='text--upper text--p5 text--bold mr-0.8'>
+                    <span className='is-hidden--lg-down'>Добавить </span>
+                    <span>в корзину</span>
+                </span>
                 <Icon name='basketMD' width='18' height='18' />
             </div>
 
             <div data-open={isOpen} className={style.buyOpen}>
 
-                <div className={`${style.toBasket} btn btn--md btn--fill btn--secondary`}>
-                    <span className='text--upper text--p5 text--bold is-hidden--sm-down'>к корзине</span>
-                    <span className='text--upper text--p6 text--bold is-hidden--md-up'>к корзине</span>
+                <div className={`${style.toBasket} btn btn--md btn--fill btn--secondary is-hidden--xl-down`}>
+                    <span className='text--upper text--p5 text--bold'>к корзине</span>
                 </div>
 
                 <div
@@ -459,7 +495,7 @@ function BuyButton({ children }) {
 function InfoLine({ title, text }) {
     return (
         <div className={style.infoline}>
-            <div className='text--p4'>{title}</div>
+            <div className={`${style.text5} text--normal`}>{title}</div>
             <div className={style.infolinedelim} />
             <div className='text--p5 text--bold text--upper'>{text}</div>
         </div>
@@ -484,10 +520,9 @@ function Accordeon({ children, title, open = false }) {
         const newHeight = !isOpen ? refContainerHeight.current : titleHeight
         refAccordeon.current.style.height = `${newHeight}px`
     }
-
     return (
         <div ref={refAccordeon} data-open={isOpen} className={style.accordeon}>
-            <div onClick={toggleHandler} className={`${style.accordeonTitle} text--p1 text--bold`}>{title}</div>
+            <div onClick={toggleHandler} className={`${style.accordeonTitle} ${style.text4} text--p1 text--bold`}>{title}</div>
 
             <div ref={refChildrenContainer}>
                 {children}
