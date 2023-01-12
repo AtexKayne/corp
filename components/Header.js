@@ -11,7 +11,9 @@ export default function Header() {
     const refRabbit = useRef(null)
     const [isHeaderFixed, setIsHeaderFixed] = useState(false)
     const [theme, setTheme] = useState('ui-light')
+    const [basketCount, setBasketCount] = useState(0)
     const [themeImage, setThemeImage] = useState('ui-light')
+
 
     const hoverEnterHandler = () => {
         setIsHeaderFixed(true)
@@ -35,7 +37,7 @@ export default function Header() {
         // setTheme('ui-dark')
     }
 
-    
+
     useEffect(() => {
         const changeBodyClass = className => {
             const classList = document.querySelector('body').classList
@@ -43,10 +45,14 @@ export default function Header() {
             else classList.add(className)
         }
         globalState.headerTheme = {
-            set: setTheme,
-            get: theme
+            setTheme,
+            theme
         }
         globalState.toggleBodyClass = changeBodyClass
+        globalState.basket = {
+            setBasketCount,
+            basketCount
+        }
 
         const scrollHandler = () => {
             const scrollTop = window.scrollY
@@ -114,9 +120,10 @@ export default function Header() {
 
                     </div>
                     <div className={style.groupMD}>
-                        <div className='btn btn--empty btn--xs'>
+                        <div className='btn btn--empty btn--xs p-relative'>
                             <Icon width='27' height='24' external='is-hidden--sm-down' name='basket' />
                             <Icon width='24' height='21' external='is-hidden--md-up' name='basket' />
+                            <div className={`${style.countBasket} ${!!basketCount ? '' : 'is-hidden'}`}>{basketCount}</div>
                         </div>
                         <div className='btn btn--empty btn--sm'>
                             <Icon width='24' height='24' external='is-hidden--sm-down' name='person' />
@@ -203,14 +210,20 @@ export default function Header() {
                     <div className={`${style.groupSM} is-hidden--lg-down`}>
                         <div className='btn btn--empty btn--sm'><Icon width='21' height='21' name='searchMD' /></div>
                         <div className='btn btn--empty btn--sm'><Icon width='24' height='21' name='heartMD' /></div>
-                        <div className='btn btn--empty btn--sm'><Icon width='27' height='25' name='basketMD' /></div>
+                        <div className='btn btn--empty btn--sm p-relative'>
+                            <div className={`${style.countBasket} ${!!basketCount ? '' : 'is-hidden'}`}>{basketCount}</div>
+                            <Icon width='27' height='25' name='basketMD' />
+                        </div>
                         <div className={`${style.textt6} btn btn--tetriary btn--md text--bold ml-0.5`}>ВОЙТИ</div>
                     </div>
 
                     <div className={`${style.groupSM} is-hidden--xl-up`}>
                         <div className='btn btn--empty btn--sm'><Icon width='18' height='20' name='searchMD' /></div>
                         <div className='btn btn--empty btn--sm'><Icon width='20' height='18' name='heartMD' /></div>
-                        <div className='btn btn--empty btn--sm'><Icon width='22' height='21' name='basketMD' /></div>
+                        <div className={`btn btn--empty btn--sm p-relative`}>
+                            <div className={`${style.countBasket} ${!!basketCount ? '' : 'is-hidden'}`}>{basketCount}</div>
+                            <Icon width='22' height='21' name='basketMD' />
+                        </div>
                         <div className={`${style.textt6} btn btn--tetriary btn--md text--bold ml-0.5`}>ВОЙТИ</div>
                     </div>
                 </div>
@@ -227,7 +240,7 @@ export default function Header() {
                 <Image src='/images/layout/logo-lg.svg' layout='fill' alt='RedHair market' />
             </div>
 
-            <Popover/>
+            <Popover />
         </header>
     )
 }

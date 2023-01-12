@@ -253,3 +253,25 @@
     border: 2px solid var(--t-primary);
     background-color: var(--t-background);
 }
+
+.countBasket {
+    top: 5px;
+    right: 2px;
+    width: 18px;
+    height: 18px;
+    display: flex;
+    font-size: 10px;
+    font-weight: 700;
+    position: absolute;
+    border-radius: 50%;
+    align-items: center;
+    justify-content: center;
+    color: var(--t-background);
+    background-color: var(--t-primary);
+    border: 2px solid var(--t-background);
+
+    @include media-breakpoint(lg-up) {
+        top: 10px;
+        right: 7px;
+    }
+}

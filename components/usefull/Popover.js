@@ -11,10 +11,11 @@ export default function Popover() {
     const [isBasket, setIsBasket] = useState(false)
     const [isOpen, setIsOpen] = useState('')
     const [image, setImage] = useState('')
+    const refContainer = useRef(null)
 
     useEffect(() => {
-        const container = document.querySelector('.header-middle-container')
-        const rect = container.getBoundingClientRect()
+        refContainer.current = document.querySelector('.header-middle-container')
+        const rect = refContainer.current.getBoundingClientRect()
         setTopPosition(rect.top + rect.height + 20)
         setRightPosition(rect.right - rect.width)
 
@@ -27,13 +28,24 @@ export default function Popover() {
             setIsOpen,
             setImage
         }
+
+        if (typeof window === 'undefined') return
+        const resizeHandler = () => {
+            const rect = refContainer.current.getBoundingClientRect()
+            setTopPosition(rect.top + rect.height + 20)
+            setRightPosition(rect.right - rect.width)
+        }
+        window.addEventListener('resize', resizeHandler)
+
+        return () => {
+            window.removeEventListener('resize', resizeHandler)
+        }
     }, [])
 
     useEffect(() => {
         if (!isOpen) return
         setTimeout(() => setIsOpen(false), 6000)
     }, [isOpen])
-
 
     return (
         <div style={{top: `${topPosition}px`, right: `${rightPosition}px`}} data-open={isOpen} className={style.popover}>

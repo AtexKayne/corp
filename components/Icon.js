@@ -23,6 +23,7 @@ export default function Icon({ name, external = '', width = 16, height = 16, siz
             chevronUp: dynamic(() => import('../public/icons/icon-chevron-up.svg'), { ssr: false }),
             chevronDown: dynamic(() => import('../public/icons/icon-chevron-down.svg'), { ssr: false }),
             chevronLeft: dynamic(() => import('../public/icons/icon-chevron-left.svg'), { ssr: false }),
+            chevronRight: dynamic(() => import('../public/icons/icon-chevron-right.svg'), { ssr: false }),
             link: dynamic(() => import('../public/icons/icon-link.svg'), { ssr: false }),
             new: dynamic(() => import('../public/icons/icon-new.svg'), { ssr: false }),
             fire: dynamic(() => import('../public/icons/icon-fire.svg'), { ssr: false }),

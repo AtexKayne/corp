@@ -192,6 +192,13 @@ function ProductGallery({ images = [], alt = '' }) {
         globalState.toggleBodyClass('overflow-hidden')
     }
 
+    const nextHandler = () => {
+        const index =  images.findIndex(image => image.gallery === activeImage)
+        const nextImageObj = images[index + 1]
+        const nextImage = nextImageObj ? nextImageObj.gallery : images[0].gallery
+        setActiveImage(nextImage)
+    }
+
     useEffect(() => {
         const imagePositions = []
         const imageList = refModal.current.querySelectorAll(`.${style.imageModal}`)
@@ -266,6 +273,8 @@ function ProductGallery({ images = [], alt = '' }) {
                         <Icon name='verified' width='22' height='22' />
                     </div>
                 </div>
+
+                <div onClick={nextHandler} className={style.nextCol} />
             </div>
 
             <div ref={refModal} data-open={modalOpen} className={style.galleryModal}>
@@ -363,6 +372,7 @@ function BuyButton({ children }) {
         globalState.popover.setTextSecondary('ТЕПЕРЬ В КОРЗИНЕ')
         globalState.popover.setIsBasket(true)
         globalState.popover.setIsOpen(true)
+        globalState.basket.setBasketCount(1)
     }
 
     const changeHandler = () => {
@@ -381,6 +391,7 @@ function BuyButton({ children }) {
             globalState.popover.setTextSecondary('БОЛЬШЕ НЕ В КОРЗИНЕ')
             globalState.popover.setIsBasket(true)
             globalState.popover.setIsOpen(true)
+            globalState.basket.setBasketCount(0)
         } else if (count >= maxValue) {
             setDiabled('plus')
             setCount(maxValue)
@@ -394,7 +405,7 @@ function BuyButton({ children }) {
             setDiabled(false)
         }
     }, [count])
-    
+
 
     return (
         <div className={style.buybtn}>
@@ -412,9 +423,10 @@ function BuyButton({ children }) {
             </div>
 
             <div data-open={isOpen} className={style.buyOpen}>
-                
+
                 <div className={`${style.toBasket} btn btn--md btn--fill btn--secondary`}>
-                    <span className='text--upper text--p5 text--bold mr-0.8'>к корзине</span>
+                    <span className='text--upper text--p5 text--bold is-hidden--sm-down'>к корзине</span>
+                    <span className='text--upper text--p6 text--bold is-hidden--md-up'>к корзине</span>
                 </div>
 
                 <div
