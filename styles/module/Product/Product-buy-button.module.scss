@@ -1,0 +1,161 @@
+@import "../../mixins/helpers/media";
+@import "../../mixins/helpers/adaptive-value";
+@import "../../extends/_text-sizes";
+
+// BUY BUTTON
+.buybtn {
+    display: flex;
+
+    >* {
+        min-height: 60px;
+        margin-right: 8px;
+
+        &:last-child {
+            margin-right: 0;
+        }
+    }
+
+    @include media-breakpoint(md-down) {
+        left: 0;
+        bottom: 0;
+        z-index: 3;
+        width: 100vw;
+        position: fixed;
+        min-height: 92px;
+        padding: 24px 32px;
+        background-color: var(--t-background);
+
+        > div {
+            height: auto;
+
+            &:nth-child(2) {
+                min-width: 60px;
+            }
+        }
+    }
+
+    @include media-breakpoint(sm-down) {
+        padding: 16px;
+    }
+}
+
+.buybtnChildren {
+    @include media-breakpoint(md-down) {
+        margin-right: 32px;
+    }
+}
+
+.btnMain {
+    max-width: 415px;
+    
+    &[data-open="true"] {
+        display: none;
+    }
+}
+
+.buyOpen {
+    width: 100%;
+    display: none;
+    user-select: none;
+
+    * {
+        user-select: none;
+        white-space: nowrap;
+    }
+
+    .toBasket {
+        min-height: 60px;
+        flex-basis: 100%;
+    }
+
+    &[data-open="true"] {
+        display: flex;
+    }
+
+    @include media-breakpoint(xxl-up) {
+        .toBasket {
+            flex-basis: 50%;
+        }
+        .countSelector {
+            flex-basis: 50%;
+        }
+    }
+}
+
+.counterInput {
+    width: 100%;
+    border: none;
+    outline: none;
+    display: none;
+    padding: 0 12px;
+    flex-basis: 100%;
+    padding-right: 0;
+    text-align: center;
+    align-items: center;
+    justify-content: center;
+    text-transform: uppercase;
+    background-color: var(--t-light);
+
+    &[data-shake="true"] {
+        animation: shake 1s ease;
+    }
+}
+
+@keyframes shake {
+    0% { transform: translateX(-20px); }
+    20% { transform: translateX(20px); }
+    40% { transform: translateX(-10px); }
+    60% { transform: translateX(10px); }
+    80% { transform: translateX(-5px); }
+    100% { transform: translateX(0); }
+}
+
+.counterDiv {
+    width: 100%;
+    display: flex;
+    flex-basis: 100%;
+    align-items: center;
+    justify-content: center;
+    text-transform: uppercase;
+}
+
+.countSelector {
+    display: flex;
+    cursor: pointer;
+    margin-left: 8px;
+    flex-basis: 100%;
+    border-radius: 8px;
+    background-color: var(--t-light);
+
+
+    &[data-active="true"] {
+        .counterInput {
+            display: flex;
+        }
+
+        .counterDiv {
+            display: none;
+        }
+    }
+}
+
+.counterBtn {
+    display: flex;
+    min-width: 40px;
+    align-items: center;
+    justify-content: center;
+
+    &[data-disabled="true"] {
+        opacity: .3;
+        pointer-events: none;
+    }
+
+    @include media-breakpoint(md-up) {
+        min-width: 60px;
+    }
+}
+
+.favourite {
+    min-width: 60px;
+    min-height: 60px;
+}

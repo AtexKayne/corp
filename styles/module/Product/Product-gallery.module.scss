@@ -1,0 +1,240 @@
+@import "../../mixins/helpers/media";
+@import "../../mixins/helpers/adaptive-value";
+@import "../../extends/_text-sizes";
+
+
+// GALLERY
+.gallery {
+    width: 100%;
+    flex-grow: 0;
+    display: flex;
+    flex-shrink: 0;
+    min-width: 100%;
+    position: relative;
+    margin-bottom: 12px;
+    // padding: 20px 36px;
+
+    @include media-breakpoint(lg-down) {
+        min-height: 450px;
+    }
+
+    @include media-breakpoint(sm-down) {
+        margin-bottom: 0;
+    }
+}
+
+.nav {
+    left: 51px;
+    z-index: 2;
+    flex-grow: 0;
+    display: flex;
+    flex-shrink: 0;
+    min-width: 88px;
+    flex-basis: 88px;
+    position: relative;
+    flex-direction: column;
+    justify-content: center;
+
+    &:hover {
+        .navPrev,
+        .navNext {
+            opacity: 1;
+        }
+    }
+}
+
+.navTablet {
+    left: 50%;
+    z-index: 2;
+    height: 2px;
+    width: 120px;
+    bottom: 24px;
+    display: flex;
+    position: absolute;
+
+    >span {
+        top: 0;
+        left: -1px;
+        width: 14px;
+        height: 4px;
+        position: absolute;
+        border-radius: 3px;
+        background-color: var(--t-primary);
+    }
+
+    >div {
+        width: 4px;
+        height: 4px;
+        margin-right: 4px;
+        border-radius: 2px;
+        background-color: var(--t-small);
+    }
+}
+
+.previews {
+    overflow: hidden;
+    max-height: 412px;
+}
+
+.imagePreview {
+    width: 88px;
+    height: 88px;
+    opacity: 0.3;
+    margin: 12px 0;
+    transition: .4s;
+    cursor: pointer;
+    background-color: white;
+
+    img {
+        object-fit: cover;
+    }
+
+    &[data-active="true"],
+    &:hover {
+        opacity: 1;
+    }
+}
+
+.navPrev,
+.navNext {
+    opacity: 0;
+    width: 88px;
+    cursor: pointer;
+    transition: .4s;
+    text-align: center;
+
+    &[data-disabled="true"] {
+        filter: opacity(0.4);
+        pointer-events: none;
+    }
+}
+
+.navPrev {
+    margin-top: 40px;
+}
+
+.navNext {
+    margin-bottom: 40px;
+}
+
+.imageMain {
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 1;
+    width: 100%;
+    cursor: pointer;
+    position: absolute;
+    transform: none!important;
+    background-color: white;
+
+    img {
+        object-fit: cover;
+    }
+
+    @include media-breakpoint(xs) {
+        left: -15px;
+        width: auto;
+        right: -15px;
+    }
+}
+
+.labels {
+    z-index: 2;
+    right: 36px;
+    margin: 40px 0;
+    position: absolute;
+    pointer-events: none;
+
+    @include media-breakpoint(lg-down) {
+        left: 4px;
+        bottom: 4px;
+    }
+}
+
+.nextCol {
+    top: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 3;
+    width: 169px;
+    position: absolute;
+    cursor: url('/icons/icon-chevron-right.svg') 0 0, pointer;
+}
+
+
+// GALLERY MODAL
+.galleryModal {
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    opacity: 0;
+    z-index: 10;
+    overflow: auto;
+    position: fixed;
+    transition: .2s;
+    pointer-events: none;
+    background-color: white;
+
+    &[data-open="true"] {
+        opacity: 1;
+        pointer-events: all;
+    }
+
+    * {
+        user-select: none;
+    }
+
+    .nav {
+        top: 50px;
+        position: fixed;
+    }
+}
+
+.modalHeader {
+    top: 0;
+    z-index: 11;
+    display: flex;
+    position: fixed;
+    justify-content: flex-end;
+    padding: adaptive-value((
+        xs: 32px 20px,
+        md: 32px 0px 34px 40px,
+        lg: 32px 120px,
+    ));
+}
+
+.imageModal {
+    width: 100%;
+
+    img {
+        object-fit: contain;
+    }
+}
+
+.previewsModal {
+    top: 98px;
+    left: 72px;
+    position: fixed;
+}
+
+.previewModal {
+    width: 88px;
+    height: 88px;
+    opacity: 0.3;
+    margin: 12px 0;
+    transition: .4s;
+    cursor: pointer;
+    background-color: white;
+
+    img {
+        object-fit: cover;
+    }
+
+    &[data-active="true"],
+    &:hover {
+        opacity: 1;
+    }
+}

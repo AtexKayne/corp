@@ -1,13 +1,15 @@
+import { useState, useEffect, useRef } from 'react'
+import { product } from '../../components/helpers/constants'
+import style from '../../styles/module/Product/Product.module.scss'
+import useDeviceDetect from '../../components/helpers/useDeviceDetect'
+
 import Image from 'next/image'
 import Icon from '../../components/Icon'
 import MainLayout from '../../layout/MainLayout'
-import { useState, useEffect, useRef } from 'react'
+import Gallery from '../../components/product/Gallery'
 import Breadcrumbs from '../../components/Breadcrumbs'
-import { product } from '../../components/helpers/constants'
-import { motion, useAnimationControls } from 'framer-motion'
-import style from '../../styles/module/Product/Product.module.scss'
-import { globalState } from '../../components/helpers/globaslState'
-import useDeviceDetect from '../../components/helpers/useDeviceDetect'
+import BuyButton from '../../components/product/BuyButton'
+import Accordeon from '../../components/usefull/Accordeon'
 
 export default function Product({ detail }) {
     const { isMobile } = useDeviceDetect()
@@ -51,13 +53,14 @@ export default function Product({ detail }) {
         { status: '', text: '200 мл' },
         { status: 'disabled', text: '500 мл' },
     ]
+
     return (
         <MainLayout>
             <Breadcrumbs />
 
             <div className='row p-relative'>
                 <div className='col col--xs-6 col--lg-7'>
-                    <ProductGallery images={product.images} alt={product.names.primary} />
+                    <Gallery images={product.images} alt={product.names.primary} />
 
                     <div className='pt-0 pt-3:lg' />
                 </div>
@@ -103,14 +106,13 @@ export default function Product({ detail }) {
             </div>
 
             <div className='row'>
-                <div className='col col--xs-6 col--lg-7'>
+                <div className='col col--xs-6 col--lg-6'>
                     <div className={style.additionInfo}>
                         <div className={style.topInfo}>
                             <div className={`${style.text4} text--bold pb-0.6:xl pb-0:xxl`}>Доставка</div>
                             <a href='#' className='link active text--p5 text--upper text--bold'>Подробнее</a>
                         </div>
                         <div className='text--p5 mb-1.5 mb-2:xxl'>в город Москва</div>
-
                         <InfoLine text='сегодня' title='Фирменный магазин' />
                         <InfoLine text='с 13 октября' title='Доставка в ПВЗ' />
                         <InfoLine text='с 12 октября' title='Курьер' />
@@ -189,186 +191,6 @@ export default function Product({ detail }) {
     )
 }
 
-function ProductGallery({ images = [], alt = '' }) {
-    const [activeImage, setActiveImage] = useState(images[0].gallery)
-    const [navDisabled, setNavDisabled] = useState('up')
-    const [modalOpen, setModalOpen] = useState(false)
-    const animatePreview = useAnimationControls()
-    const refPreviewPosition = useRef(0)
-    const refModal = useRef(null)
-
-    const choseActive = (image, index = 0) => {
-        setActiveImage(image)
-        const imageList = refModal.current.querySelectorAll(`.${style.imageModal}`)
-        const offsetTop = imageList[index].offsetTop
-        refModal.current.scrollTo(0, offsetTop)
-    }
-
-    const slidePreview = slide => {
-        const previewHeight = 100
-        const slideTo = slide === 'down' ? -1 : 1
-        refPreviewPosition.current = refPreviewPosition.current + slideTo * previewHeight
-        const checkPosition = Math.abs(refPreviewPosition.current / previewHeight)
-
-        if (checkPosition >= images.length - 3 && slide === 'down') setNavDisabled('down')
-        else if (checkPosition === 0 && slide === 'up') setNavDisabled('up')
-        else setNavDisabled(false)
-
-        animatePreview.start({ y: refPreviewPosition.current, transition: { duration: 0.5 } })
-    }
-
-    const openModal = () => {
-        setModalOpen(true)
-        globalState.toggleBodyClass('overflow-hidden')
-    }
-
-    const modalClose = () => {
-        setModalOpen(false)
-        globalState.toggleBodyClass('overflow-hidden')
-    }
-
-    const nextHandler = () => {
-        const index = images.findIndex(image => image.gallery === activeImage)
-        const nextImageObj = images[index + 1]
-        const nextImage = nextImageObj ? nextImageObj.gallery : images[0].gallery
-        setActiveImage(nextImage)
-    }
-
-    useEffect(() => {
-        const imagePositions = []
-        const imageList = refModal.current.querySelectorAll(`.${style.imageModal}`)
-        imageList.forEach(image => {
-            imagePositions.push(image.offsetTop)
-        })
-        const reversePositons = [...imagePositions].reverse()
-        const searchIndex = (element, scrollTop) => element <= scrollTop
-
-        const scrollHandler = () => {
-            const scrollTop = refModal.current.scrollTop
-            const element = reversePositons.find((element) => searchIndex(element, scrollTop))
-            const index = element ? imagePositions.indexOf(element) : 0
-            setActiveImage(images[index].gallery)
-        }
-        refModal.current.addEventListener('scroll', scrollHandler)
-
-        return () => {
-            if (refModal.current) {
-                refModal.current.removeEventListener('scroll', scrollHandler)
-            }
-        }
-    }, [])
-
-
-    return (
-        <>
-            <div className={style.gallery}>
-                <div className={`${style.nav} is-hidden--lg-down`}>
-                    {images.length > 4
-                        ? <div data-disabled={navDisabled === 'up'} onClick={() => slidePreview('up')} className={style.navPrev}>
-                            <Icon name='chevronUp' width='20' height='20' />
-                        </div>
-                        : null
-                    }
-
-                    <div className={`${style.previews}`}>
-                        <motion.div animate={animatePreview}>
-                            {images.map((image, index) => (
-                                <div onClick={() => choseActive(image.gallery, index)} data-active={activeImage === image.gallery} key={image.gallery} className={style.imagePreview}>
-                                    <Image src={image.preview} width='88' height='88' alt={alt} />
-                                </div>
-                            ))}
-                        </motion.div>
-                    </div>
-
-                    {images.length > 4
-                        ? <div data-disabled={navDisabled === 'down'} onClick={() => slidePreview('down')} className={style.navNext}>
-                            <Icon name='chevronDown' width='20' height='20' />
-                        </div>
-                        : null
-                    }
-                </div>
-
-                <div className={`${style.navTablet} is-hidden--xl-up`}>
-                    <span /><div /><div /><div /><div /><div />
-                </div>
-
-                <div onClick={openModal} className={style.imageMain}>
-                    <Image src={activeImage} layout='fill' alt={alt} />
-                </div>
-
-                <div className={style.labels}>
-                    <div className='label label--sucess mb-0.6'>50%</div>
-                    <div className='label label--info mb-0.6'>
-                        <Icon name='new' width='22' height='22' />
-                    </div>
-                    <div className='label label--warning mb-0.6'>
-                        <Icon name='fire' width='22' height='22' />
-                    </div>
-                    <div className='label label--danger mb-0.6'>
-                        <Icon name='verified' width='22' height='22' />
-                    </div>
-                </div>
-
-                <div onClick={nextHandler} className={style.nextCol} />
-            </div>
-
-            <div ref={refModal} data-open={modalOpen} className={style.galleryModal}>
-                <div className='container p-relative'>
-                    <div className='text--t1 text--bold py-2'>{alt}</div>
-                    <div className={`${style.modalHeader} container`}>
-                        <div className='c-pointer' onClick={modalClose}><Icon name='close' width='16' height='16' /></div>
-
-                        {/* <div className='c-pointer is-hidden--md-up' onClick={modalClose}>
-                            <Icon name='chevronLeft' width='11' height='20' />
-                            <span className='ml-0.5 text--no-wrap'>{alt}</span>
-                        </div> */}
-                    </div>
-
-                    {images.map(image => (
-                        <div key={image.full} className={style.imageModal}>
-                            <Image src={image.full} width='1496' height='919' alt={alt} />
-                        </div>
-                    ))}
-
-                    {/* <div className={`${style.previewsModal} is-hidden--md-down`}>
-                        {images.map((image, index) => (
-                            <div onClick={() => choseActive(image.gallery, index)} data-active={activeImage === image.gallery} key={image.preview} className={style.previewModal}>
-                                <Image src={image.preview} width='88' height='88' alt={alt} />
-                            </div>
-                        ))}
-                    </div> */}
-
-                    <div className={`${style.nav} is-hidden--lg-down`}>
-                        {images.length > 4
-                            ? <div data-disabled={navDisabled === 'up'} onClick={() => slidePreview('up')} className={style.navPrev}>
-                                <Icon name='chevronUp' width='20' height='20' />
-                            </div>
-                            : null
-                        }
-
-                        <div className={`${style.previews}`}>
-                            <motion.div animate={animatePreview}>
-                                {images.map((image, index) => (
-                                    <div onClick={() => choseActive(image.gallery, index)} data-active={activeImage === image.gallery} key={image.gallery} className={style.imagePreview}>
-                                        <Image src={image.preview} width='88' height='88' alt={alt} />
-                                    </div>
-                                ))}
-                            </motion.div>
-                        </div>
-
-                        {images.length > 4
-                            ? <div data-disabled={navDisabled === 'down'} onClick={() => slidePreview('down')} className={style.navNext}>
-                                <Icon name='chevronDown' width='20' height='20' />
-                            </div>
-                            : null
-                        }
-                    </div>
-                </div>
-            </div>
-        </>
-    )
-}
-
 function RadioButton({ items = [] }) {
     if (!items.length) return null
     const [active, setActive] = useState(0)
@@ -388,176 +210,12 @@ function RadioButton({ items = [] }) {
     )
 }
 
-function BuyButton({ children }) {
-    const [isSelected, setIsSelected] = useState(false)
-    const [isShaked, setIsShaked] = useState(false)
-    const [diabled, setDiabled] = useState(false)
-    const [isOpen, setIsOpen] = useState(false)
-    const [count, setCount] = useState(1)
-    const refCounter = useRef(null)
-    const refInput = useRef(null)
-    const maxValue = 109
-
-
-    const getValue = () => {
-        const value = refInput.current.value
-        return +value.replace(/[^\d]/g, '')
-    }
-
-    const documentClick = event => {
-        if (!event.target.classList.contains(`${style.counterInput}`)) {
-            document.removeEventListener('click', documentClick)
-            setIsSelected(false)
-            refInput.current.value = getValue()
-        }
-    }
-
-    const counerClick = () => {
-        // document.removeEventListener('click', documentClick)
-        setIsSelected(true)
-        setTimeout(() => {
-            refInput.current.focus()
-            document.addEventListener('click', documentClick)
-        }, 100);
-    }
-
-    const updateCount = increment => {
-        const newValue = +count + increment
-        setCount(newValue)
-    }
-
-    const buyHandler = () => {
-        setCount(1)
-        setIsOpen(true)
-        refInput.current.value = 1
-        globalState.popover.setTextPrimary('System 4 Shale Oil Shampoo 4')
-        globalState.popover.setImage('/images/product/image-0.jpg')
-        globalState.popover.setTextSecondary('ТЕПЕРЬ В КОРЗИНЕ')
-        globalState.popover.setIsBasket(true)
-        globalState.popover.setIsOpen(true)
-    }
-
-    const changeHandler = () => {
-        setCount(getValue())
-    }
-
-    useEffect(() => {
-        if (count <= 0) {
-            setDiabled('minus')
-            setCount(0)
-            refInput.current.value = 0
-            setIsSelected(false)
-            setIsOpen(false)
-            globalState.popover.setTextPrimary('System 4 Shale Oil Shampoo 4')
-            globalState.popover.setImage('/images/product/image-0.jpg')
-            globalState.popover.setTextSecondary('БОЛЬШЕ НЕ В КОРЗИНЕ')
-            globalState.popover.setIsBasket(true)
-            globalState.popover.setIsOpen(true)
-        } else if (count >= maxValue) {
-            setDiabled('plus')
-            setCount(maxValue)
-            refInput.current.value = maxValue
-            globalState.popover.setTextPrimary('System 4 Shale Oil Shampoo 4')
-            globalState.popover.setImage('/images/product/image-0.jpg')
-            globalState.popover.setTextSecondary('Максимум для этого заказа')
-            globalState.popover.setIsBasket(false)
-            globalState.popover.setIsOpen(true)
-            setIsShaked(true)
-            setTimeout(() => setIsShaked(false), 1000)
-        } else {
-            setDiabled(false)
-        }
-        globalState.basket.setBasketCount(count)
-    }, [count])
-
-
-    return (
-        <div className={style.buybtn}>
-            <div className={`${style.buybtnChildren} is-hidden--lg-up is-hidden--sm-down`}>
-                {children}
-            </div>
-
-            <div className={`${style.favourite} btn btn--md btn--shadow`}>
-                <Icon name='heartMD' width='18' height='16' />
-            </div>
-
-            <div onClick={buyHandler} data-open={isOpen} className={`${style.btnMain} btn btn--md btn--fill btn--primary`}>
-                <span className='text--upper text--p5 text--bold mr-0.8'>
-                    <span className='is-hidden--lg-down'>Добавить </span>
-                    <span>в корзину</span>
-                </span>
-                <Icon name='basketMD' width='18' height='18' />
-            </div>
-
-            <div data-open={isOpen} className={style.buyOpen}>
-
-                <div className={`${style.toBasket} btn btn--md btn--fill btn--secondary is-hidden--xl-down`}>
-                    <span className='text--upper text--p5 text--bold'>к корзине</span>
-                </div>
-
-                <div
-                    ref={refCounter}
-                    data-active={isSelected}
-                    className={`${style.countSelector} text--p5 text--bold`}>
-                    <span data-disabled={diabled === 'minus'} onClick={() => updateCount(-1)} className={style.counterBtn}>
-                        <Icon name='minus' width='16' height='16' />
-                    </span>
-
-                    <input
-                        type='text'
-                        ref={refInput}
-                        placeholder={count}
-                        data-shake={isShaked}
-                        onChange={changeHandler}
-                        className={`${style.counterInput} text--p5 text--bold`} />
-                    <div onClick={counerClick} className={style.counterDiv}>{count} ШТ</div>
-
-                    <span data-disabled={diabled === 'plus'} onClick={() => updateCount(+1)} className={style.counterBtn}>
-                        <Icon name='plus' width='16' height='16' />
-                    </span>
-                </div>
-            </div>
-
-
-        </div>
-    )
-}
-
 function InfoLine({ title, text }) {
     return (
         <div className={style.infoline}>
             <div className={`${style.text5} text--normal`}>{title}</div>
             <div className={style.infolinedelim} />
             <div className='text--p5 text--bold text--upper'>{text}</div>
-        </div>
-    )
-}
-
-function Accordeon({ children, title, open = false }) {
-    const [isOpen, setIsOpen] = useState(open)
-    const refChildrenContainer = useRef(null)
-    const refContainerHeight = useRef(null)
-    const refAccordeon = useRef(null)
-    const titleHeight = 50
-
-    useEffect(() => {
-        refContainerHeight.current = refChildrenContainer.current.clientHeight + titleHeight
-        const newHeight = isOpen ? refContainerHeight.current : titleHeight
-        refAccordeon.current.style.height = `${newHeight}px`
-    }, [])
-
-    const toggleHandler = () => {
-        setIsOpen(!isOpen)
-        const newHeight = !isOpen ? refContainerHeight.current : titleHeight
-        refAccordeon.current.style.height = `${newHeight}px`
-    }
-    return (
-        <div ref={refAccordeon} data-open={isOpen} className={style.accordeon}>
-            <div onClick={toggleHandler} className={`${style.accordeonTitle} ${style.text4} text--p1 text--bold`}>{title}</div>
-
-            <div ref={refChildrenContainer}>
-                {children}
-            </div>
         </div>
     )
 }
