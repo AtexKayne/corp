@@ -9,20 +9,36 @@ export default function Popover() {
     const [textPrimary, setTextPrimary] = useState('')
     const [topPosition, setTopPosition] = useState('')
     const [isBasket, setIsBasket] = useState(false)
+    const [isFixed, setIsFixed] = useState(false)
     const [isOpen, setIsOpen] = useState('')
     const [image, setImage] = useState('')
     const refContainer = useRef(null)
 
-    useEffect(() => {
+    const setPositions = () => {
         refContainer.current = document.querySelector('.header-middle-container')
         const rect = refContainer.current.getBoundingClientRect()
+
         if (rect.top === 0 && rect.right === 0) {
-            setTopPosition(60)
-            setRightPosition(15)
+            if (window.scrollY > 20) {
+                setTopPosition(15)
+                setRightPosition(15)
+            } else {
+                setTopPosition(60)
+                setRightPosition(15)
+            }
         } else {
-            setTopPosition(rect.top + rect.height + 20)
-            setRightPosition(rect.right - rect.width)
+            if (window.scrollY > 20) {
+                setTopPosition(40)
+                setRightPosition(40)
+            } else {
+                setTopPosition(rect.top + rect.height + 20)
+                setRightPosition(rect.right - rect.width)
+            }
         }
+    }
+
+    useEffect(() => {
+        setPositions()
 
         globalState.popover = {
             setTextSecondary,
@@ -54,11 +70,15 @@ export default function Popover() {
 
     useEffect(() => {
         if (!isOpen) return
+        if (window.scrollY > 20) setIsFixed(true)
+        else setIsFixed(false)
+
+        setPositions()
         setTimeout(() => setIsOpen(false), 6000)
     }, [isOpen])
 
     return (
-        <div style={{top: `${topPosition}px`, right: `${rightPosition}px`}} data-open={isOpen} className={style.popover}>
+        <div style={{ top: `${topPosition}px`, right: `${rightPosition}px` }} data-open={isOpen} data-fixed={isFixed} className={style.popover}>
             <div className={style.popoverImage}>
                 <Image src={image} width='50' height='50' alt='' />
             </div>

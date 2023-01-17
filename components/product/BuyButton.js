@@ -4,6 +4,7 @@ import { globalState } from '../../components/helpers/globaslState'
 import style from '../../styles/module/Product/Product-buy-button.module.scss'
 
 export default function BuyButton({ children }) {
+    const [isFavourite, setIsFavourite] = useState(false)
     const [isSelected, setIsSelected] = useState(false)
     const [isShaked, setIsShaked] = useState(false)
     const [diabled, setDiabled] = useState(false)
@@ -52,6 +53,16 @@ export default function BuyButton({ children }) {
         globalState.popover.setIsOpen(true)
     }
 
+    const favouriteHandler = () => {
+        const text = !isFavourite ? 'ТЕПЕРЬ В ИЗБРАННОМ' : 'БОЛЬШЕ НЕ В ИЗБРАННОМ'
+        setIsFavourite(!isFavourite)
+        globalState.popover.setTextPrimary('System 4 Shale Oil Shampoo 4')
+        globalState.popover.setImage('/images/product/image-0.jpg')
+        globalState.popover.setTextSecondary(text)
+        globalState.popover.setIsBasket(false)
+        globalState.popover.setIsOpen(true)
+    }
+
     const changeHandler = () => {
         setCount(getValue())
     }
@@ -92,8 +103,11 @@ export default function BuyButton({ children }) {
                 {children}
             </div>
 
-            <div className={`${style.favourite} btn btn--md btn--shadow`}>
-                <Icon name='heartMD' width='18' height='16' />
+            <div 
+                onClick={favouriteHandler}
+                data-active={isFavourite}
+                className={`${style.favourite} btn btn--md btn--shadow`}>
+                <Icon name='heartFill' width='18' height='16' />
             </div>
 
             <div onClick={buyHandler} data-open={isOpen} className={`${style.btnMain} btn btn--md btn--fill btn--primary`}>

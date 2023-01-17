@@ -9,6 +9,7 @@ export default function Icon({ name, external = '', width = 16, height = 16, siz
             navigation: dynamic(() => import('../public/icons/icon-navigation.svg'), { ssr: false }),
             navigationXS: dynamic(() => import('../public/icons/icon-navigation-xs.svg'), { ssr: false }),
             heartMD: dynamic(() => import('../public/icons/icon-heart-md.svg'), { ssr: false }),
+            heartFill: dynamic(() => import('../public/icons/icon-heart-fill.svg'), { ssr: false }),
             searchMD: dynamic(() => import('../public/icons/icon-search-md.svg'), { ssr: false }),
             search: dynamic(() => import('../public/icons/icon-search.svg'), { ssr: false }),
             basketMD: dynamic(() => import('../public/icons/icon-basket-md.svg'), { ssr: false }),

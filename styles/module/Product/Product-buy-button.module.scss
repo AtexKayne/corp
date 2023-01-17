@@ -157,4 +157,27 @@
 .favourite {
     min-width: 60px;
     min-height: 60px;
+    
+    path {
+        transition: .3s;
+    }
+
+    &[data-active="false"] {
+        svg {
+            stroke-width: 1.5px;
+            stroke: currentColor;
+        }
+
+        path {
+            fill: none;
+        }
+    }
+
+    &[data-active="true"] {
+        path {
+            stroke-width: 1.5px;
+            fill: var(--t-primary);
+            stroke: var(--t-primary);
+        }
+    }
 }
