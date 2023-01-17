@@ -44,30 +44,28 @@
 }
 
 .navTablet {
-    left: 50%;
+    left: 0;
+    right: 0;
     z-index: 2;
     height: 2px;
-    width: 120px;
     bottom: 24px;
     display: flex;
     position: absolute;
-
-    >span {
-        top: 0;
-        left: -1px;
-        width: 14px;
-        height: 4px;
-        position: absolute;
-        border-radius: 3px;
-        background-color: var(--t-primary);
-    }
+    justify-content: center;
 
     >div {
         width: 4px;
         height: 4px;
+        transition: .3s;
         margin-right: 4px;
-        border-radius: 2px;
+        border-radius: 3px;
         background-color: var(--t-small);
+
+        &[data-active="true"] {
+            width: 14px;
+            margin-right: 5px;
+            background-color: var(--t-primary);
+        }
     }
 }
 

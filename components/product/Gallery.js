@@ -15,9 +15,9 @@ export default function Gallery({ images = [], alt = '' }) {
     const refModal = useRef(null)
 
     const updateActiveImage = async image => {
-        await animateActiveImage.start({opacity: 0})
+        await animateActiveImage.start({ opacity: 0 })
         setActiveImage(image)
-        await animateActiveImage.start({opacity: 1})
+        await animateActiveImage.start({ opacity: 1 })
     }
 
     const choseActive = (image, index = 0) => {
@@ -70,8 +70,8 @@ export default function Gallery({ images = [], alt = '' }) {
     const dragHandler = (_, info) => {
         if (typeof window === 'undefined' || window.innerWidth > 880) return
         const offset = info.offset.x
-        if (offset > 120) nextHandler()
-        else if (offset < -120) prevHandler()
+        if (offset < 120) nextHandler()
+        else if (offset > -120) prevHandler()
     }
 
     useEffect(() => {
@@ -130,14 +130,16 @@ export default function Gallery({ images = [], alt = '' }) {
                 </div>
 
                 <div className={`${style.navTablet} is-hidden--xl-up`}>
-                    <span /><div /><div /><div /><div /><div />
+                    {images.map(image => (
+                        <div key={image.full} data-active={image.gallery === activeImage} />
+                    ))}
                 </div>
 
                 <motion.div
                     drag
                     onClick={openModal}
                     onDragEnd={dragHandler}
-                    transition={{duration: 0.3}}
+                    transition={{ duration: 0.3 }}
                     animate={animateActiveImage}
                     className={style.imageMain}>
                     <Image src={activeImage} layout='fill' alt={alt} />

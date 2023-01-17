@@ -41,6 +41,7 @@ export default function Product({ detail }) {
 
         const resizeHandler = () => {
             refContainerOffset.current = refStickyContainer.current.offsetTop
+            if (window.innerWidth < 880) refStickyBlock.current.style.transform = 'translateY(0px)'
         }
 
         window.addEventListener('scroll', scrollHandler)
