@@ -10,7 +10,7 @@
         min-height: 60px;
         margin-right: 8px;
 
-        &:last-child {
+        &.btnMain {
             margin-right: 0;
         }
     }
@@ -46,7 +46,6 @@
 }
 
 .btnMain {
-    max-width: 415px;
     
     &[data-open="true"] {
         display: none;

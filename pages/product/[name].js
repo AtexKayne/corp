@@ -12,38 +12,43 @@ import BuyButton from '../../components/product/BuyButton'
 import Accordeon from '../../components/usefull/Accordeon'
 
 export default function Product({ detail }) {
+    const [containerHeight, setContainerHeight] = useState(0)
     const { isMobile } = useDeviceDetect()
-    const refSticky = useRef(null)
+    const refStickyBlock = useRef(null)
+    const refStickyContainer = useRef(null)
+    const refContainerOffset = useRef(0)
 
     useEffect(() => {
-        const footerHeight = document.querySelector('footer').clientHeight
-        const offsetInfo = refSticky.current.getBoundingClientRect().top
-        const stickyHandler = () => {
-            if (window.innerWidth <= 880) return
+        refContainerOffset.current = refStickyContainer.current.offsetTop
+    }, [containerHeight])
 
+    useEffect(() => {
+        refContainerOffset.current = refStickyContainer.current.offsetTop
+        const offsetSticky = 20
+
+        const scrollHandler = () => {
+            if (window.innerWidth < 880) return
             const scrollPos = window.scrollY
-            // const documentHeight = document.body.clientHeight - window.innerHeight
-            if (scrollPos > offsetInfo) {
-                refSticky.current.style.position = 'fixed'
-            } else {
-                refSticky.current.style.position = 'static'
+            const isScrolledDown = scrollPos > refContainerOffset.current - offsetSticky
+            const isScrolledContainer = refStickyContainer.current.getBoundingClientRect().bottom > 510
+            if (isScrolledDown && isScrolledContainer) {
+                const translate = scrollPos + offsetSticky - refContainerOffset.current
+                refStickyBlock.current.style.transform = `translateY(${translate}px)`
+            } else if (!isScrolledDown && isScrolledContainer) {
+                refStickyBlock.current.style.transform = 'translateY(0px)'
             }
-
-            // if (documentHeight - scrollPos < 183) {
-            //     // const rect = refSticky.current.getBoundingClientRect()
-            //     refSticky.current.style.position = 'absolute'
-            //     refSticky.current.style.top = `${scrollPos}px`
-            // } else {
-            //     refSticky.current.style.bottom = 'auto'
-            // }
         }
 
-        if (window.innerWidth > 880) {
-            window.addEventListener('scroll', stickyHandler)
+        const resizeHandler = () => {
+            refContainerOffset.current = refStickyContainer.current.offsetTop
         }
+
+        window.addEventListener('scroll', scrollHandler)
+        window.addEventListener('resize', resizeHandler)
 
         return () => {
-            window.removeEventListener('scroll', stickyHandler)
+            window.removeEventListener('scroll', scrollHandler)
+            window.removeEventListener('resize', resizeHandler)
         }
     }, [])
 
@@ -58,15 +63,15 @@ export default function Product({ detail }) {
         <MainLayout>
             <Breadcrumbs />
 
-            <div className='row p-relative'>
+            <div ref={refStickyContainer} className='row p-relative'>
                 <div className='col col--xs-6 col--lg-7'>
                     <Gallery images={product.images} alt={product.names.primary} />
 
                     <div className='pt-0 pt-3:lg' />
                 </div>
 
-                <div className='col col--xs-6 col--lg-5'>
-                    <div ref={refSticky} className={style.mainInfo}>
+                <div ref={refStickyBlock} style={{ transition: '0.1s' }} className='col col--xs-6 col--lg-5'>
+                    <div className={style.mainInfo}>
                         <div className={`${style.text0} text--normal text--upper mb-0.8`}>{product.names.secondary}</div>
                         <h1 className={`${style.text1} text--regular mb-0.8`}>{product.names.primary}</h1>
                         <div className='text--p4 text--color-small mb-1 mb-2:xxl'>Артикул: {product.art}</div>
@@ -103,9 +108,7 @@ export default function Product({ detail }) {
                         </div>
                     </div>
                 </div>
-            </div>
 
-            <div className='row'>
                 <div className='col col--xs-6 col--lg-6'>
                     <div className={style.additionInfo}>
                         <div className={style.topInfo}>
@@ -119,7 +122,7 @@ export default function Product({ detail }) {
 
                         <div className='pt-1.5 pt-2.5:md pt-2:xl pt3:xxl' />
 
-                        <Accordeon title='Описание' open={true}>
+                        <Accordeon updateHeight={setContainerHeight} title='Описание' open={true}>
                             <div className={`${style.text6} mb-0.8`}>Лечение жирных волос и кожи головы</div>
                             <p className={`${style.text7} text--normal mb-2`}>
                                 Специально для людей с активными сальными железами был разработан терапевтический шампунь № 4.
@@ -147,7 +150,7 @@ export default function Product({ detail }) {
 
                         <div className='pt-2.5 pt-4:lg' />
 
-                        <Accordeon title='Характеристики'>
+                        <Accordeon updateHeight={setContainerHeight} title='Характеристики'>
                             <div className={style.params}>
                                 <span className='text--p6 text--bold text--color-smaler text--upper'>Вид товара</span>
                                 <span className='text--p4'>Шампунь</span>
@@ -168,7 +171,7 @@ export default function Product({ detail }) {
 
                         <div className='pt-2.5 pt-4:lg' />
 
-                        <Accordeon title='О бренде'>
+                        <Accordeon updateHeight={setContainerHeight} title='О бренде'>
                             <Image src='/images/product/brand-logo.svg' width='100' height='100' alt='' />
 
                             <div className='text--t1 mt-1.5 mb-1'>System 4</div>
