@@ -17,31 +17,49 @@ export default function Product({ detail }) {
     const refStickyBlock = useRef(null)
     const refStickyContainer = useRef(null)
     const refContainerOffset = useRef(0)
+    const refBlockWidth = useRef(null)
+    const refFooterHeight = useRef(0)
 
     useEffect(() => {
         refContainerOffset.current = refStickyContainer.current.offsetTop
+        const margin = +getComputedStyle(refStickyBlock.current).marginLeft.match(/\d+/)
+        refStickyBlock.current.style.width = (refBlockWidth.current.clientWidth - margin) + 'px'
+        refFooterHeight.current = document.querySelector('footer').clientHeight
     }, [containerHeight])
 
     useEffect(() => {
         refContainerOffset.current = refStickyContainer.current.offsetTop
+        refStickyBlock.current.style.width = refBlockWidth.current.clientWidth + 'px'
         const offsetSticky = 20
-
+        // @TODO Rewrite this fckn shit
         const scrollHandler = () => {
             if (window.innerWidth < 880) return
             const scrollPos = window.scrollY
             const isScrolledDown = scrollPos > refContainerOffset.current - offsetSticky
-            const isScrolledContainer = refStickyContainer.current.getBoundingClientRect().bottom > 510
+            const isScrolledContainer = refStickyContainer.current.getBoundingClientRect().bottom > refFooterHeight.current + offsetSticky
             if (isScrolledDown && isScrolledContainer) {
-                const translate = scrollPos + offsetSticky - refContainerOffset.current
-                refStickyBlock.current.style.transform = `translateY(${translate}px)`
+                refStickyBlock.current.style.position = 'fixed'
+                refStickyBlock.current.style.top = `${offsetSticky}px`
             } else if (!isScrolledDown && isScrolledContainer) {
-                refStickyBlock.current.style.transform = 'translateY(0px)'
+                refStickyBlock.current.style.position = 'relative'
+                refStickyBlock.current.style.top = ''
+                refStickyBlock.current.style.bottom = ''
+            } else if (isScrolledDown && !isScrolledContainer) {
+                refStickyBlock.current.style.position = 'absolute'
+                refStickyBlock.current.style.top = ''
+                refStickyBlock.current.style.bottom = '0'
             }
         }
 
         const resizeHandler = () => {
-            refContainerOffset.current = refStickyContainer.current.offsetTop
-            if (window.innerWidth < 880) refStickyBlock.current.style.transform = ''
+            if (window.innerWidth < 880) {
+                refStickyBlock.current.style.transform = ''
+            } else {
+                const margin = +getComputedStyle(refStickyBlock.current).marginLeft.match(/\d+/)
+                refContainerOffset.current = refStickyContainer.current.offsetTop
+                refFooterHeight.current = document.querySelector('footer').clientHeight
+                refStickyBlock.current.style.width = (refBlockWidth.current.clientWidth - margin) + 'px'
+            }
         }
 
         window.addEventListener('scroll', scrollHandler)
@@ -71,8 +89,8 @@ export default function Product({ detail }) {
                     <div className='pt-0 pt-3:lg' />
                 </div>
 
-                <div ref={refStickyBlock} style={{ transition: '0.1s' }} className='col col--xs-6 col--lg-5'>
-                    <div className={style.mainInfo}>
+                <div ref={refBlockWidth} className='col col--xs-6 col--lg-5'>
+                    <div ref={refStickyBlock} className={style.mainInfo}>
                         <div className={`${style.text0} text--normal text--upper mb-0.8`}>{product.names.secondary}</div>
                         <h1 className={`${style.text1} text--regular mb-0.8`}>{product.names.primary}</h1>
                         <div className='text--p4 text--color-small mb-1 mb-2:xxl'>Артикул: {product.art}</div>

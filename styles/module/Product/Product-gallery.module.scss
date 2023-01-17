@@ -102,6 +102,7 @@
     width: 88px;
     cursor: pointer;
     transition: .4s;
+    margin-left: 10px;
     text-align: center;
 
     &[data-disabled="true"] {
@@ -202,8 +203,9 @@
     justify-content: flex-end;
     padding: adaptive-value((
         xs: 32px 20px,
-        md: 32px 0px 34px 40px,
-        lg: 32px 120px,
+        md: 32px 20px,
+        lg: 32px 10px,
+        xl: 32px 0,
     ));
 }
 
@@ -213,6 +215,12 @@
     img {
         object-fit: contain;
     }
+}
+
+.alt {
+    left: 61px;
+    z-index: 1;
+    position: fixed;
 }
 
 .previewsModal {
