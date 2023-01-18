@@ -200,6 +200,10 @@
         top: 50px;
         position: fixed;
     }
+
+    @include media-breakpoint(sm-down) {
+        padding-top: 80px;
+    }
 }
 
 .modalHeader {
@@ -232,6 +236,15 @@
             min-height: 90vh;
         }
     }
+
+    @include media-breakpoint(sm-down) {
+        min-height: 50vh;
+
+        img {
+            object-fit: cover;
+            min-height: 50vh!important;
+        }
+    }
 }
 
 .alt {
@@ -239,6 +252,12 @@
     left: 61px;
     z-index: 1;
     position: fixed;
+
+    @include media-breakpoint(sm-down) {
+        left: 0;
+        top: -80px;
+        position: absolute;
+    }
 }
 
 .previewsModal {
