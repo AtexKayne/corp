@@ -13,6 +13,7 @@ export default function Gallery({ images = [], alt = '' }) {
     const animatePreview = useAnimationControls()
     const refPreviewPosition = useRef(0)
     const refModal = useRef(null)
+    const previewHeight = 100
 
     const updateActiveImage = async image => {
         await animateActiveImage.start({ opacity: 0 })
@@ -31,7 +32,12 @@ export default function Gallery({ images = [], alt = '' }) {
     }
 
     const slidePreview = slide => {
-        const previewHeight = 100
+        if (slide === 'reset') {
+            refPreviewPosition.current = 0
+            animatePreview.start({ y: 0, transition: { duration: 0.5 } })
+            setNavDisabled('up')
+            return
+        }
         const slideTo = slide === 'down' ? -1 : 1
         refPreviewPosition.current = refPreviewPosition.current + slideTo * previewHeight
         const checkPosition = Math.abs(refPreviewPosition.current / previewHeight)
@@ -75,29 +81,62 @@ export default function Gallery({ images = [], alt = '' }) {
     }
 
     useEffect(() => {
-        const imagePositions = []
-        const imageList = refModal.current.querySelectorAll(`.${style.imageModal}`)
-        imageList.forEach(image => {
-            imagePositions.push(image.offsetTop)
-        })
-        const reversePositons = [...imagePositions].reverse()
-        const searchIndex = (element, scrollTop) => element <= scrollTop
+        // const imagePositions = []
+        // const imageList = refModal.current.querySelectorAll(`.${style.imageModal}`)
+        // imageList.forEach(image => {
+        //     imagePositions.push(image.offsetTop)
+        // })
+        // const reversePositons = [...imagePositions].reverse()
+        // const searchIndex = (element, scrollTop) => element <= scrollTop
 
-        const scrollHandler = () => {
-            if (!modalOpen) return
-            const scrollTop = refModal.current.scrollTop
-            const element = reversePositons.find((element) => searchIndex(element, scrollTop))
-            const index = element ? imagePositions.indexOf(element) : 0
-            updateActiveImage(images[index].gallery)
+        // const scrollHandler = () => {
+        //     if (!modalOpen) return
+        //     const scrollTop = refModal.current.scrollTop
+        //     const element = reversePositons.find((element) => searchIndex(element, scrollTop))
+        //     const index = element ? imagePositions.indexOf(element) : 0
+        //     updateActiveImage(images[index].gallery)
+        // }
+        // refModal.current.addEventListener('scroll', scrollHandler)
+
+        // return () => {
+        //     if (refModal.current) {
+        //         refModal.current.removeEventListener('scroll', scrollHandler)
+        //     }
+        // }
+        const imageList = refModal.current.querySelectorAll(`.${style.imageModal}`)
+        const imageListArr = Array.from(imageList)
+        const observers = []
+        const observeHandler = entries => {
+            const entry = entries[0]
+            if (entry.isIntersecting) {
+                const index = imageListArr.indexOf(entry.target)
+                setActiveImage(images[index].gallery)
+            }
+            
         }
-        refModal.current.addEventListener('scroll', scrollHandler)
+        
+
+        imageList.forEach(image => {
+            const observer = new IntersectionObserver(observeHandler, { threshold: 1 });
+            observer.observe(image)
+            observers.push(observer)
+        })
 
         return () => {
-            if (refModal.current) {
-                refModal.current.removeEventListener('scroll', scrollHandler)
+            if (observers.length) {
+                observers.forEach(observer => observer.disconnect())
             }
         }
     }, [])
+
+    useEffect(() => {
+        if (window.innerWidth < 1024) return
+        const activeIndex = images.findIndex(image => image.gallery === activeImage)
+        const condition = Math.abs(refPreviewPosition.current / previewHeight) - activeIndex
+        if (condition <= -4) slidePreview('down')
+        else if (condition > 0) slidePreview('reset')
+    }, [activeImage])
+
 
 
     return (
