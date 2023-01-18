@@ -1,7 +1,7 @@
 import Icon from './Icon'
 import Image from 'next/image'
 import { useState, useEffect, useRef } from 'react'
-import { globalState } from './helpers/globaslState'
+import { globalState } from './helpers/globalState'
 import style from '../styles/module/Header.module.scss'
 import Popover from './usefull/Popover'
 

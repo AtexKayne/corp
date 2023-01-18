@@ -149,9 +149,14 @@
     position: absolute;
     pointer-events: none;
 
-    @include media-breakpoint(lg-down) {
-        left: 4px;
-        bottom: 4px;
+    @include media-breakpoint(md) {
+        left: 48px;
+        bottom: 20px;
+    }
+
+    @include media-breakpoint(sm-down) {
+        left: 16px;
+        bottom: -10px;
     }
 }
 
@@ -177,6 +182,7 @@
     overflow: auto;
     position: fixed;
     transition: .2s;
+    padding-top: 40px;
     pointer-events: none;
     padding-bottom: 40px;
     background-color: white;
@@ -218,9 +224,18 @@
         max-height: 98vh;
         object-fit: contain;
     }
+
+    @media (min-width: 1920px) {
+        min-height: 90vh;
+
+        img {
+            min-height: 90vh;
+        }
+    }
 }
 
 .alt {
+    top: 0;
     left: 61px;
     z-index: 1;
     position: fixed;

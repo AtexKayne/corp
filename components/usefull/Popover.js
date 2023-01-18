@@ -1,6 +1,6 @@
 import Image from 'next/image'
 import { useState, useEffect, useRef } from 'react'
-import { globalState } from '../helpers/globaslState'
+import { globalState } from '../helpers/globalState'
 import style from '../../styles/module/usefull/Popover.module.scss'
 
 export default function Popover() {

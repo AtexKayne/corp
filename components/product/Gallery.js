@@ -2,7 +2,7 @@ import Image from 'next/image'
 import Icon from '../../components/Icon'
 import { useState, useEffect, useRef } from 'react'
 import { motion, useAnimationControls } from 'framer-motion'
-import { globalState } from '../../components/helpers/globaslState'
+import { globalState } from '../helpers/globalState'
 import style from '../../styles/module/Product/Product-gallery.module.scss'
 
 export default function Gallery({ images = [], alt = '' }) {
@@ -12,6 +12,8 @@ export default function Gallery({ images = [], alt = '' }) {
     const animateActiveImage = useAnimationControls()
     const animatePreview = useAnimationControls()
     const refPreviewPosition = useRef(0)
+    const refGalleryOffset = useRef(0)
+    const refGallery = useRef(null)
     const refModal = useRef(null)
     const previewHeight = 100
 
@@ -81,28 +83,25 @@ export default function Gallery({ images = [], alt = '' }) {
     }
 
     useEffect(() => {
-        // const imagePositions = []
-        // const imageList = refModal.current.querySelectorAll(`.${style.imageModal}`)
-        // imageList.forEach(image => {
-        //     imagePositions.push(image.offsetTop)
-        // })
-        // const reversePositons = [...imagePositions].reverse()
-        // const searchIndex = (element, scrollTop) => element <= scrollTop
+        // Gallery settings
+        const rect = refGallery.current.getBoundingClientRect()
+        refGalleryOffset.current = rect.x
+        refGallery.current.style.left = `${-refGalleryOffset.current}px`
+        refGallery.current.style.width = `calc(100% + ${refGalleryOffset.current}px)`
+        const resizeHandler = () => {
+            const windowWidth = window.innerWidth
+            const rect = refGallery.current.getBoundingClientRect()
+            refGalleryOffset.current = refGalleryOffset.current - rect.x
+            refGallery.current.style.left = `${refGalleryOffset.current}px`
+            const galleryWidth = windowWidth >= 880 
+                ? `calc(100% + ${-refGalleryOffset.current}px)` 
+                : '100vw'
+            refGallery.current.style.width = galleryWidth
+        }
 
-        // const scrollHandler = () => {
-        //     if (!modalOpen) return
-        //     const scrollTop = refModal.current.scrollTop
-        //     const element = reversePositons.find((element) => searchIndex(element, scrollTop))
-        //     const index = element ? imagePositions.indexOf(element) : 0
-        //     updateActiveImage(images[index].gallery)
-        // }
-        // refModal.current.addEventListener('scroll', scrollHandler)
+        window.addEventListener('resize', resizeHandler)
 
-        // return () => {
-        //     if (refModal.current) {
-        //         refModal.current.removeEventListener('scroll', scrollHandler)
-        //     }
-        // }
+        // Modal settings
         const imageList = refModal.current.querySelectorAll(`.${style.imageModal}`)
         const imageListArr = Array.from(imageList)
         const observers = []
@@ -112,9 +111,8 @@ export default function Gallery({ images = [], alt = '' }) {
                 const index = imageListArr.indexOf(entry.target)
                 setActiveImage(images[index].gallery)
             }
-            
+
         }
-        
 
         imageList.forEach(image => {
             const observer = new IntersectionObserver(observeHandler, { threshold: 1 });
@@ -126,6 +124,7 @@ export default function Gallery({ images = [], alt = '' }) {
             if (observers.length) {
                 observers.forEach(observer => observer.disconnect())
             }
+            window.removeEventListener('resize', resizeHandler)
         }
     }, [])
 
@@ -141,7 +140,7 @@ export default function Gallery({ images = [], alt = '' }) {
 
     return (
         <>
-            <div className={style.gallery}>
+            <div ref={refGallery} className={style.gallery}>
                 <div className={`${style.nav} is-hidden--lg-down`}>
                     {images.length > 4
                         ? <div data-disabled={navDisabled === 'up'} onClick={() => slidePreview('up')} className={style.navPrev}>

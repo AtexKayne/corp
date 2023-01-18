@@ -1,6 +1,6 @@
 import Icon from '../../components/Icon'
 import { useState, useEffect, useRef } from 'react'
-import { globalState } from '../../components/helpers/globaslState'
+import { globalState } from '../helpers/globalState'
 import style from '../../styles/module/Product/Product-buy-button.module.scss'
 
 export default function BuyButton({ children }) {
