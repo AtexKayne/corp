@@ -90,6 +90,11 @@ export default function Gallery({ images = [], alt = '' }) {
         refGallery.current.style.width = `calc(100% + ${refGalleryOffset.current}px)`
         const resizeHandler = () => {
             const windowWidth = window.innerWidth
+            if (windowWidth >= 1600) {
+                refGallery.current.style.left = '0'
+                refGallery.current.style.width = '100%'
+                return
+            }
             const rect = refGallery.current.getBoundingClientRect()
             refGalleryOffset.current = refGalleryOffset.current - rect.x
             refGallery.current.style.left = `${refGalleryOffset.current}px`
