@@ -10,6 +10,7 @@ export default function BuyButton({ children }) {
     const [diabled, setDiabled] = useState(false)
     const [isOpen, setIsOpen] = useState(false)
     const [count, setCount] = useState(1)
+    const refSafeValue = useRef(0)
     const refCounter = useRef(null)
     const refInput = useRef(null)
     const maxValue = 109
@@ -21,15 +22,27 @@ export default function BuyButton({ children }) {
     }
 
     const documentClick = event => {
-        if (!event.target.classList.contains(`${style.counterInput}`)) {
+        const classList = event.target.classList
+        
+        if (!classList.contains(style.counterInput) && !classList.contains(style.counterBtnReject)) {
             document.removeEventListener('click', documentClick)
             setIsSelected(false)
             refInput.current.value = getValue()
+
+            if (+refInput.current.value === 0) setCount(0)
+        } else if (classList.contains(style.counterBtnReject)) {
+            document.removeEventListener('click', documentClick)
+            setIsSelected(false)
         }
     }
 
+    const cancelHandler = () => {
+        setCount(refSafeValue.current)
+        refInput.current.value = refSafeValue.current
+    }
+
     const counterClick = () => {
-        // document.removeEventListener('click', documentClick)
+        refSafeValue.current = count
         setIsSelected(true)
         setTimeout(() => {
             refInput.current.focus()
@@ -132,7 +145,7 @@ export default function BuyButton({ children }) {
                     <span data-disabled={diabled === 'minus'} onClick={() => updateCount(-1)} className={style.counterBtn}>
                         <Icon name='minus' width='16' height='16' />
                     </span>
-                    <span onClick={() => setCount(0)} className={style.counterBtnAccept}>
+                    <span onClick={cancelHandler} className={`${style.counterBtnAccept} ${style.counterBtnReject}`}>
                         <Icon name='close' width='16' height='16' />
                     </span>
 

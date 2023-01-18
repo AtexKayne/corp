@@ -50,7 +50,7 @@
     left: 85px;
     right: 15px;
     position: absolute;
-    transition: .5s ease;
+    transition: .2s ease;
     transform-origin: left;
 
     &[data-open="true"] {
@@ -76,7 +76,7 @@
     user-select: none;
     position: absolute;
     transform: scaleX(0);
-    transition: .5s ease;
+    transition: .2s ease;
     transform-origin: right;
 
     * {
@@ -222,6 +222,10 @@
     @include media-breakpoint(md-up) {
         min-width: 60px;
     }
+}
+
+.counterBtnReject {
+    filter: none;
 }
 
 .favourite {
