@@ -5,6 +5,7 @@
 // BUY BUTTON
 .buybtn {
     display: flex;
+    position: relative;
 
     >* {
         min-height: 60px;
@@ -46,16 +47,26 @@
 }
 
 .btnMain {
-    
+    right: 0;
+    left: 68px;
+    position: absolute;
+    transition: .5s ease;
+    transform-origin: left;
+
     &[data-open="true"] {
-        display: none;
+        transform: scaleX(0);
     }
 }
 
 .buyOpen {
-    width: 100%;
-    display: none;
+    right: 0;
+    left: 68px;
+    display: flex;
     user-select: none;
+    position: absolute;
+    transform: scaleX(0);
+    transition: .5s ease;
+    transform-origin: right;
 
     * {
         user-select: none;
@@ -68,7 +79,7 @@
     }
 
     &[data-open="true"] {
-        display: flex;
+        transform: scaleX(1);
     }
 
     @include media-breakpoint(xxl-up) {
@@ -112,10 +123,15 @@
 .counterDiv {
     width: 100%;
     display: flex;
+    transition: .3s;
     flex-basis: 100%;
     align-items: center;
     justify-content: center;
     text-transform: uppercase;
+
+    &:hover {
+        color: var(--t-primary);
+    }
 }
 
 .countSelector {
@@ -126,23 +142,36 @@
     border-radius: 8px;
     background-color: var(--t-light);
 
+    &[data-active="false"] {
+        .counterBtnAccept {
+            display: none;
+        }
+    }
 
     &[data-active="true"] {
-        .counterInput {
+        .counterInput,
+        .counterBtnAccept {
             display: flex;
         }
 
-        .counterDiv {
+        .counterDiv,
+        .counterBtn {
             display: none;
         }
     }
 }
 
-.counterBtn {
+.counterBtn,
+.counterBtnAccept {
     display: flex;
     min-width: 40px;
     align-items: center;
+    transition: .3s color;
     justify-content: center;
+
+    &:hover {
+        color: var(--t-primary);
+    }
 
     &[data-disabled="true"] {
         opacity: .3;

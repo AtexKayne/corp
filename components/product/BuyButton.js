@@ -28,7 +28,7 @@ export default function BuyButton({ children }) {
         }
     }
 
-    const counerClick = () => {
+    const counterClick = () => {
         // document.removeEventListener('click', documentClick)
         setIsSelected(true)
         setTimeout(() => {
@@ -64,7 +64,8 @@ export default function BuyButton({ children }) {
     }
 
     const changeHandler = () => {
-        setCount(getValue())
+        const value = getValue()
+        if (!!value) setCount(value)
     }
 
     useEffect(() => {
@@ -110,7 +111,7 @@ export default function BuyButton({ children }) {
                 <Icon name='heartFill' width='18' height='16' />
             </div>
 
-            <div onClick={buyHandler} data-open={isOpen} className={`${style.btnMain} btn btn--md btn--fill btn--primary`}>
+            <div onClick={buyHandler} data-open={isOpen} className={`${style.btnMain} btn btn--md btn--primary`}>
                 <span className='text--upper text--p5 text--bold mr-0.8'>
                     <span className='is-hidden--lg-down'>Добавить </span>
                     <span>в корзину</span>
@@ -120,7 +121,7 @@ export default function BuyButton({ children }) {
 
             <div data-open={isOpen} className={style.buyOpen}>
 
-                <div className={`${style.toBasket} btn btn--md btn--fill btn--secondary is-hidden--xl-down`}>
+                <div className={`${style.toBasket} btn btn--md btn--secondary is-hidden--xl-down`}>
                     <span className='text--upper text--p5 text--bold'>к корзине</span>
                 </div>
 
@@ -131,6 +132,9 @@ export default function BuyButton({ children }) {
                     <span data-disabled={diabled === 'minus'} onClick={() => updateCount(-1)} className={style.counterBtn}>
                         <Icon name='minus' width='16' height='16' />
                     </span>
+                    <span onClick={() => setCount(0)} className={style.counterBtnAccept}>
+                        <Icon name='close' width='16' height='16' />
+                    </span>
 
                     <input
                         type='text'
@@ -139,10 +143,13 @@ export default function BuyButton({ children }) {
                         data-shake={isShaked}
                         onChange={changeHandler}
                         className={`${style.counterInput} text--p5 text--bold`} />
-                    <div onClick={counerClick} className={style.counterDiv}>{count} ШТ</div>
+                    <div onClick={counterClick} className={style.counterDiv}>{count} ШТ</div>
 
                     <span data-disabled={diabled === 'plus'} onClick={() => updateCount(+1)} className={style.counterBtn}>
                         <Icon name='plus' width='16' height='16' />
+                    </span>
+                    <span className={style.counterBtnAccept}>
+                        <Icon name='check' width='16' height='16' />
                     </span>
                 </div>
             </div>

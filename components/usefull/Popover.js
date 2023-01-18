@@ -13,6 +13,7 @@ export default function Popover() {
     const [isOpen, setIsOpen] = useState('')
     const [image, setImage] = useState('')
     const refContainer = useRef(null)
+    const refTimeout = useRef(false)
 
     const setPositions = () => {
         refContainer.current = document.querySelector('.header-middle-container')
@@ -37,16 +38,30 @@ export default function Popover() {
         }
     }
 
+    const openHandler = open => {
+        if (window.scrollY > 20) setIsFixed(true)
+        else setIsFixed(false)
+
+        setPositions()
+
+        if (open) {
+            if (refTimeout.current) clearTimeout(refTimeout.current)
+            refTimeout.current = setTimeout(() => setIsOpen(false), 6000)
+        }
+
+        setIsOpen(open)
+    }
+
     useEffect(() => {
         setPositions()
 
         globalState.popover = {
+            setIsOpen: openHandler,
             setTextSecondary,
             setRightPosition,
             setTextPrimary,
             setTopPosition,
             setIsBasket,
-            setIsOpen,
             setImage
         }
 
@@ -67,15 +82,6 @@ export default function Popover() {
             window.removeEventListener('resize', resizeHandler)
         }
     }, [])
-
-    useEffect(() => {
-        if (!isOpen) return
-        if (window.scrollY > 20) setIsFixed(true)
-        else setIsFixed(false)
-
-        setPositions()
-        setTimeout(() => setIsOpen(false), 6000)
-    }, [isOpen])
 
     return (
         <div style={{ top: `${topPosition}px`, right: `${rightPosition}px` }} data-open={isOpen} data-fixed={isFixed} className={style.popover}>

@@ -20,18 +20,21 @@ export default function Product({ detail }) {
     const refBlockWidth = useRef(null)
     const refFooterHeight = useRef(0)
 
+    // @TODO Rewrite this fckn shit
     useEffect(() => {
         refContainerOffset.current = refStickyContainer.current.offsetTop
-        const margin = +getComputedStyle(refStickyBlock.current).marginLeft.match(/\d+/)
-        refStickyBlock.current.style.width = (refBlockWidth.current.clientWidth - margin) + 'px'
         refFooterHeight.current = document.querySelector('footer').clientHeight
+        setTimeout(() => {
+            // const margin = +getComputedStyle(refStickyBlock.current).marginLeft.match(/\d+/)
+            refStickyBlock.current.style.width = refBlockWidth.current.clientWidth + 'px'
+        }, 0);
     }, [containerHeight])
 
     useEffect(() => {
         refContainerOffset.current = refStickyContainer.current.offsetTop
         refStickyBlock.current.style.width = refBlockWidth.current.clientWidth + 'px'
         const offsetSticky = 20
-        // @TODO Rewrite this fckn shit
+        
         const scrollHandler = () => {
             if (window.innerWidth < 880) return
             const scrollPos = window.scrollY
@@ -54,6 +57,8 @@ export default function Product({ detail }) {
         const resizeHandler = () => {
             if (window.innerWidth < 880) {
                 refStickyBlock.current.style.transform = ''
+                refStickyBlock.current.style.position = ''
+                refStickyBlock.current.style.width = ''
             } else {
                 const margin = +getComputedStyle(refStickyBlock.current).marginLeft.match(/\d+/)
                 refContainerOffset.current = refStickyContainer.current.offsetTop
