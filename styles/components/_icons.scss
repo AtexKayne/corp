@@ -154,6 +154,11 @@
 
     &--grey {
         background-color: #F9F9F9;
+
+        &:hover {
+            color: var(--t-text);
+            background-color: #E5E5E5;
+        }
     }
 }
 
