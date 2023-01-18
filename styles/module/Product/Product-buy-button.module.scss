@@ -26,7 +26,7 @@
         padding: 24px 32px;
         background-color: var(--t-background);
 
-        > div {
+        >div {
             height: auto;
 
             &:nth-child(2) {
@@ -47,14 +47,25 @@
 }
 
 .btnMain {
-    right: 0;
-    left: 68px;
+    left: 85px;
+    right: 15px;
     position: absolute;
     transition: .5s ease;
     transform-origin: left;
 
     &[data-open="true"] {
         transform: scaleX(0);
+    }
+
+    @include media-breakpoint(md) {
+        right: 30px;
+        left: 332px;
+        min-height: 65px;
+    }
+
+    @include media-breakpoint(lg-up) {
+        right: 0;
+        left: 68px;
     }
 }
 
@@ -86,9 +97,21 @@
         .toBasket {
             flex-basis: 50%;
         }
+
         .countSelector {
             flex-basis: 50%;
         }
+    }
+
+    @include media-breakpoint(md) {
+        right: 30px;
+        left: 332px;
+        min-height: 65px;
+    }
+
+    @include media-breakpoint(lg-up) {
+        right: 0;
+        left: 68px;
     }
 }
 
@@ -112,12 +135,29 @@
 }
 
 @keyframes shake {
-    0% { transform: translateX(-20px); }
-    20% { transform: translateX(20px); }
-    40% { transform: translateX(-10px); }
-    60% { transform: translateX(10px); }
-    80% { transform: translateX(-5px); }
-    100% { transform: translateX(0); }
+    0% {
+        transform: translateX(-20px);
+    }
+
+    20% {
+        transform: translateX(20px);
+    }
+
+    40% {
+        transform: translateX(-10px);
+    }
+
+    60% {
+        transform: translateX(10px);
+    }
+
+    80% {
+        transform: translateX(-5px);
+    }
+
+    100% {
+        transform: translateX(0);
+    }
 }
 
 .counterDiv {
@@ -149,6 +189,7 @@
     }
 
     &[data-active="true"] {
+
         .counterInput,
         .counterBtnAccept {
             display: flex;
@@ -186,7 +227,7 @@
 .favourite {
     min-width: 60px;
     min-height: 60px;
-    
+
     path {
         transition: .3s;
     }
