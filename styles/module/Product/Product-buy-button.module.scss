@@ -24,6 +24,7 @@
         position: fixed;
         min-height: 92px;
         padding: 24px 32px;
+        transition: .3s ease transform;
         background-color: var(--t-background);
 
         >div {
@@ -43,12 +44,20 @@
 .buybtnChildren {
     @include media-breakpoint(md-down) {
         margin-right: 32px;
+        white-space: nowrap;
     }
 }
 
+.btnWrapper {
+    width: 100%;
+    margin-right: 0;
+    position: relative;
+}
+
 .btnMain {
-    left: 85px;
-    right: 15px;
+    left: 0;
+    right: 0;
+    height: 100%;
     position: absolute;
     transition: .2s ease;
     transform-origin: left;
@@ -58,20 +67,14 @@
     }
 
     @include media-breakpoint(md) {
-        right: 30px;
-        left: 332px;
         min-height: 65px;
-    }
-
-    @include media-breakpoint(lg-up) {
-        right: 0;
-        left: 68px;
     }
 }
 
 .buyOpen {
-    left: 85px;
-    right: 15px;
+    left: 0;
+    right: 0;
+    height: 100%;
     display: flex;
     user-select: none;
     position: absolute;
@@ -104,14 +107,7 @@
     }
 
     @include media-breakpoint(md) {
-        right: 30px;
-        left: 332px;
         min-height: 65px;
-    }
-
-    @include media-breakpoint(lg-up) {
-        right: 0;
-        left: 68px;
     }
 }
 

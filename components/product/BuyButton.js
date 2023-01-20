@@ -12,6 +12,7 @@ export default function BuyButton({ children }) {
     const [count, setCount] = useState(1)
     const refSafeValue = useRef(0)
     const refCounter = useRef(null)
+    const refButton = useRef(null)
     const refInput = useRef(null)
     const maxValue = 109
 
@@ -23,7 +24,7 @@ export default function BuyButton({ children }) {
 
     const documentClick = event => {
         const classList = event.target.classList
-        
+
         if (!classList.contains(style.counterInput) && !classList.contains(style.counterBtnReject)) {
             document.removeEventListener('click', documentClick)
             setIsSelected(false)
@@ -110,64 +111,81 @@ export default function BuyButton({ children }) {
         globalState.basket.setBasketCount(count)
     }, [count])
 
+    useEffect(() => {
+        const target = document.querySelector('footer')
+        const callback = entries => {
+            if (window.innerWidth < globalState.sizes.lg) {
+                if (entries[0].isIntersecting) refButton.current.style.transform = 'translateY(200px)'
+                else refButton.current.style.transform = ''
+            }
+        }
+
+        const observer = new IntersectionObserver(callback, { threshold: 0.1 })
+        observer.observe(target)
+
+        return () => {
+            observer.disconnect()
+        }
+    }, [])
+
 
     return (
-        <div className={style.buybtn}>
+        <div ref={refButton} className={style.buybtn}>
             <div className={`${style.buybtnChildren} is-hidden--lg-up is-hidden--sm-down`}>
                 {children}
             </div>
 
-            <div 
+            <div
                 onClick={favouriteHandler}
                 data-active={isFavourite}
                 className={`${style.favourite} btn btn--md btn--shadow`}>
                 <Icon name='heartFill' width='18' height='16' />
             </div>
 
-            <div onClick={buyHandler} data-open={isOpen} className={`${style.btnMain} btn btn--md btn--primary`}>
-                <span className='text--upper text--p5 text--bold mr-0.8'>
-                    <span className='is-hidden--lg-down'>Добавить </span>
-                    <span>в корзину</span>
-                </span>
-                <Icon name='basketMD' width='18' height='18' />
-            </div>
-
-            <div data-open={isOpen} className={style.buyOpen}>
-
-                <div className={`${style.toBasket} btn btn--md btn--secondary is-hidden--xl-down`}>
-                    <span className='text--upper text--p5 text--bold'>к корзине</span>
+            <div className={style.btnWrapper}>
+                <div onClick={buyHandler} data-open={isOpen} className={`${style.btnMain} btn btn--md btn--primary`}>
+                    <span className='text--upper text--p5 text--bold mr-0.8'>
+                        <span className='is-hidden--lg-down'>Добавить </span>
+                        <span>в корзину</span>
+                    </span>
+                    <Icon name='basketMD' width='18' height='18' />
                 </div>
 
-                <div
-                    ref={refCounter}
-                    data-active={isSelected}
-                    className={`${style.countSelector} text--p5 text--bold`}>
-                    <span data-disabled={diabled === 'minus'} onClick={() => updateCount(-1)} className={style.counterBtn}>
-                        <Icon name='minus' width='16' height='16' />
-                    </span>
-                    <span onClick={cancelHandler} className={`${style.counterBtnAccept} ${style.counterBtnReject}`}>
-                        <Icon name='close' width='16' height='16' />
-                    </span>
+                <div data-open={isOpen} className={style.buyOpen}>
 
-                    <input
-                        type='text'
-                        ref={refInput}
-                        placeholder={count}
-                        data-shake={isShaked}
-                        onChange={changeHandler}
-                        className={`${style.counterInput} text--p5 text--bold`} />
-                    <div onClick={counterClick} className={style.counterDiv}>{count} ШТ</div>
+                    <div className={`${style.toBasket} btn btn--md btn--secondary is-hidden--xl-down`}>
+                        <span className='text--upper text--p5 text--bold'>к корзине</span>
+                    </div>
 
-                    <span data-disabled={diabled === 'plus'} onClick={() => updateCount(+1)} className={style.counterBtn}>
-                        <Icon name='plus' width='16' height='16' />
-                    </span>
-                    <span className={style.counterBtnAccept}>
-                        <Icon name='check' width='16' height='16' />
-                    </span>
+                    <div
+                        ref={refCounter}
+                        data-active={isSelected}
+                        className={`${style.countSelector} text--p5 text--bold`}>
+                        <span data-disabled={diabled === 'minus'} onClick={() => updateCount(-1)} className={style.counterBtn}>
+                            <Icon name='minus' width='16' height='16' />
+                        </span>
+                        <span onClick={cancelHandler} className={`${style.counterBtnAccept} ${style.counterBtnReject}`}>
+                            <Icon name='close' width='16' height='16' />
+                        </span>
+
+                        <input
+                            type='text'
+                            ref={refInput}
+                            placeholder={count}
+                            data-shake={isShaked}
+                            onChange={changeHandler}
+                            className={`${style.counterInput} text--p5 text--bold`} />
+                        <div onClick={counterClick} className={style.counterDiv}>{count} ШТ</div>
+
+                        <span data-disabled={diabled === 'plus'} onClick={() => updateCount(+1)} className={style.counterBtn}>
+                            <Icon name='plus' width='16' height='16' />
+                        </span>
+                        <span className={style.counterBtnAccept}>
+                            <Icon name='check' width='16' height='16' />
+                        </span>
+                    </div>
                 </div>
             </div>
-
-
         </div>
     )
 }

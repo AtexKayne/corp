@@ -1,6 +1,7 @@
 import { useState, useEffect, useRef } from 'react'
 import { product } from '../../components/helpers/constants'
 import style from '../../styles/module/Product/Product.module.scss'
+import { globalState } from '../../components/helpers/globalState'
 import useDeviceDetect from '../../components/helpers/useDeviceDetect'
 
 import Image from 'next/image'
@@ -36,7 +37,7 @@ export default function Product({ detail }) {
         const offsetSticky = 20
         
         const scrollHandler = () => {
-            if (window.innerWidth < 880) return
+            if (window.innerWidth < globalState.sizes.lg) return
             const scrollPos = window.scrollY
             const isScrolledDown = scrollPos > refContainerOffset.current - offsetSticky
             const isScrolledContainer = refStickyContainer.current.getBoundingClientRect().bottom > refFooterHeight.current + offsetSticky
@@ -55,7 +56,7 @@ export default function Product({ detail }) {
         }
 
         const resizeHandler = () => {
-            if (window.innerWidth < 880) {
+            if (window.innerWidth < globalState.sizes.lg) {
                 refStickyBlock.current.style.transform = ''
                 refStickyBlock.current.style.position = ''
                 refStickyBlock.current.style.width = ''

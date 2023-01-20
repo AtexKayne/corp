@@ -6,16 +6,19 @@ import { globalState } from '../helpers/globalState'
 import style from '../../styles/module/Product/Product-gallery.module.scss'
 
 export default function Gallery({ images = [], alt = '' }) {
+    const [prevImage, setPrevImage] = useState(images[images.length - 1].gallery)
     const [activeImage, setActiveImage] = useState(images[0].gallery)
+    const [nextImage, setNextImage] = useState(images[1].gallery)
+    const [previewHeight, setPreviewHeight] = useState(100)
     const [navDisabled, setNavDisabled] = useState('up')
     const [modalOpen, setModalOpen] = useState(false)
     const animateActiveImage = useAnimationControls()
     const animatePreview = useAnimationControls()
+    const animateDrag = useAnimationControls()
     const refPreviewPosition = useRef(0)
     const refGalleryOffset = useRef(0)
     const refGallery = useRef(null)
     const refModal = useRef(null)
-    const previewHeight = 100
 
     const updateActiveImage = async image => {
         await animateActiveImage.start({ opacity: 0 })
@@ -65,43 +68,82 @@ export default function Gallery({ images = [], alt = '' }) {
         const index = images.findIndex(image => image.gallery === activeImage)
         const nextImageObj = images[index + 1]
         const nextImage = nextImageObj ? nextImageObj.gallery : images[0].gallery
-        updateActiveImage(nextImage)
+        const scrollIndex = nextImageObj ? index + 1 : 0
+        setActiveImage(nextImage)
+        animateDrag.start({ x: window.innerWidth * scrollIndex * -1, transition: { duration: 0.3 } })
     }
 
     const prevHandler = () => {
         const index = images.findIndex(image => image.gallery === activeImage)
         const nextImageObj = images[index - 1]
         const nextImage = nextImageObj ? nextImageObj.gallery : images[images.length - 1].gallery
-        updateActiveImage(nextImage)
+        const scrollIndex = nextImageObj ? index - 1 : images.length - 1
+        setActiveImage(nextImage)
+        animateDrag.start({ x: window.innerWidth * scrollIndex * -1, transition: { duration: 0.3 } })
     }
 
-    const dragHandler = (_, info) => {
-        if (typeof window === 'undefined' || window.innerWidth > 880) return
-        const offset = info.offset.x
-        if (offset < 120) nextHandler()
-        else if (offset > -120) prevHandler()
+    const dragEndHandler = (_, info) => {
+        if (typeof window === 'undefined' || window.innerWidth > globalState.sizes.lg) return
+        const offsetX = Math.abs(info.offset.x)
+        const offsetY = Math.abs(info.offset.y)
+
+        if (offsetX > 80 && offsetY < 30) {
+            if (info.offset.x < 0) nextHandler()
+            else prevHandler()
+        } else {
+            const index = images.findIndex(image => image.gallery === activeImage)
+            animateDrag.start({ x: window.innerWidth * index * -1, transition: { duration: 0.1 } })
+        }
+        // animateDrag.start({ x: 0, transition: { duration: 0.3 } })
     }
 
     useEffect(() => {
         // Gallery settings
         const rect = refGallery.current.getBoundingClientRect()
         refGalleryOffset.current = rect.x
-        refGallery.current.style.left = `${-refGalleryOffset.current}px`
-        refGallery.current.style.width = `calc(100% + ${refGalleryOffset.current}px)`
+        const windowInnerWidth = window.innerWidth
+        if (windowInnerWidth < globalState.sizes.xxxl) {
+            refGallery.current.style.left = `${-refGalleryOffset.current}px`
+            refGallery.current.style.width = `calc(100% + ${refGalleryOffset.current}px)`
+        }
+
+        if (windowInnerWidth >= globalState.sizes.xxxl) {
+            setPreviewHeight(100)
+        } else if (windowInnerWidth >= globalState.sizes.xxl && windowInnerWidth < globalState.sizes.xxxl) {
+            setPreviewHeight(82)
+        } else if (windowInnerWidth >= globalState.sizes.xl && windowInnerWidth < globalState.sizes.xxl) {
+            setPreviewHeight(60)
+        }
+
         const resizeHandler = () => {
             const windowWidth = window.innerWidth
-            if (windowWidth >= 1600) {
+            if (windowWidth >= globalState.sizes.xxxl) {
                 refGallery.current.style.left = '0'
                 refGallery.current.style.width = '100%'
                 return
             }
+
+            if (windowWidth >= globalState.sizes.xxxl) {
+                setPreviewHeight(100)
+            } else if (windowWidth >= globalState.sizes.xxl && windowWidth < globalState.sizes.xxxl) {
+                setPreviewHeight(82)
+            } else if (windowWidth >= globalState.sizes.xl && windowWidth < globalState.sizes.xxl) {
+                setPreviewHeight(60)
+            }
+
             const rect = refGallery.current.getBoundingClientRect()
             refGalleryOffset.current = refGalleryOffset.current - rect.x
             refGallery.current.style.left = `${refGalleryOffset.current}px`
-            const galleryWidth = windowWidth >= 880 
-                ? `calc(100% + ${-refGalleryOffset.current}px)` 
+            const galleryWidth = windowWidth >= globalState.sizes.lg
+                ? `calc(100% + ${-refGalleryOffset.current}px)`
                 : '100vw'
             refGallery.current.style.width = galleryWidth
+
+            const index = images.findIndex(image => image.gallery === activeImage)
+            animateDrag.start({ x: window.innerWidth * index * -1, transition: { duration: 0 } })
+
+            refPreviewPosition.current = 0
+            animatePreview.start({ y: 0, transition: { duration: 0 } })
         }
 
         window.addEventListener('resize', resizeHandler)
@@ -134,7 +176,7 @@ export default function Gallery({ images = [], alt = '' }) {
     }, [])
 
     useEffect(() => {
-        if (window.innerWidth < 1024) return
+        if (window.innerWidth < globalState.sizes.xl) return
         const activeIndex = images.findIndex(image => image.gallery === activeImage)
         const condition = Math.abs(refPreviewPosition.current / previewHeight) - activeIndex
         if (condition <= -4) slidePreview('down')
@@ -179,14 +221,31 @@ export default function Gallery({ images = [], alt = '' }) {
                 </div>
 
                 <motion.div
-                    drag
                     onClick={openModal}
-                    onDragEnd={dragHandler}
                     transition={{ duration: 0.3 }}
                     animate={animateActiveImage}
-                    className={style.imageMain}>
+                    className={`${style.imageMain} is-hidden--md-down`}>
                     <Image src={activeImage} layout='fill' alt={alt} />
                 </motion.div>
+
+                <div onClick={openModal} className={`${style.imageMain} is-hidden--lg-up`}>
+                    <motion.div
+                        drag='x'
+                        animate={animateDrag}
+                        onDragEnd={dragEndHandler}
+                        className={style.imageDragCntainer}
+                        // dragConstraints={{ left: 0, right: 0 }}
+                        >
+
+                        {images.map(image => (
+                            <div key={image.gallery} className={style.imageDrag}>
+                                <img src={image.gallery} width='100%' height='100%' alt={alt} />
+                            </div>
+                        ))}
+                    </motion.div>
+                </div>
+
+
 
                 <div className={style.labels}>
                     <div className='label label--sucess mb-0.6'>50%</div>
@@ -207,8 +266,8 @@ export default function Gallery({ images = [], alt = '' }) {
             <div ref={refModal} data-open={modalOpen} className={style.galleryModal}>
                 <div className='container p-relative'>
                     <div className={`${style.alt} text--t1 text--upper text--bold py-2 pr-4`}>{alt}</div>
-                    <div className={`${style.modalHeader} container`}>
-                        <div className='c-pointer' onClick={modalClose}><Icon name='close' width='16' height='16' /></div>
+                    <div className={`${style.modalHeader}`}>
+                        <div className={`${style.closeBtn} c-pointer`} onClick={modalClose}><Icon name='close' width='16' height='16' /></div>
                     </div>
 
                     {images.map(image => (
