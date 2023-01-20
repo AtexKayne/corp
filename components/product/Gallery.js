@@ -6,9 +6,7 @@ import { globalState } from '../helpers/globalState'
 import style from '../../styles/module/Product/Product-gallery.module.scss'
 
 export default function Gallery({ images = [], alt = '' }) {
-    const [prevImage, setPrevImage] = useState(images[images.length - 1].gallery)
     const [activeImage, setActiveImage] = useState(images[0].gallery)
-    const [nextImage, setNextImage] = useState(images[1].gallery)
     const [previewHeight, setPreviewHeight] = useState(100)
     const [navDisabled, setNavDisabled] = useState('up')
     const [modalOpen, setModalOpen] = useState(false)
@@ -87,7 +85,7 @@ export default function Gallery({ images = [], alt = '' }) {
         const offsetX = Math.abs(info.offset.x)
         const offsetY = Math.abs(info.offset.y)
 
-        if (offsetX > 80 && offsetY < 30) {
+        if (offsetX > 60 && offsetY < 30) {
             if (info.offset.x < 0) nextHandler()
             else prevHandler()
         } else {

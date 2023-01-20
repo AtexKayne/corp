@@ -3,7 +3,6 @@ import Image from 'next/image'
 import { useState, useEffect, useRef } from 'react'
 import { globalState } from './helpers/globalState'
 import style from '../styles/module/Header.module.scss'
-import Popover from './usefull/Popover'
 
 
 export default function Header() {
@@ -239,8 +238,6 @@ export default function Header() {
                 className={`${style.rabbit} ui-light`}>
                 <Image src='/images/layout/logo-lg.svg' layout='fill' alt='RedHair market' />
             </div>
-
-            <Popover />
         </header>
     )
 }

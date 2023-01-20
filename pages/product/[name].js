@@ -178,19 +178,19 @@ export default function Product({ detail }) {
                         <Accordeon updateHeight={setContainerHeight} title='Характеристики'>
                             <div className={style.params}>
                                 <span className='text--p6 text--bold text--color-smaler text--upper'>Вид товара</span>
-                                <span className='text--p4'>Шампунь</span>
+                                <span className='text--p4 text--normal'>Шампунь</span>
                             </div>
                             <div className={style.params}>
                                 <span className='text--p6 text--bold text--color-smaler text--upper'>Особенности</span>
-                                <span className='text--p4'>Регулирует работу сальных желез</span>
+                                <span className='text--p4 text--normal'>Регулирует работу сальных желез</span>
                             </div>
                             <div className={style.params}>
                                 <span className='text--p6 text--bold text--color-smaler text--upper'>Производство</span>
-                                <span className='text--p4'>Финляндия</span>
+                                <span className='text--p4 text--normal'>Финляндия</span>
                             </div>
                             <div className={style.params}>
                                 <span className='text--p6 text--bold text--color-smaler text--upper'>Назначение</span>
-                                <span className='text--p4'>Для работы, Для домашнего использования, Для роста волос, От выпадения, От жирности кожи головы</span>
+                                <span className='text--p4 text--normal'>Для работы, Для домашнего использования, Для роста волос, От выпадения, От жирности кожи головы</span>
                             </div>
                         </Accordeon>
 

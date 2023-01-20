@@ -90,21 +90,23 @@ export default function BuyButton({ children }) {
             setIsSelected(false)
             setIsOpen(false)
             globalState.popover.setTextPrimary('System 4 Shale Oil Shampoo 4')
-            globalState.popover.setImage('/images/product/image-0.jpg')
             globalState.popover.setTextSecondary('БОЛЬШЕ НЕ В КОРЗИНЕ')
+            globalState.popover.setImage('/images/product/image-0.jpg')
             globalState.popover.setIsBasket(false)
+            
             globalState.popover.setIsOpen(true)
-        } else if (count >= maxValue) {
+        } else if (count > maxValue) {
             setDiabled('plus')
             setCount(maxValue)
             refInput.current.value = maxValue
-            globalState.popover.setTextPrimary('System 4 Shale Oil Shampoo 4')
-            globalState.popover.setImage('/images/product/image-0.jpg')
-            globalState.popover.setTextSecondary('Максимум для этого заказа')
-            globalState.popover.setIsBasket(false)
-            globalState.popover.setIsOpen(true)
             setIsShaked(true)
             setTimeout(() => setIsShaked(false), 1000)
+            globalState.popover.setTextPrimary('System 4 Shale Oil Shampoo 4')
+            globalState.popover.setTextSecondary('Максимум для этого заказа')
+            globalState.popover.setImage('/images/product/image-0.jpg')
+            globalState.popover.setIsBasket(false)
+
+            globalState.popover.setIsOpen(true)
         } else {
             setDiabled(false)
         }
