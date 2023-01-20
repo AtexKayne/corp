@@ -61,6 +61,7 @@ figure {
     &--h3 { @extend %text--size-h3; }
     &--h4 { @extend %text--size-h4; }
     &--h5 { @extend %text--size-h5; }
+    &--a3 { @extend %text--size-a3; }
 }
 
 .text--left { text-align: left;}

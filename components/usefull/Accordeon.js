@@ -38,7 +38,7 @@ export default function Accordeon({ children, title, open = false, updateHeight 
 
     return (
         <div ref={refAccordeon} data-open={isOpen} className={style.accordeon}>
-            <div ref={refTitle} onClick={toggleHandler} className={`${style.accordeonTitle} ${style.text4} text--p1 text--bold`}>{title}</div>
+            <div ref={refTitle} onClick={toggleHandler} className={`${style.accordeonTitle} ${style.text4} text--a3 text--bold`}>{title}</div>
 
             <div ref={refChildrenContainer}>
                 {children}
