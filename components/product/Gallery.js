@@ -1,10 +1,11 @@
 import Image from 'next/image'
 import Icon from '../../components/Icon'
 import { useState, useEffect, useRef } from 'react'
-import { motion, useAnimationControls } from 'framer-motion'
 import { globalState } from '../helpers/globalState'
+import { motion, useAnimationControls } from 'framer-motion'
 import style from '../../styles/module/Product/Product-gallery.module.scss'
 
+// @TODO Переписать фунуции переключения слайдов по свайпу.
 export default function Gallery({ images = [], alt = '' }) {
     const [activeImage, setActiveImage] = useState(images[0].gallery)
     const [previewHeight, setPreviewHeight] = useState(100)
@@ -85,7 +86,7 @@ export default function Gallery({ images = [], alt = '' }) {
         const offsetX = Math.abs(info.offset.x)
         const offsetY = Math.abs(info.offset.y)
 
-        if (offsetX > 60 && offsetY < 60) {
+        if (offsetX > 60 && offsetY < 90) {
             if (info.offset.x < 0) nextHandler()
             else prevHandler()
         } else {

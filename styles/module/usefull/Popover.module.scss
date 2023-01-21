@@ -31,8 +31,10 @@
     opacity: 0;
     display: flex;
     overflow: hidden;
+    user-select: none;
     border-radius: 8px;
     align-items: center;
+    touch-action: pan-y;
     background-color: var(--t-text);
     transition: 0.3s height, 0.3s opacity;
     

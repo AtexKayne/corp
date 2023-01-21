@@ -1,4 +1,3 @@
-import Image from 'next/image'
 import { useState, useEffect, useRef } from 'react'
 import { globalState } from '../helpers/globalState'
 import style from '../../styles/module/usefull/Popover.module.scss'
@@ -8,6 +7,7 @@ export default function Popover() {
     const [topPosition, setTopPosition] = useState('')
     const [isOpen, setIsOpen] = useState('')
 
+    const refTouch = useRef(0)
     const refCount = useRef(0)
     const refImage = useRef('')
     const refPopover = useRef(null)
@@ -69,9 +69,9 @@ export default function Popover() {
                 element.setAttribute('data-active', false)
                 resolve(element)
             }, 6000)
-        }).then(element => {
+        }).then(item => {
             setTimeout(() => {
-                element.remove()
+                item.remove()
                 refCount.current--
             }, 200)
         })
@@ -86,7 +86,7 @@ export default function Popover() {
             const item = refPopover.current.appendChild(getLayout())
             item.setAttribute('data-active', true)
 
-            removeItem(item)
+            // removeItem(item)
 
             if (refCount.current > 3) {
                 refPopover.current.querySelector(`.${style.popoverInner}`).remove()
@@ -94,18 +94,32 @@ export default function Popover() {
         }
     }
 
-    const setImage = src => {
-        refImage.current = src
+    const touchStartHandler = event => {
+        const target = event.target
+        const parent = target.closest(`.${style.popoverInner}`)
+        if (!parent) return
+        refTouch.current = {
+            parent,
+            y: event.touches[0].clientY
+        }
     }
-    const setIsBasket = condition => {
-        refIsBasket.current = condition
+
+    const touchMoveHandler = event => {
+        if (!!refTouch.current.y) {
+            const y = event.touches[0].clientY
+            const offset = refTouch.current.y - y
+            refTouch.current.parent.style.transform = `translateY(${-offset}px)`
+        }
     }
-    const setTextSecondary = text => {
-        refTextSecondary.current = text
+
+    const touchEndHandler = () => {
+        refTouch.current.y = false
     }
-    const setTextPrimary = text => {
-        refTextPrimary.current = text
-    }
+
+    const setImage = src => refImage.current = src
+    const setIsBasket = condition => refIsBasket.current = condition
+    const setTextSecondary = text => refTextSecondary.current = text
+    const setTextPrimary = text => refTextPrimary.current = text
 
     useEffect(() => {
         setPositions()
@@ -134,6 +148,9 @@ export default function Popover() {
         }
 
         window.addEventListener('resize', resizeHandler)
+        refPopover.current.addEventListener('touchstart', touchStartHandler)
+        refPopover.current.addEventListener('touchmove', touchMoveHandler)
+        refPopover.current.addEventListener('touchend', touchEndHandler)
 
         return () => {
             window.removeEventListener('resize', resizeHandler)
