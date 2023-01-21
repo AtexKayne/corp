@@ -33,10 +33,10 @@
     overflow: hidden;
     user-select: none;
     border-radius: 8px;
+    touch-action: none;
     align-items: center;
-    touch-action: pan-y;
     background-color: var(--t-text);
-    transition: 0.3s height, 0.3s opacity;
+    transition: 0.3s height, 0.3s opacity, 0.1s transform;
     
     &[data-active="true"] {
         opacity: 1;

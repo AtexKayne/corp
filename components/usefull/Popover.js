@@ -77,6 +77,14 @@ export default function Popover() {
         })
     }
 
+    const removeItemImmediatly = element => {
+        element.setAttribute('data-active', false)
+        setTimeout(() => {
+            element.remove()
+            refCount.current--
+        }, 200)
+    }
+
     const openHandler = open => {
         setIsOpen(open)
         if (open) {
@@ -108,12 +116,19 @@ export default function Popover() {
         if (!!refTouch.current.y) {
             const y = event.touches[0].clientY
             const offset = refTouch.current.y - y
+            refTouch.current.offset = offset
             refTouch.current.parent.style.transform = `translateY(${-offset}px)`
         }
     }
 
     const touchEndHandler = () => {
+        if (Math.abs(refTouch.current.offset) > 30) {
+            removeItemImmediatly(refTouch.current.parent)
+        }
+        refTouch.current.parent.style.transform = 'translateY(0)'
         refTouch.current.y = false
+        refTouch.current.offset = false
+        refTouch.current.parent = false
     }
 
     const setImage = src => refImage.current = src
