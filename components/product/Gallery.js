@@ -85,7 +85,7 @@ export default function Gallery({ images = [], alt = '' }) {
         const offsetX = Math.abs(info.offset.x)
         const offsetY = Math.abs(info.offset.y)
 
-        if (offsetX > 60 && offsetY < 30) {
+        if (offsetX > 60 && offsetY < 60) {
             if (info.offset.x < 0) nextHandler()
             else prevHandler()
         } else {

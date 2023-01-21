@@ -6,17 +6,15 @@ import style from '../../styles/module/usefull/Popover.module.scss'
 export default function Popover() {
     const [rightPosition, setRightPosition] = useState('')
     const [topPosition, setTopPosition] = useState('')
-
     const [isOpen, setIsOpen] = useState('')
 
-    const refContainer = useRef(null)
-    const refPopover = useRef(null)
     const refCount = useRef(0)
-
     const refImage = useRef('')
+    const refPopover = useRef(null)
+    const refIsBasket = useRef(false)
+    const refContainer = useRef(null)
     const refTextPrimary = useRef('')
     const refTextSecondary = useRef('')
-    const refIsBasket = useRef(false)
 
     const getLayout = () => {
         let layout = `
@@ -65,6 +63,20 @@ export default function Popover() {
         }
     }
 
+    const removeItem = element => {
+        new Promise(resolve => {
+            setTimeout(() => {
+                element.setAttribute('data-active', false)
+                resolve(element)
+            }, 6000)
+        }).then(element => {
+            setTimeout(() => {
+                element.remove()
+                refCount.current--
+            }, 200)
+        })
+    }
+
     const openHandler = open => {
         setIsOpen(open)
         if (open) {
@@ -74,18 +86,11 @@ export default function Popover() {
             const item = refPopover.current.appendChild(getLayout())
             item.setAttribute('data-active', true)
 
-            setTimeout(() => {
-                item.remove()
-                refCount.current--
-                // item.setAttribute('data-active', false)
-                // setTimeout(() => {
-                // }, 200)
-            }, 6000)
+            removeItem(item)
 
             if (refCount.current > 3) {
                 refPopover.current.querySelector(`.${style.popoverInner}`).remove()
             }
-    
         }
     }
 
