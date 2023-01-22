@@ -55,12 +55,12 @@ export default function Gallery({ images = [], alt = '' }) {
 
     const openModal = () => {
         setModalOpen(true)
-        globalState.toggleBodyClass('overflow-hidden')
+        globalState.body.toggleClass('overflow-hidden')
     }
 
     const modalClose = () => {
         setModalOpen(false)
-        globalState.toggleBodyClass('overflow-hidden')
+        globalState.body.toggleClass('overflow-hidden')
     }
 
     const nextHandler = () => {

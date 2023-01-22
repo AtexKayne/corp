@@ -6,11 +6,20 @@
     opacity: 0;
     z-index: 15;
     position: fixed;
+    transition: .3s;
     pointer-events: none;
 
     &[data-open="true"] {
         opacity: 1;
         pointer-events: all;
+    }
+
+    @include media-breakpoint(lg-up) {
+        &[data-open="false"] {
+            .modal__content {
+                margin-right: -12px; // Иначе дрыгает
+            }
+        }
     }
 
     &__layout {
@@ -21,5 +30,105 @@
         opacity: .7;
         position: absolute;
         background-color: #112233;
+    }
+
+    &__content {
+        right: 0;
+        bottom: 0;
+        display: flex;
+        position: fixed;
+        overflow-y: auto;
+        max-height: 100vh;
+        flex-direction: column;
+        border-radius: 16px 16px 0px 0px;
+        background-color: color-use(background);
+        width: adaptive-value((
+            xs: 100vw,
+            md: 620px,
+            lg: 452px,
+            xl: 528px,
+            xxl: 644px,
+            xxxl: 684px
+        ));
+        padding: adaptive-value((
+            xs: 16px 16px 28px,
+            md: 28px 32px 0,
+            lg: 28px 48px 0,
+            xl: 28px 72px 0,
+        ));
+
+        @include media-breakpoint(md-up) {
+            top: 0;
+            border-radius: 0;
+            transform: none!important;
+        }
+
+        &--full-height {
+            border-radius: 0;
+            transform: none!important;
+            touch-action: unset!important;
+            
+            .modal__close {
+                pointer-events: all;
+                align-self: flex-start;
+
+                &::after {
+                    top: -20px;
+                    left: -20px;
+                    content: '';
+                    right: -30px;
+                    bottom: -30px;
+                    background-color: transparent;
+                }
+
+                >* {
+                    display: block!important
+                }
+            }
+        }
+    }
+
+    &__close {
+        width: 0;
+        height: 0;
+        cursor: pointer;
+        position: relative;
+        transition: .3s color;
+
+        &:hover {
+            color: color-use(primary);
+        }
+
+        &::after {
+            top: -20px;
+            left: -20px;
+            content: '';
+            right: -20px;
+            bottom: -20px;
+            position: absolute;
+        }
+
+
+        @include media-breakpoint(md-up) {
+            align-self: flex-end;
+        }
+
+        @include media-breakpoint(sm-down) {
+            align-self: center;
+            pointer-events: none;
+
+            &::after {
+                top: 0px;
+                left: -16px;
+                right: -16px;
+                bottom: -4px;
+                border-radius: 50px;
+                background-color: color-use(tetriary);
+            }
+
+            >* {
+                display: none;
+            }
+        }
     }
 }

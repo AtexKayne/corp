@@ -68,7 +68,7 @@ export default function Popover() {
             setTimeout(() => {
                 element.setAttribute('data-active', false)
                 resolve(element)
-            }, 6000)
+            }, 4000)
         }).then(item => {
             setTimeout(() => {
                 item.remove()
@@ -89,12 +89,12 @@ export default function Popover() {
         setIsOpen(open)
         if (open) {
             setPositions()
-    
+
             refCount.current++
             const item = refPopover.current.appendChild(getLayout())
             item.setAttribute('data-active', true)
 
-            // removeItem(item)
+            removeItem(item)
 
             if (refCount.current > 3) {
                 refPopover.current.querySelector(`.${style.popoverInner}`).remove()
@@ -117,7 +117,9 @@ export default function Popover() {
             const y = event.touches[0].clientY
             const offset = refTouch.current.y - y
             refTouch.current.offset = offset
-            refTouch.current.parent.style.transform = `translateY(${-offset}px)`
+            if (Math.abs(offset) < 60) {
+                refTouch.current.parent.style.transform = `translateY(${-offset}px)`
+            }
         }
     }
 
@@ -169,6 +171,11 @@ export default function Popover() {
 
         return () => {
             window.removeEventListener('resize', resizeHandler)
+            if (refPopover.current) {
+                refPopover.current.removeEventListener('touchstart', touchStartHandler)
+                refPopover.current.removeEventListener('touchmove', touchMoveHandler)
+                refPopover.current.removeEventListener('touchend', touchEndHandler)
+            }
         }
     }, [])
 
@@ -179,7 +186,7 @@ export default function Popover() {
 
 
     return (
-        <div 
+        <div
             style={{
                 top: `${topPosition}px`,
                 right: `${rightPosition}px`

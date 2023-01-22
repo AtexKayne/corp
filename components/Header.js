@@ -3,6 +3,7 @@ import Image from 'next/image'
 import { useState, useEffect, useRef } from 'react'
 import { globalState } from './helpers/globalState'
 import style from '../styles/module/Header.module.scss'
+import Link from 'next/link'
 
 
 export default function Header() {
@@ -38,16 +39,33 @@ export default function Header() {
 
 
     useEffect(() => {
-        const changeBodyClass = className => {
-            const classList = document.querySelector('body').classList
-            if (classList.contains(className)) classList.remove(className)
-            else classList.add(className)
-        }
         globalState.headerTheme = {
             setTheme,
             theme
         }
-        globalState.toggleBodyClass = changeBodyClass
+
+        const toggleBodyClass = className => {
+            const classList = document.querySelector('body').classList
+            if (classList.contains(className)) classList.remove(className)
+            else classList.add(className)
+        }
+
+        const addBodyClass = className => {
+            const classList = document.querySelector('body').classList
+            classList.add(className)
+        }
+
+        const removeBodyClass = className => {
+            const classList = document.querySelector('body').classList
+            classList.remove(className)
+        }
+
+        globalState.body = {
+            addClass: addBodyClass,
+            removeClass: removeBodyClass,
+            toggleClass: toggleBodyClass,
+        }
+
         globalState.basket = {
             setBasketCount,
             basketCount
@@ -99,24 +117,27 @@ export default function Header() {
                         </div>
                     </div>
                     <div className={style.group}>
-                        <div className='logo-light'>
-                            <div className='is-hidden--sm-down'>
-                                <Image src='/images/layout/logo-md.svg' width='242' height='45' alt='RedHair market' />
+                        <Link href='/'>
+                            <div className='logo-light'>
+                                <div className='is-hidden--sm-down'>
+                                    <Image src='/images/layout/logo-md.svg' width='242' height='45' alt='RedHair market' />
+                                </div>
+                                <div className='is-hidden--md-up'>
+                                    <Image src='/images/layout/logo-xs.svg' width='41' height='41' alt='RedHair market' />
+                                </div>
                             </div>
-                            <div className='is-hidden--md-up'>
-                                <Image src='/images/layout/logo-xs.svg' width='41' height='41' alt='RedHair market' />
-                            </div>
-                        </div>
+                        </Link>
 
-                        <div className='logo-dark'>
-                            <div className='is-hidden--sm-down'>
-                                <Image src='/images/layout/logo-dark-md.svg' width='242' height='45' alt='RedHair market' />
+                        <Link href='/'>
+                            <div className='logo-dark'>
+                                <div className='is-hidden--sm-down'>
+                                    <Image src='/images/layout/logo-dark-md.svg' width='242' height='45' alt='RedHair market' />
+                                </div>
+                                <div className='is-hidden--md-up'>
+                                    <Image src='/images/layout/logo-dark-xs.svg' width='41' height='41' alt='RedHair market' />
+                                </div>
                             </div>
-                            <div className='is-hidden--md-up'>
-                                <Image src='/images/layout/logo-dark-xs.svg' width='41' height='41' alt='RedHair market' />
-                            </div>
-                        </div>
-
+                        </Link>
                     </div>
                     <div className={style.groupMD}>
                         <div className='btn btn--empty btn--xs p-relative'>
@@ -161,29 +182,33 @@ export default function Header() {
                     onMouseEnter={hoverEnterHandler}>
 
                     <div className={`${style.groupMD} ${style.textt1} text--semi`}>
-                        <div className='logo-light'>
-                            <div className='is-hidden--xxl-down' style={{ width: 297, height: 52 }}>
-                                <Image src='/images/layout/logo-xxl.svg' width='297' height='52' alt='RedHair market' />
+                        <Link href='/'>
+                            <div className='logo-light'>
+                                <div className='is-hidden--xxl-down' style={{ width: 297, height: 52 }}>
+                                    <Image src='/images/layout/logo-xxl.svg' width='297' height='52' alt='RedHair market' />
+                                </div>
+                                <div className='is-hidden--xxxl-up is-hidden--xl-down' style={{ width: 256, height: 44 }}>
+                                    <Image src='/images/layout/logo-xl.svg' width='256' height='44' alt='RedHair market' />
+                                </div>
+                                <div className='is-hidden--xxl-up' style={{ width: 44, height: 44 }}>
+                                    <Image src='/images/layout/logo-lg.svg' width='44' height='44' alt='RedHair market' />
+                                </div>
                             </div>
-                            <div className='is-hidden--xxxl-up is-hidden--xl-down' style={{ width: 256, height: 44 }}>
-                                <Image src='/images/layout/logo-xl.svg' width='256' height='44' alt='RedHair market' />
+                        </Link>
+                        
+                        <Link href='/'>
+                            <div className='logo-dark'>
+                                <div className='is-hidden--xxl-down' style={{ width: 297, height: 52 }}>
+                                    <Image src='/images/layout/logo-dark-xxl.svg' width='297' height='52' alt='RedHair market' />
+                                </div>
+                                <div className='is-hidden--xxxl-up is-hidden--xl-down' style={{ width: 256, height: 44 }}>
+                                    <Image src='/images/layout/logo-dark-xl.svg' width='256' height='44' alt='RedHair market' />
+                                </div>
+                                <div className='is-hidden--xxl-up' style={{ width: 44, height: 44 }}>
+                                    <Image src='/images/layout/logo-dark-lg.svg' width='44' height='44' alt='RedHair market' />
+                                </div>
                             </div>
-                            <div className='is-hidden--xxl-up' style={{ width: 44, height: 44 }}>
-                                <Image src='/images/layout/logo-lg.svg' width='44' height='44' alt='RedHair market' />
-                            </div>
-                        </div>
-
-                        <div className='logo-dark'>
-                            <div className='is-hidden--xxl-down' style={{ width: 297, height: 52 }}>
-                                <Image src='/images/layout/logo-dark-xxl.svg' width='297' height='52' alt='RedHair market' />
-                            </div>
-                            <div className='is-hidden--xxxl-up is-hidden--xl-down' style={{ width: 256, height: 44 }}>
-                                <Image src='/images/layout/logo-dark-xl.svg' width='256' height='44' alt='RedHair market' />
-                            </div>
-                            <div className='is-hidden--xxl-up' style={{ width: 44, height: 44 }}>
-                                <Image src='/images/layout/logo-dark-lg.svg' width='44' height='44' alt='RedHair market' />
-                            </div>
-                        </div>
+                        </Link>
 
                         <div className={`${style.catalogBtn} btn btn--md btn--secondary`}>
                             <div className='btn__icon'>

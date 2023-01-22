@@ -28,6 +28,11 @@
     // }
 }
 
+.logo-dark,
+.logo-light {
+    cursor: pointer;
+}
+
 .ui-light .logo-dark {
     display: none;
 }

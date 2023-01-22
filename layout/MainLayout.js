@@ -1,4 +1,5 @@
 import Head from 'next/head'
+import Modal from '../components/Modal'
 import Footer from '../components/Footer'
 import Header from '../components/Header'
 import Popover from '../components/usefull/Popover'
@@ -15,6 +16,7 @@ export default function MainLayout({ children, title }) {
                 {children}
             </div>
             <Footer />
+            <Modal />
         </>
     )
 }

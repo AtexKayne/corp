@@ -3,12 +3,6 @@ export const product = {
         primary: 'System 4 Shale Oil Shampoo 4',
         secondary: 'Шампунь №4 для жирной кожи головы'
     },
-    art: 5414,
-    price: {
-        actual: 931,
-        old: 1299 // Can be empty
-    },
-    bonuses: 24,
     images: [
         { preview: '/images/product/image-0.jpg', full: '/images/product/image-0.jpg', gallery: '/images/product/image-0.jpg' },
         { preview: '/images/product/image-1.jpg', full: '/images/product/image-1.jpg', gallery: '/images/product/image-1.jpg' },
@@ -17,5 +11,65 @@ export const product = {
         { preview: '/images/product/image-4.jpg', full: '/images/product/image-4.jpg', gallery: '/images/product/image-4.jpg' },
         { preview: '/images/product/image-5.jpg', full: '/images/product/image-5.jpg', gallery: '/images/product/image-5.jpg' },
         { preview: '/images/product/image-6.jpg', full: '/images/product/image-6.jpg', gallery: '/images/product/image-6.jpg' }
+    ],
+    values: [
+        {
+            value: '100 мл',
+            price: {
+                actual: 931,
+                old: 1299 // Can be empty
+            },
+            bonuses: 24,
+            art: 5414,
+            link: '100',
+            max: 109,
+        },
+        {
+            value: '200 мл',
+            price: {
+                actual: 1931,
+            },
+            bonuses: 28,
+            art: 5415,
+            link: '200',
+            max: 880,
+            basket: 4,
+        },
+        {
+            value: '500 мл',
+            price: {
+                actual: 2931,
+                old: 1299 // Can be empty
+            },
+            bonuses: 30,
+            art: 5416,
+            link: '500',
+            max: 85,
+        },
+        {
+            value: '1000 мл',
+            price: {
+                actual: 6931,
+            },
+            bonuses: 74,
+            art: 5417,
+            link: '1000',
+            max: 0,
+        },
+    ],
+    color: { image: '/images/product/variants/image-3.jpg', name: '8/74', text: 'Светлый коричнево-красный блонд' }
+}
+
+export const productVariants = {
+    name: 'Brown Red /74, Brown Purple /75 & Brown Gold /73 Absolute',
+    items: [
+        { image: '/images/product/variants/image-1.jpg', name: '9/73', text: 'Темный очень светлый коричнево-золотистый блонд', link: 'test-1' },
+        { image: '/images/product/variants/image-2.jpg', name: '9/73', text: 'Темный очень светлый коричнево-золотистый блонд', link: 'test-2' },
+        { image: '/images/product/variants/image-3.jpg', name: '9/73', text: 'Темный очень светлый коричнево-золотистый блонд', link: 'test-3' },
+        { image: '/images/product/variants/image-4.jpg', name: '9/73', text: 'Темный очень светлый коричнево-золотистый блонд', link: 'test-4' },
+        { image: '/images/product/variants/image-5.jpg', name: '9/73', text: 'Темный очень светлый коричнево-золотистый блонд', link: 'test-5' },
+        { image: '/images/product/variants/image-6.jpg', name: '9/73', text: 'Темный очень светлый коричнево-золотистый блонд', link: 'test-6' },
+        { image: '/images/product/variants/image-7.jpg', name: '9/73', text: 'Темный очень светлый коричнево-золотистый блонд', link: 'test-7' },
     ]
+
 }

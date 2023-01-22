@@ -12,14 +12,37 @@ import Breadcrumbs from '../../components/Breadcrumbs'
 import BuyButton from '../../components/product/BuyButton'
 import Accordeon from '../../components/usefull/Accordeon'
 
-export default function Product({ detail }) {
+export default function Product({ detail = product }) {
     const [containerHeight, setContainerHeight] = useState(0)
+    const [isProfi, setIsProfi] = useState(true)
+    const [inBasket, setInBasket] = useState(0)
     const { isMobile } = useDeviceDetect()
-    const refStickyBlock = useRef(null)
     const refStickyContainer = useRef(null)
     const refContainerOffset = useRef(0)
+    const refStickyBlock = useRef(null)
     const refBlockWidth = useRef(null)
     const refFooterHeight = useRef(0)
+
+    const [activeValue, setActiveValue] = useState(detail.values[0])
+
+    const colorsHandler = () => {
+        globalState.modal.setIsOpen(true)
+        globalState.modal.setTemplate('colors')
+    }
+
+    useEffect(() => {
+        // console.log(detail.values)
+    }, [activeValue])
+
+    const updateBasket = () => {
+        const countInBasket = { current: 0 }
+        detail.values.forEach(value => {
+            if (!!value.basket) {
+                countInBasket.current = countInBasket.current + value.basket
+            }
+        })
+        globalState.basket.setBasketCount(countInBasket.current)
+    }
 
     // @TODO Rewrite this fckn shit
     useEffect(() => {
@@ -35,7 +58,7 @@ export default function Product({ detail }) {
         refContainerOffset.current = refStickyContainer.current.offsetTop
         refStickyBlock.current.style.width = refBlockWidth.current.clientWidth + 'px'
         const offsetSticky = 20
-        
+
         const scrollHandler = () => {
             if (window.innerWidth < globalState.sizes.lg) return
             const scrollPos = window.scrollY
@@ -68,6 +91,8 @@ export default function Product({ detail }) {
             }
         }
 
+        updateBasket()
+
         window.addEventListener('scroll', scrollHandler)
         window.addEventListener('resize', resizeHandler)
 
@@ -77,12 +102,10 @@ export default function Product({ detail }) {
         }
     }, [])
 
+    useEffect(() => {
+        updateBasket()
+    }, [inBasket])
 
-    const radioItems = [
-        { status: '', text: '100 мл' },
-        { status: '', text: '200 мл' },
-        { status: 'disabled', text: '500 мл' },
-    ]
 
     return (
         <MainLayout>
@@ -98,29 +121,61 @@ export default function Product({ detail }) {
                 <div ref={refBlockWidth} className='col col--xs-6 col--lg-5'>
                     <div ref={refStickyBlock} className={style.mainInfo}>
                         <div className={`${style.text0} text--normal text--upper mb-0.8`}>{product.names.secondary}</div>
-                        <h1 className={`${style.text1} text--regular mb-0.8`}>{product.names.primary}</h1>
-                        <div className='text--p4 text--color-small mb-1 mb-2:xxl'>Артикул: {product.art}</div>
+                        <h1
+                            onClick={() => setIsProfi(!isProfi)} // @TODO For testing
+                            className={`${style.text1} text--regular mb-0.8`}>{product.names.primary}</h1>
+                        <div className='text--p4 text--color-small mb-1 mb-2:xxl'>Артикул: {activeValue.art}</div>
                         <div className={`${style.price} is-hidden--md`}>
-                            <span className={`${style.text2} text--bold`}>{product.price.actual} ₽</span>
-                            <span className={`${style.text3} text--bold`}>{product.price.old} ₽</span>
+                            <span className={`${style.text2} text--bold`}>{activeValue.price.actual} ₽</span>
+                            {
+                                activeValue.price.old
+                                    ? <span className={`${style.text3} text--bold`}>{activeValue.price.old} ₽</span>
+                                    : null
+                            }
                         </div>
                         <div className='text--p6 text--upper mt-0.8:xxl mb-1 mb-2:xxl is-hidden--md'>
                             <span className='mr-0.5'>Вы получите</span>
-                            <span className='text--bold'>{product.bonuses} Red-бонуса</span>
+                            <span className='text--bold'>{activeValue.bonuses} Red-бонуса</span>
                         </div>
 
-                        <RadioButton items={radioItems} />
+                        {
+                            detail.color
+                                ? <div onClick={colorsHandler} className={`${style.color} mb-1.5`}>
+                                    <div className={style.colorImage}>
+                                        <Image src={detail.color.image} width='50' height='50' alt='' />
+                                    </div>
+                                    <div className='text--t3'>
+                                        <span className={`${style.colorName} text--bold`}>{detail.color.name}</span>
+                                        <span className={`${style.colorText} text--normal`}>{detail.color.text}</span>
+                                    </div>
+                                    <div className={`${style.colorArrow} text--bold`}>
+                                        <Icon name='chevronRight' width='20' height='20' />
+                                    </div>
+                                </div>
+                                : null
+                        }
+
+                        <RadioButton items={detail.values} setActiveValue={setActiveValue} />
 
                         <div className='mb-2' />
 
-                        <BuyButton>
+                        <BuyButton
+                            activeValue={activeValue}
+                            setInBasket={setInBasket}
+                            isProfi={isProfi}
+                            max={activeValue.max}>
                             <div className={`${style.price} text--h4`}>
-                                <span className={`${style.text2} text--bold`}>{product.price.actual} ₽</span>
-                                <span className={`${style.text2} text--bold`}>{product.price.old} ₽</span>
+                                <span className={`${style.text2} text--bold`}>{activeValue.price.actual} ₽</span>
+                                {
+                                    activeValue.price.old
+                                        ? <span className={`${style.text2} text--bold`}>{activeValue.price.old} ₽</span>
+                                        : null
+                                }
+
                             </div>
                             <div className='text--p6 text--upper mt-0.8 mt-0:md mt-0.8:lg'>
                                 <span className='mr-0.5'>Вы получите</span>
-                                <span className='text--bold'>{product.bonuses} Red-бонуса</span>
+                                <span className='text--bold'>{activeValue.bonuses} Red-бонуса</span>
                             </div>
                         </BuyButton>
 
@@ -219,19 +274,23 @@ export default function Product({ detail }) {
     )
 }
 
-function RadioButton({ items = [] }) {
+function RadioButton({ items = [], setActiveValue }) {
     if (!items.length) return null
     const [active, setActive] = useState(0)
+    const clickHandler = index => {
+        setActiveValue(items[index])
+        setActive(index)
+    }
 
     return (
         <div className={`${style.radio} text--p4`}>
             {items.map((item, index) => (
                 <div
-                    key={item.text}
-                    data-disabled={item.status}
-                    onClick={() => setActive(index)}
+                    key={item.link}
+                    data-disabled={item.max === 0}
+                    onClick={() => clickHandler(index)}
                     data-active={active === index}>
-                    {item.text}
+                    {item.value}
                 </div>
             ))}
         </div>

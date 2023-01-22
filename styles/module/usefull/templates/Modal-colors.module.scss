@@ -1,0 +1,41 @@
+@import "../../../mixins/helpers/media";
+
+.title {
+    text-align: center;
+
+    >span {
+        max-width: 190px;
+        display: inline-block;
+    }
+
+    @include media-breakpoint(md-up) {
+        text-align: left;
+        
+        >span {
+            display: inline;
+            max-width: none;
+        }
+    }
+}
+
+.variants {
+    flex-grow: 0;
+    display: flex;
+    flex-shrink: 0;
+    flex-direction: column;
+
+    >* {
+        margin-bottom: 4px;
+    }
+}
+
+.variant {
+    display: flex;
+    align-items: center;
+}
+
+.image {
+    min-width: 90px;
+    min-height: 90px;
+    margin-right: 8px;
+}

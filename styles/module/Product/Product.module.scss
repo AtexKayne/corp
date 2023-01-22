@@ -67,7 +67,7 @@
         border-radius: 4px;
         text-transform: uppercase;
 
-        &[data-disabled="disabled"] {
+        &[data-disabled="true"] {
             pointer-events: none;
             color: var(--c-_light-gray);
         }
@@ -79,6 +79,41 @@
         }
     }
 }
+
+.color {
+    display: flex;
+    cursor: pointer;
+    align-items: center;
+
+    
+    .colorImage {
+        width: 30px;
+        height: 30px;
+        flex-grow: 0;
+        flex-shrink: 0;
+        overflow: hidden;
+        margin-right: 8px;
+        border-radius: 50%;
+
+        img {
+            object-fit: none;
+        }
+    }
+
+    .colorName {
+        margin-right: 8px;
+    }
+
+    .colorText {
+        margin-right: 8px;
+    }
+    
+    .colorArrow {
+        max-height: 19px;
+        min-width: 20px;
+    }
+}
+
 
 
 .infoline {

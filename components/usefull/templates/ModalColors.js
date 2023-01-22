@@ -1,0 +1,40 @@
+import { useState, useEffect, useRef } from 'react'
+import { productVariants } from '../../helpers/constants'
+import style from '../../../styles/module/usefull/templates/Modal-colors.module.scss'
+import Link from 'next/link'
+
+export default function ModalColors() {
+    const [title, setTitle] = useState('')
+    const [variants, setVariants] = useState([])
+
+    useEffect(() => {
+        setTitle(productVariants.name)
+        setVariants(productVariants.items)
+    }, [])
+
+
+    return (
+        <div className='full-height'>
+            <div className={`${style.title} text--a4 text--bold pb-2`}>
+                <span>{title}</span>
+            </div>
+            <div className={style.variants}>
+                {
+                    variants.length
+                        ? variants.map(variant => (
+                            <Link key={variant.link} href={`/${variant.link}`}>
+                                <div className={style.variant}>
+                                    <img className={style.image} src={variant.image} width='90' height='90' alt='' />
+                                    <div className={style.text}>
+                                        <div className='text--bold text--t1 pb-0.5'>{variant.name}</div>
+                                        <div className='text--normal text--t5'>{variant.text}</div>
+                                    </div>
+                                </div>
+                            </Link>
+                        ))
+                        : null
+                }
+            </div>
+        </div>
+    )
+}
