@@ -14,6 +14,7 @@ import Accordeon from '../../components/usefull/Accordeon'
 
 export default function Product({ detail = product }) {
     const [containerHeight, setContainerHeight] = useState(0)
+    const [isEmpty, setIsEmpty] = useState(false)
     const [isProfi, setIsProfi] = useState(true)
     const [inBasket, setInBasket] = useState(0)
     const { isMobile } = useDeviceDetect()
@@ -129,7 +130,11 @@ export default function Product({ detail = product }) {
                         <h1
                             onClick={() => setIsProfi(!isProfi)} // @TODO For testing
                             className={`${style.text1} text--regular mb-0.8`}>{product.names.primary}</h1>
-                        <div className='text--p4 text--color-small mb-1 mb-2:xxl'>Артикул: {activeValue.art}</div>
+                        <div
+                            onClick={() => setIsEmpty(!isEmpty)} // @TODO For testing
+                            className='text--p4 text--color-small mb-1 mb-2:xxl'>
+                            Артикул: {activeValue.art}
+                        </div>
                         <div className={`${style.price} is-hidden--md`}>
                             <span className={`${style.text2} text--bold`}>{activeValue.price.actual} ₽</span>
                             {
@@ -175,6 +180,7 @@ export default function Product({ detail = product }) {
                             activeValue={activeValue}
                             setInBasket={setInBasket}
                             isProfi={isProfi}
+                            isEmpty={isEmpty}
                             max={activeValue.max}>
                             <div className={`${style.price} text--h4`}>
                                 <span className={`${style.text2} text--bold`}>{activeValue.price.actual} ₽</span>

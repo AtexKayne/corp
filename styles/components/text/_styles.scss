@@ -33,6 +33,7 @@ figure {
 .text--default { @extend %text--style-default; }
 .text--color-primary { color: color-use(primary); }
 .text--color-heading { color: color-use(heading); }
+.text--color-disabled { color: color-use(disabled); }
 .text--color-small { color: color-use(small); }
 .text--color-smaler { color: color-use(_light-gray); }
 .text--color-smallish { color: color-use(smallish); }

@@ -1,0 +1,44 @@
+@import "../../../mixins/helpers/media";
+
+.notification {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+}
+
+.image {
+    margin-top: 20px;
+    align-self: center;
+    margin-bottom: 20px;
+
+    @include media-breakpoint(md-up) {
+        margin-bottom: 50px;
+    }
+}
+
+.phoneInput {
+    border: 0;
+    width: 100%;
+    outline: none;
+    display: block;
+    font-size: 20px;
+    font-weight: 400;
+    padding-bottom: 12px;
+    color: var(--t-disabled);
+    border-bottom: 1px solid var(--t-disabled);
+
+    &::placeholder {
+        color: var(--t-disabled);
+    }
+}
+
+.btn {
+    margin-top: 40px;
+    min-height: 60px;
+    margin-bottom: 30px;
+
+    @include media-breakpoint(md-up) {
+        margin-bottom: 76px;
+    }
+}

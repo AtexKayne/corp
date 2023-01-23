@@ -4,7 +4,7 @@ import { globalState } from '../helpers/globalState'
 import { motion, useAnimationControls } from 'framer-motion'
 import style from '../../styles/module/Product/Product-buy-button.module.scss'
 
-export default function BuyButton({ children, max, activeValue, isProfi, setInBasket }) {
+export default function BuyButton({ children, max, activeValue, isProfi, isEmpty, setInBasket }) {
     const [isFavourite, setIsFavourite] = useState(false)
     const [isSelected, setIsSelected] = useState(false)
     const [isShaked, setIsShaked] = useState(false)
@@ -95,6 +95,11 @@ export default function BuyButton({ children, max, activeValue, isProfi, setInBa
         // console.log(globalState);
     }
 
+    const notificationClickHandler = () => {
+        globalState.modal.setIsOpen(true)
+        globalState.modal.setTemplate('notification')
+    }
+
     useEffect(() => {
         if (refValuesUpdate.current || isProfi) return
 
@@ -178,7 +183,7 @@ export default function BuyButton({ children, max, activeValue, isProfi, setInBa
                 <Icon name='heartFill' width='18' height='16' />
             </div>
             {
-                !isProfi
+                !isProfi && !isEmpty
                     ? <div className={style.btnWrapper}>
                         <div onClick={buyHandler} data-open={isOpen} className={`${style.btnMain} btn btn--md btn--primary`}>
                             <span className='text--upper text--p5 text--bold mr-0.8'>
@@ -226,14 +231,26 @@ export default function BuyButton({ children, max, activeValue, isProfi, setInBa
                                 </span>
                             </div>
                         </div>
-                    </div>
-                    : <div className={style.btnWrapper}>
+                    </div> : null
+            }
+
+            {
+                isProfi && !isEmpty
+                    ? <div className={style.btnWrapper}>
                         <div onClick={profiClickHandler} className={`${style.btnMain} btn btn--md btn--primary`}>
                             <span className='text--upper text--p5 text--bold mr-0.8'>ДЛЯ ПРОФессионалов</span>
                         </div>
-                    </div>
+                    </div> : null
             }
 
+            {
+                isEmpty
+                    ? <div className={style.btnWrapper}>
+                        <div onClick={notificationClickHandler} className={`${style.btnMain} btn btn--md btn--yellow`}>
+                            <span className='text--upper text--p5 text--bold mr-0.8'>Сообщить</span>
+                        </div>
+                    </div> : null
+            }
         </div>
     )
 }
