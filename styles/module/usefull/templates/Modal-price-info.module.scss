@@ -4,16 +4,25 @@
 .info {
     padding-top: 20px;
     text-align: center;
+
+    @include media-breakpoint(sm-down) {
+        padding-top: 0;
+
+        .icon {
+            width: 120px!important;
+            height: 120px!important;
+        }
+    }
 }
 
 .title {
-    padding-bottom: 24px;
-
     @include text--size((
-        xs:   $text-a3,
-        md:   $text-a3,
-        lg:   $text-a2,
+        xs: $text-a3,
+        md: $text-a3,
+        lg: $text-a2,
     ));
+    line-height: 26px;
+    padding-bottom: 24px;
 }
 
 .text {
@@ -22,7 +31,11 @@
 
 .text2 {
     padding-top: 24px;
-    padding-bottom: 48px;
+    padding-bottom: 30px;
+
+    @include media-breakpoint(md-up) {
+        padding-bottom: 48px;
+    }
 }
 
 .btn {

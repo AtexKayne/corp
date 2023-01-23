@@ -119,7 +119,8 @@
         transform: rotate(-90deg);
 
         img {
-            object-fit: none;
+            object-fit: cover;
+            transform: scale(2.5);
         }
     }
 

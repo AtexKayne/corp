@@ -6,7 +6,7 @@ export default function ModalPriceInfo() {
 
     return (
         <div className={`${style.info} full-height`}>
-            <Icon name='infoImage' width='200' height='200' external='is-hidden--md is-hidden--lg' />
+            <Icon name='infoImage' width='200' height='200' external={`${style.icon} is-hidden--md is-hidden--lg`} />
             <div className={`${style.title} text--bold px-2:xl`}>
                 Получите доступ к оптовым ценам!
             </div>
@@ -17,13 +17,13 @@ export default function ModalPriceInfo() {
             <div className={`${style.text2} text--p4 text--normal`}>
                 Подтвердите ваш статус профессионала!
             </div>
-            <div className={`${style.btn} btn btn--md btn--fill btn--primary mb-1.5`}>
+            <div className={`${style.btn} btn btn--md btn--fill btn--primary mb-0.8 mb-1.5:md`}>
                 <span className='text--upper text--p6 text--bold'>У меня есть инвайт-код</span>
             </div>
-            <div className={`${style.btn} btn btn--md btn--fill btn--shadow mb-1.5`}>
+            <div className={`${style.btn} btn btn--md btn--fill btn--shadow mb-0.8 mb-1.5:md`}>
                 <span className='text--upper text--p6 text--bold'>заполнить форму в телеграм-боте</span>
             </div>
-            <div className={`${style.or} text--p5 text--upper mb-1`}>
+            <div className={`${style.or} text--p5 text--upper mb-0.8 mb-1:md`}>
                 или
             </div>
             <a href='#' className='link d-block text--bold text--upper text--p6 text--color-primary'>
