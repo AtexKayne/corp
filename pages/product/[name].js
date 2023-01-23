@@ -30,6 +30,11 @@ export default function Product({ detail = product }) {
         globalState.modal.setTemplate('colors')
     }
 
+    const infoHandler = () => {
+        globalState.modal.setIsOpen(true)
+        globalState.modal.setTemplate('priceInfo')
+    }
+
     useEffect(() => {
         // console.log(detail.values)
     }, [activeValue])
@@ -129,7 +134,14 @@ export default function Product({ detail = product }) {
                             <span className={`${style.text2} text--bold`}>{activeValue.price.actual} ₽</span>
                             {
                                 activeValue.price.old
-                                    ? <span className={`${style.text3} text--bold`}>{activeValue.price.old} ₽</span>
+                                    ? <span className={`${style.text3} ${style.priceOld} text--bold`}>{activeValue.price.old} ₽</span>
+                                    : null
+                            }
+                            {
+                                !isProfi
+                                    ? <span onClick={infoHandler} className={`${style.priceIcon} is-hiden--md`}>
+                                        <Icon name='info' width='18' height='18' />
+                                    </span>
                                     : null
                             }
                         </div>
@@ -168,10 +180,16 @@ export default function Product({ detail = product }) {
                                 <span className={`${style.text2} text--bold`}>{activeValue.price.actual} ₽</span>
                                 {
                                     activeValue.price.old
-                                        ? <span className={`${style.text2} text--bold`}>{activeValue.price.old} ₽</span>
+                                        ? <span className={`${style.text2} ${style.priceOld} text--bold`}>{activeValue.price.old} ₽</span>
                                         : null
                                 }
-
+                                {
+                                    !isProfi
+                                        ? <span onClick={infoHandler} className={`${style.priceIcon} is-hiden--md`}>
+                                            <Icon name='info' width='18' height='18' />
+                                        </span>
+                                        : null
+                                }
                             </div>
                             <div className='text--p6 text--upper mt-0.8 mt-0:md mt-0.8:lg'>
                                 <span className='mr-0.5'>Вы получите</span>

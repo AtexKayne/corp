@@ -1,8 +1,21 @@
 import Icon from './Icon'
 import Image from 'next/image'
+import { useEffect } from 'react'
+import { globalState } from './helpers/globalState'
 import style from '../styles/module/Footer.module.scss'
+import useDeviceDetect from '/components/helpers/useDeviceDetect'
 
 export default function Footer() {
+    const { isMobile } = useDeviceDetect()
+
+    useEffect(() => {
+        if (isMobile) {
+            globalState.body.addClass('is-mobile')
+        } else {
+            globalState.body.removeClass('is-mobile')
+        }
+    }, [isMobile])
+
     return (
         <footer className={style.footer}>
             <div className={`container ${style.container}`}>

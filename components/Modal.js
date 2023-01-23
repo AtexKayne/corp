@@ -87,6 +87,7 @@ function LoadTemplate({ name }) {
         const dynamicComponents = {
             profi: dynamic(() => import('./usefull/templates/ModalProfi'), { ssr: false }),
             colors: dynamic(() => import('./usefull/templates/ModalColors'), { ssr: false }),
+            priceInfo: dynamic(() => import('./usefull/templates/ModalPriceInfo'), { ssr: false }),
         }
         setLoadedTemplate(dynamicComponents[templateName])
     }

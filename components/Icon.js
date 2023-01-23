@@ -34,6 +34,9 @@ export default function Icon({ name, external = '', width = 16, height = 16, siz
             plus: dynamic(() => import('../public/icons/icon-plus.svg'), { ssr: false }),
             minus: dynamic(() => import('../public/icons/icon-dash.svg'), { ssr: false }),
             check: dynamic(() => import('../public/icons/icon-check.svg'), { ssr: false }),
+            info: dynamic(() => import('../public/icons/icon-info.svg'), { ssr: false }),
+            infoImage: dynamic(() => import('../public/icons/icon-info-image.svg'), { ssr: false }),
+            starM: dynamic(() => import('../public/icons/icon-star-m.svg'), { ssr: false }),
         }
         const Component = dynamicComponents[iconName]
         setLoadedIcon(Component)

@@ -1,0 +1,52 @@
+@import "../../../mixins/helpers/media";
+@import "../../../extends/_text-sizes";
+
+.info {
+    padding-top: 20px;
+    text-align: center;
+}
+
+.title {
+    padding-bottom: 24px;
+
+    @include text--size((
+        xs:   $text-a3,
+        md:   $text-a3,
+        lg:   $text-a2,
+    ));
+}
+
+.text {
+    padding-bottom: 24px;
+}
+
+.text2 {
+    padding-top: 24px;
+    padding-bottom: 48px;
+}
+
+.or {
+    position: relative;
+    display: inline-block;
+
+    &::after,
+    &::before {
+        top: 0.5em;
+        content: '';
+        height: 3px;
+        width: 105px;
+        position: absolute;
+        background-color: var(--t-text);
+    }
+
+    &::after {
+        left: 40px;
+        clip-path: polygon(100% 50%, 0 80%, 0 20%);
+
+    }
+
+    &::before {
+        right: 40px;
+        clip-path: polygon(0 50%, 100% 80%, 100% 20%);
+    }
+}
