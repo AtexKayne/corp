@@ -21,6 +21,7 @@ export default function Product({ detail = product }) {
     const refStickyContainer = useRef(null)
     const refContainerOffset = useRef(0)
     const refStickyBlock = useRef(null)
+    const refStickyBlockHeight = useRef(null)
     const refBlockWidth = useRef(null)
     const refFooterHeight = useRef(0)
 
@@ -69,6 +70,7 @@ export default function Product({ detail = product }) {
     }, [containerHeight])
 
     useEffect(() => {
+        refStickyBlockHeight.current = refStickyBlock.current.clientHeight
         refContainerOffset.current = refStickyContainer.current.offsetTop
         refStickyBlock.current.style.width = refBlockWidth.current.clientWidth + 'px'
         const offsetSticky = 20
@@ -77,12 +79,12 @@ export default function Product({ detail = product }) {
             if (window.innerWidth < globalState.sizes.lg) return
             const scrollPos = window.scrollY
             const isScrolledDown = scrollPos > refContainerOffset.current - offsetSticky
-            const isScrolledContainer = refStickyContainer.current.getBoundingClientRect().bottom > refFooterHeight.current + offsetSticky
+            const isScrolledContainer = refStickyContainer.current.clientHeight + refContainerOffset.current - scrollPos > refStickyBlockHeight.current
             if (isScrolledDown && isScrolledContainer) {
                 refStickyBlock.current.style.position = 'fixed'
                 refStickyBlock.current.style.top = `${offsetSticky}px`
             } else if (!isScrolledDown && isScrolledContainer) {
-                refStickyBlock.current.style.position = 'relative'
+                refStickyBlock.current.style.position = 'absolute'
                 refStickyBlock.current.style.top = ''
                 refStickyBlock.current.style.bottom = ''
             } else if (isScrolledDown && !isScrolledContainer) {
@@ -102,6 +104,7 @@ export default function Product({ detail = product }) {
                 refContainerOffset.current = refStickyContainer.current.offsetTop
                 refFooterHeight.current = document.querySelector('footer').clientHeight
                 refStickyBlock.current.style.width = (refBlockWidth.current.clientWidth - margin) + 'px'
+                refStickyBlockHeight.current = refStickyBlock.current.clientHeight
             }
         }
 

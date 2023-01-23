@@ -166,16 +166,18 @@ export default function Gallery({ images = [], alt = '' }) {
         const imageListArr = Array.from(imageList)
         const observers = []
         const observeHandler = entries => {
-            if (!modalOpen) return
+            // if (!modalOpen) return
             const entry = entries[0]
+            console.log(entry.isIntersecting);
             if (entry.isIntersecting) {
                 const index = imageListArr.indexOf(entry.target)
+                console.log(index);
                 setActiveImage(images[index].gallery)
             }
         }
 
         imageList.forEach(image => {
-            const observer = new IntersectionObserver(observeHandler, { threshold: 1 });
+            const observer = new IntersectionObserver(observeHandler, { threshold: 0.5 });
             observer.observe(image)
             observers.push(observer)
         })
