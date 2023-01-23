@@ -42,12 +42,13 @@
 
     &::before {
         top: -50px;
+        z-index: 1;
         left: -50px;
         content: '';
         right: -50px;
         bottom: -120px;
-        z-index: 1;
         position: absolute;
+        pointer-events: none;
     }
 
     >* {

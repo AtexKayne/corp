@@ -127,6 +127,7 @@ export default function Gallery({ images = [], alt = '' }) {
 
         const resizeHandler = () => {
             const windowWidth = window.innerWidth
+            if (windowWidth < globalState.sizes.sm) return
             if (windowWidth >= globalState.sizes.xxxl) {
                 refGallery.current.style.left = '0'
                 refGallery.current.style.width = '100%'
