@@ -112,7 +112,7 @@ export default function Gallery({ images = [], alt = '' }) {
         const rect = refGallery.current.getBoundingClientRect()
         refGalleryOffset.current = rect.x
         const windowInnerWidth = window.innerWidth
-        if (windowInnerWidth < globalState.sizes.xxxl) {
+        if (windowInnerWidth < globalState.sizes.xxxl && windowInnerWidth >= globalState.sizes.sm) {
             refGallery.current.style.left = `${-refGalleryOffset.current}px`
             refGallery.current.style.width = `calc(100% + ${refGalleryOffset.current}px)`
         }
