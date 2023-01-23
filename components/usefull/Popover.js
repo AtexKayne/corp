@@ -74,7 +74,7 @@ export default function Popover() {
         }).then(item => {
             setTimeout(() => {
                 item.remove()
-                refCount.current--
+                if (refCount.current - 1 >= 0) refCount.current--
             }, 200)
         })
     }
@@ -84,7 +84,7 @@ export default function Popover() {
         element.setAttribute('data-active', false)
         setTimeout(() => {
             element.remove()
-            refCount.current--
+            if (refCount.current - 1 >= 0) refCount.current--
         }, 200)
     }
 
@@ -95,6 +95,7 @@ export default function Popover() {
 
             refCount.current++
             const item = refPopover.current.appendChild(getLayout())
+            console.log(refCount.current);
             item.setAttribute('data-active', true)
 
             removeItem(item)
