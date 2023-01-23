@@ -14,6 +14,7 @@ import BuyButton from '../../components/product/BuyButton'
 import Accordeon from '../../components/usefull/Accordeon'
 
 export default function Product({ detail = product }) {
+    const [currentImages, setCurrentImages] = useState(detail.images)
     const [containerHeight, setContainerHeight] = useState(0)
     const [isProfi, setIsProfi] = useState(true)
     const [inBasket, setInBasket] = useState(0)
@@ -46,7 +47,11 @@ export default function Product({ detail = product }) {
     }
 
     useEffect(() => {
-        // console.log(detail.values)
+        window.scrollTo({
+            top: 0,
+            behavior: 'smooth'
+        })
+        // setCurrentImages([...currentImages.reverse()])
     }, [activeValue])
 
     const updateBasket = () => {
@@ -133,7 +138,7 @@ export default function Product({ detail = product }) {
 
             <div ref={refStickyContainer} className='row p-relative'>
                 <div className='col col--xs-6 col--lg-7'>
-                    <Gallery images={product.images} alt={product.names.primary} />
+                    <Gallery images={currentImages} alt={product.names.primary} />
 
                     <div className='pt-0 pt-3:lg' />
                 </div>

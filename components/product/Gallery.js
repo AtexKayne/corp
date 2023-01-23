@@ -17,6 +17,7 @@ export default function Gallery({ images = [], alt = '' }) {
     const animateDrag = useAnimationControls()
     const refPreviewPosition = useRef(0)
     const refGalleryOffset = useRef(0)
+    const refModalOpen = useRef(false)
     const refGallery = useRef(null)
     const refModal = useRef(null)
 
@@ -56,11 +57,13 @@ export default function Gallery({ images = [], alt = '' }) {
 
     const openModal = () => {
         setModalOpen(true)
+        refModalOpen.current = true
         globalState.body.toggleClass('overflow-hidden')
     }
 
     const modalClose = () => {
         setModalOpen(false)
+        refModalOpen.current = false
         globalState.body.toggleClass('overflow-hidden')
     }
 
@@ -109,6 +112,7 @@ export default function Gallery({ images = [], alt = '' }) {
 
     useEffect(() => {
         // Gallery settings
+        // setActiveImage(images[0].gallery)
         const rect = refGallery.current.getBoundingClientRect()
         refGalleryOffset.current = rect.x
         const windowInnerWidth = window.innerWidth
@@ -166,12 +170,10 @@ export default function Gallery({ images = [], alt = '' }) {
         const imageListArr = Array.from(imageList)
         const observers = []
         const observeHandler = entries => {
-            // if (!modalOpen) return
+            if (!refModalOpen.current) return
             const entry = entries[0]
-            console.log(entry.isIntersecting);
             if (entry.isIntersecting) {
                 const index = imageListArr.indexOf(entry.target)
-                console.log(index);
                 setActiveImage(images[index].gallery)
             }
         }
@@ -197,8 +199,6 @@ export default function Gallery({ images = [], alt = '' }) {
         if (condition <= -4) slidePreview('down')
         else if (condition > 0) slidePreview('reset')
     }, [activeImage])
-
-
 
     return (
         <>
