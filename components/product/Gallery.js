@@ -1,5 +1,6 @@
 import Image from 'next/image'
 import Icon from '../../components/Icon'
+import { debounce } from '../helpers/debounce'
 import { useState, useEffect, useRef } from 'react'
 import { globalState } from '../helpers/globalState'
 import { motion, useAnimationControls } from 'framer-motion'
@@ -155,7 +156,9 @@ export default function Gallery({ images = [], alt = '' }) {
             animatePreview.start({ y: 0, transition: { duration: 0 } })
         }
 
-        window.addEventListener('resize', resizeHandler)
+        const debounceResize = debounce(resizeHandler, 40)
+
+        window.addEventListener('resize', debounceResize)
 
         // Modal settings
         const imageList = refModal.current.querySelectorAll(`.${style.imageModal}`)
@@ -168,7 +171,6 @@ export default function Gallery({ images = [], alt = '' }) {
                 const index = imageListArr.indexOf(entry.target)
                 setActiveImage(images[index].gallery)
             }
-
         }
 
         imageList.forEach(image => {
@@ -181,7 +183,7 @@ export default function Gallery({ images = [], alt = '' }) {
             if (observers.length) {
                 observers.forEach(observer => observer.disconnect())
             }
-            window.removeEventListener('resize', resizeHandler)
+            window.removeEventListener('resize', debounceResize)
         }
     }, [])
 

@@ -1,7 +1,8 @@
 import { useState, useEffect, useRef } from 'react'
 import { product } from '../../components/helpers/constants'
-import style from '../../styles/module/Product/Product.module.scss'
+import { debounce } from '../../components/helpers/debounce'
 import { globalState } from '../../components/helpers/globalState'
+import style from '../../styles/module/Product/Product.module.scss'
 import useDeviceDetect from '../../components/helpers/useDeviceDetect'
 
 import Image from 'next/image'
@@ -104,14 +105,17 @@ export default function Product({ detail = product }) {
             }
         }
 
+        const debounceScroll = debounce(scrollHandler, 10)
+        const debounceResize = debounce(resizeHandler, 40)
+
         updateBasket()
 
-        window.addEventListener('scroll', scrollHandler)
-        window.addEventListener('resize', resizeHandler)
+        window.addEventListener('scroll', debounceScroll)
+        window.addEventListener('resize', debounceResize)
 
         return () => {
-            window.removeEventListener('scroll', scrollHandler)
-            window.removeEventListener('resize', resizeHandler)
+            window.removeEventListener('scroll', debounceScroll)
+            window.removeEventListener('resize', debounceResize)
         }
     }, [])
 
@@ -136,10 +140,8 @@ export default function Product({ detail = product }) {
                         <div className={`${style.text0} text--normal text--upper mb-0.8`}>{product.names.secondary}</div>
                         <h1
                             onClick={() => setIsProfi(!isProfi)} // @TODO For testing
-                            className={`${style.text1} text--regular mb-0.8`}>{product.names.primary}</h1>
-                        <div className='text--p4 text--color-small mb-1 mb-2:xxl'>
-                            Артикул: {activeValue.art}
-                        </div>
+                            className={`${style.text1} text--regular mb-1 mb-2:xxl`}>{product.names.primary}
+                        </h1>
                         <div className={`${style.price} is-hidden--md`}>
                             <span className={`${style.text2} text--bold`}>{activeValue.price.actual} ₽</span>
                             {
@@ -178,6 +180,10 @@ export default function Product({ detail = product }) {
                         }
 
                         <RadioButton items={detail.values} setActiveValue={setActiveValue} />
+
+                        <div className='text--p4 text--color-small mt-0.5 mb-1 mb-2:xxl'>
+                            Артикул: {activeValue.art}
+                        </div>
 
                         <div className='mb-2' />
 

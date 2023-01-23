@@ -7,7 +7,7 @@ export default function ModalProfi() {
     }
 
     return (
-        <div className={style.profi}>
+        <div className={`${style.profi}`}>
             <div className={`${style.title} text--a3 text--bold pt-2 pb-0.5`}>Для профессионалов</div>
             <div className='text--p4 text--normal pt-1 pb-1'>
                 Этот товар мы продаём только парикмахерам, барберам, колористам и другим специалистам.

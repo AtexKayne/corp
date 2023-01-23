@@ -1,3 +1,4 @@
+import { debounce } from '../helpers/debounce'
 import { useState, useEffect, useRef } from 'react'
 import { globalState } from '../helpers/globalState'
 import style from '../../styles/module/usefull/Accordeon.module.scss'
@@ -20,11 +21,13 @@ export default function Accordeon({ children, title, open = false, updateHeight 
             const newHeight = isOpen ? refContainerHeight.current : refTitle.current.offsetHeight
             refAccordeon.current.style.height = `${newHeight}px`
         }
+        
+        const debounceResize = debounce(resizeHandler, 60)
 
-        window.addEventListener('resize', resizeHandler)
+        window.addEventListener('resize', debounceResize)
 
         return () => {
-            window.removeEventListener('resize', resizeHandler)
+            window.removeEventListener('resize', debounceResize)
         }
     }, [])
 

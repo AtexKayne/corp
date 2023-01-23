@@ -7,5 +7,5 @@ export const globalState = {
         xl: 1024,
         xxl: 1256,
         xxxl: 1600
-    }
+    },
 }
