@@ -44,6 +44,7 @@
         cursor: pointer;
         transition: .3s;
         margin-left: 12px;
+        color: var(--t-disabled);
         
         &:hover {
             color: var(--t-primary);

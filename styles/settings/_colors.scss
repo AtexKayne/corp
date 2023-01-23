@@ -65,6 +65,7 @@ $color-themes: (
         text-invert:   color-use(_white),
         active-link:   color-use(_red),
         light:         color-use(_light),
+        disabled:      color-use(_disabled),
     ),
 
     // "Dark" theme

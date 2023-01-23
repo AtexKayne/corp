@@ -17,11 +17,11 @@ export default function ModalPriceInfo() {
             <div className={`${style.text2} text--p4 text--normal`}>
                 Подтвердите ваш статус профессионала!
             </div>
-            <div className={`btn btn--md btn--fill btn--primary mb-1.5`}>
-                <span className='text--upper text--p5 text--bold'>У меня есть инвайт-код</span>
+            <div className={`${style.btn} btn btn--md btn--fill btn--primary mb-1.5`}>
+                <span className='text--upper text--p6 text--bold'>У меня есть инвайт-код</span>
             </div>
-            <div className={`btn btn--md btn--fill btn--shadow mb-1.5`}>
-                <span className='text--upper text--p5 text--bold'>заполнить форму в телеграм-боте</span>
+            <div className={`${style.btn} btn btn--md btn--fill btn--shadow mb-1.5`}>
+                <span className='text--upper text--p6 text--bold'>заполнить форму в телеграм-боте</span>
             </div>
             <div className={`${style.or} text--p5 text--upper mb-1`}>
                 или

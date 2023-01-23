@@ -63,13 +63,13 @@ export const product = {
 export const productVariants = {
     name: 'Brown Red /74, Brown Purple /75 & Brown Gold /73 Absolute',
     items: [
-        { image: '/images/product/variants/image-1.jpg', name: '9/73', text: 'Темный очень светлый коричнево-золотистый блонд', link: 'test-1' },
-        { image: '/images/product/variants/image-2.jpg', name: '9/73', text: 'Темный очень светлый коричнево-золотистый блонд', link: 'test-2' },
-        { image: '/images/product/variants/image-3.jpg', name: '9/73', text: 'Темный очень светлый коричнево-золотистый блонд', link: 'test-3' },
-        { image: '/images/product/variants/image-4.jpg', name: '9/73', text: 'Темный очень светлый коричнево-золотистый блонд', link: 'test-4' },
-        { image: '/images/product/variants/image-5.jpg', name: '9/73', text: 'Темный очень светлый коричнево-золотистый блонд', link: 'test-5' },
-        { image: '/images/product/variants/image-6.jpg', name: '9/73', text: 'Темный очень светлый коричнево-золотистый блонд', link: 'test-6' },
-        { image: '/images/product/variants/image-7.jpg', name: '9/73', text: 'Темный очень светлый коричнево-золотистый блонд', link: 'test-7' },
+        { image: '/images/product/variants/image-1.jpg', name: '9/73', text: 'Темный очень светлый коричнево-золотистый блонд', link: 'test-1', status: 'current' },
+        { image: '/images/product/variants/image-2.jpg', name: '9/73', text: 'Темный очень светлый коричнево-золотистый блонд', link: 'test-2', status: 'disable' },
+        { image: '/images/product/variants/image-3.jpg', name: '9/73', text: 'Темный очень светлый коричнево-золотистый блонд', link: 'test-3', status: 'default' },
+        { image: '/images/product/variants/image-4.jpg', name: '9/73', text: 'Темный очень светлый коричнево-золотистый блонд', link: 'test-4', status: 'default' },
+        { image: '/images/product/variants/image-5.jpg', name: '9/73', text: 'Темный очень светлый коричнево-золотистый блонд', link: 'test-5', status: 'default' },
+        { image: '/images/product/variants/image-6.jpg', name: '9/73', text: 'Темный очень светлый коричнево-золотистый блонд', link: 'test-6', status: 'default' },
+        { image: '/images/product/variants/image-7.jpg', name: '9/73', text: 'Темный очень светлый коричнево-золотистый блонд', link: 'test-7', status: 'default' },
     ]
 
 }

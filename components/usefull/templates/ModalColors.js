@@ -23,11 +23,11 @@ export default function ModalColors() {
                     variants.length
                         ? variants.map(variant => (
                             <Link key={variant.link} href={`/${variant.link}`}>
-                                <div className={style.variant}>
+                                <div data-status={variant.status} className={style.variant}>
                                     <img className={style.image} src={variant.image} width='90' height='90' alt='' />
                                     <div className={style.text}>
                                         <div className='text--bold text--t1 pb-0.5'>{variant.name}</div>
-                                        <div className='text--normal text--t5'>{variant.text}</div>
+                                        <div className={`${variant.status !== 'current' ? 'text--normal' : ''} text--t5`}>{variant.text}</div>
                                     </div>
                                 </div>
                             </Link>
