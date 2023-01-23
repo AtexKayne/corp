@@ -1,4 +1,5 @@
 import { useState, useEffect, useRef } from 'react'
+import { globalState } from '../helpers/globalState'
 import style from '../../styles/module/usefull/Accordeon.module.scss'
 
 export default function Accordeon({ children, title, open = false, updateHeight = false }) {
@@ -14,6 +15,7 @@ export default function Accordeon({ children, title, open = false, updateHeight 
         refAccordeon.current.style.height = `${newHeight}px`
 
         const resizeHandler = () => {
+            if (window.innerWidth < globalState.sizes.md) return
             refContainerHeight.current = refChildrenContainer.current.clientHeight + refTitle.current.offsetHeight
             const newHeight = isOpen ? refContainerHeight.current : refTitle.current.offsetHeight
             refAccordeon.current.style.height = `${newHeight}px`

@@ -20,6 +20,7 @@
 
     @include media-breakpoint(sm-down) {
         margin-bottom: 0;
+        min-height: 382px;
     }
 }
 
@@ -126,6 +127,10 @@
         xxxl: 88px,
     ));
 
+    &:hover {
+        color: var(--t-primary);
+    }
+
     &[data-disabled="true"] {
         filter: opacity(0.4);
         pointer-events: none;
@@ -149,12 +154,17 @@
     width: 100vw;
     cursor: pointer;
     overflow: hidden;
+    max-height: 382px;
     position: absolute;
     transform: none!important;
     background-color: white;
 
     img {
         object-fit: cover;
+    }
+
+    @include media-breakpoint(md-up) {
+        max-height: none;
     }
 
     @include media-breakpoint(lg-up) {
@@ -330,14 +340,19 @@
 }
 
 .closeBtn {
+    transition: .3s;
     position: relative;
 
+    &:hover {
+        color: var(--t-primary);
+    }
+
     &::before {
-        top: -20px;
-        left: -20px;
-        content: '';
-        right: -20px;
-        bottom: -20px;
+        top: -10px;
+        left: -10px;
+        content: "";
+        right: -10px;
+        bottom: -10px;
         position: absolute;
     }
 }

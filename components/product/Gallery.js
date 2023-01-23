@@ -66,6 +66,11 @@ export default function Gallery({ images = [], alt = '' }) {
     const nextHandler = () => {
         const index = images.findIndex(image => image.gallery === activeImage)
         const nextImageObj = images[index + 1]
+        if (!nextImageObj) {
+            const index = images.findIndex(image => image.gallery === activeImage)
+            animateDrag.start({ x: window.innerWidth * index * -1, transition: { duration: 0.1 } })
+            return
+        }
         const nextImage = nextImageObj ? nextImageObj.gallery : images[0].gallery
         const scrollIndex = nextImageObj ? index + 1 : 0
         setActiveImage(nextImage)
@@ -75,6 +80,11 @@ export default function Gallery({ images = [], alt = '' }) {
     const prevHandler = () => {
         const index = images.findIndex(image => image.gallery === activeImage)
         const nextImageObj = images[index - 1]
+        if (!nextImageObj) {
+            const index = images.findIndex(image => image.gallery === activeImage)
+            animateDrag.start({ x: window.innerWidth * index * -1, transition: { duration: 0.1 } })
+            return
+        }
         const nextImage = nextImageObj ? nextImageObj.gallery : images[images.length - 1].gallery
         const scrollIndex = nextImageObj ? index - 1 : images.length - 1
         setActiveImage(nextImage)
@@ -152,6 +162,7 @@ export default function Gallery({ images = [], alt = '' }) {
         const imageListArr = Array.from(imageList)
         const observers = []
         const observeHandler = entries => {
+            if (!modalOpen) return
             const entry = entries[0]
             if (entry.isIntersecting) {
                 const index = imageListArr.indexOf(entry.target)

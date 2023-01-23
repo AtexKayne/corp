@@ -15,7 +15,7 @@ export default function Breadcrumbs() {
                 left: scrollWidth,
                 behavior: 'smooth'
             })
-        }, 2000);
+        }, 1000);
     }, [])
 
 

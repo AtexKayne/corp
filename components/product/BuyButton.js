@@ -4,11 +4,12 @@ import { globalState } from '../helpers/globalState'
 import { motion, useAnimationControls } from 'framer-motion'
 import style from '../../styles/module/Product/Product-buy-button.module.scss'
 
-export default function BuyButton({ children, max, activeValue, isProfi, isEmpty, setInBasket }) {
+export default function BuyButton({ children, max, activeValue, isProfi, setInBasket }) {
     const [isFavourite, setIsFavourite] = useState(false)
     const [isSelected, setIsSelected] = useState(false)
     const [isShaked, setIsShaked] = useState(false)
     const [diabled, setDiabled] = useState(false)
+    const [isEmpty, setIsEmpty] = useState(false)
     const [isOpen, setIsOpen] = useState(false)
     const [count, setCount] = useState(0)
 
@@ -52,13 +53,17 @@ export default function BuyButton({ children, max, activeValue, isProfi, isEmpty
         setTimeout(() => {
             refInput.current.focus()
             document.addEventListener('click', documentClick)
-        }, 100);
+        }, 100)
     }
 
     const updateCount = async increment => {
         const newValue = +count + increment
-        await animateCount.start({ y: -40, transition: { duration: 0.1 } })
-        await animateCount.start({ y: 40, transition: { duration: 0 } })
+        if (newValue) {
+            const strValue = '' + newValue
+            const pos = increment + 1 ? -40 : 40
+            await animateCount.start({ y: pos, width: `${strValue.length * 5 + 8}px`, transition: { duration: 0.3, ease: 'anticipate' } })
+            await animateCount.start({ y: pos * - 1, transition: { duration: 0 } })
+        }
         setCount(newValue)
         animateCount.start({ y: 0, transition: { duration: 0.1 } })
     }
@@ -89,10 +94,13 @@ export default function BuyButton({ children, max, activeValue, isProfi, isEmpty
         if (!!value) setCount(value)
     }
 
+    const keyDownHandler = event => {
+        if (event.keyCode === 13) document.body.click()
+    }
+
     const profiClickHandler = () => {
         globalState.modal.setIsOpen(true)
         globalState.modal.setTemplate('profi')
-        // console.log(globalState);
     }
 
     const notificationClickHandler = () => {
@@ -101,7 +109,7 @@ export default function BuyButton({ children, max, activeValue, isProfi, isEmpty
     }
 
     useEffect(() => {
-        if (refValuesUpdate.current || isProfi) return
+        if (refValuesUpdate.current || isProfi || isEmpty) return
 
         if (count <= 0) {
             setDiabled('minus')
@@ -135,7 +143,7 @@ export default function BuyButton({ children, max, activeValue, isProfi, isEmpty
     }, [count])
 
     useEffect(() => {
-        if (isProfi) return
+        // if (isProfi || isEmpty) return
         const target = document.querySelector('footer')
         const callback = entries => {
             if (window.innerWidth < globalState.sizes.lg) {
@@ -153,6 +161,9 @@ export default function BuyButton({ children, max, activeValue, isProfi, isEmpty
     }, [])
 
     useEffect(() => {
+        if (max === 0) setIsEmpty(true)
+        else setIsEmpty(false)
+
         refValuesUpdate.current = true
         if (activeValue.basket) {
             setCount(activeValue.basket)
@@ -164,11 +175,9 @@ export default function BuyButton({ children, max, activeValue, isProfi, isEmpty
 
         setTimeout(() => {
             refValuesUpdate.current = false
-        }, 300);
+        }, 300)
 
     }, [activeValue])
-
-
 
     return (
         <div ref={refButton} className={style.buybtn}>
@@ -187,7 +196,7 @@ export default function BuyButton({ children, max, activeValue, isProfi, isEmpty
                     ? <div className={style.btnWrapper}>
                         <div onClick={buyHandler} data-open={isOpen} className={`${style.btnMain} btn btn--md btn--primary`}>
                             <span className='text--upper text--p5 text--bold mr-0.8'>
-                                <span className='is-hidden--lg-down'>Добавить </span>
+                                <span className='is-hidden--lg is-hidden--md'>Добавить </span>
                                 <span>в корзину</span>
                             </span>
                             <Icon name='basketMD' width='18' height='18' />
@@ -211,11 +220,14 @@ export default function BuyButton({ children, max, activeValue, isProfi, isEmpty
                                 </span>
 
                                 <input
-                                    type='text'
+                                    min={0}
+                                    max={max}
+                                    type='number'
                                     ref={refInput}
                                     placeholder={count}
                                     data-shake={isShaked}
                                     onChange={changeHandler}
+                                    onKeyDown={keyDownHandler}
                                     className={`${style.counterInput} text--p5 text--bold`} />
 
                                 <div onClick={counterClick} className={style.counterDiv}>
@@ -238,7 +250,7 @@ export default function BuyButton({ children, max, activeValue, isProfi, isEmpty
                 isProfi && !isEmpty
                     ? <div className={style.btnWrapper}>
                         <div onClick={profiClickHandler} className={`${style.btnMain} btn btn--md btn--primary`}>
-                            <span className='text--upper text--p5 text--bold mr-0.8'>ДЛЯ ПРОФессионалов</span>
+                            <span className='text--upper text--p5 text--bold'>ДЛЯ ПРОФессионалов</span>
                         </div>
                     </div> : null
             }

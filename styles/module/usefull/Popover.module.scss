@@ -36,52 +36,52 @@
     touch-action: none;
     align-items: center;
     background-color: var(--t-text);
-    transition: 0.3s height, 0.3s opacity, 0.1s transform;
-    
+    transition: 0.3s height ease-in-out, 0.3s opacity, 0.2s transform;
+
+    &[data-active="false"] {
+        transform: translateY(-60px) scaleY(0);
+
+        .popoverImage {
+            opacity: 0;
+            transition: .2s;
+        }
+    }
+
     &[data-active="true"] {
         opacity: 1;
         height: 82px;
         margin-bottom: 12px;
+        transform: translateY(0) scaleY(1);
+
+        .popoverImage {
+            opacity: 1;
+            transition: .3s .3s;
+        }
     }
 }
 
 .popoverClose {
-    width: 11px;
-    height: 13px;
+    width: 14px;
+    height: 14px;
     cursor: pointer;
-    margin-top: 16px;
+    transition: .3s;
+    margin-top: 14px;
     position: relative;
     margin-right: 16px;
     align-self: flex-start;
-
-    &::after,
-    &::before {
-        top: 0;
-        bottom: 0;
-        width: 1.5px;
-        content: '';
-        transition: .3s;
-        position: absolute;
-        border-radius: 20px;
-        transform-origin: top;
-        background-color: var(--t-background);
-    }
+    color: var(--t-background);
 
     &:hover {
-        &::after,
-        &::before {
-            background-color: var(--t-primary);
-        }
-    }
-
-    &::after {
-        right: 0;
-        transform: rotate(45deg);
+        color: var(--t-primary);
     }
 
     &::before {
-        left: 0;
-        transform: rotate(-45deg);
+        top: -5px;
+        left: -10px;
+        content: '';
+        right: -10px;
+        bottom: -15px;
+        position: absolute;
     }
 }
 

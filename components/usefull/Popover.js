@@ -12,7 +12,6 @@ export default function Popover() {
     const refImage = useRef('')
     const refPopover = useRef(null)
     const refIsBasket = useRef(false)
-    const refContainer = useRef(null)
     const refTextPrimary = useRef('')
     const refTextSecondary = useRef('')
 
@@ -30,39 +29,30 @@ export default function Popover() {
             layout += `<a class="${style.popoverBasket} text--p6 text--bold">ОТКРЫТЬ</a>`
         }
 
-        layout += `<div class="${style.popoverClose} is-hidden--md-down"></div>`
+        layout += `<div class="${style.popoverClose} is-hidden--md-down">
+            <svg viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path fill-rule="evenodd" clip-rule="evenodd" d="M3.24322 3.26413C3.39915 3.10872 3.61054 3.02143 3.83093 3.02143C4.05132 3.02143 4.2627 3.10872 4.41864 3.26413L7.98926 6.82709L11.5599 3.26413C11.636 3.18259 11.7279 3.1172 11.8299 3.07184C11.9319 3.02649 12.042 3.0021 12.1537 3.00013C12.2653 2.99816 12.3762 3.01866 12.4798 3.0604C12.5834 3.10214 12.6774 3.16426 12.7564 3.24306C12.8354 3.32187 12.8976 3.41575 12.9394 3.51907C12.9812 3.62241 13.0019 3.73309 12.9999 3.84452C12.9979 3.95595 12.9735 4.06584 12.928 4.16764C12.8825 4.26944 12.817 4.36106 12.7353 4.43703L9.16467 7.99999L12.7353 11.563C12.817 11.639 12.8825 11.7306 12.928 11.8324C12.9735 11.9342 12.9979 12.0441 12.9999 12.1555C13.0019 12.2669 12.9812 12.3776 12.9394 12.4809C12.8976 12.5843 12.8354 12.6781 12.7564 12.7569C12.6774 12.8358 12.5834 12.8978 12.4798 12.9396C12.3762 12.9813 12.2653 13.0019 12.1537 12.9999C12.042 12.9979 11.9319 12.9735 11.8299 12.9282C11.7279 12.8828 11.636 12.8174 11.5599 12.7359L7.98926 9.17289L4.41864 12.7359C4.26098 12.8825 4.05245 12.9622 3.837 12.9585C3.62154 12.9546 3.41598 12.8675 3.26359 12.7155C3.11122 12.5635 3.02394 12.3583 3.02014 12.1433C3.01633 11.9283 3.09632 11.7203 3.24322 11.563L6.81384 7.99999L3.24322 4.43703C3.08748 4.28143 3 4.0705 3 3.85058C3 3.63066 3.08748 3.41974 3.24322 3.26413Z" fill="currentColor"/>
+            </svg>
+        </div>`
 
         const inner = document.createElement('div')
         inner.classList.add(style.popoverInner)
         inner.classList.add(refCount.current)
+        inner.setAttribute('data-active', 'false')
         inner.innerHTML = layout
 
         return inner
     }
 
     const setPositions = () => {
-        if (!refContainer.current)
-            refContainer.current = document.querySelector('.header-middle-container')
-
-        const rect = refContainer.current.getBoundingClientRect()
-
-        if (rect.top === 0 && rect.right === 0) {
-            if (window.scrollY > 20) {
-                setTopPosition(15)
-                setRightPosition(15)
-            } else {
-                setTopPosition(60)
-                setRightPosition(15)
-            }
+        if (window.innerWidth < globalState.sizes.md) {
+            setTopPosition(15)
+            setRightPosition(15)
         } else {
-            if (window.scrollY > 20) {
-                setTopPosition(40)
-                setRightPosition(40)
-            } else {
-                setTopPosition(rect.top + rect.height + 20)
-                setRightPosition(rect.right - rect.width)
-            }
+            setTopPosition(40)
+            setRightPosition(40)
         }
+
     }
 
     const removeItem = element => {
@@ -75,7 +65,7 @@ export default function Popover() {
             setTimeout(() => {
                 item.remove()
                 if (refCount.current - 1 >= 0) refCount.current--
-            }, 200)
+            }, 400)
         })
     }
 
@@ -85,7 +75,7 @@ export default function Popover() {
         setTimeout(() => {
             element.remove()
             if (refCount.current - 1 >= 0) refCount.current--
-        }, 200)
+        }, 400)
     }
 
     const openHandler = open => {
@@ -95,8 +85,9 @@ export default function Popover() {
 
             refCount.current++
             const item = refPopover.current.appendChild(getLayout())
-            console.log(refCount.current);
-            item.setAttribute('data-active', true)
+            setTimeout(() => {
+                item.setAttribute('data-active', true)
+            }, 100)
 
             removeItem(item)
 
@@ -151,7 +142,6 @@ export default function Popover() {
     const setTextPrimary = text => refTextPrimary.current = text
 
     useEffect(() => {
-        setPositions()
 
         globalState.popover = {
             setIsOpen: openHandler,
@@ -165,24 +155,11 @@ export default function Popover() {
 
         if (typeof window === 'undefined') return
 
-        const resizeHandler = () => {
-            const rect = refContainer.current.getBoundingClientRect()
-            if (rect.top === 0 && rect.right === 0) {
-                setTopPosition(60)
-                setRightPosition(15)
-            } else {
-                setTopPosition(rect.top + rect.height + 20)
-                setRightPosition(rect.right - rect.width)
-            }
-        }
-
-        window.addEventListener('resize', resizeHandler)
         refPopover.current.addEventListener('touchstart', touchStartHandler)
         refPopover.current.addEventListener('touchmove', touchMoveHandler)
         refPopover.current.addEventListener('touchend', touchEndHandler)
 
         return () => {
-            window.removeEventListener('resize', resizeHandler)
             if (refPopover.current) {
                 refPopover.current.removeEventListener('touchstart', touchStartHandler)
                 refPopover.current.removeEventListener('touchmove', touchMoveHandler)
@@ -190,11 +167,6 @@ export default function Popover() {
             }
         }
     }, [])
-
-    useEffect(() => {
-        if (isOpen) window.addEventListener('scroll', setPositions)
-        else window.removeEventListener('scroll', setPositions)
-    }, [isOpen])
 
 
     return (

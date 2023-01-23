@@ -84,6 +84,7 @@ $text-p3:      ( font-size: 1.8rem,  line-height: 16 / 12 * 1em );
 $text-p4:      ( font-size: 1.6rem,  line-height: 18 / 12 * 1em );
 $text-p5:      ( font-size: 1.4rem,  line-height: 16 / 12 * 1em );
 $text-p6:      ( font-size: 1.2rem,  line-height: 20 / 12 * 1em );
+$text-p7:      ( font-size: 1.0rem,  line-height: 12 / 12 * 1em );
 
 // TT Common
 $text-t0-xl:   ( font-size: 2.4rem,  line-height: 24 / 24 * 1em, font-weight: $bold );
@@ -146,6 +147,7 @@ $text-sizes: (
         'p4':           $text-p4,
         'p5':           $text-p5,
         'p6':           $text-p6,
+        'p7':           $text-p7,
     ),
 
     md: (

@@ -35,15 +35,15 @@
     transition: .3s;
     align-items: center;
 
-    &[data-status="disable"] {
-        color: var(--t-disabled);
-    }
+    // &[data-status="disable"] {
+    //     color: var(--t-disabled);
+    // }
 
-    &[data-status="current"] {
-        div {
-            font-weight: 700;
-        }
-    }
+    // &[data-status="current"] {
+    //     div {
+    //         font-weight: 700;
+    //     }
+    // }
 
     &:hover {
         color: var(--t-primary);

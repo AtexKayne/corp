@@ -48,10 +48,20 @@
         cursor: pointer;
         transition: .3s;
         margin-left: 12px;
+        position: relative;
         color: var(--t-disabled);
         
         &:hover {
             color: var(--t-primary);
+        }
+
+        &::after {
+            top: -15px;
+            left: -15px;
+            content: '';
+            right: -15px;
+            bottom: -15px;
+            position: absolute;
         }
     }
 
@@ -82,11 +92,11 @@
         transition: .3s;
         padding: 6px 12px;
         margin-right: 8px;
+        margin-bottom: 8px;
         border-radius: 4px;
         text-transform: uppercase;
 
         &[data-disabled="true"] {
-            pointer-events: none;
             color: var(--c-_light-gray);
         }
 

@@ -63,7 +63,7 @@ export default function Modal() {
 
     return (
         <div data-open={isOpen} className='modal'>
-            <div className='modal__layout' />
+            <div onClick={() => setIsOpen(false)} className='modal__layout' />
             <motion.div
                 drag='y'
                 ref={refContent}
