@@ -7,13 +7,15 @@ import { motion, useAnimationControls, useDragControls } from 'framer-motion'
 export default function Modal() {
     const [isOpen, setIsOpen] = useState(false)
     const [template, setTemplate] = useState(null)
+    const [isMobile, setIsMobile] = useState(null)
     const [isFullHeight, setIsFullHeight] = useState(false)
-    const refContent = useRef(null)
+    
     const animateContent = useAnimationControls()
     const controls = useDragControls()
+    const refContent = useRef(null)
 
     const startDrag = event => {
-        if (isFullHeight) return
+        if (isFullHeight || !isMobile) return
         if (window.innerWidth >= globalState.sizes.sm) return
         controls.start(event)
     }
@@ -58,6 +60,7 @@ export default function Modal() {
 
     useEffect(() => {
         if (isOpen) {
+            setIsMobile(window.innerWidth < globalState.sizes.sm)
             const pos = window.innerWidth >= globalState.sizes.sm
                 ? { x: 0, y: 0, transition: { duration: 0.6, ease: 'easeIn', delay: 0.3 } }
                 : { y: 0, x: 0, transition: { duration: 0.6, ease: 'easeIn', delay: 0.3 } }
@@ -90,8 +93,8 @@ export default function Modal() {
                 animate={animateContent}
                 onPointerDown={startDrag}
                 onDragEnd={dragEndHandler}
-                drag={isFullHeight ? false : 'y'}
                 dragConstraints={{ top: 0, bottom: 0 }}
+                drag={isFullHeight || !isMobile ? false : 'y'}
                 className={`${isFullHeight ? 'modal__content--full-height' : 'modal__content'}`}>
 
                 <div onClick={() => setIsOpen(false)} className='modal__close'>
