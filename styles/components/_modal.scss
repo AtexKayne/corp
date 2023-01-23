@@ -14,29 +14,6 @@
         opacity: 1;
         pointer-events: all;
         transition-delay: 0s;
-
-        @include media-breakpoint(sm-down) {
-            .modal__content {
-                transform: translateY(0);
-            }
-
-            .modal__content--full-height {
-                transition-delay: .3s;
-                transition-duration: .5s;
-                transition-property: transform;
-                transform: translateY(0)!important;
-            }
-        }
-
-        @include media-breakpoint(md-up) {
-            .modal__content,
-            .modal__content--full-height {
-                transition-delay: .3s;
-                transition-duration: .5s;
-                transition-property: transform;
-                transform: translateX(0)!important;
-            }
-        }
     }
 
     @include media-breakpoint(lg-up) {
@@ -45,17 +22,6 @@
                 margin-right: -12px; // Иначе дрыгает
             }
         }
-    }
-
-    &__layout {
-        top: 0;
-        left: 0;
-        right: 0;
-        bottom: 0;
-        opacity: .7;
-        cursor: pointer;
-        position: absolute;
-        background-color: #112233;
     }
 
     &__content,
@@ -67,7 +33,6 @@
         max-height: 100vh;
         flex-direction: column;
         background-color: color-use(background);
-        transition-timing-function: cubic-bezier(.68,.02,.37,.87);
         width: adaptive-value((
             xs: 100vw,
             md: 620px,
@@ -89,10 +54,6 @@
         border-radius: 16px 16px 0px 0px;
 
         @include media-breakpoint(sm-down) {
-            transition-duration: .5s;
-            transform: translateY(100%);
-            transition-property: transform;
-
             .modal__close {
                 align-self: center;
                 pointer-events: none;
@@ -115,10 +76,7 @@
         @include media-breakpoint(md-up) {
             top: 0;
             border-radius: 0;
-            transition-duration: .5s;
             touch-action: unset!important;
-            transition-property: transform;
-            transform: translateX(100%)!important;
         }
     }
 
@@ -127,26 +85,29 @@
         overflow-y: auto;
         max-height: 100vh;
         min-height: 100vh;
-        transition-duration: .5s;
         touch-action: unset!important;
-        transition-property: transform;
         height: -webkit-fill-available;
         min-height: -webkit-fill-available;
-        transform: translateX(100%)!important;
         background-color: color-use(background);
 
-        @include media-breakpoint(sm-down) {
-            transition-duration: .5s;
-            touch-action: unset!important;
-            transition-property: transform;
-            transform: translateY(100%)!important;
-            
+        @include media-breakpoint(sm-down) {            
             .modal__close {
                 align-self: flex-start;
             }
         }
     }
 
+    &__layout {
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        opacity: .7;
+        cursor: pointer;
+        position: absolute;
+        background-color: #112233;
+    }
+    
     &__close {
         width: 0;
         height: 0;
