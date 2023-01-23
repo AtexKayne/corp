@@ -248,6 +248,7 @@ export default function BuyButton({ children, max, activeValue, isProfi, isEmpty
                     ? <div className={style.btnWrapper}>
                         <div onClick={notificationClickHandler} className={`${style.btnMain} btn btn--md btn--yellow`}>
                             <span className='text--upper text--p5 text--bold mr-0.8'>Сообщить</span>
+                            <Icon name='bell' width='16' height='16' />
                         </div>
                     </div> : null
             }
