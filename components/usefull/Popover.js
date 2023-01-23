@@ -30,6 +30,8 @@ export default function Popover() {
             layout += `<a class="${style.popoverBasket} text--p6 text--bold">ОТКРЫТЬ</a>`
         }
 
+        layout += `<div class="${style.popoverClose} is-hidden--md-down"></div>`
+
         const inner = document.createElement('div')
         inner.classList.add(style.popoverInner)
         inner.classList.add(refCount.current)
@@ -78,6 +80,7 @@ export default function Popover() {
     }
 
     const removeItemImmediatly = element => {
+        if (!element) return
         element.setAttribute('data-active', false)
         setTimeout(() => {
             element.remove()
@@ -131,6 +134,14 @@ export default function Popover() {
         refTouch.current.y = false
         refTouch.current.offset = false
         refTouch.current.parent = false
+    }
+
+    const closeHandler = event => {
+        const target = event.target
+        if (target.classList.contains(style.popoverClose)) {
+            const parent = target.closest(`.${style.popoverInner}`)
+            removeItemImmediatly(parent)
+        }
     }
 
     const setImage = src => refImage.current = src
@@ -193,6 +204,7 @@ export default function Popover() {
             }}
             ref={refPopover}
             data-open={isOpen}
+            onClick={closeHandler}
             className={style.popover}>
         </div>
     )

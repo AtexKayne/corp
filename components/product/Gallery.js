@@ -266,7 +266,7 @@ export default function Gallery({ images = [], alt = '' }) {
                 <div className='container p-relative'>
                     <div className={`${style.alt} text--t1 text--upper text--bold py-2 pr-4`}>{alt}</div>
                     <div className={`${style.modalHeader}`}>
-                        <div className={`${style.closeBtn} c-pointer`} onClick={modalClose}><Icon name='close' width='16' height='16' /></div>
+                        <div className={`${style.closeBtn} c-pointer`} onClick={modalClose}><Icon name='close' width='20' height='20' /></div>
                     </div>
 
                     {images.map(image => (

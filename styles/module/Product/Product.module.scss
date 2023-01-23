@@ -96,8 +96,12 @@
 .color {
     display: flex;
     cursor: pointer;
+    transition: .3s;
     align-items: center;
 
+    &:hover {
+        color: var(--t-primary);
+    }
     
     .colorImage {
         width: 30px;
@@ -107,6 +111,7 @@
         overflow: hidden;
         margin-right: 8px;
         border-radius: 50%;
+        transform: rotate(-90deg);
 
         img {
             object-fit: none;

@@ -45,6 +45,45 @@
     }
 }
 
+.popoverClose {
+    width: 11px;
+    height: 13px;
+    cursor: pointer;
+    margin-top: 16px;
+    position: relative;
+    margin-right: 16px;
+    align-self: flex-start;
+
+    &::after,
+    &::before {
+        top: 0;
+        bottom: 0;
+        width: 1.5px;
+        content: '';
+        transition: .3s;
+        position: absolute;
+        transform-origin: top;
+        background-color: var(--t-background);
+    }
+
+    &:hover {
+        &::after,
+        &::before {
+            background-color: var(--t-primary);
+        }
+    }
+
+    &::after {
+        right: 0;
+        transform: rotate(45deg);
+    }
+
+    &::before {
+        left: 0;
+        transform: rotate(-45deg);
+    }
+}
+
 .popoverImage {
     width: 50px;
     height: 50px;
