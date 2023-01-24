@@ -124,6 +124,7 @@
     justify-content: center;
     text-transform: uppercase;
     -moz-appearance: textfield;
+    user-select: all!important;
     background-color: var(--t-light);
 
     &[data-shake="true"] {
