@@ -52,7 +52,8 @@ export default function BuyButton({ children, max, activeValue, isProfi, setInBa
         setIsSelected(true)
         setTimeout(() => {
             if (refInput.current && typeof refInput.current.click !== 'undefined') {
-                refInput.current.click().focus()
+                refInput.current.click()
+                refInput.current.focus()
             }
             document.addEventListener('click', documentClick)
         }, 100)
