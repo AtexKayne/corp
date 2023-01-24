@@ -9,11 +9,11 @@ export default function Footer() {
     const { isMobile } = useDeviceDetect()
 
     useEffect(() => {
-        if (isMobile) {
-            globalState.body.addClass('is-mobile')
-        } else {
-            globalState.body.removeClass('is-mobile')
-        }
+        // if (isMobile) {
+        //     globalState.body.addClass('is-mobile')
+        // } else {
+        //     globalState.body.removeClass('is-mobile')
+        // }
     }, [isMobile])
 
     return (

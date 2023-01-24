@@ -63,18 +63,18 @@ export default function Header() {
         }
 
         const toggleBodyClass = className => {
-            const classList = document.querySelector('body').classList
+            const classList = document.querySelector('html').classList
             if (classList.contains(className)) classList.remove(className)
             else classList.add(className)
         }
 
         const addBodyClass = className => {
-            const classList = document.querySelector('body').classList
+            const classList = document.querySelector('html').classList
             classList.add(className)
         }
 
         const removeBodyClass = className => {
-            const classList = document.querySelector('body').classList
+            const classList = document.querySelector('html').classList
             classList.remove(className)
         }
 
