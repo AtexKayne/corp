@@ -18,19 +18,20 @@ export default function Product({ detail = product }) {
     const [containerHeight, setContainerHeight] = useState(0)
     const [isProfi, setIsProfi] = useState(true)
     const [inBasket, setInBasket] = useState(0)
-    const { isMobile } = useDeviceDetect()
+
+    const refStickyBlockHeight = useRef(null)
     const refStickyContainer = useRef(null)
     const refContainerOffset = useRef(0)
     const refStickyBlock = useRef(null)
-    const refStickyBlockHeight = useRef(null)
     const refBlockWidth = useRef(null)
     const refFooterHeight = useRef(0)
 
     const [activeValue, setActiveValue] = useState(detail.values[0])
 
     const colorsHandler = () => {
-        globalState.modal.setIsOpen(true)
         globalState.modal.setTemplate('colors')
+        globalState.modal.setIsZero(true)
+        globalState.modal.setIsOpen(true)
     }
 
     const copyHandler = () => {
@@ -42,8 +43,9 @@ export default function Product({ detail = product }) {
     }
 
     const infoHandler = () => {
-        globalState.modal.setIsOpen(true)
         globalState.modal.setTemplate('priceInfo')
+        globalState.modal.setIsZero(true)
+        globalState.modal.setIsOpen(true)
     }
 
     useEffect(() => {
@@ -189,7 +191,7 @@ export default function Product({ detail = product }) {
 
                         <RadioButton items={detail.values} setActiveValue={setActiveValue} />
 
-                        <div className='text--p4 text--color-small mt-0.5 mb-1 mb-2:xxl'>
+                        <div className='text--p4 text--normal mt-0.5 mb-1 mb-2:xxl'>
                             Артикул: {activeValue.art}
                         </div>
 

@@ -24,7 +24,7 @@ export default function ModalNotification() {
                 <span>Есть вопросы?&nbsp;</span>
                 <a className='link text--bold text--upper text--p6 text--color-primary' href='#'>Напишите в Telegram</a>
             </div>
-            <InputMask className={style.phoneInput} placeholder='+7 (___) ___ __ __' mask="+7 (999) 999 99 99" maskChar=" " />
+            <InputMask className={style.phoneInput} type='number' placeholder='+7 (___) ___ __ __' mask="+7 (999) 999 99 99" maskChar=" " />
             <div className={`${style.btn} btn btn--md btn--fill btn--grey`}>
                 <span className='text--upper text--p6 text--color-disabled text--bold'>У меня есть инвайт-код</span>
             </div>

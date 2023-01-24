@@ -196,3 +196,9 @@
         background-color: #EF9595;
     }
 }
+
+.link.text--color-primary {
+    &:hover {
+        color: #c61821;
+    }
+}

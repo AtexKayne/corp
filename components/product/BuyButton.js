@@ -61,7 +61,7 @@ export default function BuyButton({ children, max, activeValue, isProfi, setInBa
         if (newValue) {
             const strValue = '' + newValue
             const pos = increment + 1 ? -40 : 40
-            await animateCount.start({ y: pos, width: `${strValue.length * 5 + 8}px`, transition: { duration: 0.3, ease: 'anticipate' } })
+            await animateCount.start({ y: pos, minWidth: `${strValue.length * 5 + 8}px`, transition: { duration: 0.3, ease: 'anticipate' } })
             await animateCount.start({ y: pos * - 1, transition: { duration: 0 } })
         }
         setCount(newValue)
@@ -99,13 +99,15 @@ export default function BuyButton({ children, max, activeValue, isProfi, setInBa
     }
 
     const profiClickHandler = () => {
-        globalState.modal.setIsOpen(true)
         globalState.modal.setTemplate('profi')
+        globalState.modal.setIsZero(false)
+        globalState.modal.setIsOpen(true)
     }
 
     const notificationClickHandler = () => {
-        globalState.modal.setIsOpen(true)
         globalState.modal.setTemplate('notification')
+        globalState.modal.setIsZero(true)
+        globalState.modal.setIsOpen(true)
     }
 
     useEffect(() => {
@@ -135,6 +137,8 @@ export default function BuyButton({ children, max, activeValue, isProfi, setInBa
             globalState.popover.setIsBasket(false)
 
             globalState.popover.setIsOpen(true)
+        } else if (count === max) {
+            setDiabled('plus')
         } else {
             setDiabled(false)
         }

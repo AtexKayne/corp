@@ -22,9 +22,9 @@ export default function Gallery({ images = [], alt = '' }) {
     const refModal = useRef(null)
 
     const updateActiveImage = async image => {
-        await animateActiveImage.start({ opacity: 0 })
+        await animateActiveImage.start({ opacity: 0, transition: {duration: 0.5} })
         setActiveImage(image)
-        await animateActiveImage.start({ opacity: 1 })
+        await animateActiveImage.start({ opacity: 1, transition: {duration: 0.5} })
     }
 
     const choseActive = (image, index = 0) => {
@@ -68,16 +68,18 @@ export default function Gallery({ images = [], alt = '' }) {
     }
 
     const nextHandler = () => {
+        const isTouch = window.innerWidth < globalState.sizes.lg
         const index = images.findIndex(image => image.gallery === activeImage)
         const nextImageObj = images[index + 1]
         if (!nextImageObj) {
             const index = images.findIndex(image => image.gallery === activeImage)
             animateDrag.start({ x: window.innerWidth * index * -1, transition: { duration: 0.1 } })
-            return
+            if (isTouch) return
         }
         const nextImage = nextImageObj ? nextImageObj.gallery : images[0].gallery
         const scrollIndex = nextImageObj ? index + 1 : 0
-        setActiveImage(nextImage)
+        if (!isTouch) updateActiveImage(nextImage)
+        else setActiveImage(nextImage)
         animateDrag.start({ x: window.innerWidth * scrollIndex * -1, transition: { duration: 0.3 } })
     }
 
@@ -240,7 +242,7 @@ export default function Gallery({ images = [], alt = '' }) {
                     transition={{ duration: 0.3 }}
                     animate={animateActiveImage}
                     className={`${style.imageMain} is-hidden--md-down`}>
-                    <Image src={activeImage} layout='fill' alt={alt} />
+                    <img src={activeImage} width='100%' height='100%' alt={alt} />
                 </motion.div>
 
                 <div onClick={openModal} className={`${style.imageMain} is-hidden--lg-up`}>

@@ -29,10 +29,6 @@
 
         >div {
             height: auto;
-
-            &:nth-child(2) {
-                min-width: 60px;
-            }
         }
     }
 
@@ -265,5 +261,13 @@
             fill: var(--t-primary);
             stroke: var(--t-primary);
         }
+    }
+
+    @include media-breakpoint(md) {
+        min-width: 73px;
+    }
+
+    @include media-breakpoint(sm-down) {
+        min-width: 60px;
     }
 }

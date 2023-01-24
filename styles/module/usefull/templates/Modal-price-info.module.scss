@@ -15,6 +15,12 @@
     }
 }
 
+.icon {
+    @media (max-height: 750px) {
+        display: none;
+    }
+}
+
 .title {
     @include text--size((
         xs: $text-a3,

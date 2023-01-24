@@ -6,10 +6,11 @@ import { motion, useAnimationControls, useDragControls } from 'framer-motion'
 
 export default function Modal() {
     const [isOpen, setIsOpen] = useState(false)
+    const [isZero, setIsZero] = useState(false)
     const [template, setTemplate] = useState(null)
     const [isMobile, setIsMobile] = useState(null)
     const [isFullHeight, setIsFullHeight] = useState(false)
-    
+
     const animateContent = useAnimationControls()
     const controls = useDragControls()
     const refContent = useRef(null)
@@ -23,14 +24,17 @@ export default function Modal() {
     const dragEndHandler = (_, info) => {
         if (isFullHeight) return
         if (Math.abs(info.offset.y) > 60 && window.innerWidth < globalState.sizes.sm) {
-            setIsOpen(false)
+            setTimeout(() => {
+                setIsOpen(false)
+            }, 100)
         }
     }
 
     useEffect(() => {
         globalState.modal = {
-            setIsOpen,
-            setTemplate
+            setIsOpen: open => { setTimeout(() => setIsOpen(open), 50) },
+            setTemplate,
+            setIsZero
         }
 
         let observer
@@ -56,28 +60,36 @@ export default function Modal() {
         }
     }, [])
 
-
-
+    // @TODO REWIRITE!
     useEffect(() => {
+        const mobile = window.innerWidth < globalState.sizes.sm
+        const duration = mobile ? 0.3 : 0.6
+
         if (isOpen) {
-            setIsMobile(window.innerWidth < globalState.sizes.sm)
-            const pos = window.innerWidth >= globalState.sizes.sm
-                ? { x: 0, y: 0, transition: { duration: 0.6, ease: 'easeIn', delay: 0.3 } }
-                : { y: 0, x: 0, transition: { duration: 0.6, ease: 'easeIn', delay: 0.3 } }
+            setIsMobile(mobile)
+            const pos = window.innerWidth >= globalState.sizes.sm || isZero
+                ? { x: 0, y: 0, transition: { duration: duration, ease: 'easeIn', delay: 0.3 } }
+                : { y: 0, x: 0, transition: { duration: duration, ease: 'easeIn', delay: 0.3 } }
+            const posStart = window.innerWidth >= globalState.sizes.sm || isZero
+                ? { x: '100%', y: 0, transition: { duration: 0, ease: 'easeIn', delay: 0 } }
+                : { y: '100%', x: 0, transition: { duration: 0, ease: 'easeIn', delay: 0 } }
 
+            animateContent.start(posStart).then(() => {
+                animateContent.start(pos)
+            })
             globalState.body.addClass('overflow-hidden')
-            animateContent.start(pos)
         } else {
-            const pos = window.innerWidth >= globalState.sizes.sm
-                ? { x: '100%', y: 0, transition: { duration: 0.6, ease: 'easeIn', delay: 0 } }
-                : { y: '100%', x: 0, transition: { duration: 0.6, ease: 'easeIn', delay: 0 } }
+            const posStart = window.innerWidth >= globalState.sizes.sm || isZero
+                ? { x: '100%', y: 0, transition: { duration: duration, ease: 'easeIn', delay: 0 } }
+                : { y: '100%', x: 0, transition: { duration: duration, ease: 'easeIn', delay: 0 } }
 
-            animateContent.start(pos)
+            animateContent.start(posStart)
 
             setTimeout(() => {
                 setTemplate(null)
                 setIsFullHeight(false)
                 globalState.body.removeClass('overflow-hidden')
+                setIsZero(false)
             }, 600)
         }
     }, [isOpen])
@@ -94,7 +106,7 @@ export default function Modal() {
                 onPointerDown={startDrag}
                 onDragEnd={dragEndHandler}
                 dragConstraints={{ top: 0, bottom: 0 }}
-                drag={isFullHeight || !isMobile ? false : 'y'}
+                drag={isFullHeight || isZero ? false : 'y'}
                 className={`${isFullHeight ? 'modal__content--full-height' : 'modal__content'}`}>
 
                 <div onClick={() => setIsOpen(false)} className='modal__close'>
