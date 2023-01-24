@@ -82,10 +82,12 @@
 
     &__content--full-height {
         top: 0;
-        bottom: 0;
+        bottom: auto;
+        height: 100vh;
         overflow-y: auto;
         min-height: 100vh;
         touch-action: unset!important;
+        height: -webkit-fill-available;
         min-height: -webkit-fill-available;
         background-color: color-use(background);
 
