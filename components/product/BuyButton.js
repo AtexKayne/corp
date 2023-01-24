@@ -111,8 +111,7 @@ export default function BuyButton({ children, max, activeValue, isProfi, setInBa
     }
 
     const blurHandler = () => {
-        document.removeEventListener('click', documentClick)
-        setIsSelected(false)
+        document.body.click()
     }
 
     const profiClickHandler = () => {

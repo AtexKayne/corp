@@ -142,11 +142,11 @@ export default function Popover() {
     const setTextPrimary = text => refTextPrimary.current = text
 
     useEffect(() => {
-        const observeHandler = entries => {
-            console.log(entries[0].isIntersecting);
-        }
-        const observer = new IntersectionObserver(observeHandler, {threshold: 1})
-        observer.observe(refPopover.current)
+        // const observeHandler = entries => {
+        //     console.log(entries[0].isIntersecting);
+        // }
+        // const observer = new IntersectionObserver(observeHandler, {threshold: 1})
+        // observer.observe(refPopover.current)
 
         globalState.popover = {
             setIsOpen: openHandler,
