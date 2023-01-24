@@ -48,15 +48,24 @@ export default function BuyButton({ children, max, activeValue, isProfi, setInBa
     }
 
     const counterClick = () => {
+        const fakeInput = document.createElement('input')
+        fakeInput.setAttribute('type', 'text')
+        fakeInput.style.position = 'absolute'
+        fakeInput.style.opacity = 0
+        fakeInput.style.height = 0
+        fakeInput.style.fontSize = '16px'
+        document.body.prepend(fakeInput)
+        fakeInput.focus()
+
         refSafeValue.current = count
+        refInput.current.value = count
         setIsSelected(true)
+
         setTimeout(() => {
-            if (refInput.current && typeof refInput.current.click !== 'undefined') {
-                refInput.current.click()
-                refInput.current.focus()
-            }
+            refInput.current.focus()
+            fakeInput.remove()
             document.addEventListener('click', documentClick)
-        }, 100)
+        }, 1000)
     }
 
     const updateCount = async increment => {
@@ -64,7 +73,7 @@ export default function BuyButton({ children, max, activeValue, isProfi, setInBa
         if (newValue) {
             const strValue = '' + newValue
             const pos = increment + 1 ? -40 : 40
-            await animateCount.start({ y: pos, minWidth: `${strValue.length * 5 + 8}px`, transition: { duration: 0.3, ease: 'anticipate' } })
+            await animateCount.start({ y: pos, minWidth: `${strValue.length * 5 + 8}px`, transition: { duration: 0.2, ease: 'anticipate' } })
             await animateCount.start({ y: pos * - 1, transition: { duration: 0 } })
         }
         setCount(newValue)
