@@ -22,7 +22,7 @@ export default function Popover() {
             </div>
             <div class="${style.popoverText}">
                 <div class="text--p5 mb-0.6">${refTextPrimary.current}</div>
-                <div class="text--p6 text--upper text--bold">${refTextSecondary.current}</div>
+                <div class="text--p7 text--color-smallest text--upper text--bold">${refTextSecondary.current}</div>
             </div>
         `
         if (refIsBasket.current) {
@@ -89,7 +89,7 @@ export default function Popover() {
                 item.setAttribute('data-active', true)
             }, 100)
 
-            // removeItem(item)
+            removeItem(item)
 
             if (refCount.current > 3) {
                 refPopover.current.querySelector(`.${style.popoverInner}`).remove()
@@ -142,6 +142,11 @@ export default function Popover() {
     const setTextPrimary = text => refTextPrimary.current = text
 
     useEffect(() => {
+        const observeHandler = entries => {
+            console.log(entries[0].isIntersecting);
+        }
+        const observer = new IntersectionObserver(observeHandler, {threshold: 1})
+        observer.observe(refPopover.current)
 
         globalState.popover = {
             setIsOpen: openHandler,

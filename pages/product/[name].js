@@ -36,7 +36,7 @@ export default function Product({ detail = product }) {
 
     const copyHandler = () => {
         globalState.popover.setTextPrimary('System 4 Shale Oil Shampoo 4')
-        globalState.popover.setTextSecondary('<span class="text--p7 text--color-small">ссылка скопирована в буфер обмена</span>')
+        globalState.popover.setTextSecondary('ссылка скопирована в буфер обмена')
         globalState.popover.setImage('/images/product/image-0.jpg')
         globalState.popover.setIsBasket(false)
         globalState.popover.setIsOpen(true)

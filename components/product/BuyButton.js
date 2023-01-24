@@ -107,8 +107,12 @@ export default function BuyButton({ children, max, activeValue, isProfi, setInBa
     }
 
     const keyDownHandler = event => {
-        console.log(event.keyCode);
         if (event.keyCode === 13) document.body.click()
+    }
+
+    const blurHandler = () => {
+        document.removeEventListener('click', documentClick)
+        setIsSelected(false)
     }
 
     const profiClickHandler = () => {
@@ -242,6 +246,7 @@ export default function BuyButton({ children, max, activeValue, isProfi, setInBa
                                     type='number'
                                     ref={refInput}
                                     placeholder={count}
+                                    onBlur={blurHandler}
                                     data-shake={isShaked}
                                     onChange={changeHandler}
                                     onKeyDown={keyDownHandler}
