@@ -23,6 +23,7 @@
     display: flex;
     flex-shrink: 0;
     flex-direction: column;
+    min-height: -webkit-fill-available;
 
     >* {
         margin-bottom: 4px;

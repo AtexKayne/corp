@@ -4,6 +4,7 @@
 .info {
     padding-top: 20px;
     text-align: center;
+    min-height: -webkit-fill-available;
 
     @include media-breakpoint(sm-down) {
         padding-top: 0;

@@ -4,7 +4,7 @@
     height: 100%;
     display: flex;
     flex-direction: column;
-    justify-content: flex-end;
+    min-height: -webkit-fill-available;
 }
 
 .image {
@@ -32,6 +32,12 @@
     &::placeholder {
         color: var(--t-disabled);
     }
+}
+
+.footer {
+    display: flex;
+    flex-basis: 100%;
+    align-items: flex-end;
 }
 
 .btn {

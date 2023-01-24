@@ -28,10 +28,12 @@ export default function ModalNotification() {
             <div className={`${style.btn} btn btn--md btn--fill btn--grey`}>
                 <span className='text--upper text--p6 text--color-disabled text--bold'>У меня есть инвайт-код</span>
             </div>
-            <div className='text--p6 text--color-disabled pb-1.5:md'>
-                <a href='#' className='text--underline'>Соглашение об использовании Cookies</a>
-                &nbsp;и&nbsp;
-                <a href='#' className='text--underline'>Положение об обработке и защите персональных данных</a>
+            <div className={`${style.footer} text--p6 text--color-disabled pb-1.5:md`}>
+                <span>
+                    <a href='#' className='text--underline'>Соглашение об использовании Cookies</a>
+                    &nbsp;и&nbsp;
+                    <a href='#' className='text--underline'>Положение об обработке и защите персональных данных</a>
+                </span>
             </div>
         </div>
     )
