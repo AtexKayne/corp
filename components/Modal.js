@@ -24,9 +24,7 @@ export default function Modal() {
     const dragEndHandler = (_, info) => {
         if (isFullHeight) return
         if (Math.abs(info.offset.y) > 60 && window.innerWidth < globalState.sizes.sm) {
-            setTimeout(() => {
-                setIsOpen(false)
-            }, 100)
+            setIsOpen(false)
         }
     }
 
