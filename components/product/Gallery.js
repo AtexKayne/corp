@@ -12,6 +12,7 @@ export default function Gallery({ images = [], alt = '' }) {
     const [previewHeight, setPreviewHeight] = useState(100)
     const [navDisabled, setNavDisabled] = useState('up')
     const [modalOpen, setModalOpen] = useState(false)
+    const [isScaled, setIsScaled] = useState(false)
     const animateActiveImage = useAnimationControls()
     const animatePreview = useAnimationControls()
     const animateDrag = useAnimationControls()
@@ -202,6 +203,31 @@ export default function Gallery({ images = [], alt = '' }) {
         else if (condition > 0) slidePreview('reset')
     }, [activeImage])
 
+    const openFullImage = (event, index) => {
+        if (window.innerWidth >= globalState.sizes.lg) return
+        const target = event.target.closest(`.${style.imageModal}`)
+        const classList = target.classList
+        
+        if (isScaled) {
+            target.style.transform = 'scale(1)'
+            setTimeout(() => target.classList.remove(style.imageFull), 200)
+        } else {
+            target.style.transform = 'scale(1.2)'
+            setTimeout(() => target.classList.add(style.imageFull), 200)
+        }
+        setIsScaled(!isScaled)
+    }
+
+    const scaleDownHandler = () => {
+        if (!isScaled) return
+        const target = document.querySelector(`.${style.imageFull}`)
+        target.style.transform = 'scale(1)'
+        setIsScaled(false)
+        setTimeout(() => {
+            target.classList.remove(style.imageFull)
+        }, 200)
+    }
+
     return (
         <>
             <div ref={refGallery} className={style.gallery}>
@@ -262,8 +288,6 @@ export default function Gallery({ images = [], alt = '' }) {
                     </motion.div>
                 </div>
 
-
-
                 <div className={style.labels}>
                     <div className='label label--sucess mb-0.6'>50%</div>
                     <div className='label label--info mb-0.6'>
@@ -282,13 +306,18 @@ export default function Gallery({ images = [], alt = '' }) {
 
             <div ref={refModal} data-open={modalOpen} className={style.galleryModal}>
                 <div className='container p-relative'>
-                    <div className={`${style.alt} text--t1 text--upper text--bold py-2 pr-4`}>{alt}</div>
+                    <div
+                        onClick={scaleDownHandler}
+                        className={`${style.alt} text--a4 text--upper text--bold py-2 pr-4`}>
+                            <Icon name='chevronLeft' width='20' height='20' external={isScaled ? 'mr-0.5' : 'is-hidden'} />
+                            {alt}
+                    </div>
                     <div className={`${style.modalHeader}`}>
                         <div className={`${style.closeBtn} c-pointer`} onClick={modalClose}><Icon name='close' width='20' height='20' /></div>
                     </div>
 
-                    {images.map(image => (
-                        <div key={image.full} className={style.imageModal}>
+                    {images.map((image, index) => (
+                        <div onClick={event => openFullImage(event, index)} key={image.full} className={style.imageModal}>
                             <Image src={image.full} width='1496' height='919' alt={alt} />
                         </div>
                     ))}

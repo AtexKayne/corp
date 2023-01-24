@@ -61,16 +61,16 @@ export default function Modal() {
     // @TODO REWIRITE!
     useEffect(() => {
         const mobile = window.innerWidth < globalState.sizes.sm
-        const duration = mobile ? 0.3 : 0.6
+        const duration = mobile ? 0.3 : 0.5
 
         if (isOpen) {
             setIsMobile(mobile)
             const pos = window.innerWidth >= globalState.sizes.sm || isZero
-                ? { x: 0, y: 0, transition: { duration: duration, ease: 'easeIn', delay: 0.3 } }
-                : { y: 0, x: 0, transition: { duration: duration, ease: 'easeIn', delay: 0.3 } }
+                ? { x: 0, y: 0, transition: { duration: duration, ease: 'easeInOut' } }
+                : { y: 0, x: 0, transition: { duration: duration, ease: 'easeInOut' } }
             const posStart = window.innerWidth >= globalState.sizes.sm || isZero
-                ? { x: '100%', y: 0, transition: { duration: 0, ease: 'easeIn', delay: 0 } }
-                : { y: '100%', x: 0, transition: { duration: 0, ease: 'easeIn', delay: 0 } }
+                ? { x: '100%', y: 0, transition: { duration: 0 } }
+                : { y: '100%', x: 0, transition: { duration: 0 } }
 
             animateContent.start(posStart).then(() => {
                 animateContent.start(pos)
@@ -78,8 +78,8 @@ export default function Modal() {
             globalState.body.addClass('overflow-hidden')
         } else {
             const posStart = window.innerWidth >= globalState.sizes.sm || isZero
-                ? { x: '100%', y: 0, transition: { duration: duration, ease: 'easeIn', delay: 0 } }
-                : { y: '100%', x: 0, transition: { duration: duration, ease: 'easeIn', delay: 0 } }
+                ? { x: '100%', y: 0, transition: { duration: duration, ease: 'easeInOut' } }
+                : { y: '100%', x: 0, transition: { duration: duration, ease: 'easeInOut' } }
 
             animateContent.start(posStart)
 

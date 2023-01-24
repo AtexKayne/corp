@@ -14,34 +14,34 @@ export default function Header() {
     const [themeImage, setThemeImage] = useState('ui-light')
     const [isHeaderFixed, setIsHeaderFixed] = useState(false)
     const [isRabbitFixed, setIsRabbitFixed] = useState(false)
+    const refHeader = useRef(null)
+    const refIsHandled = useRef(false)
+
+    const clickDocumentHandler = event => {
+        const target = event.target
+        if (target.closest('header')) return
+        setIsRabbitFixed(true)
+        setIsHeaderFixed('fixed')
+        console.log(target);
+        refIsHandled.current = false
+        document.removeEventListener('click', clickDocumentHandler)
+    }
 
     const hoverEnterHandler = () => {
-        if (window.scrollY <= 250) return
         setIsRabbitFixed(false)
         setIsHeaderFixed(true)
+        console.log(refIsHandled.current);
+        if (refIsHandled.current) return
+        document.addEventListener('click', clickDocumentHandler)
+        refIsHandled.current = true
     }
 
     const hoverLeaveHandler = () => {
         if (window.scrollY <= 250) return
         setIsRabbitFixed(true)
-        refFixed.current.style.opacity = '1'
         setIsHeaderFixed('fixed')
-        setTimeout(() => refFixed.current.style.opacity = '', 300)
+        document.removeEventListener('click', clickDocumentHandler)
     }
-
-    const scrollHandler = () => {
-        const scrollTop = window.scrollY
-
-        if (scrollTop > 250) {
-            setIsRabbitFixed(true)
-            setIsHeaderFixed('fixed')
-        } else {
-            setIsRabbitFixed(false)
-            setIsHeaderFixed(false)
-        }
-    }
-
-    const scrollDebounce = debounce(scrollHandler, 10)
 
     const themeChanfe = () => {
         const them = theme === 'ui-light' ? 'ui-dark' : 'ui-light'
@@ -89,17 +89,28 @@ export default function Header() {
             basketCount
         }
 
-
-
-        document.addEventListener('scroll', scrollDebounce)
+        const observeHandler = entries => {
+            const isIntersecting = entries[0].isIntersecting
+            if (isIntersecting) {
+                setIsRabbitFixed(false)
+                setIsHeaderFixed(false)
+            } else {
+                setIsRabbitFixed(true)
+                refFixed.current.style.opacity = '0'
+                setIsHeaderFixed('fixed')
+                setTimeout(() => refFixed.current.style.opacity = '', 300)
+            }
+        }
+        const observer = new IntersectionObserver(observeHandler, { threshold: 0 })
+        observer.observe(refHeader.current)
 
         return () => {
-            document.removeEventListener('scroll', scrollDebounce)
+            observer.disconnect()
         }
     }, [])
 
     return (
-        <header onMouseEnter={setThemeLight} onMouseLeave={setThemeDark} className={`${style.header} ${theme}`}>
+        <header ref={refHeader} onMouseEnter={setThemeLight} onMouseLeave={setThemeDark} className={`${style.header} ${theme}`}>
             <div className={`container ${style.container}`}>
                 <div className='header-hover'></div>
 

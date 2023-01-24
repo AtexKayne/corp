@@ -3,17 +3,16 @@
     left: 0;
     right: 0;
     bottom: 0;
-    opacity: 0;
     z-index: 15;
     position: fixed;
-    transition: .3s;
     pointer-events: none;
-    transition-delay: .5s;
 
     &[data-open="true"] {
-        opacity: 1;
         pointer-events: all;
-        transition-delay: 0s;
+
+        .modal__layout {
+            opacity: .7;
+        }
     }
 
     @include media-breakpoint(lg-up) {
@@ -33,6 +32,14 @@
         max-height: 100vh;
         flex-direction: column;
         background-color: color-use(background);
+        width: adaptive-value((
+            xs: 100vw,
+            md: 620px,
+            lg: 452px,
+            xl: 528px,
+            xxl: 644px,
+            xxxl: 684px
+        ));
         padding: adaptive-value((
             xs: 16px 16px 28px,
             md: 28px 32px 0,
@@ -44,14 +51,6 @@
     &__content {
         overflow-y: auto;
         border-radius: 16px 16px 0px 0px;
-        width: adaptive-value((
-            xs: 100vw,
-            md: 620px,
-            lg: 452px,
-            xl: 528px,
-            xxl: 644px,
-            xxxl: 684px
-        ));
 
         @include media-breakpoint(sm-down) {
             .modal__close {
@@ -88,14 +87,6 @@
         min-height: 100vh;
         touch-action: unset!important;
         background-color: color-use(background);
-        width: adaptive-value((
-            xs: 90vw,
-            md: 620px,
-            lg: 452px,
-            xl: 528px,
-            xxl: 644px,
-            xxxl: 684px
-        ));
 
         @include media-breakpoint(sm-down) {            
             .modal__close {
@@ -109,8 +100,9 @@
         left: 0;
         right: 0;
         bottom: 0;
-        opacity: .7;
+        opacity: 0;
         cursor: pointer;
+        transition: .5s;
         position: absolute;
         background-color: #112233;
     }

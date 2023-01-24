@@ -47,7 +47,9 @@
 .btnWrapper {
     width: 100%;
     margin-right: 0;
+    overflow: hidden;
     position: relative;
+    border-radius: 8px;
 }
 
 .btnMain {
@@ -56,12 +58,11 @@
     height: 100%;
     position: absolute;
     transform-origin: left;
+    transform: translateX(0);
     transition: .5s cubic-bezier(.9,0,.5,1);
-    // transition-delay: .1s;
 
     &[data-open="true"] {
-        transform: scaleX(0);
-        // transition-delay: 0s;
+        transform: translateX(-100%);
     }
 
     @include media-breakpoint(md) {
@@ -76,10 +77,9 @@
     display: flex;
     user-select: none;
     position: absolute;
-    transform: scaleX(0);
     transform-origin: right;
+    transform: translateX(100%);
     transition: .5s cubic-bezier(.9,0,.5,1);
-    // transition-delay: 0s;
 
     * {
         white-space: nowrap;
@@ -91,8 +91,7 @@
     }
 
     &[data-open="true"] {
-        transform: scaleX(1);
-        // transition-delay: .1s;
+        transform: translateX(0);
     }
 
     @include media-breakpoint(xxl-up) {
@@ -185,7 +184,6 @@
 .countSelector {
     display: flex;
     cursor: pointer;
-    margin-left: 8px;
     flex-basis: 100%;
     border-radius: 8px;
     background-color: var(--t-light);
@@ -197,7 +195,6 @@
     }
 
     &[data-active="true"] {
-
         .counterInput,
         .counterBtnAccept {
             display: flex;
@@ -207,6 +204,10 @@
         .counterBtn {
             display: none;
         }
+    }
+
+    @include media-breakpoint(xxl-up) {
+        margin-left: 8px;
     }
 }
 
@@ -269,5 +270,60 @@
 
     @include media-breakpoint(sm-down) {
         min-width: 60px;
+    }
+}
+
+.notify {
+    &[data-shaked="true"] {
+        svg {
+            transform-origin: top;
+            animation: ring 1s ease 0s 1;
+        }
+    }
+
+    &[data-active="true"] path {
+        fill: var(--t-background);
+    }
+
+    &[data-active="false"] path {
+        fill: none;
+        stroke-width: 0.7px;
+        stroke: var(--t-background);
+    }
+}
+
+@keyframes ring {
+    0% {
+        transform: translateY(-1.5px);
+    }
+    10% {
+        transform: translateY(-3px) rotate(-5deg);
+    }
+    20% {
+        transform: translateY(-3px) rotate(5deg);
+    }
+    30% {
+        transform: translateY(-3px) rotate(-5deg);
+    }
+    40% {
+        transform: translateY(-3px) rotate(5deg);
+    }
+    50% {
+        transform: translateY(-3px) rotate(-5deg);
+    }
+    60% {
+        transform: translateY(-3px) rotate(5deg);
+    }
+    70% {
+        transform: translateY(-3px) rotate(-5deg);
+    }
+    80% {
+        transform: translateY(-3px) rotate(5deg);
+    }
+    90% {
+        transform: translateY(-3px) rotate(0deg);
+    }
+    100% {
+        transform: translate(0px) rotate(0deg);
     }
 }

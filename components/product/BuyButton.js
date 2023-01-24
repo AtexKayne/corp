@@ -8,6 +8,8 @@ export default function BuyButton({ children, max, activeValue, isProfi, setInBa
     const [isFavourite, setIsFavourite] = useState(false)
     const [isSelected, setIsSelected] = useState(false)
     const [isShaked, setIsShaked] = useState(false)
+    const [isRinged, setIsRinged] = useState(false)
+    const [isNotify, setIsNotify] = useState(false)
     const [diabled, setDiabled] = useState(false)
     const [isEmpty, setIsEmpty] = useState(false)
     const [isOpen, setIsOpen] = useState(false)
@@ -16,6 +18,7 @@ export default function BuyButton({ children, max, activeValue, isProfi, setInBa
     const animateCount = useAnimationControls()
 
     const refValuesUpdate = useRef(false)
+    const refIsAnimated = useRef(false)
     const refSafeValue = useRef(0)
     const refCounter = useRef(null)
     const refButton = useRef(null)
@@ -49,7 +52,7 @@ export default function BuyButton({ children, max, activeValue, isProfi, setInBa
 
     const counterClick = () => {
         const fakeInput = document.createElement('input')
-        fakeInput.setAttribute('type', 'text')
+        fakeInput.setAttribute('type', 'tel')
         fakeInput.style.position = 'absolute'
         fakeInput.style.opacity = 0
         fakeInput.style.height = 0
@@ -69,6 +72,8 @@ export default function BuyButton({ children, max, activeValue, isProfi, setInBa
     }
 
     const updateCount = async increment => {
+        if (refIsAnimated.current) return
+        refIsAnimated.current = true
         const newValue = +count + increment
         if (newValue) {
             const strValue = '' + newValue
@@ -77,7 +82,8 @@ export default function BuyButton({ children, max, activeValue, isProfi, setInBa
             await animateCount.start({ y: pos * - 1, transition: { duration: 0 } })
         }
         setCount(newValue)
-        animateCount.start({ y: 0, transition: { duration: 0.1 } })
+        await animateCount.start({ y: 0, transition: { duration: 0.1 } })
+        refIsAnimated.current = false
     }
 
     const buyHandler = () => {
@@ -120,10 +126,25 @@ export default function BuyButton({ children, max, activeValue, isProfi, setInBa
         globalState.modal.setIsOpen(true)
     }
 
-    const notificationClickHandler = () => {
-        globalState.modal.setTemplate('notification')
-        globalState.modal.setIsZero(true)
-        globalState.modal.setIsOpen(true)
+    const notificationClickHandler = (isAuth = true) => {
+        if (isAuth) {
+            const text = isNotify ? 'Уведомление отключено' : 'Сообщим о поступлении письмом'
+            if (!isNotify) {
+                setIsRinged(true)
+                setTimeout(() => setIsRinged(false), 1100)
+            }
+            setIsNotify(!isNotify)
+            globalState.popover.setTextPrimary('System 4 Shale Oil Shampoo 4')
+            globalState.popover.setTextSecondary(text)
+            globalState.popover.setImage('/images/product/image-0.jpg')
+            globalState.popover.setIsBasket(false)
+            globalState.popover.setIsOpen(true)
+        } else {
+            globalState.modal.setTemplate('notification')
+            globalState.modal.setIsZero(true)
+            globalState.modal.setIsOpen(true)
+        }
+
     }
 
     useEffect(() => {
@@ -242,7 +263,7 @@ export default function BuyButton({ children, max, activeValue, isProfi, setInBa
                                 <input
                                     min={0}
                                     max={max}
-                                    type='number'
+                                    type='tel'
                                     ref={refInput}
                                     placeholder={count}
                                     onBlur={blurHandler}
@@ -279,9 +300,9 @@ export default function BuyButton({ children, max, activeValue, isProfi, setInBa
             {
                 isEmpty
                     ? <div className={style.btnWrapper}>
-                        <div onClick={notificationClickHandler} className={`${style.btnMain} btn btn--md btn--yellow`}>
+                        <div data-active={isNotify} data-shaked={isRinged} onClick={notificationClickHandler} className={`${style.btnMain} ${style.notify} btn btn--md btn--yellow`}>
                             <span className='text--upper text--p5 text--bold mr-0.8'>Сообщить</span>
-                            <Icon name='bell' width='16' height='16' />
+                            <Icon name='bellFill' width='16' height='16' />
                         </div>
                     </div> : null
             }
