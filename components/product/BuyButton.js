@@ -107,6 +107,7 @@ export default function BuyButton({ children, max, activeValue, isProfi, setInBa
     }
 
     const keyDownHandler = event => {
+        console.log(event.keyCode);
         if (event.keyCode === 13) document.body.click()
     }
 

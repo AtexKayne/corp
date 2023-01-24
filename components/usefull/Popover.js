@@ -89,7 +89,7 @@ export default function Popover() {
                 item.setAttribute('data-active', true)
             }, 100)
 
-            removeItem(item)
+            // removeItem(item)
 
             if (refCount.current > 3) {
                 refPopover.current.querySelector(`.${style.popoverInner}`).remove()
