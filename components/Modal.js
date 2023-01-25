@@ -70,7 +70,7 @@ export default function Modal() {
                 : { y: 0, x: 0, transition: { duration: duration, ease: 'easeInOut' } }
             const posStart = window.innerWidth >= globalState.sizes.sm || isZero
                 ? { x: '100%', y: 0, transition: { duration: 0 } }
-                : { y: '100vh', x: 0, transition: { duration: 0 } }
+                : { y: '120%', x: 0, transition: { duration: 0 } }
 
             animateContent.start(posStart).then(() => {
                 animateContent.start(pos)
@@ -79,7 +79,7 @@ export default function Modal() {
         } else {
             const posStart = window.innerWidth >= globalState.sizes.sm || isZero
                 ? { x: '100%', y: 0, transition: { duration: duration, ease: 'easeInOut' } }
-                : { y: '100vh', x: 0, transition: { duration: duration, ease: 'easeInOut' } }
+                : { y: '120%', x: 0, transition: { duration: duration, ease: 'easeInOut' } }
 
             animateContent.start(posStart)
 
