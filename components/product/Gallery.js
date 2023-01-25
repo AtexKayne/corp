@@ -268,7 +268,7 @@ export default function Gallery({ images = [], alt = '' }) {
                     transition={{ duration: 0.3 }}
                     animate={animateActiveImage}
                     className={`${style.imageMain} is-hidden--md-down`}>
-                    <img src={activeImage} width='100%' height='100%' alt={alt} />
+                    <Image src={activeImage} layout='fill' alt={alt} />
                 </motion.div>
 
                 <div onClick={openModal} className={`${style.imageMain} is-hidden--lg-up`}>
@@ -282,7 +282,7 @@ export default function Gallery({ images = [], alt = '' }) {
 
                         {images.map(image => (
                             <div key={image.gallery} className={style.imageDrag}>
-                                <img src={image.gallery} width='100%' height='100%' alt={alt} />
+                                <Image src={image.gallery} layout='fill' alt={alt} />
                             </div>
                         ))}
                     </motion.div>
