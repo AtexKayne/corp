@@ -87,11 +87,8 @@
         left: 100%;
     }
 
-    @include media-breakpoint(lg-up) {
-        top: 0;
-    }
-
     &[data-active="false"] {
+        transition: .3s;
         position: absolute;
     }
 
@@ -109,6 +106,14 @@
         position: fixed;
         transform: translateY(0px);
         transition: .3s ease-in-out transform;
+    }
+
+    @include media-breakpoint(lg-up) {
+        top: 0;
+
+        &[data-active="false"] {
+            transition: 0s;
+        }
     }
 }
 
