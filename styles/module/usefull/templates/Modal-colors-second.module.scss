@@ -1,15 +1,7 @@
 @import "../../../mixins/helpers/media";
+@import "../../../mixins/helpers/adaptive-value";
 
 .colors {
-    display: flex;
-    margin-bottom: 40px;
-    flex-direction: column;
-    height: calc(100% - 95px);
-    max-height: -webkit-fill-available;
-
-    @include media-breakpoint(md-up) {
-        height: calc(100% - 120px);
-    }
 }
 
 .title {
@@ -85,10 +77,20 @@
 }
 
 .footer {
-    height: 100%;
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-end;
+    bottom: 28px;
+    position: absolute;
+    left: adaptive-value((
+        xs: 16px,
+        md: 32px,
+        lg: 48px,
+        xl: 72px,
+    ));
+    right: adaptive-value((
+        xs: 16px,
+        md: 32px,
+        lg: 48px,
+        xl: 72px,
+    ));
 }
 
 .showBtn {
