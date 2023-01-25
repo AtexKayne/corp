@@ -9,13 +9,14 @@ import style from '../../styles/module/Product/Product-gallery.module.scss'
 // @TODO Переписать фунуции переключения слайдов по свайпу.
 export default function Gallery({ images = [], alt = '' }) {
     const [activeImage, setActiveImage] = useState(images[0].gallery)
+    const [fullScreenImage, setFullScreenImage] = useState('')
     const [previewHeight, setPreviewHeight] = useState(100)
     const [navDisabled, setNavDisabled] = useState('up')
     const [modalOpen, setModalOpen] = useState(false)
-    const [isScaled, setIsScaled] = useState(false)
     const animateActiveImage = useAnimationControls()
     const animatePreview = useAnimationControls()
     const animateDrag = useAnimationControls()
+    const refFullScreenImage = useRef(null)
     const refPreviewPosition = useRef(0)
     const refGalleryOffset = useRef(0)
     const refModalOpen = useRef(false)
@@ -23,9 +24,9 @@ export default function Gallery({ images = [], alt = '' }) {
     const refModal = useRef(null)
 
     const updateActiveImage = async image => {
-        await animateActiveImage.start({ opacity: 0, transition: {duration: 0.5} })
+        await animateActiveImage.start({ opacity: 0, transition: { duration: 0.5 } })
         setActiveImage(image)
-        await animateActiveImage.start({ opacity: 1, transition: {duration: 0.5} })
+        await animateActiveImage.start({ opacity: 1, transition: { duration: 0.5 } })
     }
 
     const choseActive = (image, index = 0) => {
@@ -203,29 +204,37 @@ export default function Gallery({ images = [], alt = '' }) {
         else if (condition > 0) slidePreview('reset')
     }, [activeImage])
 
+    const loadHandler = () => {
+        refFullScreenImage.current.style.opacity = '1'
+        setTimeout(() => {
+            refFullScreenImage.current.scrollIntoView({inline: 'end'})
+            refFullScreenImage.current.scrollIntoView({inline: 'center'})
+        }, 100)
+        refFullScreenImage.current.removeEventListener('load', loadHandler)
+    }
+
     const openFullImage = (event, index) => {
         if (window.innerWidth >= globalState.sizes.lg) return
         const target = event.target.closest(`.${style.imageModal}`)
-        const classList = target.classList
-        
-        if (isScaled) {
-            target.style.transform = 'scale(1)'
-            setTimeout(() => target.classList.remove(style.imageFull), 200)
+
+        if (fullScreenImage) {
+            refFullScreenImage.current.style.opacity = '0'
+            setFullScreenImage(false)
         } else {
-            target.style.transform = 'scale(1.2)'
-            setTimeout(() => target.classList.add(style.imageFull), 200)
+            target.style.transform = 'scale(1.5)'
+            target.style.zIndex = '1'
+            refFullScreenImage.current.addEventListener('load', loadHandler)
+            setTimeout(() => {
+                setFullScreenImage(images[index].full)
+                target.style.transform = 'scale(1)'
+                target.style.zIndex = ''
+            }, 300)
         }
-        setIsScaled(!isScaled)
     }
 
     const scaleDownHandler = () => {
-        if (!isScaled) return
-        const target = document.querySelector(`.${style.imageFull}`)
-        target.style.transform = 'scale(1)'
-        setIsScaled(false)
-        setTimeout(() => {
-            target.classList.remove(style.imageFull)
-        }, 200)
+        refFullScreenImage.current.style.opacity = '0'
+        setFullScreenImage(false)
     }
 
     return (
@@ -277,8 +286,8 @@ export default function Gallery({ images = [], alt = '' }) {
                         animate={animateDrag}
                         onDragEnd={dragEndHandler}
                         className={style.imageDragCntainer}
-                        // dragConstraints={{ left: 0, right: 0 }}
-                        >
+                    // dragConstraints={{ left: 0, right: 0 }}
+                    >
 
                         {images.map(image => (
                             <div key={image.gallery} className={style.imageDrag}>
@@ -306,11 +315,8 @@ export default function Gallery({ images = [], alt = '' }) {
 
             <div ref={refModal} data-open={modalOpen} className={style.galleryModal}>
                 <div className='container p-relative'>
-                    <div
-                        onClick={scaleDownHandler}
-                        className={`${style.alt} text--a4 text--upper text--bold py-2 pr-4`}>
-                            <Icon name='chevronLeft' width='20' height='20' external={isScaled ? 'mr-0.5' : 'is-hidden'} />
-                            {alt}
+                    <div className={`${style.alt} text--a4 text--upper text--bold py-2 pr-4`}>
+                        {alt}
                     </div>
                     <div className={`${style.modalHeader}`}>
                         <div className={`${style.closeBtn} c-pointer`} onClick={modalClose}><Icon name='close' width='20' height='20' /></div>
@@ -348,6 +354,19 @@ export default function Gallery({ images = [], alt = '' }) {
                         }
                     </div>
                 </div>
+            </div>
+
+            <div data-active={!!fullScreenImage} className={style.imageFullScreen}>
+                <div
+                    onClick={scaleDownHandler}
+                    className={`${style.alt} text--a4 text--upper text--bold py-2 pr-4`}>
+                    <Icon name='chevronLeft' width='20' height='20' external={'mr-0.5'} />
+                    {alt}
+                </div>
+                <div className={style.dragContainer}>
+                    <img ref={refFullScreenImage} style={{opacity: 0}} src={fullScreenImage ? fullScreenImage : '/icons/icon-empty.svg'} alt={alt} />
+                </div>
+
             </div>
         </>
     )

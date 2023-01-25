@@ -278,13 +278,13 @@
 
 .notify {
     >span:first-child {
-        min-width: 85px;
+        width: 78px;
     }
 
     svg {
         position: relative;
         width: 99%!important;
-        height: 130%!important;
+        height: 104%!important;
 
         &::after {
             content: '';

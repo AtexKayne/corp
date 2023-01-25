@@ -328,7 +328,6 @@
     display: flex;
     position: fixed;
     align-items: center;
-    pointer-events: none;
 
     >span {
         margin-left: -28px;
@@ -385,5 +384,47 @@
         right: -10px;
         bottom: -10px;
         position: absolute;
+    }
+}
+
+// 
+
+.imageFullScreen {
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    opacity: 0;
+    z-index: 11;
+    position: fixed;
+    overflow: hidden;
+    pointer-events: none;
+    background-color: white;
+
+    &[data-active="true"] {
+        opacity: 1;
+        pointer-events: all;
+    }
+}
+
+.dragContainer {
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    padding: 0;
+    overflow: auto;
+    position: absolute;
+    scrollbar-color: transparent;
+
+    &::-webkit-scrollbar-thumb {
+        border-radius: 20px;
+        background-color: transparent;
+        border: 3px solid transparent;
+    }
+
+    img {
+        transition: .2s .2s;
+        height: calc(100vh - 30px);
     }
 }
