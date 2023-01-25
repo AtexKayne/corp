@@ -30,7 +30,7 @@ export default function Modal() {
 
     useEffect(() => {
         globalState.modal = {
-            setIsOpen: open => { setTimeout(() => setIsOpen(open), 50) },
+            setIsOpen: open => { setTimeout(() => setIsOpen(open), 100) },
             setTemplate,
             setIsZero
         }
