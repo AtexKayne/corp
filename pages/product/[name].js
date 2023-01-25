@@ -175,15 +175,19 @@ export default function Product({ detail = product }) {
 
                             {
                                 activeValue.max === 0
-                                    ? <span style={{ fontSize: '28px' }} className={`${style.text2} text--color-disabled text--bold`}>Нет в наличии</span>
+                                    ? <span style={{ fontSize: '28px' }} className={`${style.text2} text--color-disabled text--bold pb-1.5`}>Нет в наличии</span>
                                     : null
                             }
 
                         </div>
-                        <div className='text--p6 text--upper mt-0.8:xxl mb-1 mb-2:xxl is-hidden--md'>
-                            <span className='mr-0.5'>Вы получите</span>
-                            <span className='text--bold'>{activeValue.bonuses} Red-бонуса</span>
-                        </div>
+                        {
+                            activeValue.max !== 0
+                                ? <div className='text--p6 text--upper mt-0.8:xxl mb-1 mb-2:xxl is-hidden--md'>
+                                    <span className='mr-0.5'>Вы получите</span>
+                                    <span className='text--bold'>{activeValue.bonuses} Red-бонуса</span>
+                                </div>
+                                : null
+                        }
 
                         {
                             detail.color
@@ -215,7 +219,7 @@ export default function Product({ detail = product }) {
                             setInBasket={setInBasket}
                             isProfi={isProfi}
                             max={activeValue.max}>
-                            <div className={`${style.price} text--h4`}>
+                            <div className={`${style.price} text--h4`} style={{minHeight: activeValue.max === 0 ? '60px' : ''}}>
                                 {
                                     activeValue.max !== 0
                                         ? <span className={`${style.text2} text--bold`}>{activeValue.price.actual} ₽</span>
@@ -235,14 +239,19 @@ export default function Product({ detail = product }) {
                                 }
                                 {
                                     activeValue.max === 0
-                                        ? <span style={{ fontSize: '28px' }} className={`${style.text2} text--color-disabled text--bold`}>Нет в наличии</span>
+                                        ? <span style={{ fontSize: '28px' }} className={`text--color-disabled text--bold pr-2`}>Нет в наличии</span>
                                         : null
                                 }
                             </div>
-                            <div className='text--p6 text--upper mt-0.8 mt-0:md mt-0.8:lg'>
-                                <span className='mr-0.5'>Вы получите</span>
-                                <span className='text--bold'>{activeValue.bonuses} Red-бонуса</span>
-                            </div>
+                            {
+                                activeValue.max !== 0
+                                    ? <div className='text--p6 text--upper mt-0.8 mt-0:md mt-0.8:lg'>
+                                        <span className='mr-0.5'>Вы получите</span>
+                                        <span className='text--bold'>{activeValue.bonuses} Red-бонуса</span>
+                                    </div>
+                                    : null
+                            }
+
                         </BuyButton>
 
                         <div className='mb-2' />

@@ -229,7 +229,7 @@ export default function BuyButton({ children, max, activeValue, isProfi, setInBa
             <div
                 onClick={favouriteHandler}
                 data-active={isFavourite}
-                className={`${style.favourite} btn btn--md btn--shadow`}>
+                className={`${isEmpty ? style.favouriteEmpty : style.favourite} btn btn--md btn--shadow`}>
                 <Icon name='heartFill' width='18' height='16' />
             </div>
             {
