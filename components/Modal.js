@@ -9,20 +9,19 @@ export default function Modal() {
     const [isZero, setIsZero] = useState(false)
     const [template, setTemplate] = useState(null)
     const [isMobile, setIsMobile] = useState(null)
-    const [isFullHeight, setIsFullHeight] = useState(false)
 
     const animateContent = useAnimationControls()
     const controls = useDragControls()
     const refContent = useRef(null)
 
     const startDrag = event => {
-        if (isFullHeight || !isMobile) return
+        if (isZero || !isMobile) return
         if (window.innerWidth >= globalState.sizes.sm) return
         controls.start(event)
     }
 
     const dragEndHandler = (_, info) => {
-        if (isFullHeight) return
+        if (isZero) return
         if (Math.abs(info.offset.y) > 60 && window.innerWidth < globalState.sizes.sm) {
             setIsOpen(false)
         }
@@ -35,27 +34,27 @@ export default function Modal() {
             setIsZero
         }
 
-        let observer
-        if (refContent.current) {
-            const config = {
-                attributes: false,
-                childList: true,
-                subtree: false
-            }
-            const callback = info => {
-                const value = info[0]
-                // if (window.innerWidth >= globalState.sizes.sm) return
-                if (!value.addedNodes || !value.addedNodes.length) return
-                setIsFullHeight(value.addedNodes[0].classList.contains('full-height'))
-            }
+        // let observer
+        // if (refContent.current) {
+        //     const config = {
+        //         attributes: false,
+        //         childList: true,
+        //         subtree: false
+        //     }
+        //     const callback = info => {
+        //         const value = info[0]
+        //         // if (window.innerWidth >= globalState.sizes.sm) return
+        //         if (!value.addedNodes || !value.addedNodes.length) return
+        //         setIsFullHeight(value.addedNodes[0].classList.contains('full-height'))
+        //     }
 
-            observer = new MutationObserver(callback)
-            observer.observe(refContent.current, config)
-        }
+        //     observer = new MutationObserver(callback)
+        //     observer.observe(refContent.current, config)
+        // }
 
-        return () => {
-            if (observer) observer.disconnect()
-        }
+        // return () => {
+        //     if (observer) observer.disconnect()
+        // }
     }, [])
 
     // @TODO REWIRITE!
@@ -66,8 +65,8 @@ export default function Modal() {
         if (isOpen) {
             setIsMobile(mobile)
             const pos = window.innerWidth >= globalState.sizes.sm || isZero
-                ? { x: 0, y: 0, transition: { duration: duration, ease: 'easeInOut' } }
-                : { y: 0, x: 0, transition: { duration: duration, ease: 'easeInOut' } }
+                ? { x: 0, y: 0, transition: { duration, ease: 'easeInOut' } }
+                : { y: 0, x: 0, transition: { duration, ease: 'easeInOut' } }
             const posStart = window.innerWidth >= globalState.sizes.sm || isZero
                 ? { x: '100%', y: 0, transition: { duration: 0 } }
                 : { y: '120%', x: 0, transition: { duration: 0 } }
@@ -78,16 +77,14 @@ export default function Modal() {
             globalState.body.addClass('overflow-hidden')
         } else {
             const posStart = window.innerWidth >= globalState.sizes.sm || isZero
-                ? { x: '100%', y: 0, transition: { duration: duration, ease: 'easeInOut' } }
-                : { y: '120%', x: 0, transition: { duration: duration, ease: 'easeInOut' } }
+                ? { x: '100%', y: 0, transition: { duration, ease: 'easeInOut' } }
+                : { y: '120%', x: 0, transition: { duration, ease: 'easeInOut' } }
 
             animateContent.start(posStart)
 
             setTimeout(() => {
                 setTemplate(null)
-                setIsFullHeight(false)
                 globalState.body.removeClass('overflow-hidden')
-                setIsZero(false)
             }, 500)
         }
     }, [isOpen])
@@ -104,8 +101,8 @@ export default function Modal() {
                 onPointerDown={startDrag}
                 onDragEnd={dragEndHandler}
                 dragConstraints={{ top: 0, bottom: 0 }}
-                drag={isFullHeight || isZero ? false : 'y'}
-                className={`${isFullHeight ? 'modal__content--full-height' : 'modal__content'}`}>
+                drag={isZero ? false : 'y'}
+                className={`${isZero ? 'modal__content--full-height' : 'modal__content'}`}>
 
                 <div onClick={() => setIsOpen(false)} className='modal__close'>
                     <Icon name='close' width='20' height='20' />
