@@ -1,5 +1,6 @@
 import { useState, useEffect, useRef } from 'react'
 import { colorVariants } from '../../helpers/constants'
+import { globalState } from '../../helpers/globalState'
 import style from '../../../styles/module/usefull/templates/Modal-colors-second.module.scss'
 import Link from 'next/link'
 
@@ -12,6 +13,8 @@ export default function ModalColorsSecond() {
     const choseHandler = (index, link) => {
         setCurrentId(index)
         setCurrentLink(link)
+
+        // globalState.modal.setIsOpen(false)
     }
 
     useEffect(() => {
@@ -60,7 +63,7 @@ export default function ModalColorsSecond() {
 
             <div className={style.footer}>
                 <Link href={currentLink}>
-                    <div className={`${style.showBtn} btn btn--primary btn--fill text--`}>
+                    <div onClick={() => globalState.modal.setIsOpen(false)} className={`${style.showBtn} btn btn--primary btn--fill text--`}>
                         <span className='text--upper text--p6 text--bold'>Показать товар</span>
                     </div>
                 </Link>
