@@ -61,7 +61,7 @@ export default function ModalColorsSecond() {
             <div className={style.footer}>
                 <Link href={currentLink}>
                     <div className={`${style.showBtn} btn btn--primary btn--fill text--`}>
-                        <span className='text--upper text--p6 text--bold'>{currentLink} Показать товар</span>
+                        <span className='text--upper text--p6 text--bold'>Показать товар</span>
                     </div>
                 </Link>
             </div>
