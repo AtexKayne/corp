@@ -31,6 +31,7 @@
         position: fixed;
         max-height: 100vh;
         flex-direction: column;
+        transform: translateX(100vw);
         background-color: color-use(background);
         width: adaptive-value((
             xs: 100vw,

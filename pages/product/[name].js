@@ -135,22 +135,22 @@ export default function Product({ detail = product }) {
 
 
     return (
-        <MainLayout>
+        <MainLayout title={detail.names.primary}>
             <Breadcrumbs />
 
             <div ref={refStickyContainer} className='row p-relative'>
                 <div className='col col--xs-6 col--lg-7'>
-                    <Gallery images={currentImages} alt={product.names.primary} />
+                    <Gallery images={currentImages} alt={detail.names.primary} />
 
                     <div className='pt-0 pt-3:lg' />
                 </div>
 
                 <div ref={refBlockWidth} className='col col--xs-6 col--lg-5'>
                     <div ref={refStickyBlock} className={style.mainInfo}>
-                        <div className={`${style.text0} text--normal text--upper mb-0.8`}>{product.names.secondary}</div>
+                        <div className={`${style.text0} text--normal text--upper mb-0.8`}>{detail.names.secondary}</div>
                         <h1
                             onClick={() => setIsProfi(!isProfi)} // @TODO For testing
-                            className={`${style.text1} text--regular mb-1 mb-2:xxl`}>{product.names.primary}
+                            className={`${style.text1} text--regular mb-1 mb-2:xxl`}>{detail.names.primary}
                         </h1>
                         <div className={`${style.price} is-hidden--md`}>
                             {
@@ -219,7 +219,7 @@ export default function Product({ detail = product }) {
                             setInBasket={setInBasket}
                             isProfi={isProfi}
                             max={activeValue.max}>
-                            <div className={`${style.price} text--h4`} style={{minHeight: activeValue.max === 0 ? '60px' : ''}}>
+                            <div className={`${style.price} text--h4`} style={{minHeight: activeValue.max === 0 ? '60px' : '0px'}}>
                                 {
                                     activeValue.max !== 0
                                         ? <span className={`${style.text2} text--bold`}>{activeValue.price.actual} ₽</span>
