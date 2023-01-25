@@ -301,7 +301,7 @@ export default function BuyButton({ children, max, activeValue, isProfi, setInBa
                 isEmpty
                     ? <div className={style.btnWrapper}>
                         <div data-active={isNotify} data-shaked={isRinged} onClick={notificationClickHandler} className={`${style.btnMain} ${style.notify} btn btn--md btn--yellow`}>
-                            <span className='text--upper text--p5 text--bold mr-0.8'>Сообщить</span>
+                            <span className='text--upper text--p5 text--bold mr-0.8'>{isNotify ? 'сообщим' : 'сообщить'}</span>
                             <Icon name='bellFill' width='16' height='16' />
                         </div>
                     </div> : null
