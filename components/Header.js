@@ -22,7 +22,6 @@ export default function Header() {
         if (target.closest('header')) return
         setIsRabbitFixed(true)
         setIsHeaderFixed('fixed')
-        console.log(target);
         refIsHandled.current = false
         document.removeEventListener('click', clickDocumentHandler)
     }
@@ -30,9 +29,10 @@ export default function Header() {
     const hoverEnterHandler = () => {
         setIsRabbitFixed(false)
         setIsHeaderFixed(true)
-        console.log(refIsHandled.current);
         if (refIsHandled.current) return
-        document.addEventListener('click', clickDocumentHandler)
+        setTimeout(() => {
+            document.addEventListener('click', clickDocumentHandler)
+        }, 100)
         refIsHandled.current = true
     }
 
@@ -54,7 +54,6 @@ export default function Header() {
     const setThemeDark = (event) => {
         // setTheme('ui-dark')
     }
-
 
     useEffect(() => {
         globalState.headerTheme = {
@@ -140,8 +139,7 @@ export default function Header() {
                 <div className={`${style.middle} header-middle-container container`}
                     ref={refFixed}
                     data-active={isHeaderFixed}
-                    onMouseLeave={hoverLeaveHandler}
-                >
+                    onMouseLeave={hoverLeaveHandler}>
 
                     <div className='is-hidden--lg-up' style={{ width: '100%' }}>
                         <div className={`${style.top} ${style.textt4} text--regular`}>

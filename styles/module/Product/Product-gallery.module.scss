@@ -252,6 +252,10 @@
         top: 50px;
         position: fixed;
     }
+
+    .alt {
+        pointer-events: none;
+    }
 }
 
 .modalHeader {
