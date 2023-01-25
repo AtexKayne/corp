@@ -82,6 +82,12 @@
         xxl: 328px,
         xxxl: 412px,
     ));
+    min-height: adaptive-value((
+        xs: 20px,
+        xl: 240px,
+        xxl: 328px,
+        xxxl: 412px,
+    ));
 }
 
 .imagePreview {

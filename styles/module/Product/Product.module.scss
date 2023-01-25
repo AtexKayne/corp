@@ -148,7 +148,124 @@
     }
 }
 
+.colorPicker {
+    margin: 32px 0;
 
+    .colorItem,
+    .colorActive {
+        display: flex;
+        cursor: pointer;
+        align-items: center;
+
+        > * {
+            margin-right: 11px;
+        }
+    }
+
+    .colorActive {
+        transition: .3s;
+        max-width: 360px;
+        position: relative;
+        margin-right: 16px;
+
+        &:hover {
+            color: var(--t-primary);
+        }
+
+        &::after {
+            top: 0px;
+            content: '';
+            width: 18px;
+            right: -18px;
+            height: 18px;
+            transition: .3s;
+            position: absolute;
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            background-image: url('/icons/icon-chevron-right.svg');
+        }
+
+        @include media-breakpoint(lg-up) {
+            display: inline-flex;
+
+            &::after {
+                background-image: url('/icons/icon-triangle-down.svg');
+            }
+        }
+    }
+
+    .colorItem {
+        transition: .3s;
+        padding-bottom: 20px;
+
+        &:last-child {
+            padding-bottom: 0px;
+        }
+
+        &[data-active="true"] {
+            font-weight: 700;
+            pointer-events: none;
+        }
+
+        &:hover {
+            color: var(--t-primary);
+        }
+    }
+
+    .colorItemIcon,
+    .colorActiveIcon {
+        width: 12px;
+        height: 12px;
+        border-radius: 50%;
+    }
+
+    .dropdown {
+        z-index: 4;
+        height: 0px;
+        transition: .4s;
+        overflow: hidden;
+        min-width: 237px;
+        margin-top: 10px;
+        max-height: 192px;
+        position: absolute;
+        border-radius: 8px;
+        background-color: var(--t-background);
+        scrollbar-color: var(--t-smallish) var(--c-_lightest);
+
+        &::-webkit-scrollbar-thumb {
+            border-radius: 20px;
+            background-color: var(--t-smallish);
+            border: 3px solid var(--c-_lightest);
+        }
+    }
+
+    .dropdownList {
+        padding: 23px 19px;
+    }
+
+    &[data-active="true"] {
+        .dropdown {
+            height: 192px;
+            overflow: auto;
+            box-shadow: 0px 4px 15px 3px #0000001F;
+        }
+
+        .colorActive {
+            &::after {
+                transform: rotate(180deg);
+            }
+        }
+    }
+
+    .iconWhite {
+        border: 1px solid #E5E5E5
+    }
+    
+    .iconColorfull {
+        background: linear-gradient(223deg, rgba(4, 255, 14, 1) 0%, rgba(253, 196, 0, 1) 50%, rgba(225, 41, 33, 1) 100%)!important;
+    }
+}
 
 .infoline {
     width: 100%;

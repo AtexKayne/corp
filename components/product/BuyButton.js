@@ -222,9 +222,12 @@ export default function BuyButton({ children, max, activeValue, isProfi, setInBa
 
     return (
         <div ref={refButton} className={style.buybtn}>
-            <div className={`${style.buybtnChildren} is-hidden--lg-up is-hidden--sm-down`}>
-                {children}
-            </div>
+            {
+                children
+                    ? <div className={`${style.buybtnChildren} is-hidden--lg-up is-hidden--sm-down`}>
+                        {children}
+                    </div> : null
+            }
 
             <div
                 onClick={favouriteHandler}

@@ -1,5 +1,5 @@
 import { useState, useEffect, useRef } from 'react'
-import { product } from '../../components/helpers/constants'
+import { product, product1, product2 } from '../../components/helpers/constants'
 import { debounce } from '../../components/helpers/debounce'
 import { globalState } from '../../components/helpers/globalState'
 import style from '../../styles/module/Product/Product.module.scss'
@@ -12,11 +12,12 @@ import Gallery from '../../components/product/Gallery'
 import Breadcrumbs from '../../components/Breadcrumbs'
 import BuyButton from '../../components/product/BuyButton'
 import Accordeon from '../../components/usefull/Accordeon'
+import Link from 'next/link'
 
 export default function Product({ detail = product }) {
     const [currentImages, setCurrentImages] = useState(detail.images)
     const [containerHeight, setContainerHeight] = useState(0)
-    const [isProfi, setIsProfi] = useState(true)
+    const [isProfi, setIsProfi] = useState(detail.forProfi)
     const [inBasket, setInBasket] = useState(0)
 
     const refStickyBlockHeight = useRef(null)
@@ -76,6 +77,7 @@ export default function Product({ detail = product }) {
         }, 0);
     }, [containerHeight])
 
+
     useEffect(() => {
         refStickyBlockHeight.current = refStickyBlock.current.clientHeight
         refContainerOffset.current = refStickyContainer.current.offsetTop
@@ -127,7 +129,7 @@ export default function Product({ detail = product }) {
             window.removeEventListener('scroll', debounceScroll)
             window.removeEventListener('resize', debounceResize)
         }
-    }, [])
+    }, [detail])
 
     useEffect(() => {
         updateBasket()
@@ -148,19 +150,16 @@ export default function Product({ detail = product }) {
                 <div ref={refBlockWidth} className='col col--xs-6 col--lg-5'>
                     <div ref={refStickyBlock} className={style.mainInfo}>
                         <div className={`${style.text0} text--normal text--upper mb-0.8`}>{detail.names.secondary}</div>
-                        <h1
-                            onClick={() => setIsProfi(!isProfi)} // @TODO For testing
-                            className={`${style.text1} text--regular mb-1 mb-2:xxl`}>{detail.names.primary}
-                        </h1>
+                        <h1 className={`${style.text1} text--regular mb-1 mb-2:xxl`}>{detail.names.primary}</h1>
                         <div className={`${style.price} is-hidden--md`}>
                             {
-                                activeValue.max !== 0
+                                activeValue.max !== 0 && !isProfi
                                     ? <span className={`${style.text2} text--bold`}>{activeValue.price.actual} ₽</span>
                                     : null
                             }
 
                             {
-                                activeValue.price.old && activeValue.max !== 0
+                                activeValue.price.old && activeValue.max !== 0 && !isProfi
                                     ? <span className={`${style.text3} ${style.priceOld} text--bold`}>{activeValue.price.old} ₽</span>
                                     : null
                             }
@@ -169,24 +168,22 @@ export default function Product({ detail = product }) {
                                 !isProfi && activeValue.max !== 0
                                     ? <span onClick={infoHandler} className={`${style.priceIcon} is-hiden--md`}>
                                         <Icon name='info' width='18' height='18' />
-                                    </span>
-                                    : null
+                                    </span> : null
                             }
 
                             {
-                                activeValue.max === 0
+                                activeValue.max === 0 && !isProfi
                                     ? <span style={{ fontSize: '28px' }} className={`${style.text2} text--color-disabled text--bold pb-1.5`}>Нет в наличии</span>
                                     : null
                             }
 
                         </div>
                         {
-                            activeValue.max !== 0
+                            activeValue.max !== 0 && !isProfi
                                 ? <div className='text--p6 text--upper mt-0.8:xxl mb-1 mb-2:xxl is-hidden--md'>
                                     <span className='mr-0.5'>Вы получите</span>
                                     <span className='text--bold'>{activeValue.bonuses} Red-бонуса</span>
-                                </div>
-                                : null
+                                </div> : null
                         }
 
                         {
@@ -202,11 +199,11 @@ export default function Product({ detail = product }) {
                                     <div className={`${style.colorArrow} text--bold`}>
                                         <Icon name='chevronRight' width='20' height='20' />
                                     </div>
-                                </div>
-                                : null
+                                </div> : null
                         }
 
                         <RadioButton items={detail.values} setActiveValue={setActiveValue} />
+                        <ColorPicker items={detail.valuePicker} />
 
                         <div className='text--p4 text--normal mt-0.5 mb-1 mb-2:xxl'>
                             Артикул: {activeValue.art}
@@ -219,39 +216,42 @@ export default function Product({ detail = product }) {
                             setInBasket={setInBasket}
                             isProfi={isProfi}
                             max={activeValue.max}>
-                            <div className={`${style.price} text--h4`} style={{minHeight: activeValue.max === 0 ? '60px' : '0px'}}>
-                                {
-                                    activeValue.max !== 0
-                                        ? <span className={`${style.text2} text--bold`}>{activeValue.price.actual} ₽</span>
-                                        : null
-                                }
-                                {
-                                    activeValue.price.old && activeValue.max !== 0
-                                        ? <span className={`${style.text2} ${style.priceOld} text--bold`}>{activeValue.price.old} ₽</span>
-                                        : null
-                                }
-                                {
-                                    !isProfi && activeValue.max !== 0
-                                        ? <span onClick={infoHandler} className={`${style.priceIcon} is-hiden--md`}>
-                                            <Icon name='info' width='18' height='18' />
-                                        </span>
-                                        : null
-                                }
-                                {
-                                    activeValue.max === 0
-                                        ? <span style={{ fontSize: '28px' }} className={`text--color-disabled text--bold pr-2`}>Нет в наличии</span>
-                                        : null
-                                }
-                            </div>
                             {
-                                activeValue.max !== 0
-                                    ? <div className='text--p6 text--upper mt-0.8 mt-0:md mt-0.8:lg'>
-                                        <span className='mr-0.5'>Вы получите</span>
-                                        <span className='text--bold'>{activeValue.bonuses} Red-бонуса</span>
-                                    </div>
-                                    : null
+                                isProfi
+                                    ? null
+                                    : <>
+                                        <div className={`${style.price} text--h4`} style={{ minHeight: activeValue.max === 0 ? '60px' : '0px' }}>
+                                            {
+                                                activeValue.max !== 0
+                                                    ? <span className={`${style.text2} text--bold`}>{activeValue.price.actual} ₽</span>
+                                                    : null
+                                            }
+                                            {
+                                                activeValue.price.old && activeValue.max !== 0
+                                                    ? <span className={`${style.text2} ${style.priceOld} text--bold`}>{activeValue.price.old} ₽</span>
+                                                    : null
+                                            }
+                                            {
+                                                !isProfi && activeValue.max !== 0
+                                                    ? <span onClick={infoHandler} className={`${style.priceIcon} is-hiden--md`}>
+                                                        <Icon name='info' width='18' height='18' />
+                                                    </span> : null
+                                            }
+                                            {
+                                                activeValue.max === 0
+                                                    ? <span style={{ fontSize: '28px' }} className={`text--color-disabled text--bold pr-2`}>Нет в наличии</span>
+                                                    : null
+                                            }
+                                        </div>
+                                        {
+                                            activeValue.max !== 0
+                                                ? <div className='text--p6 text--upper mt-0.8 mt-0:md mt-0.8:lg'>
+                                                    <span className='mr-0.5'>Вы получите</span>
+                                                    <span className='text--bold'>{activeValue.bonuses} Red-бонуса</span>
+                                                </div> : null
+                                        }
+                                    </>
                             }
-
                         </BuyButton>
 
                         <div className='mb-2' />
@@ -350,7 +350,7 @@ export default function Product({ detail = product }) {
 }
 
 function RadioButton({ items = [], setActiveValue }) {
-    if (!items.length) return null
+    if (items.length <= 1) return null
     const [active, setActive] = useState(0)
     const clickHandler = index => {
         setActiveValue(items[index])
@@ -372,6 +372,61 @@ function RadioButton({ items = [], setActiveValue }) {
     )
 }
 
+function ColorPicker({ items = [] }) {
+    if (!items || !items.length) return null
+    const [isActive, setIsActive] = useState(false)
+
+    const clickHandler = () => {
+        setIsActive(false)
+        document.removeEventListener('click', clickHandler)
+    }
+    const openHandler = () => {
+        if (window.innerWidth >= globalState.sizes.lg) {
+            if (!isActive) {
+                setTimeout(() => document.addEventListener('click', clickHandler), 100)
+            }
+            setIsActive(!isActive)
+        } else {
+            globalState.modal.setTemplate('colorsSecond')
+            globalState.modal.setIsZero(true)
+            globalState.modal.setIsOpen(true)
+        }
+    }
+
+    return (
+        <div data-active={isActive} className={`${style.colorPicker} text--t4`}>
+            <div onClick={openHandler} className={style.colorActive}>
+                <span className={style.colorActiveIcon} style={{ backgroundColor: items[0].iconColor }} />
+                <span className={style.colorActiveName}>{items[0].name}</span>
+            </div>
+
+            <div className={style.dropdown}>
+                <div className={style.dropdownList}>
+                    {
+                        items.map(item => {
+                            let iconStyle = ''
+                            const name = item.name.toLowerCase()
+                            if (name === 'белый') {
+                                iconStyle = style.iconWhite
+                            } else if (name === 'разноцветный') {
+                                iconStyle = style.iconColorfull
+                            }
+                            return (
+                                <Link key={item.name} href={item.link}>
+                                    <div data-active={item.current} className={style.colorItem}>
+                                        <span className={`${style.colorItemIcon} ${iconStyle}`} style={{ backgroundColor: item.iconColor }} />
+                                        <span className={style.colorItemName}>{item.name}</span>
+                                    </div>
+                                </Link>
+                            )
+                        })
+                    }
+                </div>
+            </div>
+        </div>
+    )
+}
+
 function InfoLine({ title, text }) {
     return (
         <div className={style.infoline}>
@@ -380,4 +435,30 @@ function InfoLine({ title, text }) {
             <div className='text--p5 text--bold text--upper'>{text}</div>
         </div>
     )
+}
+
+export async function getServerSideProps(context) {
+    let resp, json
+    if (context.query.name === 'test') {
+        json = product
+    } else if (context.query.name === 'test-1') {
+        json = product1
+    } else if (context.query.name === 'test-2') {
+        json = product2
+    } else {
+        json = product
+    }
+    // json = persone
+    // try {
+    //   resp = await fetch(`${process.env.API_URL}/team/${context.query.name}/?lang=ru`)
+    //   json = await resp.json()
+    // } catch (error) {
+    //   json = persone
+    // }
+
+    return {
+        props: {
+            detail: json,
+        }
+    }
 }
