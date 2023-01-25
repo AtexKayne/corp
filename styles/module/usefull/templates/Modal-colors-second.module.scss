@@ -77,7 +77,7 @@
 }
 
 .footer {
-    bottom: 28px;
+    top: calc(100vh - 85px);
     position: absolute;
     left: adaptive-value((
         xs: 16px,
