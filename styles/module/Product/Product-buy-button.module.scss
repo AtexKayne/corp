@@ -277,9 +277,15 @@
 }
 
 .notify {
+    >span:first-child {
+        min-width: 85px;
+    }
+
     svg {
         position: relative;
-        
+        width: 99%!important;
+        height: 130%!important;
+
         &::after {
             content: '';
             width: 2px;
