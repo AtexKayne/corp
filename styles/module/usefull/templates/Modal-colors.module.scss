@@ -54,5 +54,8 @@
 .image {
     min-width: 90px;
     min-height: 90px;
+    max-height: 90px;
     margin-right: 8px;
+    border-radius: 50%;
+    background-color: var(--t-smallish);
 }
