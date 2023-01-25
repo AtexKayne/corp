@@ -126,22 +126,21 @@ export const product1 = {
 
 export const product2 = {
     names: {
-        primary: 'System 4 Shale Oil Shampoo 4',
-        secondary: 'Шампунь №4 для жирной кожи головы'
+        primary: 'Canway SZ-A7116-4 blue',
+        secondary: 'Расческа с хвостиком'
     },
     images: [
-        { preview: '/images/product/image-0.jpg', full: '/images/product/image-0.jpg', gallery: '/images/product/image-0.jpg' },
-        { preview: '/images/product/image-1.jpg', full: '/images/product/image-1.jpg', gallery: '/images/product/image-1.jpg' },
+        { preview: '/images/product/image-7.jpg', full: '/images/product/image-7.jpg', gallery: '/images/product/image-7.jpg' },
+        { preview: '/images/product/image-8.jpg', full: '/images/product/image-8.jpg', gallery: '/images/product/image-8.jpg' },
     ],
     values: [
         {
             value: '100 мл',
             price: {
-                actual: 931,
-                old: 1299 // Can be empty
+                actual: 277,
             },
             bonuses: 24,
-            art: 5414,
+            art: 'SZ-A7116-4',
             link: '100',
             max: 109,
         },

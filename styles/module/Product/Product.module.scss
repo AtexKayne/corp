@@ -156,8 +156,10 @@
         display: flex;
         cursor: pointer;
         align-items: center;
+        -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
 
         > * {
+            user-select: none;
             margin-right: 11px;
         }
     }
