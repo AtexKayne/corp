@@ -277,6 +277,16 @@
 }
 
 .notify {
+    svg {
+        position: relative;
+        
+        &::after {
+            content: '';
+            width: 2px;
+            height: 2px;
+            background-color: var(--t-background);
+        }
+    }
     &[data-shaked="true"] {
         svg {
             transform-origin: top;

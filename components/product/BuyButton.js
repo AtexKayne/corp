@@ -17,7 +17,7 @@ export default function BuyButton({ children, max, activeValue, isProfi, setInBa
 
     const animateCount = useAnimationControls()
 
-    const refValuesUpdate = useRef(false)
+    const refValuesUpdate = useRef(true)
     const refIsAnimated = useRef(false)
     const refSafeValue = useRef(0)
     const refCounter = useRef(null)
@@ -148,6 +148,7 @@ export default function BuyButton({ children, max, activeValue, isProfi, setInBa
     }
 
     useEffect(() => {
+        console.log(count);
         if (refValuesUpdate.current || isProfi || isEmpty) return
 
         if (count <= 0) {
@@ -195,6 +196,8 @@ export default function BuyButton({ children, max, activeValue, isProfi, setInBa
 
         const observer = new IntersectionObserver(callback, { threshold: 0.1 })
         observer.observe(target)
+
+        setTimeout(() => refValuesUpdate.current = false, 200) //@TODO для предотвращение уведомления при первой загруке
 
         return () => {
             observer.disconnect()

@@ -30,7 +30,7 @@ export default function Modal() {
 
     useEffect(() => {
         globalState.modal = {
-            setIsOpen: open => { setTimeout(() => setIsOpen(open), 100) },
+            setIsOpen: open => { setTimeout(() => setIsOpen(open), 120) },
             setTemplate,
             setIsZero
         }
@@ -88,7 +88,7 @@ export default function Modal() {
                 setIsFullHeight(false)
                 globalState.body.removeClass('overflow-hidden')
                 setIsZero(false)
-            }, 600)
+            }, 500)
         }
     }, [isOpen])
 

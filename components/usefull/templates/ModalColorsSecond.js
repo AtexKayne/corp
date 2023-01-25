@@ -6,22 +6,31 @@ import Link from 'next/link'
 export default function ModalColorsSecond() {
     const [title, setTitle] = useState('')
     const [variants, setVariants] = useState([])
+    const [currentId, setCurrentId] = useState(0)
+    const [currentLink, setCurrentLink] = useState('/product/test-3')
+
+    const choseHandler = (index, link) => {
+        setCurrentId(index)
+        setCurrentLink(link)
+    }
 
     useEffect(() => {
         setTitle(colorVariants.name)
         setVariants(colorVariants.items)
+        setCurrentLink(colorVariants.items.filter(el => el.current)[0].link)
+        // setCurrentLink('/product/test-3')
     }, [])
 
 
     return (
-        <div className='full-height'>
+        <div className={`${style.colors} full-height`}>
             <div className={`${style.title} text--t5 text--upper text--bold pb-2`}>
                 <span>{title}</span>
             </div>
             <div className={style.variants}>
                 {
                     variants.length
-                        ? variants.map(variant => {
+                        ? variants.map((variant, index) => {
                             let iconStyle = ''
                             if (variant.name.toLowerCase() === 'белый') {
                                 iconStyle = style.iconWhite
@@ -29,22 +38,32 @@ export default function ModalColorsSecond() {
                                 iconStyle = style.iconColorfull
                             }
                             return (
-                                <Link key={variant.name} href={`${variant.link}`}>
-                                    <div data-status={variant.status} className={style.variant}>
-                                        <div className={style.radio} data-selected={!!variant.current} />
+                                <div
+                                    onClick={() => choseHandler(index, variant.link)}
+                                    data-link={variant.link}
+                                    key={variant.name}
+                                    data-status={variant.status}
+                                    className={style.variant}>
 
-                                        <span className={`${style.icon} ${iconStyle}`} style={{ backgroundColor: variant.iconColor }} />
+                                    <div className={style.radio} data-selected={currentId === index} />
 
-                                        <div className={style.text}>
-                                            <div className='text--t4 text--normal'>{variant.name}</div>
-                                        </div>
+                                    <span className={`${style.icon} ${iconStyle}`} style={{ backgroundColor: variant.iconColor }} />
+
+                                    <div className={style.text}>
+                                        <div className='text--t4 text--normal'>{variant.name}</div>
                                     </div>
-                                </Link>
+                                </div>
                             )
-                        }
-                        )
-                        : null
+                        }) : null
                 }
+            </div>
+
+            <div className={style.footer}>
+                <Link href={currentLink}>
+                    <div className={`${style.showBtn} btn btn--primary btn--fill text--`}>
+                        <span className='text--upper text--p6 text--bold'>{currentLink} Показать товар</span>
+                    </div>
+                </Link>
             </div>
         </div>
     )

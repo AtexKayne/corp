@@ -33,7 +33,6 @@ export const product = {
             art: 5415,
             link: '200',
             max: 880,
-            basket: 4,
         },
         {
             value: '500 мл',

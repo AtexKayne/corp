@@ -1,5 +1,15 @@
 @import "../../../mixins/helpers/media";
 
+.colors {
+    display: flex;
+    flex-direction: column;
+    height: calc(100% - 95px);
+    
+    @include media-breakpoint(md-up) {
+        height: calc(100% - 120px);
+    }
+}
+
 .title {
     text-align: center;
 
@@ -47,6 +57,7 @@
 .radio {
     width: 20px;
     height: 20px;
+    transition: .3s;
     position: relative;
     margin-right: 19px;
     border-radius: 50%;
@@ -69,4 +80,15 @@
 
 .iconColorfull {
     background: linear-gradient(223deg, rgba(4, 255, 14, 1) 0%, rgba(253, 196, 0, 1) 50%, rgba(225, 41, 33, 1) 100%)!important;
+}
+
+.footer {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+}
+
+.showBtn {
+    min-height: 60px;
 }
