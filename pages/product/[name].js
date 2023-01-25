@@ -153,19 +153,32 @@ export default function Product({ detail = product }) {
                             className={`${style.text1} text--regular mb-1 mb-2:xxl`}>{product.names.primary}
                         </h1>
                         <div className={`${style.price} is-hidden--md`}>
-                            <span className={`${style.text2} text--bold`}>{activeValue.price.actual} ₽</span>
                             {
-                                activeValue.price.old
+                                activeValue.max !== 0
+                                    ? <span className={`${style.text2} text--bold`}>{activeValue.price.actual} ₽</span>
+                                    : null
+                            }
+
+                            {
+                                activeValue.price.old && activeValue.max !== 0
                                     ? <span className={`${style.text3} ${style.priceOld} text--bold`}>{activeValue.price.old} ₽</span>
                                     : null
                             }
+
                             {
-                                !isProfi
+                                !isProfi && activeValue.max !== 0
                                     ? <span onClick={infoHandler} className={`${style.priceIcon} is-hiden--md`}>
                                         <Icon name='info' width='18' height='18' />
                                     </span>
                                     : null
                             }
+
+                            {
+                                activeValue.max === 0
+                                    ? <span style={{ fontSize: '28px' }} className={`${style.text2} text--color-disabled text--bold`}>Нет в наличии</span>
+                                    : null
+                            }
+
                         </div>
                         <div className='text--p6 text--upper mt-0.8:xxl mb-1 mb-2:xxl is-hidden--md'>
                             <span className='mr-0.5'>Вы получите</span>
@@ -203,17 +216,26 @@ export default function Product({ detail = product }) {
                             isProfi={isProfi}
                             max={activeValue.max}>
                             <div className={`${style.price} text--h4`}>
-                                <span className={`${style.text2} text--bold`}>{activeValue.price.actual} ₽</span>
                                 {
-                                    activeValue.price.old
+                                    activeValue.max !== 0
+                                        ? <span className={`${style.text2} text--bold`}>{activeValue.price.actual} ₽</span>
+                                        : null
+                                }
+                                {
+                                    activeValue.price.old && activeValue.max !== 0
                                         ? <span className={`${style.text2} ${style.priceOld} text--bold`}>{activeValue.price.old} ₽</span>
                                         : null
                                 }
                                 {
-                                    !isProfi
+                                    !isProfi && activeValue.max !== 0
                                         ? <span onClick={infoHandler} className={`${style.priceIcon} is-hiden--md`}>
                                             <Icon name='info' width='18' height='18' />
                                         </span>
+                                        : null
+                                }
+                                {
+                                    activeValue.max === 0
+                                        ? <span style={{ fontSize: '28px' }} className={`${style.text2} text--color-disabled text--bold`}>Нет в наличии</span>
                                         : null
                                 }
                             </div>
