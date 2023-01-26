@@ -207,15 +207,11 @@ export default function Gallery({ images = [], alt = '' }) {
     const loadHandler = () => {
         refFullScreenImage.current.style.opacity = '1'
         setTimeout(() => {
-            // refFullScreenImage.current.scrollIntoView({inline: 'end'})
-            refFullScreenImage.current.scrollIntoView({inline: 'end', behavior: 'auto'})
-            // refFullScreenImage.current.parentElement.scrollIntoView({inline: 'end'})
-            // refFullScreenImage.current.parentElement.scrollIntoView({inline: 'center', behavior: 'smooth'})
-            // refFullScreenImage.current.parentElement.scrollIntoView({inline: 'center', behavior: 'smooth'})
+            const imageWidth = refFullScreenImage.current.clientWidth
+            const windowWidth = window.innerWidth
+            const scrollTo = imageWidth / 2 - windowWidth / 2
+            refFullScreenImage.current.parentElement.scroll(scrollTo, 0)
         }, 100)
-        setTimeout(() => {
-            refFullScreenImage.current.scrollIntoView({inline: 'center', behavior: 'auto'})
-        }, 150);
         refFullScreenImage.current.removeEventListener('load', loadHandler)
     }
 
