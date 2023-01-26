@@ -5,10 +5,12 @@ import { debounce } from './helpers/debounce'
 import { globalState } from './helpers/globalState'
 import { useState, useEffect, useRef } from 'react'
 import style from '../styles/module/Header.module.scss'
+import useDeviceDetect from './helpers/useDeviceDetect'
 
 export default function Header() {
     const refFixed = useRef(null)
     const refRabbit = useRef(null)
+    const { isMobile } = useDeviceDetect()
     const [theme, setTheme] = useState('ui-light')
     const [basketCount, setBasketCount] = useState(0)
     const [themeImage, setThemeImage] = useState('ui-light')
@@ -43,7 +45,7 @@ export default function Header() {
         document.removeEventListener('click', clickDocumentHandler)
     }
 
-    const themeChanfe = () => {
+    const themeChange = () => {
         const them = theme === 'ui-light' ? 'ui-dark' : 'ui-light'
         setTheme(them)
         setThemeImage(them)
@@ -269,8 +271,8 @@ export default function Header() {
             <div
                 ref={refRabbit}
                 data-active={isRabbitFixed}
-                onClick={hoverEnterHandler}
-                onMouseEnter={hoverEnterHandler}
+                onClick={isMobile ? null : hoverEnterHandler}
+                onMouseEnter={isMobile ? hoverEnterHandler : null}
                 className={`${style.rabbit} ui-light`}>
                 <Image src='/images/layout/logo-lg.svg' layout='fill' alt='RedHair market' />
             </div>
