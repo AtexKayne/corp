@@ -13,14 +13,17 @@
     position: relative;
     margin-bottom: 12px;
     // padding: 20px 36px;
-
-    @include media-breakpoint(lg-down) {
-        min-height: 450px;
-    }
+    min-height: adaptive-value((
+        xs: 382px,
+        md: 450px,
+        lg: 374px,
+        xl: 385px,
+        xxl: 472px,
+        xxxl: 605px,
+    ));
 
     @include media-breakpoint(sm-down) {
         margin-bottom: 0;
-        min-height: 382px;
         left: -16px!important;
         width: 100vw!important;
     }
