@@ -205,8 +205,8 @@ export default function Gallery({ images = [], alt = '' }) {
     }, [activeImage])
 
     const loadHandler = () => {
-        refFullScreenImage.current.style.opacity = '1'
         setTimeout(() => {
+            refFullScreenImage.current.style.opacity = '1'
             const imageWidth = refFullScreenImage.current.clientWidth
             const windowWidth = window.innerWidth
             const scrollTo = imageWidth / 2 - windowWidth / 2

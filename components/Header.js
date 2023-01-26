@@ -5,12 +5,10 @@ import { debounce } from './helpers/debounce'
 import { globalState } from './helpers/globalState'
 import { useState, useEffect, useRef } from 'react'
 import style from '../styles/module/Header.module.scss'
-import useDeviceDetect from './helpers/useDeviceDetect'
 
 export default function Header() {
     const refFixed = useRef(null)
     const refRabbit = useRef(null)
-    const { isMobile } = useDeviceDetect()
     const [theme, setTheme] = useState('ui-light')
     const [basketCount, setBasketCount] = useState(0)
     const [themeImage, setThemeImage] = useState('ui-light')
@@ -32,10 +30,10 @@ export default function Header() {
         setIsRabbitFixed(false)
         setIsHeaderFixed(true)
         if (refIsHandled.current) return
+        refIsHandled.current = true
         setTimeout(() => {
             document.addEventListener('click', clickDocumentHandler)
         }, 300)
-        refIsHandled.current = true
     }
 
     const hoverLeaveHandler = () => {
@@ -58,6 +56,7 @@ export default function Header() {
     }
 
     useEffect(() => {
+
         globalState.headerTheme = {
             setTheme,
             theme
@@ -94,8 +93,12 @@ export default function Header() {
             const isIntersecting = entries[0].isIntersecting
             console.log(isIntersecting);
             if (isIntersecting) {
-                setIsRabbitFixed(false)
-                setIsHeaderFixed(false)
+                const isDesktop = window.innerWidth >= globalState.sizes.lg
+                const scrollTop = window.scrollY
+                if (!refIsHandled.current || isDesktop || (!isDesktop && scrollTop < 80)) {
+                    setIsRabbitFixed(false)
+                    setIsHeaderFixed(false)
+                }
             } else {
                 setIsRabbitFixed(true)
                 refFixed.current.style.opacity = '0'
@@ -272,8 +275,8 @@ export default function Header() {
             <div
                 ref={refRabbit}
                 data-active={isRabbitFixed}
-                onClick={isMobile ? null : hoverEnterHandler}
-                onMouseEnter={isMobile ? hoverEnterHandler : null}
+                onClick={hoverEnterHandler}
+                onMouseEnter={hoverEnterHandler}
                 className={`${style.rabbit} ui-light`}>
                 <Image src='/images/layout/logo-lg.svg' layout='fill' alt='RedHair market' />
             </div>
