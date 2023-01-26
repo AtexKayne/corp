@@ -208,10 +208,14 @@ export default function Gallery({ images = [], alt = '' }) {
         refFullScreenImage.current.style.opacity = '1'
         setTimeout(() => {
             // refFullScreenImage.current.scrollIntoView({inline: 'end'})
-            refFullScreenImage.current.scrollIntoView({inline: 'center'})
+            refFullScreenImage.current.scrollIntoView({inline: 'end', behavior: 'auto'})
             // refFullScreenImage.current.parentElement.scrollIntoView({inline: 'end'})
-            refFullScreenImage.current.parentElement.scrollIntoView({inline: 'center'})
+            // refFullScreenImage.current.parentElement.scrollIntoView({inline: 'center', behavior: 'smooth'})
+            // refFullScreenImage.current.parentElement.scrollIntoView({inline: 'center', behavior: 'smooth'})
         }, 100)
+        setTimeout(() => {
+            refFullScreenImage.current.scrollIntoView({inline: 'center', behavior: 'auto'})
+        }, 150);
         refFullScreenImage.current.removeEventListener('load', loadHandler)
     }
 
