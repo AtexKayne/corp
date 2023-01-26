@@ -27,7 +27,7 @@ export default function Home() {
         </div>
         <div>
           <Link href='/product/empty'>
-            <a href='/product/empty' className='link'>Карточка товара - РП (нет в наличии)</a>
+            <a href='/product/empty' className='link'>Карточка товара - Не авторизован (нет в наличии)</a>
           </Link>
         </div>
         <div>

@@ -135,7 +135,14 @@ export default function Product({ detail }) {
         updateBasket()
     }, [inBasket])
 
-
+    useEffect(() => {
+        setTimeout(() => {
+            if (detail.forFuckingTest) {
+                globalState.auth.setIsAuth(true)
+            }
+        }, 2000);
+    }, [])
+    
     return (
         <MainLayout title={detail.names.primary}>
             <Breadcrumbs />

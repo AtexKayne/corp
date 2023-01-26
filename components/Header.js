@@ -58,7 +58,9 @@ export default function Header() {
     }
 
     useEffect(() => {
-
+        globalState.auth = {
+            setIsAuth
+        }
         globalState.headerTheme = {
             setTheme,
             theme
@@ -116,7 +118,7 @@ export default function Header() {
     }, [])
 
     useEffect(() => {
-        globalState.auth = { isAuth }
+        globalState.auth.isAuth = isAuth
     }, [isAuth])
     
 

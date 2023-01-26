@@ -190,6 +190,7 @@ export const product3 = {
         },
     ],
     forProfi: false,
+    forFuckingTest: true,
 }
 
 export const product4 = {
