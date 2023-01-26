@@ -22,7 +22,7 @@ export default function Home() {
         </div>
         <div>
           <Link href='/product/rp-no-coloristic'>
-            <a href='/product/rp-no-coloristic' className='link'>Карточка товара - РП</a>
+            <a href='/product/rp-no-coloristic' className='link'>Карточка товара - РП  (1000 мл нет в наличии)</a>
           </Link>
         </div>
         <div>
