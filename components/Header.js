@@ -27,7 +27,8 @@ export default function Header() {
     }
 
     const hoverEnterHandler = event => {
-        console.log(event);
+        event.preventDefault()
+        if (event.type === 'mouseenter' && window.innerWidth < globalState.sizes.lg) return
         setIsRabbitFixed(false)
         setIsHeaderFixed(true)
         if (refIsHandled.current) return
