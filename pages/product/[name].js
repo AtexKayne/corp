@@ -349,7 +349,8 @@ export default function Product({ detail }) {
 }
 
 function RadioButton({ items = [], setActiveValue }) {
-    if (!items.length) return null
+    if (!items.length || !items[0].value) return null
+    console.log(items);
     const [active, setActive] = useState(0)
     const clickHandler = index => {
         setActiveValue(items[index])
@@ -438,13 +439,13 @@ function InfoLine({ title, text }) {
 
 export async function getServerSideProps(context) {
     let resp, json
-    if (context.query.name === 'coloristic-profi') {
+    if (context.query.name === 'rp-coloristic') {
         json = product4
-    } else if (context.query.name === 'rp') {
+    } else if (context.query.name === 'pp-coloristic') {
         json = product
     } else if (context.query.name === 'color-selector') {
         json = product2
-    } else if (context.query.name === 'rp-2') {
+    } else if (context.query.name === 'rp-no-coloristic') {
         json = product3
     } else if (context.query.name === 'empty') {
         json = product5

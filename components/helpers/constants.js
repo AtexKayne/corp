@@ -1,7 +1,7 @@
 export const product = {
     names: {
-        primary: 'System 4 Shale Oil Shampoo 4',
-        secondary: 'Шампунь №4 для жирной кожи головы'
+        primary: 'SensiDO Absolute 8/74',
+        secondary: 'Краска безаммиачная'
     },
     images: [
         { preview: '/images/product/image-10.jpg', full: '/images/product/image-10.jpg', gallery: '/images/product/image-10.jpg' },
@@ -108,7 +108,7 @@ export const product2 = {
     ],
     values: [
         {
-            value: '100 мл',
+            value: '',
             price: {
                 actual: 277,
             },
@@ -193,8 +193,8 @@ export const product3 = {
 
 export const product4 = {
     names: {
-        primary: 'Canway SZ-A7116-4 blue',
-        secondary: 'Расческа с хвостиком'
+        primary: 'SensiDO Absolute 8/74',
+        secondary: 'Краска безаммиачная'
     },
     images: [
         { preview: '/images/product/image-10.jpg', full: '/images/product/image-10.jpg', gallery: '/images/product/image-10.jpg' },
@@ -212,6 +212,7 @@ export const product4 = {
         },
     ],
     forProfi: true,
+    color: { image: '/images/product/variants/image-3.jpg', name: '8/74', text: 'Светлый коричнево-красный блонд' }
 }
 
 export const product5 = {

@@ -11,18 +11,18 @@ export default function Home() {
         <div className='text--t1'>Список страниц:</div>
         <div className='pt-1' />
         <div>
-          <Link href='/product/coloristic-profi'>
-            <a href='/product/coloristic-profi' className='link'>Карточка товара - колористика (профи)</a>
+          <Link href='/product/rp-coloristic'>
+            <a href='/product/rp-coloristic' className='link'>Карточка товара - РП Колористика (для профи)</a>
           </Link>
         </div>
         <div>
-          <Link href='/product/rp'>
-            <a href='/product/rp' className='link'>Карточка товара - РП (с колористикой)</a>
+          <Link href='/product/pp-coloristic'>
+            <a href='/product/pp-coloristic' className='link'>Карточка товара - ПП (с колористикой)</a>
           </Link>
         </div>
         <div>
-          <Link href='/product/rp-2'>
-            <a href='/product/rp-2' className='link'>Карточка товара - РП (без колористики)</a>
+          <Link href='/product/rp-no-coloristic'>
+            <a href='/product/rp-no-coloristic' className='link'>Карточка товара - РП</a>
           </Link>
         </div>
         <div>
@@ -32,7 +32,7 @@ export default function Home() {
         </div>
         <div>
           <Link href='/product/color-selector'>
-            <a href='/product/color-selector' className='link'>Карточка товара - выбор цвета</a>
+            <a href='/product/color-selector' className='link'>Карточка товара - РП выбор цвета</a>
           </Link>
         </div>
       </div>
