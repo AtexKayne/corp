@@ -4,6 +4,7 @@
 
 .header {
     width: 100%;
+    z-index: 12;
     // overflow: hidden;
     position: relative;
     padding: adaptive-value((
@@ -96,8 +97,8 @@
         top: 0;
         padding: 16px 0;
         position: fixed;
-        transform: translateY(-300px);
-        transition: .3s ease-in-out transform;
+        transform: translateY(-200px);
+        transition: .3s ease-in transform;
     }
 
     &[data-active="true"] {
@@ -105,7 +106,8 @@
         padding: 16px 0;
         position: fixed;
         transform: translateY(0px);
-        transition: .3s ease-in-out transform;
+        transition: .5s ease-in transform;
+        // box-shadow: 0px 4px 10px 0px #0000001A;
     }
 
     @include media-breakpoint(lg-up) {
@@ -115,6 +117,13 @@
             transition: 0s;
         }
     }
+
+    // @include media-breakpoint(md-down) {
+    //     &[data-active="true"] {
+    //         width: 100%;
+    //         box-shadow: 0px 4px 10px 0px #0000001A;
+    //     }
+    // }
 }
 
 .rabbit {
@@ -122,6 +131,7 @@
     z-index: 5;
     width: 40px;
     height: 40px;
+    cursor: pointer;
     position: fixed;
     transition: .3s;
     border-radius: 50%;
@@ -148,6 +158,15 @@
 
     >* {
         transform: scale(1.05);
+    }
+
+    &::after {
+        top: -10px;
+        left: -10px;
+        content: '';
+        right: -10px;
+        bottom: -10px;
+        position: absolute;
     }
 }
 

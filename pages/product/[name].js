@@ -222,6 +222,7 @@ export default function Product({ detail }) {
                             activeValue={activeValue}
                             setInBasket={setInBasket}
                             isProfi={isProfi}
+                            image={detail.images[0].preview}
                             max={activeValue.max}>
                             {
                                 isProfi

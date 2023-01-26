@@ -4,7 +4,7 @@ import { globalState } from '../helpers/globalState'
 import { motion, useAnimationControls } from 'framer-motion'
 import style from '../../styles/module/Product/Product-buy-button.module.scss'
 
-export default function BuyButton({ children, max, activeValue, isProfi, setInBasket }) {
+export default function BuyButton({ children, max, activeValue, isProfi, setInBasket, image }) {
     const [isFavourite, setIsFavourite] = useState(false)
     const [isSelected, setIsSelected] = useState(false)
     const [isShaked, setIsShaked] = useState(false)
@@ -99,7 +99,7 @@ export default function BuyButton({ children, max, activeValue, isProfi, setInBa
         setIsOpen(true)
         refInput.current.value = 1
         globalState.popover.setTextPrimary('System 4 Shale Oil Shampoo 4')
-        globalState.popover.setImage('/images/product/image-0.jpg')
+        globalState.popover.setImage(image)
         globalState.popover.setTextSecondary('ТЕПЕРЬ В КОРЗИНЕ')
         globalState.popover.setIsBasket(true)
         globalState.popover.setIsOpen(true)
@@ -109,7 +109,7 @@ export default function BuyButton({ children, max, activeValue, isProfi, setInBa
         const text = !isFavourite ? 'ТЕПЕРЬ В ИЗБРАННОМ' : 'БОЛЬШЕ НЕ В ИЗБРАННОМ'
         setIsFavourite(!isFavourite)
         globalState.popover.setTextPrimary('System 4 Shale Oil Shampoo 4')
-        globalState.popover.setImage('/images/product/image-0.jpg')
+        globalState.popover.setImage(image)
         globalState.popover.setTextSecondary(text)
         globalState.popover.setIsBasket(false)
         globalState.popover.setIsOpen(true)
@@ -135,7 +135,6 @@ export default function BuyButton({ children, max, activeValue, isProfi, setInBa
     }
 
     const notificationClickHandler = () => {
-        console.log(globalState.auth);
         if (globalState.auth.isAuth) {
             const text = isNotify ? 'Уведомление отключено' : 'Сообщим о поступлении письмом'
             if (!isNotify) {
@@ -145,7 +144,7 @@ export default function BuyButton({ children, max, activeValue, isProfi, setInBa
             setIsNotify(!isNotify)
             globalState.popover.setTextPrimary('System 4 Shale Oil Shampoo 4')
             globalState.popover.setTextSecondary(text)
-            globalState.popover.setImage('/images/product/image-0.jpg')
+            globalState.popover.setImage(image)
             globalState.popover.setIsBasket(false)
             globalState.popover.setIsOpen(true)
         } else {
@@ -167,7 +166,7 @@ export default function BuyButton({ children, max, activeValue, isProfi, setInBa
             setIsOpen(false)
             globalState.popover.setTextPrimary('System 4 Shale Oil Shampoo 4')
             globalState.popover.setTextSecondary('БОЛЬШЕ НЕ В КОРЗИНЕ')
-            globalState.popover.setImage('/images/product/image-0.jpg')
+            globalState.popover.setImage(image)
             globalState.popover.setIsBasket(false)
 
             globalState.popover.setIsOpen(true)
@@ -179,7 +178,7 @@ export default function BuyButton({ children, max, activeValue, isProfi, setInBa
             setTimeout(() => setIsShaked(false), 1000)
             globalState.popover.setTextPrimary('System 4 Shale Oil Shampoo 4')
             globalState.popover.setTextSecondary('Максимум для этого заказа')
-            globalState.popover.setImage('/images/product/image-0.jpg')
+            globalState.popover.setImage(image)
             globalState.popover.setIsBasket(false)
 
             globalState.popover.setIsOpen(true)
