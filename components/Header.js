@@ -9,6 +9,7 @@ import style from '../styles/module/Header.module.scss'
 export default function Header() {
     const refFixed = useRef(null)
     const refRabbit = useRef(null)
+    const [isAuth, setIsAuth] = useState(false)
     const [theme, setTheme] = useState('ui-light')
     const [basketCount, setBasketCount] = useState(0)
     const [themeImage, setThemeImage] = useState('ui-light')
@@ -114,6 +115,11 @@ export default function Header() {
         }
     }, [])
 
+    useEffect(() => {
+        globalState.auth = { isAuth }
+    }, [isAuth])
+    
+
     return (
         <header ref={refHeader} onMouseEnter={setThemeLight} onMouseLeave={setThemeDark} className={`${style.header} ${theme}`}>
             <div className={`container ${style.container}`}>
@@ -161,25 +167,25 @@ export default function Header() {
                             </div>
                             <div className={style.group}>
                                 {/* <Link href='/'> */}
-                                    <div className='logo-light'>
-                                        <div className='is-hidden--sm-down'>
-                                            <Image src='/images/layout/logo-md.svg' width='242' height='45' alt='RedHair market' />
-                                        </div>
-                                        <div className='is-hidden--md-up'>
-                                            <Image src='/images/layout/logo-xs.svg' width='41' height='41' alt='RedHair market' />
-                                        </div>
+                                <div className='logo-light'>
+                                    <div className='is-hidden--sm-down'>
+                                        <Image src='/images/layout/logo-md.svg' width='242' height='45' alt='RedHair market' />
                                     </div>
+                                    <div className='is-hidden--md-up'>
+                                        <Image src='/images/layout/logo-xs.svg' width='41' height='41' alt='RedHair market' />
+                                    </div>
+                                </div>
                                 {/* </Link> */}
 
                                 {/* <Link href='/'> */}
-                                    <div className='logo-dark'>
-                                        <div className='is-hidden--sm-down'>
-                                            <Image src='/images/layout/logo-dark-md.svg' width='242' height='45' alt='RedHair market' />
-                                        </div>
-                                        <div className='is-hidden--md-up'>
-                                            <Image src='/images/layout/logo-dark-xs.svg' width='41' height='41' alt='RedHair market' />
-                                        </div>
+                                <div className='logo-dark'>
+                                    <div className='is-hidden--sm-down'>
+                                        <Image src='/images/layout/logo-dark-md.svg' width='242' height='45' alt='RedHair market' />
                                     </div>
+                                    <div className='is-hidden--md-up'>
+                                        <Image src='/images/layout/logo-dark-xs.svg' width='41' height='41' alt='RedHair market' />
+                                    </div>
+                                </div>
                                 {/* </Link> */}
                             </div>
                             <div className={style.groupMD}>
@@ -254,7 +260,14 @@ export default function Header() {
                                 <div className={`${style.countBasket} ${!!basketCount ? '' : 'is-hidden'}`}>{basketCount}</div>
                                 <Icon width='27' height='25' name='basketMD' />
                             </div>
-                            <div className={`${style.textt6} btn btn--tetriary btn--md text--bold ml-0.5`}>ВОЙТИ</div>
+                            {
+                                isAuth
+                                    ? <div onClick={() => setIsAuth(false)} className='btn btn--empty btn--sm p-relative'>
+                                        {/* <div className={`${style.countBasket} ${!!basketCount ? '' : 'is-hidden'}`}>{basketCount}</div> */}
+                                        <Icon name='person' width='25' height='25' />
+                                    </div>
+                                    : <div onClick={() => setIsAuth(true)} className={`${style.textt6} btn btn--tetriary btn--md text--bold ml-0.5`}>ВОЙТИ</div>
+                            }
                         </div>
 
                         <div className={`${style.groupSM} is-hidden--xl-up`}>
@@ -264,7 +277,14 @@ export default function Header() {
                                 <div className={`${style.countBasket} ${!!basketCount ? '' : 'is-hidden'}`}>{basketCount}</div>
                                 <Icon width='22' height='21' name='basketMD' />
                             </div>
-                            <div className={`${style.textt6} btn btn--tetriary btn--md text--bold ml-0.5`}>ВОЙТИ</div>
+                            {
+                                isAuth
+                                    ? <div onClick={() => setIsAuth(false)} className={`btn btn--empty btn--sm p-relative`}>
+                                        {/* <div className={`${style.countBasket} ${!!basketCount ? '' : 'is-hidden'}`}>{basketCount}</div> */}
+                                        <Icon name='person' width='20' height='20' />
+                                    </div>
+                                    : <div onClick={() => setIsAuth(true)} className={`${style.textt6} btn btn--tetriary btn--md text--bold ml-0.5`}>ВОЙТИ</div>
+                            }
                         </div>
                     </div>
                 </div>

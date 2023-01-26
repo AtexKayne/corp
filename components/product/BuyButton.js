@@ -134,8 +134,9 @@ export default function BuyButton({ children, max, activeValue, isProfi, setInBa
         globalState.modal.setIsOpen(true)
     }
 
-    const notificationClickHandler = (isAuth = true) => {
-        if (isAuth) {
+    const notificationClickHandler = () => {
+        console.log(globalState.auth);
+        if (globalState.auth.isAuth) {
             const text = isNotify ? 'Уведомление отключено' : 'Сообщим о поступлении письмом'
             if (!isNotify) {
                 setIsRinged(true)
