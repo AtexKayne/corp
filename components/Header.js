@@ -26,7 +26,8 @@ export default function Header() {
         document.removeEventListener('click', clickDocumentHandler)
     }
 
-    const hoverEnterHandler = () => {
+    const hoverEnterHandler = event => {
+        console.log(event);
         setIsRabbitFixed(false)
         setIsHeaderFixed(true)
         if (refIsHandled.current) return
