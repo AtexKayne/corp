@@ -34,7 +34,7 @@ export default function Header() {
         if (refIsHandled.current) return
         setTimeout(() => {
             document.addEventListener('click', clickDocumentHandler)
-        }, 100)
+        }, 300)
         refIsHandled.current = true
     }
 
@@ -92,6 +92,7 @@ export default function Header() {
 
         const observeHandler = entries => {
             const isIntersecting = entries[0].isIntersecting
+            console.log(isIntersecting);
             if (isIntersecting) {
                 setIsRabbitFixed(false)
                 setIsHeaderFixed(false)
