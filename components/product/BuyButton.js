@@ -56,7 +56,7 @@ export default function BuyButton({ children, max, activeValue, isProfi, setInBa
         fakeInput.style.position = 'absolute'
         fakeInput.style.opacity = 0
         fakeInput.style.height = 0
-        fakeInput.style.fontSize = '16px'
+        fakeInput.style.fontSize = '30px'
         document.body.prepend(fakeInput)
         fakeInput.focus()
 
@@ -148,7 +148,6 @@ export default function BuyButton({ children, max, activeValue, isProfi, setInBa
     }
 
     useEffect(() => {
-        console.log(count);
         if (refValuesUpdate.current || isProfi || isEmpty) return
 
         if (count <= 0) {
