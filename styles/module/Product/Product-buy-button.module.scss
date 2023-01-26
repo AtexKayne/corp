@@ -281,33 +281,39 @@
         width: 78px;
     }
 
-    svg {
+    .iconBell {
+        width: 16px;
+        height: 16px;
         position: relative;
-        width: 99%!important;
-        height: 104%!important;
 
-        &::after {
-            content: '';
-            width: 2px;
-            height: 2px;
-            background-color: var(--t-background);
+        >span {
+            opacity: 0;
+            transition: .3s;
+            position: absolute;
         }
     }
+
     &[data-shaked="true"] {
-        svg {
+        .iconBell {
             transform-origin: top;
             animation: ring 1s ease 0s 1;
         }
     }
 
-    &[data-active="true"] path {
-        fill: var(--t-background);
+    &[data-active="true"] {
+        .iconBell {
+            >span:last-child {
+                opacity: 1;
+            }
+        }
     }
 
-    &[data-active="false"] path {
-        fill: none;
-        stroke-width: 1.5px;
-        stroke: var(--t-background);
+    &[data-active="false"] {
+        .iconBell {
+            >span:first-child {
+                opacity: 1;
+            }
+        }
     }
 }
 
