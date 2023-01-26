@@ -30,6 +30,7 @@ export const product = {
             max: 880,
         },
     ],
+    isProfi: true,
     forProfi: false,
     color: { image: '/images/product/variants/image-3.jpg', name: '8/74', text: 'Светлый коричнево-красный блонд' }
 }

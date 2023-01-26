@@ -17,8 +17,9 @@ export default function Product({ detail }) {
     const [currentImages, setCurrentImages] = useState(detail.images)
     const [containerHeight, setContainerHeight] = useState(0)
     const [isProfi, setIsProfi] = useState(detail.forProfi)
+    const [isUserProfi, setIsUserProfi] = useState(detail.isProfi)
     const [inBasket, setInBasket] = useState(0)
-
+    
     const refStickyBlockHeight = useRef(null)
     const refStickyContainer = useRef(null)
     const refContainerOffset = useRef(0)
@@ -164,7 +165,7 @@ export default function Product({ detail }) {
                             }
 
                             {
-                                !isProfi && activeValue.max !== 0
+                                !isProfi && activeValue.max !== 0 && !isUserProfi
                                     ? <span onClick={infoHandler} className={`${style.priceIcon} is-hiden--md`}>
                                         <Icon name='info' width='18' height='18' />
                                     </span> : null
@@ -231,7 +232,7 @@ export default function Product({ detail }) {
                                                     : null
                                             }
                                             {
-                                                !isProfi && activeValue.max !== 0
+                                                !isProfi && activeValue.max !== 0 && !isUserProfi
                                                     ? <span onClick={infoHandler} className={`${style.priceIcon} is-hiden--md`}>
                                                         <Icon name='info' width='18' height='18' />
                                                     </span> : null
@@ -350,7 +351,6 @@ export default function Product({ detail }) {
 
 function RadioButton({ items = [], setActiveValue }) {
     if (!items.length || !items[0].value) return null
-    console.log(items);
     const [active, setActive] = useState(0)
     const clickHandler = index => {
         setActiveValue(items[index])
