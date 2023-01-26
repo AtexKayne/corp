@@ -26,7 +26,7 @@ export default function ModalNotification() {
             </div>
             <InputMask className={style.phoneInput} type='tel' placeholder='+7 (___) ___ __ __' mask="+7 (999) 999 99 99" maskChar=" " />
             <div className={`${style.btn} btn btn--md btn--fill btn--grey`}>
-                <span className='text--upper text--p6 text--color-disabled text--bold'>У меня есть инвайт-код</span>
+                <span className='text--upper text--p6 text--color-disabled text--bold'>Получить код</span>
             </div>
             <div className={`${style.footer} text--p6 text--color-disabled pb-1.5:md`}>
                 <span>

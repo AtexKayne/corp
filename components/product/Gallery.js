@@ -242,7 +242,7 @@ export default function Gallery({ images = [], alt = '' }) {
     return (
         <>
             <div ref={refGallery} className={style.gallery}>
-                <div className={`${style.nav} is-hidden--lg-down`}>
+                <div className={`${style.nav}  ${images.length <= 1 ? 'is-decorative' : ''} is-hidden--lg-down`}>
                     {images.length > 4
                         ? <div data-disabled={navDisabled === 'up'} onClick={() => slidePreview('up')} className={style.navPrev}>
                             <Icon name='chevronUp' width='20' height='20' />
@@ -315,8 +315,13 @@ export default function Gallery({ images = [], alt = '' }) {
                         <Icon name='verified' width='22' height='22' />
                     </div>
                 </div>
-
-                <div onClick={nextHandler} className={`${style.nextCol} is-hidden--md-down`} />
+                
+                {
+                    images.length > 1
+                        ? <div onClick={nextHandler} className={`${style.nextCol} is-hidden--md-down`} />
+                        : null
+                }
+                
             </div>
 
             <div ref={refModal} data-open={modalOpen} className={style.galleryModal}>
