@@ -207,8 +207,10 @@ export default function Gallery({ images = [], alt = '' }) {
     const loadHandler = () => {
         refFullScreenImage.current.style.opacity = '1'
         setTimeout(() => {
-            refFullScreenImage.current.scrollIntoView({inline: 'end'})
+            // refFullScreenImage.current.scrollIntoView({inline: 'end'})
             refFullScreenImage.current.scrollIntoView({inline: 'center'})
+            // refFullScreenImage.current.parentElement.scrollIntoView({inline: 'end'})
+            refFullScreenImage.current.parentElement.scrollIntoView({inline: 'center'})
         }, 100)
         refFullScreenImage.current.removeEventListener('load', loadHandler)
     }
