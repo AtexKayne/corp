@@ -88,7 +88,7 @@ export default function Product({ detail }) {
             if (window.innerWidth < globalState.sizes.lg) return
             const scrollPos = window.scrollY
             const isScrolledDown = scrollPos > refContainerOffset.current - offsetSticky
-            const isScrolledContainer = refStickyContainer.current.clientHeight + refContainerOffset.current - scrollPos > refStickyBlockHeight.current
+            const isScrolledContainer = refStickyContainer.current.clientHeight + refContainerOffset.current - scrollPos - offsetSticky > refStickyBlockHeight.current
             if (isScrolledDown && isScrolledContainer) {
                 refStickyBlock.current.style.position = 'fixed'
                 refStickyBlock.current.style.top = `${offsetSticky}px`
@@ -117,7 +117,7 @@ export default function Product({ detail }) {
             }
         }
 
-        const debounceScroll = debounce(scrollHandler, 10)
+        const debounceScroll = debounce(scrollHandler, 5)
         const debounceResize = debounce(resizeHandler, 40)
 
         updateBasket()

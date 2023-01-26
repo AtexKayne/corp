@@ -186,6 +186,7 @@
             background-size: cover;
             background-position: center;
             background-repeat: no-repeat;
+            transform: rotate(0deg) translateY(-1px);
             background-image: url('/icons/icon-chevron-right.svg');
         }
 
@@ -256,7 +257,7 @@
 
         .colorActive {
             &::after {
-                transform: rotate(180deg);
+                transform: rotate(180deg) translateY(0px);
             }
         }
     }

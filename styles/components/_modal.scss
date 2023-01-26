@@ -16,6 +16,7 @@
 
         .modal__layout {
             opacity: .7;
+            transition-delay: 0s;
         }
     }
 
@@ -107,9 +108,15 @@
         bottom: 0;
         opacity: 0;
         cursor: pointer;
-        transition: .5s;
+        transition: .3s;
         position: absolute;
+        transition-delay: .1s;
         background-color: #112233;
+
+        @include media-breakpoint(md-up) {
+            transition: .5s;
+            transition-delay: 0s;
+        }
     }
     
     &__close {

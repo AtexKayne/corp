@@ -59,7 +59,7 @@ export default function Header() {
 
         refIsHandled.current = setTimeout(() => {
             refRabbit.current.style.pointerEvents = 'all'
-        }, 500)
+        }, 300)
     }
 
     const debounceScroll = debounce(scrollHandler, 5)
@@ -293,7 +293,7 @@ export default function Header() {
                 ref={refRabbit}
                 data-active={isRabbitFixed}
                 onClick={hoverEnterHandler}
-                onMouseEnter={hoverEnterHandler}
+                onMouseOver={hoverEnterHandler}
                 className={`${style.rabbit} ui-light`}>
                 <Image src='/images/layout/logo-lg.svg' layout='fill' alt='RedHair market' />
             </div>
