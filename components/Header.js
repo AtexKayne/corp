@@ -28,7 +28,6 @@ export default function Header() {
 
     const hoverEnterHandler = event => {
         event.preventDefault()
-        if (event.type === 'mouseenter' && window.innerWidth < globalState.sizes.lg) return
         setIsRabbitFixed(false)
         setIsHeaderFixed(true)
         if (refIsHandled.current) return
@@ -93,7 +92,6 @@ export default function Header() {
 
         const observeHandler = entries => {
             const isIntersecting = entries[0].isIntersecting
-            console.log(isIntersecting);
             if (isIntersecting) {
                 const isDesktop = window.innerWidth >= globalState.sizes.lg
                 const scrollTop = window.scrollY
