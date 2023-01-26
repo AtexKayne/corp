@@ -162,7 +162,7 @@ export default function Header() {
                                 </div>
                             </div>
                             <div className={style.group}>
-                                <Link href='/'>
+                                {/* <Link href='/'> */}
                                     <div className='logo-light'>
                                         <div className='is-hidden--sm-down'>
                                             <Image src='/images/layout/logo-md.svg' width='242' height='45' alt='RedHair market' />
@@ -171,9 +171,9 @@ export default function Header() {
                                             <Image src='/images/layout/logo-xs.svg' width='41' height='41' alt='RedHair market' />
                                         </div>
                                     </div>
-                                </Link>
+                                {/* </Link> */}
 
-                                <Link href='/'>
+                                {/* <Link href='/'> */}
                                     <div className='logo-dark'>
                                         <div className='is-hidden--sm-down'>
                                             <Image src='/images/layout/logo-dark-md.svg' width='242' height='45' alt='RedHair market' />
@@ -182,7 +182,7 @@ export default function Header() {
                                             <Image src='/images/layout/logo-dark-xs.svg' width='41' height='41' alt='RedHair market' />
                                         </div>
                                     </div>
-                                </Link>
+                                {/* </Link> */}
                             </div>
                             <div className={style.groupMD}>
                                 <div className='btn btn--empty btn--xs p-relative'>
