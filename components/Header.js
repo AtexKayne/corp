@@ -275,7 +275,7 @@ export default function Header() {
             <div
                 ref={refRabbit}
                 data-active={isRabbitFixed}
-                onClick={hoverEnterHandler}
+                onTouchStart={hoverEnterHandler}
                 onMouseEnter={hoverEnterHandler}
                 className={`${style.rabbit} ui-light`}>
                 <Image src='/images/layout/logo-lg.svg' layout='fill' alt='RedHair market' />
