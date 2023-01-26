@@ -51,6 +51,10 @@ export default function BuyButton({ children, max, activeValue, isProfi, setInBa
     }
 
     const counterClick = () => {
+        const meta = document.createElement('meta')
+        meta.setAttribute('name', 'viewport')
+        meta.setAttribute('content', 'width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0')
+        document.querySelector('head').append(meta)
         const fakeInput = document.createElement('input')
         fakeInput.setAttribute('type', 'tel')
         fakeInput.style.position = 'absolute'
@@ -69,6 +73,10 @@ export default function BuyButton({ children, max, activeValue, isProfi, setInBa
             fakeInput.remove()
             document.addEventListener('click', documentClick)
         }, 1000)
+
+        setTimeout(() => {
+            meta.remove()
+        }, 2000)
     }
 
     const updateCount = async increment => {
