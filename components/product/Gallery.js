@@ -251,13 +251,17 @@ export default function Gallery({ images = [], alt = '' }) {
                     }
 
                     <div className={`${style.previews}`}>
-                        <motion.div animate={animatePreview}>
-                            {images.map((image, index) => (
-                                <div onClick={() => choseActive(image.gallery, index)} data-active={activeImage === image.gallery} key={image.gallery} className={style.imagePreview}>
-                                    <Image src={image.preview} width='88' height='88' alt={alt} />
-                                </div>
-                            ))}
-                        </motion.div>
+                        {
+                            images.length > 1
+                                ? <motion.div animate={animatePreview}>
+                                    {images.map((image, index) => (
+                                        <div onClick={() => choseActive(image.gallery, index)} data-active={activeImage === image.gallery} key={image.gallery} className={style.imagePreview}>
+                                            <Image src={image.preview} width='88' height='88' alt={alt} />
+                                        </div>
+                                    ))}
+                                </motion.div>
+                                : null
+                        }
                     </div>
 
                     {images.length > 4
@@ -339,13 +343,17 @@ export default function Gallery({ images = [], alt = '' }) {
                         }
 
                         <div className={`${style.previews}`}>
-                            <motion.div animate={animatePreview}>
-                                {images.map((image, index) => (
-                                    <div onClick={() => choseActive(image.gallery, index)} data-active={activeImage === image.gallery} key={image.gallery} className={style.imagePreview}>
-                                        <Image src={image.preview} width='88' height='88' alt={alt} />
-                                    </div>
-                                ))}
-                            </motion.div>
+                            {
+                                images.length > 1
+                                    ? <motion.div animate={animatePreview}>
+                                        {images.map((image, index) => (
+                                            <div onClick={() => choseActive(image.gallery, index)} data-active={activeImage === image.gallery} key={image.gallery} className={style.imagePreview}>
+                                                <Image src={image.preview} width='88' height='88' alt={alt} />
+                                            </div>
+                                        ))}
+                                    </motion.div>
+                                    : null
+                            }
                         </div>
 
                         {images.length > 4
@@ -366,7 +374,7 @@ export default function Gallery({ images = [], alt = '' }) {
                     {alt}
                 </div>
                 <div className={style.dragContainer}>
-                    <img ref={refFullScreenImage} style={{opacity: 0}} src={fullScreenImage ? fullScreenImage : '/icons/icon-empty.svg'} alt={alt} />
+                    <img ref={refFullScreenImage} style={{ opacity: 0 }} src={fullScreenImage ? fullScreenImage : '/icons/icon-empty.svg'} alt={alt} />
                 </div>
 
             </div>

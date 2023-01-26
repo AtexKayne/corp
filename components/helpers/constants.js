@@ -4,17 +4,12 @@ export const product = {
         secondary: 'Шампунь №4 для жирной кожи головы'
     },
     images: [
-        { preview: '/images/product/image-0.jpg', full: '/images/product/image-0.jpg', gallery: '/images/product/image-0.jpg' },
-        { preview: '/images/product/image-1.jpg', full: '/images/product/image-1.jpg', gallery: '/images/product/image-1.jpg' },
-        { preview: '/images/product/image-2.jpg', full: '/images/product/image-2.jpg', gallery: '/images/product/image-2.jpg' },
-        { preview: '/images/product/image-3.jpg', full: '/images/product/image-3.jpg', gallery: '/images/product/image-3.jpg' },
-        { preview: '/images/product/image-4.jpg', full: '/images/product/image-4.jpg', gallery: '/images/product/image-4.jpg' },
-        { preview: '/images/product/image-5.jpg', full: '/images/product/image-5.jpg', gallery: '/images/product/image-5.jpg' },
-        { preview: '/images/product/image-6.jpg', full: '/images/product/image-6.jpg', gallery: '/images/product/image-6.jpg' }
+        { preview: '/images/product/image-10.jpg', full: '/images/product/image-10.jpg', gallery: '/images/product/image-10.jpg' },
+        { preview: '/images/product/image-11.jpg', full: '/images/product/image-11.jpg', gallery: '/images/product/image-11.jpg' },
     ],
     values: [
         {
-            value: '100 мл',
+            value: '60 мл',
             price: {
                 actual: 931,
                 old: 1299 // Can be empty
@@ -25,7 +20,7 @@ export const product = {
             max: 109,
         },
         {
-            value: '200 мл',
+            value: '150 мл',
             price: {
                 actual: 1931,
             },
@@ -33,27 +28,6 @@ export const product = {
             art: 5415,
             link: '200',
             max: 880,
-        },
-        {
-            value: '500 мл',
-            price: {
-                actual: 2931,
-                old: 1299 // Can be empty
-            },
-            bonuses: 30,
-            art: 5416,
-            link: '500',
-            max: 85,
-        },
-        {
-            value: '1000 мл',
-            price: {
-                actual: 6931,
-            },
-            bonuses: 74,
-            art: 5417,
-            link: '1000',
-            max: 0,
         },
     ],
     forProfi: false,
@@ -153,6 +127,116 @@ export const product2 = {
         {name: 'Белый', iconColor: '#FFFFFF', link: '/product/test-3' },
         {name: 'Разноцветный', iconColor: '#FFFFFF', link: '/product/test-3' },
     ]
+}
+
+export const product3 = {
+    names: {
+        primary: 'System 4 Shale Oil Shampoo 4',
+        secondary: 'Шампунь №4 для жирной кожи головы'
+    },
+    images: [
+        { preview: '/images/product/image-0.jpg', full: '/images/product/image-0.jpg', gallery: '/images/product/image-0.jpg' },
+        { preview: '/images/product/image-1.jpg', full: '/images/product/image-1.jpg', gallery: '/images/product/image-1.jpg' },
+        { preview: '/images/product/image-2.jpg', full: '/images/product/image-2.jpg', gallery: '/images/product/image-2.jpg' },
+        { preview: '/images/product/image-3.jpg', full: '/images/product/image-3.jpg', gallery: '/images/product/image-3.jpg' },
+        { preview: '/images/product/image-4.jpg', full: '/images/product/image-4.jpg', gallery: '/images/product/image-4.jpg' },
+        { preview: '/images/product/image-5.jpg', full: '/images/product/image-5.jpg', gallery: '/images/product/image-5.jpg' },
+        { preview: '/images/product/image-6.jpg', full: '/images/product/image-6.jpg', gallery: '/images/product/image-6.jpg' }
+    ],
+    values: [
+        {
+            value: '100 мл',
+            price: {
+                actual: 931,
+                old: 1299 // Can be empty
+            },
+            bonuses: 24,
+            art: 5414,
+            link: '100',
+            max: 109,
+        },
+        {
+            value: '200 мл',
+            price: {
+                actual: 1931,
+            },
+            bonuses: 28,
+            art: 5415,
+            link: '200',
+            max: 880,
+            basket: 4,
+        },
+        {
+            value: '500 мл',
+            price: {
+                actual: 2931,
+                old: 1299 // Can be empty
+            },
+            bonuses: 30,
+            art: 5416,
+            link: '500',
+            max: 85,
+        },
+        {
+            value: '1000 мл',
+            price: {
+                actual: 6931,
+            },
+            bonuses: 74,
+            art: 5417,
+            link: '1000',
+            max: 0,
+        },
+    ],
+    forProfi: false,
+}
+
+export const product4 = {
+    names: {
+        primary: 'Canway SZ-A7116-4 blue',
+        secondary: 'Расческа с хвостиком'
+    },
+    images: [
+        { preview: '/images/product/image-10.jpg', full: '/images/product/image-10.jpg', gallery: '/images/product/image-10.jpg' },
+    ],
+    values: [
+        {
+            value: '60 мл',
+            price: {
+                actual: 277,
+            },
+            bonuses: 24,
+            art: 'SZ-A7116-4',
+            link: '100',
+            max: 109,
+        },
+    ],
+    forProfi: true,
+}
+
+export const product5 = {
+    names: {
+        primary: 'System 4 Shale Oil Shampoo 4',
+        secondary: 'Шампунь №4 для жирной кожи головы'
+    },
+    images: [
+        { preview: '/images/product/image-1.jpg', full: '/images/product/image-1.jpg', gallery: '/images/product/image-1.jpg' },
+        { preview: '/images/product/image-2.jpg', full: '/images/product/image-2.jpg', gallery: '/images/product/image-2.jpg' },
+    ],
+    values: [
+        {
+            value: '60 мл',
+            price: {
+                actual: 931,
+                old: 1299 // Can be empty
+            },
+            bonuses: 24,
+            art: 5414,
+            link: '100',
+            max: 0,
+        },
+    ],
+    forProfi: false,
 }
 
 export const productVariants = {

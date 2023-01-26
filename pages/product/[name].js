@@ -1,9 +1,8 @@
 import { useState, useEffect, useRef } from 'react'
-import { product, product1, product2 } from '../../components/helpers/constants'
 import { debounce } from '../../components/helpers/debounce'
 import { globalState } from '../../components/helpers/globalState'
 import style from '../../styles/module/Product/Product.module.scss'
-import useDeviceDetect from '../../components/helpers/useDeviceDetect'
+import { product, product1, product2, product3, product4, product5 } from '../../components/helpers/constants'
 
 import Image from 'next/image'
 import Icon from '../../components/Icon'
@@ -14,7 +13,7 @@ import BuyButton from '../../components/product/BuyButton'
 import Accordeon from '../../components/usefull/Accordeon'
 import Link from 'next/link'
 
-export default function Product({ detail = product }) {
+export default function Product({ detail }) {
     const [currentImages, setCurrentImages] = useState(detail.images)
     const [containerHeight, setContainerHeight] = useState(0)
     const [isProfi, setIsProfi] = useState(detail.forProfi)
@@ -350,7 +349,7 @@ export default function Product({ detail = product }) {
 }
 
 function RadioButton({ items = [], setActiveValue }) {
-    if (items.length <= 1) return null
+    if (!items.length) return null
     const [active, setActive] = useState(0)
     const clickHandler = index => {
         setActiveValue(items[index])
@@ -439,12 +438,16 @@ function InfoLine({ title, text }) {
 
 export async function getServerSideProps(context) {
     let resp, json
-    if (context.query.name === 'test') {
+    if (context.query.name === 'coloristic-profi') {
+        json = product4
+    } else if (context.query.name === 'rp') {
         json = product
-    } else if (context.query.name === 'test-1') {
-        json = product1
-    } else if (context.query.name === 'test-2') {
+    } else if (context.query.name === 'color-selector') {
         json = product2
+    } else if (context.query.name === 'rp-2') {
+        json = product3
+    } else if (context.query.name === 'empty') {
+        json = product5
     } else {
         json = product
     }
