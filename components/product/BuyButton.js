@@ -4,6 +4,7 @@ import { globalState } from '../helpers/globalState'
 import { motion, useAnimationControls } from 'framer-motion'
 import style from '../../styles/module/Product/Product-buy-button.module.scss'
 
+
 export default function BuyButton({ children, max, activeValue, isProfi, setInBasket, image }) {
     const [isFavourite, setIsFavourite] = useState(false)
     const [isSelected, setIsSelected] = useState(false)
@@ -61,7 +62,7 @@ export default function BuyButton({ children, max, activeValue, isProfi, setInBa
         fakeInput.style.opacity = 0
         fakeInput.style.height = 0
         fakeInput.style.fontSize = '30px'
-        document.body.prepend(fakeInput)
+        refButton.current.prepend(fakeInput)
         fakeInput.focus()
 
         refSafeValue.current = count
@@ -117,6 +118,7 @@ export default function BuyButton({ children, max, activeValue, isProfi, setInBa
 
     const changeHandler = () => {
         const value = getValue()
+        refInput.current.value = value
         if (!!value) setCount(value)
     }
 
@@ -157,7 +159,6 @@ export default function BuyButton({ children, max, activeValue, isProfi, setInBa
 
     useEffect(() => {
         if (refValuesUpdate.current || isProfi || isEmpty) return
-
         if (count <= 0) {
             setDiabled('minus')
             setCount(0)

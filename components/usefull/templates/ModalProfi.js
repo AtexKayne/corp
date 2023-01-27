@@ -14,11 +14,22 @@ export default function ModalProfi() {
                 Подайте заявку на подтверждение своего профессионального статуса через наш телеграм-бот:
                 это быстро и бесплатно.
             </div>
-            <a className='link text--t6 text--bold text--color-primary text--upper pt-1 pb-1.5' href='#'>открыть телеграм-бот</a>
-            <div className={style.btn}>
-                <div onClick={clickHandler} className={`btn btn--md btn--fill btn--primary`}>
-                    <span className='text--upper text--p5 text--bold'>ясно</span>
+            <div className={style.btns}>
+                <div onClick={clickHandler} className={`${style.button} btn btn--md btn--fill btn--primary mb-0.8`}>
+                    <span className='text--upper text--p5 text--bold'>открыть телеграм-бот</span>
                 </div>
+
+                <div className={`${style.button} btn btn--md btn--fill btn--shadow mb-0.8 mb-1.5:md`}>
+                    <span className='text--upper text--p6 text--bold'>я уже профи. авторизоваться</span>
+                </div>
+
+                <div className={`${style.or} text--p5 text--normal text--upper mb-0.8 mb-1:md`}>
+                    или
+                </div>
+
+                <a href='#' className='link d-block text--bold text--upper text--p6 text--color-primary'>
+                позже. перейти к покупкам
+                </a>
             </div>
         </div>
     )

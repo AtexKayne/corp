@@ -4,8 +4,8 @@ import Image from 'next/image'
 import { debounce } from './helpers/debounce'
 import { globalState } from './helpers/globalState'
 import { useState, useEffect, useRef } from 'react'
-import { motion, useAnimationControls } from 'framer-motion'
 import style from '../styles/module/Header.module.scss'
+import { motion, useAnimationControls } from 'framer-motion'
 
 export default function Header() {
     const refRabbit = useRef(null)
@@ -103,7 +103,7 @@ export default function Header() {
         globalState.body = { addClass, removeClass, toggleClass }
         globalState.basket = { setBasketCount, basketCount }
         globalState.headerTheme = { setTheme, theme }
-        globalState.auth = { setIsAuth }
+        globalState.auth = { setIsAuth, isAuth }
 
         return () => {
             window.removeEventListener('scroll', debounceScroll)
@@ -144,12 +144,11 @@ export default function Header() {
                         </div>
                     </div>
                 </div>
-
-                {/* <div onClick={themeChanfe} className={style.themechanger}></div> */}
             </header>
 
             <motion.div className={`${style.fixedContainer} ui-light`}
                 animate={animateHeader}
+                data-active={isTranslated}
                 onMouseLeave={hoverLeaveHandler}
             >
 
