@@ -66,6 +66,8 @@ export default function Gallery({ images = [], alt = '' }) {
     const modalClose = () => {
         setModalOpen(false)
         refModalOpen.current = false
+        refFullScreenImage.current.style.opacity = '0'
+        setFullScreenImage(false)
         globalState.body.toggleClass('overflow-hidden')
     }
 
@@ -315,13 +317,13 @@ export default function Gallery({ images = [], alt = '' }) {
                         <Icon name='verified' width='22' height='22' />
                     </div>
                 </div>
-                
+
                 {
                     images.length > 1
                         ? <div onClick={nextHandler} className={`${style.nextCol} is-hidden--md-down`} />
                         : null
                 }
-                
+
             </div>
 
             <div ref={refModal} data-open={modalOpen} className={style.galleryModal}>
@@ -377,6 +379,9 @@ export default function Gallery({ images = [], alt = '' }) {
                     className={`${style.alt} text--a4 text--upper text--bold py-2 pr-4`}>
                     <Icon name='chevronLeft' width='20' height='20' external={'mr-0.5'} />
                     {alt}
+                </div>
+                <div className={`${style.modalHeader}`}>
+                    <div className={`${style.closeBtn} c-pointer`} onClick={modalClose}><Icon name='close' width='20' height='20' /></div>
                 </div>
                 <div className={style.dragContainer}>
                     <img ref={refFullScreenImage} style={{ opacity: 0 }} src={fullScreenImage ? fullScreenImage : '/icons/icon-empty.svg'} alt={alt} />
