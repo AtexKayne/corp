@@ -67,7 +67,7 @@ export default function Footer() {
                     </div>
                 </div>
                 <div className={style.bottom}>
-                    <div><Image src='/images/layout/pays.png' width='227' height='20' alt='' /></div>
+                    <div><Image src='/images/layout/pays.png' width='256' height='25' alt='' /></div>
                     <div className={`${style.textt5} text--color-small pt-0.5`}>Также доступны <a className='text--underline' href='#'>другие способы оплаты</a>.</div>
                     <div className={`${style.copy} text--t6 text--sparse text--color-small`}>
                         <div className='container'>

@@ -122,7 +122,7 @@ export default function Product({ detail }) {
 
         updateBasket()
 
-        window.addEventListener('scroll', debounceScroll)
+        window.addEventListener('scroll', debounceScroll, { passive: true })
         window.addEventListener('resize', debounceResize)
 
         return () => {

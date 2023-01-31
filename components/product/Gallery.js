@@ -384,7 +384,13 @@ export default function Gallery({ images = [], alt = '' }) {
                     <div className={`${style.closeBtn} c-pointer`} onClick={modalClose}><Icon name='close' width='20' height='20' /></div>
                 </div>
                 <div className={style.dragContainer}>
-                    <img ref={refFullScreenImage} style={{ opacity: 0 }} src={fullScreenImage ? fullScreenImage : '/icons/icon-empty.svg'} alt={alt} />
+                    <img 
+                        ref={refFullScreenImage}
+                        style={{ opacity: 0 }}
+                        width={fullScreenImage ? '' : 1}
+                        height={fullScreenImage ? '' : 1}
+                        src={fullScreenImage ? fullScreenImage : '/icons/icon-empty.svg'}
+                        alt={alt} />
                 </div>
 
             </div>

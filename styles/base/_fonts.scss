@@ -33,7 +33,7 @@
     url('#{$path-fonts}/ProximaNova-Light.woff') format('woff');
     font-weight: $light;
     font-style: normal;
-    font-display: block;
+    font-display: swap;
 }
 
 @font-face {
@@ -42,7 +42,7 @@
     url('#{$path-fonts}/ProximaNova-Regular.woff') format('woff');
     font-weight: $book;
     font-style: normal;
-    font-display: block;
+    font-display: swap;
 }
 
 @font-face {
@@ -51,7 +51,7 @@
     url('#{$path-fonts}/ProximaNova-Semibold.woff') format('woff');
     font-weight: $semi-bold;
     font-style: normal;
-    font-display: block;
+    font-display: swap;
 }
 
 @font-face {
@@ -60,5 +60,5 @@
     url('#{$path-fonts}/ProximaNova-Bold.woff') format('woff');
     font-weight: $bold;
     font-style: normal;
-    font-display: block;
+    font-display: swap;
 }

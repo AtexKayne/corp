@@ -84,7 +84,7 @@ export default function Header() {
 
 
     useEffect(() => {
-        window.addEventListener('scroll', debounceScroll)
+        window.addEventListener('scroll', debounceScroll, { passive: true })
 
         const toggleClass = className => {
             const classList = document.querySelector('html').classList
