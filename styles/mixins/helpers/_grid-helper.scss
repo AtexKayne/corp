@@ -1,5 +1,5 @@
-@import "scaled";
-@import "../lib/strip-unit";
+@import 'scaled';
+@import '../lib/strip-unit';
 
 /*
  * Grid generator mixins
@@ -47,7 +47,7 @@
 @mixin grid-row-pad ($grid-config, $namespaces: null) {
     // We use last known gutter to make sure value 0 overwrites any
     // previously set value, but at the same time that we don't output
-    // unnecessary duplicate code, eg. setting "0" gutter on all breakpoints
+    // unnecessary duplicate code, eg. setting '0' gutter on all breakpoints
     $last-known-gutter-value: 0;
 
     @each $breakpoint, $config in $grid-config {
@@ -161,7 +161,7 @@
     @if not $unit {
         $unit: 100%;
     } @else if unitless($unit) {
-        @error "Grid column width can't be without a unit \"#{ $unit }\", please add unit, eg. \"#{ $unit * 1% }\", \"#{ $unit * 1vw }\"";
+        @error 'Grid column width can`t be without a unit \"#{ $unit }\", please add unit, eg. \"#{ $unit * 1% }\", \"#{ $unit * 1vw }\"';
     }
 
     @if $columns {
@@ -232,7 +232,7 @@
 @function grid-column-precision-fix ($width) {
     @if unit($width) == 'vw' {
         $unit: ($width - $width + 1);
-        $width-str: "#{ $width }";
+        $width-str: '#{ $width }';
         $dot-index: str-index($width-str, '.');
 
         @if $dot-index and str-length($width-str) - $dot-index > 4 {

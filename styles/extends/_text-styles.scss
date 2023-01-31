@@ -22,7 +22,7 @@
             #{ $prop }: #{ $value };
         }
     } @else {
-        @error 'Missing text style "#{ $name }", see settings/_text.scss';
+        @error 'Missing text style '#{ $name }', see settings/_text.scss';
     }
 }
 

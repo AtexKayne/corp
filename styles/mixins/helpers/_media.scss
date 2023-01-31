@@ -1,4 +1,4 @@
-@import "../lib/str-split";
+@import '../lib/str-split';
 
 /**
  * Breakpoints for devices / orientations / screens
@@ -48,13 +48,13 @@ $media-breakpoint-sm:       568px !default;
 // Minimal viewport size, not actually used anywhere
 $media-breakpoint-xs:       375px !default;
 
-// Min vertical height on md, if vertical size is smaller then "sm" will apply
+// Min vertical height on md, if vertical size is smaller then 'sm' will apply
 $media-breakpoint-md-min-height: 416px !default;
 
-// Min vertical height on xl, if vertical size is smaller then "lg" will apply
+// Min vertical height on xl, if vertical size is smaller then 'lg' will apply
 $media-breakpoint-xl-min-height: 500px !default;
 
-// Min vertical height on xxl, if vertical size is smaller then "xl" will apply
+// Min vertical height on xxl, if vertical size is smaller then 'xl' will apply
 $media-breakpoint-xxl-min-height: 700px !default;
 
 // Custom queries
@@ -152,7 +152,7 @@ $media-breakpoint-list: (
 
         @if $query {
             @if str-index($query, '(') == null {
-                $query: "(#{ $query })";
+                $query: '(#{ $query })';
             }
 
             @return $query;
@@ -165,88 +165,88 @@ $media-breakpoint-list: (
 
         // xxxl - Desktop PC, high-end laptop media queries with wide screen
         @if $name == 'xxxl' or $name == 'xxxl-up' {
-            @return "#{ $mediaPrefix } (min-width: #{ $media-breakpoint-xxxl-up }) and (min-height: #{ $media-breakpoint-xxl-min-height })";
+            @return '#{ $mediaPrefix } (min-width: #{ $media-breakpoint-xxxl-up }) and (min-height: #{ $media-breakpoint-xxl-min-height })';
         } @else if $name == 'xxxl-down' {
             @return null;
 
         // xxl - Desktop PC, high-end laptop media queries
         } @else if $name == 'xxl' {
-            @return "#{ $mediaPrefix } (min-width: #{ $media-breakpoint-xxl-up }) and (min-height: #{ $media-breakpoint-xxl-min-height }) and (max-width: #{ $media-breakpoint-xxl-down })";
+            @return '#{ $mediaPrefix } (min-width: #{ $media-breakpoint-xxl-up }) and (min-height: #{ $media-breakpoint-xxl-min-height }) and (max-width: #{ $media-breakpoint-xxl-down })';
         } @else if $name == 'xxl-up' {
-            @return "#{ $mediaPrefix } (min-width: #{ $media-breakpoint-xxl-up }) and (min-height: #{ $media-breakpoint-xxl-min-height })";
+            @return '#{ $mediaPrefix } (min-width: #{ $media-breakpoint-xxl-up }) and (min-height: #{ $media-breakpoint-xxl-min-height })';
         } @else if $name == 'xxl-down' {
-            @return "#{ $mediaPrefix } (max-width: #{ $media-breakpoint-xxl-down }), (max-height: #{ $media-breakpoint-xxl-min-height - 1px })";
+            @return '#{ $mediaPrefix } (max-width: #{ $media-breakpoint-xxl-down }), (max-height: #{ $media-breakpoint-xxl-min-height - 1px })';
 
             // xl - Desktop PC, high-end laptop media queries
         } @else if $name == 'xl' {
-            @return "#{ $mediaPrefix } (min-width: #{ $media-breakpoint-xl-up }) and (min-height: #{ $media-breakpoint-xl-min-height }) and (max-width: #{ $media-breakpoint-xl-down }), (min-width: #{ $media-breakpoint-xl-up }) and (min-height: #{ $media-breakpoint-xl-min-height }) and (max-height: #{ $media-breakpoint-xxl-min-height - 1px })";
+            @return '#{ $mediaPrefix } (min-width: #{ $media-breakpoint-xl-up }) and (min-height: #{ $media-breakpoint-xl-min-height }) and (max-width: #{ $media-breakpoint-xl-down }), (min-width: #{ $media-breakpoint-xl-up }) and (min-height: #{ $media-breakpoint-xl-min-height }) and (max-height: #{ $media-breakpoint-xxl-min-height - 1px })';
         } @else if $name == 'xl-up' {
-            @return "#{ $mediaPrefix } (min-width: #{ $media-breakpoint-xl-up }) and (min-height: #{ $media-breakpoint-xl-min-height })";
+            @return '#{ $mediaPrefix } (min-width: #{ $media-breakpoint-xl-up }) and (min-height: #{ $media-breakpoint-xl-min-height })';
         } @else if $name == 'xl-down' {
-            @return "#{ $mediaPrefix } (max-width: #{ $media-breakpoint-xl-down }), (max-height: #{ $media-breakpoint-xl-min-height - 1px }), (min-width: #{ $media-breakpoint-xl-up }) and (max-height: #{ $media-breakpoint-xxl-min-height - 1px })";
+            @return '#{ $mediaPrefix } (max-width: #{ $media-breakpoint-xl-down }), (max-height: #{ $media-breakpoint-xl-min-height - 1px }), (min-width: #{ $media-breakpoint-xl-up }) and (max-height: #{ $media-breakpoint-xxl-min-height - 1px })';
 
             // lg - Desktop PC, laptop and tablet in landscape orienation media queries
         } @else if $name == 'lg' {
-            @return "#{ $mediaPrefix } (min-width: #{ $media-breakpoint-lg-up }) and (max-width: #{ $media-breakpoint-lg-down }),  (min-width: #{ $media-breakpoint-lg-up }) and (max-height: #{ $media-breakpoint-xl-min-height - 1px })";
+            @return '#{ $mediaPrefix } (min-width: #{ $media-breakpoint-lg-up }) and (max-width: #{ $media-breakpoint-lg-down }),  (min-width: #{ $media-breakpoint-lg-up }) and (max-height: #{ $media-breakpoint-xl-min-height - 1px })';
         } @else if $name == 'lg-up' {
-            @return "#{ $mediaPrefix } (min-width: #{ $media-breakpoint-lg-up })";
+            @return '#{ $mediaPrefix } (min-width: #{ $media-breakpoint-lg-up })';
         } @else if $name == 'lg-down' {
-            @return "#{ $mediaPrefix } (max-width: #{ $media-breakpoint-lg-down }), (max-height: #{ $media-breakpoint-xl-min-height - 1px })";
+            @return '#{ $mediaPrefix } (max-width: #{ $media-breakpoint-lg-down }), (max-height: #{ $media-breakpoint-xl-min-height - 1px })';
 
             // md - Tablet in portrait orienation media queries
         } @else if $name == 'md' {
             @if $media-breakpoint-sm-up != false {
-                @return "#{ $mediaPrefix } (min-width: #{ $media-breakpoint-sm-up }) and (#{ $orientation-portrait }) and (max-width: #{ $media-breakpoint-md-down }), #{ $mediaPrefix } (min-width: #{ $media-breakpoint-md-up }) and (min-height: #{ $media-breakpoint-md-min-height }) and (max-width: #{ $media-breakpoint-md-down })";
+                @return '#{ $mediaPrefix } (min-width: #{ $media-breakpoint-sm-up }) and (#{ $orientation-portrait }) and (max-width: #{ $media-breakpoint-md-down }), #{ $mediaPrefix } (min-width: #{ $media-breakpoint-md-up }) and (min-height: #{ $media-breakpoint-md-min-height }) and (max-width: #{ $media-breakpoint-md-down })';
             } @else {
-                @return "#{ $mediaPrefix } (min-width: #{ $media-breakpoint-md-up }) and (min-height: #{ $media-breakpoint-md-min-height }) and (max-width: #{ $media-breakpoint-md-down })";
+                @return '#{ $mediaPrefix } (min-width: #{ $media-breakpoint-md-up }) and (min-height: #{ $media-breakpoint-md-min-height }) and (max-width: #{ $media-breakpoint-md-down })';
             }
         } @else if $name == 'md-up' {
             @if $media-breakpoint-sm-up != false {
-                @return "#{ $mediaPrefix } (min-width: #{ $media-breakpoint-sm-up }) and (#{ $orientation-portrait }), #{ $mediaPrefix } (min-width: #{ $media-breakpoint-md-up }) and (min-height: #{ $media-breakpoint-md-min-height }), #{ $mediaPrefix } (min-width: #{ $media-breakpoint-lg-up })";
+                @return '#{ $mediaPrefix } (min-width: #{ $media-breakpoint-sm-up }) and (#{ $orientation-portrait }), #{ $mediaPrefix } (min-width: #{ $media-breakpoint-md-up }) and (min-height: #{ $media-breakpoint-md-min-height }), #{ $mediaPrefix } (min-width: #{ $media-breakpoint-lg-up })';
             } @else {
-                @return "#{ $mediaPrefix } (min-width: #{ $media-breakpoint-md-up }) and (min-height: #{ $media-breakpoint-md-min-height })";
+                @return '#{ $mediaPrefix } (min-width: #{ $media-breakpoint-md-up }) and (min-height: #{ $media-breakpoint-md-min-height })';
             }
         } @else if $name == 'md-down' {
-            @return "#{ $mediaPrefix } (max-width: #{ $media-breakpoint-md-down })";
+            @return '#{ $mediaPrefix } (max-width: #{ $media-breakpoint-md-down })';
 
             // sm - Mobile phones in landscape orienation media queries
         } @else if $name == 'sm' {
             @if $media-breakpoint-md-down != false {
-                @return "#{ $mediaPrefix } (max-width: #{ $media-breakpoint-md-down} ) and (max-height: #{ $media-breakpoint-md-min-height - 1px }) and (#{ $orientation-landscape }), (max-width: #{ $media-breakpoint-sm-down} ) and (#{ $orientation-landscape })";
+                @return '#{ $mediaPrefix } (max-width: #{ $media-breakpoint-md-down} ) and (max-height: #{ $media-breakpoint-md-min-height - 1px }) and (#{ $orientation-landscape }), (max-width: #{ $media-breakpoint-sm-down} ) and (#{ $orientation-landscape })';
             } @else {
-                @return "#{ $mediaPrefix } (max-height: #{ $media-breakpoint-md-min-height - 1px }) and (#{ $orientation-landscape })";
+                @return '#{ $mediaPrefix } (max-height: #{ $media-breakpoint-md-min-height - 1px }) and (#{ $orientation-landscape })';
             }
         } @else if $name == 'sm-up' {
-            @return "#{ $mediaPrefix } (min-width: #{ $media-breakpoint-sm-up }), (#{ $orientation-landscape })";
+            @return '#{ $mediaPrefix } (min-width: #{ $media-breakpoint-sm-up }), (#{ $orientation-landscape })';
         } @else if $name == 'sm-down' {
-            @return "#{ $mediaPrefix } (max-width: #{ $media-breakpoint-md-down }) and (max-height: #{ $media-breakpoint-md-min-height - 1px }) and (#{ $orientation-landscape }), (max-width: #{ $media-breakpoint-sm-down} ) and (#{ $orientation-landscape }), (max-width: #{ $media-breakpoint-xs-down }) and (#{ $orientation-portrait })";
+            @return '#{ $mediaPrefix } (max-width: #{ $media-breakpoint-md-down }) and (max-height: #{ $media-breakpoint-md-min-height - 1px }) and (#{ $orientation-landscape }), (max-width: #{ $media-breakpoint-sm-down} ) and (#{ $orientation-landscape }), (max-width: #{ $media-breakpoint-xs-down }) and (#{ $orientation-portrait })';
 
             // xs - Mobile phones in portrait orienation media queries
         } @else if $name == 'xs' or $name == 'xs-down' {
-            @return "#{ $mediaPrefix } (max-width: #{ $media-breakpoint-xs-down }) and (#{ $orientation-portrait })";
+            @return '#{ $mediaPrefix } (max-width: #{ $media-breakpoint-xs-down }) and (#{ $orientation-portrait })';
         } @else if $name == 'xs-up' {
             @return null;
         } @else {
-            @error "Media query with name '#{ $name }' is not valid, definition not found!";
+            @error 'Media query with name '#{ $name }' is not valid, definition not found!';
         }
 
     } @else if $name == 'print' or $name == 'print-up' {
         // Print queries
-        @return "print";
+        @return 'print';
 
     } @else if $name == 'not-print' or $name == 'not-print-up' {
         // Not print queries
-        @return "not print";
+        @return 'not print';
 
     } @else if not map-has-key($media-breakpoint-list, $name) {
         // Name is a query
         @if str-index($name, '(') == null {
-            $name: "(#{ $name })";
+            $name: '(#{ $name })';
         }
 
-        @return "#{ $mediaPrefix } #{ $name }";
+        @return '#{ $mediaPrefix } #{ $name }';
     } @else {
-        @error "Media query with name '#{ $name }' is not valid, breakpoint has been disabled!";
+        @error 'Media query with name '#{ $name }' is not valid, breakpoint has been disabled!';
     }
 }
 
@@ -267,7 +267,7 @@ $media-breakpoint-list: (
  *         }
  *
  *         // Styles for md-down, ignored in print
- *         @include media-breakpoint (md-down, "only screen and") {
+ *         @include media-breakpoint (md-down, 'only screen and') {
  *             // ...
  *         }
  *
@@ -283,21 +283,21 @@ $media-breakpoint-list: (
     // Convert a list into a string and then back into a list
     // First check if $name is a string with a media query
     @if type-of($name) != 'string' or str-index($name, ':') == null {
-        $name: str-split("#{ $name }", " ");
+        $name: str-split('#{ $name }', ' ');
     }
 
     @if length($name) > 1 {
-        // A list of media query names, combine them by separating them with a ","
+        // A list of media query names, combine them by separating them with a ','
         $query: null;
 
         @each $item-name in $name {
             // Convert to string
-            $item-name: "#{ $item-name }";
+            $item-name: '#{ $item-name }';
             $item-query: get-media-query($item-name, $mediaPrefix);
 
             @if $item-query {
                 @if $query {
-                    $query: "#{ $query }, #{ $item-query }";
+                    $query: '#{ $query }, #{ $item-query }';
                 } @else {
                     $query: $item-query;
                 }
@@ -310,7 +310,7 @@ $media-breakpoint-list: (
             @content;
         }
     } @else {
-        $name: "#{ $name }";
+        $name: '#{ $name }';
         $query: get-media-query($name, $mediaPrefix);
 
         @if $query {

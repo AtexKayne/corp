@@ -6,7 +6,7 @@
 ////
 // I have written a lot of different `str-replace` Sass functions over
 // the months yet none of my tries were succeeding in making the new substring
-// able to contain the one to replace (e.g. `str-replace($str, "a", "ab")`).
+// able to contain the one to replace (e.g. `str-replace($str, 'a', 'ab')`).
 // Thanks to Valérian Galliat (@valeriangalliat), I finally managed to build
 // a bulletproof `str-replace` Sass function that allows new string to contain
 // the old one.

@@ -35,7 +35,7 @@
 %overflow-fix {
     &:after,
     &:before {
-        content: "";
+        content: '';
         display: block;
         overflow: hidden;
         position: relative;

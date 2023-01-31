@@ -1,5 +1,5 @@
-@import "../mixins/helpers/adaptive-value";
-@import "../mixins/helpers/responsive-value";
+@import '../mixins/helpers/adaptive-value';
+@import '../mixins/helpers/responsive-value';
 
 :root {
     // Scale can be used to change icon scale if some breakpoint is a % of another breakpoint, eg.
@@ -16,7 +16,7 @@
 /*
  * Media breakpoint properties
  * Used by adaptive-value function which is internally used by margins / paddings
- * We tell postcss to ignore it to prevent postcss from removing white space from ": ;"
+ * We tell postcss to ignore it to prevent postcss from removing white space from ': ;'
  *
  * 1. We use @media to prevent this definition from being moved by cssnano
  * 2. We use additional media query to prevent this definition from being merged with other media queries

@@ -26,15 +26,15 @@ $heavy:         $black;
  * Settings for text, fonts, sizes
  */
 
-$text-default-font:      "ProximaNova", "Helvetica Neue", Helvetica, Arial, sans-serif;
+$text-default-font:      'ProximaNova', 'Helvetica Neue', Helvetica, Arial, sans-serif;
 $text-default-weight:    $light;
 $text-default-transform: none;
-$text-heading-font:      "ProximaNova", "Helvetica Neue", Helvetica, Arial, sans-serif;
+$text-heading-font:      'ProximaNova', 'Helvetica Neue', Helvetica, Arial, sans-serif;
 $text-heading-weight:    $light;
 $text-heading-transform: none;
 
 $text-wysiwyg-transform: none;
-$text-code-font: Consolas, "Liberation Mono", Menlo, Courier, monospace;
+$text-code-font: Consolas, 'Liberation Mono', Menlo, Courier, monospace;
 
 $text-styles: (
     default:    ( font-family: $text-default-font, font-weight: $text-default-weight, text-transform: $text-default-transform, letter-spacing: 0.5px ),
@@ -56,8 +56,8 @@ $text-styles: (
 
 $text-default-weight: $light;
 $text-heading-weight: $light;
-$text-default-font:   "ProximaNova", "Helvetica Neue", Helvetica, Arial, sans-serif;
-$text-heading-font:   "ProximaNova", "Helvetica Neue", Helvetica, Arial, sans-serif;
+$text-default-font:   'ProximaNova', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+$text-heading-font:   'ProximaNova', 'Helvetica Neue', Helvetica, Arial, sans-serif;
 
 // ProximaNova
 $text-g2:      ( font-size: 14rem,   line-height: 80 / 56 * 1em );

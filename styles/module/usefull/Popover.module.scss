@@ -1,4 +1,4 @@
-@import "../../mixins/helpers/media";
+@import '../../mixins/helpers/media';
 
 .popover {
     z-index: 12;
@@ -7,13 +7,13 @@
     position: fixed;
     flex-direction: column;
 
-    &[data-open="true"] {
+    &[data-open='true'] {
         opacity: 1;
         pointer-events: all;
         transition: .3s opacity;
     }
 
-    &[data-open="false"] {
+    &[data-open='false'] {
         transition: .2s opacity;
     }
 
@@ -38,7 +38,7 @@
     background-color: var(--t-text);
     transition: 0.3s height ease-in-out, 0.3s opacity, 0.2s transform;
 
-    &[data-active="false"] {
+    &[data-active='false'] {
         transform: translateY(-60px) scaleY(0);
 
         .popoverImage {
@@ -47,7 +47,7 @@
         }
     }
 
-    &[data-active="true"] {
+    &[data-active='true'] {
         opacity: 1;
         height: 82px;
         margin-bottom: 12px;

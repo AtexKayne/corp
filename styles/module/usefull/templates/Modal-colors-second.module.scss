@@ -1,5 +1,5 @@
-@import "../../../mixins/helpers/media";
-@import "../../../mixins/helpers/adaptive-value";
+@import '../../../mixins/helpers/media';
+@import '../../../mixins/helpers/adaptive-value';
 
 .colors {
 }
@@ -57,7 +57,7 @@
     border-radius: 50%;
     border: 2px solid #11244D;
 
-    &[data-selected="true"] {
+    &[data-selected='true'] {
         border: 6px solid #E21B25;
     }
 }

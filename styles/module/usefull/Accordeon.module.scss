@@ -1,4 +1,4 @@
-@import "../../mixins/helpers/media";
+@import '../../mixins/helpers/media';
 
 // ACCORDEON
 .accordeon {
@@ -33,7 +33,7 @@
         }
     }
 
-    &[data-open="true"] {        
+    &[data-open='true'] {        
         .accordeonTitle::after {
             transform: rotate(180deg);
         }

@@ -13,7 +13,7 @@ button {
     // Color
     font-kerning: normal;
     color: color-use(text);
-    font-feature-settings: "kern" 1;
+    font-feature-settings: 'kern' 1;
     text-rendering: optimizeLegibility;
 
     @extend %text--style-default;

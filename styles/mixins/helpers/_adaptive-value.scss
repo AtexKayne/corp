@@ -1,4 +1,4 @@
-@import "../helpers/scaled";
+@import '../helpers/scaled';
 
 
 /**
@@ -40,7 +40,7 @@
                     }
                 }
             } @else {
-                @error "Media query with name '#{ $name }' is not valid, definition not found!";
+                @error 'Media query with name '#{ $name }' is not valid, definition not found!';
             }
         }
     } @else {

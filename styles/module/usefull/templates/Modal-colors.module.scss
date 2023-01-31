@@ -1,4 +1,4 @@
-@import "../../../mixins/helpers/media";
+@import '../../../mixins/helpers/media';
 
 .title {
     text-align: center;
@@ -36,11 +36,11 @@
     transition: .3s;
     align-items: center;
 
-    // &[data-status="disable"] {
+    // &[data-status='disable'] {
     //     color: var(--t-disabled);
     // }
 
-    // &[data-status="current"] {
+    // &[data-status='current'] {
     //     div {
     //         font-weight: 700;
     //     }

@@ -1,6 +1,6 @@
-@import "../mixins/lib/map-get-deep";
-@import "../mixins/lib/str-split";
-@import "../mixins/helpers/media";
+@import '../mixins/lib/map-get-deep';
+@import '../mixins/lib/str-split';
+@import '../mixins/helpers/media';
 
 
 /**
@@ -22,20 +22,20 @@ $z-index-ajax-loader: 7;
  * All resolution styles cascade up from mobile to desktop
  *
  * @demo
- *   <div class="row">
- *      <div class="col col--xs-12 col--sm-6 col--md-9 col--lg-12 col--xl-12">Column</div>
- *      <div class="col col--xs-12 col--sm-6 col--md-9 col--lg-12 col--xl-12">Column</div>
+ *   <div class='row'>
+ *      <div class='col col--xs-12 col--sm-6 col--md-9 col--lg-12 col--xl-12'>Column</div>
+ *      <div class='col col--xs-12 col--sm-6 col--md-9 col--lg-12 col--xl-12'>Column</div>
  *   </div>
  *
  * @demo
- *   <div class="row row--pad">
- *      <div class="col col--xs-12 col--sm-6 col--md-9 col--lg-12 col--xl-12">Column with padding</div>
- *      <div class="col col--xs-12 col--sm-6 col--md-9 col--lg-12 col--xl-12">Column with padding</div>
+ *   <div class='row row--pad'>
+ *      <div class='col col--xs-12 col--sm-6 col--md-9 col--lg-12 col--xl-12'>Column with padding</div>
+ *      <div class='col col--xs-12 col--sm-6 col--md-9 col--lg-12 col--xl-12'>Column with padding</div>
  *   </div>
  *
  * @demo
- *   <div class="row">
- *      <div class="col col--xs-12 col--sm-6 offset--sm-6 col--md-9 offset--sm-9 col--lg-24 offset--lg-0">
+ *   <div class='row'>
+ *      <div class='col col--xs-12 col--sm-6 offset--sm-6 col--md-9 offset--sm-9 col--lg-24 offset--lg-0'>
  *        Column with left offset
  *      </div>
  *   </div>

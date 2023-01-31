@@ -1,6 +1,6 @@
-@import "../../mixins/helpers/media";
-@import "../../mixins/helpers/adaptive-value";
-@import "../../extends/_text-sizes";
+@import '../../mixins/helpers/media';
+@import '../../mixins/helpers/adaptive-value';
+@import '../../extends/_text-sizes';
 
 // BUY BUTTON
 .buybtn {
@@ -61,7 +61,7 @@
     transform: translateX(0);
     transition: .5s cubic-bezier(.9,0,.5,1);
 
-    &[data-open="true"] {
+    &[data-open='true'] {
         transform: translateX(-100%);
     }
 
@@ -90,7 +90,7 @@
         flex-basis: 100%;
     }
 
-    &[data-open="true"] {
+    &[data-open='true'] {
         transform: translateX(0);
     }
 
@@ -125,7 +125,7 @@
     user-select: all!important;
     background-color: var(--t-light);
 
-    &[data-shake="true"] {
+    &[data-shake='true'] {
         animation: shake 1s ease;
     }
 
@@ -188,13 +188,13 @@
     border-radius: 8px;
     background-color: var(--t-light);
 
-    &[data-active="false"] {
+    &[data-active='false'] {
         .counterBtnAccept {
             display: none;
         }
     }
 
-    &[data-active="true"] {
+    &[data-active='true'] {
         .counterInput,
         .counterBtnAccept {
             display: flex;
@@ -223,7 +223,7 @@
         color: var(--t-primary);
     }
 
-    &[data-disabled="true"] {
+    &[data-disabled='true'] {
         opacity: .3;
         pointer-events: none;
     }
@@ -246,7 +246,7 @@
         transition: .3s;
     }
 
-    &[data-active="false"] {
+    &[data-active='false'] {
         svg {
             stroke-width: 1.5px;
             stroke: currentColor;
@@ -257,7 +257,7 @@
         }
     }
 
-    &[data-active="true"] {
+    &[data-active='true'] {
         path {
             stroke-width: 1.5px;
             fill: var(--t-primary);
@@ -293,14 +293,14 @@
         }
     }
 
-    &[data-shaked="true"] {
+    &[data-shaked='true'] {
         .iconBell {
             transform-origin: top;
             animation: ring 1s ease 0s 1;
         }
     }
 
-    &[data-active="true"] {
+    &[data-active='true'] {
         .iconBell {
             >span:last-child {
                 opacity: 1;
@@ -308,7 +308,7 @@
         }
     }
 
-    &[data-active="false"] {
+    &[data-active='false'] {
         .iconBell {
             >span:first-child {
                 opacity: 1;

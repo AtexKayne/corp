@@ -1,4 +1,4 @@
-// @import "mixins/lib/str-replace";
+// @import 'mixins/lib/str-replace';
 
 
 /**
@@ -8,7 +8,7 @@
  * @return {string} Escaped selector
  * @group core/utils/str
  * @example scss
- *   @use "core/utils/str";
+ *   @use 'core/utils/str';
  *
  *   str.escape-selector('100%')
  *   // '100\%'

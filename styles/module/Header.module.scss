@@ -1,6 +1,6 @@
-@import "../mixins/helpers/media";
-@import "../mixins/helpers/adaptive-value";
-@import "../extends/_text-sizes";
+@import '../mixins/helpers/media';
+@import '../mixins/helpers/adaptive-value';
+@import '../extends/_text-sizes';
 
 .header {
     width: 100%;
@@ -72,7 +72,7 @@
     background-color: var(--t-background);
     box-shadow: 0px 4px 10px 0px #0000001A;
 
-    &[data-active="true"] {
+    &[data-active='true'] {
         transition: .3s .2s;
         transform: translateY(0);
     }
@@ -125,7 +125,7 @@
     @include media-breakpoint(md-down) {
         padding: 15px 0;
 
-        &[data-active="true"] {
+        &[data-active='true'] {
             box-shadow: 0px 4px 10px 0px #0000001A;
         }
     }

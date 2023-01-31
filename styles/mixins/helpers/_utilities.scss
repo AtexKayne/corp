@@ -1,12 +1,12 @@
-@import "../lib/escape-selector";
+@import '../lib/escape-selector';
 
 
 /**
  * Convert classnames into CSS selector with breakpoint and postfix and add non-breakpoint prefixed selector for 'xs'
  *
  * @example
- *     get-utility-classname(foo bar, 'xs', '3'); // => ".foo-3,.bar-3,.foo-xs-3,.bar-xs-3"
- *     get-utility-classname(foo bar, 'md', '3'); // => ".foo-md-3,.bar-md-3"
+ *     get-utility-classname(foo bar, 'xs', '3'); // => '.foo-3,.bar-3,.foo-xs-3,.bar-xs-3'
+ *     get-utility-classname(foo bar, 'md', '3'); // => '.foo-md-3,.bar-md-3'
  */
 
 @function get-utility-selector ($classnames, $breakpoint: '', $postfix: '') {
@@ -91,7 +91,7 @@
     $use: map-get($utility, use);
 
     @if $use and type-of($use) == 'string' {
-        $use: str-split($use, " ");
+        $use: str-split($use, ' ');
     }
 
     @if index($use, reset-first-child) {

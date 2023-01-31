@@ -9,7 +9,7 @@
     pointer-events: none;
     transition-delay: 1s;
 
-    &[data-open="true"] {
+    &[data-open='true'] {
         opacity: 1;
         pointer-events: all;
         transition-delay: 0s;
@@ -21,7 +21,7 @@
     }
 
     @include media-breakpoint(lg-up) {
-        &[data-open="false"] {
+        &[data-open='false'] {
             .modal__content {
                 margin-right: -12px; // Иначе дрыгает
             }
@@ -133,7 +133,7 @@
         &::after {
             top: -10px;
             left: -10px;
-            content: "";
+            content: '';
             right: -30px;
             bottom: -30px;
             position: absolute;

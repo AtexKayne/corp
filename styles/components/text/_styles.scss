@@ -2,7 +2,7 @@
  * Heading styles/sizes for elements
  *
  * @demo
- *     <h2 class="h1">Looks like first level heading</h2>
+ *     <h2 class='h1'>Looks like first level heading</h2>
  */
 
 h1, .h1 { @extend h1; }
@@ -26,7 +26,7 @@ figure {
  * Font family / style
  *
  * @demo
- *     <p class="text--heading">Text with same style as heading</p>
+ *     <p class='text--heading'>Text with same style as heading</p>
  */
 
 .text--heading { @extend %text--style-heading; }
@@ -108,7 +108,7 @@ figure {
  * Prevent text wrapping
  *
  * @demo
- *     <p class="text--nowrap">
+ *     <p class='text--nowrap'>
  *         Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum
  *         pharetra sed erat convallis suscipit. Vestibulum at interdum neque.
  *     </p>
@@ -121,7 +121,7 @@ figure {
  * Truncate text adding dots at the end of the line if needed
  *
  * @demo
- *     <p class="text--truncate">
+ *     <p class='text--truncate'>
  *         Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum
  *         pharetra sed erat convallis suscipit. Vestibulum at interdum neque.
  *     </p>

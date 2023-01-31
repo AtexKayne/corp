@@ -1,9 +1,9 @@
-@import "../mixins/helpers/scaled";
-@import "../components/text/text";
+@import '../mixins/helpers/scaled';
+@import '../components/text/text';
 
 /**
  * Text size / style mixin and placeholder classname generator
- * For each style is generated "%text--size-NAME" placeholder selector
+ * For each style is generated '%text--size-NAME' placeholder selector
  *
  * @see settings/_text.scss
  * @demo

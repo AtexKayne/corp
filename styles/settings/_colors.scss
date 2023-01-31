@@ -1,4 +1,4 @@
-@import "../mixins/helpers/color";
+@import '../mixins/helpers/color';
 
 
 /*
@@ -43,7 +43,7 @@ $color-design-system: (
  */
 
 $color-themes: (
-    // "Light" theme
+    // 'Light' theme
     light: (
         background:    color-use(_white),
         line:          color-use(_black, 0.15),
@@ -69,7 +69,7 @@ $color-themes: (
         yellow:        color-use(_disabled),
     ),
 
-    // "Dark" theme
+    // 'Dark' theme
     dark: (
         background:    color-use(_black),
         line:          color-use(_black, 0.15),

@@ -1,4 +1,4 @@
-@import "../mixins/helpers/grid-helper";
+@import '../mixins/helpers/grid-helper';
 
 /**
  * Grid system
@@ -9,20 +9,20 @@
  * Grid row
  *
  * @demo
- *     <div class="row">
- *         <div class="col--xs-6"></div>
- *         <div class="col--xs-6"></div>
+ *     <div class='row'>
+ *         <div class='col--xs-6'></div>
+ *         <div class='col--xs-6'></div>
  *     </div>
  *
- *     <div class="row row--pad">
- *         <div class="col">Left side</div>
- *         <div class="col end-xs">Right side</div>
+ *     <div class='row row--pad'>
+ *         <div class='col'>Left side</div>
+ *         <div class='col end-xs'>Right side</div>
  *     </div>
  *
- *     <div class="row row--pad">
- *         <div class="col--xs-12 col--md-6 col--xl-4"></div>
- *         <div class="col--xs-12 col--md-6 col--xl-4"></div>
- *         <div class="col--xs-12 col--md-6 col--xl-4"></div>
+ *     <div class='row row--pad'>
+ *         <div class='col--xs-12 col--md-6 col--xl-4'></div>
+ *         <div class='col--xs-12 col--md-6 col--xl-4'></div>
+ *         <div class='col--xs-12 col--md-6 col--xl-4'></div>
  *     </div>
  */
 
@@ -31,7 +31,7 @@
 }
 
 .row--pad {
-    // Doesn't work if grid columns are using "vw" unit for width
+    // Doesn't work if grid columns are using 'vw' unit for width
     @if (unit(map-get-deep($grid-columns, 'xs', 'unit')) != 'vw') {
         @include grid-row-pad ($grid-columns);
     }
@@ -42,9 +42,9 @@
  * Grid columns
  *
  * @demo
- *     <div class="row row--pad">
- *         <div class="col">Left side</div>
- *         <div class="col">Right side</div>
+ *     <div class='row row--pad'>
+ *         <div class='col'>Left side</div>
+ *         <div class='col'>Right side</div>
  *     </div>
  */
 
@@ -70,9 +70,9 @@
  *   .row--between-BREAKPOINT
  *
  * @demo
- *     <div class="row row--start-xs"></div>
- *     <div class="row row--center-xs around-xs"></div>
- *     <div class="row row--end-xs"></div>
+ *     <div class='row row--start-xs'></div>
+ *     <div class='row row--center-xs around-xs'></div>
+ *     <div class='row row--end-xs'></div>
  */
 
 .row {
@@ -83,7 +83,7 @@
 /**
  * Overwrite col--lg and col--xl with col--xxl values when
  * screen resolution is >= 1440px.
- * ONLY for "vw" layout and if >= 1440px layout is not "vw"
+ * ONLY for 'vw' layout and if >= 1440px layout is not 'vw'
  */
 
 @if (map-has-key($grid-columns, xl) and map-has-key($grid-columns, xxl)) {

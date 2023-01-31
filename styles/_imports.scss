@@ -3,25 +3,25 @@
  * all root level stylesheets
  */
 // Settings
-@import "settings/paths";
-@import "settings/colors";
-@import "components/text/text";
-@import "settings/links";
-@import "settings/layout";
-@import "settings/spacing";
-@import "settings/utilities";
-@import "settings/grid";
+@import 'settings/paths';
+@import 'settings/colors';
+@import 'components/text/text';
+@import 'settings/links';
+@import 'settings/layout';
+@import 'settings/spacing';
+@import 'settings/utilities';
+@import 'settings/grid';
 
 // Mixins
-@import "mixins/lib/list-css-nth";
-@import "mixins/lib/breakpoint-pick-css-nth";
-@import "mixins/lib/map-get-deep";
-@import "mixins/lib/str-replace";
-@import "mixins/helpers/adaptive-value";
-@import "mixins/helpers/media";
-@import "mixins/helpers/color";
+@import 'mixins/lib/list-css-nth';
+@import 'mixins/lib/breakpoint-pick-css-nth';
+@import 'mixins/lib/map-get-deep';
+@import 'mixins/lib/str-replace';
+@import 'mixins/helpers/adaptive-value';
+@import 'mixins/helpers/media';
+@import 'mixins/helpers/color';
 
 // Extends
-@import "extends/layout";
-@import "extends/text-styles";
-@import "extends/text-sizes";
+@import 'extends/layout';
+@import 'extends/text-styles';
+@import 'extends/text-sizes';

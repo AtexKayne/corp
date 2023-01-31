@@ -1,4 +1,4 @@
-@import "../lib/strip-unit";
+@import '../lib/strip-unit';
 
 /**
  * Returns value which is scaled using --scale
@@ -33,7 +33,7 @@
             } @else if $unit == 'rem' {
                 @return calc(var(--scale-rem) * #{ $unitless-value });
             // } @else if $unit == '%' {
-            //     @error '"scaled(#{ $value })" can\'t be used with percentage value';
+            //     @error ''scaled(#{ $value })' can\'t be used with percentage value';
             } @else {
                 @return $value;
             }

@@ -1,6 +1,6 @@
-@import "../../mixins/helpers/media";
-@import "../../mixins/helpers/adaptive-value";
-@import "../../extends/_text-sizes";
+@import '../../mixins/helpers/media';
+@import '../../mixins/helpers/adaptive-value';
+@import '../../extends/_text-sizes';
 
 // DESCRIPTION
 .mainInfo {
@@ -97,12 +97,12 @@
         border-radius: 4px;
         text-transform: uppercase;
 
-        &[data-disabled="true"] {
+        &[data-disabled='true'] {
             color: var(--c-_light-gray);
         }
 
         &:hover,
-        &[data-active="true"] {
+        &[data-active='true'] {
             color: var(--t-background);
             background-color: var(--t-primary);
         }
@@ -207,7 +207,7 @@
             padding-bottom: 0px;
         }
 
-        &[data-active="true"] {
+        &[data-active='true'] {
             font-weight: 700;
             pointer-events: none;
         }
@@ -248,7 +248,7 @@
         padding: 23px 19px;
     }
 
-    &[data-active="true"] {
+    &[data-active='true'] {
         .dropdown {
             height: 192px;
             overflow: auto;
