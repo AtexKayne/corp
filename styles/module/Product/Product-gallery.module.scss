@@ -422,7 +422,7 @@
     padding: 0;
     overflow: auto;
     position: absolute;
-    scrollbar-color: transparent;
+    scrollbar-color: unset;
 
     &::-webkit-scrollbar-thumb {
         border-radius: 0;

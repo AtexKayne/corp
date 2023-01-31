@@ -3,8 +3,8 @@ import { globalState } from '../helpers/globalState'
 import style from '../../styles/module/usefull/Popover.module.scss'
 
 export default function Popover() {
-    const [rightPosition, setRightPosition] = useState('')
-    const [topPosition, setTopPosition] = useState('')
+    const [rightPosition, setRightPosition] = useState(0)
+    const [topPosition, setTopPosition] = useState(0)
     const [isOpen, setIsOpen] = useState('')
 
     const refTouch = useRef(0)
