@@ -25,21 +25,21 @@ export default function Footer() {
                     <p className={`${style.textp3} text--regular text--color-small`}>Товары для парикмахеров, барберов и стилистов по выгодным ценам.</p>
                 </div>
                 <div className={style.columnNav}>
-                    <a className={`${style.textt2} link mt-1.5 mt-1:md mt-1:xxl mt-1.5:xxxl`}>Каталог товаров</a>
-                    <a className={`${style.textt2} link mt-1.5 mt-1:md mt-1:xxl mt-1.5:xxxl`}>Бренды</a>
-                    <a className={`${style.textt2} link mt-1.5 mt-1:md mt-1:xxl mt-1.5:xxxl is-hidden--sm-down`}>Подборки</a>
-                    <a className={`${style.textt2} link mt-1.5 mt-1:md mt-1:xxl mt-1.5:xxxl is-hidden--sm-down`}>Со скидкой</a>
+                    <a href='#' className={`${style.textt2} link mt-1.5 mt-1:md mt-1:xxl mt-1.5:xxxl`}>Каталог товаров</a>
+                    <a href='#' className={`${style.textt2} link mt-1.5 mt-1:md mt-1:xxl mt-1.5:xxxl`}>Бренды</a>
+                    <a href='#' className={`${style.textt2} link mt-1.5 mt-1:md mt-1:xxl mt-1.5:xxxl is-hidden--sm-down`}>Подборки</a>
+                    <a href='#' className={`${style.textt2} link mt-1.5 mt-1:md mt-1:xxl mt-1.5:xxxl is-hidden--sm-down`}>Со скидкой</a>
                 </div>
                 <div className={style.columnNav}>
-                    <a className={`${style.textt2} link mt-1.5 mt-1:md mt-1:xxl mt-1.5:xxxl pt-1.5 pt-0:md`}>Доставка и оплата</a>
-                    <a className={`${style.textt2} link mt-1.5 mt-1:md mt-1:xxl mt-1.5:xxxl`}>Помощь</a>
-                    <a className={`${style.textt2} link mt-1.5 mt-1:md mt-1:xxl mt-1.5:xxxl`}>Правовые документы</a>
-                    <a className={`${style.textt2} link mt-1.5 mt-1:md mt-1:xxl mt-1.5:xxxl`}>Контакты</a>
+                    <a href='#' className={`${style.textt2} link mt-1.5 mt-1:md mt-1:xxl mt-1.5:xxxl pt-1.5 pt-0:md`}>Доставка и оплата</a>
+                    <a href='#' className={`${style.textt2} link mt-1.5 mt-1:md mt-1:xxl mt-1.5:xxxl`}>Помощь</a>
+                    <a href='#' className={`${style.textt2} link mt-1.5 mt-1:md mt-1:xxl mt-1.5:xxxl`}>Правовые документы</a>
+                    <a href='#' className={`${style.textt2} link mt-1.5 mt-1:md mt-1:xxl mt-1.5:xxxl`}>Контакты</a>
                 </div>
                 <div className={style.columnInfo1}>
                     <div className={`${style.textt6} text--color-small text--upper text--sparse pt-2.5 pt-0:lg`}>Служба поддержки:</div>
-                    <a className={`${style.textp2} link mt-0.6 mt-0.5:xxl`}>+7 (495) 983-35-42</a>
-                    <a className={`${style.textp4} link mt-0.5 mt-0:xxl`}>info@redhare.ru</a>
+                    <a href='#' className={`${style.textp2} link mt-0.6 mt-0.5:xxl`}>+7 (495) 983-35-42</a>
+                    <a href='#' className={`${style.textp4} link mt-0.5 mt-0:xxl`}>info@redhare.ru</a>
 
                     <div className={`${style.textt6} is-hidden--md text--color-small pt-2.5 pt-1.5:md pt-2:xxl pt-1.5:xxxl text--upper text--sparse`}>Наш адрес:</div>
                     <div className={`${style.textp5} is-hidden--md pt-0.5 pr-1.5`}>Москва, ул. Бауманская 6/2, «Виктория Плаза», 6-й этаж. Метро «Бауманская»</div>

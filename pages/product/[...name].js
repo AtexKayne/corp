@@ -4,6 +4,7 @@ import { globalState } from '../../components/helpers/globalState'
 import style from '../../styles/module/Product/Product.module.scss'
 import { product, product1, product2, product3, product4, product5 } from '../../components/helpers/constants'
 
+import Link from 'next/link'
 import Image from 'next/image'
 import Icon from '../../components/Icon'
 import MainLayout from '../../layout/MainLayout'
@@ -11,7 +12,6 @@ import Gallery from '../../components/product/Gallery'
 import Breadcrumbs from '../../components/Breadcrumbs'
 import BuyButton from '../../components/product/BuyButton'
 import Accordeon from '../../components/usefull/Accordeon'
-import Link from 'next/link'
 
 export default function Product({ detail }) {
     const [currentImages, setCurrentImages] = useState(detail.images)

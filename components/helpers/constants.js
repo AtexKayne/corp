@@ -267,3 +267,73 @@ export const colorVariants = {
     ]
 
 }
+
+export const catalog = {
+    categories: [
+        {
+            name: 'Машинки',
+            slug: 'test-1',
+            icon: '/images/catalog/categorys/машинки-xs.svg'
+        },
+        {
+            name: 'Фены и стайлеры',
+            slug: 'test-2',
+            icon: '/images/catalog/categorys/фены-xs.svg'
+        },
+        {
+            name: 'Ножницы',
+            slug: 'test-3',
+            icon: '/images/catalog/categorys/ножницы-xs.svg'
+        },
+        {
+            name: 'Стайлинг',
+            slug: 'test-4',
+            icon: '/images/catalog/categorys/стайлинг-xs.svg'
+        },
+        {
+            name: 'Косметика для волос',
+            slug: 'test-5',
+            icon: '/images/catalog/categorys/косметика-xs.svg'
+        },
+        {
+            name: 'Расходные материалы',
+            slug: 'test-6',
+            icon: '/images/catalog/categorys/расходники-xs.svg'
+        },
+        {
+            name: 'Окрашивание волос',
+            slug: 'test-7',
+            icon: '/images/catalog/categorys/окрашивание-xs.svg'
+        },
+        {
+            name: 'Расчески и брашинги',
+            slug: 'test-8',
+            icon: '/images/catalog/categorys/расчески-xs.svg'
+        },
+        {
+            name: 'Для барберов',
+            slug: 'test-9',
+            icon: '/images/catalog/categorys/барберам-xs.svg'
+        },
+        {
+            name: 'Пеньюары и фартуки',
+            slug: 'test-10',
+            icon: '/images/catalog/categorys/пеньюары-xs.svg'
+        },
+        {
+            name: 'Интерьер для бизнеса',
+            slug: 'test-11',
+            icon: '/images/catalog/categorys/интерьер-xs.svg'
+        },
+        {
+            name: 'Оборудование для обучения',
+            slug: 'test-12',
+            icon: '/images/catalog/categorys/обучение-xs.svg'
+        },
+        {
+            name: 'Дезинфекция и гигиена',
+            slug: 'test-13',
+            icon: '/images/catalog/categorys/гигиена-xs.svg'
+        },
+    ]
+}

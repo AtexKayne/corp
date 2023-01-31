@@ -1,0 +1,19 @@
+@import "../../mixins/helpers/media";
+@import "../../mixins/helpers/adaptive-value";
+@import "../../extends/_text-sizes";
+
+.categories {
+    // padding-top: 12px;
+}
+
+.category {
+    padding: 8px;
+    display: flex;
+    margin-top: 6px;
+    align-items: center;
+    white-space: nowrap;
+
+    >* {
+        margin-left: 8px;
+    }
+}

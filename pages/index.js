@@ -5,38 +5,45 @@ export default function Home() {
   return (
     <MainLayout title='Главная'>
       <div className='pt-3' />
-      <h1>Главная страница</h1>
+      <h1 className='sr-only'>Главная страница</h1>
       <div className='pt-3' />
-      <div className='pl-2'>
-        <div className='text--t1'>Список страниц:</div>
-        <div className='pt-1' />
-        <div>
-          <Link href='/product/rp-coloristic'>
-            <a href='/product/rp-coloristic' className='link'>Карточка товара - РП Колористика (для профи)</a>
-          </Link>
-        </div>
-        <div>
-          <Link href='/product/pp-coloristic'>
-            <a href='/product/pp-coloristic' className='link'>Карточка товара - ПП (с колористикой)</a>
-          </Link>
-        </div>
-        <div>
-          <Link href='/product/rp-no-coloristic'>
-            <a href='/product/rp-no-coloristic' className='link'>Карточка товара - РП  (1000 мл нет в наличии)</a>
-          </Link>
-        </div>
-        <div>
-          <Link href='/product/empty'>
-            <a href='/product/empty' className='link'>Карточка товара - Не авторизован (нет в наличии)</a>
-          </Link>
-        </div>
-        <div>
-          <Link href='/product/color-selector'>
-            <a href='/product/color-selector' className='link'>Карточка товара - РП выбор цвета</a>
-          </Link>
-        </div>
+      <div className='text--h4 text--bold'>Список страниц:</div>
+      <div className='pt-2' />
+      <div className='text--t1 pb-1'>Карточка товара</div>
+      <div className='ml-1'>
+        <Link href='/product/rp-coloristic'>
+          <a href='/product/rp-coloristic' className='link'>Карточка товара - РП Колористика (для профи)</a>
+        </Link>
+      </div>
+      <div className='ml-1'>
+        <Link href='/product/pp-coloristic'>
+          <a href='/product/pp-coloristic' className='link'>Карточка товара - ПП (с колористикой)</a>
+        </Link>
+      </div>
+      <div className='ml-1'>
+        <Link href='/product/rp-no-coloristic'>
+          <a href='/product/rp-no-coloristic' className='link'>Карточка товара - РП  (1000 мл нет в наличии)</a>
+        </Link>
+      </div>
+      <div className='ml-1'>
+        <Link href='/product/empty'>
+          <a href='/product/empty' className='link'>Карточка товара - Не авторизован (нет в наличии)</a>
+        </Link>
+      </div>
+      <div className='ml-1'>
+        <Link href='/product/color-selector'>
+          <a href='/product/color-selector' className='link'>Карточка товара - РП выбор цвета</a>
+        </Link>
+      </div>
+
+      <div className='text--t1 pb-1 pt-1.5'>Каталожная выдача</div>
+      <div className='ml-1'>
+        <Link href='/catalog/main'>
+          <a href='/catalog/main' className='link'>Кааталожная выдача</a>
+        </Link>
       </div>
       <div className='pt-5' />
+
     </MainLayout>
   )
 }
