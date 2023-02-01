@@ -337,3 +337,56 @@ export const catalog = {
         },
     ]
 }
+
+export const filters = {
+    colors: [
+        'Белый',
+        'Серебристый',
+        'Черный',
+        'Красный',
+        'Синий',
+        'Желтый',
+        'Разноцветный'
+    ],
+    brands: [
+        'ANDIS',
+        'BABYLISS PRO',
+        'BEARDBURYS',
+        'BEUY PRO',
+        'CANWAY',
+        'CLIPPER СAMO',
+        'DAYO 1',
+        'ANDIS 1',
+        'BABYLISS PRO 1',
+        'BEARDBURYS 1',
+        'BEUY PRO 1',
+        'CANWAY 1',
+        'CLIPPER СAMO 1',
+        'DAYO 2',
+        'ANDIS 2',
+        'BABYLISS PRO 2',
+        'BEARDBURYS 2',
+        'BEUY PRO 2',
+        'CANWAY 2',
+        'CLIPPER СAMO 2',
+    ],
+    pitanie: [
+        'Проводные',
+        'Беспроводные',
+        'Комбинированные'
+    ],
+    proizvodstvo: [
+        'Америка',
+        'Германия',
+        'Китай',
+        'Тайвань',
+        'Япония',
+        'Швейцария',
+    ],
+    ves: [
+        '150 г',
+        '170 г',
+        '200 г',
+        '250 г',
+    ]
+}

@@ -7,6 +7,9 @@ const nextConfig = {
   },
   reactStrictMode: false,
   swcMinify: true,
+  images: {
+    domains: ['redharemarket.ru'],
+  },
   webpack(config) {
     config.module.rules.push({
       test: /\.svg$/,
