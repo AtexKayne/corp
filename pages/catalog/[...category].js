@@ -15,11 +15,16 @@ import ColorPicker from '../../components/usefull/form/ColorPicker'
 import ItemsPicker from '../../components/usefull/form/ItemsPicker'
 
 export default function Catalog({ detail }) {
-    const [categoryName, setCategoryName] = useState('Каталог товаров')
-    const [activeSubCategory, setActiveSubCategory] = useState(0)
-    const [activeCategory, setActiveCategory] = useState(0)
-    const [filters, setFilters] = useState(false)
+    const [categoryName, setCategoryName] = useState(detail.currentCategory.name)
+    const [activeSubCategory, setActiveSubCategory] = useState(detail.currentCategory.id)
+    const [activeCategory, setActiveCategory] = useState(detail.currentCategory.parent_id ?? detail.currentCategory.id)
+    const [filters, setFilters] = useState(detail.currentCategory.filter)
     const router = useRouter()
+
+    useEffect(() => {
+        console.log(detail);
+    }, [])
+    
 
     const routerPush = url => {
         const link = url.includes('catalog/') ? url.split('catalog/')[1] : url
@@ -60,7 +65,7 @@ export default function Catalog({ detail }) {
 
 
     return (
-        <MainLayout title={'Каталог'}>
+        <MainLayout title={`Каталог | ${detail.currentCategory.name}`}>
             <Breadcrumbs />
             <div className='row mb-3'>
                 <h1 className='text--h4 text--bold'>{categoryName}</h1>
@@ -209,10 +214,15 @@ function Filter({ name, code }) {
     )
 }
 
-
-
 export async function getServerSideProps(context) {
+    const queryCategory = context.query.category
     let resp
+    let currentCategory = {
+        name: 'Каталог товаров',
+        id: 0,
+        parent_id: 0,
+        filter: false
+    }
     const json = {}
     const getIncludes = obj => {
         const includes = []
@@ -228,9 +238,20 @@ export async function getServerSideProps(context) {
         for (const property in categories.data) {
             // const url = categories.data[property].url.split('catalog/')[1]
             // categories.data[property].url = url
+            currentCategory = categories.data[property].url.includes(queryCategory)
+                ? categories.data[property]
+                : currentCategory
             if (categories.data[property].hasOwnProperty('include_sections')) {
                 const includes = getIncludes(categories.data[property].include_sections)
                 categories.data[property].include_sections = includes
+
+                if (currentCategory.id === 0) {
+                    categories.data[property].include_sections.forEach(include => {
+                        currentCategory = include.url.includes(queryCategory)
+                            ? include
+                            : currentCategory
+                    })
+                }
             }
             // categories.data[property].url = 'catalog'
             data.push(categories.data[property])
@@ -238,6 +259,8 @@ export async function getServerSideProps(context) {
 
         json.categories = data
     }
+
+    json.currentCategory = currentCategory
 
     // json = persone
     // try {
