@@ -90,7 +90,7 @@ export default function Catalog({ detail }) {
                     </div>
                 </div>
             </div>
-            <div className='row'>
+            <div className='d-flex'>
                 <div className='col col--xl-3 pr-1'>
                     <div className={`${style.categories}`} data-selected={!!activeCategory}>
                         <div className={style.additional}>
@@ -153,14 +153,16 @@ export default function Catalog({ detail }) {
                         : null
                     }
                 </div>
+                <div className='d-flex flex--wrap'>
+                    {products && products.length
+                        ? products.map(product => (
+                            <div key={product.id} className='col col--xl-4 px-1'>
+                                <Card info={product} />
+                            </div>
+                        )) : null
+                    }
+                </div>
 
-                {products && products.length
-                    ? products.map(product => (
-                        <div key={product.id} className='col col--xl-3 px-1'>
-                            <Card info={product} />
-                        </div>
-                    )) : null
-                }
 
             </div>
         </MainLayout>

@@ -18,12 +18,12 @@ export default function Card({ info }) {
         refRect.current.width = refRect.current.width * 1.1
         console.log(refRect.current);
     }, [])
-    
+
 
     const mouseMoveHandler = event => {
         const c = event.screenX - refRect.current.x
         const t = refRect.current.width / info.images.length
-        const r = Math.min(info.images.length - 1, Math.floor(c/t))
+        const r = Math.min(info.images.length - 1, Math.floor(c / t))
         setActiveImage(r)
     }
 
@@ -43,15 +43,17 @@ export default function Card({ info }) {
                     ))}
                 </div>
             </div>
-            <div className='text--t6 text--normal text--upper pb-0.6 pt-1.5'>{info.secondaryName}</div>
-            <div className='text--t4 text--normal text--upper pb-1'>{info.primaryName}</div>
-            <div className='text--t2 text--normal pb-0.8'>
-                <span data-hidden={!count} className={`${style.basket} text--t5 text--normal text--color-primary`}>
-                    <Icon name='basket' width='19' height='16' /> 
-                    <span>{count} шт x</span>
-                </span>
-                <span>{info.price} ₽</span>
-            </div>
+            <div className='text--t6 text--normal text--upper pb-0.6 pt-1.5'>{info.primaryName}</div>
+            <div className='text--t4 text--normal text--upper pb-1'>{info.secondaryName}</div>
+            {!info.isProfi
+                ? <div className='text--t2 text--normal pb-0.8'>
+                    <span data-hidden={!count} className={`${style.basket} text--t5 text--normal text--color-primary`}>
+                        <Icon name='basket' width='19' height='16' />
+                        <span>{count} шт x</span>
+                    </span>
+                    <span>{info.price} ₽</span>
+                </div> : null
+            }
             <div className={style.colors}>
                 <div className={style.color} data-color='black' />
                 <div className='text--t6 text--upper text--normal'>Черный</div>
