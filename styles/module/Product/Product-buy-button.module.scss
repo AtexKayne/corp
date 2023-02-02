@@ -37,6 +37,20 @@
     }
 }
 
+.cardBuybtn {
+    display: flex;
+    position: relative;
+
+    >* {
+        min-height: 60px;
+        margin-right: 8px;
+
+        &.btnMain {
+            margin-right: 0;
+        }
+    }
+}
+
 .buybtnChildren {
     @include media-breakpoint(md-down) {
         margin-right: 32px;
@@ -208,6 +222,32 @@
 
     @include media-breakpoint(xxl-up) {
         margin-left: 8px;
+    }
+}
+
+.cardCountSelector {
+    display: flex;
+    cursor: pointer;
+    flex-basis: 100%;
+    border-radius: 8px;
+    background-color: var(--t-light);
+
+    &[data-active='false'] {
+        .counterBtnAccept {
+            display: none;
+        }
+    }
+
+    &[data-active='true'] {
+        .counterInput,
+        .counterBtnAccept {
+            display: flex;
+        }
+
+        .counterDiv,
+        .counterBtn {
+            display: none;
+        }
     }
 }
 

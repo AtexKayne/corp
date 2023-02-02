@@ -1,6 +1,6 @@
 import { useRouter } from 'next/router'
 import { useState, useEffect, useRef } from 'react'
-import { catalog, filters } from '../../components/helpers/constants'
+import { cards, filters } from '../../components/helpers/constants'
 import { categories } from '../../components/helpers/categories'
 import style from '../../styles/module/Catalog/Catalog.module.scss'
 import useDeviceDetect from '../../components/helpers/useDeviceDetect'
@@ -13,18 +13,21 @@ import Icon from '../../components/Icon'
 import InputRange from '../../components/usefull/form/InputRange'
 import ColorPicker from '../../components/usefull/form/ColorPicker'
 import ItemsPicker from '../../components/usefull/form/ItemsPicker'
+import Card from '../../components/product/Card'
 
 export default function Catalog({ detail }) {
     const [categoryName, setCategoryName] = useState(detail.currentCategory.name)
     const [activeSubCategory, setActiveSubCategory] = useState(detail.currentCategory.id)
     const [activeCategory, setActiveCategory] = useState(detail.currentCategory.parent_id ?? detail.currentCategory.id)
     const [filters, setFilters] = useState(detail.currentCategory.filter)
+    const [products, setProducts] = useState(false)
     const router = useRouter()
 
     useEffect(() => {
+        setProducts(cards)
         console.log(detail);
     }, [])
-    
+
 
     const routerPush = url => {
         const link = url.includes('catalog/') ? url.split('catalog/')[1] : url
@@ -80,7 +83,7 @@ export default function Catalog({ detail }) {
                         <span>&nbsp;и фильтры</span>
                     </div>
                 </div>
-                <div className='col col--xl-9'>
+                <div className='col col--xl-9 px-1'>
                     <div className='d-flex flex--between'>
                         <div className='text--t5 text--bold text--upper text--color-small'>НАЙДЕНО 668 ТОВАРОВ</div>
                         <div className='text--t5 text--bold text--upper'>Популярные</div>
@@ -141,26 +144,23 @@ export default function Catalog({ detail }) {
                         </div>
                     </div>
 
-                    {
-                        filters && filters.length
-                            ? <div className={style.filters}>
-                                {
-                                    filters.map(filter => <Filter key={filter.id} name={filter.name} code={filter.code} />)
-                                }
-                            </div>
-                            : null
+                    {filters && filters.length
+                        ? <div className={style.filters}>
+                            {
+                                filters.map(filter => <Filter key={filter.id} name={filter.name} code={filter.code} />)
+                            }
+                        </div>
+                        : null
                     }
+                </div>
 
-                </div>
-                <div className='col col--xl-3'>
-                    v
-                </div>
-                <div className='col col--xl-3'>
-                    v
-                </div>
-                <div className='col col--xl-3'>
-                    v
-                </div>
+                {products && products.length
+                    ? products.map(product => (
+                        <div key={product.id} className='col col--xl-3 px-1'>
+                            <Card info={product} />
+                        </div>
+                    )) : null
+                }
 
             </div>
         </MainLayout>
@@ -168,7 +168,7 @@ export default function Catalog({ detail }) {
 }
 
 function Filter({ name, code }) {
-    const {colors, brands, pitanie, proizvodstvo, ves} = filters
+    const { colors, brands, pitanie, proizvodstvo, ves } = filters
 
     const [isOpen, setIsOpen] = useState(true)
     const [selectedFilters, setSelectedFilters] = useState(0)
@@ -197,19 +197,19 @@ function Filter({ name, code }) {
                                 ? <span className={style.filterIcon}>{selectedFilters}</span>
                                 : null
                         }
-                        
+
                     </div>
                 </div>
                 <Icon name='chevronUp' width='16' height='16' />
             </div>
 
-            { code === 'price' ? <InputRange min={0} max={15000} onAfterChange={event => changeHandler(event, 'price')} /> : null }
-            { code === 'color' ? <ColorPicker colors={colors} onAfterChange={event => changeHandler(event, 'picker')} /> : null }
-            { code === 'brand' ? <ItemsPicker items={brands} onAfterChange={event => changeHandler(event, 'picker')} /> : null }
-            { code === 'pitanie' ? <ItemsPicker items={pitanie} onAfterChange={event => changeHandler(event, 'picker')} /> : null }
-            { code === 'proizvodstvo' ? <ItemsPicker items={proizvodstvo} onAfterChange={event => changeHandler(event, 'picker')} /> : null }
-            { code === 'weight_filter' || code === 'ves' ? <ItemsPicker items={ves} onAfterChange={event => changeHandler(event, 'picker')} /> : null }
-            
+            {code === 'price' ? <InputRange min={0} max={15000} onAfterChange={event => changeHandler(event, 'price')} /> : null}
+            {code === 'color' ? <ColorPicker colors={colors} onAfterChange={event => changeHandler(event, 'picker')} /> : null}
+            {code === 'brand' ? <ItemsPicker items={brands} onAfterChange={event => changeHandler(event, 'picker')} /> : null}
+            {code === 'pitanie' ? <ItemsPicker items={pitanie} onAfterChange={event => changeHandler(event, 'picker')} /> : null}
+            {code === 'proizvodstvo' ? <ItemsPicker items={proizvodstvo} onAfterChange={event => changeHandler(event, 'picker')} /> : null}
+            {code === 'weight_filter' || code === 'ves' ? <ItemsPicker items={ves} onAfterChange={event => changeHandler(event, 'picker')} /> : null}
+
         </div>
     )
 }

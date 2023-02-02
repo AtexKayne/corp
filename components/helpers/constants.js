@@ -121,12 +121,12 @@ export const product2 = {
     ],
     forProfi: false,
     valuePicker: [
-        {name: 'Голубой', iconColor: '#00BEFF', link: '/product/test-2', current: true },
-        {name: 'Желтый', iconColor: '#E7B820', link: '/product/test-3' },
-        {name: 'Розовый', iconColor: '#FFB5B5', link: '/product/test-3' },
-        {name: 'Черный', iconColor: '#112233', link: '/product/test-3' },
-        {name: 'Белый', iconColor: '#FFFFFF', link: '/product/test-3' },
-        {name: 'Разноцветный', iconColor: '#FFFFFF', link: '/product/test-3' },
+        { name: 'Голубой', iconColor: '#00BEFF', link: '/product/test-2', current: true },
+        { name: 'Желтый', iconColor: '#E7B820', link: '/product/test-3' },
+        { name: 'Розовый', iconColor: '#FFB5B5', link: '/product/test-3' },
+        { name: 'Черный', iconColor: '#112233', link: '/product/test-3' },
+        { name: 'Белый', iconColor: '#FFFFFF', link: '/product/test-3' },
+        { name: 'Разноцветный', iconColor: '#FFFFFF', link: '/product/test-3' },
     ]
 }
 
@@ -258,12 +258,12 @@ export const productVariants = {
 export const colorVariants = {
     name: 'Цвет',
     items: [
-        {name: 'Голубой', iconColor: '#00BEFF', link: '/product/test-2', current: true },
-        {name: 'Желтый', iconColor: '#E7B820', link: '/product/test-3' },
-        {name: 'Розовый', iconColor: '#FFB5B5', link: '/product/test-3' },
-        {name: 'Черный', iconColor: '#112233', link: '/product/test-3' },
-        {name: 'Белый', iconColor: '#FFFFFF', link: '/product/test-3' },
-        {name: 'Разноцветный', iconColor: '#FFFFFF', link: '/product/test-3' },
+        { name: 'Голубой', iconColor: '#00BEFF', link: '/product/test-2', current: true },
+        { name: 'Желтый', iconColor: '#E7B820', link: '/product/test-3' },
+        { name: 'Розовый', iconColor: '#FFB5B5', link: '/product/test-3' },
+        { name: 'Черный', iconColor: '#112233', link: '/product/test-3' },
+        { name: 'Белый', iconColor: '#FFFFFF', link: '/product/test-3' },
+        { name: 'Разноцветный', iconColor: '#FFFFFF', link: '/product/test-3' },
     ]
 
 }
@@ -390,3 +390,52 @@ export const filters = {
         '250 г',
     ]
 }
+
+export const cards = [
+    {
+        id: 1,
+        images: [
+            '/images/product/image-0.jpg',
+            '/images/product/image-1.jpg',
+            '/images/product/image-2.jpg',
+            '/images/product/image-3.jpg',
+        ],
+        primaryName: 'Шейвер для бритья',
+        secondaryName: 'Wahl Shaver Finale Lithium 8164-116',
+        price: '13 160',
+        values: [
+            { max: 10 },
+        ],
+        isProfi: true
+    },
+    {
+        id: 2,
+        images: [
+            '/images/product/image-0.jpg',
+            '/images/product/image-1.jpg',
+            '/images/product/image-2.jpg',
+            '/images/product/image-3.jpg',
+        ],
+        primaryName: 'Шейвер для бритья',
+        secondaryName: 'Wahl Shaver Finale Lithium 8164-116',
+        price: '13 160',
+        values: [
+            { max: 0 },
+        ]
+    },
+    {
+        id: 3,
+        images: [
+            '/images/product/image-0.jpg',
+            '/images/product/image-1.jpg',
+            '/images/product/image-2.jpg',
+            '/images/product/image-3.jpg',
+        ],
+        primaryName: 'Шейвер для бритья',
+        secondaryName: 'Wahl Shaver Finale Lithium 8164-116',
+        price: '13 160',
+        values: [
+            { max: 10 },
+        ]
+    }
+]
