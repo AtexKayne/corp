@@ -2,7 +2,7 @@
     padding: 16px;
     transition: .3s;
     position: relative;
-    transform-origin: top;
+    // transform-origin: top;
 
     &:hover {
         z-index: 2;
@@ -46,7 +46,7 @@
     opacity: 0;
     z-index: 1;
     height: 281px;
-    transition: .3s;
+    transition: .1s;
     position: absolute;
 
     &[data-active='true'] {
