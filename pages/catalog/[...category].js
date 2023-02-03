@@ -1,24 +1,23 @@
-import { useRouter } from 'next/router'
-import { useState, useEffect, useRef } from 'react'
 import { cards, filters } from '../../components/helpers/constants'
-import { categories } from '../../components/helpers/categories'
 import style from '../../styles/module/Catalog/Catalog.module.scss'
-import useDeviceDetect from '../../components/helpers/useDeviceDetect'
+import { categories } from '../../components/helpers/categories'
+import { useState, useEffect, useRef } from 'react'
+import { useRouter } from 'next/router'
 
+import Link from 'next/link'
+import Image from 'next/image'
+import Icon from '../../components/Icon'
+import Card from '../../components/product/Card'
 import MainLayout from '../../layout/MainLayout'
 import Breadcrumbs from '../../components/Breadcrumbs'
-import Image from 'next/image'
-import Link from 'next/link'
-import Icon from '../../components/Icon'
 import InputRange from '../../components/usefull/form/InputRange'
 import ColorPicker from '../../components/usefull/form/ColorPicker'
 import ItemsPicker from '../../components/usefull/form/ItemsPicker'
-import Card from '../../components/product/Card'
 
 export default function Catalog({ detail }) {
-    const [categoryName, setCategoryName] = useState(detail.currentCategory.name)
-    const [activeSubCategory, setActiveSubCategory] = useState(detail.currentCategory.id)
     const [activeCategory, setActiveCategory] = useState(detail.currentCategory.parent_id ?? detail.currentCategory.id)
+    const [activeSubCategory, setActiveSubCategory] = useState(detail.currentCategory.id)
+    const [categoryName, setCategoryName] = useState(detail.currentCategory.name)
     const [filters, setFilters] = useState(detail.currentCategory.filter)
     const [products, setProducts] = useState(false)
     const refTitle = useRef(null)
@@ -75,11 +74,6 @@ export default function Catalog({ detail }) {
         setFilters(false)
         routerPush('main')
     }
-
-    useEffect(() => {
-        console.log(detail);
-    }, [categoryName])
-
 
     return (
         <MainLayout title={`Каталог | ${detail.currentCategory.name}`}>

@@ -12,23 +12,30 @@ export default function Card({ info }) {
     const refImages = useRef(null)
     const refRect = useRef(false)
 
+    const resizeHandler = () => {
+        refRect.current = refImages.current.getBoundingClientRect()
+    }
+
+    const debounceResize = debounce(resizeHandler, 60)
+
     useEffect(() => {
         refRect.current = refImages.current.getBoundingClientRect()
+        window.addEventListener('resize', debounceResize)
 
-        refRect.current.x = refRect.current.x * 1.05
-        refRect.current.width = refRect.current.width * 1.1
-        console.log(refRect.current);
+        return () => {
+            window.removeEventListener('resize', debounceResize)
+        }
     }, [])
 
 
     const mouseMoveHandler = event => {
-        const c = event.screenX - refRect.current.x
+        const c = event.clientX - refRect.current.x
         const t = refRect.current.width / info.images.length
         const r = Math.min(info.images.length - 1, Math.floor(c / t))
         setActiveImage(r)
     }
 
-    // const debounceMouseMove = debounce(mouseMoveHandler, 30)
+    
 
     return (
         <div className={style.card}>

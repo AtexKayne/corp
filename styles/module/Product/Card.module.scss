@@ -18,6 +18,7 @@
 }
 
 .basket {
+    height: 1px;
     align-items: center;
     display: inline-flex;
 
@@ -108,10 +109,10 @@
 }
 
 .price {
-    display: inline-flex;
     position: relative;
     white-space: nowrap;
     align-items: center;
+    display: inline-flex;
 
     .priceOld {
         margin-left: 12px;
