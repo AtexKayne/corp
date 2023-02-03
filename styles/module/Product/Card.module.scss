@@ -1,6 +1,7 @@
 .card {
     padding: 16px;
     transition: .3s;
+    border-radius: 8px;
     position: relative;
     // transform-origin: top;
 
@@ -36,7 +37,9 @@
 .images {
     z-index: 1;
     height: 281px;
+    overflow: hidden;
     position: relative;
+    border-radius: 8px;
 }
 
 .image {
