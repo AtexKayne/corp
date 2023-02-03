@@ -44,9 +44,10 @@
     left: 0;
     right: 0;
     opacity: 0;
+    z-index: 1;
     height: 281px;
+    transition: .3s;
     position: absolute;
-    transition: .3s .3s;
 
     &[data-active='true'] {
         opacity: 1;
