@@ -100,12 +100,15 @@
 }
 
 .popoverText {
+    max-width: 250px;
     margin-left: 12px;
     padding-right: 16px;
     color: var(--t-background);
 
     * {
+        overflow: hidden;
         white-space: nowrap;
+        text-overflow: ellipsis;
     }
 }
 

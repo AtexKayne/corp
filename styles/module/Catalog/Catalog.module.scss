@@ -14,9 +14,24 @@
     }
 }
 
+.title {
+    transition: .3s;
+}
+
+.wrapper {
+    flex-grow: 0;
+    flex-shrink: 0;
+    max-width: 280px;
+    flex-basis: 280px;
+}
+
 .categories {
     .additional {
+        opacity: 1;
+        height: 86px;
         display: block;
+        overflow: hidden;
+        transition: .3s .3s;
         margin-bottom: 16px;
     }
 
@@ -40,7 +55,9 @@
 
     &[data-selected='true'] {
         .additional {
-            display: none;
+            height: 0;
+            opacity: 0;
+            margin-bottom: 0;
         }
 
         .catalogPrev {
@@ -114,13 +131,12 @@
 
 .subcategory {
     order: 2;
-    display: flex;
+    display: none;
     cursor: pointer;
     margin-top: 6px;
     transition: .3s;
     border-radius: 4px;
     align-items: center;
-    white-space: nowrap;
     padding: 12px 16px 12px 39px;
 
     &:hover {
@@ -128,11 +144,17 @@
     }
 
     &[data-selected='true'] {
-        order: 1;
+        // order: 1;
+        display: flex;
         background-color: var(--t-smallish);
+        
         >* {
             font-weight: 700;
         }
+    }
+
+    .category[data-selected='true'] ~ & {
+        display: flex;
     }
 }
 
@@ -199,4 +221,16 @@
     justify-content: center;
     color: var(--t-background);
     background-color: var(--t-primary);
+}
+
+.cardWrapper {
+    // height: 500px;
+}
+
+.cardsContainer {
+    display: grid;
+    grid-gap: 16px;
+    padding-left: 32px;
+    grid-template-rows: repeat(3, 532px);
+    grid-template-columns: repeat(3, 1fr);
 }

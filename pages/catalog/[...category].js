@@ -21,6 +21,7 @@ export default function Catalog({ detail }) {
     const [activeCategory, setActiveCategory] = useState(detail.currentCategory.parent_id ?? detail.currentCategory.id)
     const [filters, setFilters] = useState(detail.currentCategory.filter)
     const [products, setProducts] = useState(false)
+    const refTitle = useRef(null)
     const router = useRouter()
 
     useEffect(() => {
@@ -31,7 +32,11 @@ export default function Catalog({ detail }) {
 
     const routerPush = url => {
         const link = url.includes('catalog/') ? url.split('catalog/')[1] : url
-        router.push(link)
+        router.push(link, undefined, { scroll: false })
+        window.scrollTo({
+            top: 0,
+            behavior: 'smooth'
+        })
     }
 
     const updateFilters = filters => {
@@ -41,16 +46,24 @@ export default function Catalog({ detail }) {
         setFilters(updated)
     }
 
+    const updateCategoryName = name => {
+        refTitle.current.style.opacity = 0
+        setTimeout(() => {
+            setCategoryName(name)
+            refTitle.current.style.opacity = 1
+        }, 300)
+    }
+
     const selectCategory = info => {
         setActiveCategory(info.id)
         setActiveSubCategory(info.id)
-        setCategoryName(info.name)
+        updateCategoryName(info.name)
         updateFilters(info.filter)
         routerPush(info.url)
     }
     const selectSubCategory = info => {
         setActiveSubCategory(info.id)
-        setCategoryName(info.name)
+        updateCategoryName(info.name)
         updateFilters(info.filter)
         routerPush(info.url)
     }
@@ -58,40 +71,39 @@ export default function Catalog({ detail }) {
     const resetSelection = () => {
         setActiveCategory(false)
         setActiveSubCategory(false)
-        setCategoryName('Каталог товаров')
+        updateCategoryName('Каталог товаров')
         setFilters(false)
         routerPush('main')
     }
+
     useEffect(() => {
         console.log(detail);
-    }, [])
+    }, [categoryName])
 
 
     return (
         <MainLayout title={`Каталог | ${detail.currentCategory.name}`}>
             <Breadcrumbs />
             <div className='row mb-3'>
-                <h1 className='text--h4 text--bold'>{categoryName}</h1>
+                <h1 ref={refTitle} className={`${style.title} text--h4 text--bold`}>{categoryName}</h1>
                 <div className={`${style.share} ml-1.5`}>
                     share
                 </div>
             </div>
-            <div className='row mb-2'>
-                <div className='col col--xl-3'>
+            <div className='d-flex mb-2'>
+                <div className={style.wrapper}>
                     <div data-selected={!!activeCategory} className={`${style.selector} text--t5 text--upper text--bold`}>
                         <span>Категории</span>
                         <span>&nbsp;и фильтры</span>
                     </div>
                 </div>
-                <div className='col col--xl-9 px-1'>
-                    <div className='d-flex flex--between'>
-                        <div className='text--t5 text--bold text--upper text--color-small'>НАЙДЕНО 668 ТОВАРОВ</div>
-                        <div className='text--t5 text--bold text--upper'>Популярные</div>
-                    </div>
+                <div className='d-flex col pl-2 flex--between'>
+                    <div className='text--t5 text--bold text--upper text--color-small'>НАЙДЕНО 668 ТОВАРОВ</div>
+                    <div className='text--t5 text--bold text--upper'>Популярные</div>
                 </div>
             </div>
             <div className='d-flex'>
-                <div className='col col--xl-6 pr-1'>
+                <div className={style.wrapper}>
                     <div className={`${style.categories}`} data-selected={!!activeCategory}>
                         <div className={style.additional}>
                             <Link href={`/catalog/hit`}>
@@ -153,10 +165,10 @@ export default function Catalog({ detail }) {
                         : null
                     }
                 </div>
-                <div className='d-flex flex--wrap'>
+                <div className={style.cardsContainer}>
                     {products && products.length
                         ? products.map(product => (
-                            <div key={product.id} className='col col--xl-4 px-1'>
+                            <div key={product.id} className={style.cardWrapper}>
                                 <Card info={product} />
                             </div>
                         )) : null
