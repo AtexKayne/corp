@@ -91,7 +91,7 @@ export default function Catalog({ detail }) {
                         <span>&nbsp;и фильтры</span>
                     </div>
                 </div>
-                <div className='d-flex col pl-2 flex--between'>
+                <div className='d-flex col pl-3 pr-1 flex--between'>
                     <div className='text--t5 text--bold text--upper text--color-small'>НАЙДЕНО 668 ТОВАРОВ</div>
                     <div className='text--t5 text--bold text--upper'>Популярные</div>
                 </div>

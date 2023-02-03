@@ -114,6 +114,7 @@
     }
 
     &[data-selected='true'] {
+        pointer-events: none;
         background-color: var(--t-smallish);
     }
 
@@ -146,6 +147,7 @@
     &[data-selected='true'] {
         // order: 1;
         display: flex;
+        pointer-events: none;
         background-color: var(--t-smallish);
         
         >* {

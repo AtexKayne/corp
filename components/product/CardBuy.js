@@ -225,10 +225,7 @@ export default function CardBuy({ max, activeValue, isProfi, setInBasket, image,
                 !isProfi && !isEmpty
                     ? <div className={style.btnWrapper}>
                         <div onClick={buyHandler} data-open={isOpen} className={`${style.btnMain} btn btn--md btn--primary`}>
-                            <span className='text--upper text--p5 text--bold mr-0.8'>
-                                <span>в корзину</span>
-                            </span>
-                            <Icon name='basketMD' width='18' height='18' />
+                            <span className='text--upper text--p5 text--bold mr-0.8'>в корзину</span>
                         </div>
 
                         <div data-open={isOpen} className={style.buyOpen}>

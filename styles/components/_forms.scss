@@ -44,6 +44,14 @@
         bottom: 13px;
         position: absolute;
     }
+
+    &__empty {
+        display: none;
+
+        &[data-searched='true'] {
+            display: block;
+        }
+    }
 }
 
 .input {
@@ -52,6 +60,7 @@
     outline: none;
     display: block;
     font-size: 20px;
+    transition: .3s;
     font-weight: 400;
     border-radius: 0;
     padding-bottom: 12px;
@@ -60,6 +69,11 @@
 
     &::placeholder {
         color: var(--t-disabled);
+    }
+
+    &:focus {
+        color: var(--t-text);
+        border-bottom: 1px solid var(--t-text);
     }
 }
 

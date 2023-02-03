@@ -3,10 +3,12 @@ import Icon from '../../Icon'
 
 export default function InputSearch({ children, count }) {
     const refSearched = useRef(null)
+    const [isSearched, setIsSearched] = useState(false)
 
     const changeHandler = event => {
         const value = event.target.value.toLowerCase()
         const childrens = Array.from(refSearched.current.children)
+        let items = 0
         childrens.forEach(element => {
             const allChildren = element.querySelectorAll('div, span')
             let isContains = false
@@ -14,7 +16,10 @@ export default function InputSearch({ children, count }) {
                 isContains = children.innerHTML.toLowerCase().includes(value)
             })
             element.style.display = isContains ? '' : 'none'
+            if (!isContains) items++
         })
+        console.log(items, childrens.length);
+        setIsSearched(items === childrens.length)
     }
 
     return (
@@ -30,6 +35,7 @@ export default function InputSearch({ children, count }) {
             <div ref={refSearched} className='searched-childrens'>
                 {children}
             </div>
+            <div data-searched={isSearched} className='input-search__empty text--t2 text--normal text--color-disabled'>Ничего не найдено</div>
         </div>
     )
 }

@@ -39,12 +39,15 @@ export default function InputRange({ min, max, onAfterChange }) {
     }
 
     const blurHandler = input => {
-        const value = input === 'min'
+        let value = input === 'min'
             ? parseInt(refInputMin.current.value.replaceAll(' ', '')) ?? min
             : parseInt(refInputMax.current.value.replaceAll(' ', '')) ?? max
+
         if (input === 'min') {
+            if (!value) value = 0
             refInputMin.current.value = value.toLocaleString() + ' ₽'
         } else if (input === 'max') {
+            if (!value) value = max
             refInputMax.current.value = value.toLocaleString() + ' ₽'
         }
     }
@@ -67,7 +70,7 @@ export default function InputRange({ min, max, onAfterChange }) {
                     onBlur={() => blurHandler('min')}
                     placeholder={`${min.toLocaleString()} ₽`}
                     onChange={event => changeInput(event, 'min')} />
-                <div style={{ minWidth: '40px', textAlign: 'center' }}>-</div>
+                <div style={{ minWidth: '40px', textAlign: 'center', color: '#989898' }}>–</div>
                 <input
                     max={max}
                     min={min}
