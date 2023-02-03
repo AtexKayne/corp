@@ -402,9 +402,15 @@ export const cards = [
         ],
         primaryName: 'Шейвер для бритья',
         secondaryName: 'Wahl Shaver Finale Lithium 8164-116',
-        price: '13 160',
         values: [
-            { max: 10 },
+            {
+                value: '100 мл',
+                price: {
+                    actual: '13 160',
+                    old: '16 160' // Can be empty
+                },
+                max: 10,
+            },
         ],
         isProfi: true
     },
@@ -418,9 +424,15 @@ export const cards = [
         ],
         primaryName: 'Шейвер для бритья',
         secondaryName: 'Wahl Shaver Finale Lithium 8164-116',
-        price: '13 160',
         values: [
-            { max: 0 },
+            {
+                value: '100 мл',
+                price: {
+                    actual: '13 160',
+                    old: '16 160' // Can be empty
+                },
+                max: 0,
+            },
         ]
     },
     {
@@ -433,9 +445,14 @@ export const cards = [
         ],
         primaryName: 'Шейвер для бритья',
         secondaryName: 'Wahl Shaver Finale Lithium 8164-116',
-        price: '13 160',
         values: [
-            { max: 10 },
+            {
+                value: '100 мл',
+                price: {
+                    actual: '13 160',
+                },
+                max: 10,
+            },
         ]
     },
     {
@@ -448,9 +465,14 @@ export const cards = [
         ],
         primaryName: 'Шейвер для бритья',
         secondaryName: 'Wahl Shaver Finale Lithium 8164-116',
-        price: '13 160',
         values: [
-            { max: 10 },
+            {
+                value: '100 мл',
+                price: {
+                    actual: '13 160',
+                },
+                max: 10,
+            },
         ]
     },
     {
@@ -461,11 +483,16 @@ export const cards = [
             '/images/product/image-2.jpg',
             '/images/product/image-3.jpg',
         ],
-        primaryName: 'Шейвер для бритья',
-        secondaryName: 'Wahl Shaver Finale Lithium 8164-116',
-        price: '13 160',
+        primaryName: 'Шейвер для бритья Шейвер для бритья Шейвер для бритья',
+        secondaryName: 'Wahl Shaver Finale Lithium 8164-116 Wahl Shaver Finale Lithium 8164-116',
         values: [
-            { max: 10 },
+            {
+                value: '100 мл',
+                price: {
+                    actual: '13 160',
+                },
+                max: 10,
+            },
         ]
     },
     {
@@ -478,9 +505,15 @@ export const cards = [
         ],
         primaryName: 'Шейвер для бритья',
         secondaryName: 'Wahl Shaver Finale Lithium 8164-116',
-        price: '13 160',
         values: [
-            { max: 10 },
+            {
+                value: '100 мл',
+                price: {
+                    actual: '13 160',
+                    old: '16 160' // Can be empty
+                },
+                max: 10,
+            },
         ]
     },
     {
@@ -493,9 +526,15 @@ export const cards = [
         ],
         primaryName: 'Шейвер для бритья',
         secondaryName: 'Wahl Shaver Finale Lithium 8164-116',
-        price: '13 160',
         values: [
-            { max: 10 },
+            {
+                value: '100 мл',
+                price: {
+                    actual: '13 160',
+                    old: '16 160' // Can be empty
+                },
+                max: 10,
+            },
         ]
     },
 ]

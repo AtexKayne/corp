@@ -91,7 +91,7 @@ export default function Catalog({ detail }) {
                 </div>
             </div>
             <div className='d-flex'>
-                <div className='col col--xl-3 pr-1'>
+                <div className='col col--xl-6 pr-1'>
                     <div className={`${style.categories}`} data-selected={!!activeCategory}>
                         <div className={style.additional}>
                             <Link href={`/catalog/hit`}>

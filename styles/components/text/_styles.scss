@@ -32,6 +32,7 @@ figure {
 .text--heading { @extend %text--style-heading; }
 .text--default { @extend %text--style-default; }
 .text--color-primary { color: color-use(primary); }
+.text--color-tetriary { color: color-use(_yellow); }
 .text--color-heading { color: color-use(heading); }
 .text--color-disabled { color: color-use(disabled); }
 .text--color-small { color: color-use(small); }

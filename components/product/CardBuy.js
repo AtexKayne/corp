@@ -5,11 +5,11 @@ import { motion, useAnimationControls } from 'framer-motion'
 import style from '../../styles/module/Product/Product-buy-button.module.scss'
 
 
-export default function CardBuy({ max, activeValue, isProfi, setInBasket, image, name }) {
+export default function CardBuy({ max, activeValue, isProfi, setInBasket, image, name, isNotify, setIsNotify }) {
     const [isSelected, setIsSelected] = useState(false)
     const [isShaked, setIsShaked] = useState(false)
     const [isRinged, setIsRinged] = useState(false)
-    const [isNotify, setIsNotify] = useState(false)
+    // const [isNotify, setIsNotify] = useState(false)
     const [diabled, setDiabled] = useState(false)
     const [isEmpty, setIsEmpty] = useState(false)
     const [isOpen, setIsOpen] = useState(false)
