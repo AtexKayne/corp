@@ -101,7 +101,7 @@ export default function Modal() {
                 onPointerDown={startDrag}
                 onDragEnd={dragEndHandler}
                 dragConstraints={{ top: 0, bottom: 0 }}
-                drag={isZero ? false : 'y'}
+                drag={isZero || !isMobile ? false : 'y'}
                 className={`${isZero ? 'modal__content--full-height' : 'modal__content'}`}>
 
                 <div onClick={() => setIsOpen(false)} className='modal__close'>

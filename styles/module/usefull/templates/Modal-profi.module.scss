@@ -16,6 +16,16 @@
     @include media-breakpoint(md-up) {
         text-align: left;
     }
+
+    @media (min-height: 1000px) {
+        font-size: 44px;
+    }
+}
+
+.text {
+    @media (min-height: 1000px) {
+        font-size: 18px;
+    }
 }
 
 .btns {
