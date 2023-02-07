@@ -1,0 +1,108 @@
+@import '../../../mixins/helpers/media';
+@import '../../../mixins/helpers/adaptive-value';
+
+.title {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.filterName {
+    width: 100%;
+    display: flex;
+    cursor: pointer;
+    padding: 22px 0;
+    transition: .3s;
+    align-items: center;
+    justify-content: space-between;
+
+    &:hover {
+        color: var(--t-primary);
+    }
+}
+
+.filler {
+    // max-width: 20px;
+    position: relative;
+    
+    >span {
+        z-index: 2;
+        display: block;
+        cursor: pointer;
+        position: relative;
+        // transform: translateX(-50px);
+    }
+
+    &::before {
+        left: 0;
+        top: -10px;
+        z-index: 1;
+        content: '';
+        right: -40px;
+        bottom: -10px;
+        position: absolute;
+        pointer-events: none;
+        background-color: var(--t-background);
+    }
+
+    &[data-changed='false'] {
+        >span {
+            opacity: 0;
+            pointer-events: none;
+        }
+    }
+}
+
+.closer {
+    width: 20px;
+    height: 20px;
+    cursor: pointer;
+    transition: .3s;
+    position: relative;
+
+    &::after {
+        top: -10px;
+        left: -10px;
+        content: '';
+        right: -10px;
+        bottom: -10px;
+        position: absolute;
+    }
+
+    &:hover {
+        color: var(--t-primary);
+    }
+}
+
+.filterModal {
+    top: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 3;
+    overflow-y: auto;
+    max-height: 100vh;
+    overflow-x: hidden;
+    position: absolute;
+    transition: .5s ease-in-out;
+    transform: translateX(100vw);
+    background-color: var(--t-background);
+    width: adaptive-value((
+        xs: 100vw,
+        md: 620px,
+        lg: 452px,
+        xl: 528px,
+        xxl: 644px,
+        xxxl: 684px
+    ));
+    padding: adaptive-value((
+        xs: 16px 16px 28px,
+        md: 28px 32px 0,
+        lg: 28px 48px 0,
+        xl: 28px 72px 0,
+    ));
+
+    &[data-open='true'] {
+        transform: translateX(0);
+    }
+}

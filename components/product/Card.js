@@ -5,15 +5,21 @@ import style from '../../styles/module/Product/Card.module.scss'
 import Icon from '../Icon'
 import CardBuy from './CardBuy'
 
-export default function Card({ info }) {
-    const [count, setCount] = useState(0)
+export default function Card({ info, updated }) {
+    const [isSelected, setIsSelected] = useState(false)
     const [activeImage, setActiveImage] = useState(0)
     const [isNotify, setIsNotify] = useState(false)
+    const [isHover, setIsHover] = useState(false)
+    const [count, setCount] = useState(0)
     const refImages = useRef(null)
     const refRect = useRef(false)
 
     const resizeHandler = () => {
         refRect.current = refImages.current.getBoundingClientRect()
+    }
+
+    const mouseLeaveHandler = () => {
+        if (!isSelected) setIsHover(false)
     }
 
     const debounceResize = debounce(resizeHandler, 60)
@@ -27,6 +33,10 @@ export default function Card({ info }) {
         }
     }, [])
 
+    useEffect(() => {
+        refRect.current = refImages.current.getBoundingClientRect()
+    }, updated)
+    
 
     const mouseMoveHandler = event => {
         const c = event.clientX - refRect.current.x
@@ -35,10 +45,8 @@ export default function Card({ info }) {
         setActiveImage(r)
     }
 
-    
-
     return (
-        <div className={style.card}>
+        <div data-hover={isHover} onMouseEnter={() => setIsHover(true)} onMouseLeave={mouseLeaveHandler} className={style.card}>
             <div ref={refImages} onMouseLeave={() => setActiveImage(0)} onMouseMove={mouseMoveHandler} className={style.images}>
                 {info.images.map((image, index) => (
                     <div key={image} data-active={activeImage === index} className={style.image}>
@@ -83,14 +91,16 @@ export default function Card({ info }) {
 
             <div className={`${style.buyBtn} mt-2`}>
                 <CardBuy
-                    isProfi={info.isProfi}
                     image={info.images[0]}
-                    setInBasket={setCount}
                     max={info.values[0].max}
                     name={info.secondaryName}
-                    isNotify={isNotify}
                     activeValue={info.values[0]}
+                    isNotify={isNotify}
+                    isProfi={info.isProfi}
+                    isSelected={isSelected}
+                    setInBasket={setCount}
                     setIsNotify={setIsNotify}
+                    setIsSelected={setIsSelected}
                 />
             </div>
         </div>

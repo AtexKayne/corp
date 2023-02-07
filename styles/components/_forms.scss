@@ -33,6 +33,10 @@
     max-height: 300px;
 }
 
+.modal .searched-childrens {
+    max-height: none;
+}
+
 
 .input-search {
     display: block;
@@ -155,5 +159,57 @@
 
     &__name {
         font-size: 16px;
+    }
+}
+
+.input-switch {
+    width: 28px;
+    height: 16px;
+    cursor: pointer;
+    overflow: hidden;
+    position: relative;
+    border-radius: 20px;
+    display: inline-block;
+
+    input {
+        display: none;
+    }
+
+    &__background {
+        top: -5px;
+        left: -5px;
+        right: -5px;
+        bottom: -5px;
+        transition: .3s;
+        position: absolute;
+        pointer-events: none;
+        background-color: #11244D;
+    }
+
+    input:checked ~ &__background {
+        background-color: var(--t-primary);
+    }
+
+    &__base {
+        width: 10px;
+        height: 10px;
+        transition: .3s;
+        position: absolute;
+        border-radius: 50%;
+        transform: translate(4px, 3px);
+        background-color: var(--t-background);
+    }
+
+    input:checked ~ &__base {
+        transform: translate(15px, 3px);
+    }
+}
+
+.checker {
+    display: flex;
+    align-items: center;
+
+    .input-switch {
+        margin-right: 8px;
     }
 }

@@ -111,7 +111,6 @@
     max-width: 100vw;
     overflow: hidden;
     position: absolute;
-    padding: 20px 30px;
     justify-content: center;
     background-color: var(--t-background);
     top: adaptive-value((
@@ -122,23 +121,36 @@
         xxxl: 74px,
     ));
 
-    @include media-breakpoint(md-down) {
-        padding: 15px 0;
+    padding: adaptive-value((
+        xs: 0 16px,
+        md: 0 32px,
+        lg: 20px 48px,
+        xl: 20px 72px,
+        xxl: 20px 72px,
+        xxxl: 20px 0,
+    ));
 
+    @include media-breakpoint(md-down) {
         &[data-active='true'] {
             box-shadow: 0px 4px 10px 0px #0000001A;
         }
     }
+}
 
-    > div {
-        width: adaptive-value((
-            xs: calc(100% - var(--spacing) * 2),
-            md: 656px,
-            lg: 784px,
-            xl: 880px,
-            xxl: 1112px,
-            xxxl: 1496px,
-        ));
+.fixedContainerInnerTablet {
+    width: 100%;
+    padding: 10px 0;
+}
+
+.fixedContainerInnerDesktop {
+    width: 100%;
+    display: flex;
+    // padding: 20px 0 0;
+    justify-content: space-between;
+
+    @include media-breakpoint(xxxl) {
+        padding: 0;
+        max-width: 1496px;
     }
 }
 

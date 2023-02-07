@@ -43,6 +43,7 @@
 .flex {
     &--wrap { flex-wrap: wrap; }
     &--column { flex-direction: column; }
+    &--align-center { align-items: center; }
     &--between { justify-content: space-between; }
     &--column-reverse { flex-direction: column-reverse; }
     &--center { align-items: center; justify-content: center; }

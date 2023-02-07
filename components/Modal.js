@@ -5,6 +5,7 @@ import { globalState } from './helpers/globalState'
 import { motion, useAnimationControls, useDragControls } from 'framer-motion'
 
 export default function Modal() {
+    const [data, setData] = useState(null)
     const [isOpen, setIsOpen] = useState(false)
     const [isZero, setIsZero] = useState(false)
     const [template, setTemplate] = useState(null)
@@ -31,30 +32,9 @@ export default function Modal() {
         globalState.modal = {
             setIsOpen: open => { setTimeout(() => setIsOpen(open), 120) },
             setTemplate,
-            setIsZero
+            setIsZero,
+            setData
         }
-
-        // let observer
-        // if (refContent.current) {
-        //     const config = {
-        //         attributes: false,
-        //         childList: true,
-        //         subtree: false
-        //     }
-        //     const callback = info => {
-        //         const value = info[0]
-        //         // if (window.innerWidth >= globalState.sizes.sm) return
-        //         if (!value.addedNodes || !value.addedNodes.length) return
-        //         setIsFullHeight(value.addedNodes[0].classList.contains('full-height'))
-        //     }
-
-        //     observer = new MutationObserver(callback)
-        //     observer.observe(refContent.current, config)
-        // }
-
-        // return () => {
-        //     if (observer) observer.disconnect()
-        // }
     }, [])
 
     // @TODO REWIRITE!
@@ -107,18 +87,19 @@ export default function Modal() {
                 <div onClick={() => setIsOpen(false)} className='modal__close'>
                     <Icon name='close' width='20' height='20' />
                 </div>
-                <LoadTemplate name={template} />
+                <LoadTemplate data={data} name={template} />
             </motion.div>
         </div>
     )
 }
 
-function LoadTemplate({ name }) {
+function LoadTemplate({ name, data }) {
     const [LoadedTemplate, setLoadedTemplate] = useState(false)
     const loadTemplate = templateName => {
         const dynamicComponents = {
             profi: dynamic(() => import('./usefull/templates/ModalProfi'), { ssr: false }),
             colors: dynamic(() => import('./usefull/templates/ModalColors'), { ssr: false }),
+            filters: dynamic(() => import('./usefull/templates/ModalFilters'), { ssr: false }),
             priceInfo: dynamic(() => import('./usefull/templates/ModalPriceInfo'), { ssr: false }),
             notification: dynamic(() => import('./usefull/templates/ModalNotification'), { ssr: false }),
             colorsSecond: dynamic(() => import('./usefull/templates/ModalColorsSecond'), { ssr: false }),
@@ -132,7 +113,7 @@ function LoadTemplate({ name }) {
 
     return (
         <>
-            {LoadedTemplate ? <LoadedTemplate /> : null}
+            {LoadedTemplate ? <LoadedTemplate data={data} /> : null}
         </>
     )
 }

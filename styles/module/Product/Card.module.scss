@@ -1,11 +1,15 @@
+@import '../../mixins/helpers/media';
+@import '../../mixins/helpers/adaptive-value';
+
 .card {
-    padding: 16px;
+    height: 100%;
     transition: .3s;
     border-radius: 8px;
     position: relative;
+    padding: 16px 16px 90px;
     // transform-origin: top;
 
-    &:hover {
+    &[data-hover='true'] {
         z-index: 2;
         // transform: scale(1.1);
         box-shadow: 0px 10px 30px 2px #69748633;
@@ -14,6 +18,11 @@
         .buyBtn {
             opacity: 1;
         }
+    }
+
+    @include media-breakpoint(lg-down) {
+        padding: 0 0 90px;
+        box-shadow: none!important;
     }
 }
 
@@ -37,10 +46,16 @@
 
 .images {
     z-index: 1;
-    height: 281px;
     overflow: hidden;
     position: relative;
     border-radius: 8px;
+    height: adaptive-value((
+        xs: 180px,
+        md: 230px,
+        lg: 197px,
+        xl: 217px,
+        xxl: 281px
+    ));
 }
 
 .image {
@@ -49,10 +64,16 @@
     right: 0;
     opacity: 0;
     z-index: 1;
-    height: 281px;
     transition: .1s;
     position: absolute;
-
+    height: adaptive-value((
+        xs: 180px,
+        md: 230px,
+        lg: 197px,
+        xl: 217px,
+        xxl: 281px
+    ));
+    
     &[data-active='true'] {
         opacity: 1;
     }
@@ -77,8 +98,17 @@
 }
 
 .buyBtn {
+    left: 0;
+    right: 0;
+    bottom: 0;
     opacity: 0;
+    height: 60px;
     transition: .3s;
+    position: absolute;
+
+    @include media-breakpoint(lg-down) {
+        opacity: 1;
+    }
 }
 
 .nav {

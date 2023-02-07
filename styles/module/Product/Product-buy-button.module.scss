@@ -233,6 +233,7 @@
     background-color: var(--t-light);
 
     &[data-active='false'] {
+        .counterBtnReject,
         .counterBtnAccept {
             display: none;
         }
@@ -240,7 +241,8 @@
 
     &[data-active='true'] {
         .counterInput,
-        .counterBtnAccept {
+        .counterBtnAccept,
+        .counterBtnReject {
             display: flex;
         }
 
@@ -252,8 +254,10 @@
 }
 
 .counterBtn,
+.counterBtnReject,
 .counterBtnAccept {
     display: flex;
+    cursor: pointer;
     min-width: 40px;
     align-items: center;
     transition: .3s color;
@@ -271,10 +275,6 @@
     @include media-breakpoint(md-up) {
         min-width: 60px;
     }
-}
-
-.counterBtnReject {
-    filter: none;
 }
 
 .favourite,

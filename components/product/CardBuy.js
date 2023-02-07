@@ -5,8 +5,18 @@ import { motion, useAnimationControls } from 'framer-motion'
 import style from '../../styles/module/Product/Product-buy-button.module.scss'
 
 
-export default function CardBuy({ max, activeValue, isProfi, setInBasket, image, name, isNotify, setIsNotify }) {
-    const [isSelected, setIsSelected] = useState(false)
+export default function CardBuy({ 
+    max,
+    name,
+    image,
+    isProfi,
+    isNotify,
+    isSelected,
+    setIsNotify,
+    setInBasket,
+    activeValue,
+    setIsSelected }) {
+    
     const [isShaked, setIsShaked] = useState(false)
     const [isRinged, setIsRinged] = useState(false)
     // const [isNotify, setIsNotify] = useState(false)
@@ -31,18 +41,18 @@ export default function CardBuy({ max, activeValue, isProfi, setInBasket, image,
     }
 
     const documentClick = event => {
+        if (event.target === document.body) return
         const classList = event.target.classList
 
         if (!classList.contains(style.counterInput) && !classList.contains(style.counterBtnReject)) {
-            document.removeEventListener('click', documentClick)
-            setIsSelected(false)
             refInput.current.value = getValue()
-
-            if (+refInput.current.value === 0) setCount(0)
-        } else if (classList.contains(style.counterBtnReject)) {
-            document.removeEventListener('click', documentClick)
-            setIsSelected(false)
+            setCount(+refInput.current.value)
+        } else if (classList.contains(style.counterInput)) {
+            return
         }
+        
+        setIsSelected(false)
+        document.removeEventListener('click', documentClick)
     }
 
     const cancelHandler = () => {
@@ -72,7 +82,7 @@ export default function CardBuy({ max, activeValue, isProfi, setInBasket, image,
             refInput.current.focus()
             fakeInput.remove()
             document.addEventListener('click', documentClick)
-        }, 1000)
+        }, 500)
 
         setTimeout(() => {
             meta.remove()
@@ -106,17 +116,30 @@ export default function CardBuy({ max, activeValue, isProfi, setInBasket, image,
     }
 
     const changeHandler = () => {
-        const value = getValue()
+        let value = getValue()
+
+        if (value > max) {
+            value = max
+            setIsShaked(true)
+            setTimeout(() => setIsShaked(false), 1000)
+            globalState.popover.setTextPrimary(name)
+            globalState.popover.setTextSecondary('Максимум для этого заказа')
+            globalState.popover.setImage(image)
+            globalState.popover.setIsBasket(false)
+            globalState.popover.setIsOpen(true)
+        }
+        
         refInput.current.value = value
-        if (!!value) setCount(value)
+
+        // if (!!value) setCount(value)
     }
 
     const keyDownHandler = event => {
-        if (event.keyCode === 13) document.body.click()
+        if (event.keyCode === 13) document.querySelector(`.${style.counterBtnAccept}`).click()
     }
 
     const blurHandler = () => {
-        document.body.click()
+        document.querySelector(`.${style.counterBtnAccept}`).click()
     }
 
     const profiClickHandler = () => {
@@ -181,23 +204,7 @@ export default function CardBuy({ max, activeValue, isProfi, setInBasket, image,
     }, [count])
 
     useEffect(() => {
-        // if (isProfi || isEmpty) return
-        const target = document.querySelector('footer')
-        const callback = entries => {
-            if (window.innerWidth < globalState.sizes.lg) {
-                if (entries[0].isIntersecting) refButton.current.style.transform = 'translateY(200px)'
-                else refButton.current.style.transform = ''
-            }
-        }
-
-        const observer = new IntersectionObserver(callback, { threshold: 0.1 })
-        observer.observe(target)
-
         setTimeout(() => refValuesUpdate.current = false, 200) //@TODO для предотвращение уведомления при первой загруке
-
-        return () => {
-            observer.disconnect()
-        }
     }, [])
 
     useEffect(() => {
@@ -236,7 +243,7 @@ export default function CardBuy({ max, activeValue, isProfi, setInBasket, image,
                                 <span data-disabled={diabled === 'minus'} onClick={() => updateCount(-1)} className={style.counterBtn}>
                                     <Icon name='minus' width='16' height='16' />
                                 </span>
-                                <span onClick={cancelHandler} className={`${style.counterBtnAccept} ${style.counterBtnReject}`}>
+                                <span onClick={cancelHandler} className={`${style.counterBtnReject} ${style.counterBtnReject}`}>
                                     <Icon name='close' width='16' height='16' />
                                 </span>
 

@@ -129,12 +129,12 @@ export default function Header() {
                             <a className='link active' href='#' rel='nofollow'>RedHare Market</a>
                             <a className='link' href='#' rel='nofollow'>RedHare Обучение</a>
                         </div>
-                        <div className={style.group}>
+                        <div className={'d-flex flex--align-center'}>
                             <a className='link btn btn--xs' href='#' rel='nofollow'>
                                 <Icon name='navigationXS' width='12' height='12' size='xxs' />
                                 <span>Петропавловск-Камчатский</span>
                             </a>
-                            <a className='link is-hidden--xl-up' href='#'>Контакты</a>
+                            <a className='link is-hidden--xl-up mr-0:lg' href='#'>Контакты</a>
                             <a className='link is-hidden--xl-down' href='tel:+74959833542'>+7 (495) 983-35-42</a>
                         </div>
                         <div className={`${style.group} is-hidden--lg-down`}>
@@ -152,7 +152,7 @@ export default function Header() {
                 onMouseLeave={hoverLeaveHandler}
             >
 
-                <div className='is-hidden--lg-up'>
+                <div className={`${style.fixedContainerInnerTablet} is-hidden--lg-up`}>
                     <div className={`${style.top} ${style.textt4} text--regular`}>
                         <div className={style.groupMD}>
                             <div className='btn btn--empty btn--xs'>
@@ -201,7 +201,7 @@ export default function Header() {
                     </div>
                 </div>
 
-                <div className='is-hidden--md-down d-flex flex--between'>
+                <div className={`${style.fixedContainerInnerDesktop} is-hidden--md-down`}>
                     <div className={`${style.groupMD} ${style.textt1} text--semi`}>
                         <Link href='/'>
                             <div className='logo-light'>

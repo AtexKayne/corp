@@ -6,7 +6,6 @@ export default function InputRange({ min, max, onAfterChange }) {
     const [rangeValue, setRangeValue] = useState([min, max])
     const refInputMin = useRef(null)
     const refInputMax = useRef(null)
-    const refRange = useRef(null)
 
     const changeInput = (event, input) => {
         const value = event.target.value.replaceAll(' ', '')
@@ -20,7 +19,6 @@ export default function InputRange({ min, max, onAfterChange }) {
         } else if (numValue > max) {
             validateValue = max
         }
-        console.log(validateValue);
 
         if (input === 'min') {
             if (validateValue > rangeValue[1]) validateValue = rangeValue[1] - 1
@@ -87,13 +85,12 @@ export default function InputRange({ min, max, onAfterChange }) {
                 min={min}
                 max={max}
                 count={1}
-                ref={refRange}
                 pushable={true}
                 tabIndex={[0, 1]}
                 value={rangeValue}
                 onChange={changeHandler}
                 defaultValue={[min, max]}
-                onAfterChange={onAfterChange} />
+                onAfterChange={event => onAfterChange({values: event, reset: {min, max}})} />
         </div>
     )
 }

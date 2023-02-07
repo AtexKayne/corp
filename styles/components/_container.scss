@@ -2,22 +2,18 @@
     width: 100%;
     margin: 0 auto;
     max-width: adaptive-value((
-        xs: calc(100% - var(--spacing) * 2),
-        md: 656px,
-        lg: 784px,
-        xl: 880px,
-        xxl: 1112px,
+        xs: 100%,
         xxxl: 1496px,
     ));
 
-    // padding: adaptive-value((
-    //     xs: 0 16px,
-    //     md: 0 32px,
-    //     lg: 0 48px,
-    //     xl: 0 72px,
-    //     xxl: 0 72px,
-    //     xxxl: 0 16px,
-    // ));
+    padding: adaptive-value((
+        xs: 0 16px,
+        md: 0 32px,
+        lg: 0 48px,
+        xl: 0 72px,
+        xxl: 0 72px,
+        xxxl: 0,
+    ));
 
     // @include media-breakpoint(xxxl) {
     //     max-width: 1496px;
