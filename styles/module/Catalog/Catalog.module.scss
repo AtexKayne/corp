@@ -54,6 +54,8 @@
 .wrapper {
     flex-grow: 0;
     flex-shrink: 0;
+    transition: .3s;
+    
     max-width: adaptive-value((
         xs: 100vw,
         xl: 196px,
