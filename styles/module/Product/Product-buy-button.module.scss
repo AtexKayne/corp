@@ -43,10 +43,16 @@
 
     >* {
         min-height: 60px;
-        margin-right: 8px;
+        // margin-right: 8px;
 
         &.btnMain {
             margin-right: 0;
+        }
+    }
+
+    @include media-breakpoint(lg-down) {
+        >* {
+            min-height: 44px;
         }
     }
 }

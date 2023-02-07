@@ -29,12 +29,18 @@ export default function ModalFilters({ data }) {
             </div>
 
             {data && data.length
-                ? data.map(filter => <Filter 
+                ? data.map(filter => <Filter
                     key={filter.id}
                     setActiveFilters={setActiveFilters}
                     name={filter.name} code={filter.code} />)
                 : null
             }
+
+            <div className={style.footer}>
+                <div onClick={() => globalState.modal.setIsOpen(false)} className={`${style.showBtn} btn btn--primary btn--fill`}>
+                    <span className='text--upper text--p6 text--bold'>Показать 100 товаров</span>
+                </div>
+            </div>
         </div>
     )
 }
@@ -60,6 +66,10 @@ function ModalFilterWrapper({ children, name, isChanged }) {
                     </div>
                 </div>
                 {children}
+
+                <div onClick={() => setIsOpen(false)} className={`${style.showBtn} btn btn--primary btn--fill`}>
+                    <span className='text--upper text--p6 text--bold'>Показать 100 товаров</span>
+                </div>
             </div>
         </>
     )
@@ -84,7 +94,7 @@ function Filter({ name, code, setActiveFilters }) {
     }
     const changeHandler = (event, type, code) => {
         const active = getValues(event, type)
-        const activeTypes = {[code]: active}
+        const activeTypes = { [code]: active }
         setActiveFilters(prev => {
             return [prev, activeTypes]
         })

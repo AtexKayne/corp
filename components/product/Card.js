@@ -60,7 +60,7 @@ export default function Card({ info, updated }) {
                 </div>
             </div>
             <div className='text--t6 text--normal text--upper pb-0.6 pt-1.5'>{info.primaryName}</div>
-            <div className='text--t4 text--normal text--upper pb-1'>{info.secondaryName}</div>
+            <div className='text--t4 text--normal pb-1'>{info.secondaryName}</div>
             {!info.isProfi && info.values[0].max !== 0
                 ? <div className='text--t2 text--normal pb-0.8'>
                     <span data-hidden={!count} className={`${style.basket} text--t5 text--normal text--color-primary`}>

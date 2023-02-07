@@ -23,15 +23,16 @@
 }
 
 .filler {
-    // max-width: 20px;
+    max-width: 20px;
     position: relative;
     
     >span {
         z-index: 2;
         display: block;
         cursor: pointer;
+        transition: .3s;
         position: relative;
-        // transform: translateX(-50px);
+        transform: translate(-50px, 3px);
     }
 
     &::before {
@@ -75,6 +76,23 @@
     }
 }
 
+.footer {
+    bottom: 0;
+    position: absolute;
+    left: adaptive-value((
+        xs: 16px,
+        md: 32px,
+        lg: 48px,
+        xl: 72px,
+    ));
+    right: adaptive-value((
+        xs: 16px,
+        md: 32px,
+        lg: 48px,
+        xl: 72px,
+    ));
+}
+
 .filterModal {
     top: 0;
     right: 0;
@@ -105,4 +123,10 @@
     &[data-open='true'] {
         transform: translateX(0);
     }
+}
+
+.showBtn {
+    min-height: 60px;
+    margin-top: 30px;
+    margin-bottom: 20px;
 }

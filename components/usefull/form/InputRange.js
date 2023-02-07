@@ -80,17 +80,19 @@ export default function InputRange({ min, max, onAfterChange }) {
                     onChange={event => changeInput(event, 'max')} />
             </div>
 
-            <Range
-                range
-                min={min}
-                max={max}
-                count={1}
-                pushable={true}
-                tabIndex={[0, 1]}
-                value={rangeValue}
-                onChange={changeHandler}
-                defaultValue={[min, max]}
-                onAfterChange={event => onAfterChange({values: event, reset: {min, max}})} />
+            <div className='px-0.8'>
+                <Range
+                    range
+                    min={min}
+                    max={max}
+                    count={1}
+                    pushable={true}
+                    tabIndex={[0, 1]}
+                    value={rangeValue}
+                    onChange={changeHandler}
+                    defaultValue={[min, max]}
+                    onAfterChange={event => onAfterChange({ values: event, reset: { min, max } })} />
+            </div>
         </div>
     )
 }

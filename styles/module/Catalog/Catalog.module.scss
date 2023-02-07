@@ -33,16 +33,33 @@
 
     &[data-shown='true'] {
         .titleArrow {
-            transform: rotate(180deg);
+            transform: translateY(4px) rotate(180deg);
         }
     }
 
     .titleArrow {
         opacity: 0;
+        transform: translateY(2px);
     }
 
     @include media-breakpoint(lg-down) {
         cursor: pointer;
+
+        h1 {
+            z-index: 1;
+            position: relative;
+
+            &::after {
+                top: -5px;
+                left: 0px;
+                z-index: 1;
+                content: '';
+                right: -60px;
+                bottom: -5px;
+                cursor: pointer;
+                position: absolute;
+            }
+        }
 
         .titleArrow {
             opacity: 1;
@@ -52,17 +69,12 @@
 }
 
 .wrapper {
+    opacity: 1;
     flex-grow: 0;
     flex-shrink: 0;
     transition: .3s;
-    
-    max-width: adaptive-value((
-        xs: 100vw,
-        xl: 196px,
-        xxl: 280px,
-        xxxl: 381px
-    ));
-    flex-basis: adaptive-value((
+    overflow: hidden;
+    width: adaptive-value((
         xs: 100vw,
         xl: 196px,
         xxl: 280px,
@@ -76,8 +88,13 @@
     ));
 
     &[data-hidden='true'] {
-        flex-basis: 0;
-        overflow: hidden;
+        width: 0;
+    }
+
+    @include media-breakpoint(xl-up) {
+        &[data-hidden='true'] {
+            opacity: 0;
+        }
     }
 
     @include media-breakpoint(lg-down) {
@@ -110,6 +127,13 @@
 }
 
 .categories {
+    width: adaptive-value((
+        xs: 100vw,
+        xl: 196px,
+        xxl: 280px,
+        xxxl: 381px
+    ));
+
     .additional {
         opacity: 1;
         height: 86px;
@@ -247,6 +271,12 @@
 
 .filters {
     display: none;
+    width: adaptive-value((
+        xs: 100vw,
+        xl: 196px,
+        xxl: 280px,
+        xxxl: 381px
+    ));
     
     >* {
         margin-bottom: 48px;

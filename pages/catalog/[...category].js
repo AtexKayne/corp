@@ -62,6 +62,11 @@ export default function Catalog({ detail }) {
         return null
     }
 
+    const closeWrapper = () => {
+        if (window.innerWidth >= globalState.sizes.xl) return
+        setTimeout(() => setIsSidebarHidden(true), 600)
+    }
+
     const updateCategoryName = name => {
         refTitle.current.style.opacity = 0
         setTimeout(() => {
@@ -77,6 +82,7 @@ export default function Catalog({ detail }) {
         updateCategoryName(info.name)
         updateFilters(info.filter)
         routerPush(info.url)
+        // closeWrapper()
     }
 
     const selectSubCategory = info => {
@@ -85,6 +91,7 @@ export default function Catalog({ detail }) {
         updateCategoryName(info.name)
         updateFilters(info.filter)
         routerPush(info.url)
+        closeWrapper()
     }
 
     const resetSelection = () => {
@@ -96,7 +103,6 @@ export default function Catalog({ detail }) {
     }
 
     const openFilters = () => {
-        console.log(info);
         const filter = updateFilters(info.filter)
         if (filter) {
             globalState.modal.setTemplate('filters')
@@ -112,7 +118,7 @@ export default function Catalog({ detail }) {
             <div className={`${style.head} row mb-2 mb-3:md`}>
                 <div data-shown={!isSidebarHidden} className={`${style.title}`}>
                     <h1 onClick={toggleSidebar} ref={refTitle} className={`text--a2 text--bold`}>{categoryName}</h1>
-                    <Icon name='dropdown' external={style.titleArrow} width='16' height='16' />
+                    <Icon name='dropdown' external={style.titleArrow} width='20' height='20' />
                 </div>
                 <div className={`${style.share} is-hidden--sm-down ml-1.5`}>
                     share
@@ -130,7 +136,11 @@ export default function Catalog({ detail }) {
                 <div className='d-flex col pl-3:xl pr-1:xl flex--between'>
                     <div className='is-hidden--lg-down text--t5 text--bold text--upper text--color-small'>НАЙДЕНО 668 ТОВАРОВ</div>
                     <div className='text--t5 text--bold text--upper'>Популярные</div>
-                    <div onClick={openFilters} className='is-hidden--xl-up text--t5 text--bold text--upper'>фильтры</div>
+                    {filters && filters.length
+                        ? <div onClick={openFilters} className='is-hidden--xl-up text--t5 text--bold text--upper'>фильтры</div>
+                        : null
+                    }
+
                 </div>
             </div>
             <div className='d-flex'>

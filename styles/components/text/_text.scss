@@ -27,10 +27,10 @@ $heavy:         $black;
  */
 
 $text-default-font:      'ProximaNova', 'Helvetica Neue', Helvetica, Arial, sans-serif;
-$text-default-weight:    $light;
+$text-default-weight:    $regular;
 $text-default-transform: none;
 $text-heading-font:      'ProximaNova', 'Helvetica Neue', Helvetica, Arial, sans-serif;
-$text-heading-weight:    $light;
+$text-heading-weight:    $regular;
 $text-heading-transform: none;
 
 $text-wysiwyg-transform: none;
@@ -54,8 +54,8 @@ $text-styles: (
  * Settings for text, fonts, sizes
  */
 
-$text-default-weight: $light;
-$text-heading-weight: $light;
+$text-default-weight: $regular;
+$text-heading-weight: $regular;
 $text-default-font:   'ProximaNova', 'Helvetica Neue', Helvetica, Arial, sans-serif;
 $text-heading-font:   'ProximaNova', 'Helvetica Neue', Helvetica, Arial, sans-serif;
 
