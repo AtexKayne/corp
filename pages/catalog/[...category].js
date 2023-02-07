@@ -197,15 +197,38 @@ export default function Catalog({ detail }) {
                     }
                 </div>
 
-                <div data-show={isSidebarHidden} className={style.cardsContainer}>
-                    {products && products.length
-                        ? products.map(product => (
-                            <div key={product.id} className={style.cardWrapper}>
-                                <Card info={product} updated={[isSidebarHidden]} />
+                <div className='d-flex flex--column'>
+                    <div data-show={isSidebarHidden} className={style.cardsContainer}>
+                        {products && products.length
+                            ? products.map(product => (
+                                <div key={product.id} className={style.cardWrapper}>
+                                    <Card info={product} updated={[isSidebarHidden]} />
+                                </div>
+                            )) : null
+                        }
+
+                    </div>
+                    <div className={`${style.pagination}`}>
+                        <div className={`${style.showBtn} btn btn--primary btn--fill`}>
+                            <span className='text--upper text--p6 text--bold'>показать еще</span>
+                        </div>
+
+                        <div className={style.paginationNav}>
+                            <div>
+                                <span className='text--upper text--p6'>показывать по</span>
+                                <span className='text--upper text--p5 text--bold ml-0.5'>24</span>
                             </div>
-                        )) : null
-                    }
+                            <div className={style.paginationPages}>
+                                <div data-active='true'>1</div>
+                                <div>2</div>
+                                <div>3</div>
+                                <div>4</div>
+                                <div><Icon name='chevronRight' width='18' height='18' /></div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
+
             </div>
         </MainLayout>
     )
@@ -241,19 +264,19 @@ function Filter({ name, code }) {
                                     ? <span className={style.filterIcon}>{selectedFilters}</span>
                                     : null
                             }
-    
+
                         </div>
                     </div>
                     <Icon name='chevronUp' width='16' height='16' />
                 </div>
-    
+
                 {code === 'price' ? <InputRange min={0} max={15000} onAfterChange={event => changeHandler(event, 'price')} /> : null}
                 {code === 'color' ? <ColorPicker colors={colors} onAfterChange={event => changeHandler(event, 'picker')} /> : null}
                 {code === 'brand' ? <ItemsPicker items={brands} onAfterChange={event => changeHandler(event, 'picker')} /> : null}
                 {code === 'pitanie' ? <ItemsPicker items={pitanie} onAfterChange={event => changeHandler(event, 'picker')} /> : null}
                 {code === 'proizvodstvo' ? <ItemsPicker items={proizvodstvo} onAfterChange={event => changeHandler(event, 'picker')} /> : null}
                 {code === 'weight_filter' || code === 'ves' ? <ItemsPicker items={ves} onAfterChange={event => changeHandler(event, 'picker')} /> : null}
-    
+
             </div>
         )
     } else {

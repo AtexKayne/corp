@@ -354,3 +354,51 @@
         grid-template-columns: repeat(1, 1fr);
     }
 }
+
+.pagination {
+    width: 100%;
+    padding: 80px 16px 20px;
+
+    .showBtn {
+        min-height: 60px;
+    }
+
+    .paginationNav {
+        display: flex;
+        margin-top: 40px;
+        align-items: center;
+        justify-content: space-between;
+    }
+
+    .paginationPages {
+
+        >div {
+            width: 44px;
+            height: 44px;
+            cursor: pointer;
+            transition: .3s;
+            font-weight: 700;
+            margin-left: 4px;
+            line-height: 44px;
+            text-align: center;
+            border-radius: 8px;
+            display: inline-block;
+
+            &:hover {
+                color: var(--t-primary);
+            }
+
+            &[data-active='true'] {
+                background-color: var(--t-smallish);
+            }
+
+            >span {
+                transform: translateY(3px);
+            }
+        }
+    }
+
+    @include media-breakpoint(md-down) {
+        display: none;
+    }
+}

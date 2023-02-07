@@ -76,6 +76,10 @@ function Filter({ name, code, setActiveFilters }) {
         } else if (type === 'price') {
             if (event.values[0] === event.reset.min && event.values[1] === event.reset.max) return []
             else return event.values
+        } else if (type === 'checker') {
+            return []
+        } else {
+            return []
         }
     }
     const changeHandler = (event, type, code) => {
