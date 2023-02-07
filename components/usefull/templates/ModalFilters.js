@@ -17,7 +17,7 @@ export default function ModalFilters({ data }) {
 
 
     return (
-        <div className='full-height'>
+        <div className={`${style.modalFilters} full-height`}>
             <div className={`${style.title} pb-2`}>
                 <div className={style.closer} onClick={() => globalState.modal.setIsOpen(false)}>
                     <Icon name='close' width='20' height='20' />
