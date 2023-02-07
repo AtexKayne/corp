@@ -258,7 +258,7 @@ function Filter({ name, code }) {
         )
     } else {
         return (
-            <div>
+            <div className={style.checker}>
                 {code === 'market' || code === 'available' ? <ItemChecker text={name} onAfterChange={event => changeHandler(event, 'checker')} /> : null}
             </div>
         )

@@ -249,6 +249,10 @@
     >* {
         margin-bottom: 48px;
     }
+
+    .checker {
+        margin-bottom: 16px;
+    }
     
     @include media-breakpoint(xl-up) {
         display: block;

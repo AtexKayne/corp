@@ -39,7 +39,7 @@ export default function Home() {
       <div className='text--t1 pb-1 pt-1.5'>Каталожная выдача</div>
       <div className='ml-1'>
         <Link href='/catalog/main'>
-          <a href='/catalog/main' className='link'>Кааталожная выдача</a>
+          <a href='/catalog/main' className='link'>Каталожная выдача</a>
         </Link>
       </div>
       <div className='pt-5' />
