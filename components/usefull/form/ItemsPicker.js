@@ -2,7 +2,6 @@ import { useState, useEffect, useRef } from 'react'
 import InputSearch from './InputSearch'
 
 export default function ItemsPicker({ items, onAfterChange }) {
-
     return (
         <InputSearch count={items.length}>
             {
@@ -18,7 +17,6 @@ export default function ItemsPicker({ items, onAfterChange }) {
                     )
                 })
             }
-
         </InputSearch>
     )
 }

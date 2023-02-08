@@ -33,10 +33,15 @@
     max-height: 300px;
 }
 
-.modal .searched-childrens {
-    max-height: none;
-}
+.modal {
+    .reset {
+        display: none;
+    }
 
+    .searched-childrens {
+        max-height: none;
+    }
+}
 
 .input-search {
     display: block;
@@ -207,9 +212,24 @@
 
 .checker {
     display: flex;
+    cursor: pointer;
     align-items: center;
 
     .input-switch {
         margin-right: 8px;
+    }
+}
+
+.reset {
+    padding-top: 16px;
+    text-align: right;
+
+    &[data-changed='false'] {
+        opacity: 0;
+        pointer-events: none;
+    }
+
+    span {
+        cursor: pointer;
     }
 }

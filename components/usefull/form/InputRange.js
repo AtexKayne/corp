@@ -4,6 +4,7 @@ import Range from 'rc-slider'
 
 export default function InputRange({ min, max, onAfterChange }) {
     const [rangeValue, setRangeValue] = useState([min, max])
+    const [isChanged, setIsChanged] = useState(false)
     const refInputMin = useRef(null)
     const refInputMax = useRef(null)
 
@@ -56,6 +57,21 @@ export default function InputRange({ min, max, onAfterChange }) {
         refInputMax.current.value = `${event[1].toLocaleString()} ₽`
     }
 
+    const resetHandler = () => {
+        setIsChanged(false)
+        setRangeValue([min, max])
+        refInputMin.current.value = `${min.toLocaleString()} ₽`
+        refInputMax.current.value = `${max.toLocaleString()} ₽`
+    }
+
+    const afterChangeHandler = event => {
+        setIsChanged(event[0] !== min || event[1] !== max)
+        onAfterChange({ values: event, reset: { min, max } })
+        globalState.catalog.setSelectedFilter(prev => {
+            return prev
+        })
+    }
+
     return (
         <div>
             <div className='d-flex mb-1'>
@@ -91,7 +107,11 @@ export default function InputRange({ min, max, onAfterChange }) {
                     value={rangeValue}
                     onChange={changeHandler}
                     defaultValue={[min, max]}
-                    onAfterChange={event => onAfterChange({ values: event, reset: { min, max } })} />
+                    onAfterChange={afterChangeHandler} />
+            </div>
+
+            <div data-changed={isChanged} className='reset'>
+                <span onClick={resetHandler} className='text--t6 text--upper text--color-primary'>сбросить</span>
             </div>
         </div>
     )

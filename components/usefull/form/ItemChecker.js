@@ -8,13 +8,12 @@ export default function ItemChecker({ onAfterChange, text = '' }) {
     }
 
     return (
-        <div className='checker'>
+        <div onClick={toggle} className='checker'>
             <label className='input-switch'>
-                <input onChange={toggle} checked={isChecked} type='checkbox'/>
-                <div className='input-switch__background'/>
-                <div className='input-switch__base'/>
+                <input onChange={() => {console.log('');}} checked={isChecked} type='checkbox' />
+                <div className='input-switch__background' />
+                <div className='input-switch__base' />
             </label>
-
             <div className='text--t4'>{text}</div>
         </div>
     )

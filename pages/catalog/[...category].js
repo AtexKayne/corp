@@ -23,15 +23,24 @@ export default function Catalog({ detail }) {
     const [categoryName, setCategoryName] = useState(detail.currentCategory.name)
     const [filters, setFilters] = useState(detail.currentCategory.filter)
     const [isSidebarHidden, setIsSidebarHidden] = useState('new')
+    const [selectedFilter, setSelectedFilter] = useState([])
     const [info, setInfo] = useState(detail.currentCategory)
     const [products, setProducts] = useState(false)
     const refTitle = useRef(null)
     const router = useRouter()
 
     useEffect(() => {
+        globalState.catalog = {
+            setSelectedFilter
+        }
         setProducts(cards)
         setIsSidebarHidden(window.innerWidth < globalState.sizes.xl)
     }, [])
+
+    useEffect(() => {
+        console.log(selectedFilter);
+    }, [selectedFilter])
+    
 
     const toggleSidebar = () => {
         setIsSidebarHidden(!isSidebarHidden)
@@ -166,8 +175,7 @@ export default function Catalog({ detail }) {
                             <span>Каталог товаров</span>
                         </div>
 
-
-                        <div className=''>
+                        <div>
                             {detail.categories
                                 ? detail.categories.map(category => {
                                     return (

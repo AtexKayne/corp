@@ -67,7 +67,7 @@ function ModalFilterWrapper({ children, name, isChanged }) {
                 </div>
                 {children}
 
-                <div onClick={() => setIsOpen(false)} className={`${style.showBtn} btn btn--primary btn--fill`}>
+                <div onClick={() => globalState.modal.setIsOpen(false)} className={`${style.showBtn} btn btn--primary btn--fill`}>
                     <span className='text--upper text--p6 text--bold'>Показать 100 товаров</span>
                 </div>
             </div>
