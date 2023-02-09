@@ -23,7 +23,7 @@ export default function Catalog({ detail }) {
     const [categoryName, setCategoryName] = useState(detail.currentCategory.name)
     const [filters, setFilters] = useState(detail.currentCategory.filter)
     const [isSidebarHidden, setIsSidebarHidden] = useState('new')
-    const [selectedFilter, setSelectedFilter] = useState([])
+    const [selectedFilter, setSelectedFilter] = useState({})
     const [info, setInfo] = useState(detail.currentCategory)
     const [products, setProducts] = useState(false)
     const refTitle = useRef(null)
@@ -31,14 +31,14 @@ export default function Catalog({ detail }) {
 
     useEffect(() => {
         globalState.catalog = {
-            setSelectedFilter
+            setSelectedFilter,
         }
         setProducts(cards)
         setIsSidebarHidden(window.innerWidth < globalState.sizes.xl)
     }, [])
 
     useEffect(() => {
-        console.log(selectedFilter);
+        globalState.catalog.selectedFilter = selectedFilter
     }, [selectedFilter])
     
 
@@ -254,20 +254,26 @@ export default function Catalog({ detail }) {
 
 function Filter({ name, code }) {
     const { colors, brands, pitanie, proizvodstvo, ves } = filters
+    const min = 0
+    const max = 15000
 
     const [isOpen, setIsOpen] = useState(true)
     const [selectedFilters, setSelectedFilters] = useState(0)
 
     const toggleHandler = () => {
-        setIsOpen(!isOpen)
-    }
-    const changeHandler = (event, type) => {
-        if (type === 'picker') {
-            if (event.target.checked) setSelectedFilters(prev => prev + 1)
-            else setSelectedFilters(prev => prev - 1)
-        } else {
-            setSelectedFilters('')
+        if (isOpen) {
+            const values = globalState.catalog.selectedFilter[code]
+            if (code !== 'market' && code !== 'available' && code !== 'price') {
+                if (values && values.length) setSelectedFilters(values.length)
+                else setSelectedFilters(0)
+            } else if (code === 'price') {
+                if (values && values.length && values[0] !== min && values[1] !== max)
+                    setSelectedFilters(' ')
+                else setSelectedFilters(0)
+            }
         }
+        
+        setIsOpen(!isOpen)
     }
 
     if (code !== 'market' && code !== 'available') {
@@ -288,19 +294,18 @@ function Filter({ name, code }) {
                     <Icon name='chevronUp' width='16' height='16' />
                 </div>
 
-                {code === 'price' ? <InputRange min={0} max={15000} onAfterChange={event => changeHandler(event, 'price')} /> : null}
-                {code === 'color' ? <ColorPicker colors={colors} onAfterChange={event => changeHandler(event, 'picker')} /> : null}
-                {code === 'brand' ? <ItemsPicker items={brands} onAfterChange={event => changeHandler(event, 'picker')} /> : null}
-                {code === 'pitanie' ? <ItemsPicker items={pitanie} onAfterChange={event => changeHandler(event, 'picker')} /> : null}
-                {code === 'proizvodstvo' ? <ItemsPicker items={proizvodstvo} onAfterChange={event => changeHandler(event, 'picker')} /> : null}
-                {code === 'weight_filter' || code === 'ves' ? <ItemsPicker items={ves} onAfterChange={event => changeHandler(event, 'picker')} /> : null}
-
+                {code === 'price' ? <InputRange min={min} max={max} code={code} /> : null}
+                {code === 'color' ? <ColorPicker colors={colors} code={code} /> : null}
+                {code === 'brand' ? <ItemsPicker items={brands} code={code} /> : null}
+                {code === 'pitanie' ? <ItemsPicker items={pitanie} code={code} /> : null}
+                {code === 'proizvodstvo' ? <ItemsPicker items={proizvodstvo} code={code} /> : null}
+                {code === 'weight_filter' || code === 'ves' ? <ItemsPicker items={ves} code={code} /> : null}
             </div>
         )
     } else {
         return (
             <div className={style.checker}>
-                {code === 'market' || code === 'available' ? <ItemChecker text={name} onAfterChange={event => changeHandler(event, 'checker')} /> : null}
+                {code === 'market' || code === 'available' ? <ItemChecker text={name} code={code} /> : null}
             </div>
         )
     }

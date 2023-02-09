@@ -1,18 +1,28 @@
 import { useState, useEffect, useRef } from 'react'
+import { globalState } from '../../helpers/globalState'
 import Icon from '../../Icon'
 
-export default function InputSearch({ children, count }) {
-    const [isChanged, setIsChanged] = useState(true)
-    const [childrens, setChildrens] = useState(children)
+export default function InputSearch({ children, count, selectedCount, setSelectedCount, code }) {
+    const [isChanged, setIsChanged] = useState(!!selectedCount)
+
+    useEffect(() => {
+        setIsChanged(!!selectedCount)
+    }, [selectedCount])
+
 
     const resetHandler = () => {
-        // setIsChanged(false)
+        setSelectedCount(0)
         const checked = refSearched.current.querySelectorAll('input:checked')
         if (checked.length) {
             checked.forEach(input => {
                 input.checked = false;
             })
         }
+        globalState.catalog.setSelectedFilter(prev => {
+            const prevCopy = Object.assign({}, prev)
+            prevCopy[code] = []
+            return prevCopy
+        })
     }
 
     const refSearched = useRef(null)
@@ -46,7 +56,7 @@ export default function InputSearch({ children, count }) {
                         : null
                 }
                 <div ref={refSearched} className='searched-childrens'>
-                    {childrens}
+                    {children}
                 </div>
                 <div data-searched={isSearched} className='input-search__empty text--t2 text--normal text--color-disabled'>Ничего не найдено</div>
             </div>

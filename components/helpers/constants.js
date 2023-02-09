@@ -559,3 +559,96 @@ export const cards = [
         ]
     },
 ]
+
+export const brands = [
+    {
+        letter: '0-9',
+        brands: [
+            { name: '100 Рецептов Красоты', code: 'test' },
+        ]
+    },
+    {
+        letter: 'A',
+        brands: [
+            { name: 'Andis', code: 'test' },
+        ]
+    },
+    {
+        letter: 'B',
+        brands: [
+            { name: 'Babyliss Pro', code: 'test' },
+            { name: 'Beardbyrus', code: 'test' },
+            { name: 'Beuy Pro', code: 'test' },
+        ]
+    },
+    {
+        letter: 'C',
+        brands: [
+            { name: 'Canway', code: 'test' },
+            { name: 'Clipper Camo', code: 'test' },
+        ]
+    },
+    {
+        letter: 'D',
+        brands: [
+            { name: 'Dayo', code: 'test' },
+            { name: 'Denman', code: 'test' },
+            { name: 'Derby', code: 'test' },
+            { name: 'Dorso', code: 'test' },
+            { name: 'DS Scissors', code: 'test' },
+        ]
+    },
+    {
+        letter: 'E',
+        brands: [
+            { name: 'Ergo', code: 'Eurosteel' },
+        ]
+    },
+    {
+        letter: 'F',
+        brands: [
+            { name: 'Feather', code: 'test' },
+            { name: 'Forme', code: 'test' },
+            { name: 'Forme Essentials', code: 'test' },
+        ]
+    },
+    {
+        letter: 'G',
+        brands: [
+            { name: 'Gamma Piu', code: 'test' },
+        ]
+    },
+    {
+        letter: 'H',
+        brands: [
+            { name: 'Hairart', code: 'test' },
+            { name: 'Hairbrained Pro', code: 'test' },
+            { name: 'Harisma', code: 'test' },
+        ]
+    },
+    {
+        letter: 'S',
+        brands: [
+            { name: 'S-Market', code: 'test' },
+            { name: 'Sensido', code: 'test' },
+            { name: 'Sim Sensitive', code: 'test' },
+            { name: 'Simushka Instruments', code: 'test' },
+            { name: 'System 4', code: 'test' },
+            { name: 'Slim Gorilla', code: 'test' },
+            { name: 'S-Market 1', code: 'test' },
+            { name: 'Sensido 1', code: 'test' },
+            { name: 'Sim Sensitive 1', code: 'test' },
+            { name: 'Simushka Instruments 1', code: 'test' },
+            { name: 'System 4 1', code: 'test' },
+            { name: 'Slim Gorilla 1', code: 'test' },
+        ]
+    },
+    {
+        letter: 'Y',
+        brands: [
+            { name: 'Y.S.Park', code: 'test' },
+        ]
+    },
+    
+
+]

@@ -32,15 +32,6 @@
 .filler {
     max-width: 20px;
     position: relative;
-    
-    >span {
-        z-index: 2;
-        display: block;
-        cursor: pointer;
-        transition: .3s;
-        position: relative;
-        transform: translate(-50px, 3px);
-    }
 
     &::before {
         left: 0;
@@ -52,13 +43,6 @@
         position: absolute;
         pointer-events: none;
         background-color: var(--t-background);
-    }
-
-    &[data-changed='false'] {
-        >span {
-            opacity: 0;
-            pointer-events: none;
-        }
     }
 }
 

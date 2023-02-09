@@ -1,0 +1,116 @@
+.brandSearch {
+    border-radius: 4px;
+    background-color: var(--t-background);
+}
+
+.search {
+    margin-bottom: 40px;
+    color: var(--t-text);
+    transition: .3s transform;
+}
+
+.searchIcon {
+    opacity: 0;
+    right: 16px;
+    transition: 0s;
+    cursor: pointer;
+    position: absolute;
+    pointer-events: none;
+
+    &:hover {
+        color: var(--t-primary);
+    }
+}
+
+.brandLetters {
+    width: 100%;
+    display: flex;
+    padding: 14px 10px;
+    justify-content: center;
+    transition: .3s transform;
+
+    &[data-value='true'] {
+        display: none;
+    }
+
+    >* {
+        padding: 10px;
+        display: block;
+
+        &:last-child {
+            margin-right: 0;
+        }
+    }
+}
+
+.brandSearchFixed {
+    z-index: 2;
+    max-height: 74px;
+    box-shadow: 0px 4px 10px 0px #0000001A;
+
+    .brandLetters {
+        margin-top: 0;
+        transform: translateY(-30px);
+    }
+
+    .search {
+        opacity: 0;
+        margin: 0 26px;
+        transition: .3s;
+        margin-bottom: 0;
+        pointer-events: none;
+        transform: translateY(25px);
+    }
+
+    .searchIcon {
+        opacity: 1;
+        transition: .3s;
+        pointer-events: all;
+    }
+}
+
+.searchChildren {
+
+    &[data-value='true'] {
+        .brandsLine {
+            display: block;
+            max-width: none;
+            margin-bottom: 0;
+        }
+
+        .letter {
+            display: none;
+        }
+
+        .brand {
+            display: block;
+            margin-bottom: 16px;
+        }
+    }
+}
+
+.brandsLine {
+    width: 100%;
+    max-width: 1192px;
+    margin-bottom: 30px;
+    display: inline-block;
+}
+
+.brand {
+    cursor: pointer;
+    transition: .3s;
+    margin-right: 32px;
+    display: inline-block;
+
+    &:hover {
+        color: var(--t-primary);
+    }
+}
+
+.empty {
+    display: none;
+    
+    &[data-empty='true'] {
+        display: block;
+    }
+}

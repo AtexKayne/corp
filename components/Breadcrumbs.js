@@ -1,7 +1,8 @@
+import Link from 'next/link';
 import { useState, useEffect, useRef } from 'react'
 import style from '../styles/module/Breadcrumbs.module.scss'
 
-export default function Breadcrumbs() {
+export default function Breadcrumbs({ link }) {
     const refBreadcrumbs = useRef(null)
     const refInner = useRef(null)
 
@@ -22,11 +23,19 @@ export default function Breadcrumbs() {
     return (
         <div ref={refBreadcrumbs} className={`${style.breadcrumbs} text--p5 text--color-small`}>
             <div ref={refInner} className={style.inner}>
-                <span>Главная</span>
-                <span>Каталог</span>
-                <span>Косметика для волос</span>
-                <span>Лечение волос</span>
-                <span>Бальзамы и кондиционеры</span>
+                <Link href='/'>
+                    <span>Главная</span>
+                </Link>
+                {
+                    link === 'Бренды'
+                        ? <span>Бренды</span>
+                        : <>
+                            <span>Каталог</span>
+                            <span>Косметика для волос</span>
+                            <span>Лечение волос</span>
+                            <span>Бальзамы и кондиционеры</span>
+                        </>
+                }
             </div>
         </div>
     )

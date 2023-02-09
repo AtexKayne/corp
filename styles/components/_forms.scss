@@ -35,7 +35,15 @@
 
 .modal {
     .reset {
-        display: none;
+        z-index: 3;
+        position: absolute;
+        top: adaptive-value(( xs: -3px, md: 10px ));
+        right: adaptive-value((
+            xs: 16px,
+            md: 32px,
+            lg: 48px,
+            xl: 72px,
+        ));
     }
 
     .searched-childrens {
@@ -212,15 +220,17 @@
 
 .checker {
     display: flex;
-    cursor: pointer;
     align-items: center;
-
+    
     .input-switch {
+        cursor: pointer;
         margin-right: 8px;
     }
 }
 
 .reset {
+    opacity: 1;
+    transition: .3s;
     padding-top: 16px;
     text-align: right;
 
