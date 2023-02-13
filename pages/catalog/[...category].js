@@ -1,5 +1,6 @@
 import { cards, filters } from '../../components/helpers/constants'
 import style from '../../styles/module/Catalog/Catalog.module.scss'
+import { globalState } from '../../components/helpers/globalState'
 import { categories } from '../../components/helpers/categories'
 import { useState, useEffect, useRef } from 'react'
 import { useRouter } from 'next/router'
@@ -14,18 +15,22 @@ import InputRange from '../../components/usefull/form/InputRange'
 import ColorPicker from '../../components/usefull/form/ColorPicker'
 import ItemsPicker from '../../components/usefull/form/ItemsPicker'
 import InputSwitch from '../../components/usefull/form/InputSwitch'
-import { globalState } from '../../components/helpers/globalState'
 import ItemChecker from '../../components/usefull/form/ItemChecker'
 
 export default function Catalog({ detail }) {
-    const [activeCategory, setActiveCategory] = useState(detail.currentCategory.parent_id ?? detail.currentCategory.id)
-    const [activeSubCategory, setActiveSubCategory] = useState(detail.currentCategory.id)
-    const [categoryName, setCategoryName] = useState(detail.currentCategory.name)
-    const [filters, setFilters] = useState(detail.currentCategory.filter)
+    const c = detail.currentCategory
+    const parentInfo = c.parent_id !== null
+        ? detail.categories.filter(category => category.id === c.parent_id)[0]
+        : c
+    const [activeCategory, setActiveCategory] = useState(c.parent_id ?? c.id)
+    const [activeSubCategory, setActiveSubCategory] = useState(c.id)
     const [isSidebarHidden, setIsSidebarHidden] = useState('new')
     const [selectedFilter, setSelectedFilter] = useState({})
-    const [info, setInfo] = useState(detail.currentCategory)
-    const [products, setProducts] = useState(false)
+    const [categoryName, setCategoryName] = useState(c.name)
+    const [titleOpacity, setTitleOpacity] = useState(false)
+    const [products, setProducts] = useState('updated')
+    const [filters, setFilters] = useState(c.filter)
+    const [info, setInfo] = useState(c)
     const refTitle = useRef(null)
     const router = useRouter()
 
@@ -37,10 +42,15 @@ export default function Catalog({ detail }) {
         setIsSidebarHidden(window.innerWidth < globalState.sizes.xl)
     }, [])
 
+    const updateProducts = () => {
+        setProducts('updated')
+        setTimeout(() => setProducts(cards), 1500)
+    }
+
     useEffect(() => {
         globalState.catalog.selectedFilter = selectedFilter
+        updateProducts()
     }, [selectedFilter])
-    
 
     const toggleSidebar = () => {
         setIsSidebarHidden(!isSidebarHidden)
@@ -57,18 +67,14 @@ export default function Catalog({ detail }) {
 
     const updateFilters = filters => {
         const updated = [
-            { code: 'price', name: 'Цена', id: 666 },
             ...filters,
             { code: 'market', name: 'Есть в ФМ', id: 566 },
             { code: 'available', name: 'Только в наличии', id: 466 },
         ]
-        if (window.innerWidth < globalState.sizes.xl) {
-            return updated
-        } else {
-            setFilters(updated)
-        }
 
-        return null
+        return window.innerWidth < globalState.sizes.xl
+            ? updated
+            : setFilters(updated)
     }
 
     const closeWrapper = () => {
@@ -77,10 +83,10 @@ export default function Catalog({ detail }) {
     }
 
     const updateCategoryName = name => {
-        refTitle.current.style.opacity = 0
+        setTitleOpacity(true)
         setTimeout(() => {
             setCategoryName(name)
-            refTitle.current.style.opacity = 1
+            setTitleOpacity(false)
         }, 300)
     }
 
@@ -91,6 +97,7 @@ export default function Catalog({ detail }) {
         updateCategoryName(info.name)
         updateFilters(info.filter)
         routerPush(info.url)
+        updateProducts()
         // closeWrapper()
     }
 
@@ -101,14 +108,20 @@ export default function Catalog({ detail }) {
         updateFilters(info.filter)
         routerPush(info.url)
         closeWrapper()
+        updateProducts()
     }
 
     const resetSelection = () => {
-        setActiveCategory(false)
-        setActiveSubCategory(false)
-        updateCategoryName('Каталог товаров')
-        setFilters(false)
-        routerPush('main')
+        if (detail.isBrands) {
+            router.push('/brands')
+        } else {
+            setActiveCategory(false)
+            setActiveSubCategory(false)
+            updateCategoryName('Каталог товаров')
+            setFilters(false)
+            routerPush('main')
+            updateProducts()
+        }
     }
 
     const openFilters = () => {
@@ -122,26 +135,20 @@ export default function Catalog({ detail }) {
     }
 
     return (
-        <MainLayout title={`Каталог | ${detail.currentCategory.name}`}>
-            <Breadcrumbs />
-            <div className={`${style.head} row mb-2 mb-3:md`}>
-                <div data-shown={!isSidebarHidden} className={`${style.title}`}>
-                    <h1 onClick={toggleSidebar} ref={refTitle} className={`text--a2 text--bold`}>{categoryName}</h1>
-                    <Icon name='dropdown' external={style.titleArrow} width='20' height='20' />
-                </div>
-                <div className={`${style.share} is-hidden--sm-down ml-1.5`}>
-                    share
-                </div>
-            </div>
-            <div className='d-flex mb-2'>
-                <div className={`${style.wrapper} is-hidden--lg-down`}>
-                    <div data-selected={!!activeCategory} className={`${style.selector} d-flex flex--align-center text--t5 text--upper text--bold`}>
-                        <span>Категории</span>
-                        <span className='is-hidden--xl'>&nbsp;и фильтры</span>
-                        <div className='mr-0.5' />
-                        <InputSwitch onAfterChange={toggleSidebar} isActive={true} />
-                    </div>
-                </div>
+        <MainLayout title={`Каталог | ${c.name}`}>
+            <Breadcrumbs theme={parentInfo ? parentInfo.theme : false} />
+
+            <Head
+                info={parentInfo}
+                isBrands={detail.isBrands}
+                categoryName={categoryName}
+                titleOpacity={titleOpacity}
+                toggleSidebar={toggleSidebar}
+                isSidebarHidden={isSidebarHidden} />
+
+            <div className='d-flex mb-2 p-relative'>
+                <SidebarHead activeCategory={activeCategory} toggleSidebar={toggleSidebar} />
+
                 <div className='d-flex col pl-3:xl pr-1:xl flex--between'>
                     <div className='is-hidden--lg-down text--t5 text--bold text--upper text--color-small'>НАЙДЕНО 668 ТОВАРОВ</div>
                     <div className='text--t5 text--bold text--upper'>Популярные</div>
@@ -149,60 +156,24 @@ export default function Catalog({ detail }) {
                         ? <div onClick={openFilters} className='is-hidden--xl-up text--t5 text--bold text--upper'>фильтры</div>
                         : null
                     }
-
                 </div>
             </div>
             <div className='d-flex'>
                 <div data-hidden={isSidebarHidden} className={style.wrapper}>
                     <div className={`${style.categories}`} data-selected={!!activeCategory}>
-                        <div className={style.additional}>
-                            <Link href={`/catalog/hit`}>
-                                <a href={`/catalog/hit`} className={style.category}>
-                                    <Image src='/images/catalog/categorys/hit-xs.svg' width='24' height='24' alt='Хиты' />
-                                    <div className='text--t4'>Хиты</div>
-                                </a>
-                            </Link>
-                            <Link href={`/catalog/new`}>
-                                <a href={`/catalog/new`} className={style.category}>
-                                    <Image src='/images/catalog/categorys/new-xs.svg' width='24' height='24' alt='Новинки' />
-                                    <div className='text--t4'>Новинки</div>
-                                </a>
-                            </Link>
-                        </div>
+                        <Addition isBrands={detail.isBrands} />
 
                         <div onClick={resetSelection} className={`${style.catalogPrev} text--t4 text--bold`}>
                             <Icon name='chevronLeft' width='16' height='16' />
-                            <span>Каталог товаров</span>
+                            <span>{detail.isBrands ? 'Все бренды' : 'Каталог товаров'}</span>
                         </div>
 
-                        <div>
-                            {detail.categories
-                                ? detail.categories.map(category => {
-                                    return (
-                                        <div data-active={activeCategory === category.id} key={category.id} className={style.categoryWrapper}>
-                                            <div onClick={() => selectCategory(category)} data-selected={activeSubCategory === category.id} className={style.category}>
-                                                <span className={style.categoryImage}>
-                                                    <Image src={category.img_mini} width='24' height='24' alt={category.name} />
-                                                </span>
-                                                <span className={style.categoryIcon}>
-                                                    <Icon name='chevronLeft' width='16' height='16' />
-                                                </span>
-                                                <div className='text--t4'>{category.name}</div>
-                                            </div>
-                                            {
-                                                category.include_sections
-                                                    ? category.include_sections.map(include => {
-                                                        return (
-                                                            <div onClick={() => selectSubCategory(include)} data-selected={activeSubCategory === include.id} key={include.id} className={style.subcategory}>
-                                                                <div className='text--t4'>{include.name}</div>
-                                                            </div>
-                                                        )
-                                                    }) : null
-                                            }
-                                        </div>
-                                    )
-                                }) : null}
-                        </div>
+                        <Categories
+                            categories={detail.categories}
+                            activeCategory={activeCategory}
+                            selectCategory={selectCategory}
+                            selectSubCategory={selectSubCategory}
+                            activeSubCategory={activeSubCategory} />
                     </div>
 
                     {filters && filters.length
@@ -215,40 +186,125 @@ export default function Catalog({ detail }) {
                     }
                 </div>
 
-                <div className='d-flex flex--column'>
-                    <div data-show={isSidebarHidden} className={style.cardsContainer}>
-                        {products && products.length
-                            ? products.map(product => (
-                                <div key={product.id} className={style.cardWrapper}>
-                                    <Card info={product} updated={[isSidebarHidden]} />
-                                </div>
-                            )) : null
-                        }
+                <div style={{width: '100%'}} className='d-flex flex--column'>
+                    <CardList products={products} isSidebarHidden={isSidebarHidden} />
 
-                    </div>
-                    <div className={`${style.pagination}`}>
-                        <div className={`${style.showBtn} btn btn--primary btn--fill`}>
-                            <span className='text--upper text--p6 text--bold'>показать еще</span>
-                        </div>
-
-                        <div className={style.paginationNav}>
-                            <div>
-                                <span className='text--upper text--p6'>показывать по</span>
-                                <span className='text--upper text--p5 text--bold ml-0.5'>24</span>
-                            </div>
-                            <div className={style.paginationPages}>
-                                <div data-active='true'>1</div>
-                                <div>2</div>
-                                <div>3</div>
-                                <div>4</div>
-                                <div><Icon name='chevronRight' width='18' height='18' /></div>
-                            </div>
-                        </div>
-                    </div>
+                    <Pagination />
                 </div>
 
             </div>
         </MainLayout>
+    )
+}
+
+function Head({ toggleSidebar, isSidebarHidden, categoryName, titleOpacity, isBrands, info }) {
+    const [imageOverlay, setImageOverlay] = useState(null)
+    const [imageLogo, setImageLogo] = useState('/icons/icon-empty.svg')
+    const [themeHead, setThemeHead] = useState('ui-light')
+    const [description, setDescription] = useState('')
+
+    useEffect(() => {
+        if (isBrands && info.parent_id === null) {
+            setDescription(info.description)
+            setImageOverlay(info.img_big ? info.img_big : false)
+            setImageLogo(info.logo)
+            if (info.theme === 'dark') {
+                globalState.header.setTheme('ui-dark')
+                setThemeHead('ui-dark')
+            }
+        }
+    }, [info])
+
+    if (isBrands) {
+        // return null
+        return (
+            <div className={`${themeHead} ${imageOverlay ? 'mb-3 mb-6:lg' : 'mb-3'}`}>
+                {imageOverlay
+                    ? <div className={style.imageOverlay}><Image src={imageOverlay} layout='fill' alt={info.name} /></div>
+                    : null
+                }
+
+                <div className={style.brandHead}>
+                    {imageOverlay
+                        ? null
+                        : <div className='mr-1.5 px-1 py-1 is-hidden--md-down'><Image src={imageLogo} width='100' height='100' alt={info.name} /></div>
+                    }
+                    <div className={style.brandInfo}>
+                        <div className={`${style.brandDescription} text--p2 text--normal mb-1 is-hidden--md-down`}>{description}</div>
+
+                        <div className={`${style.head} row mb-1`}>
+                            <div data-shown={!isSidebarHidden} data-opacity={titleOpacity} className={`${style.title}`}>
+                                <h1 onClick={toggleSidebar} className={`text--a2 text--bold`}>{categoryName}</h1>
+                                <Icon name='dropdown' external={style.titleArrow} width='20' height='20' />
+                            </div>
+
+                            <Share isBrands={isBrands} name={info.name} />
+                        </div>
+
+                        <div className={`${style.aboutBrand} text--t5 text--upper text--bold`}>Подробнее о бренде</div>
+                    </div>
+                </div>
+            </div>
+        )
+    } else {
+        return (
+            <div className={`${style.head} row mb-2 mb-3:md`}>
+
+                <div data-shown={!isSidebarHidden} data-opacity={titleOpacity} className={`${style.title}`}>
+                    <h1 onClick={toggleSidebar} className={`text--a2 text--bold`}>{categoryName}</h1>
+                    <Icon name='dropdown' external={style.titleArrow} width='20' height='20' />
+                </div>
+
+                {info ? <Share isBrands={isBrands} name={info.name} /> : null}
+            </div>
+        )
+    }
+}
+
+function Share({ name, isBrands }) {
+    const [isOpen, setIsOpen] = useState(false)
+
+    const documentClick = () => {
+        setIsOpen(false)
+        document.removeEventListener('click', documentClick)
+    }
+
+    const open = () => {
+        if (isOpen) {
+            setIsOpen(false)
+            document.removeEventListener('click', documentClick)
+        } else {
+            setIsOpen(true)
+            setTimeout(() => document.addEventListener('click', documentClick), 200)
+        }
+    }
+
+    const copyHandler = () => {
+        setIsOpen(false)
+        globalState.popover.setTextPrimary(`${isBrands ? 'Бренд' : 'Раздел'} ${name}`)
+        globalState.popover.setTextSecondary('ссылка скопирована в буфер обмена')
+        globalState.popover.setImage(false)
+        globalState.popover.setIsBasket(false)
+        globalState.popover.setIsOpen(true)
+    }
+
+    return (
+        <div data-open={isOpen} className={`${style.share} is-hidden--sm-down ml-1.5`}>
+            <div onClick={open} className={style.iconShare}>
+                <Icon name='share' width='24' height='24' />
+            </div>
+            <div className={style.additionalShare}>
+                <div className={`${style.iconShare} btn btn--grey btn--xs`}>
+                    <Icon name='VK' width='15' height='15' />
+                </div>
+                <div className={`${style.iconShare} btn btn--grey btn--xs`}>
+                    <Icon name='telegram' width='15' height='15' />
+                </div>
+                <div onClick={copyHandler} className={`${style.iconShare} btn btn--grey btn--xs`}>
+                    <Icon name='link' width='15' height='15' />
+                </div>
+            </div>
+        </div>
     )
 }
 
@@ -272,7 +328,7 @@ function Filter({ name, code }) {
                 else setSelectedFilters(0)
             }
         }
-        
+
         setIsOpen(!isOpen)
     }
 
@@ -311,6 +367,131 @@ function Filter({ name, code }) {
     }
 }
 
+function Addition({ isBrands }) {
+    if (isBrands) return null
+
+    return (
+        <div className={style.additional}>
+            <Link href={`/catalog/hit`}>
+                <a href={`/catalog/hit`} className={style.category}>
+                    <Image src='/images/catalog/categorys/hit-xs.svg' width='24' height='24' alt='Хиты' />
+                    <div className='text--t4'>Хиты</div>
+                </a>
+            </Link>
+            <Link href={`/catalog/new`}>
+                <a href={`/catalog/new`} className={style.category}>
+                    <Image src='/images/catalog/categorys/new-xs.svg' width='24' height='24' alt='Новинки' />
+                    <div className='text--t4'>Новинки</div>
+                </a>
+            </Link>
+        </div>
+    )
+}
+
+function Categories({ categories, activeCategory, activeSubCategory, selectCategory, selectSubCategory }) {
+    if (!categories) return null
+
+    return (
+        <div>
+            {categories.map(category => {
+                return (
+                    <div data-active={activeCategory === category.id} key={category.id} className={style.categoryWrapper}>
+                        <div onClick={() => selectCategory(category)} data-selected={activeSubCategory === category.id} className={style.category}>
+                            <span className={style.categoryImage}>
+                                <Image src='/icons/icon-empty.svg' width='24' height='24' alt={category.name} />
+                            </span>
+                            <span className={style.categoryIcon}>
+                                <Icon name='chevronLeft' width='16' height='16' />
+                            </span>
+                            <div className='text--t4'>{category.name}</div>
+                        </div>
+                        {
+                            category.include_sections
+                                ? category.include_sections.map(include => {
+                                    return (
+                                        <div onClick={() => selectSubCategory(include)} data-selected={activeSubCategory === include.id} key={include.id} className={style.subcategory}>
+                                            <div className='text--t4'>{include.name}</div>
+                                        </div>
+                                    )
+                                }) : null
+                        }
+                    </div>
+                )
+            })}
+        </div>
+    )
+}
+
+function Pagination() {
+    return (
+        <div className={`${style.pagination}`}>
+            <div className={`${style.showBtn} btn btn--primary btn--fill`}>
+                <span className='text--upper text--p6 text--bold'>показать еще</span>
+            </div>
+
+            <div className={style.paginationNav}>
+                <div>
+                    <span className='text--upper text--p6'>показывать по</span>
+                    <span className='text--upper text--p5 text--bold ml-0.5'>24</span>
+                </div>
+                <div className={style.paginationPages}>
+                    <div data-active='true'>1</div>
+                    <div>2</div>
+                    <div>3</div>
+                    <div>4</div>
+                    <div><Icon name='chevronRight' width='18' height='18' /></div>
+                </div>
+            </div>
+        </div>
+    )
+}
+
+function SidebarHead({ activeCategory, toggleSidebar }) {
+    return (
+        <div className={`${style.wrapper} is-hidden--lg-down`}>
+            <div data-selected={!!activeCategory} className={`${style.selector} d-flex flex--align-center text--t5 text--upper text--bold`}>
+                <span>Категории</span>
+                <span className='is-hidden--xl'>&nbsp;и фильтры</span>
+                <div className='mr-0.5' />
+                <InputSwitch onAfterChange={toggleSidebar} isActive={true} />
+            </div>
+        </div>
+    )
+}
+
+function CardList({ products, isSidebarHidden }) {
+    const fillers = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12]
+    if (products === 'updated') {
+        return (
+            <div data-show={isSidebarHidden} className={style.cardsContainer}>
+                {fillers.map(product => (
+                    <div key={product} className={style.cardFiller}>
+                        <div className={style.cardFillerImage} />
+                        <div className={style.cardFillerText} />
+                        <div className={style.cardFillerText} />
+                        <div className={style.cardFillerButton} />
+                        <div className={style.cardFillerAnimatron} />
+                    </div>
+                ))}
+            </div>
+        )
+    }
+
+    if (!products || !products.length) return null
+
+    return (
+        <div data-show={isSidebarHidden} className={style.cardsContainer}>
+            {
+                products.map(product => (
+                    <div key={product.id} className={style.cardWrapper}>
+                        <Card info={product} updated={[isSidebarHidden]} />
+                    </div>
+                ))
+            }
+        </div>
+    )
+}
+
 export async function getServerSideProps(context) {
     const queryCategory = context.query.category
     let resp
@@ -318,43 +499,22 @@ export async function getServerSideProps(context) {
         name: 'Каталог товаров',
         id: 0,
         parent_id: 0,
-        filter: false
+        filter: false,
     }
-    const json = {}
-    const getIncludes = obj => {
-        const includes = []
-        for (const property in obj) {
-            includes.push(obj[property])
-        }
-        return includes
+    const json = {
+        categories: categories.data
     }
 
     if (categories.data) {
-        const data = []
+        categories.data.forEach(property => {
+            currentCategory = property.url.includes(`/${queryCategory}/`) ? property : currentCategory
 
-        for (const property in categories.data) {
-            // const url = categories.data[property].url.split('catalog/')[1]
-            // categories.data[property].url = url
-            currentCategory = categories.data[property].url.includes(queryCategory)
-                ? categories.data[property]
-                : currentCategory
-            if (categories.data[property].hasOwnProperty('include_sections')) {
-                const includes = getIncludes(categories.data[property].include_sections)
-                categories.data[property].include_sections = includes
-
-                if (currentCategory.id === 0) {
-                    categories.data[property].include_sections.forEach(include => {
-                        currentCategory = include.url.includes(queryCategory)
-                            ? include
-                            : currentCategory
-                    })
-                }
+            if (Array.isArray(property['include_sections'])) {
+                property.include_sections.forEach(include => {
+                    currentCategory = include.url.includes(`/${queryCategory}/`) ? include : currentCategory
+                })
             }
-            // categories.data[property].url = 'catalog'
-            data.push(categories.data[property])
-        }
-
-        json.categories = data
+        })
     }
 
     json.currentCategory = currentCategory

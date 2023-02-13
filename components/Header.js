@@ -9,6 +9,7 @@ import { motion, useAnimationControls } from 'framer-motion'
 
 export default function Header() {
     const refRabbit = useRef(null)
+    const refThemeDefault = useRef('ui-light')
     const [isAuth, setIsAuth] = useState(false)
     const [theme, setTheme] = useState('ui-light')
     const [basketCount, setBasketCount] = useState(0)
@@ -16,35 +17,42 @@ export default function Header() {
     const [isTranslated, setIsTranslated] = useState(false)
     const [isHeaderFixed, setIsHeaderFixed] = useState(false)
     const [isRabbitFixed, setIsRabbitFixed] = useState(false)
+    const [isHeaderHover, setIsHeaderHover] = useState(false)
     const animateHeader = useAnimationControls()
     const refHeader = useRef(null)
     const refIsHandled = useRef(false)
     const scrolloffset = 300
 
-    const hoverEnterHandler = event => {
+    const hoverEnterHandler = () => {
         setIsTranslated(true)
         setIsRabbitFixed(false)
+        setThemeLight()
     }
 
     const hoverLeaveHandler = () => {
+        setThemeDefault()
         if (window.scrollY <= scrolloffset) return
         setIsTranslated(false)
         setIsRabbitFixed(true)
     }
 
-    const themeChange = () => {
-        const them = theme === 'ui-light' ? 'ui-dark' : 'ui-light'
-        setTheme(them)
-        setThemeImage(them)
+    const setThemeLight = () => {
+        setTheme('ui-light')
+        setIsHeaderHover(true)
     }
-    const setThemeLight = (event) => {
-        // setTheme('ui-light')
+    
+    const setThemeDefault = () => {
+        setTheme(refThemeDefault.current)
+        setIsHeaderHover(false)
     }
-    const setThemeDark = (event) => {
-        // setTheme('ui-dark')
+
+    const setHeaderTheme = theme => {
+        refThemeDefault.current = theme
+        setTheme(theme)
     }
 
     const scrollHandler = () => {
+        setThemeDefault()
         const scroll = window.scrollY
         refRabbit.current.style.pointerEvents = 'none'
         if (refIsHandled.current) clearInterval(refIsHandled.current)
@@ -102,7 +110,7 @@ export default function Header() {
 
         globalState.body = { addClass, removeClass, toggleClass }
         globalState.basket = { setBasketCount, basketCount }
-        globalState.headerTheme = { setTheme, theme }
+        globalState.header = { setTheme: setHeaderTheme }
         globalState.auth = { setIsAuth, isAuth }
 
         return () => {
@@ -117,13 +125,11 @@ export default function Header() {
 
     return (
         <>
-            <header ref={refHeader} onMouseEnter={setThemeLight} onMouseLeave={setThemeDark} className={`${style.header} ${theme}`}>
+            <header ref={refHeader} onMouseEnter={setThemeLight} onMouseLeave={setThemeDefault} className={`${style.header} ${theme}`}>
                 <div className={`container ${style.container}`}>
-                    <div className='header-hover'></div>
+                    <div data-hover={isHeaderHover} className='header-hover'></div>
 
-                    <div className={`${style.top} ${style.textt4} text--regular is-hidden--md-down`}
-                        onMouseEnter={setThemeLight}
-                        onMouseLeave={setThemeDark}>
+                    <div className={`${style.top} ${style.textt4} text--regular is-hidden--md-down`} >
 
                         <div className={style.group}>
                             <a className='link active' href='#' rel='nofollow'>RedHare Market</a>
@@ -146,10 +152,12 @@ export default function Header() {
                 </div>
             </header>
 
-            <motion.div className={`${style.fixedContainer} ui-light`}
+            <motion.div
                 animate={animateHeader}
                 data-active={isTranslated}
+                onMouseEnter={setThemeLight}
                 onMouseLeave={hoverLeaveHandler}
+                className={`${style.fixedContainer} ${theme}`}
             >
 
                 <div className={`${style.fixedContainerInnerTablet} is-hidden--lg-up`}>
@@ -293,7 +301,7 @@ export default function Header() {
                 data-active={isRabbitFixed}
                 onClick={hoverEnterHandler}
                 onMouseOver={hoverEnterHandler}
-                className={`${style.rabbit} ui-light`}>
+                className={`${style.rabbit}`}>
                 <Image src='/images/layout/logo-lg.svg' layout='fill' alt='RedHair market' />
             </div>
         </>

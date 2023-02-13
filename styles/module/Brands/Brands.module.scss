@@ -1,12 +1,18 @@
+@import '../../mixins/helpers/media';
+
 .brandSearch {
     border-radius: 4px;
     background-color: var(--t-background);
 }
 
 .search {
-    margin-bottom: 40px;
+    transition: .3s;
     color: var(--t-text);
-    transition: .3s transform;
+
+    @include media-breakpoint(lg-up) {
+        margin-bottom: 40px;
+        transition: .3s transform;
+    }
 }
 
 .searchIcon {
@@ -24,7 +30,7 @@
 
 .brandLetters {
     width: 100%;
-    display: flex;
+    display: none;
     padding: 14px 10px;
     justify-content: center;
     transition: .3s transform;
@@ -41,11 +47,15 @@
             margin-right: 0;
         }
     }
+
+    @include media-breakpoint(lg-up) {
+        display: flex;
+    }
 }
 
 .brandSearchFixed {
     z-index: 2;
-    max-height: 74px;
+    height: 74px;
     box-shadow: 0px 4px 10px 0px #0000001A;
 
     .brandLetters {
@@ -54,12 +64,8 @@
     }
 
     .search {
-        opacity: 0;
-        margin: 0 26px;
-        transition: .3s;
-        margin-bottom: 0;
-        pointer-events: none;
-        transform: translateY(25px);
+        margin: 0 16px;
+        transform: translateY(20px);
     }
 
     .searchIcon {
@@ -67,9 +73,21 @@
         transition: .3s;
         pointer-events: all;
     }
+
+    @include media-breakpoint(lg-up) {
+        .search {
+            opacity: 0;
+            margin: 0 26px;
+            transition: .3s;
+            margin-bottom: 0;
+            pointer-events: none;
+            transform: translateY(25px);
+        }
+    }
 }
 
 .searchChildren {
+    margin-top: 40px;
 
     &[data-value='true'] {
         .brandsLine {
@@ -87,6 +105,10 @@
             margin-bottom: 16px;
         }
     }
+
+    @include media-breakpoint(lg-up) {
+        margin-top: 0;
+    }
 }
 
 .brandsLine {
@@ -98,9 +120,9 @@
 
 .brand {
     cursor: pointer;
-    transition: .3s;
     margin-right: 32px;
     display: inline-block;
+    transition: .3s color;
 
     &:hover {
         color: var(--t-primary);
@@ -109,7 +131,7 @@
 
 .empty {
     display: none;
-    
+
     &[data-empty='true'] {
         display: block;
     }

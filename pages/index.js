@@ -42,6 +42,28 @@ export default function Home() {
           <a href='/catalog/main' className='link'>Каталожная выдача</a>
         </Link>
       </div>
+
+      <div className='text--t1 pb-1 pt-1.5'>Бренды</div>
+      <div className='ml-1'>
+        <Link href='/brands'>
+          <a href='/brands' className='link'>Страница брендов</a>
+        </Link>
+      </div>
+      <div className='ml-1'>
+        <Link href='/brands/ds'>
+          <a href='/brands/ds' className='link'>Каталожная выдача бренда (светлая обложка)</a>
+        </Link>
+      </div>
+      <div className='ml-1'>
+        <Link href='/brands/lock-stock-barrel'>
+          <a href='/brands/lock-stock-barrel' className='link'>Каталожная выдача бренда (темная обложка)</a>
+        </Link>
+      </div>
+      <div className='ml-1'>
+        <Link href='/brands/Mr-Natty'>
+          <a href='/brands/Mr-Natty' className='link'>Каталожная выдача бренда (без обложки)</a>
+        </Link>
+      </div>
       <div className='pt-5' />
 
     </MainLayout>

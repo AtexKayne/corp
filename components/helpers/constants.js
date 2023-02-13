@@ -564,38 +564,38 @@ export const brands = [
     {
         letter: '0-9',
         brands: [
-            { name: '100 Рецептов Красоты', code: 'test' },
+            { name: '100 Рецептов Красоты', code: 'ds' },
         ]
     },
     {
         letter: 'A',
         brands: [
-            { name: 'Andis', code: 'test' },
+            { name: 'Andis', code: 'ds' },
         ]
     },
     {
         letter: 'B',
         brands: [
-            { name: 'Babyliss Pro', code: 'test' },
-            { name: 'Beardbyrus', code: 'test' },
-            { name: 'Beuy Pro', code: 'test' },
+            { name: 'Babyliss Pro', code: 'ds' },
+            { name: 'Beardbyrus', code: 'ds' },
+            { name: 'Beuy Pro', code: 'ds' },
         ]
     },
     {
         letter: 'C',
         brands: [
-            { name: 'Canway', code: 'test' },
-            { name: 'Clipper Camo', code: 'test' },
+            { name: 'Canway', code: 'ds' },
+            { name: 'Clipper Camo', code: 'ds' },
         ]
     },
     {
         letter: 'D',
         brands: [
-            { name: 'Dayo', code: 'test' },
-            { name: 'Denman', code: 'test' },
-            { name: 'Derby', code: 'test' },
-            { name: 'Dorso', code: 'test' },
-            { name: 'DS Scissors', code: 'test' },
+            { name: 'Dayo', code: 'ds' },
+            { name: 'Denman', code: 'ds' },
+            { name: 'Derby', code: 'ds' },
+            { name: 'Dorso', code: 'ds' },
+            { name: 'DS Scissors', code: 'ds' },
         ]
     },
     {
@@ -607,46 +607,46 @@ export const brands = [
     {
         letter: 'F',
         brands: [
-            { name: 'Feather', code: 'test' },
-            { name: 'Forme', code: 'test' },
-            { name: 'Forme Essentials', code: 'test' },
+            { name: 'Feather', code: 'ds' },
+            { name: 'Forme', code: 'ds' },
+            { name: 'Forme Essentials', code: 'ds' },
         ]
     },
     {
         letter: 'G',
         brands: [
-            { name: 'Gamma Piu', code: 'test' },
+            { name: 'Gamma Piu', code: 'ds' },
         ]
     },
     {
         letter: 'H',
         brands: [
-            { name: 'Hairart', code: 'test' },
-            { name: 'Hairbrained Pro', code: 'test' },
-            { name: 'Harisma', code: 'test' },
+            { name: 'Hairart', code: 'ds' },
+            { name: 'Hairbrained Pro', code: 'ds' },
+            { name: 'Harisma', code: 'ds' },
         ]
     },
     {
         letter: 'S',
         brands: [
-            { name: 'S-Market', code: 'test' },
-            { name: 'Sensido', code: 'test' },
-            { name: 'Sim Sensitive', code: 'test' },
-            { name: 'Simushka Instruments', code: 'test' },
-            { name: 'System 4', code: 'test' },
-            { name: 'Slim Gorilla', code: 'test' },
-            { name: 'S-Market 1', code: 'test' },
-            { name: 'Sensido 1', code: 'test' },
-            { name: 'Sim Sensitive 1', code: 'test' },
-            { name: 'Simushka Instruments 1', code: 'test' },
-            { name: 'System 4 1', code: 'test' },
-            { name: 'Slim Gorilla 1', code: 'test' },
+            { name: 'S-Market', code: 'ds' },
+            { name: 'Sensido', code: 'ds' },
+            { name: 'Sim Sensitive', code: 'ds' },
+            { name: 'Simushka Instruments', code: 'ds' },
+            { name: 'System 4', code: 'ds' },
+            { name: 'Slim Gorilla', code: 'ds' },
+            { name: 'S-Market 1', code: 'ds' },
+            { name: 'Sensido 1', code: 'ds' },
+            { name: 'Sim Sensitive 1', code: 'ds' },
+            { name: 'Simushka Instruments 1', code: 'ds' },
+            { name: 'System 4 1', code: 'ds' },
+            { name: 'Slim Gorilla 1', code: 'ds' },
         ]
     },
     {
         letter: 'Y',
         brands: [
-            { name: 'Y.S.Park', code: 'test' },
+            { name: 'Y.S.Park', code: 'ds' },
         ]
     },
     

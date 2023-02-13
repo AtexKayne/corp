@@ -52,14 +52,14 @@
         xxl: 158px,
         xxxl: 176px,
     ));
-}
 
-.ui-dark .header-hover {
-    background-color: color-use(background, 0);
-}
+    &[data-hover='false'] {
+        background-color: color-use(background, 0);
+    }
 
-.ui-light .header-hover {
-    background-color: color-use(background, 1);
+    &[data-hover='true'] {
+        background-color: color-use(background, 1);
+    }
 }
 
 header.ui-dark {

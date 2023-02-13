@@ -40,6 +40,7 @@ export default function Icon({ name, external = '', width = 16, height = 16, siz
             bell: dynamic(() => import('../public/icons/icon-bell.svg'), { ssr: false }),
             bellFill: dynamic(() => import('../public/icons/icon-bell-fill.svg'), { ssr: false }),
             dropdown: dynamic(() => import('../public/icons/icon-triangle-down.svg'), { ssr: false }),
+            share: dynamic(() => import('../public/icons/icon-share-android.svg'), { ssr: false }),
         }
         const Component = dynamicComponents[iconName]
         setLoadedIcon(Component)

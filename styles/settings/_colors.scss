@@ -73,7 +73,7 @@ $color-themes: (
     dark: (
         background:    color-use(_black),
         line:          color-use(_black, 0.15),
-        small:         color-use(_gray),
+        small:         color-use(_white),
         smallish:      color-use(_fixed),
         text:          color-use(_white),
         heading:       color-use(_white),

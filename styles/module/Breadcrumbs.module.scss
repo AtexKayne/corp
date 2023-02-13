@@ -2,6 +2,7 @@
 
 .breadcrumbs {
     z-index: 3;
+    height: 30px;
     max-width: 100%;
     margin: 10px 0 0;
     min-height: 30px;
@@ -71,6 +72,12 @@
             &::after {
                 opacity: 1;
             }
+        }
+    }
+
+    &[data-theme='ui-dark'] {
+        > span::after {
+            background-image: url('/icons/icon-chevron-right-white.svg');
         }
     }
 }

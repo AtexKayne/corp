@@ -1,6 +1,6 @@
 import Catalog from '../catalog/[...category]'
 import { useState, useEffect, useRef } from 'react'
-import { categories } from '../../components/helpers/categories'
+import { brands as categories } from '../../components/helpers/categories'
 
 export default function Brand({detail}) {
 
@@ -10,52 +10,33 @@ export default function Brand({detail}) {
 }
 
 export async function getServerSideProps(context) {
-    const queryCategory = context.query.category
+    const queryCategory = context.query.code
+
     let resp
     let currentCategory = {
-        name: 'Каталог товаров',
+        name: 'Все бренды',
         id: 0,
         parent_id: 0,
-        filter: false
+        filter: false,
     }
-    const json = {}
-    const getIncludes = obj => {
-        const includes = []
-        for (const property in obj) {
-            includes.push(obj[property])
-        }
-        return includes
+    const json = {
+        categories: categories.data
     }
 
     if (categories.data) {
-        const data = []
+        categories.data.forEach(property => {
+            currentCategory = property.url.includes(`/${queryCategory}/`) ? property : currentCategory
 
-        for (const property in categories.data) {
-            // const url = categories.data[property].url.split('catalog/')[1]
-            // categories.data[property].url = url
-            currentCategory = categories.data[property].url.includes(queryCategory)
-                ? categories.data[property]
-                : currentCategory
-            if (categories.data[property].hasOwnProperty('include_sections')) {
-                const includes = getIncludes(categories.data[property].include_sections)
-                categories.data[property].include_sections = includes
-
-                if (currentCategory.id === 0) {
-                    categories.data[property].include_sections.forEach(include => {
-                        currentCategory = include.url.includes(queryCategory)
-                            ? include
-                            : currentCategory
-                    })
-                }
+            if (Array.isArray(property['include_sections'])) {
+                property.include_sections.forEach(include => {
+                    currentCategory = include.url.includes(`/${queryCategory}/`) ? include : currentCategory
+                })
             }
-            // categories.data[property].url = 'catalog'
-            data.push(categories.data[property])
-        }
-
-        json.categories = data
+        })
     }
 
     json.currentCategory = currentCategory
+    json.isBrands = true
 
     // json = persone
     // try {

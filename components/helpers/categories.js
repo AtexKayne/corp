@@ -1,9 +1,14 @@
 export const categories = {
     "success": true,
-    "data": {
-        "1": {
+    "data": [
+        {
             "id": 1932,
             "filter": [
+                {
+                    "id": 666,
+                    "code": "price",
+                    "name": "Цена"
+                },
                 {
                     "id": 708,
                     "code": "brand",
@@ -28,10 +33,15 @@ export const categories = {
             "img_mini": "https://redharemarket.ru/upload/iblock/b7c/5yhuay0gjymcydsye1aj3ghu7067sns6/Ikonka_mashinki-_1_.png",
             "img_big": "https://redharemarket.ru/upload/iblock/382/pq5ygre6exyriy4d2ab4wbplkfibmtj7/Ikonka_Mashinki.png",
             "parent_id": null,
-            "include_sections": {
-                "1": {
+            "include_sections": [
+                {
                     "id": 1933,
                     "filter": [
+                        {
+                            "id": 666,
+                            "code": "price",
+                            "name": "Цена"
+                        },
                         {
                             "id": 708,
                             "code": "brand",
@@ -77,9 +87,14 @@ export const categories = {
                     "img_big": null,
                     "parent_id": 1932
                 },
-                "2": {
+                {
                     "id": 1934,
                     "filter": [
+                        {
+                            "id": 666,
+                            "code": "price",
+                            "name": "Цена"
+                        },
                         {
                             "id": 708,
                             "code": "brand",
@@ -105,9 +120,14 @@ export const categories = {
                     "img_big": null,
                     "parent_id": 1932
                 },
-                "3": {
+                {
                     "id": 1935,
                     "filter": [
+                        {
+                            "id": 666,
+                            "code": "price",
+                            "name": "Цена"
+                        },
                         {
                             "id": 708,
                             "code": "brand",
@@ -138,9 +158,14 @@ export const categories = {
                     "img_big": null,
                     "parent_id": 1932
                 },
-                "4": {
+                {
                     "id": 1936,
                     "filter": [
+                        {
+                            "id": 666,
+                            "code": "price",
+                            "name": "Цена"
+                        },
                         {
                             "id": 708,
                             "code": "brand",
@@ -161,11 +186,16 @@ export const categories = {
                     "img_big": null,
                     "parent_id": 1932
                 }
-            }
+            ]
         },
-        "2": {
+        {
             "id": 1938,
             "filter": [
+                {
+                    "id": 666,
+                    "code": "price",
+                    "name": "Цена"
+                },
                 {
                     "id": 708,
                     "code": "brand",
@@ -190,10 +220,15 @@ export const categories = {
             "img_mini": "https://redharemarket.ru/upload/iblock/198/05zforfz7egxxceve3ters9ehsg21kc0/Ikonka_feny-_1_.png",
             "img_big": "https://redharemarket.ru/upload/iblock/ef0/ohj8z0dwgpv32b858bnfs2klu7p7mv92/Ikonka_Feny.png",
             "parent_id": null,
-            "include_sections": {
-                "1": {
+            "include_sections": [
+                {
                     "id": 1939,
                     "filter": [
+                        {
+                            "id": 666,
+                            "code": "price",
+                            "name": "Цена"
+                        },
                         {
                             "id": 708,
                             "code": "brand",
@@ -229,9 +264,14 @@ export const categories = {
                     "img_big": null,
                     "parent_id": 1938
                 },
-                "2": {
+                {
                     "id": 1940,
                     "filter": [
+                        {
+                            "id": 666,
+                            "code": "price",
+                            "name": "Цена"
+                        },
                         {
                             "id": 708,
                             "code": "brand",
@@ -262,9 +302,14 @@ export const categories = {
                     "img_big": null,
                     "parent_id": 1938
                 },
-                "3": {
+                {
                     "id": 1941,
                     "filter": [
+                        {
+                            "id": 666,
+                            "code": "price",
+                            "name": "Цена"
+                        },
                         {
                             "id": 708,
                             "code": "brand",
@@ -300,9 +345,14 @@ export const categories = {
                     "img_big": null,
                     "parent_id": 1938
                 },
-                "4": {
+                {
                     "id": 1943,
                     "filter": [
+                        {
+                            "id": 666,
+                            "code": "price",
+                            "name": "Цена"
+                        },
                         {
                             "id": 708,
                             "code": "brand",
@@ -333,11 +383,16 @@ export const categories = {
                     "img_big": null,
                     "parent_id": 1938
                 }
-            }
+            ]
         },
-        "3": {
+        {
             "id": 1944,
             "filter": [
+                {
+                    "id": 666,
+                    "code": "price",
+                    "name": "Цена"
+                },
                 {
                     "id": 708,
                     "code": "brand",
@@ -367,10 +422,15 @@ export const categories = {
             "img_mini": "https://redharemarket.ru/upload/iblock/c10/2lcip5kgnefnqx71fx5tlvfv1o5jxg4t/Ikonka_nozhnitsy-_1_.png",
             "img_big": "https://redharemarket.ru/upload/iblock/7c2/bw9zwmd53cks372g0v8bj9t5h1854szg/Ikonka_Nozhnitsy.png",
             "parent_id": null,
-            "include_sections": {
-                "1": {
+            "include_sections": [
+                {
                     "id": 1945,
                     "filter": [
+                        {
+                            "id": 666,
+                            "code": "price",
+                            "name": "Цена"
+                        },
                         {
                             "id": 708,
                             "code": "brand",
@@ -416,9 +476,14 @@ export const categories = {
                     "img_big": null,
                     "parent_id": 1944
                 },
-                "2": {
+                {
                     "id": 1946,
                     "filter": [
+                        {
+                            "id": 666,
+                            "code": "price",
+                            "name": "Цена"
+                        },
                         {
                             "id": 708,
                             "code": "brand",
@@ -464,9 +529,14 @@ export const categories = {
                     "img_big": null,
                     "parent_id": 1944
                 },
-                "3": {
+                {
                     "id": 1947,
                     "filter": [
+                        {
+                            "id": 666,
+                            "code": "price",
+                            "name": "Цена"
+                        },
                         {
                             "id": 708,
                             "code": "brand",
@@ -497,9 +567,14 @@ export const categories = {
                     "img_big": null,
                     "parent_id": 1944
                 },
-                "4": {
+                {
                     "id": 1948,
                     "filter": [
+                        {
+                            "id": 666,
+                            "code": "price",
+                            "name": "Цена"
+                        },
                         {
                             "id": 708,
                             "code": "brand",
@@ -530,9 +605,14 @@ export const categories = {
                     "img_big": null,
                     "parent_id": 1944
                 },
-                "5": {
+                {
                     "id": 1949,
                     "filter": [
+                        {
+                            "id": 666,
+                            "code": "price",
+                            "name": "Цена"
+                        },
                         {
                             "id": 708,
                             "code": "brand",
@@ -563,9 +643,14 @@ export const categories = {
                     "img_big": null,
                     "parent_id": 1944
                 },
-                "6": {
+                {
                     "id": 2301,
                     "filter": [
+                        {
+                            "id": 666,
+                            "code": "price",
+                            "name": "Цена"
+                        },
                         {
                             "id": 708,
                             "code": "brand",
@@ -596,11 +681,16 @@ export const categories = {
                     "img_big": null,
                     "parent_id": 1944
                 }
-            }
+            ]
         },
-        "4": {
+        {
             "id": 1950,
             "filter": [
+                {
+                    "id": 666,
+                    "code": "price",
+                    "name": "Цена"
+                },
                 {
                     "id": 708,
                     "code": "brand",
@@ -625,10 +715,15 @@ export const categories = {
             "img_mini": "https://redharemarket.ru/upload/iblock/f4c/o3wey0sbqi28ix31dei1gwsmasyq0omf/Ikonka_stai_ling-_1_.png",
             "img_big": "https://redharemarket.ru/upload/iblock/9c7/holln80y67qs5brbjlyb79jlwin20zr7/Ikonka_Stai_ling.png",
             "parent_id": null,
-            "include_sections": {
-                "1": {
+            "include_sections": [
+                {
                     "id": 1951,
                     "filter": [
+                        {
+                            "id": 666,
+                            "code": "price",
+                            "name": "Цена"
+                        },
                         {
                             "id": 708,
                             "code": "brand",
@@ -669,9 +764,14 @@ export const categories = {
                     "img_big": null,
                     "parent_id": 1950
                 },
-                "2": {
+                {
                     "id": 1952,
                     "filter": [
+                        {
+                            "id": 666,
+                            "code": "price",
+                            "name": "Цена"
+                        },
                         {
                             "id": 708,
                             "code": "brand",
@@ -712,9 +812,14 @@ export const categories = {
                     "img_big": null,
                     "parent_id": 1950
                 },
-                "3": {
+                {
                     "id": 1953,
                     "filter": [
+                        {
+                            "id": 666,
+                            "code": "price",
+                            "name": "Цена"
+                        },
                         {
                             "id": 708,
                             "code": "brand",
@@ -745,9 +850,14 @@ export const categories = {
                     "img_big": null,
                     "parent_id": 1950
                 },
-                "4": {
+                {
                     "id": 1954,
                     "filter": [
+                        {
+                            "id": 666,
+                            "code": "price",
+                            "name": "Цена"
+                        },
                         {
                             "id": 708,
                             "code": "brand",
@@ -773,9 +883,14 @@ export const categories = {
                     "img_big": null,
                     "parent_id": 1950
                 },
-                "5": {
+                {
                     "id": 1955,
                     "filter": [
+                        {
+                            "id": 666,
+                            "code": "price",
+                            "name": "Цена"
+                        },
                         {
                             "id": 708,
                             "code": "brand",
@@ -810,10 +925,15 @@ export const categories = {
                     "img_mini": null,
                     "img_big": null,
                     "parent_id": 1950,
-                    "include_sections": {
-                        "1": {
+                    "include_sections": [
+                        {
                             "id": 1956,
                             "filter": [
+                                {
+                                    "id": 666,
+                                    "code": "price",
+                                    "name": "Цена"
+                                },
                                 {
                                     "id": 708,
                                     "code": "brand",
@@ -864,9 +984,14 @@ export const categories = {
                             "img_big": null,
                             "parent_id": 1955
                         },
-                        "2": {
+                        {
                             "id": 1957,
                             "filter": [
+                                {
+                                    "id": 666,
+                                    "code": "price",
+                                    "name": "Цена"
+                                },
                                 {
                                     "id": 708,
                                     "code": "brand",
@@ -917,9 +1042,14 @@ export const categories = {
                             "img_big": null,
                             "parent_id": 1955
                         },
-                        "3": {
+                        {
                             "id": 1958,
                             "filter": [
+                                {
+                                    "id": 666,
+                                    "code": "price",
+                                    "name": "Цена"
+                                },
                                 {
                                     "id": 708,
                                     "code": "brand",
@@ -955,9 +1085,14 @@ export const categories = {
                             "img_big": null,
                             "parent_id": 1955
                         },
-                        "4": {
+                        {
                             "id": 1959,
                             "filter": [
+                                {
+                                    "id": 666,
+                                    "code": "price",
+                                    "name": "Цена"
+                                },
                                 {
                                     "id": 708,
                                     "code": "brand",
@@ -993,11 +1128,16 @@ export const categories = {
                             "img_big": null,
                             "parent_id": 1955
                         }
-                    }
+                    ]
                 },
-                "6": {
+                {
                     "id": 1960,
                     "filter": [
+                        {
+                            "id": 666,
+                            "code": "price",
+                            "name": "Цена"
+                        },
                         {
                             "id": 708,
                             "code": "brand",
@@ -1027,10 +1167,15 @@ export const categories = {
                     "img_mini": null,
                     "img_big": null,
                     "parent_id": 1950,
-                    "include_sections": {
-                        "1": {
+                    "include_sections": [
+                        {
                             "id": 1961,
                             "filter": [
+                                {
+                                    "id": 666,
+                                    "code": "price",
+                                    "name": "Цена"
+                                },
                                 {
                                     "id": 708,
                                     "code": "brand",
@@ -1061,9 +1206,14 @@ export const categories = {
                             "img_big": null,
                             "parent_id": 1960
                         },
-                        "2": {
+                        {
                             "id": 1962,
                             "filter": [
+                                {
+                                    "id": 666,
+                                    "code": "price",
+                                    "name": "Цена"
+                                },
                                 {
                                     "id": 708,
                                     "code": "brand",
@@ -1094,9 +1244,14 @@ export const categories = {
                             "img_big": null,
                             "parent_id": 1960
                         },
-                        "3": {
+                        {
                             "id": 1963,
                             "filter": [
+                                {
+                                    "id": 666,
+                                    "code": "price",
+                                    "name": "Цена"
+                                },
                                 {
                                     "id": 708,
                                     "code": "brand",
@@ -1127,9 +1282,14 @@ export const categories = {
                             "img_big": null,
                             "parent_id": 1960
                         },
-                        "4": {
+                        {
                             "id": 1965,
                             "filter": [
+                                {
+                                    "id": 666,
+                                    "code": "price",
+                                    "name": "Цена"
+                                },
                                 {
                                     "id": 708,
                                     "code": "brand",
@@ -1160,9 +1320,14 @@ export const categories = {
                             "img_big": null,
                             "parent_id": 1960
                         },
-                        "5": {
+                        {
                             "id": 1966,
                             "filter": [
+                                {
+                                    "id": 666,
+                                    "code": "price",
+                                    "name": "Цена"
+                                },
                                 {
                                     "id": 708,
                                     "code": "brand",
@@ -1193,9 +1358,14 @@ export const categories = {
                             "img_big": null,
                             "parent_id": 1960
                         },
-                        "6": {
+                        {
                             "id": 1967,
                             "filter": [
+                                {
+                                    "id": 666,
+                                    "code": "price",
+                                    "name": "Цена"
+                                },
                                 {
                                     "id": 708,
                                     "code": "brand",
@@ -1226,11 +1396,16 @@ export const categories = {
                             "img_big": null,
                             "parent_id": 1960
                         }
-                    }
+                    ]
                 },
-                "7": {
+                {
                     "id": 1969,
                     "filter": [
+                        {
+                            "id": 666,
+                            "code": "price",
+                            "name": "Цена"
+                        },
                         {
                             "id": 708,
                             "code": "brand",
@@ -1260,10 +1435,15 @@ export const categories = {
                     "img_mini": null,
                     "img_big": null,
                     "parent_id": 1950,
-                    "include_sections": {
-                        "1": {
+                    "include_sections": [
+                        {
                             "id": 1970,
                             "filter": [
+                                {
+                                    "id": 666,
+                                    "code": "price",
+                                    "name": "Цена"
+                                },
                                 {
                                     "id": 708,
                                     "code": "brand",
@@ -1294,9 +1474,14 @@ export const categories = {
                             "img_big": null,
                             "parent_id": 1969
                         },
-                        "2": {
+                        {
                             "id": 1971,
                             "filter": [
+                                {
+                                    "id": 666,
+                                    "code": "price",
+                                    "name": "Цена"
+                                },
                                 {
                                     "id": 708,
                                     "code": "brand",
@@ -1327,9 +1512,14 @@ export const categories = {
                             "img_big": null,
                             "parent_id": 1969
                         },
-                        "3": {
+                        {
                             "id": 1972,
                             "filter": [
+                                {
+                                    "id": 666,
+                                    "code": "price",
+                                    "name": "Цена"
+                                },
                                 {
                                     "id": 708,
                                     "code": "brand",
@@ -1360,9 +1550,14 @@ export const categories = {
                             "img_big": null,
                             "parent_id": 1969
                         },
-                        "4": {
+                        {
                             "id": 1973,
                             "filter": [
+                                {
+                                    "id": 666,
+                                    "code": "price",
+                                    "name": "Цена"
+                                },
                                 {
                                     "id": 708,
                                     "code": "brand",
@@ -1393,9 +1588,14 @@ export const categories = {
                             "img_big": null,
                             "parent_id": 1969
                         },
-                        "5": {
+                        {
                             "id": 1974,
                             "filter": [
+                                {
+                                    "id": 666,
+                                    "code": "price",
+                                    "name": "Цена"
+                                },
                                 {
                                     "id": 708,
                                     "code": "brand",
@@ -1426,9 +1626,14 @@ export const categories = {
                             "img_big": null,
                             "parent_id": 1969
                         },
-                        "6": {
+                        {
                             "id": 1975,
                             "filter": [
+                                {
+                                    "id": 666,
+                                    "code": "price",
+                                    "name": "Цена"
+                                },
                                 {
                                     "id": 708,
                                     "code": "brand",
@@ -1459,9 +1664,14 @@ export const categories = {
                             "img_big": null,
                             "parent_id": 1969
                         },
-                        "7": {
+                        {
                             "id": 1976,
                             "filter": [
+                                {
+                                    "id": 666,
+                                    "code": "price",
+                                    "name": "Цена"
+                                },
                                 {
                                     "id": 708,
                                     "code": "brand",
@@ -1492,9 +1702,14 @@ export const categories = {
                             "img_big": null,
                             "parent_id": 1969
                         },
-                        "8": {
+                        {
                             "id": 1978,
                             "filter": [
+                                {
+                                    "id": 666,
+                                    "code": "price",
+                                    "name": "Цена"
+                                },
                                 {
                                     "id": 708,
                                     "code": "brand",
@@ -1525,13 +1740,18 @@ export const categories = {
                             "img_big": null,
                             "parent_id": 1969
                         }
-                    }
+                    ]
                 }
-            }
+            ]
         },
-        "5": {
+        {
             "id": 1979,
             "filter": [
+                {
+                    "id": 666,
+                    "code": "price",
+                    "name": "Цена"
+                },
                 {
                     "id": 708,
                     "code": "brand",
@@ -1556,10 +1776,15 @@ export const categories = {
             "img_mini": "https://redharemarket.ru/upload/iblock/91e/pqlwssebhy22r0kpwgagnlpskg16qw3m/Ikonka_kosmetika-_1_.png",
             "img_big": "https://redharemarket.ru/upload/iblock/662/5pejs5fsc2w2jnu3gr4gclx71quz70zn/Ikonka_Kosmetika.png",
             "parent_id": null,
-            "include_sections": {
-                "1": {
+            "include_sections": [
+                {
                     "id": 1980,
                     "filter": [
+                        {
+                            "id": 666,
+                            "code": "price",
+                            "name": "Цена"
+                        },
                         {
                             "id": 708,
                             "code": "brand",
@@ -1589,10 +1814,15 @@ export const categories = {
                     "img_mini": null,
                     "img_big": null,
                     "parent_id": 1979,
-                    "include_sections": {
-                        "1": {
+                    "include_sections": [
+                        {
                             "id": 1981,
                             "filter": [
+                                {
+                                    "id": 666,
+                                    "code": "price",
+                                    "name": "Цена"
+                                },
                                 {
                                     "id": 708,
                                     "code": "brand",
@@ -1623,9 +1853,14 @@ export const categories = {
                             "img_big": null,
                             "parent_id": 1980
                         },
-                        "2": {
+                        {
                             "id": 1982,
                             "filter": [
+                                {
+                                    "id": 666,
+                                    "code": "price",
+                                    "name": "Цена"
+                                },
                                 {
                                     "id": 708,
                                     "code": "brand",
@@ -1656,9 +1891,14 @@ export const categories = {
                             "img_big": null,
                             "parent_id": 1980
                         },
-                        "3": {
+                        {
                             "id": 1983,
                             "filter": [
+                                {
+                                    "id": 666,
+                                    "code": "price",
+                                    "name": "Цена"
+                                },
                                 {
                                     "id": 708,
                                     "code": "brand",
@@ -1689,9 +1929,14 @@ export const categories = {
                             "img_big": null,
                             "parent_id": 1980
                         },
-                        "4": {
+                        {
                             "id": 1984,
                             "filter": [
+                                {
+                                    "id": 666,
+                                    "code": "price",
+                                    "name": "Цена"
+                                },
                                 {
                                     "id": 708,
                                     "code": "brand",
@@ -1722,9 +1967,14 @@ export const categories = {
                             "img_big": null,
                             "parent_id": 1980
                         },
-                        "5": {
+                        {
                             "id": 1985,
                             "filter": [
+                                {
+                                    "id": 666,
+                                    "code": "price",
+                                    "name": "Цена"
+                                },
                                 {
                                     "id": 708,
                                     "code": "brand",
@@ -1755,9 +2005,14 @@ export const categories = {
                             "img_big": null,
                             "parent_id": 1980
                         },
-                        "6": {
+                        {
                             "id": 1986,
                             "filter": [
+                                {
+                                    "id": 666,
+                                    "code": "price",
+                                    "name": "Цена"
+                                },
                                 {
                                     "id": 708,
                                     "code": "brand",
@@ -1788,9 +2043,14 @@ export const categories = {
                             "img_big": null,
                             "parent_id": 1980
                         },
-                        "7": {
+                        {
                             "id": 1987,
                             "filter": [
+                                {
+                                    "id": 666,
+                                    "code": "price",
+                                    "name": "Цена"
+                                },
                                 {
                                     "id": 708,
                                     "code": "brand",
@@ -1821,9 +2081,14 @@ export const categories = {
                             "img_big": null,
                             "parent_id": 1980
                         },
-                        "8": {
+                        {
                             "id": 1988,
                             "filter": [
+                                {
+                                    "id": 666,
+                                    "code": "price",
+                                    "name": "Цена"
+                                },
                                 {
                                     "id": 708,
                                     "code": "brand",
@@ -1854,9 +2119,14 @@ export const categories = {
                             "img_big": null,
                             "parent_id": 1980
                         },
-                        "9": {
+                        {
                             "id": 2450,
                             "filter": [
+                                {
+                                    "id": 666,
+                                    "code": "price",
+                                    "name": "Цена"
+                                },
                                 {
                                     "id": 708,
                                     "code": "brand",
@@ -1887,11 +2157,16 @@ export const categories = {
                             "img_big": null,
                             "parent_id": 1980
                         }
-                    }
+                    ]
                 },
-                "2": {
+                {
                     "id": 1989,
                     "filter": [
+                        {
+                            "id": 666,
+                            "code": "price",
+                            "name": "Цена"
+                        },
                         {
                             "id": 708,
                             "code": "brand",
@@ -1921,10 +2196,15 @@ export const categories = {
                     "img_mini": null,
                     "img_big": null,
                     "parent_id": 1979,
-                    "include_sections": {
-                        "1": {
+                    "include_sections": [
+                        {
                             "id": 1990,
                             "filter": [
+                                {
+                                    "id": 666,
+                                    "code": "price",
+                                    "name": "Цена"
+                                },
                                 {
                                     "id": 708,
                                     "code": "brand",
@@ -1955,9 +2235,14 @@ export const categories = {
                             "img_big": null,
                             "parent_id": 1989
                         },
-                        "2": {
+                        {
                             "id": 1991,
                             "filter": [
+                                {
+                                    "id": 666,
+                                    "code": "price",
+                                    "name": "Цена"
+                                },
                                 {
                                     "id": 708,
                                     "code": "brand",
@@ -1988,9 +2273,14 @@ export const categories = {
                             "img_big": null,
                             "parent_id": 1989
                         },
-                        "3": {
+                        {
                             "id": 1992,
                             "filter": [
+                                {
+                                    "id": 666,
+                                    "code": "price",
+                                    "name": "Цена"
+                                },
                                 {
                                     "id": 708,
                                     "code": "brand",
@@ -2021,9 +2311,14 @@ export const categories = {
                             "img_big": null,
                             "parent_id": 1989
                         },
-                        "4": {
+                        {
                             "id": 1993,
                             "filter": [
+                                {
+                                    "id": 666,
+                                    "code": "price",
+                                    "name": "Цена"
+                                },
                                 {
                                     "id": 708,
                                     "code": "brand",
@@ -2054,9 +2349,14 @@ export const categories = {
                             "img_big": null,
                             "parent_id": 1989
                         },
-                        "5": {
+                        {
                             "id": 1994,
                             "filter": [
+                                {
+                                    "id": 666,
+                                    "code": "price",
+                                    "name": "Цена"
+                                },
                                 {
                                     "id": 708,
                                     "code": "brand",
@@ -2087,9 +2387,14 @@ export const categories = {
                             "img_big": null,
                             "parent_id": 1989
                         },
-                        "6": {
+                        {
                             "id": 1996,
                             "filter": [
+                                {
+                                    "id": 666,
+                                    "code": "price",
+                                    "name": "Цена"
+                                },
                                 {
                                     "id": 708,
                                     "code": "brand",
@@ -2120,11 +2425,16 @@ export const categories = {
                             "img_big": null,
                             "parent_id": 1989
                         }
-                    }
+                    ]
                 },
-                "3": {
+                {
                     "id": 1999,
                     "filter": [
+                        {
+                            "id": 666,
+                            "code": "price",
+                            "name": "Цена"
+                        },
                         {
                             "id": 708,
                             "code": "brand",
@@ -2150,9 +2460,14 @@ export const categories = {
                     "img_big": null,
                     "parent_id": 1979
                 },
-                "4": {
+                {
                     "id": 2000,
                     "filter": [
+                        {
+                            "id": 666,
+                            "code": "price",
+                            "name": "Цена"
+                        },
                         {
                             "id": 708,
                             "code": "brand",
@@ -2182,10 +2497,15 @@ export const categories = {
                     "img_mini": null,
                     "img_big": null,
                     "parent_id": 1979,
-                    "include_sections": {
-                        "1": {
+                    "include_sections": [
+                        {
                             "id": 2001,
                             "filter": [
+                                {
+                                    "id": 666,
+                                    "code": "price",
+                                    "name": "Цена"
+                                },
                                 {
                                     "id": 708,
                                     "code": "brand",
@@ -2216,9 +2536,14 @@ export const categories = {
                             "img_big": null,
                             "parent_id": 2000
                         },
-                        "2": {
+                        {
                             "id": 2002,
                             "filter": [
+                                {
+                                    "id": 666,
+                                    "code": "price",
+                                    "name": "Цена"
+                                },
                                 {
                                     "id": 708,
                                     "code": "brand",
@@ -2249,9 +2574,14 @@ export const categories = {
                             "img_big": null,
                             "parent_id": 2000
                         },
-                        "3": {
+                        {
                             "id": 2003,
                             "filter": [
+                                {
+                                    "id": 666,
+                                    "code": "price",
+                                    "name": "Цена"
+                                },
                                 {
                                     "id": 708,
                                     "code": "brand",
@@ -2282,9 +2612,14 @@ export const categories = {
                             "img_big": null,
                             "parent_id": 2000
                         },
-                        "4": {
+                        {
                             "id": 2004,
                             "filter": [
+                                {
+                                    "id": 666,
+                                    "code": "price",
+                                    "name": "Цена"
+                                },
                                 {
                                     "id": 708,
                                     "code": "brand",
@@ -2315,11 +2650,16 @@ export const categories = {
                             "img_big": null,
                             "parent_id": 2000
                         }
-                    }
+                    ]
                 },
-                "5": {
+                {
                     "id": 2005,
                     "filter": [
+                        {
+                            "id": 666,
+                            "code": "price",
+                            "name": "Цена"
+                        },
                         {
                             "id": 708,
                             "code": "brand",
@@ -2344,10 +2684,15 @@ export const categories = {
                     "img_mini": null,
                     "img_big": null,
                     "parent_id": 1979,
-                    "include_sections": {
-                        "1": {
+                    "include_sections": [
+                        {
                             "id": 2006,
                             "filter": [
+                                {
+                                    "id": 666,
+                                    "code": "price",
+                                    "name": "Цена"
+                                },
                                 {
                                     "id": 708,
                                     "code": "brand",
@@ -2373,9 +2718,14 @@ export const categories = {
                             "img_big": null,
                             "parent_id": 2005
                         },
-                        "2": {
+                        {
                             "id": 2007,
                             "filter": [
+                                {
+                                    "id": 666,
+                                    "code": "price",
+                                    "name": "Цена"
+                                },
                                 {
                                     "id": 708,
                                     "code": "brand",
@@ -2401,9 +2751,14 @@ export const categories = {
                             "img_big": null,
                             "parent_id": 2005
                         },
-                        "3": {
+                        {
                             "id": 2008,
                             "filter": [
+                                {
+                                    "id": 666,
+                                    "code": "price",
+                                    "name": "Цена"
+                                },
                                 {
                                     "id": 708,
                                     "code": "brand",
@@ -2429,9 +2784,14 @@ export const categories = {
                             "img_big": null,
                             "parent_id": 2005
                         },
-                        "4": {
+                        {
                             "id": 2009,
                             "filter": [
+                                {
+                                    "id": 666,
+                                    "code": "price",
+                                    "name": "Цена"
+                                },
                                 {
                                     "id": 708,
                                     "code": "brand",
@@ -2457,13 +2817,18 @@ export const categories = {
                             "img_big": null,
                             "parent_id": 2005
                         }
-                    }
+                    ]
                 }
-            }
+            ]
         },
-        "6": {
+        {
             "id": 2010,
             "filter": [
+                {
+                    "id": 666,
+                    "code": "price",
+                    "name": "Цена"
+                },
                 {
                     "id": 708,
                     "code": "brand",
@@ -2489,9 +2854,14 @@ export const categories = {
             "img_big": "https://redharemarket.ru/upload/iblock/86b/koz3di5qkieyrj541koa2bdvk2v8nhly/Ikonka_Raskhodniki.png",
             "parent_id": null
         },
-        "7": {
+        {
             "id": 2018,
             "filter": [
+                {
+                    "id": 666,
+                    "code": "price",
+                    "name": "Цена"
+                },
                 {
                     "id": 708,
                     "code": "brand",
@@ -2531,10 +2901,15 @@ export const categories = {
             "img_mini": "https://redharemarket.ru/upload/iblock/7e7/b0h41u03r00vukx920i0i23kvx5r1tuw/Ikonka_okrashivanie.png",
             "img_big": "https://redharemarket.ru/upload/iblock/bfe/iw8pfzz1dr8t49pxguv9kplctm6ymnih/Ikonka_Okraska-volos.png",
             "parent_id": null,
-            "include_sections": {
-                "1": {
+            "include_sections": [
+                {
                     "id": 2019,
                     "filter": [
+                        {
+                            "id": 666,
+                            "code": "price",
+                            "name": "Цена"
+                        },
                         {
                             "id": 708,
                             "code": "brand",
@@ -2574,10 +2949,15 @@ export const categories = {
                     "img_mini": null,
                     "img_big": null,
                     "parent_id": 2018,
-                    "include_sections": {
-                        "1": {
+                    "include_sections": [
+                        {
                             "id": 2020,
                             "filter": [
+                                {
+                                    "id": 666,
+                                    "code": "price",
+                                    "name": "Цена"
+                                },
                                 {
                                     "id": 708,
                                     "code": "brand",
@@ -2628,9 +3008,14 @@ export const categories = {
                             "img_big": null,
                             "parent_id": 2019
                         },
-                        "2": {
+                        {
                             "id": 2021,
                             "filter": [
+                                {
+                                    "id": 666,
+                                    "code": "price",
+                                    "name": "Цена"
+                                },
                                 {
                                     "id": 708,
                                     "code": "brand",
@@ -2676,9 +3061,14 @@ export const categories = {
                             "img_big": null,
                             "parent_id": 2019
                         },
-                        "3": {
+                        {
                             "id": 2022,
                             "filter": [
+                                {
+                                    "id": 666,
+                                    "code": "price",
+                                    "name": "Цена"
+                                },
                                 {
                                     "id": 708,
                                     "code": "brand",
@@ -2719,11 +3109,16 @@ export const categories = {
                             "img_big": null,
                             "parent_id": 2019
                         }
-                    }
+                    ]
                 },
-                "2": {
+                {
                     "id": 2023,
                     "filter": [
+                        {
+                            "id": 666,
+                            "code": "price",
+                            "name": "Цена"
+                        },
                         {
                             "id": 708,
                             "code": "brand",
@@ -2763,10 +3158,15 @@ export const categories = {
                     "img_mini": null,
                     "img_big": null,
                     "parent_id": 2018,
-                    "include_sections": {
-                        "1": {
+                    "include_sections": [
+                        {
                             "id": 2352,
                             "filter": [
+                                {
+                                    "id": 666,
+                                    "code": "price",
+                                    "name": "Цена"
+                                },
                                 {
                                     "id": 708,
                                     "code": "brand",
@@ -2807,9 +3207,14 @@ export const categories = {
                             "img_big": null,
                             "parent_id": 2023
                         },
-                        "2": {
+                        {
                             "id": 2353,
                             "filter": [
+                                {
+                                    "id": 666,
+                                    "code": "price",
+                                    "name": "Цена"
+                                },
                                 {
                                     "id": 708,
                                     "code": "brand",
@@ -2850,9 +3255,14 @@ export const categories = {
                             "img_big": null,
                             "parent_id": 2023
                         },
-                        "3": {
+                        {
                             "id": 2354,
                             "filter": [
+                                {
+                                    "id": 666,
+                                    "code": "price",
+                                    "name": "Цена"
+                                },
                                 {
                                     "id": 708,
                                     "code": "brand",
@@ -2898,9 +3308,14 @@ export const categories = {
                             "img_big": null,
                             "parent_id": 2023
                         },
-                        "4": {
+                        {
                             "id": 2355,
                             "filter": [
+                                {
+                                    "id": 666,
+                                    "code": "price",
+                                    "name": "Цена"
+                                },
                                 {
                                     "id": 708,
                                     "code": "brand",
@@ -2941,9 +3356,14 @@ export const categories = {
                             "img_big": null,
                             "parent_id": 2023
                         },
-                        "5": {
+                        {
                             "id": 2394,
                             "filter": [
+                                {
+                                    "id": 666,
+                                    "code": "price",
+                                    "name": "Цена"
+                                },
                                 {
                                     "id": 708,
                                     "code": "brand",
@@ -2984,11 +3404,16 @@ export const categories = {
                             "img_big": null,
                             "parent_id": 2023
                         }
-                    }
+                    ]
                 },
-                "3": {
+                {
                     "id": 2024,
                     "filter": [
+                        {
+                            "id": 666,
+                            "code": "price",
+                            "name": "Цена"
+                        },
                         {
                             "id": 708,
                             "code": "brand",
@@ -3034,9 +3459,14 @@ export const categories = {
                     "img_big": null,
                     "parent_id": 2018
                 },
-                "4": {
+                {
                     "id": 2025,
                     "filter": [
+                        {
+                            "id": 666,
+                            "code": "price",
+                            "name": "Цена"
+                        },
                         {
                             "id": 708,
                             "code": "brand",
@@ -3077,9 +3507,14 @@ export const categories = {
                     "img_big": null,
                     "parent_id": 2018
                 },
-                "5": {
+                {
                     "id": 2026,
                     "filter": [
+                        {
+                            "id": 666,
+                            "code": "price",
+                            "name": "Цена"
+                        },
                         {
                             "id": 708,
                             "code": "brand",
@@ -3125,9 +3560,14 @@ export const categories = {
                     "img_big": null,
                     "parent_id": 2018
                 },
-                "6": {
+                {
                     "id": 2027,
                     "filter": [
+                        {
+                            "id": 666,
+                            "code": "price",
+                            "name": "Цена"
+                        },
                         {
                             "id": 708,
                             "code": "brand",
@@ -3173,9 +3613,14 @@ export const categories = {
                     "img_big": null,
                     "parent_id": 2018
                 },
-                "7": {
+                {
                     "id": 2028,
                     "filter": [
+                        {
+                            "id": 666,
+                            "code": "price",
+                            "name": "Цена"
+                        },
                         {
                             "id": 708,
                             "code": "brand",
@@ -3216,9 +3661,14 @@ export const categories = {
                     "img_big": null,
                     "parent_id": 2018
                 },
-                "8": {
+                {
                     "id": 2029,
                     "filter": [
+                        {
+                            "id": 666,
+                            "code": "price",
+                            "name": "Цена"
+                        },
                         {
                             "id": 708,
                             "code": "brand",
@@ -3259,9 +3709,14 @@ export const categories = {
                     "img_big": null,
                     "parent_id": 2018
                 },
-                "9": {
+                {
                     "id": 2030,
                     "filter": [
+                        {
+                            "id": 666,
+                            "code": "price",
+                            "name": "Цена"
+                        },
                         {
                             "id": 708,
                             "code": "brand",
@@ -3301,10 +3756,15 @@ export const categories = {
                     "img_mini": null,
                     "img_big": null,
                     "parent_id": 2018,
-                    "include_sections": {
-                        "1": {
+                    "include_sections": [
+                        {
                             "id": 2033,
                             "filter": [
+                                {
+                                    "id": 666,
+                                    "code": "price",
+                                    "name": "Цена"
+                                },
                                 {
                                     "id": 708,
                                     "code": "brand",
@@ -3355,9 +3815,14 @@ export const categories = {
                             "img_big": null,
                             "parent_id": 2030
                         },
-                        "2": {
+                        {
                             "id": 2034,
                             "filter": [
+                                {
+                                    "id": 666,
+                                    "code": "price",
+                                    "name": "Цена"
+                                },
                                 {
                                     "id": 708,
                                     "code": "brand",
@@ -3403,11 +3868,16 @@ export const categories = {
                             "img_big": null,
                             "parent_id": 2030
                         }
-                    }
+                    ]
                 },
-                "10": {
+                {
                     "id": 2357,
                     "filter": [
+                        {
+                            "id": 666,
+                            "code": "price",
+                            "name": "Цена"
+                        },
                         {
                             "id": 708,
                             "code": "brand",
@@ -3447,10 +3917,15 @@ export const categories = {
                     "img_mini": null,
                     "img_big": null,
                     "parent_id": 2018,
-                    "include_sections": {
-                        "1": {
+                    "include_sections": [
+                        {
                             "id": 2395,
                             "filter": [
+                                {
+                                    "id": 666,
+                                    "code": "price",
+                                    "name": "Цена"
+                                },
                                 {
                                     "id": 708,
                                     "code": "brand",
@@ -3491,13 +3966,18 @@ export const categories = {
                             "img_big": "https://redharemarket.ru/upload/iblock/31c/nfpen41jt8capj1stzek37zbjivunqpo/estel_app.png",
                             "parent_id": 2357
                         }
-                    }
+                    ]
                 }
-            }
+            ]
         },
-        "8": {
+        {
             "id": 2039,
             "filter": [
+                {
+                    "id": 666,
+                    "code": "price",
+                    "name": "Цена"
+                },
                 {
                     "id": 708,
                     "code": "brand",
@@ -3522,10 +4002,15 @@ export const categories = {
             "img_mini": "https://redharemarket.ru/upload/iblock/5b3/xbnxr14ajq5lrtdlj0p9wcsrfv5klp5m/Ikonka_rascheski-_1_.png",
             "img_big": "https://redharemarket.ru/upload/iblock/855/ia2elbxn9dglww0uh4n3o48wzjkmywuh/Ikonka_Rascheski.png",
             "parent_id": null,
-            "include_sections": {
-                "1": {
+            "include_sections": [
+                {
                     "id": 2040,
                     "filter": [
+                        {
+                            "id": 666,
+                            "code": "price",
+                            "name": "Цена"
+                        },
                         {
                             "id": 708,
                             "code": "brand",
@@ -3566,9 +4051,14 @@ export const categories = {
                     "img_big": null,
                     "parent_id": 2039
                 },
-                "2": {
+                {
                     "id": 2041,
                     "filter": [
+                        {
+                            "id": 666,
+                            "code": "price",
+                            "name": "Цена"
+                        },
                         {
                             "id": 708,
                             "code": "brand",
@@ -3609,9 +4099,14 @@ export const categories = {
                     "img_big": null,
                     "parent_id": 2039
                 },
-                "3": {
+                {
                     "id": 2042,
                     "filter": [
+                        {
+                            "id": 666,
+                            "code": "price",
+                            "name": "Цена"
+                        },
                         {
                             "id": 708,
                             "code": "brand",
@@ -3637,9 +4132,14 @@ export const categories = {
                     "img_big": null,
                     "parent_id": 2039
                 },
-                "4": {
+                {
                     "id": 2043,
                     "filter": [
+                        {
+                            "id": 666,
+                            "code": "price",
+                            "name": "Цена"
+                        },
                         {
                             "id": 708,
                             "code": "brand",
@@ -3665,11 +4165,16 @@ export const categories = {
                     "img_big": null,
                     "parent_id": 2039
                 }
-            }
+            ]
         },
-        "9": {
+        {
             "id": 2044,
             "filter": [
+                {
+                    "id": 666,
+                    "code": "price",
+                    "name": "Цена"
+                },
                 {
                     "id": 708,
                     "code": "brand",
@@ -3694,10 +4199,15 @@ export const categories = {
             "img_mini": "https://redharemarket.ru/upload/iblock/c1c/kfgnbsg2nzjpg3omx5mm0zp4d5ikf10t/Ikonka_barberam.png",
             "img_big": "https://redharemarket.ru/upload/iblock/217/9wte4om2vrwl16gxxghlj4dml1qwga30/Ikonka_Dlya-barberov.png",
             "parent_id": null,
-            "include_sections": {
-                "1": {
+            "include_sections": [
+                {
                     "id": 2045,
                     "filter": [
+                        {
+                            "id": 666,
+                            "code": "price",
+                            "name": "Цена"
+                        },
                         {
                             "id": 708,
                             "code": "brand",
@@ -3727,10 +4237,15 @@ export const categories = {
                     "img_mini": null,
                     "img_big": null,
                     "parent_id": 2044,
-                    "include_sections": {
-                        "1": {
+                    "include_sections": [
+                        {
                             "id": 2046,
                             "filter": [
+                                {
+                                    "id": 666,
+                                    "code": "price",
+                                    "name": "Цена"
+                                },
                                 {
                                     "id": 708,
                                     "code": "brand",
@@ -3761,9 +4276,14 @@ export const categories = {
                             "img_big": null,
                             "parent_id": 2045
                         },
-                        "2": {
+                        {
                             "id": 2047,
                             "filter": [
+                                {
+                                    "id": 666,
+                                    "code": "price",
+                                    "name": "Цена"
+                                },
                                 {
                                     "id": 708,
                                     "code": "brand",
@@ -3794,9 +4314,14 @@ export const categories = {
                             "img_big": null,
                             "parent_id": 2045
                         },
-                        "3": {
+                        {
                             "id": 2048,
                             "filter": [
+                                {
+                                    "id": 666,
+                                    "code": "price",
+                                    "name": "Цена"
+                                },
                                 {
                                     "id": 708,
                                     "code": "brand",
@@ -3827,9 +4352,14 @@ export const categories = {
                             "img_big": null,
                             "parent_id": 2045
                         },
-                        "4": {
+                        {
                             "id": 2049,
                             "filter": [
+                                {
+                                    "id": 666,
+                                    "code": "price",
+                                    "name": "Цена"
+                                },
                                 {
                                     "id": 708,
                                     "code": "brand",
@@ -3860,9 +4390,14 @@ export const categories = {
                             "img_big": null,
                             "parent_id": 2045
                         },
-                        "5": {
+                        {
                             "id": 2050,
                             "filter": [
+                                {
+                                    "id": 666,
+                                    "code": "price",
+                                    "name": "Цена"
+                                },
                                 {
                                     "id": 708,
                                     "code": "brand",
@@ -3893,9 +4428,14 @@ export const categories = {
                             "img_big": null,
                             "parent_id": 2045
                         },
-                        "6": {
+                        {
                             "id": 2051,
                             "filter": [
+                                {
+                                    "id": 666,
+                                    "code": "price",
+                                    "name": "Цена"
+                                },
                                 {
                                     "id": 708,
                                     "code": "brand",
@@ -3926,9 +4466,14 @@ export const categories = {
                             "img_big": null,
                             "parent_id": 2045
                         },
-                        "7": {
+                        {
                             "id": 2052,
                             "filter": [
+                                {
+                                    "id": 666,
+                                    "code": "price",
+                                    "name": "Цена"
+                                },
                                 {
                                     "id": 708,
                                     "code": "brand",
@@ -3959,9 +4504,14 @@ export const categories = {
                             "img_big": null,
                             "parent_id": 2045
                         },
-                        "8": {
+                        {
                             "id": 2053,
                             "filter": [
+                                {
+                                    "id": 666,
+                                    "code": "price",
+                                    "name": "Цена"
+                                },
                                 {
                                     "id": 708,
                                     "code": "brand",
@@ -3992,9 +4542,14 @@ export const categories = {
                             "img_big": null,
                             "parent_id": 2045
                         },
-                        "9": {
+                        {
                             "id": 2054,
                             "filter": [
+                                {
+                                    "id": 666,
+                                    "code": "price",
+                                    "name": "Цена"
+                                },
                                 {
                                     "id": 708,
                                     "code": "brand",
@@ -4025,11 +4580,16 @@ export const categories = {
                             "img_big": null,
                             "parent_id": 2045
                         }
-                    }
+                    ]
                 },
-                "2": {
+                {
                     "id": 2055,
                     "filter": [
+                        {
+                            "id": 666,
+                            "code": "price",
+                            "name": "Цена"
+                        },
                         {
                             "id": 708,
                             "code": "brand",
@@ -4059,10 +4619,15 @@ export const categories = {
                     "img_mini": null,
                     "img_big": null,
                     "parent_id": 2044,
-                    "include_sections": {
-                        "1": {
+                    "include_sections": [
+                        {
                             "id": 2056,
                             "filter": [
+                                {
+                                    "id": 666,
+                                    "code": "price",
+                                    "name": "Цена"
+                                },
                                 {
                                     "id": 708,
                                     "code": "brand",
@@ -4093,9 +4658,14 @@ export const categories = {
                             "img_big": null,
                             "parent_id": 2055
                         },
-                        "2": {
+                        {
                             "id": 2057,
                             "filter": [
+                                {
+                                    "id": 666,
+                                    "code": "price",
+                                    "name": "Цена"
+                                },
                                 {
                                     "id": 708,
                                     "code": "brand",
@@ -4126,9 +4696,14 @@ export const categories = {
                             "img_big": null,
                             "parent_id": 2055
                         },
-                        "3": {
+                        {
                             "id": 2058,
                             "filter": [
+                                {
+                                    "id": 666,
+                                    "code": "price",
+                                    "name": "Цена"
+                                },
                                 {
                                     "id": 708,
                                     "code": "brand",
@@ -4159,9 +4734,14 @@ export const categories = {
                             "img_big": null,
                             "parent_id": 2055
                         },
-                        "4": {
+                        {
                             "id": 2059,
                             "filter": [
+                                {
+                                    "id": 666,
+                                    "code": "price",
+                                    "name": "Цена"
+                                },
                                 {
                                     "id": 708,
                                     "code": "brand",
@@ -4192,9 +4772,14 @@ export const categories = {
                             "img_big": null,
                             "parent_id": 2055
                         },
-                        "5": {
+                        {
                             "id": 2060,
                             "filter": [
+                                {
+                                    "id": 666,
+                                    "code": "price",
+                                    "name": "Цена"
+                                },
                                 {
                                     "id": 708,
                                     "code": "brand",
@@ -4225,9 +4810,14 @@ export const categories = {
                             "img_big": null,
                             "parent_id": 2055
                         },
-                        "6": {
+                        {
                             "id": 2121,
                             "filter": [
+                                {
+                                    "id": 666,
+                                    "code": "price",
+                                    "name": "Цена"
+                                },
                                 {
                                     "id": 708,
                                     "code": "brand",
@@ -4258,11 +4848,16 @@ export const categories = {
                             "img_big": null,
                             "parent_id": 2055
                         }
-                    }
+                    ]
                 },
-                "3": {
+                {
                     "id": 2061,
                     "filter": [
+                        {
+                            "id": 666,
+                            "code": "price",
+                            "name": "Цена"
+                        },
                         {
                             "id": 708,
                             "code": "brand",
@@ -4287,10 +4882,15 @@ export const categories = {
                     "img_mini": null,
                     "img_big": null,
                     "parent_id": 2044,
-                    "include_sections": {
-                        "1": {
+                    "include_sections": [
+                        {
                             "id": 2062,
                             "filter": [
+                                {
+                                    "id": 666,
+                                    "code": "price",
+                                    "name": "Цена"
+                                },
                                 {
                                     "id": 708,
                                     "code": "brand",
@@ -4316,9 +4916,14 @@ export const categories = {
                             "img_big": null,
                             "parent_id": 2061
                         },
-                        "2": {
+                        {
                             "id": 2063,
                             "filter": [
+                                {
+                                    "id": 666,
+                                    "code": "price",
+                                    "name": "Цена"
+                                },
                                 {
                                     "id": 708,
                                     "code": "brand",
@@ -4344,9 +4949,14 @@ export const categories = {
                             "img_big": null,
                             "parent_id": 2061
                         },
-                        "3": {
+                        {
                             "id": 2064,
                             "filter": [
+                                {
+                                    "id": 666,
+                                    "code": "price",
+                                    "name": "Цена"
+                                },
                                 {
                                     "id": 708,
                                     "code": "brand",
@@ -4372,9 +4982,14 @@ export const categories = {
                             "img_big": null,
                             "parent_id": 2061
                         },
-                        "4": {
+                        {
                             "id": 2065,
                             "filter": [
+                                {
+                                    "id": 666,
+                                    "code": "price",
+                                    "name": "Цена"
+                                },
                                 {
                                     "id": 708,
                                     "code": "brand",
@@ -4400,11 +5015,16 @@ export const categories = {
                             "img_big": null,
                             "parent_id": 2061
                         }
-                    }
+                    ]
                 },
-                "4": {
+                {
                     "id": 2067,
                     "filter": [
+                        {
+                            "id": 666,
+                            "code": "price",
+                            "name": "Цена"
+                        },
                         {
                             "id": 708,
                             "code": "brand",
@@ -4429,10 +5049,15 @@ export const categories = {
                     "img_mini": null,
                     "img_big": null,
                     "parent_id": 2044,
-                    "include_sections": {
-                        "1": {
+                    "include_sections": [
+                        {
                             "id": 2068,
                             "filter": [
+                                {
+                                    "id": 666,
+                                    "code": "price",
+                                    "name": "Цена"
+                                },
                                 {
                                     "id": 708,
                                     "code": "brand",
@@ -4463,9 +5088,14 @@ export const categories = {
                             "img_big": null,
                             "parent_id": 2067
                         },
-                        "2": {
+                        {
                             "id": 2072,
                             "filter": [
+                                {
+                                    "id": 666,
+                                    "code": "price",
+                                    "name": "Цена"
+                                },
                                 {
                                     "id": 708,
                                     "code": "brand",
@@ -4501,9 +5131,14 @@ export const categories = {
                             "img_big": null,
                             "parent_id": 2067
                         },
-                        "3": {
+                        {
                             "id": 2073,
                             "filter": [
+                                {
+                                    "id": 666,
+                                    "code": "price",
+                                    "name": "Цена"
+                                },
                                 {
                                     "id": 708,
                                     "code": "brand",
@@ -4529,9 +5164,14 @@ export const categories = {
                             "img_big": null,
                             "parent_id": 2067
                         },
-                        "4": {
+                        {
                             "id": 2074,
                             "filter": [
+                                {
+                                    "id": 666,
+                                    "code": "price",
+                                    "name": "Цена"
+                                },
                                 {
                                     "id": 708,
                                     "code": "brand",
@@ -4557,9 +5197,14 @@ export const categories = {
                             "img_big": null,
                             "parent_id": 2067
                         },
-                        "5": {
+                        {
                             "id": 2075,
                             "filter": [
+                                {
+                                    "id": 666,
+                                    "code": "price",
+                                    "name": "Цена"
+                                },
                                 {
                                     "id": 708,
                                     "code": "brand",
@@ -4585,9 +5230,14 @@ export const categories = {
                             "img_big": null,
                             "parent_id": 2067
                         },
-                        "6": {
+                        {
                             "id": 2076,
                             "filter": [
+                                {
+                                    "id": 666,
+                                    "code": "price",
+                                    "name": "Цена"
+                                },
                                 {
                                     "id": 708,
                                     "code": "brand",
@@ -4613,9 +5263,14 @@ export const categories = {
                             "img_big": null,
                             "parent_id": 2067
                         },
-                        "7": {
+                        {
                             "id": 2303,
                             "filter": [
+                                {
+                                    "id": 666,
+                                    "code": "price",
+                                    "name": "Цена"
+                                },
                                 {
                                     "id": 708,
                                     "code": "brand",
@@ -4641,11 +5296,16 @@ export const categories = {
                             "img_big": null,
                             "parent_id": 2067
                         }
-                    }
+                    ]
                 },
-                "5": {
+                {
                     "id": 2082,
                     "filter": [
+                        {
+                            "id": 666,
+                            "code": "price",
+                            "name": "Цена"
+                        },
                         {
                             "id": 708,
                             "code": "brand",
@@ -4675,10 +5335,15 @@ export const categories = {
                     "img_mini": null,
                     "img_big": null,
                     "parent_id": 2044,
-                    "include_sections": {
-                        "1": {
+                    "include_sections": [
+                        {
                             "id": 2083,
                             "filter": [
+                                {
+                                    "id": 666,
+                                    "code": "price",
+                                    "name": "Цена"
+                                },
                                 {
                                     "id": 708,
                                     "code": "brand",
@@ -4709,9 +5374,14 @@ export const categories = {
                             "img_big": null,
                             "parent_id": 2082
                         },
-                        "2": {
+                        {
                             "id": 2085,
                             "filter": [
+                                {
+                                    "id": 666,
+                                    "code": "price",
+                                    "name": "Цена"
+                                },
                                 {
                                     "id": 708,
                                     "code": "brand",
@@ -4747,11 +5417,16 @@ export const categories = {
                             "img_big": null,
                             "parent_id": 2082
                         }
-                    }
+                    ]
                 },
-                "6": {
+                {
                     "id": 2086,
                     "filter": [
+                        {
+                            "id": 666,
+                            "code": "price",
+                            "name": "Цена"
+                        },
                         {
                             "id": 708,
                             "code": "brand",
@@ -4776,10 +5451,15 @@ export const categories = {
                     "img_mini": null,
                     "img_big": null,
                     "parent_id": 2044,
-                    "include_sections": {
-                        "1": {
+                    "include_sections": [
+                        {
                             "id": 2087,
                             "filter": [
+                                {
+                                    "id": 666,
+                                    "code": "price",
+                                    "name": "Цена"
+                                },
                                 {
                                     "id": 708,
                                     "code": "brand",
@@ -4830,9 +5510,14 @@ export const categories = {
                             "img_big": null,
                             "parent_id": 2086
                         },
-                        "2": {
+                        {
                             "id": 2088,
                             "filter": [
+                                {
+                                    "id": 666,
+                                    "code": "price",
+                                    "name": "Цена"
+                                },
                                 {
                                     "id": 708,
                                     "code": "brand",
@@ -4858,9 +5543,14 @@ export const categories = {
                             "img_big": null,
                             "parent_id": 2086
                         },
-                        "3": {
+                        {
                             "id": 2089,
                             "filter": [
+                                {
+                                    "id": 666,
+                                    "code": "price",
+                                    "name": "Цена"
+                                },
                                 {
                                     "id": 708,
                                     "code": "brand",
@@ -4891,9 +5581,14 @@ export const categories = {
                             "img_big": null,
                             "parent_id": 2086
                         },
-                        "4": {
+                        {
                             "id": 2090,
                             "filter": [
+                                {
+                                    "id": 666,
+                                    "code": "price",
+                                    "name": "Цена"
+                                },
                                 {
                                     "id": 708,
                                     "code": "brand",
@@ -4919,11 +5614,16 @@ export const categories = {
                             "img_big": null,
                             "parent_id": 2086
                         }
-                    }
+                    ]
                 },
-                "7": {
+                {
                     "id": 2092,
                     "filter": [
+                        {
+                            "id": 666,
+                            "code": "price",
+                            "name": "Цена"
+                        },
                         {
                             "id": 708,
                             "code": "brand",
@@ -4948,10 +5648,15 @@ export const categories = {
                     "img_mini": null,
                     "img_big": null,
                     "parent_id": 2044,
-                    "include_sections": {
-                        "1": {
+                    "include_sections": [
+                        {
                             "id": 2093,
                             "filter": [
+                                {
+                                    "id": 666,
+                                    "code": "price",
+                                    "name": "Цена"
+                                },
                                 {
                                     "id": 708,
                                     "code": "brand",
@@ -4987,11 +5692,16 @@ export const categories = {
                             "img_big": null,
                             "parent_id": 2092
                         }
-                    }
+                    ]
                 },
-                "8": {
+                {
                     "id": 2095,
                     "filter": [
+                        {
+                            "id": 666,
+                            "code": "price",
+                            "name": "Цена"
+                        },
                         {
                             "id": 708,
                             "code": "brand",
@@ -5016,10 +5726,15 @@ export const categories = {
                     "img_mini": null,
                     "img_big": null,
                     "parent_id": 2044,
-                    "include_sections": {
-                        "1": {
+                    "include_sections": [
+                        {
                             "id": 2297,
                             "filter": [
+                                {
+                                    "id": 666,
+                                    "code": "price",
+                                    "name": "Цена"
+                                },
                                 {
                                     "id": 708,
                                     "code": "brand",
@@ -5055,9 +5770,14 @@ export const categories = {
                             "img_big": null,
                             "parent_id": 2095
                         },
-                        "2": {
+                        {
                             "id": 2298,
                             "filter": [
+                                {
+                                    "id": 666,
+                                    "code": "price",
+                                    "name": "Цена"
+                                },
                                 {
                                     "id": 708,
                                     "code": "brand",
@@ -5093,9 +5813,14 @@ export const categories = {
                             "img_big": null,
                             "parent_id": 2095
                         },
-                        "3": {
+                        {
                             "id": 2302,
                             "filter": [
+                                {
+                                    "id": 666,
+                                    "code": "price",
+                                    "name": "Цена"
+                                },
                                 {
                                     "id": 708,
                                     "code": "brand",
@@ -5121,11 +5846,16 @@ export const categories = {
                             "img_big": null,
                             "parent_id": 2095
                         }
-                    }
+                    ]
                 },
-                "9": {
+                {
                     "id": 2101,
                     "filter": [
+                        {
+                            "id": 666,
+                            "code": "price",
+                            "name": "Цена"
+                        },
                         {
                             "id": 708,
                             "code": "brand",
@@ -5160,10 +5890,15 @@ export const categories = {
                     "img_mini": null,
                     "img_big": null,
                     "parent_id": 2044,
-                    "include_sections": {
-                        "1": {
+                    "include_sections": [
+                        {
                             "id": 2102,
                             "filter": [
+                                {
+                                    "id": 666,
+                                    "code": "price",
+                                    "name": "Цена"
+                                },
                                 {
                                     "id": 708,
                                     "code": "brand",
@@ -5214,9 +5949,14 @@ export const categories = {
                             "img_big": null,
                             "parent_id": 2101
                         },
-                        "2": {
+                        {
                             "id": 2103,
                             "filter": [
+                                {
+                                    "id": 666,
+                                    "code": "price",
+                                    "name": "Цена"
+                                },
                                 {
                                     "id": 708,
                                     "code": "brand",
@@ -5267,9 +6007,14 @@ export const categories = {
                             "img_big": null,
                             "parent_id": 2101
                         },
-                        "3": {
+                        {
                             "id": 2104,
                             "filter": [
+                                {
+                                    "id": 666,
+                                    "code": "price",
+                                    "name": "Цена"
+                                },
                                 {
                                     "id": 708,
                                     "code": "brand",
@@ -5305,9 +6050,14 @@ export const categories = {
                             "img_big": null,
                             "parent_id": 2101
                         },
-                        "4": {
+                        {
                             "id": 2105,
                             "filter": [
+                                {
+                                    "id": 666,
+                                    "code": "price",
+                                    "name": "Цена"
+                                },
                                 {
                                     "id": 708,
                                     "code": "brand",
@@ -5343,9 +6093,14 @@ export const categories = {
                             "img_big": null,
                             "parent_id": 2101
                         },
-                        "5": {
+                        {
                             "id": 2106,
                             "filter": [
+                                {
+                                    "id": 666,
+                                    "code": "price",
+                                    "name": "Цена"
+                                },
                                 {
                                     "id": 708,
                                     "code": "brand",
@@ -5381,9 +6136,14 @@ export const categories = {
                             "img_big": null,
                             "parent_id": 2101
                         },
-                        "6": {
+                        {
                             "id": 2107,
                             "filter": [
+                                {
+                                    "id": 666,
+                                    "code": "price",
+                                    "name": "Цена"
+                                },
                                 {
                                     "id": 708,
                                     "code": "brand",
@@ -5419,11 +6179,16 @@ export const categories = {
                             "img_big": null,
                             "parent_id": 2101
                         }
-                    }
+                    ]
                 },
-                "10": {
+                {
                     "id": 2108,
                     "filter": [
+                        {
+                            "id": 666,
+                            "code": "price",
+                            "name": "Цена"
+                        },
                         {
                             "id": 708,
                             "code": "brand",
@@ -5449,11 +6214,16 @@ export const categories = {
                     "img_big": null,
                     "parent_id": 2044
                 }
-            }
+            ]
         },
-        "10": {
+        {
             "id": 2109,
             "filter": [
+                {
+                    "id": 666,
+                    "code": "price",
+                    "name": "Цена"
+                },
                 {
                     "id": 708,
                     "code": "brand",
@@ -5489,9 +6259,14 @@ export const categories = {
             "img_big": "https://redharemarket.ru/upload/iblock/7c1/g2icd74o2dqizvozq9llgbkz30sgbgqh/Ikonka_Fartuki.png",
             "parent_id": null
         },
-        "11": {
+        {
             "id": 2110,
             "filter": [
+                {
+                    "id": 666,
+                    "code": "price",
+                    "name": "Цена"
+                },
                 {
                     "id": 708,
                     "code": "brand",
@@ -5516,10 +6291,15 @@ export const categories = {
             "img_mini": "https://redharemarket.ru/upload/iblock/aee/674ubz9zqvb7xysou04jhzhrrhsby64y/Ikonka_interer-_1_.png",
             "img_big": "https://redharemarket.ru/upload/iblock/9e8/ov8dslnux16ze4vjd8msftxzw84kv2am/Ikonka_Interer.png",
             "parent_id": null,
-            "include_sections": {
-                "1": {
+            "include_sections": [
+                {
                     "id": 2111,
                     "filter": [
+                        {
+                            "id": 666,
+                            "code": "price",
+                            "name": "Цена"
+                        },
                         {
                             "id": 708,
                             "code": "brand",
@@ -5545,9 +6325,14 @@ export const categories = {
                     "img_big": null,
                     "parent_id": 2110
                 },
-                "2": {
+                {
                     "id": 2112,
                     "filter": [
+                        {
+                            "id": 666,
+                            "code": "price",
+                            "name": "Цена"
+                        },
                         {
                             "id": 708,
                             "code": "brand",
@@ -5573,11 +6358,16 @@ export const categories = {
                     "img_big": null,
                     "parent_id": 2110
                 }
-            }
+            ]
         },
-        "12": {
+        {
             "id": 2113,
             "filter": [
+                {
+                    "id": 666,
+                    "code": "price",
+                    "name": "Цена"
+                },
                 {
                     "id": 708,
                     "code": "brand",
@@ -5602,10 +6392,15 @@ export const categories = {
             "img_mini": "https://redharemarket.ru/upload/iblock/da4/mogftbyb19ud1nt85xsqdvr1ln43gsjx/Ikonka_obuchenie-_1_.png",
             "img_big": "https://redharemarket.ru/upload/iblock/81f/7j57m5tklc21lh96zvt10ynj9greth2h/Ikonka_Obuchenie.png",
             "parent_id": null,
-            "include_sections": {
-                "1": {
+            "include_sections": [
+                {
                     "id": 2114,
                     "filter": [
+                        {
+                            "id": 666,
+                            "code": "price",
+                            "name": "Цена"
+                        },
                         {
                             "id": 708,
                             "code": "brand",
@@ -5631,9 +6426,14 @@ export const categories = {
                     "img_big": null,
                     "parent_id": 2113
                 },
-                "2": {
+                {
                     "id": 2116,
                     "filter": [
+                        {
+                            "id": 666,
+                            "code": "price",
+                            "name": "Цена"
+                        },
                         {
                             "id": 708,
                             "code": "brand",
@@ -5659,11 +6459,16 @@ export const categories = {
                     "img_big": null,
                     "parent_id": 2113
                 }
-            }
+            ]
         },
-        "13": {
+        {
             "id": 2117,
             "filter": [
+                {
+                    "id": 666,
+                    "code": "price",
+                    "name": "Цена"
+                },
                 {
                     "id": 708,
                     "code": "brand",
@@ -5688,10 +6493,15 @@ export const categories = {
             "img_mini": "https://redharemarket.ru/upload/iblock/af0/6dxaso3e4v9pkei8cprz3jlyklngol2t/Ikonka_gigiena-_1_.png",
             "img_big": "https://redharemarket.ru/upload/iblock/d56/9xk4otviak3hfseamll3bardtu17d1l0/Ikonka_Gigiena.png",
             "parent_id": null,
-            "include_sections": {
-                "1": {
+            "include_sections": [
+                {
                     "id": 2118,
                     "filter": [
+                        {
+                            "id": 666,
+                            "code": "price",
+                            "name": "Цена"
+                        },
                         {
                             "id": 708,
                             "code": "brand",
@@ -5717,9 +6527,14 @@ export const categories = {
                     "img_big": null,
                     "parent_id": 2117
                 },
-                "2": {
+                {
                     "id": 2119,
                     "filter": [
+                        {
+                            "id": 666,
+                            "code": "price",
+                            "name": "Цена"
+                        },
                         {
                             "id": 708,
                             "code": "brand",
@@ -5745,7 +6560,681 @@ export const categories = {
                     "img_big": null,
                     "parent_id": 2117
                 }
-            }
+            ]
         }
-    }
+    ]
+}
+
+export const brands = {
+    "success": true,
+    "data": [
+        {
+            "id": 2117,
+            "filter": [
+                {
+                    "id": 666,
+                    "code": "price",
+                    "name": "Цена"
+                },
+                {
+                    "id": 981,
+                    "code": "vid",
+                    "name": "Вид товара"
+                },
+                {
+                    "id": 751,
+                    "code": "proizvodstvo",
+                    "name": "Производство"
+                }
+            ],
+            "coloristic": null,
+            "logo": "/images/brands/logos/image-1.png",
+            "url": "https://redharemarket.ru/catalog/ds/",
+            "name": "DS",
+            "description": "Финская косметика для волос без отдушек",
+            "depth_level": 1,
+            "img_mini": "/images/brands/overlays/image-1.jpg",
+            "img_big": "/images/brands/overlays/image-1.jpg",
+            "theme": "light",
+            "parent_id": null,
+            "include_sections": [
+                {
+                    "id": 9997,
+                    "filter": [
+                        {
+                            "id": 666,
+                            "code": "price",
+                            "name": "Цена"
+                        },
+                        {
+                            "id": 981,
+                            "code": "vid",
+                            "name": "Вид товара"
+                        },
+                        {
+                            "id": 751,
+                            "code": "proizvodstvo",
+                            "name": "Производство"
+                        }
+                    ],
+                    "coloristic": null,
+                    "logo": "",
+                    "url": "https://redharemarket.ru/catalog/ds-balzam/",
+                    "name": "Бальзам",
+                    "depth_level": 2,
+                    "img_mini": null,
+                    "img_big": null,
+                    "parent_id": 2117
+                },
+                {
+                    "id": 9998,
+                    "filter": [
+                        {
+                            "id": 666,
+                            "code": "price",
+                            "name": "Цена"
+                        },
+                        {
+                            "id": 981,
+                            "code": "vid",
+                            "name": "Вид товара"
+                        },
+                        {
+                            "id": 751,
+                            "code": "proizvodstvo",
+                            "name": "Производство"
+                        }
+                    ],
+                    "coloristic": null,
+                    "logo": "",
+                    "url": "https://redharemarket.ru/catalog/ds-vosk/",
+                    "name": "Воск",
+                    "depth_level": 2,
+                    "img_mini": null,
+                    "img_big": null,
+                    "parent_id": 2117
+                },
+                {
+                    "id": 9999,
+                    "filter": [
+                        {
+                            "id": 666,
+                            "code": "price",
+                            "name": "Цена"
+                        },
+                        {
+                            "id": 981,
+                            "code": "vid",
+                            "name": "Вид товара"
+                        },
+                        {
+                            "id": 751,
+                            "code": "proizvodstvo",
+                            "name": "Производство"
+                        }
+                    ],
+                    "coloristic": null,
+                    "logo": "",
+                    "url": "https://redharemarket.ru/catalog/ds-konditioner/",
+                    "name": "Кондиционер",
+                    "depth_level": 2,
+                    "img_mini": null,
+                    "img_big": null,
+                    "parent_id": 2117
+                }
+            ]
+        },
+        {
+            "id": 1932,
+            "filter": [
+                {
+                    "id": 666,
+                    "code": "price",
+                    "name": "Цена"
+                },
+                {
+                    "id": 981,
+                    "code": "vid",
+                    "name": "Вид товара"
+                },
+                {
+                    "id": 751,
+                    "code": "proizvodstvo",
+                    "name": "Производство"
+                }
+            ],
+            "coloristic": null,
+            "logo": "/images/brands/logos/image-1.png",
+            "url": "https://redharemarket.ru/catalog/lock-stock-barrel/",
+            "name": "Lock Stock & Barrel",
+            "description": "Мужская косметика для волос",
+            "depth_level": 1,
+            "img_mini": "/images/brands/overlays/image-2.jpg",
+            "img_big": "/images/brands/overlays/image-2.jpg",
+            "theme": "dark",
+            "parent_id": null,
+            "include_sections": [
+                {
+                    "id": 2118,
+                    "filter": [
+                        {
+                            "id": 666,
+                            "code": "price",
+                            "name": "Цена"
+                        },
+                        {
+                            "id": 981,
+                            "code": "vid",
+                            "name": "Вид товара"
+                        },
+                        {
+                            "id": 751,
+                            "code": "proizvodstvo",
+                            "name": "Производство"
+                        }
+                    ],
+                    "coloristic": null,
+                    "logo": "",
+                    "url": "https://redharemarket.ru/catalog/lsb-balzam/",
+                    "name": "Бальзам",
+                    "depth_level": 2,
+                    "img_mini": null,
+                    "img_big": null,
+                    "parent_id": 1932
+                },
+                {
+                    "id": 2119,
+                    "filter": [
+                        {
+                            "id": 666,
+                            "code": "price",
+                            "name": "Цена"
+                        },
+                        {
+                            "id": 981,
+                            "code": "vid",
+                            "name": "Вид товара"
+                        },
+                        {
+                            "id": 751,
+                            "code": "proizvodstvo",
+                            "name": "Производство"
+                        }
+                    ],
+                    "coloristic": null,
+                    "logo": "",
+                    "url": "https://redharemarket.ru/catalog/lsb-vosk/",
+                    "name": "Воск",
+                    "depth_level": 2,
+                    "img_mini": null,
+                    "img_big": null,
+                    "parent_id": 1932
+                },
+                {
+                    "id": 2120,
+                    "filter": [
+                        {
+                            "id": 666,
+                            "code": "price",
+                            "name": "Цена"
+                        },
+                        {
+                            "id": 981,
+                            "code": "vid",
+                            "name": "Вид товара"
+                        },
+                        {
+                            "id": 751,
+                            "code": "proizvodstvo",
+                            "name": "Производство"
+                        }
+                    ],
+                    "coloristic": null,
+                    "logo": "",
+                    "url": "https://redharemarket.ru/catalog/lsb-konditioner/",
+                    "name": "Кондиционер",
+                    "depth_level": 2,
+                    "img_mini": null,
+                    "img_big": null,
+                    "parent_id": 1932
+                }
+            ]
+        },
+        {
+            "id": 1938,
+            "filter": [
+                {
+                    "id": 666,
+                    "code": "price",
+                    "name": "Цена"
+                },
+                {
+                    "id": 751,
+                    "code": "proizvodstvo",
+                    "name": "Производство"
+                },
+                {
+                    "id": 753,
+                    "code": "color",
+                    "name": "Цвет"
+                }
+            ],
+            "coloristic": null,
+            "logo": "/images/brands/logos/image-1.png",
+            "url": "https://redharemarket.ru/catalog/Mr-Natty/",
+            "name": "Mr. Natty",
+            "description": "Мужская косметика для волос",
+            "depth_level": 1,
+            "img_mini": "",
+            "img_big": "",
+            "parent_id": null,
+            "include_sections": [
+                {
+                    "id": 2118,
+                    "filter": [
+                        {
+                            "id": 666,
+                            "code": "price",
+                            "name": "Цена"
+                        },
+                        {
+                            "id": 981,
+                            "code": "vid",
+                            "name": "Вид товара"
+                        },
+                        {
+                            "id": 751,
+                            "code": "proizvodstvo",
+                            "name": "Производство"
+                        }
+                    ],
+                    "coloristic": null,
+                    "logo": "",
+                    "url": "https://redharemarket.ru/catalog/mr-natty-balzam/",
+                    "name": "Бальзам",
+                    "depth_level": 2,
+                    "img_mini": null,
+                    "img_big": null,
+                    "parent_id": 1938
+                },
+                {
+                    "id": 2119,
+                    "filter": [
+                        {
+                            "id": 666,
+                            "code": "price",
+                            "name": "Цена"
+                        },
+                        {
+                            "id": 981,
+                            "code": "vid",
+                            "name": "Вид товара"
+                        },
+                        {
+                            "id": 751,
+                            "code": "proizvodstvo",
+                            "name": "Производство"
+                        }
+                    ],
+                    "coloristic": null,
+                    "logo": "",
+                    "url": "https://redharemarket.ru/catalog/mr-natty-vosk/",
+                    "name": "Воск",
+                    "depth_level": 2,
+                    "img_mini": null,
+                    "img_big": null,
+                    "parent_id": 1938
+                },
+                {
+                    "id": 2120,
+                    "filter": [
+                        {
+                            "id": 666,
+                            "code": "price",
+                            "name": "Цена"
+                        },
+                        {
+                            "id": 981,
+                            "code": "vid",
+                            "name": "Вид товара"
+                        },
+                        {
+                            "id": 751,
+                            "code": "proizvodstvo",
+                            "name": "Производство"
+                        }
+                    ],
+                    "coloristic": null,
+                    "logo": "",
+                    "url": "https://redharemarket.ru/catalog/mr-natty-konditioner/",
+                    "name": "Кондиционер",
+                    "depth_level": 2,
+                    "img_mini": null,
+                    "img_big": null,
+                    "parent_id": 1938
+                }
+            ]
+        },
+        {
+            "id": 1944,
+            "filter": [
+                {
+                    "id": 666,
+                    "code": "price",
+                    "name": "Цена"
+                },
+                {
+                    "id": 981,
+                    "code": "vid",
+                    "name": "Вид товара"
+                },
+                {
+                    "id": 751,
+                    "code": "proizvodstvo",
+                    "name": "Производство"
+                },
+                {
+                    "id": 753,
+                    "code": "color",
+                    "name": "Цвет"
+                }
+            ],
+            "coloristic": null,
+            "logo": "",
+            "url": "https://redharemarket.ru/catalog/Beardbyrus/",
+            "name": "Beardbyrus",
+            "depth_level": 1,
+            "description": "Мужская косметика для волос",
+            "depth_level": 1,
+            "img_mini": "",
+            "img_big": "",
+            "parent_id": null,
+        },
+        {
+            "id": 1950,
+            "filter": [
+                {
+                    "id": 666,
+                    "code": "price",
+                    "name": "Цена"
+                },
+                {
+                    "id": 981,
+                    "code": "vid",
+                    "name": "Вид товара"
+                },
+                {
+                    "id": 751,
+                    "code": "proizvodstvo",
+                    "name": "Производство"
+                }
+            ],
+            "coloristic": null,
+            "logo": "",
+            "url": "https://redharemarket.ru/catalog/Oster/",
+            "name": "Oster",
+            "depth_level": 1,
+            "description": "Мужская косметика для волос",
+            "depth_level": 1,
+            "img_mini": "",
+            "img_big": "",
+            "parent_id": null,
+        },
+        {
+            "id": 1979,
+            "filter": [
+                {
+                    "id": 666,
+                    "code": "price",
+                    "name": "Цена"
+                },
+                {
+                    "id": 981,
+                    "code": "vid",
+                    "name": "Вид товара"
+                },
+                {
+                    "id": 751,
+                    "code": "proizvodstvo",
+                    "name": "Производство"
+                }
+            ],
+            "coloristic": null,
+            "logo": "",
+            "url": "https://redharemarket.ru/catalog/Canway/",
+            "name": "Canway",
+            "depth_level": 1,
+            "description": "Мужская косметика для волос",
+            "depth_level": 1,
+            "img_mini": "",
+            "img_big": "",
+            "parent_id": null,
+        },
+        {
+            "id": 2010,
+            "filter": [
+                {
+                    "id": 666,
+                    "code": "price",
+                    "name": "Цена"
+                },
+                {
+                    "id": 981,
+                    "code": "vid",
+                    "name": "Вид товара"
+                },
+                {
+                    "id": 751,
+                    "code": "proizvodstvo",
+                    "name": "Производство"
+                }
+            ],
+            "coloristic": null,
+            "logo": "",
+            "url": "https://redharemarket.ru/catalog/Denman/",
+            "name": "Denman",
+            "depth_level": 1,
+            "description": "Мужская косметика для волос",
+            "depth_level": 1,
+            "img_mini": "",
+            "img_big": "",
+            "parent_id": null
+        },
+        {
+            "id": 2018,
+            "filter": [
+                {
+                    "id": 666,
+                    "code": "price",
+                    "name": "Цена"
+                },
+                {
+                    "id": 981,
+                    "code": "vid",
+                    "name": "Вид товара"
+                },
+                {
+                    "id": 751,
+                    "code": "proizvodstvo",
+                    "name": "Производство"
+                },
+                {
+                    "id": 1240,
+                    "code": "color_number",
+                    "name": "Уровень тона"
+                },
+                {
+                    "id": 1241,
+                    "code": "product_type",
+                    "name": "Тип продукта"
+                },
+            ],
+            "coloristic": null,
+            "logo": "",
+            "url": "https://redharemarket.ru/catalog/Eurosteel/",
+            "name": "Eurosteel",
+            "description": "Мужская косметика для волос",
+            "depth_level": 1,
+            "img_mini": "",
+            "img_big": "",
+            "parent_id": null,
+        },
+        {
+            "id": 2039,
+            "filter": [
+                {
+                    "id": 666,
+                    "code": "price",
+                    "name": "Цена"
+                },
+                {
+                    "id": 981,
+                    "code": "vid",
+                    "name": "Вид товара"
+                },
+                {
+                    "id": 751,
+                    "code": "proizvodstvo",
+                    "name": "Производство"
+                }
+            ],
+            "coloristic": null,
+            "logo": "",
+            "url": "https://redharemarket.ru/catalog/Feather/",
+            "name": "Feather",
+            "description": "Мужская косметика для волос",
+            "depth_level": 1,
+            "img_mini": "",
+            "img_big": "",
+            "parent_id": null,
+        },
+        {
+            "id": 2044,
+            "filter": [
+                {
+                    "id": 666,
+                    "code": "price",
+                    "name": "Цена"
+                },
+                {
+                    "id": 981,
+                    "code": "vid",
+                    "name": "Вид товара"
+                },
+                {
+                    "id": 751,
+                    "code": "proizvodstvo",
+                    "name": "Производство"
+                }
+            ],
+            "coloristic": null,
+            "logo": "",
+            "url": "https://redharemarket.ru/catalog/Gamma Piu/",
+            "name": "Gamma Piu",
+            "description": "Мужская косметика для волос",
+            "depth_level": 1,
+            "img_mini": "",
+            "img_big": "",
+            "parent_id": null,
+        },
+        {
+            "id": 2109,
+            "filter": [
+                {
+                    "id": 666,
+                    "code": "price",
+                    "name": "Цена"
+                },
+                {
+                    "id": 710,
+                    "code": "size",
+                    "name": "Размер"
+                },
+                {
+                    "id": 981,
+                    "code": "vid",
+                    "name": "Вид товара"
+                },
+                {
+                    "id": 751,
+                    "code": "proizvodstvo",
+                    "name": "Производство"
+                },
+                {
+                    "id": 753,
+                    "code": "color",
+                    "name": "Цвет"
+                }
+            ],
+            "coloristic": null,
+            "logo": "",
+            "url": "https://redharemarket.ru/catalog/Hairbrained-Pro/",
+            "name": "Hairbrained Pro",
+            "description": "Мужская косметика для волос",
+            "depth_level": 1,
+            "img_mini": "",
+            "img_big": "",
+            "parent_id": null
+        },
+        {
+            "id": 2110,
+            "filter": [
+                {
+                    "id": 666,
+                    "code": "price",
+                    "name": "Цена"
+                },
+                {
+                    "id": 981,
+                    "code": "vid",
+                    "name": "Вид товара"
+                },
+                {
+                    "id": 751,
+                    "code": "proizvodstvo",
+                    "name": "Производство"
+                }
+            ],
+            "coloristic": null,
+            "logo": "",
+            "url": "https://redharemarket.ru/catalog/Sensido/",
+            "name": "Sensido",
+            "depth_level": 1,
+            "description": "Мужская косметика для волос",
+            "depth_level": 1,
+            "img_mini": "",
+            "img_big": "",
+            "parent_id": null,
+        },
+        {
+            "id": 2113,
+            "filter": [
+                {
+                    "id": 666,
+                    "code": "price",
+                    "name": "Цена"
+                },
+                {
+                    "id": 981,
+                    "code": "vid",
+                    "name": "Вид товара"
+                },
+                {
+                    "id": 751,
+                    "code": "proizvodstvo",
+                    "name": "Производство"
+                }
+            ],
+            "coloristic": null,
+            "logo": "",
+            "url": "https://redharemarket.ru/catalog/System-4/",
+            "name": "System 4",
+            "depth_level": 1,
+            "description": "Мужская косметика для волос",
+            "depth_level": 1,
+            "img_mini": "",
+            "img_big": "",
+            "parent_id": null,
+        },
+    ]
 }

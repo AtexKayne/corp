@@ -2,7 +2,7 @@ import Link from 'next/link';
 import { useState, useEffect, useRef } from 'react'
 import style from '../styles/module/Breadcrumbs.module.scss'
 
-export default function Breadcrumbs({ link }) {
+export default function Breadcrumbs({ link, theme }) {
     const refBreadcrumbs = useRef(null)
     const refInner = useRef(null)
 
@@ -21,8 +21,8 @@ export default function Breadcrumbs({ link }) {
 
 
     return (
-        <div ref={refBreadcrumbs} className={`${style.breadcrumbs} text--p5 text--color-small`}>
-            <div ref={refInner} className={style.inner}>
+        <div ref={refBreadcrumbs} className={`${style.breadcrumbs} ${theme === 'dark' ? 'ui-dark' : ''} text--p5 text--color-small`}>
+            <div ref={refInner} data-theme={theme === 'dark' ? 'ui-dark' : 'ui-light'} className={style.inner}>
                 <Link href='/'>
                     <span>Главная</span>
                 </Link>

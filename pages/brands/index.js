@@ -8,18 +8,20 @@ import Icon from '../../components/Icon'
 import MainLayout from '../../layout/MainLayout'
 import Breadcrumbs from '../../components/Breadcrumbs'
 import Sticky from '../../components/usefull/Sticky'
+import { globalState } from '../../components/helpers/globalState'
 
 
 export default function Brands({ detail }) {
     const refSearchedChildren = useRef(null)
     const [searchValue, setSearchValue] = useState(false)
-    const [isEmpty, setIsEmpty] = useState(false)
+    const [isEmpty, setIsEmpty] = useState(true)
+    const [stickyOffset, setStickyOffset] = useState(100)
     const refInput = useRef(null)
     const refItems = useRef(null)
 
     const clickSearchHandler = () => {
         refInput.current.focus()
-        window.scrollTo({ top: 0, left: 0 })
+        window.scrollTo({ top: 0, left: 0, behavior: 'smooth' })
     }
 
     const searchHandler = event => {
@@ -59,7 +61,16 @@ export default function Brands({ detail }) {
         setIsEmpty(!!itemCount)
     }
 
+    const navHandler = event => {
+        event.preventDefault()
+        const id  = event.target.getAttribute('href')
+        const element = document.querySelector(id)
+        const topOffset = element.getBoundingClientRect().top + window.scrollY - (stickyOffset + 80)
+        window.scrollTo({ top: topOffset, left: 0, behavior: 'smooth' })
+    }
+
     useEffect(() => {
+        setStickyOffset(window.innerWidth >= globalState.sizes.lg ? 100 : 50)
         refItems.current = refSearchedChildren.current.querySelectorAll(`.${style.brand}`)
     }, [])
 
@@ -67,9 +78,9 @@ export default function Brands({ detail }) {
     return (
         <MainLayout title={`Бренды`}>
             <Breadcrumbs link='Бренды' />
-            <h1 className='text--h4 mb-5'>Бренды</h1>
+            <h1 className='text--h4 mb-3 mb-5:lg'>Бренды</h1>
 
-            <Sticky external={style.brandSearch} fixed={style.brandSearchFixed} offset={120}>
+            <Sticky external={style.brandSearch} fixed={style.brandSearchFixed} offset={stickyOffset}>
                 <div className={`${style.search}`}>
                     <label className='input-search'>
                         <input ref={refInput} onChange={searchHandler} type='text' className='input' placeholder='Поиск по брендам' />
@@ -79,7 +90,11 @@ export default function Brands({ detail }) {
                 <div data-value={searchValue} className={style.brandLetters}>
                     {detail && detail.length
                         ? detail.map(item => (
-                            <a key={item.letter} href={`#${item.letter}`} className='text--t3 text--bold'>{item.letter}</a>
+                            <a 
+                                onClick={navHandler}
+                                key={item.letter}
+                                href={`#${item.letter === '0-9' ? 'num' : item.letter}`}
+                                className='text--t3 text--bold'>{item.letter}</a>
                         )) : null
                     }
 
@@ -105,11 +120,13 @@ export default function Brands({ detail }) {
 
 function BrandLine({ letter, brands }) {
     return (
-        <section id={letter} className={style.brandsLine}>
+        <section id={letter === '0-9' ? 'num' : letter} className={style.brandsLine}>
             <div className={`${style.letter} text--p1 text--bold`}>{letter}</div>
             {brands && brands.length
                 ? brands.map(brand => (
-                    <div key={brand.name} className={`${style.brand} text--t4 text--normal`}>{brand.name}</div>
+                    <Link key={brand.name} href={`/brands/${brand.code}`}>
+                        <a href={`/brands/${brand.code}`} className={`${style.brand} text--t4 text--normal`}>{brand.name}</a>
+                    </Link>
                 )) : null
             }
         </section>

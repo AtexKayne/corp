@@ -3,8 +3,8 @@
 @import '../extends/_text-sizes';
 
 .header {
+    z-index: 2;
     width: 100%;
-    z-index: 1;
     // overflow: hidden;
     position: relative;
     padding: adaptive-value((
@@ -112,7 +112,8 @@
     overflow: hidden;
     position: absolute;
     justify-content: center;
-    background-color: var(--t-background);
+    transition: .0s background-color .3s;
+    
     top: adaptive-value((
         xs: 0,
         lg: 40px,
@@ -129,6 +130,11 @@
         xxl: 20px 72px,
         xxxl: 20px 0,
     ));
+
+    &[data-active='true'] {
+        transition-delay: 0s;
+        background-color: var(--c-_white);
+    }
 
     @include media-breakpoint(md-down) {
         &[data-active='true'] {

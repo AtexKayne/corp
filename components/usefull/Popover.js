@@ -16,10 +16,11 @@ export default function Popover() {
     const refTextSecondary = useRef('')
 
     const getLayout = () => {
-        let layout = `
-            <div class="${style.popoverImage}">
+        let layout = !refImage.current
+            ? '' : `<div class="${style.popoverImage}">
                 <img src="${refImage.current}" width='50' height='50' alt='' />
-            </div>
+            </div>`
+        layout += `
             <div class="${style.popoverText}">
                 <div class="text--p5 mb-0.6">${refTextPrimary.current}</div>
                 <div class="text--p7 text--color-smallest text--upper text--bold">${refTextSecondary.current}</div>
