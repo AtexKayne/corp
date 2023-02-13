@@ -240,7 +240,7 @@ function Head({ toggleSidebar, isSidebarHidden, categoryName, titleOpacity, isBr
 
                         <div className={`${style.head} mb-0.5:md mb-0.6:xl mb-1.5:xxxl`}>
                             <div data-shown={!isSidebarHidden} data-opacity={titleOpacity} className={`${style.title}`}>
-                                <h1 onClick={toggleSidebar} className={`text--a2 text--bold`}>{categoryName}</h1>
+                                <h1 onClick={toggleSidebar} className={`text--a2 text--bold is-decorative`}>{categoryName}</h1>
                                 <Icon name='dropdown' external={`${style.titleArrow} ${isBrands ? 'is-hidden' : ''}`} width='20' height='20' />
                             </div>
 

@@ -9,15 +9,16 @@ export default function Modal() {
     const [isOpen, setIsOpen] = useState(false)
     const [isZero, setIsZero] = useState(false)
     const [template, setTemplate] = useState(null)
+    const [isMobile, setIsMobile] = useState(false)
 
     const animateContent = useAnimationControls()
     const refContent = useRef(null)
 
-    const dragEndHandler = (_, info) => {
-        if (isZero) return
-        if (Math.abs(info.offset.y) > 60 && window.innerWidth < globalState.sizes.sm) {
-            // setIsOpen(false)
-        }
+    const dragEndHandler = (event, info) => {
+        if (isZero || !isMobile) return
+        if (Math.abs(info.offset.y) < 60) return
+        if (event.target.closest('.modal-scroll-content')) return
+        setIsOpen(false)
     }
 
     useEffect(() => {
@@ -32,6 +33,7 @@ export default function Modal() {
     // @TODO REWIRITE!
     useEffect(() => {
         const mobile = window.innerWidth < globalState.sizes.sm
+        setIsMobile(mobile)
         const duration = mobile ? 0.3 : 0.5
 
         if (isOpen) {
@@ -69,7 +71,7 @@ export default function Modal() {
                 dragElastic={0.5}
                 animate={animateContent}
                 onDragEnd={dragEndHandler}
-                drag={isZero ? false : 'y'}
+                drag={isZero || !isMobile ? false : 'y'}
                 dragConstraints={{ top: 0, bottom: 0 }}
                 className={`${isZero ? 'modal__content--full-height' : 'modal__content'}`}>
 

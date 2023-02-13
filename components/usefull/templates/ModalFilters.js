@@ -18,7 +18,7 @@ export default function ModalFilters({ data }) {
     }, [])
 
     useEffect(() => {
-        console.log(globalState.catalog.selectedFilter);
+        // console.log(globalState.catalog.selectedFilter);
     }, [globalState.catalog.selectedFilter])
 
 
