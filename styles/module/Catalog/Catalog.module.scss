@@ -456,6 +456,7 @@
     
     @include media-breakpoint(xl-up) {
         padding: 16px;
+        box-shadow: 0px 10px 30px 2px #69748633;
     }
 }
 
@@ -513,9 +514,11 @@
     top: -40px;
     width: 30px;
     bottom: -40px;
+    filter: blur(7px);
     position: absolute;
     background-color: var(--t-background);
-    animation: lightning 0.7s ease-in-out 0s infinite;
+    animation: lightning 0.7s ease-in-out 0s;
+    transform: translateX(-150px) skew(20deg);
 }
 
 @keyframes lightning {
