@@ -80,9 +80,19 @@ export default function Header() {
         }
     }, [isHeaderFixed])
 
+    const getTranslate = () => {
+        const ww = window.innerWidth
+        let translate = 0
+        if (ww >= globalState.sizes.xxl) translate = -59
+        else if (ww < globalState.sizes.xxl && ww >= globalState.sizes.xl) translate = -51
+        else if (ww < globalState.sizes.xl && ww >= globalState.sizes.lg) translate = -45
+        // else if (ww < globalState.sizes.lg && ww >= globalState.sizes.md) translate = 
+        return translate
+    }
+
     useEffect(() => {
         if (!isHeaderFixed) return
-        const yPosition = window.innerWidth < globalState.sizes.lg ? 0 : -80
+        const yPosition = getTranslate()
         if (isTranslated) {
             animateHeader.start({y: yPosition, transition: {duration: 0.4}})
         } else {

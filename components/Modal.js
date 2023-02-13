@@ -9,22 +9,14 @@ export default function Modal() {
     const [isOpen, setIsOpen] = useState(false)
     const [isZero, setIsZero] = useState(false)
     const [template, setTemplate] = useState(null)
-    const [isMobile, setIsMobile] = useState(null)
 
     const animateContent = useAnimationControls()
-    const controls = useDragControls()
     const refContent = useRef(null)
-
-    const startDrag = event => {
-        if (isZero || !isMobile) return
-        if (window.innerWidth >= globalState.sizes.sm) return
-        controls.start(event)
-    }
 
     const dragEndHandler = (_, info) => {
         if (isZero) return
         if (Math.abs(info.offset.y) > 60 && window.innerWidth < globalState.sizes.sm) {
-            setIsOpen(false)
+            // setIsOpen(false)
         }
     }
 
@@ -43,7 +35,6 @@ export default function Modal() {
         const duration = mobile ? 0.3 : 0.5
 
         if (isOpen) {
-            setIsMobile(mobile)
             const pos = window.innerWidth >= globalState.sizes.sm || isZero
                 ? { x: 0, y: 0, transition: { duration, ease: 'easeInOut' } }
                 : { y: 0, x: 0, transition: { duration, ease: 'easeInOut' } }
@@ -76,12 +67,10 @@ export default function Modal() {
             <motion.div
                 ref={refContent}
                 dragElastic={0.5}
-                dragControls={controls}
                 animate={animateContent}
-                onPointerDown={startDrag}
                 onDragEnd={dragEndHandler}
+                drag={isZero ? false : 'y'}
                 dragConstraints={{ top: 0, bottom: 0 }}
-                drag={isZero || !isMobile ? false : 'y'}
                 className={`${isZero ? 'modal__content--full-height' : 'modal__content'}`}>
 
                 <div onClick={() => setIsOpen(false)} className='modal__close'>
@@ -101,6 +90,7 @@ function LoadTemplate({ name, data }) {
             colors: dynamic(() => import('./usefull/templates/ModalColors'), { ssr: false }),
             filters: dynamic(() => import('./usefull/templates/ModalFilters'), { ssr: false }),
             priceInfo: dynamic(() => import('./usefull/templates/ModalPriceInfo'), { ssr: false }),
+            brandAbout: dynamic(() => import('./usefull/templates/ModalBrandAbout'), { ssr: false }),
             notification: dynamic(() => import('./usefull/templates/ModalNotification'), { ssr: false }),
             colorsSecond: dynamic(() => import('./usefull/templates/ModalColorsSecond'), { ssr: false }),
         }

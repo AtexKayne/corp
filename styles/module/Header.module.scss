@@ -11,21 +11,21 @@
         xs: 12px 0,
         md: 14px 0,
         lg: 16px 0,
-        xl: 28px 0
+        xl: 14px 0
     ));
     height: adaptive-value((
-        xs: 75px,
+        xs: 67px,
+        md: 76px,
         lg: 148px,
-        xl: 168px,
-        xxl: 168px,
-        xxxl: 185px,
+        xl: 153px,
+        xxxl: 168px,
     ));
     min-height: adaptive-value((
-        xs: 75px,
+        xs: 67px,
+        md: 76px,
         lg: 148px,
-        xl: 168px,
-        xxl: 168px,
-        xxxl: 185px,
+        xl: 153px,
+        xxxl: 168px,
     ));
 }
 
@@ -117,9 +117,9 @@
     top: adaptive-value((
         xs: 0,
         lg: 40px,
-        xl: 60px,
-        xxl: 70px,
-        xxxl: 74px,
+        xl: 50px,
+        xxl: 51px,
+        xxxl: 62px,
     ));
 
     padding: adaptive-value((

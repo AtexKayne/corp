@@ -6597,92 +6597,92 @@ export const brands = {
             "img_big": "/images/brands/overlays/image-1.jpg",
             "theme": "light",
             "parent_id": null,
-            "include_sections": [
-                {
-                    "id": 9997,
-                    "filter": [
-                        {
-                            "id": 666,
-                            "code": "price",
-                            "name": "Цена"
-                        },
-                        {
-                            "id": 981,
-                            "code": "vid",
-                            "name": "Вид товара"
-                        },
-                        {
-                            "id": 751,
-                            "code": "proizvodstvo",
-                            "name": "Производство"
-                        }
-                    ],
-                    "coloristic": null,
-                    "logo": "",
-                    "url": "https://redharemarket.ru/catalog/ds-balzam/",
-                    "name": "Бальзам",
-                    "depth_level": 2,
-                    "img_mini": null,
-                    "img_big": null,
-                    "parent_id": 2117
-                },
-                {
-                    "id": 9998,
-                    "filter": [
-                        {
-                            "id": 666,
-                            "code": "price",
-                            "name": "Цена"
-                        },
-                        {
-                            "id": 981,
-                            "code": "vid",
-                            "name": "Вид товара"
-                        },
-                        {
-                            "id": 751,
-                            "code": "proizvodstvo",
-                            "name": "Производство"
-                        }
-                    ],
-                    "coloristic": null,
-                    "logo": "",
-                    "url": "https://redharemarket.ru/catalog/ds-vosk/",
-                    "name": "Воск",
-                    "depth_level": 2,
-                    "img_mini": null,
-                    "img_big": null,
-                    "parent_id": 2117
-                },
-                {
-                    "id": 9999,
-                    "filter": [
-                        {
-                            "id": 666,
-                            "code": "price",
-                            "name": "Цена"
-                        },
-                        {
-                            "id": 981,
-                            "code": "vid",
-                            "name": "Вид товара"
-                        },
-                        {
-                            "id": 751,
-                            "code": "proizvodstvo",
-                            "name": "Производство"
-                        }
-                    ],
-                    "coloristic": null,
-                    "logo": "",
-                    "url": "https://redharemarket.ru/catalog/ds-konditioner/",
-                    "name": "Кондиционер",
-                    "depth_level": 2,
-                    "img_mini": null,
-                    "img_big": null,
-                    "parent_id": 2117
-                }
-            ]
+            // "include_sections": [
+            //     {
+            //         "id": 9997,
+            //         "filter": [
+            //             {
+            //                 "id": 666,
+            //                 "code": "price",
+            //                 "name": "Цена"
+            //             },
+            //             {
+            //                 "id": 981,
+            //                 "code": "vid",
+            //                 "name": "Вид товара"
+            //             },
+            //             {
+            //                 "id": 751,
+            //                 "code": "proizvodstvo",
+            //                 "name": "Производство"
+            //             }
+            //         ],
+            //         "coloristic": null,
+            //         "logo": "",
+            //         "url": "https://redharemarket.ru/catalog/ds-balzam/",
+            //         "name": "Бальзам",
+            //         "depth_level": 2,
+            //         "img_mini": null,
+            //         "img_big": null,
+            //         "parent_id": 2117
+            //     },
+            //     {
+            //         "id": 9998,
+            //         "filter": [
+            //             {
+            //                 "id": 666,
+            //                 "code": "price",
+            //                 "name": "Цена"
+            //             },
+            //             {
+            //                 "id": 981,
+            //                 "code": "vid",
+            //                 "name": "Вид товара"
+            //             },
+            //             {
+            //                 "id": 751,
+            //                 "code": "proizvodstvo",
+            //                 "name": "Производство"
+            //             }
+            //         ],
+            //         "coloristic": null,
+            //         "logo": "",
+            //         "url": "https://redharemarket.ru/catalog/ds-vosk/",
+            //         "name": "Воск",
+            //         "depth_level": 2,
+            //         "img_mini": null,
+            //         "img_big": null,
+            //         "parent_id": 2117
+            //     },
+            //     {
+            //         "id": 9999,
+            //         "filter": [
+            //             {
+            //                 "id": 666,
+            //                 "code": "price",
+            //                 "name": "Цена"
+            //             },
+            //             {
+            //                 "id": 981,
+            //                 "code": "vid",
+            //                 "name": "Вид товара"
+            //             },
+            //             {
+            //                 "id": 751,
+            //                 "code": "proizvodstvo",
+            //                 "name": "Производство"
+            //             }
+            //         ],
+            //         "coloristic": null,
+            //         "logo": "",
+            //         "url": "https://redharemarket.ru/catalog/ds-konditioner/",
+            //         "name": "Кондиционер",
+            //         "depth_level": 2,
+            //         "img_mini": null,
+            //         "img_big": null,
+            //         "parent_id": 2117
+            //     }
+            // ]
         },
         {
             "id": 1932,
@@ -6828,92 +6828,92 @@ export const brands = {
             "img_mini": "",
             "img_big": "",
             "parent_id": null,
-            "include_sections": [
-                {
-                    "id": 2118,
-                    "filter": [
-                        {
-                            "id": 666,
-                            "code": "price",
-                            "name": "Цена"
-                        },
-                        {
-                            "id": 981,
-                            "code": "vid",
-                            "name": "Вид товара"
-                        },
-                        {
-                            "id": 751,
-                            "code": "proizvodstvo",
-                            "name": "Производство"
-                        }
-                    ],
-                    "coloristic": null,
-                    "logo": "",
-                    "url": "https://redharemarket.ru/catalog/mr-natty-balzam/",
-                    "name": "Бальзам",
-                    "depth_level": 2,
-                    "img_mini": null,
-                    "img_big": null,
-                    "parent_id": 1938
-                },
-                {
-                    "id": 2119,
-                    "filter": [
-                        {
-                            "id": 666,
-                            "code": "price",
-                            "name": "Цена"
-                        },
-                        {
-                            "id": 981,
-                            "code": "vid",
-                            "name": "Вид товара"
-                        },
-                        {
-                            "id": 751,
-                            "code": "proizvodstvo",
-                            "name": "Производство"
-                        }
-                    ],
-                    "coloristic": null,
-                    "logo": "",
-                    "url": "https://redharemarket.ru/catalog/mr-natty-vosk/",
-                    "name": "Воск",
-                    "depth_level": 2,
-                    "img_mini": null,
-                    "img_big": null,
-                    "parent_id": 1938
-                },
-                {
-                    "id": 2120,
-                    "filter": [
-                        {
-                            "id": 666,
-                            "code": "price",
-                            "name": "Цена"
-                        },
-                        {
-                            "id": 981,
-                            "code": "vid",
-                            "name": "Вид товара"
-                        },
-                        {
-                            "id": 751,
-                            "code": "proizvodstvo",
-                            "name": "Производство"
-                        }
-                    ],
-                    "coloristic": null,
-                    "logo": "",
-                    "url": "https://redharemarket.ru/catalog/mr-natty-konditioner/",
-                    "name": "Кондиционер",
-                    "depth_level": 2,
-                    "img_mini": null,
-                    "img_big": null,
-                    "parent_id": 1938
-                }
-            ]
+            // "include_sections": [
+            //     {
+            //         "id": 2118,
+            //         "filter": [
+            //             {
+            //                 "id": 666,
+            //                 "code": "price",
+            //                 "name": "Цена"
+            //             },
+            //             {
+            //                 "id": 981,
+            //                 "code": "vid",
+            //                 "name": "Вид товара"
+            //             },
+            //             {
+            //                 "id": 751,
+            //                 "code": "proizvodstvo",
+            //                 "name": "Производство"
+            //             }
+            //         ],
+            //         "coloristic": null,
+            //         "logo": "",
+            //         "url": "https://redharemarket.ru/catalog/mr-natty-balzam/",
+            //         "name": "Бальзам",
+            //         "depth_level": 2,
+            //         "img_mini": null,
+            //         "img_big": null,
+            //         "parent_id": 1938
+            //     },
+            //     {
+            //         "id": 2119,
+            //         "filter": [
+            //             {
+            //                 "id": 666,
+            //                 "code": "price",
+            //                 "name": "Цена"
+            //             },
+            //             {
+            //                 "id": 981,
+            //                 "code": "vid",
+            //                 "name": "Вид товара"
+            //             },
+            //             {
+            //                 "id": 751,
+            //                 "code": "proizvodstvo",
+            //                 "name": "Производство"
+            //             }
+            //         ],
+            //         "coloristic": null,
+            //         "logo": "",
+            //         "url": "https://redharemarket.ru/catalog/mr-natty-vosk/",
+            //         "name": "Воск",
+            //         "depth_level": 2,
+            //         "img_mini": null,
+            //         "img_big": null,
+            //         "parent_id": 1938
+            //     },
+            //     {
+            //         "id": 2120,
+            //         "filter": [
+            //             {
+            //                 "id": 666,
+            //                 "code": "price",
+            //                 "name": "Цена"
+            //             },
+            //             {
+            //                 "id": 981,
+            //                 "code": "vid",
+            //                 "name": "Вид товара"
+            //             },
+            //             {
+            //                 "id": 751,
+            //                 "code": "proizvodstvo",
+            //                 "name": "Производство"
+            //             }
+            //         ],
+            //         "coloristic": null,
+            //         "logo": "",
+            //         "url": "https://redharemarket.ru/catalog/mr-natty-konditioner/",
+            //         "name": "Кондиционер",
+            //         "depth_level": 2,
+            //         "img_mini": null,
+            //         "img_big": null,
+            //         "parent_id": 1938
+            //     }
+            // ]
         },
         {
             "id": 1944,

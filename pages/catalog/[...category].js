@@ -159,7 +159,7 @@ export default function Catalog({ detail }) {
                 </div>
             </div>
             <div className='d-flex'>
-                <div data-hidden={isSidebarHidden} className={style.wrapper}>
+                <div data-hidden={isSidebarHidden} className={`${style.wrapper} ${detail.isBrands ? style.wrapperBrand : ''}`}>
                     <div className={`${style.categories}`} data-selected={!!activeCategory}>
                         <Addition isBrands={detail.isBrands} />
 
@@ -215,10 +215,16 @@ function Head({ toggleSidebar, isSidebarHidden, categoryName, titleOpacity, isBr
         }
     }, [info])
 
+    const openDescription = () => {
+        globalState.modal.setTemplate('brandAbout')
+        globalState.modal.setIsZero(false)
+        globalState.modal.setIsOpen(true)
+    }
+
     if (isBrands) {
         // return null
         return (
-            <div className={`${themeHead} ${imageOverlay ? 'mb-3 mb-6:lg' : 'mb-3'}`}>
+            <div className={`${themeHead} ${imageOverlay ? 'mb-2 mb-3.5:md mb-4:lg mb-6:xl' : 'mb-1.5 mb-2:md mb-3:xxl'}`}>
                 {imageOverlay
                     ? <div className={style.imageOverlay}><Image src={imageOverlay} layout='fill' alt={info.name} /></div>
                     : null
@@ -227,21 +233,21 @@ function Head({ toggleSidebar, isSidebarHidden, categoryName, titleOpacity, isBr
                 <div className={style.brandHead}>
                     {imageOverlay
                         ? null
-                        : <div className='mr-1.5 px-1 py-1 is-hidden--md-down'><Image src={imageLogo} width='100' height='100' alt={info.name} /></div>
+                        : <div className='mr-1.5 px-1 py-1 is-hidden--lg-down'><Image src={imageLogo} width='100' height='100' alt={info.name} /></div>
                     }
                     <div className={style.brandInfo}>
-                        <div className={`${style.brandDescription} text--p2 text--normal mb-1 is-hidden--md-down`}>{description}</div>
+                        <div className={`${style.brandDescription} text--p2 text--normal mb-0.6:xl mb-1.5:xxxl is-hidden--lg-down`}>{description}</div>
 
-                        <div className={`${style.head} row mb-1`}>
+                        <div className={`${style.head} mb-0.5:md mb-0.6:xl mb-1.5:xxxl`}>
                             <div data-shown={!isSidebarHidden} data-opacity={titleOpacity} className={`${style.title}`}>
                                 <h1 onClick={toggleSidebar} className={`text--a2 text--bold`}>{categoryName}</h1>
-                                <Icon name='dropdown' external={style.titleArrow} width='20' height='20' />
+                                <Icon name='dropdown' external={`${style.titleArrow} ${isBrands ? 'is-hidden' : ''}`} width='20' height='20' />
                             </div>
 
                             <Share isBrands={isBrands} name={info.name} />
                         </div>
 
-                        <div className={`${style.aboutBrand} text--t5 text--upper text--bold`}>Подробнее о бренде</div>
+                        <div onClick={openDescription} className={`${style.aboutBrand} text--t5 text--upper text--bold`}>Подробнее о бренде</div>
                     </div>
                 </div>
             </div>
