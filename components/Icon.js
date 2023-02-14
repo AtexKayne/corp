@@ -42,6 +42,8 @@ export default function Icon({ name, external = '', width = 16, height = 16, siz
             dropdown: dynamic(() => import('../public/icons/icon-triangle-down.svg'), { ssr: false }),
             share: dynamic(() => import('../public/icons/icon-share-android.svg'), { ssr: false }),
             colorPicker: dynamic(() => import('../public/icons/icon-color-picker.svg'), { ssr: false }),
+            maximize: dynamic(() => import('../public/icons/icon-maximize.svg'), { ssr: false }),
+            // 
         }
         const Component = dynamicComponents[iconName]
         setLoadedIcon(Component)

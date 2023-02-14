@@ -7197,7 +7197,7 @@ export const brands = {
                 }
             ],
             "coloristic": null,
-            "logo": "",
+            "logo": "/images/brands/logos/image-1.png",
             "url": "https://redharemarket.ru/catalog/Sensido/",
             "name": "Sensido",
             "depth_level": 1,

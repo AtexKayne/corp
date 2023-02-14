@@ -64,6 +64,11 @@ export default function Home() {
           <a href='/brands/Mr-Natty' className='link'>Каталожная выдача бренда (без обложки)</a>
         </Link>
       </div>
+      <div className='ml-1'>
+        <Link href='/brands/Sensido'>
+          <a href='/brands/Sensido' className='link'>Каталожная выдача бренда (круг sensido)</a>
+        </Link>
+      </div>
       <div className='pt-5' />
 
     </MainLayout>
