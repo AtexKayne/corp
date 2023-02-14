@@ -27,6 +27,7 @@
         &[data-fullsize='true'] {
             height: 78vh;
             overflow-x: scroll;
+            margin-bottom: -200px;
 
             .variants,
             .points {
@@ -292,7 +293,7 @@
             display: block;
         }
 
-        @include media-breakpoint(md-down) {
+        @include media-breakpoint(xl-down) {
             height: 30px;
             
             > span {
