@@ -72,6 +72,11 @@
         opacity: 1;
         transition: .3s;
         pointer-events: all;
+        color: var(--t-disabled);
+
+        &:hover {
+            color: var(--t-primary);
+        }
     }
 
     @include media-breakpoint(lg-up) {
@@ -120,12 +125,19 @@
 
 .brand {
     cursor: pointer;
+    line-height: 2em;
     margin-right: 32px;
     display: inline-block;
     transition: .3s color;
 
     &:hover {
         color: var(--t-primary);
+    }
+
+    @include media-breakpoint(sm-down) {
+        display: block;
+        padding: 12px 0;
+        line-height: 1em;
     }
 }
 

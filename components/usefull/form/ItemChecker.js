@@ -11,6 +11,9 @@ export default function ItemChecker({ text = '', code }) {
             return prevCopy
         })
     }
+    const textClick = event => {
+        event.target.previousSibling.click()
+    }
 
     return (
         <div className='checker'>
@@ -19,7 +22,7 @@ export default function ItemChecker({ text = '', code }) {
                 <div className='input-switch__background' />
                 <div className='input-switch__base' />
             </label>
-            <div className='text--t4'>{text}</div>
+            <div onClick={textClick} className='text--t4'>{text}</div>
         </div>
     )
 }

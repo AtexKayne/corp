@@ -44,12 +44,12 @@
         padding-right: 20px;
 
         &::after {
-            top: 5px;
-            right: 6px;
-            width: 8px;
-            height: 8px;
+            top: 3px;
+            right: 1px;
+            width: 12px;
             content: '';
             opacity: .5;
+            height: 12px;
             transition: .3s;
             position: absolute;
             background-size: cover;

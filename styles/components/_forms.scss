@@ -220,10 +220,10 @@
 
 .checker {
     display: flex;
+    cursor: pointer;
     align-items: center;
     
     .input-switch {
-        cursor: pointer;
         margin-right: 8px;
     }
 }

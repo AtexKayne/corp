@@ -114,6 +114,7 @@ export default function Brands({ detail }) {
             <div data-empty={!isEmpty} className={`${style.empty} text--t2 text--normal text--color-disabled`}>
                 Такой бренд не найден
             </div>
+            <div className='pb-2 pb-5:md'/>
         </MainLayout>
     )
 }
