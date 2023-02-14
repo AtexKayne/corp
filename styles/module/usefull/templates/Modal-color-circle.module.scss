@@ -1,0 +1,138 @@
+.title {
+    text-align: center;
+    
+    >span {
+        max-width: 300px;
+        display: inline-block;
+    }
+}
+
+.variants {
+    height: 336px;
+    display: flex;
+    position: relative;
+    align-items: center;
+    justify-content: center;
+
+    
+    &[data-variant='tone'] {
+        .natural {
+            cursor: pointer;
+            transform: scale(0.5);
+        }
+    }
+
+    &[data-variant='natural'] {
+        .tones {
+            cursor: pointer;
+
+            img {
+                transform: scale(1, -2) rotate(-130deg)!important;
+            }
+        }
+    }
+}
+
+.tones {
+    width: 336px;
+    height: 336px;
+    overflow: hidden;
+    position: absolute;
+    border-radius: 50%;
+    background-color: white;
+    clip-path: circle(50% at 50% 50%);
+
+    img {
+        transition: .5s ease-in-out;
+    }
+}
+
+.natural {
+    width: 336px;
+    height: 336px;
+    overflow: hidden;
+    position: absolute;
+    border-radius: 50%;
+    transform: scale(0.89);
+    background-color: white;
+    transition: .5s ease-in-out;
+    clip-path: circle(50% at 50% 50%);
+
+    >span {
+        border-radius: 50%;
+    }
+}
+
+.inner {
+    width: 336px;
+    height: 336px;
+    color: white;
+    font-size: 10px;
+    font-weight: 700;
+    position: absolute;
+
+    >div {
+        top: 50%;
+        right: 0px;
+        height: 0px;
+        cursor: pointer;
+        text-align: right;
+        position: absolute;
+        width: calc(336px / 2);
+        transform-origin: left;
+
+        // height: 1px;
+        // background-color: black;
+
+        span {
+            position: relative;
+            display: inline-block;
+        }
+
+        span::before {
+            top: 3px;
+            left: -5px;
+            width: 25px;
+            content: '';
+            height: 17px;
+            transition: .3s;
+            position: absolute;
+            border-radius: 16px;
+        }
+
+        &:hover span::before {
+            background-color: rgba(249, 249, 249, 0.6);
+        }
+    }
+}
+
+.btns {
+    width: 100%;
+    display: flex;
+    padding-top: 40px;
+
+    .btn {
+        width: 100%;
+        height: 44px;
+        margin: 0 6px;
+        cursor: pointer;
+        transition: .3s;
+        border-radius: 4px;
+        align-items: center;
+        color: var(--t-text);
+        display: inline-flex;
+        justify-content: center;
+        background-color: var(--t-smallish);
+
+        &:hover,
+        &[data-active='true'] {
+            color: var(--t-background);
+            background-color: var(--t-primary);
+        }
+
+
+        >* {
+            display: block;
+        }
+    }
+}

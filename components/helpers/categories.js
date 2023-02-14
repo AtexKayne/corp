@@ -1773,6 +1773,7 @@ export const categories = {
             "url": "https://redharemarket.ru/catalog/kosmetika-dlya-volos/",
             "name": "Косметика для волос",
             "depth_level": 1,
+            "color": true,
             "img_mini": "https://redharemarket.ru/upload/iblock/91e/pqlwssebhy22r0kpwgagnlpskg16qw3m/Ikonka_kosmetika-_1_.png",
             "img_big": "https://redharemarket.ru/upload/iblock/662/5pejs5fsc2w2jnu3gr4gclx71quz70zn/Ikonka_Kosmetika.png",
             "parent_id": null,

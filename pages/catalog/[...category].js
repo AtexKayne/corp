@@ -186,7 +186,7 @@ export default function Catalog({ detail }) {
                     }
                 </div>
 
-                <div style={{width: '100%'}} className='d-flex flex--column'>
+                <div style={{ width: '100%' }} className='d-flex flex--column'>
                     <CardList products={products} isSidebarHidden={isSidebarHidden} />
 
                     <Pagination />
@@ -221,6 +221,12 @@ function Head({ toggleSidebar, isSidebarHidden, categoryName, titleOpacity, isBr
         globalState.modal.setIsOpen(true)
     }
 
+    const openColors = () => {
+        globalState.modal.setTemplate('colorCircle')
+        globalState.modal.setIsZero(true)
+        globalState.modal.setIsOpen(true)
+    }
+
     if (isBrands) {
         // return null
         return (
@@ -243,6 +249,13 @@ function Head({ toggleSidebar, isSidebarHidden, categoryName, titleOpacity, isBr
                                 <h1 onClick={toggleSidebar} className={`text--a2 text--bold is-decorative`}>{categoryName}</h1>
                                 <Icon name='dropdown' external={`${style.titleArrow} ${isBrands ? 'is-hidden' : ''}`} width='20' height='20' />
                             </div>
+
+                            {categoryName === 'Sensido'
+                                ? <div onClick={openColors} className={`${style.colorCircle} ml-1`}>
+                                    <Icon name='colorPicker' width='20' height='20' />
+                                </div>
+                                : null
+                            }
 
                             <Share isBrands={isBrands} name={info.name} />
                         </div>
