@@ -65,6 +65,15 @@
         xl: 217px,
         xxl: 281px
     ));
+
+    > div {
+        // width: 100%;
+        display: flex;
+    }
+
+    @include media-breakpoint(lg-up) {
+        > div { transform: none!important; }
+    }
 }
 
 .image {
@@ -89,6 +98,15 @@
 
     img {
         object-fit: cover;
+    }
+
+    @include media-breakpoint(md-down) {
+        opacity: 1;
+        width: 100%;
+        flex-grow: 0;
+        flex-shrink: 0;
+        margin-right: 2px;
+        position: relative;
     }
 }
 

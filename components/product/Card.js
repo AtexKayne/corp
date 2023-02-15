@@ -1,9 +1,12 @@
-import Image from 'next/image'
 import { debounce } from '../helpers/debounce'
 import { useState, useEffect, useRef } from 'react'
+import { motion, useAnimationControls } from 'framer-motion'
 import style from '../../styles/module/Product/Card.module.scss'
+
 import Icon from '../Icon'
+import Image from 'next/image'
 import CardBuy from './CardBuy'
+import { globalState } from '../helpers/globalState'
 
 export default function Card({ info, updated }) {
     const [isSelected, setIsSelected] = useState(false)
@@ -11,6 +14,7 @@ export default function Card({ info, updated }) {
     const [isNotify, setIsNotify] = useState(false)
     const [isHover, setIsHover] = useState(false)
     const [count, setCount] = useState(0)
+    const animateDrag = useAnimationControls()
     const refImages = useRef(null)
     const refRect = useRef(false)
 
@@ -18,11 +22,54 @@ export default function Card({ info, updated }) {
         refRect.current = refImages.current.getBoundingClientRect()
     }
 
+    const debounceResize = debounce(resizeHandler, 60)
+
+    const mouseMoveHandler = event => {
+        if (window.innerWidth < globalState.sizes.lg) return
+        const c = event.clientX - refRect.current.x
+        const t = refRect.current.width / info.images.length
+        const r = Math.min(info.images.length - 1, Math.floor(c / t))
+        setActiveImage(r)
+    }
+
     const mouseLeaveHandler = () => {
         if (!isSelected) setIsHover(false)
     }
 
-    const debounceResize = debounce(resizeHandler, 60)
+    const dragEdHandler = (event, dragInfo) => {
+        if (typeof window === 'undefined' || window.innerWidth > globalState.sizes.lg) return
+        const offsetX = Math.abs(dragInfo.offset.x)
+        const offsetY = Math.abs(dragInfo.offset.y)
+        const imageWidth = refImages.current.clientWidth + 1
+
+        if (offsetX > 40 && offsetY < 40) {
+            if (dragInfo.offset.x > 0 && activeImage === 0) {
+                animateDrag.start({ x: 0, transition: { duration: 0.1 } })
+                return
+            }
+
+            if (dragInfo.offset.x < 0 && activeImage === info.images.length - 1) {
+                animateDrag.start({ x: imageWidth * -(info.images.length - 1), transition: { duration: 0.1 } })
+                return
+            }
+
+            if (dragInfo.offset.x < 0) {
+                setActiveImage(prev => {
+                    prev++
+                    animateDrag.start({ x: imageWidth * -prev, transition: { duration: 0.1 } })
+                    return prev
+                })
+            } else {
+                setActiveImage(prev => {
+                    prev--
+                    animateDrag.start({ x: imageWidth * -prev, transition: { duration: 0.1 } })
+                    return prev
+                })
+            }
+        } else {
+            animateDrag.start({ x: -imageWidth * activeImage, transition: { duration: 0.1 } })
+        }
+    }
 
     useEffect(() => {
         refRect.current = refImages.current.getBoundingClientRect()
@@ -38,29 +85,25 @@ export default function Card({ info, updated }) {
             refRect.current = refImages.current.getBoundingClientRect()
         }, 400)
     }, updated)
-    
-
-    const mouseMoveHandler = event => {
-        const c = event.clientX - refRect.current.x
-        const t = refRect.current.width / info.images.length
-        const r = Math.min(info.images.length - 1, Math.floor(c / t))
-        setActiveImage(r)
-    }
 
     return (
         <div data-hover={isHover} onMouseEnter={() => setIsHover(true)} onMouseLeave={mouseLeaveHandler} className={style.card}>
+
             <div ref={refImages} onMouseLeave={() => setActiveImage(0)} onMouseMove={mouseMoveHandler} className={style.images}>
-                {info.images.map((image, index) => (
-                    <div key={image} data-active={activeImage === index} className={style.image}>
-                        <Image layout='fill' alt={info.primaryName} src={image} />
-                    </div>
-                ))}
+                <motion.div animate={animateDrag} drag='x' onDragEnd={dragEdHandler} >
+                    {info.images.map((image, index) => (
+                        <div key={image} data-active={activeImage === index} className={style.image}>
+                            <Image layout='fill' alt={info.primaryName} src={image} />
+                        </div>
+                    ))}
+                </motion.div>
                 <div className={`${style.nav}`}>
                     {info.images.map((image, index) => (
                         <div key={image} data-active={activeImage === index} />
                     ))}
                 </div>
             </div>
+
             <div className='text--t6 text--normal text--upper pb-0.6 pt-1.5'>{info.primaryName}</div>
             <div className='text--t4 text--normal pb-1'>{info.secondaryName}</div>
             {!info.isProfi && info.values[0].max !== 0

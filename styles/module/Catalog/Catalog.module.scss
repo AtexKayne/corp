@@ -32,6 +32,16 @@
     }
 }
 
+.headAddition {
+    display: flex;
+    align-items: center;
+    flex-direction: row-reverse;
+
+    @include media-breakpoint(xl-up) {
+        flex-direction: row;
+    }
+}
+
 .brandDescription {
     // margin-bottom: 10px;
 }
@@ -251,7 +261,6 @@
     overflow: hidden;
     max-height: 40px;
     flex-direction: column;
-    // transition: .5s ease-in-out;
 
     &[data-active='true'] {
         max-height: none;
@@ -276,7 +285,6 @@
     cursor: pointer;
     margin-top: 6px;
     transition: .3s;
-    // min-width: 280px;
     position: relative;
     border-radius: 4px;
     align-items: center;
@@ -358,7 +366,6 @@
     @include media-breakpoint(xl-up) {
         display: block;
         padding-top: 64px;
-        // min-width: 280px;
     }
 }
 
@@ -462,14 +469,12 @@
     height: 100%;
     padding: 4px;
     overflow: hidden;
-    // filter: blur(2px);
     border-radius: 8px;
     position: relative;
     background-color: var(--t-light);
     
     @include media-breakpoint(xl-up) {
         padding: 16px;
-        // box-shadow: 0px 10px 30px 2px #69748633;
     }
 }
 
@@ -491,10 +496,7 @@
     height: 1em;
     font-size: 20px;
     margin-top: 16px;
-    // filter: blur(5px);
     line-height: 32px;
-    // border-bottom: 10px solid var(--t-text);
-    // background-color: var(--t-text);
 }
 
 .cardFillerButton {
@@ -504,17 +506,6 @@
     position: relative;
     border-radius: 4px;
     background-color: var(--t-primary);
-
-    // &::after {
-    //     left: 30px;
-    //     right: 30px;
-    //     content: '';
-    //     height: 10px;
-    //     filter: blur(5px);
-    //     position: absolute;
-    //     top: calc(50% - 5px);
-    //     background-color: var(--t-background);
-    // }
 
     @include media-breakpoint(xl-up) {
         opacity: 0;
@@ -652,9 +643,101 @@
 }
 
 .colorCircle {
+    z-index: 10;
     cursor: pointer;
+    position: relative;
+
+    &[data-onboard='true'] {
+        .onboard {
+            transform: scale(1);
+            pointer-events: all;
+        }
+
+        .onboardText,
+        .onboardLink {
+            opacity: 1;
+            transition-delay: .3s;
+        }
+    }
+
+    .onboard {
+        top: -299px;
+        left: -299px;
+        width: 618px;
+        height: 618px;
+        position: absolute;
+        border-radius: 50%;
+        transform: scale(0);
+        pointer-events: none;
+        background-color: rgba(17, 36, 77, 0.8);
+        transition: .6s cubic-bezier(.5,-0.6,.6,1.5);
+        clip-path: polygon(100% 50%, 100% 100%, 0 100%, 0 0, 100% 0, 100% 50%, 54% 50%,53.85% 48.92%,53.42% 47.92%,52.73% 47.08%,51.84% 46.45%,50.81% 46.08%,49.73% 46.01%,48.66% 46.23%,47.69% 46.73%,46.90% 47.48%,46.33% 48.41%,46.04% 49.46%,46.04% 50.54%,46.33% 51.59%,46.90% 52.52%,47.69% 53.27%,48.66% 53.77%,49.73% 53.99%,50.81% 53.92%,51.84% 53.55%,52.73% 52.92%,53.42% 52.08%,53.85% 51.08%,54% 50%);
+    }
+
+    .onboardText,
+    .onboardLink {
+        opacity: 0;
+        transition: .3s;
+        max-width: 185px;
+        text-align: right;
+        position: absolute;
+        right: calc(50% + 50px);
+        color: var(--t-background);
+    }
+
+    .onboardText {
+        top: 240px;
+    }
+
+    .onboardLink {
+        top: 380px;
+
+        &:hover {
+            color: var(--t-primary);
+        }
+    }
+
+    .colorIcon {
+        width: 20px;
+        height: 20px;
+    }
 
     > * {
         display: block;
+    }
+
+    @include media-breakpoint(xl-up) {
+        .onboardText {
+            top: 240px;
+            right: auto;
+            text-align: left;
+            left: calc(50% + 50px);
+        }
+        .onboardLink {
+            top: 380px;
+            right: auto;
+            text-align: left;
+            left: calc(50% + 50px);
+        }
+    }
+
+    @include media-breakpoint(sm-down) {
+        .onboard {
+            top: -190px;
+            left: -190px;
+            width: 400px;
+            height: 400px;
+        }
+
+        .onboardText {
+            top: 134px;
+            font-size: 14px;
+            max-width: 160px;
+            right: calc(50% + 30px);
+        }
+        .onboardLink {
+            top: 258px;
+            right: calc(50% + 30px);
+        }
     }
 }

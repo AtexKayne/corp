@@ -198,10 +198,11 @@ export default function Catalog({ detail }) {
 }
 
 function Head({ toggleSidebar, isSidebarHidden, categoryName, titleOpacity, isBrands, info }) {
-    const [imageOverlay, setImageOverlay] = useState(null)
     const [imageLogo, setImageLogo] = useState('/icons/icon-empty.svg')
+    const [imageOverlay, setImageOverlay] = useState(null)
     const [themeHead, setThemeHead] = useState('ui-light')
     const [description, setDescription] = useState('')
+    const [isOnboard, setIsOnboard] = useState(false)
 
     useEffect(() => {
         if (isBrands && info.parent_id === null) {
@@ -213,7 +214,30 @@ function Head({ toggleSidebar, isSidebarHidden, categoryName, titleOpacity, isBr
                 setThemeHead('ui-dark')
             }
         }
+
+        // To generate clipPath
+        // const precision = 24;
+        // const radius = 4;
+        // const c = [...Array(precision)].map((_, i) => {
+        //     const a = -i / (precision - 1) * Math.PI * 2;
+        //     const x = Math.cos(a) * radius + 50;
+        //     const y = Math.sin(a) * radius + 50;
+        //     return `${x.toFixed(2).replace('.00', '')}% ${y.toFixed(2).replace('.00', '')}%`
+        // })
+        // console.log(`polygon(100% 50%, 100% 100%, 0 100%, 0 0, 100% 0, 100% 50%, ${c.join(',')})`);
     }, [info])
+
+    const onboard = () => {
+        document.querySelector(`.${style.head}`).style.position = 'unset'
+        document.querySelector(`.${style.brandHead}`).style.position = 'unset'
+        setIsOnboard(true)
+    }
+
+    useEffect(() => {
+        if (categoryName === 'Sensido') {
+            setTimeout(onboard, 600)
+        }
+    }, [])
 
     const openDescription = () => {
         globalState.modal.setTemplate('brandAbout')
@@ -249,15 +273,22 @@ function Head({ toggleSidebar, isSidebarHidden, categoryName, titleOpacity, isBr
                                 <h1 onClick={toggleSidebar} className={`text--a2 text--bold is-decorative`}>{categoryName}</h1>
                                 <Icon name='dropdown' external={`${style.titleArrow} ${isBrands ? 'is-hidden' : ''}`} width='20' height='20' />
                             </div>
+                            <div className={style.headAddition}>
+                                {categoryName === 'Sensido'
+                                    ? <div data-onboard={isOnboard} className={`${style.colorCircle} ml-1`}>
+                                        <div onClick={() => setIsOnboard(false)} className={style.onboard}>
+                                            <div className={`${style.onboardText} text--p4 text--normal`}>Нажмите на иконку, чтобы открыть цветовой круг Освальда для бренда SensiDO</div>
+                                            <div className={`${style.onboardLink} text--t5 text--bold text--upper`}>Понятно</div>
+                                        </div>
+                                        <div onClick={openColors} className={style.colorIcon}>
+                                            <Image src='/images/brands/icon-colors.png' width='20' height='20' alt='color picker' />
+                                        </div>
+                                    </div>
+                                    : null
+                                }
 
-                            {categoryName === 'Sensido'
-                                ? <div onClick={openColors} className={`${style.colorCircle} ml-1`}>
-                                    <Icon name='colorPicker' width='20' height='20' />
-                                </div>
-                                : null
-                            }
-
-                            <Share isBrands={isBrands} name={info.name} />
+                                <Share isBrands={isBrands} name={info.name} />
+                            </div>
                         </div>
 
                         <div onClick={openDescription} className={`${style.aboutBrand} text--t5 text--upper text--bold`}>Подробнее о бренде</div>
