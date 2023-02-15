@@ -40,7 +40,7 @@ export default function Card({ info, updated }) {
         if (typeof window === 'undefined' || window.innerWidth > globalState.sizes.lg) return
         const offsetX = Math.abs(dragInfo.offset.x)
         const offsetY = Math.abs(dragInfo.offset.y)
-        const imageWidth = refImages.current.clientWidth + 1
+        const imageWidth = refImages.current.clientWidth
 
         if (offsetX > 40 && offsetY < 40) {
             if (dragInfo.offset.x > 0 && activeImage === 0) {
@@ -49,20 +49,20 @@ export default function Card({ info, updated }) {
             }
 
             if (dragInfo.offset.x < 0 && activeImage === info.images.length - 1) {
-                animateDrag.start({ x: imageWidth * -(info.images.length - 1), transition: { duration: 0.1 } })
+                animateDrag.start({ x: -imageWidth * (info.images.length - 1), transition: { duration: 0.1 } })
                 return
             }
 
             if (dragInfo.offset.x < 0) {
                 setActiveImage(prev => {
                     prev++
-                    animateDrag.start({ x: imageWidth * -prev, transition: { duration: 0.1 } })
+                    animateDrag.start({ x: -imageWidth * prev, transition: { duration: 0.1 } })
                     return prev
                 })
             } else {
                 setActiveImage(prev => {
                     prev--
-                    animateDrag.start({ x: imageWidth * -prev, transition: { duration: 0.1 } })
+                    animateDrag.start({ x: -imageWidth * prev, transition: { duration: 0.1 } })
                     return prev
                 })
             }

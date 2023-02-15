@@ -1,0 +1,70 @@
+@import '../../mixins/helpers/media';
+
+.dropdown {
+    z-index: 4;
+    position: relative;
+
+    &[data-open='true'] {
+        .dropList {
+            opacity: 1;
+            pointer-events: all;
+        }
+
+        .dropdownIcon {
+            transform: rotate(180deg);
+        }
+    }
+}
+
+.dropdownActive {
+    display: flex;
+    cursor: pointer;
+    transition: .3s;
+    align-items: center;
+
+    &:hover {
+        color: var(--t-primary);
+    }
+
+    .dropdownIcon {
+        transition: .3s;
+        margin-left: 6px;
+        transform: translateY(-1px);
+    }
+}
+
+.dropList {
+    left: 0;
+    top: 1.5em;
+    opacity: 0;
+    z-index: 4;
+    display: flex;
+    transition: .3s;
+    min-width: 237px;
+    padding: 8px 16px;
+    position: absolute;
+    border-radius: 8px;
+    pointer-events: none;
+    flex-direction: column;
+    background-color: var(--t-background);
+    box-shadow: 0px 4px 15px 3px rgba(0, 0, 0, 0.12);
+
+    >* {
+        cursor: pointer;
+        padding: 14px 0;
+        transition: .3s;
+
+        &:hover {
+            color: var(--t-primary);
+        }
+
+        &[data-active='true'] {
+            font-weight: 700;
+        }
+    }
+
+    @include media-breakpoint(xl-up) {
+        right: 0;
+        left: auto;
+    }
+}

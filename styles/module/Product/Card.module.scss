@@ -102,11 +102,11 @@
 
     @include media-breakpoint(md-down) {
         opacity: 1;
-        width: 100%;
         flex-grow: 0;
+        margin: 0 2px;
         flex-shrink: 0;
-        margin-right: 2px;
         position: relative;
+        width: calc(100% - 4px);
     }
 }
 

@@ -16,6 +16,7 @@ import ColorPicker from '../../components/usefull/form/ColorPicker'
 import ItemsPicker from '../../components/usefull/form/ItemsPicker'
 import InputSwitch from '../../components/usefull/form/InputSwitch'
 import ItemChecker from '../../components/usefull/form/ItemChecker'
+import Dropdown from '../../components/usefull/Dropdown'
 
 export default function Catalog({ detail }) {
     const c = detail.currentCategory
@@ -34,23 +35,10 @@ export default function Catalog({ detail }) {
     const refTitle = useRef(null)
     const router = useRouter()
 
-    useEffect(() => {
-        globalState.catalog = {
-            setSelectedFilter,
-        }
-        setProducts(cards)
-        setIsSidebarHidden(window.innerWidth < globalState.sizes.xl)
-    }, [])
-
     const updateProducts = () => {
         setProducts('updated')
         setTimeout(() => setProducts(cards), 1500)
     }
-
-    useEffect(() => {
-        globalState.catalog.selectedFilter = selectedFilter
-        updateProducts()
-    }, [selectedFilter])
 
     const toggleSidebar = () => {
         setIsSidebarHidden(!isSidebarHidden)
@@ -134,6 +122,31 @@ export default function Catalog({ detail }) {
         }
     }
 
+    const sortHandler = data => {
+        if (!data) return
+        const value = data.getAttribute('data-value')
+        if (!value) return
+
+        globalState.catalog.setSelectedFilter(prev => {
+            const prevCopy = Object.assign({}, prev)
+            prevCopy.sort = value
+            return prevCopy
+        })
+    }
+
+    useEffect(() => {
+        globalState.catalog = {
+            setSelectedFilter,
+        }
+        setProducts(cards)
+        setIsSidebarHidden(window.innerWidth < globalState.sizes.xl)
+    }, [])
+
+    useEffect(() => {
+        globalState.catalog.selectedFilter = selectedFilter
+        updateProducts()
+    }, [selectedFilter])
+
     return (
         <MainLayout title={`Каталог | ${c.name}`}>
             <Breadcrumbs theme={parentInfo ? parentInfo.theme : false} />
@@ -151,7 +164,14 @@ export default function Catalog({ detail }) {
 
                 <div className='d-flex col pl-3:xl pr-1:xl flex--between'>
                     <div className='is-hidden--lg-down text--t5 text--bold text--upper text--color-small'>НАЙДЕНО 668 ТОВАРОВ</div>
-                    <div className='text--t5 text--bold text--upper'>Популярные</div>
+                    <Dropdown title='Популярные' external='text--t5 text--bold text--upper' afterChose={sortHandler}>
+                        <>
+                            <span data-value='popular' data-active='true' className='text--t4'>Популярные</span>
+                            <span data-value='new' className='text--t4'>Новинки</span>
+                            <span data-value='price-down' className='text--t4'>Цена по возрастанию</span>
+                            <span data-value='price-up' className='text--t4'>Цена по убыванию</span>
+                        </>
+                    </Dropdown>
                     {filters && filters.length
                         ? <div onClick={openFilters} className='is-hidden--xl-up text--t5 text--bold text--upper'>фильтры</div>
                         : null
