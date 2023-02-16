@@ -1,12 +1,14 @@
-import { useState, useEffect, useRef } from 'react'
-import 'rc-slider/assets/index.css'
 import Range from 'rc-slider'
+import 'rc-slider/assets/index.css'
+import { useState, useEffect, useRef } from 'react'
+import { debounce } from '../../helpers/debounce'
 import { globalState } from '../../helpers/globalState'
 
 export default function InputRange({ min, max, code }) {
-    const [rangeValue, setRangeValue] = useState([min, max])
     const [isChanged, setIsChanged] = useState(false)
+    const [rangeValue, setRangeValue] = useState([min, max])
     const [valusesLocale, setValusesLocale] = useState({min: 0, max: 0})
+    const [inputFocus, setInputFocus] = useState(false)
     const refInputMin = useRef(null)
     const refInputMax = useRef(null)
 
@@ -55,11 +57,22 @@ export default function InputRange({ min, max, code }) {
         }
     }
 
-    const changeHandler = event => {
+    const onChange = event => {
         setRangeValue(event)
-        refInputMin.current.value = toLoc(event[0])
-        refInputMax.current.value = toLoc(event[1])
+        const loc0 = toLoc(event[0])
+        const loc1 = toLoc(event[1])
+        if (refInputMin.current.value !== loc0) {
+            refInputMin.current.value = loc0
+            setInputFocus('min')
+        }
+
+        if (refInputMax.current.value !== loc1) {
+            refInputMax.current.value = loc1
+            setInputFocus('max')
+        }
     }
+
+    const changeHandler = debounce(onChange, 5)
 
     const resetHandler = () => {
         setIsChanged(false)
@@ -85,6 +98,7 @@ export default function InputRange({ min, max, code }) {
             prevCopy[code] = [...event]
             return prevCopy
         })
+        setInputFocus(false)
     }
 
     useEffect(() => {
@@ -104,8 +118,9 @@ export default function InputRange({ min, max, code }) {
                     ref={refInputMin}
                     className='input'
                     onFocus={focusHandler}
-                    onBlur={() => blurHandler('min')}
                     placeholder={valusesLocale.min}
+                    onBlur={() => blurHandler('min')}
+                    data-focus={inputFocus === 'min'}
                     onChange={event => changeInput(event, 'min')} />
                 <div style={{ minWidth: '40px', textAlign: 'center', color: '#989898' }}>–</div>
                 <input
@@ -113,8 +128,9 @@ export default function InputRange({ min, max, code }) {
                     ref={refInputMax}
                     className='input'
                     onFocus={focusHandler}
-                    onBlur={() => blurHandler('max')}
                     placeholder={valusesLocale.max}
+                    onBlur={() => blurHandler('max')}
+                    data-focus={inputFocus === 'max'}
                     onChange={event => changeInput(event, 'max')} />
             </div>
 

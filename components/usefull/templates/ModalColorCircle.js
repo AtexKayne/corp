@@ -22,7 +22,7 @@ export default function ModalColorCircle() {
     return (
         <div className={`full-height`}>
             <div className={`${style.title} text--upper text--a4 text--bold pb-5`}>
-                <span>Хроматический круг для красок sensido</span>
+                <span>Хроматический круг<br/>для красок sensido</span>
             </div>
 
             <div data-fullsize={isMax} className={`${style.colorCircle}`}>
