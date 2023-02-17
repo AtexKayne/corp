@@ -95,8 +95,8 @@ export default function Catalog({ detail }) {
         refCategories.current.querySelectorAll(`.${style.categoryWrapper}`).forEach(el => {
             el.setAttribute('data-selected', 'false')
         })
-        const prevItem = refCategories.current.querySelector('.is-decorative')
-        if (prevItem) prevItem.classList.remove('is-decorative')
+        const prevItem = refCategories.current.querySelector(`.${style.active}`)
+        if (prevItem) prevItem.classList.remove(style.active)
     }
 
     const openFilters = () => {
@@ -141,8 +141,14 @@ export default function Catalog({ detail }) {
         refCategories.current.querySelectorAll(`.${style.categoryWrapper}`).forEach(el => {
             el.setAttribute('data-selected', 'none')
         })
+        active.querySelector(`.${style.category}`).classList.add(style.active)
         active.setAttribute('data-selected', true)
         recursiveSelect(active)
+        active.childNodes.forEach(el => {
+            if (el.classList.contains(style.categoryWrapper)) {
+                el.setAttribute('data-selected', false)
+            }
+        })
     }, [])
 
     useEffect(() => {
@@ -188,7 +194,7 @@ export default function Catalog({ detail }) {
                             <Addition />
 
                             <div onClick={resetSelection} className={`${style.catalogPrev} text--t4 text--bold`}>
-                                <span>{detail.isBrands ? 'Все бренды' : 'Каталог товаров'}</span>
+                                <span>Каталог товаров</span>
                             </div>
 
                             <Categories categories={detail.categories} selectCategory={selectCategory} />
@@ -272,7 +278,7 @@ function Head({ toggleSidebar, isSidebarHidden, categoryName, titleOpacity, isBr
     if (isBrands) {
         // return null
         return (
-            <div className={`${themeHead} ${imageOverlay ? 'mb-2 mb-3.5:md mb-4:lg mb-6:xl' : 'mb-1.5 mb-2:md mb-3:xxl'}`}>
+            <div className={`${themeHead} ${imageOverlay ? 'mb-2 mb-3.5:md mb-4:lg mb-5:xl mb-6:xxxl' : 'mb-1.5 mb-2:md mb-3:xxl'}`}>
                 {imageOverlay
                     ? <div className={style.imageOverlay}><Image src={imageOverlay} layout='fill' alt={info.name} /></div>
                     : null
@@ -293,7 +299,7 @@ function Head({ toggleSidebar, isSidebarHidden, categoryName, titleOpacity, isBr
                             </div>
                             <div className={style.headAddition}>
                                 {categoryName === 'Sensido'
-                                    ? <div data-onboard={isOnboard} className={`${style.colorCircle} ml-1`}>
+                                    ? <div data-onboard={isOnboard} className={`${style.colorCircle} ml-1:xl`}>
                                         <div onClick={() => setIsOnboard(false)} className={style.onboard}>
                                             <div className={`${style.onboardText} text--p4 text--normal`}>Нажмите на иконку, чтобы открыть цветовой круг Освальда для бренда SensiDO</div>
                                             <div className={`${style.onboardLink} text--t5 text--bold text--upper`}>Понятно</div>
@@ -316,11 +322,11 @@ function Head({ toggleSidebar, isSidebarHidden, categoryName, titleOpacity, isBr
         )
     } else {
         return (
-            <div className={`${style.head} row mb-2 mb-3:md`}>
+            <div className={`${style.head} row mb-2 mb-3:md  pt-1.5`}>
 
                 <div data-shown={!isSidebarHidden} data-opacity={titleOpacity} className={`${style.title}`}>
                     <h1 onClick={toggleSidebar} className={`text--a2 text--bold`}>{categoryName}</h1>
-                    <Icon name='dropdown' external={style.titleArrow} width='20' height='20' />
+                    <Icon name='dropdown' external={`${style.titleArrow} is-hidden--xl-up`} width='20' height='20' />
                 </div>
 
                 {info ? <Share isBrands={isBrands} name={info.name} /> : null}
@@ -331,6 +337,17 @@ function Head({ toggleSidebar, isSidebarHidden, categoryName, titleOpacity, isBr
 
 function Share({ name, isBrands }) {
     const [isOpen, setIsOpen] = useState(false)
+    const [isFavourite, setIsFavourite] = useState(false)
+
+    const favouriteHandler = () => {
+        const text = !isFavourite ? 'ТЕПЕРЬ В ИЗБРАННОМ' : 'БОЛЬШЕ НЕ В ИЗБРАННОМ'
+        setIsFavourite(!isFavourite)
+        globalState.popover.setTextPrimary(`${isBrands ? 'Бренд' : 'Раздел'} ${name}`)
+        globalState.popover.setImage(false)
+        globalState.popover.setTextSecondary(text)
+        globalState.popover.setIsBasket(false)
+        globalState.popover.setIsOpen(true)
+    }
 
     const documentClick = () => {
         setIsOpen(false)
@@ -357,11 +374,19 @@ function Share({ name, isBrands }) {
     }
 
     return (
-        <div data-open={isOpen} className={`${style.share} is-hidden--sm-down ml-1.5`}>
-            <div onClick={open} className={style.iconShare}>
+        <div data-open={isOpen} className={`${style.share}`}>
+            <div
+                onClick={favouriteHandler}
+                data-active={isFavourite}
+                className={`${style.favourite} btn btn--empty`}>
+                <Icon name='heartMD' width='24' height='21' />
+                <Icon name='heartFill' width='24' height='21' />
+            </div>
+            
+            <div onClick={open} className={`${style.iconShare} is-hidden--sm-down`}>
                 <Icon name='share' width='24' height='24' />
             </div>
-            <div className={style.additionalShare}>
+            <div className={`${style.additionalShare} is-hidden--sm-down`}>
                 <div className={`${style.iconShare} btn btn--grey btn--xs`}>
                     <Icon name='VK' width='15' height='15' />
                 </div>
@@ -439,15 +464,21 @@ function Addition() {
     return (
         <div className={style.additional}>
             <Link href={`/catalog/hit`}>
-                <a href={`/catalog/hit`} className='d-flex flex--align-center mb-0.8'>
+                <a href={`/catalog/hit`} className='d-flex flex--align-center mb-2'>
                     <Image src='/images/catalog/categorys/hit-xs.svg' width='24' height='24' alt='Хиты' />
-                    <div className='ml-0.5 text--t4'>Хиты</div>
+                    <div className='ml-0.5 pr-1:xxl col text--t4 d-flex flex--between flex--align-center'>
+                        <span>Хиты</span>
+                        <Icon external={style.categoryIcon} name='chevronRight' width='12' height='16'/>
+                    </div>
                 </a>
             </Link>
             <Link href={`/catalog/new`}>
-                <a href={`/catalog/new`} className='d-flex flex--align-center mb-0.8'>
+                <a href={`/catalog/new`} className='d-flex flex--align-center mb-2'>
                     <Image src='/images/catalog/categorys/new-xs.svg' width='24' height='24' alt='Новинки' />
-                    <div className='ml-0.5 text--t4'>Новинки</div>
+                    <div className='ml-0.5 pr-1:xxl col text--t4 d-flex flex--between flex--align-center'>
+                        <span>Новинки</span>
+                        <Icon external={style.categoryIcon} name='chevronRight' width='12' height='16'/>
+                    </div>
                 </a>
             </Link>
         </div>
@@ -470,11 +501,11 @@ function Categories({ categories, selectCategory }) {
         const target = event.target
         const parent = target.parentElement
         const siblings = parent.childNodes
+        const prevItem = refWrapper.current.querySelector('.is-decorative')
         let siblingsCount = 0
 
-        const prevItem = refWrapper.current.querySelector('.is-decorative')
-        if (prevItem) prevItem.classList.remove('is-decorative')
-        target.classList.add('is-decorative')
+        if (prevItem) prevItem.classList.remove(style.active)
+        target.classList.add(style.active)
 
         refWrapper.current.querySelectorAll(`.${style.categoryWrapper}`).forEach(el => {
             el.setAttribute('data-selected', 'none')
@@ -502,10 +533,13 @@ function Categories({ categories, selectCategory }) {
     }
 
     return (
-        <div ref={refWrapper}>
+        <div className='pr-1:xxl' ref={refWrapper}>
             {categories.map(include1 => (
                 <div data-selected='false' data-id={include1.id} key={include1.id} className={style.categoryWrapper}>
-                    <div key={include1.id} onClick={e => select(include1, e)} className={style.category}>{include1.name}</div>
+                    <div key={include1.id} onClick={e => select(include1, e)} className={style.category}>
+                        <span>{include1.name}</span>
+                        <Icon external={`${style.categoryIcon} is-decorative`} name='chevronRight' width='12' height='16'/>
+                    </div>
 
                     {include1.include_sections
                         ? include1.include_sections.map(include2 => (
@@ -565,7 +599,7 @@ function SidebarHead({ activeCategory, toggleSidebar, isBrands }) {
         <div className={`${style.wrapper} is-hidden--lg-down`}>
             <div data-selected={!!activeCategory} className={`${style.selector} d-flex flex--align-center text--t5 text--upper text--bold`}>
                 {isBrands
-                    ? <span className={`is-hidden--xl`}>Фильтры</span>
+                    ? <span className={`is-hidden--lg-down`}>Фильтры</span>
                     : <>
                         <span>Категории</span>
                         <span className={`${style.sidebarFilterText} is-hidden--xl`}>&nbsp;и фильтры</span>

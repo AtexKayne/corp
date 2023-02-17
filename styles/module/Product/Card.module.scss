@@ -202,3 +202,37 @@
         }
     }
 }
+
+.favourite {
+    top: 8px;
+    right: 9px;
+    z-index: 3;
+    position: absolute;
+
+    &[data-active='false'] {
+        >*:first-child {
+            display: block;
+        }
+
+        >*:last-child {
+            display: none;
+        }
+    }
+
+    &[data-active='true'] {
+        color: var(--t-primary);
+
+        >*:first-child {
+            display: none;
+        }
+
+        >*:last-child {
+            display: block;
+        }
+    }
+
+    @include media-breakpoint(xl-up) {
+        top: 24px;
+        right: 20px;
+    }
+}

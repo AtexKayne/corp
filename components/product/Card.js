@@ -9,6 +9,7 @@ import CardBuy from './CardBuy'
 import { globalState } from '../helpers/globalState'
 
 export default function Card({ info, updated }) {
+    const [isFavourite, setIsFavourite] = useState(false)
     const [isSelected, setIsSelected] = useState(false)
     const [activeImage, setActiveImage] = useState(0)
     const [isNotify, setIsNotify] = useState(false)
@@ -17,6 +18,16 @@ export default function Card({ info, updated }) {
     const animateDrag = useAnimationControls()
     const refImages = useRef(null)
     const refRect = useRef(false)
+
+    const favouriteHandler = () => {
+        const text = !isFavourite ? 'ТЕПЕРЬ В ИЗБРАННОМ' : 'БОЛЬШЕ НЕ В ИЗБРАННОМ'
+        setIsFavourite(!isFavourite)
+        globalState.popover.setTextPrimary(info.secondaryName)
+        globalState.popover.setImage(info.images[0])
+        globalState.popover.setTextSecondary(text)
+        globalState.popover.setIsBasket(false)
+        globalState.popover.setIsOpen(true)
+    }
 
     const resizeHandler = () => {
         refRect.current = refImages.current.getBoundingClientRect()
@@ -103,6 +114,14 @@ export default function Card({ info, updated }) {
                         <div key={image} data-active={activeImage === index} />
                     ))}
                 </div>
+            </div>
+
+            <div
+                onClick={favouriteHandler}
+                data-active={isFavourite}
+                className={`${style.favourite} btn btn--empty`}>
+                <Icon name='heartMD' width='24' height='21' />
+                <Icon name='heartFill' width='24' height='21' />
             </div>
 
             <div className='text--t6 text--normal text--upper pb-0.6 pt-1.5'>{info.primaryName}</div>
