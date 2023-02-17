@@ -4,6 +4,7 @@ import Icon from '../../Icon'
 
 export default function InputSearch({ children, count, selectedCount, setSelectedCount, code }) {
     const [isChanged, setIsChanged] = useState(!!selectedCount)
+    const refInput = useRef(null)
 
     useEffect(() => {
         setIsChanged(!!selectedCount)
@@ -44,16 +45,24 @@ export default function InputSearch({ children, count, selectedCount, setSelecte
         setIsSearched(items === childrens.length)
     }
 
+    const clearHandler = () => {
+        refInput.current.value = ''
+        refInput.current.focus()
+        const event = { target: refInput.current }
+        changeHandler(event)
+    }
+
     return (
         <>
             <div>
-                {
-                    count >= 7
-                        ? <label className='input-search mb-1'>
-                            <input onChange={changeHandler} type='text' className='input' placeholder='Поиск' />
-                            <Icon external='input-search__icon' name='search' width='18' height='18' />
-                        </label>
-                        : null
+                {count >= 7
+                    ? <label className='input-search mb-1'>
+                        <input ref={refInput} onChange={changeHandler} type='text' className='input' placeholder='Поиск' />
+                        <Icon external='input-search__icon' name='search' width='18' height='18' />
+                        <span onClick={clearHandler} className='input-search__icon-clear'>
+                            <Icon name='close' width='18' height='18' />
+                        </span>
+                    </label> : null
                 }
                 <div ref={refSearched} className='searched-childrens'>
                     {children}

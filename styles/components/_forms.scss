@@ -59,7 +59,25 @@
     &__icon {
         right: 0;
         bottom: 13px;
+        transition: .3s;
         position: absolute;
+        pointer-events: none;
+    }
+    
+    &__icon-clear {
+        right: 0;
+        opacity: 0;
+        z-index: 2;
+        width: 18px;
+        height: 18px;
+        bottom: 13px;
+        cursor: pointer;
+        transition: .3s;
+        position: absolute;
+
+        &:hover {
+            color: var(--t-primary);
+        }
     }
 
     &__empty {
@@ -68,6 +86,15 @@
         &[data-searched='true'] {
             display: block;
         }
+    }
+
+    .input:focus ~ .input-search__icon {
+        opacity: 0;
+
+    }
+
+    .input:focus ~ .input-search__icon-clear {
+        opacity: 1;
     }
 }
 
