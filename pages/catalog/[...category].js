@@ -501,7 +501,7 @@ function Categories({ categories, selectCategory }) {
         const target = event.target
         const parent = target.parentElement
         const siblings = parent.childNodes
-        const prevItem = refWrapper.current.querySelector('.is-decorative')
+        const prevItem = refWrapper.current.querySelector(`.${style.active}`)
         let siblingsCount = 0
 
         if (prevItem) prevItem.classList.remove(style.active)
@@ -537,7 +537,7 @@ function Categories({ categories, selectCategory }) {
             {categories.map(include1 => (
                 <div data-selected='false' data-id={include1.id} key={include1.id} className={style.categoryWrapper}>
                     <div key={include1.id} onClick={e => select(include1, e)} className={style.category}>
-                        <span>{include1.name}</span>
+                        <span className='is-decorative'>{include1.name}</span>
                         <Icon external={`${style.categoryIcon} is-decorative`} name='chevronRight' width='12' height='16'/>
                     </div>
 
