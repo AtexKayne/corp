@@ -15,11 +15,29 @@
             width: 577px;
             height: 577px;
         }
+
+        .max {
+            right: 30px;
+            bottom: 30px;
+            position: fixed;
+
+            >*:first-child {
+                display: none;
+            }
+            
+            >*:last-child {
+                display: block;
+            }
+        }
     }
 
     @include media-breakpoint(sm-down) {
         &[data-fullsize='true'] {
             margin: 0 -16px;
+
+            .max {
+                bottom: 70px;
+            }
         }
     }
 
@@ -34,12 +52,6 @@
                 left: 20px;
                 width: 70vh;
                 height: 70vh;
-            }
-
-            .max {
-                right: 30px;
-                bottom: 30px;
-                position: fixed;
             }
         }
     }
@@ -236,6 +248,10 @@
         transition: .3s;
     }
 
+    > *:last-child {
+        display: none;
+    }
+
     &:hover {
         // color: var(--t-primary);
 
@@ -263,6 +279,10 @@
         transition: 0s;
         overflow: hidden;
         pointer-events: none;
+    }
+
+    @include media-breakpoint(sm-down) {
+        padding-bottom: 80px;
     }
 }
 

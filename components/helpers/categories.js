@@ -1,3 +1,450 @@
+export const cats = {
+    "success": true,
+    "data": [
+        {
+            id: 1,
+            filter: [
+                { id: 666, code: "price", name: "Цена" },
+                { id: 708, code: "brand", name: "Бренд" },
+                { id: 981, code: "vid", name: "Вид товара" },
+                { id: 751, code: "proizvodstvo", name: "Производство" },
+                { id: 566, code: 'market', name: 'Есть в ФМ' },
+                { id: 466, code: 'available', name: 'Только в наличии' }
+            ],
+            coloristic: null,
+            url: "1-level",
+            name: "Первый уровень 1",
+            parent_id: null,
+            include_sections: [
+                {
+                    id: 11,
+                    filter: [
+                        { id: 666, code: "price", name: "Цена" },
+                        { id: 708, code: "brand", name: "Бренд" },
+                        { id: 981, code: "vid", name: "Вид товара" },
+                        { id: 751, code: "proizvodstvo", name: "Производство" },
+                        { id: 753, code: "color", name: "Цвет" },
+                        { id: 754, code: "pitanie", name: "Питание" },
+                        { id: 566, code: 'market', name: 'Есть в ФМ' },
+                        { id: 466, code: 'available', name: 'Только в наличии' }
+                    ],
+                    coloristic: null,
+                    url: "1-2-level-1",
+                    name: "Второй уровень 1",
+                    depth_level: 2,
+                    parent_id: 1,
+                    include_sections: [
+                        {
+                            id: 111,
+                            filter: [
+                                { id: 666, code: "price", name: "Цена" },
+                                { id: 708, code: "brand", name: "Бренд" },
+                                { id: 981, code: "vid", name: "Вид товара" },
+                                { id: 751, code: "proizvodstvo", name: "Производство" },
+                                { id: 753, code: "color", name: "Цвет" },
+                                { id: 754, code: "pitanie", name: "Питание" },
+                                { id: 566, code: 'market', name: 'Есть в ФМ' },
+                                { id: 466, code: 'available', name: 'Только в наличии' }
+                            ],
+                            coloristic: null,
+                            url: "1-3-level-1",
+                            name: "Третий уровень 1",
+                            depth_level: 3,
+                            parent_id: 11,
+                            include_sections: [
+                                {
+                                    id: 1111,
+                                    filter: [
+                                        { id: 666, code: "price", name: "Цена" },
+                                        { id: 708, code: "brand", name: "Бренд" },
+                                        { id: 981, code: "vid", name: "Вид товара" },
+                                        { id: 751, code: "proizvodstvo", name: "Производство" },
+                                        { id: 753, code: "color", name: "Цвет" },
+                                        { id: 754, code: "pitanie", name: "Питание" },
+                                        { id: 566, code: 'market', name: 'Есть в ФМ' },
+                                        { id: 466, code: 'available', name: 'Только в наличии' }
+                                    ],
+                                    coloristic: null,
+                                    url: "1-4-level-1",
+                                    name: "Четвертый уровень 1",
+                                    depth_level: 3,
+                                    parent_id: 111
+                                },
+                                {
+                                    id: 1112,
+                                    filter: [
+                                        { id: 666, code: "price", name: "Цена" },
+                                        { id: 708, code: "brand", name: "Бренд" },
+                                        { id: 981, code: "vid", name: "Вид товара" },
+                                        { id: 751, code: "proizvodstvo", name: "Производство" },
+                                        { id: 753, code: "color", name: "Цвет" },
+                                        { id: 754, code: "pitanie", name: "Питание" },
+                                        { id: 566, code: 'market', name: 'Есть в ФМ' },
+                                        { id: 466, code: 'available', name: 'Только в наличии' }
+                                    ],
+                                    coloristic: null,
+                                    url: "1-4-level-2",
+                                    name: "Четвертый уровень 2",
+                                    depth_level: 3,
+                                    parent_id: 111
+                                },
+                            ]
+                        },
+                        {
+                            id: 112,
+                            filter: [
+                                { id: 666, code: "price", name: "Цена" },
+                                { id: 708, code: "brand", name: "Бренд" },
+                                { id: 981, code: "vid", name: "Вид товара" },
+                                { id: 751, code: "proizvodstvo", name: "Производство" },
+                                { id: 753, code: "color", name: "Цвет" },
+                                { id: 754, code: "pitanie", name: "Питание" },
+                                { id: 566, code: 'market', name: 'Есть в ФМ' },
+                                { id: 466, code: 'available', name: 'Только в наличии' }
+                            ],
+                            coloristic: null,
+                            url: "1-3-level-2",
+                            name: "Третий уровень 2",
+                            depth_level: 3,
+                            parent_id: 11
+                        },
+                    ]
+                },
+                {
+                    id: 12,
+                    filter: [
+                        { id: 666, code: "price", name: "Цена" },
+                        { id: 708, code: "brand", name: "Бренд" },
+                        { id: 981, code: "vid", name: "Вид товара" },
+                        { id: 751, code: "proizvodstvo", name: "Производство" },
+                        { id: 753, code: "color", name: "Цвет" },
+                        { id: 754, code: "pitanie", name: "Питание" },
+                        { id: 566, code: 'market', name: 'Есть в ФМ' },
+                        { id: 466, code: 'available', name: 'Только в наличии' }
+                    ],
+                    coloristic: null,
+                    url: "1-2-level-2",
+                    name: "Второй уровень 2",
+                    depth_level: 2,
+                    parent_id: 1
+                },
+                {
+                    id: 13,
+                    filter: [
+                        { id: 666, code: "price", name: "Цена" },
+                        { id: 708, code: "brand", name: "Бренд" },
+                        { id: 981, code: "vid", name: "Вид товара" },
+                        { id: 751, code: "proizvodstvo", name: "Производство" },
+                        { id: 753, code: "color", name: "Цвет" },
+                        { id: 754, code: "pitanie", name: "Питание" },
+                        { id: 566, code: 'market', name: 'Есть в ФМ' },
+                        { id: 466, code: 'available', name: 'Только в наличии' }
+                    ],
+                    coloristic: null,
+                    url: "1-2-level-3",
+                    name: "Второй уровень 3",
+                    depth_level: 2,
+                    parent_id: 1
+                },
+            ]
+        },
+        {
+            id: 2,
+            filter: [
+                { id: 666, code: "price", name: "Цена" },
+                { id: 708, code: "brand", name: "Бренд" },
+                { id: 981, code: "vid", name: "Вид товара" },
+                { id: 751, code: "proizvodstvo", name: "Производство" },
+                { id: 566, code: 'market', name: 'Есть в ФМ' },
+                { id: 466, code: 'available', name: 'Только в наличии' }
+            ],
+            coloristic: null,
+            url: "2-level",
+            name: "Первый уровень 2",
+            parent_id: null,
+            include_sections: [
+                {
+                    id: 21,
+                    filter: [
+                        { id: 666, code: "price", name: "Цена" },
+                        { id: 708, code: "brand", name: "Бренд" },
+                        { id: 981, code: "vid", name: "Вид товара" },
+                        { id: 751, code: "proizvodstvo", name: "Производство" },
+                        { id: 753, code: "color", name: "Цвет" },
+                        { id: 754, code: "pitanie", name: "Питание" },
+                        { id: 566, code: 'market', name: 'Есть в ФМ' },
+                        { id: 466, code: 'available', name: 'Только в наличии' }
+                    ],
+                    coloristic: null,
+                    url: "2-2-level-1",
+                    name: "Второй уровень 1",
+                    depth_level: 2,
+                    parent_id: 2,
+                    include_sections: [
+                        {
+                            id: 211,
+                            filter: [
+                                { id: 666, code: "price", name: "Цена" },
+                                { id: 708, code: "brand", name: "Бренд" },
+                                { id: 981, code: "vid", name: "Вид товара" },
+                                { id: 751, code: "proizvodstvo", name: "Производство" },
+                                { id: 753, code: "color", name: "Цвет" },
+                                { id: 754, code: "pitanie", name: "Питание" },
+                                { id: 566, code: 'market', name: 'Есть в ФМ' },
+                                { id: 466, code: 'available', name: 'Только в наличии' }
+                            ],
+                            coloristic: null,
+                            url: "2-3-level-1",
+                            name: "Третий уровень 1",
+                            depth_level: 3,
+                            parent_id: 21,
+                            include_sections: [
+                                {
+                                    id: 2111,
+                                    filter: [
+                                        { id: 666, code: "price", name: "Цена" },
+                                        { id: 708, code: "brand", name: "Бренд" },
+                                        { id: 981, code: "vid", name: "Вид товара" },
+                                        { id: 751, code: "proizvodstvo", name: "Производство" },
+                                        { id: 753, code: "color", name: "Цвет" },
+                                        { id: 754, code: "pitanie", name: "Питание" },
+                                        { id: 566, code: 'market', name: 'Есть в ФМ' },
+                                        { id: 466, code: 'available', name: 'Только в наличии' }
+                                    ],
+                                    coloristic: null,
+                                    url: "2-4-level-1",
+                                    name: "Четвертый уровень 1",
+                                    depth_level: 3,
+                                    parent_id: 211
+                                },
+                                {
+                                    id: 2112,
+                                    filter: [
+                                        { id: 666, code: "price", name: "Цена" },
+                                        { id: 708, code: "brand", name: "Бренд" },
+                                        { id: 981, code: "vid", name: "Вид товара" },
+                                        { id: 751, code: "proizvodstvo", name: "Производство" },
+                                        { id: 753, code: "color", name: "Цвет" },
+                                        { id: 754, code: "pitanie", name: "Питание" },
+                                        { id: 566, code: 'market', name: 'Есть в ФМ' },
+                                        { id: 466, code: 'available', name: 'Только в наличии' }
+                                    ],
+                                    coloristic: null,
+                                    url: "2-4-level-2",
+                                    name: "Четвертый уровень 2",
+                                    depth_level: 3,
+                                    parent_id: 211
+                                },
+                            ]
+                        },
+                        {
+                            id: 212,
+                            filter: [
+                                { id: 666, code: "price", name: "Цена" },
+                                { id: 708, code: "brand", name: "Бренд" },
+                                { id: 981, code: "vid", name: "Вид товара" },
+                                { id: 751, code: "proizvodstvo", name: "Производство" },
+                                { id: 753, code: "color", name: "Цвет" },
+                                { id: 754, code: "pitanie", name: "Питание" },
+                                { id: 566, code: 'market', name: 'Есть в ФМ' },
+                                { id: 466, code: 'available', name: 'Только в наличии' }
+                            ],
+                            coloristic: null,
+                            url: "2-3-level-2",
+                            name: "Третий уровень 2",
+                            depth_level: 3,
+                            parent_id: 21
+                        },
+                    ]
+                },
+                {
+                    id: 22,
+                    filter: [
+                        { id: 666, code: "price", name: "Цена" },
+                        { id: 708, code: "brand", name: "Бренд" },
+                        { id: 981, code: "vid", name: "Вид товара" },
+                        { id: 751, code: "proizvodstvo", name: "Производство" },
+                        { id: 753, code: "color", name: "Цвет" },
+                        { id: 754, code: "pitanie", name: "Питание" },
+                        { id: 566, code: 'market', name: 'Есть в ФМ' },
+                        { id: 466, code: 'available', name: 'Только в наличии' }
+                    ],
+                    coloristic: null,
+                    url: "2-2-level-2",
+                    name: "Второй уровень 2",
+                    depth_level: 2,
+                    parent_id: 2
+                },
+                {
+                    id: 23,
+                    filter: [
+                        { id: 666, code: "price", name: "Цена" },
+                        { id: 708, code: "brand", name: "Бренд" },
+                        { id: 981, code: "vid", name: "Вид товара" },
+                        { id: 751, code: "proizvodstvo", name: "Производство" },
+                        { id: 753, code: "color", name: "Цвет" },
+                        { id: 754, code: "pitanie", name: "Питание" },
+                        { id: 566, code: 'market', name: 'Есть в ФМ' },
+                        { id: 466, code: 'available', name: 'Только в наличии' }
+                    ],
+                    coloristic: null,
+                    url: "2-2-level-3",
+                    name: "Второй уровень 3",
+                    depth_level: 2,
+                    parent_id: 2
+                },
+            ]
+        },
+        {
+            id: 3,
+            filter: [
+                { id: 666, code: "price", name: "Цена" },
+                { id: 708, code: "brand", name: "Бренд" },
+                { id: 981, code: "vid", name: "Вид товара" },
+                { id: 751, code: "proizvodstvo", name: "Производство" },
+                { id: 566, code: 'market', name: 'Есть в ФМ' },
+                { id: 466, code: 'available', name: 'Только в наличии' }
+            ],
+            coloristic: null,
+            url: "3-level",
+            name: "Первый уровень 3",
+            parent_id: null,
+            include_sections: [
+                {
+                    id: 31,
+                    filter: [
+                        { id: 666, code: "price", name: "Цена" },
+                        { id: 708, code: "brand", name: "Бренд" },
+                        { id: 981, code: "vid", name: "Вид товара" },
+                        { id: 751, code: "proizvodstvo", name: "Производство" },
+                        { id: 753, code: "color", name: "Цвет" },
+                        { id: 754, code: "pitanie", name: "Питание" },
+                        { id: 566, code: 'market', name: 'Есть в ФМ' },
+                        { id: 466, code: 'available', name: 'Только в наличии' }
+                    ],
+                    coloristic: null,
+                    url: "3-2-level-1",
+                    name: "Второй уровень 1",
+                    depth_level: 2,
+                    parent_id: 3,
+                    include_sections: [
+                        {
+                            id: 311,
+                            filter: [
+                                { id: 666, code: "price", name: "Цена" },
+                                { id: 708, code: "brand", name: "Бренд" },
+                                { id: 981, code: "vid", name: "Вид товара" },
+                                { id: 751, code: "proizvodstvo", name: "Производство" },
+                                { id: 753, code: "color", name: "Цвет" },
+                                { id: 754, code: "pitanie", name: "Питание" },
+                                { id: 566, code: 'market', name: 'Есть в ФМ' },
+                                { id: 466, code: 'available', name: 'Только в наличии' }
+                            ],
+                            coloristic: null,
+                            url: "3-3-level-1",
+                            name: "Третий уровень 1",
+                            depth_level: 3,
+                            parent_id: 31,
+                            include_sections: [
+                                {
+                                    id: 3111,
+                                    filter: [
+                                        { id: 666, code: "price", name: "Цена" },
+                                        { id: 708, code: "brand", name: "Бренд" },
+                                        { id: 981, code: "vid", name: "Вид товара" },
+                                        { id: 751, code: "proizvodstvo", name: "Производство" },
+                                        { id: 753, code: "color", name: "Цвет" },
+                                        { id: 754, code: "pitanie", name: "Питание" },
+                                        { id: 566, code: 'market', name: 'Есть в ФМ' },
+                                        { id: 466, code: 'available', name: 'Только в наличии' }
+                                    ],
+                                    coloristic: null,
+                                    url: "3-4-level-1",
+                                    name: "Четвертый уровень 1",
+                                    depth_level: 3,
+                                    parent_id: 311
+                                },
+                                {
+                                    id: 3112,
+                                    filter: [
+                                        { id: 666, code: "price", name: "Цена" },
+                                        { id: 708, code: "brand", name: "Бренд" },
+                                        { id: 981, code: "vid", name: "Вид товара" },
+                                        { id: 751, code: "proizvodstvo", name: "Производство" },
+                                        { id: 753, code: "color", name: "Цвет" },
+                                        { id: 754, code: "pitanie", name: "Питание" },
+                                        { id: 566, code: 'market', name: 'Есть в ФМ' },
+                                        { id: 466, code: 'available', name: 'Только в наличии' }
+                                    ],
+                                    coloristic: null,
+                                    url: "3-4-level-2",
+                                    name: "Четвертый уровень 2",
+                                    depth_level: 3,
+                                    parent_id: 311
+                                },
+                            ]
+                        },
+                        {
+                            id: 312,
+                            filter: [
+                                { id: 666, code: "price", name: "Цена" },
+                                { id: 708, code: "brand", name: "Бренд" },
+                                { id: 981, code: "vid", name: "Вид товара" },
+                                { id: 751, code: "proizvodstvo", name: "Производство" },
+                                { id: 753, code: "color", name: "Цвет" },
+                                { id: 754, code: "pitanie", name: "Питание" },
+                                { id: 566, code: 'market', name: 'Есть в ФМ' },
+                                { id: 466, code: 'available', name: 'Только в наличии' }
+                            ],
+                            coloristic: null,
+                            url: "3-3-level-2",
+                            name: "Третий уровень 2",
+                            depth_level: 3,
+                            parent_id: 31
+                        },
+                    ]
+                },
+                {
+                    id: 22,
+                    filter: [
+                        { id: 666, code: "price", name: "Цена" },
+                        { id: 708, code: "brand", name: "Бренд" },
+                        { id: 981, code: "vid", name: "Вид товара" },
+                        { id: 751, code: "proizvodstvo", name: "Производство" },
+                        { id: 753, code: "color", name: "Цвет" },
+                        { id: 754, code: "pitanie", name: "Питание" },
+                        { id: 566, code: 'market', name: 'Есть в ФМ' },
+                        { id: 466, code: 'available', name: 'Только в наличии' }
+                    ],
+                    coloristic: null,
+                    url: "3-2-level-2",
+                    name: "Второй уровень 2",
+                    depth_level: 2,
+                    parent_id: 3
+                },
+                {
+                    id: 23,
+                    filter: [
+                        { id: 666, code: "price", name: "Цена" },
+                        { id: 708, code: "brand", name: "Бренд" },
+                        { id: 981, code: "vid", name: "Вид товара" },
+                        { id: 751, code: "proizvodstvo", name: "Производство" },
+                        { id: 753, code: "color", name: "Цвет" },
+                        { id: 754, code: "pitanie", name: "Питание" },
+                        { id: 566, code: 'market', name: 'Есть в ФМ' },
+                        { id: 466, code: 'available', name: 'Только в наличии' }
+                    ],
+                    coloristic: null,
+                    url: "3-2-level-3",
+                    name: "Второй уровень 3",
+                    depth_level: 2,
+                    parent_id: 3
+                },
+            ]
+        },
+    ]
+}
+
 export const categories = {
     "success": true,
     "data": [
@@ -982,7 +1429,67 @@ export const categories = {
                             "depth_level": 3,
                             "img_mini": null,
                             "img_big": null,
-                            "parent_id": 1955
+                            "parent_id": 1955,
+                            "include_sections": [
+                                {
+                                    "id": 9999,
+                                    "filter": [
+                                        {
+                                            "id": 666,
+                                            "code": "price",
+                                            "name": "Цена"
+                                        },
+                                        {
+                                            "id": 708,
+                                            "code": "brand",
+                                            "name": "Бренд"
+                                        },
+                                        {
+                                            "id": 758,
+                                            "code": "material",
+                                            "name": "Материал"
+                                        },
+                                        {
+                                            "id": 981,
+                                            "code": "vid",
+                                            "name": "Вид товара"
+                                        },
+                                        {
+                                            "id": 751,
+                                            "code": "proizvodstvo",
+                                            "name": "Производство"
+                                        },
+                                        {
+                                            "id": 753,
+                                            "code": "color",
+                                            "name": "Цвет"
+                                        },
+                                        {
+                                            "id": 801,
+                                            "code": "diametr_brash",
+                                            "name": "Диаметр, мм"
+                                        },
+                                        {
+                                            "id": 802,
+                                            "code": "material_brash",
+                                            "name": "Ручка"
+                                        },
+                                        {
+                                            "id": 804,
+                                            "code": "zubci_schetina",
+                                            "name": "Зубчики и щетинки"
+                                        }
+                                    ],
+                                    "coloristic": null,
+                                    "logo": "",
+                                    "url": "https://redharemarket.ru/catalog/test-1/",
+                                    "name": "4 уровень",
+                                    "depth_level": 4,
+                                    "img_mini": null,
+                                    "img_big": null,
+                                    "parent_id": 1955,
+                                }
+                            ]
                         },
                         {
                             "id": 1957,

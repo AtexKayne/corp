@@ -244,3 +244,14 @@
         cursor: pointer;
     }
 }
+
+.range-delim {
+    min-width: 40px;
+    color: #989898;
+    text-align: center;
+
+    @include media-breakpoint(xl) {
+        opacity: 0;
+        min-width: 10px;
+    }
+}

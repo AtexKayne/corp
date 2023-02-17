@@ -122,7 +122,7 @@ export default function InputRange({ min, max, code }) {
                     onBlur={() => blurHandler('min')}
                     data-focus={inputFocus === 'min'}
                     onChange={event => changeInput(event, 'min')} />
-                <div style={{ minWidth: '40px', textAlign: 'center', color: '#989898' }}>–</div>
+                <div className='range-delim'>–</div>
                 <input
                     type='tel'
                     ref={refInputMax}

@@ -1,9 +1,9 @@
+import { useRouter } from 'next/router'
+import { useState, useEffect, useRef } from 'react'
+import { globalState } from '../../components/helpers/globalState'
 import { cards, filters } from '../../components/helpers/constants'
 import style from '../../styles/module/Catalog/Catalog.module.scss'
-import { globalState } from '../../components/helpers/globalState'
-import { categories } from '../../components/helpers/categories'
-import { useState, useEffect, useRef } from 'react'
-import { useRouter } from 'next/router'
+import { cats as categories } from '../../components/helpers/categories'
 
 import Link from 'next/link'
 import Image from 'next/image'
@@ -11,28 +11,24 @@ import Icon from '../../components/Icon'
 import Card from '../../components/product/Card'
 import MainLayout from '../../layout/MainLayout'
 import Breadcrumbs from '../../components/Breadcrumbs'
+import Dropdown from '../../components/usefull/Dropdown'
 import InputRange from '../../components/usefull/form/InputRange'
 import ColorPicker from '../../components/usefull/form/ColorPicker'
 import ItemsPicker from '../../components/usefull/form/ItemsPicker'
 import InputSwitch from '../../components/usefull/form/InputSwitch'
 import ItemChecker from '../../components/usefull/form/ItemChecker'
-import Dropdown from '../../components/usefull/Dropdown'
 
 export default function Catalog({ detail }) {
     const c = detail.currentCategory
-    const parentInfo = c.parent_id !== null
-        ? detail.categories.filter(category => category.id === c.parent_id)[0]
-        : c
-    const [activeCategory, setActiveCategory] = useState(c.parent_id ?? c.id)
-    const [activeSubCategory, setActiveSubCategory] = useState(c.id)
     const [isSidebarHidden, setIsSidebarHidden] = useState('new')
+    const [activeCategory, setActiveCategory] = useState(c.id)
     const [selectedFilter, setSelectedFilter] = useState({})
     const [categoryName, setCategoryName] = useState(c.name)
     const [titleOpacity, setTitleOpacity] = useState(false)
     const [products, setProducts] = useState('updated')
     const [filters, setFilters] = useState(c.filter)
     const [info, setInfo] = useState(c)
-    const refTitle = useRef(null)
+    const refCategories = useRef(null)
     const router = useRouter()
 
     const updateProducts = () => {
@@ -56,8 +52,8 @@ export default function Catalog({ detail }) {
     const updateFilters = filters => {
         const updated = [
             ...filters,
-            { code: 'market', name: 'Есть в ФМ', id: 566 },
-            { code: 'available', name: 'Только в наличии', id: 466 },
+            // { code: 'market', name: 'Есть в ФМ', id: 566 },
+            // { code: 'available', name: 'Только в наличии', id: 466 },
         ]
 
         return window.innerWidth < globalState.sizes.xl
@@ -79,37 +75,28 @@ export default function Catalog({ detail }) {
     }
 
     const selectCategory = info => {
+        refCategories.current.style.pointerEvents = 'none'
         setInfo(info)
         setActiveCategory(info.id)
-        setActiveSubCategory(info.id)
         updateCategoryName(info.name)
         updateFilters(info.filter)
         routerPush(info.url)
         updateProducts()
         // closeWrapper()
-    }
-
-    const selectSubCategory = info => {
-        setInfo(info)
-        setActiveSubCategory(info.id)
-        updateCategoryName(info.name)
-        updateFilters(info.filter)
-        routerPush(info.url)
-        closeWrapper()
-        updateProducts()
+        setTimeout(() => refCategories.current.style.pointerEvents = '', 1500)
     }
 
     const resetSelection = () => {
-        if (detail.isBrands) {
-            router.push('/brands')
-        } else {
-            setActiveCategory(false)
-            setActiveSubCategory(false)
-            updateCategoryName('Каталог товаров')
-            setFilters(false)
-            routerPush('main')
-            updateProducts()
-        }
+        setActiveCategory(false)
+        updateCategoryName('Каталог товаров')
+        setFilters(false)
+        routerPush('main')
+        updateProducts()
+        refCategories.current.querySelectorAll(`.${style.categoryWrapper}`).forEach(el => {
+            el.setAttribute('data-selected', 'false')
+        })
+        const prevItem = refCategories.current.querySelector('.is-decorative')
+        if (prevItem) prevItem.classList.remove('is-decorative')
     }
 
     const openFilters = () => {
@@ -134,12 +121,28 @@ export default function Catalog({ detail }) {
         })
     }
 
+    const recursiveSelect = item => {
+        const parent = item.parentElement
+        if (parent.classList.contains(style.categoryWrapper)) {
+            parent.setAttribute('data-selected', 'true')
+            recursiveSelect(parent)
+        }
+    }
+
     useEffect(() => {
         globalState.catalog = {
             setSelectedFilter,
         }
         setProducts(cards)
         setIsSidebarHidden(window.innerWidth < globalState.sizes.xl)
+        if (!activeCategory || detail.isBrands) return
+        const active = refCategories.current.querySelector(`[data-id="${activeCategory}"]`)
+        if (!active) return
+        refCategories.current.querySelectorAll(`.${style.categoryWrapper}`).forEach(el => {
+            el.setAttribute('data-selected', 'none')
+        })
+        active.setAttribute('data-selected', true)
+        recursiveSelect(active)
     }, [])
 
     useEffect(() => {
@@ -149,10 +152,10 @@ export default function Catalog({ detail }) {
 
     return (
         <MainLayout title={`Каталог | ${c.name}`}>
-            <Breadcrumbs theme={parentInfo ? parentInfo.theme : false} />
+            <Breadcrumbs theme={c.theme ? c.theme : false} />
 
             <Head
-                info={parentInfo}
+                info={info}
                 isBrands={detail.isBrands}
                 categoryName={categoryName}
                 titleOpacity={titleOpacity}
@@ -160,7 +163,7 @@ export default function Catalog({ detail }) {
                 isSidebarHidden={isSidebarHidden} />
 
             <div className='d-flex mb-2 p-relative'>
-                <SidebarHead activeCategory={activeCategory} toggleSidebar={toggleSidebar} />
+                <SidebarHead activeCategory={activeCategory} toggleSidebar={toggleSidebar} isBrands={detail.isBrands} />
 
                 <div className='d-flex col pl-3:xl pr-1:xl flex--between'>
                     <div className='is-hidden--lg-down text--t5 text--bold text--upper text--color-small'>НАЙДЕНО 668 ТОВАРОВ</div>
@@ -180,21 +183,17 @@ export default function Catalog({ detail }) {
             </div>
             <div className='d-flex'>
                 <div data-hidden={isSidebarHidden} className={`${style.wrapper} ${detail.isBrands ? style.wrapperBrand : ''}`}>
-                    <div className={`${style.categories}`} data-selected={!!activeCategory}>
-                        <Addition isBrands={detail.isBrands} />
+                    {!detail.isBrands
+                        ? <div ref={refCategories} className={`${style.categories}`} data-selected={!!activeCategory}>
+                            <Addition />
 
-                        <div onClick={resetSelection} className={`${style.catalogPrev} text--t4 text--bold`}>
-                            <Icon name='chevronLeft' width='16' height='16' />
-                            <span>{detail.isBrands ? 'Все бренды' : 'Каталог товаров'}</span>
-                        </div>
+                            <div onClick={resetSelection} className={`${style.catalogPrev} text--t4 text--bold`}>
+                                <span>{detail.isBrands ? 'Все бренды' : 'Каталог товаров'}</span>
+                            </div>
 
-                        <Categories
-                            categories={detail.categories}
-                            activeCategory={activeCategory}
-                            selectCategory={selectCategory}
-                            selectSubCategory={selectSubCategory}
-                            activeSubCategory={activeSubCategory} />
-                    </div>
+                            <Categories categories={detail.categories} selectCategory={selectCategory} />
+                        </div> : null
+                    }
 
                     {filters && filters.length
                         ? <div className={style.filters}>
@@ -221,12 +220,10 @@ function Head({ toggleSidebar, isSidebarHidden, categoryName, titleOpacity, isBr
     const [imageLogo, setImageLogo] = useState('/icons/icon-empty.svg')
     const [imageOverlay, setImageOverlay] = useState(null)
     const [themeHead, setThemeHead] = useState('ui-light')
-    const [description, setDescription] = useState('')
     const [isOnboard, setIsOnboard] = useState(false)
 
     useEffect(() => {
-        if (isBrands && info.parent_id === null) {
-            setDescription(info.description)
+        if (isBrands) {
             setImageOverlay(info.img_big ? info.img_big : false)
             setImageLogo(info.logo)
             if (info.theme === 'dark') {
@@ -266,6 +263,7 @@ function Head({ toggleSidebar, isSidebarHidden, categoryName, titleOpacity, isBr
     }
 
     const openColors = () => {
+        setIsOnboard(false)
         globalState.modal.setTemplate('colorCircle')
         globalState.modal.setIsZero(true)
         globalState.modal.setIsOpen(true)
@@ -286,7 +284,7 @@ function Head({ toggleSidebar, isSidebarHidden, categoryName, titleOpacity, isBr
                         : <div className='mr-1.5 px-1 py-1 is-hidden--lg-down'><Image src={imageLogo} width='100' height='100' alt={info.name} /></div>
                     }
                     <div className={style.brandInfo}>
-                        <div className={`${style.brandDescription} text--p2 text--normal mb-0.6:xl mb-1.5:xxxl is-hidden--lg-down`}>{description}</div>
+                        <h2 className={`${style.brandDescription} text--p2 text--normal mb-0.6:xl mb-1.5:xxxl is-hidden--lg-down`}>{info.description}</h2>
 
                         <div className={`${style.head} mb-0.5:md mb-0.6:xl mb-1.5:xxxl`}>
                             <div data-shown={!isSidebarHidden} data-opacity={titleOpacity} className={`${style.title}`}>
@@ -437,57 +435,103 @@ function Filter({ name, code }) {
     }
 }
 
-function Addition({ isBrands }) {
-    if (isBrands) return null
-
+function Addition() {
     return (
         <div className={style.additional}>
             <Link href={`/catalog/hit`}>
-                <a href={`/catalog/hit`} className={style.category}>
+                <a href={`/catalog/hit`} className='d-flex flex--align-center mb-0.8'>
                     <Image src='/images/catalog/categorys/hit-xs.svg' width='24' height='24' alt='Хиты' />
-                    <div className='text--t4'>Хиты</div>
+                    <div className='ml-0.5 text--t4'>Хиты</div>
                 </a>
             </Link>
             <Link href={`/catalog/new`}>
-                <a href={`/catalog/new`} className={style.category}>
+                <a href={`/catalog/new`} className='d-flex flex--align-center mb-0.8'>
                     <Image src='/images/catalog/categorys/new-xs.svg' width='24' height='24' alt='Новинки' />
-                    <div className='text--t4'>Новинки</div>
+                    <div className='ml-0.5 text--t4'>Новинки</div>
                 </a>
             </Link>
         </div>
     )
 }
 
-function Categories({ categories, activeCategory, activeSubCategory, selectCategory, selectSubCategory }) {
+function Categories({ categories, selectCategory }) {
     if (!categories) return null
+    const refWrapper = useRef(null)
+
+    const recursiveSelection = target => {
+        const parent = target.parentElement
+        if (parent.classList.contains(style.categoryWrapper)) {
+            parent.setAttribute('data-selected', true)
+            recursiveSelection(parent)
+        }
+    }
+
+    const select = (category, event) => {
+        const target = event.target
+        const parent = target.parentElement
+        const siblings = parent.childNodes
+        let siblingsCount = 0
+
+        const prevItem = refWrapper.current.querySelector('.is-decorative')
+        if (prevItem) prevItem.classList.remove('is-decorative')
+        target.classList.add('is-decorative')
+
+        refWrapper.current.querySelectorAll(`.${style.categoryWrapper}`).forEach(el => {
+            el.setAttribute('data-selected', 'none')
+        })
+
+        recursiveSelection(target)
+
+        siblings.forEach(el => {
+            if (el.classList.contains(style.categoryWrapper)) {
+                el.setAttribute('data-selected', false)
+
+                if (el.childElementCount > 1) siblingsCount++
+            }
+        })
+
+        if (!siblingsCount) {
+            parent.parentElement.childNodes.forEach(el => {
+                if (el.classList.contains(style.categoryWrapper) && el.getAttribute('data-selected') !== 'true') {
+                    el.setAttribute('data-selected', false)
+                }
+            })
+        }
+
+        selectCategory(category)
+    }
 
     return (
-        <div>
-            {categories.map(category => {
-                return (
-                    <div data-active={activeCategory === category.id} key={category.id} className={style.categoryWrapper}>
-                        <div onClick={() => selectCategory(category)} data-selected={activeSubCategory === category.id} className={style.category}>
-                            <span className={style.categoryImage}>
-                                <Image src='/icons/icon-empty.svg' width='24' height='24' alt={category.name} />
-                            </span>
-                            <span className={style.categoryIcon}>
-                                <Icon name='chevronLeft' width='16' height='16' />
-                            </span>
-                            <div className='text--t4'>{category.name}</div>
-                        </div>
-                        {
-                            category.include_sections
-                                ? category.include_sections.map(include => {
-                                    return (
-                                        <div onClick={() => selectSubCategory(include)} data-selected={activeSubCategory === include.id} key={include.id} className={style.subcategory}>
-                                            <div className='text--t4'>{include.name}</div>
+        <div ref={refWrapper}>
+            {categories.map(include1 => (
+                <div data-selected='false' data-id={include1.id} key={include1.id} className={style.categoryWrapper}>
+                    <div key={include1.id} onClick={e => select(include1, e)} className={style.category}>{include1.name}</div>
+
+                    {include1.include_sections
+                        ? include1.include_sections.map(include2 => (
+                            <div data-selected='false' data-id={include2.id} key={include2.id} className={style.categoryWrapper}>
+                                <div key={include2.id} onClick={e => select(include2, e)} className={style.category}>{include2.name}</div>
+
+                                {include2.include_sections
+                                    ? include2.include_sections.map(include3 => (
+                                        <div data-selected='false' data-id={include3.id} key={include3.id} className={style.categoryWrapper}>
+                                            <div key={include3.id} onClick={e => select(include3, e)} className={style.category}>{include3.name}</div>
+
+                                            {include3.include_sections
+                                                ? include3.include_sections.map(include4 => (
+                                                    <div data-selected='false' data-id={include4.id} key={include4.id} className={style.categoryWrapper}>
+                                                        <div key={include4.id} onClick={e => select(include4, e)} className={style.category}>{include4.name}</div>
+                                                    </div>
+                                                )) : null
+                                            }
                                         </div>
-                                    )
-                                }) : null
-                        }
-                    </div>
-                )
-            })}
+                                    )) : null
+                                }
+                            </div>
+                        )) : null
+                    }
+                </div>
+            ))}
         </div>
     )
 }
@@ -516,12 +560,19 @@ function Pagination() {
     )
 }
 
-function SidebarHead({ activeCategory, toggleSidebar }) {
+function SidebarHead({ activeCategory, toggleSidebar, isBrands }) {
     return (
         <div className={`${style.wrapper} is-hidden--lg-down`}>
             <div data-selected={!!activeCategory} className={`${style.selector} d-flex flex--align-center text--t5 text--upper text--bold`}>
-                <span>Категории</span>
-                <span className='is-hidden--xl'>&nbsp;и фильтры</span>
+                {isBrands
+                    ? <span className={`is-hidden--xl`}>Фильтры</span>
+                    : <>
+                        <span>Категории</span>
+                        <span className={`${style.sidebarFilterText} is-hidden--xl`}>&nbsp;и фильтры</span>
+                    </>
+                }
+
+
                 <div className='mr-0.5' />
                 <InputSwitch onAfterChange={toggleSidebar} isActive={true} />
             </div>
@@ -537,6 +588,7 @@ function CardList({ products, isSidebarHidden }) {
                 {fillers.map(product => (
                     <div key={product} className={style.cardFiller}>
                         <div className={style.cardFillerImage} />
+                        <div className={style.cardFillerText} />
                         <div className={style.cardFillerText} />
                         <div className={style.cardFillerText} />
                         <div className={style.cardFillerButton} />
@@ -563,28 +615,41 @@ function CardList({ products, isSidebarHidden }) {
 }
 
 export async function getServerSideProps(context) {
-    const queryCategory = context.query.category
+    const queryCategory = context.query.category[0]
     let resp
-    let currentCategory = {
-        name: 'Каталог товаров',
-        id: 0,
-        parent_id: 0,
-        filter: false,
-    }
+    let currentCategory
+
     const json = {
         categories: categories.data
     }
 
-    if (categories.data) {
-        categories.data.forEach(property => {
-            currentCategory = property.url.includes(`/${queryCategory}/`) ? property : currentCategory
-
+    const recursiveSearch = (categories, url) => {
+        categories.forEach(property => {
+            if (property.url === queryCategory) {
+                currentCategory = property
+                return
+            }
             if (Array.isArray(property['include_sections'])) {
-                property.include_sections.forEach(include => {
-                    currentCategory = include.url.includes(`/${queryCategory}/`) ? include : currentCategory
-                })
+                return recursiveSearch(property['include_sections'], url)
             }
         })
+    }
+
+    // const recursiveSearch = (categories, url) => {
+
+    // }
+
+    if (categories.data) {
+        recursiveSearch(categories.data, queryCategory)
+    }
+
+    if (!currentCategory) {
+        currentCategory = {
+            name: 'Каталог товаров',
+            id: 0,
+            parent_id: 0,
+            filter: false,
+        }
     }
 
     json.currentCategory = currentCategory

@@ -67,6 +67,7 @@ $color-themes: (
         light:         color-use(_light),
         disabled:      color-use(_disabled),
         yellow:        color-use(_disabled),
+        lightest:      color-use(_lightest),
     ),
 
     // 'Dark' theme

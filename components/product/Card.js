@@ -82,6 +82,7 @@ export default function Card({ info, updated }) {
 
     useEffect(() => {
         setTimeout(() => {
+            if (!refImages.current) return
             refRect.current = refImages.current.getBoundingClientRect()
         }, 400)
     }, updated)

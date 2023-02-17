@@ -43,6 +43,7 @@ export default function Icon({ name, external = '', width = 16, height = 16, siz
             share: dynamic(() => import('../public/icons/icon-share-android.svg'), { ssr: false }),
             colorPicker: dynamic(() => import('../public/icons/icon-color-picker.svg'), { ssr: false }),
             maximize: dynamic(() => import('../public/icons/icon-maximize.svg'), { ssr: false }),
+            minimize: dynamic(() => import('../public/icons/icon-minimize.svg'), { ssr: false }),
             // 
         }
         const Component = dynamicComponents[iconName]
