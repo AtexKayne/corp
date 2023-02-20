@@ -389,7 +389,7 @@ function Share({ name, isBrands }) {
             <div onClick={open} className={`${style.iconShare} is-hidden--sm-down`}>
                 <Icon name='share' width='24' height='24' />
             </div>
-            <div className={`${style.additionalShare} is-hidden--sm-down`}>
+            <div className={`${style.additionalShare} ui-light is-hidden--sm-down`}>
                 <div className={`${style.iconShare} btn btn--grey btn--xs`}>
                     <Icon name='VK' width='15' height='15' />
                 </div>

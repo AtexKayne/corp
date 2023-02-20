@@ -178,7 +178,7 @@
     @include media-breakpoint(xl-up) {
         width: auto;
         position: absolute;
-        
+
         &[data-toggled='true'] {
             left: 0;
             padding-left: 0;
@@ -292,8 +292,8 @@
     &[data-selected='true'] {
         .additional {
             height: 0;
+            margin: 0;
             opacity: 0;
-            margin-bottom: 0;
         }
 
         .catalogPrev {
