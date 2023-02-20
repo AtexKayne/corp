@@ -3,6 +3,7 @@
 .dropdown {
     z-index: 4;
     position: relative;
+    pointer-events: all;
 
     &[data-open='true'] {
         .dropList {

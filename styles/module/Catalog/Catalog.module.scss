@@ -152,6 +152,49 @@
     }
 }
 
+.nav {
+    display: flex;
+    flex-wrap: wrap;
+    position: relative;
+
+    >* {
+        width: 100%;
+    }
+}
+
+.navInner {
+    right: 0;
+    display: flex;
+    position: unset;
+    justify-content: space-between;
+    left: adaptive-value((
+        xs: 0,
+        xl: 196px,
+        xxl: 280px,
+        xxxl: 344px
+    ));
+
+    &[data-toggled='true'] {
+        left: 0;
+        padding-left: 0;
+        pointer-events: none;
+        
+        .navFiller {
+            display: block;
+        }
+    }
+        
+    @include media-breakpoint(xl-up) {
+        width: auto;
+        position: absolute;
+    }
+}
+
+.navFiller {
+    height: 1em;
+    display: none;
+}
+
 // Categories & filters
 .wrapper {
     opacity: 1;

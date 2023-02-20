@@ -29,6 +29,7 @@ export default function Catalog({ detail }) {
     const [filters, setFilters] = useState(c.filter)
     const [info, setInfo] = useState(c)
     const refCategories = useRef(null)
+    const refNav = useRef(null)
     const router = useRouter()
 
     const updateProducts = () => {
@@ -37,6 +38,9 @@ export default function Catalog({ detail }) {
     }
 
     const toggleSidebar = () => {
+        const filler = refNav.current.querySelector(`.${style.navFiller}`)
+        const selector = refNav.current.querySelector(`.${style.selector}`).childNodes[0]
+        filler.style.width = `${selector.clientWidth + 16}px`
         setIsSidebarHidden(!isSidebarHidden)
     }
 
@@ -167,11 +171,10 @@ export default function Catalog({ detail }) {
                 titleOpacity={titleOpacity}
                 toggleSidebar={toggleSidebar}
                 isSidebarHidden={isSidebarHidden} />
-
-            <div className='d-flex mb-2 p-relative'>
+            <div ref={refNav} className={`${style.nav} mb-2`}>
                 <SidebarHead activeCategory={activeCategory} toggleSidebar={toggleSidebar} isBrands={detail.isBrands} />
-
-                <div className='d-flex col pl-3:xl pr-1:xl flex--between'>
+                <div data-toggled={isSidebarHidden && isSidebarHidden !== 'new'} className={`${style.navInner} pl-3:xl pr-1:xl`}>
+                    <div className={style.navFiller} />
                     <div className='is-hidden--lg-down text--t5 text--bold text--upper text--color-small'>НАЙДЕНО 668 ТОВАРОВ</div>
                     <Dropdown title='Популярные' external='text--t5 text--bold text--upper' afterChose={sortHandler}>
                         <>

@@ -8,7 +8,7 @@ export default function InputRange({ min, max, code }) {
     const [isChanged, setIsChanged] = useState(false)
     const [rangeValue, setRangeValue] = useState([min, max])
     const [valusesLocale, setValusesLocale] = useState({min: 0, max: 0})
-    const [inputFocus, setInputFocus] = useState(false)
+    const [inputFocus, setInputFocus] = useState({})
     const refInputMin = useRef(null)
     const refInputMax = useRef(null)
 
@@ -63,13 +63,20 @@ export default function InputRange({ min, max, code }) {
         const loc1 = toLoc(event[1])
         if (refInputMin.current.value !== loc0) {
             refInputMin.current.value = loc0
-            setInputFocus('min')
+            setInputFocus(prev => {
+                prev.min = true
+                return prev
+            })
         }
 
         if (refInputMax.current.value !== loc1) {
             refInputMax.current.value = loc1
-            setInputFocus('max')
+            setInputFocus(prev => {
+                prev.max = true
+                return prev
+            })
         }
+
     }
 
     const changeHandler = debounce(onChange, 5)
@@ -98,7 +105,16 @@ export default function InputRange({ min, max, code }) {
             prevCopy[code] = [...event]
             return prevCopy
         })
-        setInputFocus(false)
+
+        if (event[0] === min) setInputFocus(prev => {
+            prev.min = false
+            return prev
+        })
+        if (event[1] === max) setInputFocus(prev => {
+            prev.max = false
+            return prev
+        })
+        // setInputFocus(false)
     }
 
     useEffect(() => {
@@ -118,9 +134,9 @@ export default function InputRange({ min, max, code }) {
                     ref={refInputMin}
                     className='input'
                     onFocus={focusHandler}
+                    data-focus={inputFocus.min}
                     placeholder={valusesLocale.min}
                     onBlur={() => blurHandler('min')}
-                    data-focus={inputFocus === 'min'}
                     onChange={event => changeInput(event, 'min')} />
                 <div className='range-delim'>–</div>
                 <input
@@ -128,9 +144,9 @@ export default function InputRange({ min, max, code }) {
                     ref={refInputMax}
                     className='input'
                     onFocus={focusHandler}
+                    data-focus={inputFocus.max}
                     placeholder={valusesLocale.max}
                     onBlur={() => blurHandler('max')}
-                    data-focus={inputFocus === 'max'}
                     onChange={event => changeInput(event, 'max')} />
             </div>
 
