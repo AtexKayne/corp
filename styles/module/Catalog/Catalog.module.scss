@@ -174,19 +174,20 @@
         xxxl: 344px
     ));
 
-    &[data-toggled='true'] {
-        left: 0;
-        padding-left: 0;
-        pointer-events: none;
-        
-        .navFiller {
-            display: block;
-        }
-    }
-        
+    
     @include media-breakpoint(xl-up) {
         width: auto;
         position: absolute;
+        
+        &[data-toggled='true'] {
+            left: 0;
+            padding-left: 0;
+            pointer-events: none;
+            
+            .navFiller {
+                display: block;
+            }
+        }
     }
 }
 
