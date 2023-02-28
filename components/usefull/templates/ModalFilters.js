@@ -44,7 +44,7 @@ export default function ModalFilters({ data }) {
 
             <div className={style.footer}>
                 <div onClick={() => globalState.modal.setIsOpen(false)} className={`${style.showBtn} btn btn--primary btn--fill`}>
-                    <span className='text--upper text--p6 text--bold'>Показать 100 товаров</span>
+                    <span className='text--upper text--p5 text--sparse text--bold'>Показать 100 товаров</span>
                 </div>
             </div>
         </div>
