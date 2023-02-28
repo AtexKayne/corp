@@ -143,6 +143,7 @@ export default function Catalog({ detail }) {
     }
 
     const resizeHandler = () => {
+        console.log('r');
         if (window.innerWidth < globalState.sizes.xl) setIsSidebarHidden(true)
     }
 
@@ -154,21 +155,24 @@ export default function Catalog({ detail }) {
         }
         setProducts(cards)
         setIsSidebarHidden(window.innerWidth < globalState.sizes.xl)
+        window.addEventListener('resize', debounceResize)
+
         if (!activeCategory || detail.isBrands) return
         const active = refCategories.current.querySelector(`[data-id="${activeCategory}"]`)
-        if (!active) return
-        refCategories.current.querySelectorAll(`.${style.categoryWrapper}`).forEach(el => {
-            el.setAttribute('data-selected', 'none')
-        })
-        active.querySelector(`.${style.category}`).classList.add(style.active)
-        active.setAttribute('data-selected', true)
-        recursiveSelect(active)
-        active.childNodes.forEach(el => {
-            if (el.classList.contains(style.categoryWrapper)) {
-                el.setAttribute('data-selected', false)
-            }
-        })
-        window.addEventListener('resize', debounceResize)
+
+        if (active) {
+            refCategories.current.querySelectorAll(`.${style.categoryWrapper}`).forEach(el => {
+                el.setAttribute('data-selected', 'none')
+            })
+            active.querySelector(`.${style.category}`).classList.add(style.active)
+            active.setAttribute('data-selected', true)
+            recursiveSelect(active)
+            active.childNodes.forEach(el => {
+                if (el.classList.contains(style.categoryWrapper)) {
+                    el.setAttribute('data-selected', false)
+                }
+            })
+        }
 
         return () => {
             window.removeEventListener('resize', debounceResize)
@@ -193,7 +197,7 @@ export default function Catalog({ detail }) {
                 isSidebarHidden={isSidebarHidden} />
 
             {detail.isBrands ? null : <FastFilter updated={[filters, info]} />}
-            
+
             <div ref={refNav} className={`${style.nav} mb-2`}>
                 <SidebarHead activeCategory={activeCategory} toggleSidebar={toggleSidebar} isBrands={detail.isBrands} />
                 <div data-toggled={isSidebarHidden && isSidebarHidden !== 'new'} className={`${style.navInner} pl-1:xl pr-1:xl`}>
@@ -350,7 +354,7 @@ function Head({ toggleSidebar, isSidebarHidden, categoryName, titleOpacity, isBr
         )
     } else {
         return (
-            <div className={`${style.head} row mb-2 mb-3:md  pt-1.5`}>
+            <div className={`${style.head} row mb-2 pt-1.5`}>
 
                 <div data-shown={!isSidebarHidden} data-opacity={titleOpacity} className={`${style.title}`}>
                     <h1 onClick={toggleSidebar} className={`text--a2 text--bold`}>{categoryName}</h1>
