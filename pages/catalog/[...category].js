@@ -1,5 +1,6 @@
 import { useRouter } from 'next/router'
 import { useState, useEffect, useRef } from 'react'
+import { motion, useAnimationControls } from 'framer-motion'
 import { globalState } from '../../components/helpers/globalState'
 import { cards, filters } from '../../components/helpers/constants'
 import style from '../../styles/module/Catalog/Catalog.module.scss'
@@ -50,7 +51,7 @@ export default function Catalog({ detail }) {
         const filler = refNav.current.querySelector(`.${style.navFiller}`)
         const selector = refNav.current.querySelector(`.${style.selector}`).childNodes[0]
         filler.style.width = `${selector.clientWidth + 16}px`
-        
+
         if (window.innerWidth < globalState.sizes.xl && isSidebarHidden) {
             setTimeout(() => {
                 document.addEventListener('click', documentClickHandler)
@@ -118,7 +119,7 @@ export default function Catalog({ detail }) {
                 return info.filter
             } else return false
         })
-        
+
     }
 
     const sortHandler = data => {
@@ -190,6 +191,7 @@ export default function Catalog({ detail }) {
                 titleOpacity={titleOpacity}
                 toggleSidebar={toggleSidebar}
                 isSidebarHidden={isSidebarHidden} />
+            <FastFilter updated={[filters, info]}/>
             <div ref={refNav} className={`${style.nav} mb-2`}>
                 <SidebarHead activeCategory={activeCategory} toggleSidebar={toggleSidebar} isBrands={detail.isBrands} />
                 <div data-toggled={isSidebarHidden && isSidebarHidden !== 'new'} className={`${style.navInner} pl-1:xl pr-1:xl`}>
@@ -206,7 +208,7 @@ export default function Catalog({ detail }) {
                     <a
                         href='#'
                         onClick={openFilters}
-                        style={{display: filters ? 'block' : 'none'}}
+                        style={{ display: filters ? 'block' : 'none' }}
                         className='is-hidden--xl-up text--t5 link text--bold text--upper'>
                         фильтры
                     </a>
@@ -357,6 +359,70 @@ function Head({ toggleSidebar, isSidebarHidden, categoryName, titleOpacity, isBr
             </div>
         )
     }
+}
+
+function FastFilter({ items, updated }) {
+    const scrollPixels = 200
+    const refWrapper = useRef(0)
+    const refScrollPos = useRef(0)
+    const refScrollLimit = useRef(2)
+    const refScrollOfset = useRef(0)
+    const [position, setPosition] = useState(false)
+    const animateInner = useAnimationControls()
+
+    const scrollTo = to => {
+        if (to == 'prev') {
+            refScrollPos.current = refScrollPos.current - refScrollOfset.current
+            animateInner.start({x: -refScrollPos.current, transition: {duration: 0.5, ease: 'easeInOut'}})
+            if (refScrollPos.current <= scrollPixels) {
+                animateInner.start({x: 0, transition: {duration: 0.4, ease: 'easeInOut'}})
+                refScrollPos.current = 0
+                return setPosition('start')
+            }
+        } else {
+            refScrollPos.current = refScrollPos.current + refScrollOfset.current
+            animateInner.start({x: -refScrollPos.current, transition: {duration: 0.5, ease: 'easeInOut'}})
+            if (refScrollPos.current >= refScrollOfset.current * refScrollLimit.current) return setPosition('end')
+        }
+        setPosition(false)
+    }
+
+    useEffect(() => {
+        const scrollWidth = refWrapper.current.scrollWidth
+        const clientWidth = refWrapper.current.clientWidth
+        
+        if (scrollWidth > clientWidth) {
+            refScrollLimit.current = Math.floor((scrollWidth - clientWidth) / scrollPixels)
+            animateInner.start({x: 0})
+            refScrollPos.current = 0
+            refScrollOfset.current = (scrollWidth - clientWidth) / refScrollLimit.current
+            setPosition('start')
+        } else setPosition('none')
+    }, updated)
+    
+    return (
+        <div ref={refWrapper} className={style.fastFilterWrapper}>
+            <div onClick={() => scrollTo('prev')} data-position={position === 'start' || position === 'none'} className={style.fastFilterPrev}>
+                <Icon name='chevronLeft' width='18' height='18' />
+            </div>
+
+            <motion.div animate={animateInner} className={style.fastFilterInner}>
+                <div className='text--p5 text--upper'>Машинки для стрижки</div>
+                <div className='text--p5 text--upper'>Ножевые блоки</div>
+                <div className='text--p5 text--upper'>Насадки на машинки</div>
+                <div className='text--p5 text--upper'>Спрей и жидкость для ножей</div>
+                <div className='text--p5 text--upper'>Уход за бородой и усами</div>
+                <div className='text--p5 text--upper'>Ножевые блоки</div>
+                <div className='text--p5 text--upper'>Насадки на машинки</div>
+                <div className='text--p5 text--upper'>Спрей и жидкость для ножей</div>
+                <div className='text--p5 text--upper'>Уход за бородой и усами</div>
+            </motion.div>
+
+            <div onClick={() => scrollTo('next')} data-position={position === 'end' || position === 'none'} className={style.fastFilterNext}>
+                <Icon name='chevronRight' width='18' height='18' />
+            </div>
+        </div>
+    )
 }
 
 function Share({ name, isBrands }) {
@@ -596,7 +662,7 @@ function Categories({ categories, selectCategory }) {
     )
 }
 
-function Pagination({isSidebarHidden}) {
+function Pagination({ isSidebarHidden }) {
     const countSelect = () => {
 
     }
