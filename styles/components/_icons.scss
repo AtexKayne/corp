@@ -56,8 +56,10 @@
         justify-content: center;
     }
 
-    &:hover {
-        color: color-use(primary);
+    @include media-breakpoint(md-up) {
+        &:hover {
+            color: color-use(primary);
+        }
     }
 
     &--primary {

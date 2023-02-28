@@ -136,6 +136,13 @@ export default function CardBuy({
 
     const keyDownHandler = event => {
         if (event.keyCode === 13) document.querySelector(`.${style.counterBtnAccept}`).click()
+        else if (event.keyCode === 38) {
+            const newValue = +refInput.current.value + 1
+            if (newValue <= max) refInput.current.value = newValue
+        } else if (event.keyCode === 40) {
+            const newValue = +refInput.current.value - 1
+            if (newValue >= 0) refInput.current.value = newValue
+        }
     }
 
     const blurHandler = () => {
@@ -232,7 +239,7 @@ export default function CardBuy({
                 !isProfi && !isEmpty
                     ? <div className={style.btnWrapper}>
                         <div onClick={buyHandler} data-open={isOpen} className={`${style.btnMain} btn btn--md btn--primary`}>
-                            <span className='text--upper text--p5 text--bold mr-0.8'>в корзину</span>
+                            <span className='text--upper text--p5 text--bold'>в корзину</span>
                         </div>
 
                         <div data-open={isOpen} className={style.buyOpen}>

@@ -17,7 +17,7 @@ export default function ItemChecker({ text = '', code }) {
 
     return (
         <div className='checker'>
-            <label className='input-switch'>
+            <label className='input-switch input-switch--xl'>
                 <input onChange={onAfterChange} value={isChecked} checked={isChecked} type='checkbox' />
                 <div className='input-switch__background' />
                 <div className='input-switch__base' />

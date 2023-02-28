@@ -53,18 +53,6 @@ export default function Catalog({ detail }) {
         })
     }
 
-    const updateFilters = filters => {
-        const updated = [
-            ...filters,
-            // { code: 'market', name: 'Есть в ФМ', id: 566 },
-            // { code: 'available', name: 'Только в наличии', id: 466 },
-        ]
-
-        return window.innerWidth < globalState.sizes.xl
-            ? updated
-            : setFilters(updated)
-    }
-
     const closeWrapper = () => {
         if (window.innerWidth >= globalState.sizes.xl) return
         setTimeout(() => setIsSidebarHidden(true), 600)
@@ -83,7 +71,7 @@ export default function Catalog({ detail }) {
         setInfo(info)
         setActiveCategory(info.id)
         updateCategoryName(info.name)
-        updateFilters(info.filter)
+        setFilters(info.filter)
         routerPush(info.url)
         updateProducts()
         // closeWrapper()
@@ -104,7 +92,7 @@ export default function Catalog({ detail }) {
     }
 
     const openFilters = () => {
-        const filter = updateFilters(info.filter)
+        const filter = setFilters(info.filter)
         if (filter) {
             globalState.modal.setTemplate('filters')
             globalState.modal.setIsZero(true)
@@ -173,7 +161,7 @@ export default function Catalog({ detail }) {
                 isSidebarHidden={isSidebarHidden} />
             <div ref={refNav} className={`${style.nav} mb-2`}>
                 <SidebarHead activeCategory={activeCategory} toggleSidebar={toggleSidebar} isBrands={detail.isBrands} />
-                <div data-toggled={isSidebarHidden && isSidebarHidden !== 'new'} className={`${style.navInner} pl-3:xl pr-1:xl`}>
+                <div data-toggled={isSidebarHidden && isSidebarHidden !== 'new'} className={`${style.navInner} pl-1:xl pr-1:xl`}>
                     <div className={style.navFiller} />
                     <div className='is-hidden--lg-down text--t5 text--bold text--upper text--color-small'>НАЙДЕНО 668 ТОВАРОВ</div>
                     <Dropdown title='Популярные' external='text--t5 text--bold text--upper' afterChose={sortHandler}>
@@ -184,13 +172,16 @@ export default function Catalog({ detail }) {
                             <span data-value='price-up' className='text--t4'>Цена по убыванию</span>
                         </>
                     </Dropdown>
-                    {filters && filters.length
-                        ? <div onClick={openFilters} className='is-hidden--xl-up text--t5 text--bold text--upper'>фильтры</div>
-                        : null
-                    }
+                    <a
+                        href='#'
+                        onClick={openFilters}
+                        style={{display: filters ? 'block' : 'none'}}
+                        className='is-hidden--xl-up text--t5 link text--bold text--upper'>
+                        фильтры
+                    </a>
                 </div>
             </div>
-            <div className='d-flex'>
+            <div className={style.container}>
                 <div data-hidden={isSidebarHidden} className={`${style.wrapper} ${detail.isBrands ? style.wrapperBrand : ''}`}>
                     {!detail.isBrands
                         ? <div ref={refCategories} className={`${style.categories}`} data-selected={!!activeCategory}>
@@ -219,7 +210,6 @@ export default function Catalog({ detail }) {
 
                     <Pagination />
                 </div>
-
             </div>
         </MainLayout>
     )
@@ -385,7 +375,7 @@ function Share({ name, isBrands }) {
                 <Icon name='heartMD' width='24' height='21' />
                 <Icon name='heartFill' width='24' height='21' />
             </div>
-            
+
             <div onClick={open} className={`${style.iconShare} is-hidden--sm-down`}>
                 <Icon name='share' width='24' height='24' />
             </div>
@@ -405,7 +395,7 @@ function Share({ name, isBrands }) {
 }
 
 function Filter({ name, code }) {
-    const { colors, brands, pitanie, proizvodstvo, ves } = filters
+    const { colors, brands, pitanie, proizvodstvo, ves, type } = filters
     const min = 0
     const max = 15000
 
@@ -452,6 +442,8 @@ function Filter({ name, code }) {
                 {code === 'pitanie' ? <ItemsPicker items={pitanie} code={code} /> : null}
                 {code === 'proizvodstvo' ? <ItemsPicker items={proizvodstvo} code={code} /> : null}
                 {code === 'weight_filter' || code === 'ves' ? <ItemsPicker items={ves} code={code} /> : null}
+                {code === 'vid' ? <ItemsPicker items={type} code={code} /> : null}
+
             </div>
         )
     } else {
@@ -471,7 +463,7 @@ function Addition() {
                     <Image src='/images/catalog/categorys/hit-xs.svg' width='24' height='24' alt='Хиты' />
                     <div className='ml-0.5 pr-1:xxl col text--t4 d-flex flex--between flex--align-center'>
                         <span>Хиты</span>
-                        <Icon external={style.categoryIcon} name='chevronRight' width='12' height='16'/>
+                        <Icon external={style.categoryIcon} name='chevronRight' width='12' height='16' />
                     </div>
                 </a>
             </Link>
@@ -480,7 +472,7 @@ function Addition() {
                     <Image src='/images/catalog/categorys/new-xs.svg' width='24' height='24' alt='Новинки' />
                     <div className='ml-0.5 pr-1:xxl col text--t4 d-flex flex--between flex--align-center'>
                         <span>Новинки</span>
-                        <Icon external={style.categoryIcon} name='chevronRight' width='12' height='16'/>
+                        <Icon external={style.categoryIcon} name='chevronRight' width='12' height='16' />
                     </div>
                 </a>
             </Link>
@@ -541,7 +533,7 @@ function Categories({ categories, selectCategory }) {
                 <div data-selected='false' data-id={include1.id} key={include1.id} className={style.categoryWrapper}>
                     <div key={include1.id} onClick={e => select(include1, e)} className={style.category}>
                         <span className='is-decorative'>{include1.name}</span>
-                        <Icon external={`${style.categoryIcon} is-decorative`} name='chevronRight' width='12' height='16'/>
+                        <Icon external={`${style.categoryIcon} is-decorative`} name='chevronRight' width='12' height='16' />
                     </div>
 
                     {include1.include_sections
@@ -574,6 +566,9 @@ function Categories({ categories, selectCategory }) {
 }
 
 function Pagination() {
+    const countSelect = () => {
+
+    }
     return (
         <div className={`${style.pagination}`}>
             <div className={`${style.showBtn} btn btn--primary btn--fill`}>
@@ -581,9 +576,15 @@ function Pagination() {
             </div>
 
             <div className={style.paginationNav}>
-                <div>
-                    <span className='text--upper text--p6'>показывать по</span>
-                    <span className='text--upper text--p5 text--bold ml-0.5'>24</span>
+                <div className='d-flex'>
+                    <span className='text--upper text--p6 mr-0.5'>показывать по</span>
+                    <Dropdown title='24' external='text--upper text--p5 text--bold' afterChose={countSelect}>
+                        <>
+                            <span data-value='24' data-active='true' className='text--t4'>24</span>
+                            <span data-value='36' className='text--t4'>36</span>
+                            <span data-value='48' className='text--t4'>48</span>
+                        </>
+                    </Dropdown>
                 </div>
                 <div className={style.paginationPages}>
                     <div data-active='true'>1</div>

@@ -16,6 +16,8 @@ export default function Card({ info, updated }) {
     const [isHover, setIsHover] = useState(false)
     const [count, setCount] = useState(0)
     const animateDrag = useAnimationControls()
+    const refCardWrapper = useRef(null)
+    const refIsSelected = useRef(false)
     const refImages = useRef(null)
     const refRect = useRef(false)
 
@@ -43,8 +45,19 @@ export default function Card({ info, updated }) {
         setActiveImage(r)
     }
 
+    const bodyMouseMoveHandler = event => {
+        if (refIsSelected.current) return
+        const target = event.target
+        const parent = target.closest(`.${style.card}`)
+        if (!parent || parent !== refCardWrapper.current) setIsHover(false)
+        document.body.removeEventListener('mousemove', bodyMouseMoveHandler)
+    }
+
     const mouseLeaveHandler = () => {
         if (!isSelected) setIsHover(false)
+        else {
+            document.body.addEventListener('mousemove', bodyMouseMoveHandler)
+        }
     }
 
     const dragEdHandler = (event, dragInfo) => {
@@ -92,6 +105,10 @@ export default function Card({ info, updated }) {
     }, [])
 
     useEffect(() => {
+        refIsSelected.current = isSelected
+    }, [isSelected])
+
+    useEffect(() => {
         setTimeout(() => {
             if (!refImages.current) return
             refRect.current = refImages.current.getBoundingClientRect()
@@ -99,7 +116,7 @@ export default function Card({ info, updated }) {
     }, updated)
 
     return (
-        <div data-hover={isHover} onMouseEnter={() => setIsHover(true)} onMouseLeave={mouseLeaveHandler} className={style.card}>
+        <div data-hover={isHover} ref={refCardWrapper} onMouseEnter={() => setIsHover(true)} onMouseLeave={mouseLeaveHandler} className={style.card}>
 
             <div ref={refImages} onMouseLeave={() => setActiveImage(0)} onMouseMove={mouseMoveHandler} className={style.images}>
                 <motion.div animate={animateDrag} drag='x' onDragEnd={dragEdHandler} >
@@ -119,9 +136,17 @@ export default function Card({ info, updated }) {
             <div
                 onClick={favouriteHandler}
                 data-active={isFavourite}
-                className={`${style.favourite} btn btn--empty`}>
+                className={`${style.favourite} btn btn--empty is-hidden--lg-down`}>
                 <Icon name='heartMD' width='24' height='21' />
                 <Icon name='heartFill' width='24' height='21' />
+            </div>
+
+            <div
+                onClick={favouriteHandler}
+                data-active={isFavourite}
+                className={`${style.favourite} btn btn--empty is-hidden--xl-up`}>
+                <Icon name='heartMD' width='20' height='17' />
+                <Icon name='heartFill' width='20' height='17' />
             </div>
 
             <div className='text--t6 text--normal text--upper pb-0.6 pt-1.5'>{info.primaryName}</div>

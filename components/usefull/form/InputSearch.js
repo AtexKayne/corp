@@ -70,8 +70,8 @@ export default function InputSearch({ children, count, selectedCount, setSelecte
                 <div data-searched={isSearched} className='input-search__empty text--t2 text--normal text--color-disabled'>Ничего не найдено</div>
             </div>
 
-            <div data-changed={isChanged} className='reset'>
-                <span onClick={resetHandler} className='text--t6 text--upper text--color-primary'>сбросить</span>
+            <div data-changed={isChanged} onClick={resetHandler} className='reset'>
+                <Icon name='close' width='10' height='10' />
             </div>
         </>
     )

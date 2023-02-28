@@ -3,6 +3,7 @@ import 'rc-slider/assets/index.css'
 import { useState, useEffect, useRef } from 'react'
 import { debounce } from '../../helpers/debounce'
 import { globalState } from '../../helpers/globalState'
+import Icon from '../../Icon'
 
 export default function InputRange({ min, max, code }) {
     const [isChanged, setIsChanged] = useState(false)
@@ -164,8 +165,8 @@ export default function InputRange({ min, max, code }) {
                     onAfterChange={onAfterChange} />
             </div>
 
-            <div data-changed={isChanged} className='reset'>
-                <span onClick={resetHandler} className='text--t6 text--upper text--color-primary'>сбросить</span>
+            <div data-changed={isChanged} onClick={resetHandler} className='reset'>
+                <Icon name='close' width='10' height='10' />
             </div>
         </div>
     )
