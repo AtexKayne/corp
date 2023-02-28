@@ -17,6 +17,7 @@ import ColorPicker from '../../components/usefull/form/ColorPicker'
 import ItemsPicker from '../../components/usefull/form/ItemsPicker'
 import InputSwitch from '../../components/usefull/form/InputSwitch'
 import ItemChecker from '../../components/usefull/form/ItemChecker'
+import { debounce } from '../../components/helpers/debounce'
 
 export default function Catalog({ detail }) {
     const c = detail.currentCategory
@@ -37,10 +38,25 @@ export default function Catalog({ detail }) {
         setTimeout(() => setProducts(cards), 1500)
     }
 
+    const documentClickHandler = event => {
+        const parent = event.target.closest(`.${style.wrapper}`)
+        if (!parent) {
+            setIsSidebarHidden(true)
+            document.removeEventListener('click', documentClickHandler)
+        }
+    }
+
     const toggleSidebar = () => {
         const filler = refNav.current.querySelector(`.${style.navFiller}`)
         const selector = refNav.current.querySelector(`.${style.selector}`).childNodes[0]
         filler.style.width = `${selector.clientWidth + 16}px`
+        
+        if (window.innerWidth < globalState.sizes.xl && isSidebarHidden) {
+            setTimeout(() => {
+                document.addEventListener('click', documentClickHandler)
+            }, 100);
+        }
+
         setIsSidebarHidden(!isSidebarHidden)
     }
 
@@ -91,14 +107,18 @@ export default function Catalog({ detail }) {
         if (prevItem) prevItem.classList.remove(style.active)
     }
 
-    const openFilters = () => {
-        const filter = setFilters(info.filter)
-        if (filter) {
-            globalState.modal.setTemplate('filters')
-            globalState.modal.setIsZero(true)
-            globalState.modal.setData(filter)
-            globalState.modal.setIsOpen(true)
-        }
+    const openFilters = event => {
+        event.preventDefault()
+        setFilters(() => {
+            if (info.filter) {
+                globalState.modal.setTemplate('filters')
+                globalState.modal.setIsZero(true)
+                globalState.modal.setData(info.filter)
+                globalState.modal.setIsOpen(true)
+                return info.filter
+            } else return false
+        })
+        
     }
 
     const sortHandler = data => {
@@ -121,6 +141,12 @@ export default function Catalog({ detail }) {
         }
     }
 
+    const resizeHandler = () => {
+        if (window.innerWidth < globalState.sizes.xl) setIsSidebarHidden(true)
+    }
+
+    const debounceResize = debounce(resizeHandler, 400)
+
     useEffect(() => {
         globalState.catalog = {
             setSelectedFilter,
@@ -141,6 +167,11 @@ export default function Catalog({ detail }) {
                 el.setAttribute('data-selected', false)
             }
         })
+        window.addEventListener('resize', debounceResize)
+
+        return () => {
+            window.removeEventListener('resize', debounceResize)
+        }
     }, [])
 
     useEffect(() => {
@@ -208,7 +239,7 @@ export default function Catalog({ detail }) {
                 <div style={{ width: '100%' }} className='d-flex flex--column'>
                     <CardList products={products} isSidebarHidden={isSidebarHidden} />
 
-                    <Pagination />
+                    <Pagination isSidebarHidden={isSidebarHidden} />
                 </div>
             </div>
         </MainLayout>
@@ -565,14 +596,14 @@ function Categories({ categories, selectCategory }) {
     )
 }
 
-function Pagination() {
+function Pagination({isSidebarHidden}) {
     const countSelect = () => {
 
     }
     return (
-        <div className={`${style.pagination}`}>
+        <div data-open={isSidebarHidden} className={`${style.pagination}`}>
             <div className={`${style.showBtn} btn btn--primary btn--fill`}>
-                <span className='text--upper text--p6 text--bold'>показать еще</span>
+                <span className='text--upper text--p5 text--sparse text--bold'>показать еще</span>
             </div>
 
             <div className={style.paginationNav}>

@@ -2,7 +2,7 @@ import { useState, useEffect, useRef } from 'react'
 import { globalState } from '../../helpers/globalState'
 import Icon from '../../Icon'
 
-export default function InputSearch({ children, count, selectedCount, setSelectedCount, code }) {
+export default function InputSearch({ children, count, selectedCount, setSelectedCount, code, reset = '' }) {
     const [isChanged, setIsChanged] = useState(!!selectedCount)
     const refInput = useRef(null)
 
@@ -71,7 +71,10 @@ export default function InputSearch({ children, count, selectedCount, setSelecte
             </div>
 
             <div data-changed={isChanged} onClick={resetHandler} className='reset'>
-                <Icon name='close' width='10' height='10' />
+                {reset
+                    ? <span className='text--t6 text--upper text--color-primary'>{reset}</span>
+                    : <Icon name='close' width='10' height='10' />
+                }
             </div>
         </>
     )

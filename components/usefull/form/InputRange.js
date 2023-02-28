@@ -5,15 +5,15 @@ import { debounce } from '../../helpers/debounce'
 import { globalState } from '../../helpers/globalState'
 import Icon from '../../Icon'
 
-export default function InputRange({ min, max, code }) {
+export default function InputRange({ min, max, code, reset = '' }) {
     const [isChanged, setIsChanged] = useState(false)
     const [rangeValue, setRangeValue] = useState([min, max])
-    const [valusesLocale, setValusesLocale] = useState({min: 0, max: 0})
+    const [valusesLocale, setValusesLocale] = useState({ min: 0, max: 0 })
     const [inputFocus, setInputFocus] = useState({})
     const refInputMin = useRef(null)
     const refInputMax = useRef(null)
 
-    const toLoc = num => num.toLocaleString('ru-RU', { style: 'currency', currency: 'RUB'}).replace(',00', '')
+    const toLoc = num => num.toLocaleString('ru-RU', { style: 'currency', currency: 'RUB' }).replace(',00', '')
 
     const changeInput = (event, input) => {
         const value = event.target.value.replaceAll(' ', '')
@@ -125,7 +125,7 @@ export default function InputRange({ min, max, code }) {
         })
         setIsChanged(rangeValue[0] !== min || rangeValue[1] !== max)
     }, [rangeValue])
-    
+
 
     return (
         <div>
@@ -166,7 +166,10 @@ export default function InputRange({ min, max, code }) {
             </div>
 
             <div data-changed={isChanged} onClick={resetHandler} className='reset'>
-                <Icon name='close' width='10' height='10' />
+                {reset
+                    ? <span className='text--t6 text--upper text--color-primary'>{reset}</span>
+                    : <Icon name='close' width='10' height='10' />
+                }
             </div>
         </div>
     )

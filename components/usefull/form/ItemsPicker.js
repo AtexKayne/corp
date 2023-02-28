@@ -2,7 +2,7 @@ import { useState, useEffect, useRef } from 'react'
 import { globalState } from '../../helpers/globalState'
 import InputSearch from './InputSearch'
 
-export default function ItemsPicker({ items, code }) {
+export default function ItemsPicker({ items, code, reset = '' }) {
     const [selectedCount, setSelectedCount] = useState(0)
     const onAfterChange = event => {
         const target = event.target
@@ -27,6 +27,7 @@ export default function ItemsPicker({ items, code }) {
     return (
         <InputSearch
             code={code}
+            reset={reset}
             count={items.length}
             selectedCount={selectedCount}
             setSelectedCount={setSelectedCount} >

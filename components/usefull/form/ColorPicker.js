@@ -2,7 +2,7 @@ import { useState, useEffect, useRef } from 'react'
 import { globalState } from '../../helpers/globalState'
 import InputSearch from './InputSearch'
 
-export default function ColorPicker({ colors, code }) {
+export default function ColorPicker({ colors, code, reset = '' }) {
     const refItems = useRef(null)
     const [selectedCount, setSelectedCount] = useState(0)
     const onAfterChange = event => {
@@ -28,6 +28,7 @@ export default function ColorPicker({ colors, code }) {
     return (
         <InputSearch
             code={code}
+            reset={reset}
             count={colors.length}
             selectedCount={selectedCount}
             setSelectedCount={setSelectedCount} >

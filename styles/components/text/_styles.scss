@@ -70,77 +70,35 @@ figure {
     &--a4 { @extend %text--size-a4; }
 }
 
-.text--left { text-align: left;}
-.text--right { text-align: right; }
+.text--left   { text-align: left;   }
+.text--right  { text-align: right;  }
 .text--center { text-align: center; }
 
-.text--thin { font-weight: 300!important; }
-.text--normal { font-weight: 400!important; }
+.text--thin    { font-weight: 300!important; }
+.text--normal  { font-weight: 400!important; }
 .text--regular { font-weight: 400!important; }
-.text--semi { font-weight: 600!important; }
-.text--bold { font-weight: 700!important; }
-.text--no-wrap { white-space: nowrap; }
+.text--semi    { font-weight: 600!important; }
+.text--bold    { font-weight: 700!important; }
+.text--no-wrap { white-space: nowrap;        }
+.text--sparse  { letter-spacing: 1.2px;      }
+.text--upper   { text-transform: uppercase;  }
 
 @include media-breakpoint(md-up) {
-    .text--left\:md {
-        text-align: left;
-    }
-    .text--right\:md {
-        text-align: right;
-    }
-    .text--center\:md {
-        text-align: center;
-    }
+    .text--left\:md   { text-align: left;   }
+    .text--right\:md  { text-align: right;  }
+    .text--center\:md { text-align: center; }
 }
 
 @include media-breakpoint(sm-down) {
-    .text--left\:sm-down {
-        text-align: left;
-    }
-    .text--right\:sm-down {
-        text-align: right;
-    }
-    .text--center\:sm-down {
-        text-align: center;
-    }
+    .text--left\:sm-down   { text-align: left;   }
+    .text--right\:sm-down  { text-align: right;  }
+    .text--center\:sm-down { text-align: center; }
 }
-
-
-/**
- * Prevent text wrapping
- *
- * @demo
- *     <p class='text--nowrap'>
- *         Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum
- *         pharetra sed erat convallis suscipit. Vestibulum at interdum neque.
- *     </p>
- */
-
-.text--nowrap { white-space: nowrap !important; }
-
-
-/**
- * Truncate text adding dots at the end of the line if needed
- *
- * @demo
- *     <p class='text--truncate'>
- *         Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum
- *         pharetra sed erat convallis suscipit. Vestibulum at interdum neque.
- *     </p>
- */
 
 .text--truncate {
     white-space:   nowrap   !important;
     overflow:      hidden   !important;
     text-overflow: ellipsis !important;
-}
-
-.text--upper {
-    text-transform: uppercase;
-}
-
-.text--sparse {
-    letter-spacing: 1.5px;
 }
 
 .text--underline {

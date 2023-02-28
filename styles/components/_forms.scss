@@ -35,9 +35,13 @@
 
 .modal {
     .reset {
+        left: auto;
         z-index: 3;
+        width: auto;
+        height: auto;
+        box-shadow: none;
         position: absolute;
-        top: adaptive-value(( xs: -3px, md: 10px ));
+        top: adaptive-value(( xs: 20px, md: 32px ));
         right: adaptive-value((
             xs: 16px,
             md: 32px,

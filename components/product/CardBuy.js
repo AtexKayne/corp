@@ -67,7 +67,7 @@ export default function CardBuy({
         document.querySelector('head').append(meta)
         const fakeInput = document.createElement('input')
         fakeInput.setAttribute('type', 'tel')
-        fakeInput.style.position = 'absolute'
+        fakeInput.style.position = 'fixed'
         fakeInput.style.opacity = 0
         fakeInput.style.height = 0
         fakeInput.style.fontSize = '30px'

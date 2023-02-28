@@ -3,18 +3,28 @@ import Image from 'next/image'
 import { useEffect } from 'react'
 import { globalState } from './helpers/globalState'
 import style from '../styles/module/Footer.module.scss'
-import useDeviceDetect from '/components/helpers/useDeviceDetect'
+import { debounce } from './helpers/debounce'
 
 export default function Footer() {
-    const { isMobile } = useDeviceDetect()
+    const resizeHandler = () => {
+        const rootHeight = window.innerHeight
+        if (window.innerWidth < globalState.sizes.sm) {
+            document.body.style = `--viewport-height:${rootHeight}px;`
+        } else {
+            document.body.style = `--viewport-height:100vh;`
+        }
+    }
 
+    const debounceResize = debounce(resizeHandler, 100)
+    
     useEffect(() => {
-        // if (isMobile) {
-        //     globalState.body.addClass('is-mobile')
-        // } else {
-        //     globalState.body.removeClass('is-mobile')
-        // }
-    }, [isMobile])
+        resizeHandler()
+        window.addEventListener('resize', debounceResize)
+
+        return () => {
+            window.removeEventListener('resize', debounceResize)
+        }
+    }, [])
 
     return (
         <footer className={style.footer}>

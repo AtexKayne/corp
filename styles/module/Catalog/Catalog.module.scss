@@ -229,10 +229,11 @@
     &[data-hidden='true'] {
         width: 0;
     }
-
+    
     @include media-breakpoint(xl-up) {
         &[data-hidden='true'] {
             opacity: 0;
+            height: 400px;
         }
     }
 
@@ -580,7 +581,11 @@
 // Usefull
 .pagination {
     width: 100%;
-    padding: 16px 32px 20px;
+    padding: 16px 16px 20px 48px;
+
+    &[data-open='true'] {
+        padding: 16px 16px 20px;
+    }
 
     .showBtn {
         min-height: 60px;
@@ -745,19 +750,25 @@
     .colorIcon {
         width: 20px;
         height: 20px;
+        margin-left: 20px;
     }
 
     > * {
         display: block;
     }
-
+    
     @include media-breakpoint(xl-up) {
+        .colorIcon {
+            margin-left: 0;
+        }
+
         .onboardText {
             top: 240px;
             right: auto;
             text-align: left;
             left: calc(50% + 50px);
         }
+
         .onboardLink {
             top: 380px;
             right: auto;
@@ -788,8 +799,8 @@
 }
 
 .favourite {
-    margin: 0 12px;
-    padding: 0 8px;
+    margin: 0 0 0 12px;
+    padding: 0 0 0 8px;
 
     >* {
         transition: .3s opacity;
@@ -819,5 +830,10 @@
             opacity: 1;
             position: relative;
         }
+    }
+
+    @include media-breakpoint(xl-up) {
+        margin: 0 12px;
+        padding: 0 8px;
     }
 }

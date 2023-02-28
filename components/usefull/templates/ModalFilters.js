@@ -25,7 +25,7 @@ export default function ModalFilters({ data }) {
     return (
         <div className={`${style.modalFilters} full-height`}>
             <div className={`${style.title} pb-2`}>
-                <div className={style.closer} onClick={() => globalState.modal.setIsOpen(false)}>
+                <div className={`${style.closer} ${style.closerFiller}`} onClick={() => globalState.modal.setIsOpen(false)}>
                     <Icon name='close' width='20' height='20' />
                 </div>
                 <div className='text--a4 text--bold text-upper'>Фильтры</div>
@@ -71,9 +71,9 @@ function ModalFilterWrapper({ children, name, isChanged }) {
                 </div>
                 {children}
 
-                <div onClick={() => globalState.modal.setIsOpen(false)} className={`${style.showBtn} btn btn--primary btn--fill`}>
+                {/* <div onClick={() => globalState.modal.setIsOpen(false)} className={`${style.showBtn} btn btn--primary btn--fill`}>
                     <span className='text--upper text--p6 text--bold'>Показать 100 товаров</span>
-                </div>
+                </div> */}
             </div>
         </>
     )
@@ -87,38 +87,37 @@ function Filter({ name, code }) {
         <div>
             {code === 'price' ?
                 <div className='pb-3 pt-1.5'>
-                    <InputRange code={code} min={0} max={15000} />
+                    <InputRange code={code} min={0} max={15000} reset='сбросить' />
                 </div>
                 : null}
-
             {code === 'color' ?
                 <ModalFilterWrapper isChanged={isChanged} name={name}>
-                    <ColorPicker code={code} colors={colors} />
+                    <ColorPicker code={code} colors={colors} reset='сбросить' />
                 </ModalFilterWrapper>
                 : null}
             {code === 'brand' ?
                 <ModalFilterWrapper isChanged={isChanged} name={name}>
-                    <ItemsPicker code={code} items={brands} />
+                    <ItemsPicker code={code} items={brands} reset='сбросить' />
                 </ModalFilterWrapper>
                 : null}
             {code === 'pitanie' ?
                 <ModalFilterWrapper isChanged={isChanged} name={name}>
-                    <ItemsPicker code={code} items={pitanie} />
+                    <ItemsPicker code={code} items={pitanie} reset='сбросить' />
                 </ModalFilterWrapper>
                 : null}
             {code === 'proizvodstvo' ?
                 <ModalFilterWrapper isChanged={isChanged} name={name}>
-                    <ItemsPicker code={code} items={proizvodstvo} />
+                    <ItemsPicker code={code} items={proizvodstvo} reset='сбросить' />
                 </ModalFilterWrapper>
                 : null}
             {code === 'weight_filter' || code === 'ves' ?
                 <ModalFilterWrapper isChanged={isChanged} name={name}>
-                    <ItemsPicker code={code} items={ves} />
+                    <ItemsPicker code={code} items={ves} reset='сбросить' />
                 </ModalFilterWrapper>
                 : null}
             {code === 'market' || code === 'available' ?
                 <div className='pt-1.5'>
-                    <ItemChecker code={code} text={name} />
+                    <ItemChecker code={code} text={name} reset='сбросить' />
                 </div>
                 : null}
         </div>
