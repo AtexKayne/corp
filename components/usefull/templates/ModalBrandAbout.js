@@ -8,7 +8,7 @@ export default function ModalBrandAbout() {
     }
 
     return (
-        <div className={``}>
+        <div className={style.brandAbout}>
             <div className='d-flex flex--center'>
                 <Image src='/images/brands/logos/image-1.png' width='100' height='100' />
             </div>
@@ -36,16 +36,17 @@ export default function ModalBrandAbout() {
                         CAS – это новая идеология салона, в которой качество продукции и забота о здоровье – неразделимые понятия.
                     </p>
                 </div>
-                <div className={`pt-1 pb-2`}>
+                <div className={`pt-1 pb-1 pb-2:md`}>
                     <span className='text--p4 text--normal mr-0.5'>Есть вопросы?</span>
                     <a href='#' className='link text--bold text--upper text--p6 text--color-primary'>
                         Напишите в Telegram
                     </a>
                 </div>
+            </div>
+            <div className={style.footer}>
                 <div onClick={clickHandler} className={`${style.button} btn btn--md btn--fill btn--primary`}>
                     <span className='text--upper text--p5 text--bold'>перейти к покупкам</span>
                 </div>
-                <div className='pb-1 pb-1.5:md' />
             </div>
         </div>
     )
