@@ -191,7 +191,9 @@ export default function Catalog({ detail }) {
                 titleOpacity={titleOpacity}
                 toggleSidebar={toggleSidebar}
                 isSidebarHidden={isSidebarHidden} />
-            <FastFilter updated={[filters, info]}/>
+
+            {detail.isBrands ? null : <FastFilter updated={[filters, info]} />}
+            
             <div ref={refNav} className={`${style.nav} mb-2`}>
                 <SidebarHead activeCategory={activeCategory} toggleSidebar={toggleSidebar} isBrands={detail.isBrands} />
                 <div data-toggled={isSidebarHidden && isSidebarHidden !== 'new'} className={`${style.navInner} pl-1:xl pr-1:xl`}>
@@ -373,15 +375,15 @@ function FastFilter({ items, updated }) {
     const scrollTo = to => {
         if (to == 'prev') {
             refScrollPos.current = refScrollPos.current - refScrollOfset.current
-            animateInner.start({x: -refScrollPos.current, transition: {duration: 0.5, ease: 'easeInOut'}})
+            animateInner.start({ x: -refScrollPos.current, transition: { duration: 0.5, ease: 'easeInOut' } })
             if (refScrollPos.current <= scrollPixels) {
-                animateInner.start({x: 0, transition: {duration: 0.4, ease: 'easeInOut'}})
+                animateInner.start({ x: 0, transition: { duration: 0.4, ease: 'easeInOut' } })
                 refScrollPos.current = 0
                 return setPosition('start')
             }
         } else {
             refScrollPos.current = refScrollPos.current + refScrollOfset.current
-            animateInner.start({x: -refScrollPos.current, transition: {duration: 0.5, ease: 'easeInOut'}})
+            animateInner.start({ x: -refScrollPos.current, transition: { duration: 0.5, ease: 'easeInOut' } })
             if (refScrollPos.current >= refScrollOfset.current * refScrollLimit.current) return setPosition('end')
         }
         setPosition(false)
@@ -390,16 +392,16 @@ function FastFilter({ items, updated }) {
     useEffect(() => {
         const scrollWidth = refWrapper.current.scrollWidth
         const clientWidth = refWrapper.current.clientWidth
-        
+
         if (scrollWidth > clientWidth) {
             refScrollLimit.current = Math.floor((scrollWidth - clientWidth) / scrollPixels)
-            animateInner.start({x: 0})
+            animateInner.start({ x: 0 })
             refScrollPos.current = 0
             refScrollOfset.current = (scrollWidth - clientWidth) / refScrollLimit.current
             setPosition('start')
         } else setPosition('none')
     }, updated)
-    
+
     return (
         <div ref={refWrapper} className={style.fastFilterWrapper}>
             <div onClick={() => scrollTo('prev')} data-position={position === 'start' || position === 'none'} className={style.fastFilterPrev}>
