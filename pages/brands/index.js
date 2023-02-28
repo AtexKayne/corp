@@ -63,14 +63,15 @@ export default function Brands({ detail }) {
 
     const navHandler = event => {
         event.preventDefault()
-        const id  = event.target.getAttribute('href')
+        const id = event.target.getAttribute('href')
         const element = document.querySelector(id)
         const topOffset = element.getBoundingClientRect().top + window.scrollY - (stickyOffset + 80)
         window.scrollTo({ top: topOffset, left: 0, behavior: 'smooth' })
     }
 
     const clearHandler = () => {
-
+        refInput.current.value = ''
+        searchHandler({ target: refInput.current })
     }
 
     useEffect(() => {
@@ -97,7 +98,7 @@ export default function Brands({ detail }) {
                 <div data-value={searchValue} className={style.brandLetters}>
                     {detail && detail.length
                         ? detail.map(item => (
-                            <a 
+                            <a
                                 onClick={navHandler}
                                 key={item.letter}
                                 href={`#${item.letter === '0-9' ? 'num' : item.letter}`}
@@ -121,7 +122,7 @@ export default function Brands({ detail }) {
             <div data-empty={!isEmpty} className={`${style.empty} text--t2 text--normal text--color-disabled`}>
                 Такой бренд не найден
             </div>
-            <div className='pb-2 pb-5:md'/>
+            <div className='pb-2 pb-5:md' />
         </MainLayout>
     )
 }

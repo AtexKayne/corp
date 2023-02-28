@@ -25,6 +25,10 @@ export default function ModalColorCircle() {
                 <span>Хроматический круг<br />для красок sensido</span>
             </div>
 
+            <div onClick={() => setIsMax(false)} data-maxed={isMax} className={style.backBtn}>
+                <Icon name='chevronLeft' width='18' height='18' />
+            </div>
+
             <div data-fullsize={isMax} className={`${style.colorCircle}`}>
                 <div data-variant={activeColor} className={style.variants}>
                     <div onClick={() => setActiveColor('tone')} className={style.tones}>

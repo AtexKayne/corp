@@ -143,7 +143,6 @@ export default function Catalog({ detail }) {
     }
 
     const resizeHandler = () => {
-        console.log('r');
         if (window.innerWidth < globalState.sizes.xl) setIsSidebarHidden(true)
     }
 
