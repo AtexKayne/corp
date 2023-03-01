@@ -837,10 +837,16 @@
         }
     }
 
+    @include media-breakpoint(lg-down) {
+        .onboard {
+            left: -280px;
+        }
+    }
+
     @include media-breakpoint(sm-down) {
         .onboard {
             top: -190px;
-            left: -190px;
+            left: -170px;
             width: 400px;
             height: 400px;
         }

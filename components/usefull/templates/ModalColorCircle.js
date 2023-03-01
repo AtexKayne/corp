@@ -9,16 +9,6 @@ export default function ModalColorCircle() {
     const [isMax, setIsMax] = useState(false)
     const [activeColor, setActiveColor] = useState('tone')
 
-    const sss = () => {
-        setTimeout(() => {
-            const val1 = temp1.value
-            const val2 = temp2.value
-            const val3 = temp3.value
-
-            navigator.clipboard.writeText(`${val1},${val2}%,${val3}%`)
-        }, 500);
-    }
-
     return (
         <div className={`full-height`}>
             <div className={`${style.title} text--upper text--a4 text--bold pb-5`}>
