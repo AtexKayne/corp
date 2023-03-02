@@ -499,7 +499,7 @@ function FastFilter({ items, updated }) {
     }
 
     const mouseUpHandler = (index, event) => {
-        if (event.timeStamp - refTimestamp.current > 100) return
+        if (event.timeStamp - refTimestamp.current > 200) return
         if (index === activeFilter) setActiveFilter(() => {
             setTimeout(calculateScroll, 400);
             return false
