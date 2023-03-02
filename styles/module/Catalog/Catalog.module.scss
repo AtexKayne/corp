@@ -216,8 +216,8 @@
     .fastFilterNext {
         top: 0px;
         z-index: 2;
-        width: 34px;
-        height: 34px;
+        width: 36px;
+        height: 36px;
         padding: 8px;
         cursor: pointer;
         transition: .3s;
@@ -233,11 +233,11 @@
     }
 
     .fastFilterNext {
-        right: -2px;
+        right: -3px;
     }
     
     .fastFilterPrev {
-        left: -2px;
+        left: -3px;
     }
 
     @include media-breakpoint(lg-up) {
@@ -259,19 +259,47 @@
         flex-shrink: 0;
         overflow: visible;
 
-        >div {
+        .fastFilterItem {
             flex-grow: 0;
             cursor: pointer;
             transition: .3s;
             padding: 8px 12px;
             margin-right: 8px;
+            position: relative;
             border-radius: 4px;
             white-space: nowrap;
             background: var(--t-light);
 
-            &:hover {
-                color: var(--t-primary);
+            &::after {
+                top: 11.5px;
+                width: 12px;
+                right: 12px;
+                content: '';
+                height: 12px;
+                position: absolute;
+                transform: scale(0);
+                background-size: cover;
+                background-position: center;
+                background-repeat: no-repeat;
+                background-image: url('/icons/icon-x-white.svg');
             }
+
+            &[data-active='true'] {
+                padding-right: 32px;
+                color: var(--t-background);
+                background-color: var(--t-dark);
+
+                &::after {
+                    transform: scale(1);
+                    transition: .3s .3s;
+                }
+            }
+        }
+    }
+
+    @include media-breakpoint(lg-up) {
+        .fastFilterItem:hover {
+            color: var(--t-primary);
         }
     }
 }

@@ -384,9 +384,23 @@ function FastFilter({ items, updated }) {
     const refScrollPos = useRef(0)
     const refScrollLimit = useRef(2)
     const refScrollOfset = useRef(0)
+    const refTimestamp = useRef(false)
     const animateInner = useAnimationControls()
     const [position, setPosition] = useState(false)
+    const [activeFilter, setActiveFilter] = useState(false)
     const [dragConstraints, setDragConstraints] = useState(0)
+
+    const itemList = [
+        'Ножевые блоки',
+        'Ножевые блоки 2',
+        'Насадки на машинки',
+        'Насадки на машинки 2',
+        'Машинки для стрижки',
+        'Уход за бородой и усами',
+        'Уход за бородой и усами 2',
+        'Спрей и жидкость для ножей',
+        'Спрей и жидкость для ножей 2',
+    ]
 
     const scrollTo = to => {
         if (to == 'prev') {
@@ -401,8 +415,8 @@ function FastFilter({ items, updated }) {
             refScrollPos.current = refScrollPos.current + refScrollOfset.current
             animateInner.start({ x: -refScrollPos.current, transition: { duration: 0.5, ease: 'easeInOut' } })
             if (refScrollPos.current >= -(dragConstraints + scrollPixels)) {
-                animateInner.start({ x: -refScrollOfset.current * refScrollLimit.current, transition: { duration: 0.4, ease: 'easeInOut' } })
-                refScrollPos.current = refScrollOfset.current * refScrollLimit.current
+                animateInner.start({ x: dragConstraints, transition: { duration: 0.4, ease: 'easeInOut' } })
+                refScrollPos.current = -dragConstraints
                 return setPosition('end')
             }
         }
@@ -426,19 +440,44 @@ function FastFilter({ items, updated }) {
         }, 200)
     }
 
-    useEffect(() => {
+    const mouseDownHandler = event => {
+        refTimestamp.current = event.timeStamp
+    }
+
+    const calculateScroll = () => {
         let dragWidth = 0
-        const scrollWidth = refWrapper.current.scrollWidth
-        const clientWidth = refWrapper.current.clientWidth
         const innerElements = Array.from(refInner.current.childNodes)
         innerElements.forEach(el => dragWidth += el.offsetWidth + 12)
-        setDragConstraints(refWrapper.current.clientWidth - scrollWidth)
+        setDragConstraints(refWrapper.current.clientWidth - dragWidth)
+    }
 
+    const mouseUpHandler = (index, event) => {
+        if (event.timeStamp - refTimestamp.current > 100) return
+        if (index === activeFilter) setActiveFilter(() => {
+            setTimeout(calculateScroll, 400);
+            return false
+        })
+        else setActiveFilter(() => {
+            setTimeout(calculateScroll, 400);
+            return index
+        })
+    }
+
+    useEffect(() => {
+        const scrollWidth = refWrapper.current.scrollWidth
+        const clientWidth = refWrapper.current.clientWidth
+        
         if (scrollWidth > clientWidth) {
-            refScrollLimit.current = Math.floor((scrollWidth - clientWidth) / scrollPixels)
+            let dragWidth = 0
+            const innerElements = Array.from(refInner.current.childNodes)
+            innerElements.forEach(el => dragWidth += el.offsetWidth + 12)
+
+            setDragConstraints(refWrapper.current.clientWidth - dragWidth)
+
+            refScrollLimit.current = Math.floor((dragWidth - clientWidth) / scrollPixels)
+            refScrollOfset.current = (dragWidth - clientWidth) / refScrollLimit.current
             animateInner.start({ x: 0 })
             refScrollPos.current = 0
-            refScrollOfset.current = (scrollWidth - clientWidth) / refScrollLimit.current
             setPosition('start')
         } else setPosition('none')
     }, updated)
@@ -457,18 +496,17 @@ function FastFilter({ items, updated }) {
                     onDragEnd={dragEndHandler}
                     className={style.fastFilterInner}
                     dragConstraints={{ right: 0, left: dragConstraints }}>
-                    <div className='text--p5 text--upper'>Машинки для стрижки</div>
-                    <div className='text--p5 text--upper'>Ножевые блоки</div>
-                    <div className='text--p5 text--upper'>Насадки на машинки</div>
-                    <div className='text--p5 text--upper'>Спрей и жидкость для ножей</div>
-                    <div className='text--p5 text--upper'>Уход за бородой и усами</div>
-                    <div className='text--p5 text--upper'>Ножевые блоки</div>
-                    <div className='text--p5 text--upper'>Насадки на машинки</div>
-                    <div className='text--p5 text--upper'>Спрей и жидкость для ножей</div>
-                    <div className='text--p5 text--upper'>Уход за бородой и усами</div>
+                    {itemList.map((item, index) => (
+                        <div
+                            key={item}
+                            data-active={index === activeFilter}
+                            onMouseDown={event => mouseDownHandler(event)}
+                            onMouseUp={event => mouseUpHandler(index, event)}
+                            className={`${style.fastFilterItem} text--p5 text--upper'`}>{item}
+                        </div>
+                    ))}
                 </motion.div>
             </div>
-
 
             <div onClick={() => scrollTo('next')} data-position={position === 'end' || position === 'none'} className={style.fastFilterNext}>
                 <Icon name='chevronRight' width='18' height='18' />
