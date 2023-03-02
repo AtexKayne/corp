@@ -795,6 +795,12 @@
     }
 }
 
+.colorCircleBtn {
+    width: 100%;
+    display: flex;
+    justify-content: flex-end;
+}
+
 .colorCircle {
     z-index: 10;
     cursor: pointer;
@@ -840,6 +846,7 @@
 
     .onboardText {
         top: 240px;
+        white-space: normal;
     }
 
     .onboardLink {

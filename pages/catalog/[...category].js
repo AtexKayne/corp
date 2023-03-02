@@ -268,7 +268,6 @@ function Head({ toggleSidebar, isSidebarHidden, categoryName, titleOpacity, isBr
     const [imageLogo, setImageLogo] = useState('/icons/icon-empty.svg')
     const [imageOverlay, setImageOverlay] = useState(null)
     const [themeHead, setThemeHead] = useState('ui-light')
-    const [isOnboard, setIsOnboard] = useState(false)
 
     useEffect(() => {
         if (isBrands) {
@@ -279,30 +278,7 @@ function Head({ toggleSidebar, isSidebarHidden, categoryName, titleOpacity, isBr
                 setThemeHead('ui-dark')
             }
         }
-
-        // To generate clipPath
-        // const precision = 24;
-        // const radius = 4;
-        // const c = [...Array(precision)].map((_, i) => {
-        //     const a = -i / (precision - 1) * Math.PI * 2;
-        //     const x = Math.cos(a) * radius + 50;
-        //     const y = Math.sin(a) * radius + 50;
-        //     return `${x.toFixed(2).replace('.00', '')}% ${y.toFixed(2).replace('.00', '')}%`
-        // })
-        // console.log(`polygon(100% 50%, 100% 100%, 0 100%, 0 0, 100% 0, 100% 50%, ${c.join(',')})`);
     }, [info])
-
-    const onboard = () => {
-        document.querySelector(`.${style.head}`).style.position = 'unset'
-        document.querySelector(`.${style.brandHead}`).style.position = 'unset'
-        setIsOnboard(true)
-    }
-
-    useEffect(() => {
-        if (categoryName === 'Sensido') {
-            setTimeout(onboard, 600)
-        }
-    }, [])
 
     const openDescription = () => {
         globalState.modal.setTemplate('brandAbout')
@@ -310,15 +286,7 @@ function Head({ toggleSidebar, isSidebarHidden, categoryName, titleOpacity, isBr
         globalState.modal.setIsOpen(true)
     }
 
-    const openColors = () => {
-        setIsOnboard(false)
-        globalState.modal.setTemplate('colorCircle')
-        globalState.modal.setIsZero(true)
-        globalState.modal.setIsOpen(true)
-    }
-
     if (isBrands) {
-        // return null
         return (
             <div className={`${themeHead} ${imageOverlay ? 'mb-2 mb-3.5:md mb-4:lg mb-5:xl mb-6:xxxl' : 'mb-1.5 mb-2:md mb-3:xxl'}`}>
                 {imageOverlay
@@ -340,21 +308,12 @@ function Head({ toggleSidebar, isSidebarHidden, categoryName, titleOpacity, isBr
                                 <Icon name='dropdown' external={`${style.titleArrow} ${isBrands ? 'is-hidden' : ''}`} width='20' height='20' />
                             </div>
                             <div className={style.headAddition}>
-                                {categoryName === 'Sensido'
-                                    ? <div data-onboard={isOnboard} className={`${style.colorCircle} ml-1:xl`}>
-                                        <div onClick={() => setIsOnboard(false)} className={style.onboard}>
-                                            <div className={`${style.onboardText} text--p4 text--normal`}>Нажмите на иконку, чтобы открыть цветовой круг Освальда для бренда SensiDO</div>
-                                            <div className={`${style.onboardLink} text--t5 text--bold text--upper`}>Понятно</div>
-                                        </div>
-                                        <div onClick={openColors} className={style.colorIcon}>
-                                            <Image src='/images/brands/icon-colors.png' width='20' height='20' alt='color picker' />
-                                        </div>
-                                    </div>
-                                    : null
-                                }
+                                {categoryName === 'Sensido' ? <ColorCircle /> : null}
 
                                 <Share isBrands={isBrands} name={info.name} />
                             </div>
+
+                            {categoryName === 'Sensido' ? <ColorCircle isFullSize={true} /> : null}
                         </div>
 
                         <div onClick={openDescription} className={`${style.aboutBrand} text--t5 text--upper text--bold`}>Подробнее о бренде</div>
@@ -372,6 +331,71 @@ function Head({ toggleSidebar, isSidebarHidden, categoryName, titleOpacity, isBr
                 </div>
 
                 {info ? <Share isBrands={isBrands} name={info.name} /> : null}
+            </div>
+        )
+    }
+}
+
+function ColorCircle({ isFullSize = false }) {
+    const [isOnboard, setIsOnboard] = useState(false)
+
+    const onboard = () => {
+        document.querySelector(`.${style.head}`).style.position = 'unset'
+        document.querySelector(`.${style.brandHead}`).style.position = 'unset'
+        setIsOnboard(true)
+    }
+
+    const openColors = event => {
+        setIsOnboard(false)
+        if (event.target.closest(`.${style.onboard}`)) return
+        globalState.modal.setTemplate('colorCircle')
+        globalState.modal.setIsZero(true)
+        globalState.modal.setIsOpen(true)
+    }
+
+    useEffect(() => {
+        setTimeout(onboard, 600)
+
+        // To generate clipPath
+        // const precision = 24;
+        // const radius = 4;
+        // const c = [...Array(precision)].map((_, i) => {
+        //     const a = -i / (precision - 1) * Math.PI * 2;
+        //     const x = Math.cos(a) * radius + 50;
+        //     const y = Math.sin(a) * radius + 50;
+        //     return `${x.toFixed(2).replace('.00', '')}% ${y.toFixed(2).replace('.00', '')}%`
+        // })
+        // console.log(`polygon(100% 50%, 100% 100%, 0 100%, 0 0, 100% 0, 100% 50%, ${c.join(',')})`);
+    }, [])
+
+    if (isFullSize) {
+        return (
+            <div className={`${style.colorCircleBtn} is-hidden--lg-down`}>
+                <div onClick={openColors} className='btn btn--grey'>
+                    <div data-onboard={isOnboard} className={`${style.colorCircle} mr-0.8`}>
+                        <div onClick={() => setIsOnboard(false)} className={style.onboard}>
+                            <div className={`${style.onboardText} text--p4 text--normal`}>Нажмите на иконку, чтобы открыть цветовой круг Освальда для бренда SensiDO</div>
+                            <div className={`${style.onboardLink} text--t5 text--bold text--upper`}>Понятно</div>
+                        </div>
+                        <div className={style.colorIcon}>
+                            <Image src='/images/brands/icon-colors.png' width='20' height='20' alt='color picker' />
+                        </div>
+                    </div>
+
+                    <span className='text--t5'>Цветовой круг SensiDO</span>
+                </div>
+            </div>
+        )
+    } else {
+        return (
+            <div data-onboard={isOnboard} className={`${style.colorCircle} is-hidden--xl-up ml-1:xl`}>
+                <div onClick={() => setIsOnboard(false)} className={style.onboard}>
+                    <div className={`${style.onboardText} text--p4 text--normal`}>Нажмите на иконку, чтобы открыть цветовой круг Освальда для бренда SensiDO</div>
+                    <div className={`${style.onboardLink} text--t5 text--bold text--upper`}>Понятно</div>
+                </div>
+                <div onClick={openColors} className={style.colorIcon}>
+                    <Image src='/images/brands/icon-colors.png' width='20' height='20' alt='color picker' />
+                </div>
             </div>
         )
     }
@@ -466,7 +490,7 @@ function FastFilter({ items, updated }) {
     useEffect(() => {
         const scrollWidth = refWrapper.current.scrollWidth
         const clientWidth = refWrapper.current.clientWidth
-        
+
         if (scrollWidth > clientWidth) {
             let dragWidth = 0
             const innerElements = Array.from(refInner.current.childNodes)
@@ -502,7 +526,7 @@ function FastFilter({ items, updated }) {
                             data-active={index === activeFilter}
                             onMouseDown={event => mouseDownHandler(event)}
                             onMouseUp={event => mouseUpHandler(index, event)}
-                            className={`${style.fastFilterItem} text--p5 text--upper'`}>{item}
+                            className={`${style.fastFilterItem} text--p5 text--upper`}>{item}
                         </div>
                     ))}
                 </motion.div>
@@ -595,7 +619,7 @@ function Filter({ name, code }) {
         setIsOpen(!isOpen)
     }
 
-    if (code !== 'market' && code !== 'available') {
+    if (code !== 'market' && code !== 'available' && code === 'hits' && code === 'discont') {
         return (
             <div data-open={isOpen} className={style.filter}>
                 <div onClick={toggleHandler} className={style.filterHeader}>
