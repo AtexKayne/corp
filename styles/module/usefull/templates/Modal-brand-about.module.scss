@@ -20,12 +20,8 @@
 }
 
 .footer {
-    z-index: 2;
-    position: fixed;
-    min-height: 60px;
-    padding-top: 8px;
-    top: calc(70vh + 60px);
-    background-color: var(--t-background);
+    position: unset;
+    // top: calc(70vh + 68px);
     left: adaptive-value((
         xs: 16px,
         md: 32px,
@@ -38,8 +34,13 @@
         lg: 48px,
         xl: 72px,
     ));
-            
+    
     @include media-breakpoint(md-up) {
+        z-index: 2;
+        position: fixed;
+        min-height: 60px;
+        padding-top: 8px;
         top: calc(100vh - 92px);
+        background-color: var(--t-background);
     }
 }

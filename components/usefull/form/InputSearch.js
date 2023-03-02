@@ -4,12 +4,9 @@ import Icon from '../../Icon'
 
 export default function InputSearch({ children, count, selectedCount, setSelectedCount, code, reset = '' }) {
     const [isChanged, setIsChanged] = useState(!!selectedCount)
+    const [isSearched, setIsSearched] = useState(false)
+    const refSearched = useRef(null)
     const refInput = useRef(null)
-
-    useEffect(() => {
-        setIsChanged(!!selectedCount)
-    }, [selectedCount])
-
 
     const resetHandler = () => {
         setSelectedCount(0)
@@ -25,9 +22,6 @@ export default function InputSearch({ children, count, selectedCount, setSelecte
             return prevCopy
         })
     }
-
-    const refSearched = useRef(null)
-    const [isSearched, setIsSearched] = useState(false)
 
     const changeHandler = event => {
         const value = event.target.value.toLowerCase()
@@ -52,12 +46,20 @@ export default function InputSearch({ children, count, selectedCount, setSelecte
         changeHandler(event)
     }
 
+    const blurHandler = () => {
+        refInput.current.setAttribute('data-changed', !!refInput.current.value)
+    }
+
+    useEffect(() => {
+        setIsChanged(!!selectedCount)
+    }, [selectedCount])
+
     return (
         <>
             <div>
                 {count >= 7
                     ? <label className='input-search mb-1'>
-                        <input ref={refInput} onChange={changeHandler} type='text' className='input' placeholder='Поиск' />
+                        <input ref={refInput} onBlur={blurHandler} onChange={changeHandler} type='text' className='input' placeholder='Поиск' />
                         <Icon external='input-search__icon' name='search' width='18' height='18' />
                         <span onClick={clearHandler} className='input-search__icon-clear'>
                             <Icon name='close' width='18' height='18' />
@@ -70,12 +72,14 @@ export default function InputSearch({ children, count, selectedCount, setSelecte
                 <div data-searched={isSearched} className='input-search__empty text--t2 text--normal text--color-disabled'>Ничего не найдено</div>
             </div>
 
-            <div data-changed={isChanged} onClick={resetHandler} className='reset'>
-                {reset
-                    ? <span className='text--t6 text--upper text--color-primary'>{reset}</span>
-                    : <Icon name='close' width='10' height='10' />
-                }
-            </div>
+            {reset
+                ? <div data-changed={isChanged} onClick={resetHandler} className='reset'>
+                    <span className='text--t6 text--upper text--color-primary'>{reset}</span>
+                </div>
+                : <div data-changed={isChanged} onClick={resetHandler} className='reset reset--icon'>
+                    <Icon name='close' width='10' height='10' />
+                </div>
+            }
         </>
     )
 }

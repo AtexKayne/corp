@@ -19,6 +19,7 @@ import ItemsPicker from '../../components/usefull/form/ItemsPicker'
 import InputSwitch from '../../components/usefull/form/InputSwitch'
 import ItemChecker from '../../components/usefull/form/ItemChecker'
 import { debounce } from '../../components/helpers/debounce'
+import Favourite from '../../components/usefull/Favourite'
 
 export default function Catalog({ detail }) {
     const c = detail.currentCategory
@@ -27,10 +28,12 @@ export default function Catalog({ detail }) {
     const [selectedFilter, setSelectedFilter] = useState({})
     const [categoryName, setCategoryName] = useState(c.name)
     const [titleOpacity, setTitleOpacity] = useState(false)
+    const [isPrevButton, setIsPrevButton] = useState(true)
     const [products, setProducts] = useState('updated')
     const [filters, setFilters] = useState(c.filter)
     const [info, setInfo] = useState(c)
     const refCategories = useRef(null)
+    const refIsToggled = useRef(false)
     const refNav = useRef(null)
     const router = useRouter()
 
@@ -58,6 +61,7 @@ export default function Catalog({ detail }) {
             }, 100);
         }
 
+        refIsToggled.current = !isSidebarHidden
         setIsSidebarHidden(!isSidebarHidden)
     }
 
@@ -144,6 +148,7 @@ export default function Catalog({ detail }) {
 
     const resizeHandler = () => {
         if (window.innerWidth < globalState.sizes.xl) setIsSidebarHidden(true)
+        else setIsSidebarHidden(refIsToggled.current)
     }
 
     const debounceResize = debounce(resizeHandler, 400)
@@ -172,6 +177,8 @@ export default function Catalog({ detail }) {
                 }
             })
         }
+
+        // setIsPrevButton(globalState.path.length > 2 && globalState.path[globalState.path.length - 1].includes('/product/'))
 
         return () => {
             window.removeEventListener('resize', debounceResize)
@@ -244,6 +251,10 @@ export default function Catalog({ detail }) {
                 </div>
 
                 <div style={{ width: '100%' }} className='d-flex flex--column'>
+                    <div className={`${style.countItemsMob} is-hidden--xl-up text--t5 text--bold text--upper text--color-small`}>НАЙДЕНО 668 ТОВАРОВ</div>
+
+                    <PreviousButton isPrevButton={isPrevButton} isSidebarHidden={isSidebarHidden} />
+
                     <CardList products={products} isSidebarHidden={isSidebarHidden} />
 
                     <Pagination isSidebarHidden={isSidebarHidden} />
@@ -432,16 +443,10 @@ function FastFilter({ items, updated }) {
 
 function Share({ name, isBrands }) {
     const [isOpen, setIsOpen] = useState(false)
-    const [isFavourite, setIsFavourite] = useState(false)
 
-    const favouriteHandler = () => {
-        const text = !isFavourite ? 'ТЕПЕРЬ В ИЗБРАННОМ' : 'БОЛЬШЕ НЕ В ИЗБРАННОМ'
-        setIsFavourite(!isFavourite)
-        globalState.popover.setTextPrimary(`${isBrands ? 'Бренд' : 'Раздел'} ${name}`)
-        globalState.popover.setImage(false)
-        globalState.popover.setTextSecondary(text)
-        globalState.popover.setIsBasket(false)
-        globalState.popover.setIsOpen(true)
+    const info = {
+        primary: `${isBrands ? 'Бренд' : 'Раздел'} ${name}`,
+        image: false,
     }
 
     const documentClick = () => {
@@ -470,12 +475,8 @@ function Share({ name, isBrands }) {
 
     return (
         <div data-open={isOpen} className={`${style.share}`}>
-            <div
-                onClick={favouriteHandler}
-                data-active={isFavourite}
-                className={`${style.favourite} btn btn--empty`}>
-                <Icon name='heartMD' width='24' height='21' />
-                <Icon name='heartFill' width='24' height='21' />
+            <div className={style.favourite}>
+                <Favourite width='24' height='21' info={info} />
             </div>
 
             <div onClick={open} className={`${style.iconShare} is-hidden--sm-down`}>
@@ -527,10 +528,9 @@ function Filter({ name, code }) {
                     <div className='text--t5 text--upper text--bold'>
                         <div className='p-relative'>
                             <span>{name}</span>
-                            {
-                                selectedFilters !== 0
-                                    ? <span className={style.filterIcon}>{selectedFilters}</span>
-                                    : null
+                            {selectedFilters !== 0
+                                ? <span className={style.filterIcon}>{selectedFilters}</span>
+                                : null
                             }
 
                         </div>
@@ -551,7 +551,9 @@ function Filter({ name, code }) {
     } else {
         return (
             <div className={style.checker}>
-                {code === 'market' || code === 'available' ? <ItemChecker text={name} code={code} /> : null}
+                {code === 'market' || code === 'available' || code === 'hits' || code === 'discont'
+                    ? <ItemChecker text={name} code={code} /> : null
+                }
             </div>
         )
     }
@@ -667,6 +669,14 @@ function Categories({ categories, selectCategory }) {
     )
 }
 
+function PreviousButton({ isSidebarHidden, isPrevButton }) {
+    return (
+        <div data-hidden={!isPrevButton} className={`${style.previousButton} btn btn--primary`}>
+            <span className='text--upper text--p5 text--sparse text--bold'>показать предыдущие</span>
+        </div>
+    )
+}
+
 function Pagination({ isSidebarHidden }) {
     const countSelect = () => {
 
@@ -712,7 +722,6 @@ function SidebarHead({ activeCategory, toggleSidebar, isBrands }) {
                     </>
                 }
 
-
                 <div className='mr-0.5' />
                 <InputSwitch onAfterChange={toggleSidebar} isActive={true} />
             </div>
@@ -745,9 +754,11 @@ function CardList({ products, isSidebarHidden }) {
         <div data-show={isSidebarHidden} className={style.cardsContainer}>
             {
                 products.map(product => (
-                    <div key={product.id} className={style.cardWrapper}>
-                        <Card info={product} updated={[isSidebarHidden]} />
-                    </div>
+                    <Link key={product.id} href='/product/rp-no-coloristic'>
+                        <div className={style.cardWrapper}>
+                            <Card info={product} updated={[isSidebarHidden]} />
+                        </div>
+                    </Link>
                 ))
             }
         </div>
@@ -756,6 +767,7 @@ function CardList({ products, isSidebarHidden }) {
 
 export async function getServerSideProps(context) {
     const queryCategory = context.query.category[0]
+    const prev = context
     let resp
     let currentCategory
 

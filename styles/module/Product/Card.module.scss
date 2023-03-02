@@ -209,36 +209,6 @@
     z-index: 3;
     position: absolute;
 
-    >* {
-        transition: .3s opacity;
-    }
-
-    &[data-active='false'] {
-        >*:first-child {
-            opacity: 1;
-            position: relative;
-        }
-
-        >*:last-child {
-            opacity: 0;
-            position: absolute;
-        }
-    }
-
-    &[data-active='true'] {
-        color: var(--t-primary);
-
-        >*:first-child {
-            opacity: 0;
-            position: absolute;
-        }
-
-        >*:last-child {
-            opacity: 1;
-            position: relative;
-        }
-    }
-
     @include media-breakpoint(xl-up) {
         top: 24px;
         right: 20px;

@@ -74,6 +74,10 @@ export default function Brands({ detail }) {
         searchHandler({ target: refInput.current })
     }
 
+    const blurHandler = () => {
+        refInput.current.setAttribute('data-changed', !!refInput.current.value)
+    }
+
     useEffect(() => {
         setStickyOffset(window.innerWidth >= globalState.sizes.lg ? 100 : 50)
         refItems.current = refSearchedChildren.current.querySelectorAll(`.${style.brand}`)
@@ -83,12 +87,12 @@ export default function Brands({ detail }) {
     return (
         <MainLayout title={`Бренды`}>
             <Breadcrumbs link='Бренды' />
-            <h1 className='text--h4 mb-3 mb-5:lg mt-1 mt-0:md'>Бренды</h1>
+            <h1 className='text--h4 mb-2.5 mb-5:lg mt-2.5 mt-0:md'>Бренды</h1>
 
             <Sticky external={style.brandSearch} fixed={style.brandSearchFixed} offset={stickyOffset}>
                 <div className={`${style.search}`}>
                     <label className='input-search'>
-                        <input ref={refInput} onChange={searchHandler} type='text' className='input' placeholder='Поиск по брендам' />
+                        <input onBlur={blurHandler} ref={refInput} onChange={searchHandler} type='text' className='input' placeholder='Поиск по брендам' />
                         <Icon external='input-search__icon' name='search' width='18' height='18' />
                         <span onClick={clearHandler} className='input-search__icon-clear'>
                             <Icon name='close' width='18' height='18' />

@@ -1,0 +1,57 @@
+@import '../../mixins/helpers/media';
+
+.favourite {
+    cursor: pointer;
+    position: relative;
+    transition: .3s color;
+
+    &::before {
+        top: -10px;
+        left: -10px;
+        right: -10px;
+        bottom: -10px;
+        content: '   ';
+        position: absolute;
+    }
+
+    >* {
+        transition: .3s;
+        position: absolute;
+    }
+
+    &[data-active='false'] {
+        >*:first-child {
+            opacity: 1;
+            animation: ripple 0.7s ease-in-out 0s 1;
+        }
+
+        >*:last-child {
+            opacity: 0;
+        }
+    }
+
+    &[data-active='true'] {
+        color: var(--t-primary);
+
+        >*:first-child {
+            opacity: 0;
+        }
+
+        >*:last-child {
+            opacity: 1;
+            animation: ripple 0.7s ease-in-out 0s 1;
+        }
+    }
+
+    @include media-breakpoint(lg-up) {
+        &:hover {
+            color: var(--t-primary);
+        }
+    }
+}
+
+@keyframes ripple {
+    0%   { transform: scale(0.7); }
+    50%  { transform: scale(1.3); }
+    100% { transform: scale(1.0); }
+}

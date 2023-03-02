@@ -7,9 +7,9 @@ import Icon from '../Icon'
 import Image from 'next/image'
 import CardBuy from './CardBuy'
 import { globalState } from '../helpers/globalState'
+import Favourite from '../usefull/Favourite'
 
 export default function Card({ info, updated }) {
-    const [isFavourite, setIsFavourite] = useState(false)
     const [isSelected, setIsSelected] = useState(false)
     const [activeImage, setActiveImage] = useState(0)
     const [isNotify, setIsNotify] = useState(false)
@@ -21,14 +21,9 @@ export default function Card({ info, updated }) {
     const refImages = useRef(null)
     const refRect = useRef(false)
 
-    const favouriteHandler = () => {
-        const text = !isFavourite ? 'ТЕПЕРЬ В ИЗБРАННОМ' : 'БОЛЬШЕ НЕ В ИЗБРАННОМ'
-        setIsFavourite(!isFavourite)
-        globalState.popover.setTextPrimary(info.secondaryName)
-        globalState.popover.setImage(info.images[0])
-        globalState.popover.setTextSecondary(text)
-        globalState.popover.setIsBasket(false)
-        globalState.popover.setIsOpen(true)
+    const infoFavourite = {
+        primary: info.secondaryName,
+        image: info.images[0],
     }
 
     const resizeHandler = () => {
@@ -133,20 +128,12 @@ export default function Card({ info, updated }) {
                 </div>
             </div>
 
-            <div
-                onClick={favouriteHandler}
-                data-active={isFavourite}
-                className={`${style.favourite} btn btn--empty is-hidden--lg-down`}>
-                <Icon name='heartMD' width='24' height='21' />
-                <Icon name='heartFill' width='24' height='21' />
+            <div className={`${style.favourite} btn btn--empty is-hidden--lg-down`}>
+                <Favourite width='24' height='21' info={infoFavourite} />
             </div>
 
-            <div
-                onClick={favouriteHandler}
-                data-active={isFavourite}
-                className={`${style.favourite} btn btn--empty is-hidden--xl-up`}>
-                <Icon name='heartMD' width='20' height='17' />
-                <Icon name='heartFill' width='20' height='17' />
+            <div className={`${style.favourite} btn btn--empty is-hidden--xl-up`}>
+                <Favourite width='20' height='17' info={infoFavourite} />
             </div>
 
             <div className='text--t6 text--normal text--upper pb-0.6 pt-1.5'>{info.primaryName}</div>

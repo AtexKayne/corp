@@ -165,12 +165,14 @@ export default function InputRange({ min, max, code, reset = '' }) {
                     onAfterChange={onAfterChange} />
             </div>
 
-            <div data-changed={isChanged} onClick={resetHandler} className='reset'>
-                {reset
-                    ? <span className='text--t6 text--upper text--color-primary'>{reset}</span>
-                    : <Icon name='close' width='10' height='10' />
-                }
-            </div>
+            {reset
+                ? <div data-changed={isChanged} onClick={resetHandler} className='reset'>
+                    <span className='text--t6 text--upper text--color-primary'>{reset !== 'none' ? reset : ''}</span>
+                </div>
+                : <div data-changed={isChanged} onClick={resetHandler} className='reset reset--icon'>
+                    <Icon name='close' width='10' height='10' />
+                </div>
+            }
         </div>
     )
 }

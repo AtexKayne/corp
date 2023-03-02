@@ -19,7 +19,7 @@ export default function Product({ detail }) {
     const [isProfi, setIsProfi] = useState(detail.forProfi)
     const [isUserProfi, setIsUserProfi] = useState(detail.isProfi)
     const [inBasket, setInBasket] = useState(0)
-    
+
     const refStickyBlockHeight = useRef(null)
     const refStickyContainer = useRef(null)
     const refContainerOffset = useRef(0)
@@ -142,7 +142,7 @@ export default function Product({ detail }) {
             }
         }, 2000);
     }, [])
-    
+
     return (
         <MainLayout title={detail.names.primary}>
             <Breadcrumbs />
@@ -159,54 +159,48 @@ export default function Product({ detail }) {
                         <div className={`${style.text0} text--normal text--upper mb-0.8`}>{detail.names.secondary}</div>
                         <h1 className={`${style.text1} text--regular mb-1 mb-2:xxl`}>{detail.names.primary}</h1>
                         <div className={`${style.price} is-hidden--md`}>
-                            {
-                                activeValue.max !== 0 && !isProfi
-                                    ? <span className={`${style.text2} text--bold`}>{activeValue.price.actual} ₽</span>
-                                    : null
+                            {activeValue.max !== 0 && !isProfi
+                                ? <span className={`${style.text2} text--bold`}>{activeValue.price.actual} ₽</span>
+                                : null
                             }
 
-                            {
-                                activeValue.price.old && activeValue.max !== 0 && !isProfi
-                                    ? <span className={`${style.text3} ${style.priceOld} text--bold`}>{activeValue.price.old} ₽</span>
-                                    : null
+                            {activeValue.price.old && activeValue.max !== 0 && !isProfi
+                                ? <span className={`${style.text3} ${style.priceOld} text--bold`}>{activeValue.price.old} ₽</span>
+                                : null
                             }
 
-                            {
-                                !isProfi && activeValue.max !== 0 && !isUserProfi
-                                    ? <span onClick={infoHandler} className={`${style.priceIcon} is-hiden--md`}>
-                                        <Icon name='info' width='18' height='18' />
-                                    </span> : null
+                            {!isProfi && activeValue.max !== 0 && !isUserProfi
+                                ? <span onClick={infoHandler} className={`${style.priceIcon} is-hiden--md`}>
+                                    <Icon name='info' width='18' height='18' />
+                                </span> : null
                             }
 
-                            {
-                                activeValue.max === 0 && !isProfi
-                                    ? <span style={{ fontSize: '28px' }} className={`${style.text2} text--color-disabled text--bold pb-1.5`}>Нет в наличии</span>
-                                    : null
+                            {activeValue.max === 0 && !isProfi
+                                ? <span style={{ fontSize: '28px' }} className={`${style.text2} text--color-disabled text--bold pb-1.5`}>Нет в наличии</span>
+                                : null
                             }
 
                         </div>
-                        {
-                            activeValue.max !== 0 && !isProfi
-                                ? <div className='text--p6 text--upper mt-0.8:xxl mb-1 mb-2:xxl is-hidden--md'>
-                                    <span className='mr-0.5'>Вы получите</span>
-                                    <span className='text--bold'>{activeValue.bonuses} Red-бонуса</span>
-                                </div> : null
+                        {activeValue.max !== 0 && !isProfi
+                            ? <div className='text--p6 text--upper mt-0.8:xxl mb-1 mb-2:xxl is-hidden--md'>
+                                <span className='mr-0.5'>Вы получите</span>
+                                <span className='text--bold'>{activeValue.bonuses} Red-бонуса</span>
+                            </div> : null
                         }
 
-                        {
-                            detail.color
-                                ? <div onClick={colorsHandler} className={`${style.color} mb-1.5`}>
-                                    <div className={style.colorImage}>
-                                        <Image src={detail.color.image} width='50' height='50' alt='' />
-                                    </div>
-                                    <div className='text--t3'>
-                                        <span className={`${style.colorName} text--bold`}>{detail.color.name}</span>
-                                        <span className={`${style.colorText} text--normal`}>{detail.color.text}</span>
-                                    </div>
-                                    <div className={`${style.colorArrow} text--bold`}>
-                                        <Icon name='chevronRight' width='20' height='20' />
-                                    </div>
-                                </div> : null
+                        {detail.color
+                            ? <div onClick={colorsHandler} className={`${style.color} mb-1.5`}>
+                                <div className={style.colorImage}>
+                                    <Image src={detail.color.image} width='50' height='50' alt='' />
+                                </div>
+                                <div className='text--t3'>
+                                    <span className={`${style.colorName} text--bold`}>{detail.color.name}</span>
+                                    <span className={`${style.colorText} text--normal`}>{detail.color.text}</span>
+                                </div>
+                                <div className={`${style.colorArrow} text--bold`}>
+                                    <Icon name='chevronRight' width='20' height='20' />
+                                </div>
+                            </div> : null
                         }
 
                         <RadioButton items={detail.values} setActiveValue={setActiveValue} />
@@ -219,46 +213,41 @@ export default function Product({ detail }) {
                         <div className='mb-2' />
 
                         <BuyButton
+                            isProfi={isProfi}
+                            max={activeValue.max}
                             activeValue={activeValue}
                             setInBasket={setInBasket}
-                            isProfi={isProfi}
-                            image={detail.images[0].preview}
-                            max={activeValue.max}>
-                            {
-                                isProfi
-                                    ? null
-                                    : <>
-                                        <div className={`${style.price} text--h4`} style={{ minHeight: activeValue.max === 0 ? '60px' : '0px' }}>
-                                            {
-                                                activeValue.max !== 0
-                                                    ? <span className={`${style.text2} text--bold`}>{activeValue.price.actual} ₽</span>
-                                                    : null
-                                            }
-                                            {
-                                                activeValue.price.old && activeValue.max !== 0
-                                                    ? <span className={`${style.text2} ${style.priceOld} text--bold`}>{activeValue.price.old} ₽</span>
-                                                    : null
-                                            }
-                                            {
-                                                !isProfi && activeValue.max !== 0 && !isUserProfi
-                                                    ? <span onClick={infoHandler} className={`${style.priceIcon} is-hiden--md`}>
-                                                        <Icon name='info' width='18' height='18' />
-                                                    </span> : null
-                                            }
-                                            {
-                                                activeValue.max === 0
-                                                    ? <span style={{ fontSize: '28px' }} className={`text--color-disabled text--bold pr-2`}>Нет в наличии</span>
-                                                    : null
-                                            }
-                                        </div>
-                                        {
-                                            activeValue.max !== 0
-                                                ? <div className='text--p6 text--upper mt-0.8 mt-0:md mt-0.8:lg'>
-                                                    <span className='mr-0.5'>Вы получите</span>
-                                                    <span className='text--bold'>{activeValue.bonuses} Red-бонуса</span>
-                                                </div> : null
+                            name={detail.names.primary}
+                            image={detail.images[0].preview}>
+                            {isProfi
+                                ? null
+                                : <>
+                                    <div className={`${style.price} text--h4`} style={{ minHeight: activeValue.max === 0 ? '60px' : '0px' }}>
+                                        {activeValue.max !== 0
+                                            ? <span className={`${style.text2} text--bold`}>{activeValue.price.actual} ₽</span>
+                                            : null
                                         }
-                                    </>
+                                        {activeValue.price.old && activeValue.max !== 0
+                                            ? <span className={`${style.text2} ${style.priceOld} text--bold`}>{activeValue.price.old} ₽</span>
+                                            : null
+                                        }
+                                        {!isProfi && activeValue.max !== 0 && !isUserProfi
+                                            ? <span onClick={infoHandler} className={`${style.priceIcon} is-hiden--md`}>
+                                                <Icon name='info' width='18' height='18' />
+                                            </span> : null
+                                        }
+                                        {activeValue.max === 0
+                                            ? <span style={{ fontSize: '28px' }} className={`text--color-disabled text--bold pr-2`}>Нет в наличии</span>
+                                            : null
+                                        }
+                                    </div>
+                                    {activeValue.max !== 0
+                                        ? <div className='text--p6 text--upper mt-0.8 mt-0:md mt-0.8:lg'>
+                                            <span className='mr-0.5'>Вы получите</span>
+                                            <span className='text--bold'>{activeValue.bonuses} Red-бонуса</span>
+                                        </div> : null
+                                    }
+                                </>
                             }
                         </BuyButton>
 

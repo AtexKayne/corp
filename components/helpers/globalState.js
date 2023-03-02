@@ -8,4 +8,5 @@ export const globalState = {
         xxl: 1256,
         xxxl: 1600
     },
+    path: []
 }
