@@ -619,7 +619,7 @@ function Filter({ name, code }) {
         setIsOpen(!isOpen)
     }
 
-    if (code !== 'market' && code !== 'available' && code === 'hits' && code === 'discont') {
+    if (code !== 'market' && code !== 'available' && code !== 'hits' && code !== 'discont') {
         return (
             <div data-open={isOpen} className={style.filter}>
                 <div onClick={toggleHandler} className={style.filterHeader}>
