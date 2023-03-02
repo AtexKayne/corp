@@ -55,6 +55,7 @@
 
 .images {
     z-index: 1;
+    display: block;
     overflow: hidden;
     position: relative;
     border-radius: 8px;
@@ -204,13 +205,13 @@
 }
 
 .favourite {
-    top: 8px;
-    right: 4px;
+    top: 14px;
+    right: 14px;
     z-index: 3;
     position: absolute;
 
     @include media-breakpoint(xl-up) {
-        top: 24px;
-        right: 20px;
+        top: 32px;
+        right: 32px;
     }
 }

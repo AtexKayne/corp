@@ -8,6 +8,7 @@ import Image from 'next/image'
 import CardBuy from './CardBuy'
 import { globalState } from '../helpers/globalState'
 import Favourite from '../usefull/Favourite'
+import Link from 'next/link'
 
 export default function Card({ info, updated }) {
     const [isSelected, setIsSelected] = useState(false)
@@ -113,26 +114,28 @@ export default function Card({ info, updated }) {
     return (
         <div data-hover={isHover} ref={refCardWrapper} onMouseEnter={() => setIsHover(true)} onMouseLeave={mouseLeaveHandler} className={style.card}>
 
-            <div ref={refImages} onMouseLeave={() => setActiveImage(0)} onMouseMove={mouseMoveHandler} className={style.images}>
-                <motion.div animate={animateDrag} drag='x' onDragEnd={dragEdHandler} >
-                    {info.images.map((image, index) => (
-                        <div key={image} data-active={activeImage === index} className={style.image}>
-                            <Image layout='fill' alt={info.primaryName} src={image} />
-                        </div>
-                    ))}
-                </motion.div>
-                <div className={`${style.nav}`}>
-                    {info.images.map((image, index) => (
-                        <div key={image} data-active={activeImage === index} />
-                    ))}
-                </div>
-            </div>
+            <Link href='/product/rp-no-coloristic'>
+                <a href='/product/rp-no-coloristic' ref={refImages} onMouseLeave={() => setActiveImage(0)} onMouseMove={mouseMoveHandler} className={style.images}>
+                    <motion.div animate={animateDrag} drag='x' onDragEnd={dragEdHandler} >
+                        {info.images.map((image, index) => (
+                            <div key={image} data-active={activeImage === index} className={style.image}>
+                                <Image layout='fill' alt={info.primaryName} src={image} />
+                            </div>
+                        ))}
+                    </motion.div>
+                    <div className={`${style.nav}`}>
+                        {info.images.map((image, index) => (
+                            <div key={image} data-active={activeImage === index} />
+                        ))}
+                    </div>
+                </a>
+            </Link>
 
-            <div className={`${style.favourite} btn btn--empty is-hidden--lg-down`}>
+            <div className={`${style.favourite} is-hidden--lg-down`}>
                 <Favourite width='24' height='21' info={infoFavourite} />
             </div>
 
-            <div className={`${style.favourite} btn btn--empty is-hidden--xl-up`}>
+            <div className={`${style.favourite} is-hidden--xl-up`}>
                 <Favourite width='20' height='17' info={infoFavourite} />
             </div>
 

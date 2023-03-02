@@ -380,11 +380,13 @@ function Head({ toggleSidebar, isSidebarHidden, categoryName, titleOpacity, isBr
 function FastFilter({ items, updated }) {
     const scrollPixels = 200
     const refWrapper = useRef(0)
+    const refInner = useRef(null)
     const refScrollPos = useRef(0)
     const refScrollLimit = useRef(2)
     const refScrollOfset = useRef(0)
-    const [position, setPosition] = useState(false)
     const animateInner = useAnimationControls()
+    const [position, setPosition] = useState(false)
+    const [dragConstraints, setDragConstraints] = useState(0)
 
     const scrollTo = to => {
         if (to == 'prev') {
@@ -398,14 +400,39 @@ function FastFilter({ items, updated }) {
         } else {
             refScrollPos.current = refScrollPos.current + refScrollOfset.current
             animateInner.start({ x: -refScrollPos.current, transition: { duration: 0.5, ease: 'easeInOut' } })
-            if (refScrollPos.current >= refScrollOfset.current * refScrollLimit.current) return setPosition('end')
+            if (refScrollPos.current >= -(dragConstraints + scrollPixels)) {
+                animateInner.start({ x: -refScrollOfset.current * refScrollLimit.current, transition: { duration: 0.4, ease: 'easeInOut' } })
+                refScrollPos.current = refScrollOfset.current * refScrollLimit.current
+                return setPosition('end')
+            }
         }
         setPosition(false)
     }
 
+    const dragEndHandler = () => {
+        setTimeout(() => {
+            const transform = refInner.current.style.transform
+            const position = +transform.split('translateX(')[1].split('px)')[0]
+            if (transform === 'none' || position >= 0) {
+                refScrollPos.current = 0
+                return setPosition('start')
+            } else if (position <= dragConstraints + scrollPixels) {
+                refScrollPos.current = -dragConstraints
+                return setPosition('end')
+            } else {
+                refScrollPos.current = -position
+                return setPosition(false)
+            }
+        }, 200)
+    }
+
     useEffect(() => {
+        let dragWidth = 0
         const scrollWidth = refWrapper.current.scrollWidth
         const clientWidth = refWrapper.current.clientWidth
+        const innerElements = Array.from(refInner.current.childNodes)
+        innerElements.forEach(el => dragWidth += el.offsetWidth + 12)
+        setDragConstraints(refWrapper.current.clientWidth - scrollWidth)
 
         if (scrollWidth > clientWidth) {
             refScrollLimit.current = Math.floor((scrollWidth - clientWidth) / scrollPixels)
@@ -417,22 +444,31 @@ function FastFilter({ items, updated }) {
     }, updated)
 
     return (
-        <div ref={refWrapper} className={style.fastFilterWrapper}>
+        <div className={style.fastFilterContainer}>
             <div onClick={() => scrollTo('prev')} data-position={position === 'start' || position === 'none'} className={style.fastFilterPrev}>
                 <Icon name='chevronLeft' width='18' height='18' />
             </div>
 
-            <motion.div animate={animateInner} className={style.fastFilterInner}>
-                <div className='text--p5 text--upper'>Машинки для стрижки</div>
-                <div className='text--p5 text--upper'>Ножевые блоки</div>
-                <div className='text--p5 text--upper'>Насадки на машинки</div>
-                <div className='text--p5 text--upper'>Спрей и жидкость для ножей</div>
-                <div className='text--p5 text--upper'>Уход за бородой и усами</div>
-                <div className='text--p5 text--upper'>Ножевые блоки</div>
-                <div className='text--p5 text--upper'>Насадки на машинки</div>
-                <div className='text--p5 text--upper'>Спрей и жидкость для ножей</div>
-                <div className='text--p5 text--upper'>Уход за бородой и усами</div>
-            </motion.div>
+            <div ref={refWrapper} className={style.fastFilterWrapper}>
+                <motion.div
+                    drag='x'
+                    ref={refInner}
+                    animate={animateInner}
+                    onDragEnd={dragEndHandler}
+                    className={style.fastFilterInner}
+                    dragConstraints={{ right: 0, left: dragConstraints }}>
+                    <div className='text--p5 text--upper'>Машинки для стрижки</div>
+                    <div className='text--p5 text--upper'>Ножевые блоки</div>
+                    <div className='text--p5 text--upper'>Насадки на машинки</div>
+                    <div className='text--p5 text--upper'>Спрей и жидкость для ножей</div>
+                    <div className='text--p5 text--upper'>Уход за бородой и усами</div>
+                    <div className='text--p5 text--upper'>Ножевые блоки</div>
+                    <div className='text--p5 text--upper'>Насадки на машинки</div>
+                    <div className='text--p5 text--upper'>Спрей и жидкость для ножей</div>
+                    <div className='text--p5 text--upper'>Уход за бородой и усами</div>
+                </motion.div>
+            </div>
+
 
             <div onClick={() => scrollTo('next')} data-position={position === 'end' || position === 'none'} className={style.fastFilterNext}>
                 <Icon name='chevronRight' width='18' height='18' />
@@ -754,11 +790,9 @@ function CardList({ products, isSidebarHidden }) {
         <div data-show={isSidebarHidden} className={style.cardsContainer}>
             {
                 products.map(product => (
-                    <Link key={product.id} href='/product/rp-no-coloristic'>
-                        <div className={style.cardWrapper}>
-                            <Card info={product} updated={[isSidebarHidden]} />
-                        </div>
-                    </Link>
+                    <div key={product.id} className={style.cardWrapper}>
+                        <Card info={product} updated={[isSidebarHidden]} />
+                    </div>
                 ))
             }
         </div>
