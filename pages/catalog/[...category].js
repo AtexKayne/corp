@@ -454,7 +454,7 @@ function FastFilter({ items, updated }) {
             if (transform === 'none' || position >= 0) {
                 refScrollPos.current = 0
                 return setPosition('start')
-            } else if (position <= dragConstraints + scrollPixels) {
+            } else if (position <= dragConstraints + 50) {
                 refScrollPos.current = -dragConstraints
                 return setPosition('end')
             } else {
