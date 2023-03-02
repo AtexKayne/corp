@@ -40,7 +40,7 @@
         width: auto;
         height: auto;
         position: absolute;
-        top: adaptive-value(( xs: 20px, md: 32px ));
+        top: adaptive-value(( xs: 18px, md: 32px ));
         right: adaptive-value((
             xs: 16px,
             md: 32px,
@@ -95,7 +95,7 @@
     .input:focus ~ .input-search__icon {
         opacity: 0;
     }
-    
+
     .input[data-changed='true'] ~ .input-search__icon-clear,
     .input:focus ~ .input-search__icon-clear {
         opacity: 1;
@@ -326,7 +326,7 @@
 
 @keyframes rippleResetIcon {
     from { opacity: 1; transform: scale3d(0.75,0.75,1); }
-    to   { opacity: 0; transform: scale3d(2,2,1); }
+    to   { opacity: 0; transform: scale3d(3,3,1); }
 }
 
 .range-delim {

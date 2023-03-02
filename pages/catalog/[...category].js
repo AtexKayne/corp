@@ -23,6 +23,7 @@ import Favourite from '../../components/usefull/Favourite'
 
 export default function Catalog({ detail }) {
     const c = detail.currentCategory
+    const [countSelectedFilters, setCountSelectedFilters] = useState(0)
     const [isSidebarHidden, setIsSidebarHidden] = useState('new')
     const [activeCategory, setActiveCategory] = useState(c.id)
     const [selectedFilter, setSelectedFilter] = useState({})
@@ -34,6 +35,7 @@ export default function Catalog({ detail }) {
     const [info, setInfo] = useState(c)
     const refCategories = useRef(null)
     const refIsToggled = useRef(false)
+    const refTimeout = useRef(false)
     const refNav = useRef(null)
     const router = useRouter()
 
@@ -187,7 +189,27 @@ export default function Catalog({ detail }) {
 
     useEffect(() => {
         globalState.catalog.selectedFilter = selectedFilter
-        updateProducts()
+
+        if (refTimeout.current) clearTimeout(refTimeout.current)
+        refTimeout.current = setTimeout(() => {
+            let countFilters = 0
+            for (const key in globalState.catalog.selectedFilter) {
+                if (Object.hasOwnProperty.call(globalState.catalog.selectedFilter, key)) {
+                    const element = globalState.catalog.selectedFilter[key];
+                    if (Array.isArray(element)) {
+                        if (key !== 'price') {
+                            if (element.length) countFilters++
+                        } else {
+                            if (element[0] !== 0 || element[1] !== 15000) countFilters++
+                        }
+                    }
+                    if (element === true) countFilters++
+                }
+            }
+            refTimeout.current = false
+            setCountSelectedFilters(countFilters)
+            updateProducts()
+        }, 200)
     }, [selectedFilter])
 
     return (
@@ -221,8 +243,9 @@ export default function Catalog({ detail }) {
                         href='#'
                         onClick={openFilters}
                         style={{ display: filters ? 'block' : 'none' }}
-                        className='is-hidden--xl-up text--t5 link text--bold text--upper'>
-                        фильтры
+                        className='is-hidden--xl-up'>
+                        <span className='text--t5 link text--bold text--upper'>фильтры</span>
+                        <span data-selected={!!countSelectedFilters} className={style.filterLinkIcon}>{countSelectedFilters}</span>
                     </a>
                 </div>
             </div>
@@ -251,7 +274,7 @@ export default function Catalog({ detail }) {
                 </div>
 
                 <div style={{ width: '100%' }} className='d-flex flex--column'>
-                    <div className={`${style.countItemsMob} is-hidden--xl-up text--t5 text--bold text--upper text--color-small`}>НАЙДЕНО 668 ТОВАРОВ</div>
+                    <div className={`${style.countItemsMob} is-hidden--xl-up text--t6 text--bold text--upper text--color-small`}>НАЙДЕНО 668 ТОВАРОВ</div>
 
                     <PreviousButton isPrevButton={isPrevButton} isSidebarHidden={isSidebarHidden} />
 
