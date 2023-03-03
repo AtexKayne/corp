@@ -36,11 +36,14 @@
 .modal {
     .reset {
         left: auto;
+        padding: 0;
         z-index: 3;
         width: auto;
-        height: auto;
+        height: 20px;
+        display: flex;
         position: absolute;
-        top: adaptive-value(( xs: 17px, md: 30px ));
+        align-items: center;
+        top: adaptive-value(( xs: 17px, md: 31px ));
         right: adaptive-value((
             xs: 16px,
             md: 32px,
