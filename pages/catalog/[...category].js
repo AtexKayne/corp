@@ -432,6 +432,7 @@ function FastFilter({ items, updated }) {
     const refScrollLimit = useRef(2)
     const refScrollOfset = useRef(0)
     const refTimestamp = useRef(false)
+    const refIsStartDrag = useRef(false)
     const animateInner = useAnimationControls()
     const [position, setPosition] = useState(false)
     const [activeFilter, setActiveFilter] = useState(false)
@@ -470,7 +471,13 @@ function FastFilter({ items, updated }) {
         setPosition(false)
     }
 
+    const dragStartHandler = () => {
+        setPosition('none')
+        refIsStartDrag.current = true
+    }
+
     const dragEndHandler = () => {
+        setTimeout(() => refIsStartDrag.current = false, 200)
         setTimeout(() => {
             const transform = refInner.current.style.transform
             const position = +transform.split('translateX(')[1].split('px)')[0]
@@ -484,49 +491,46 @@ function FastFilter({ items, updated }) {
                 refScrollPos.current = -position
                 return setPosition(false)
             }
-        }, 200)
-    }
-
-    const mouseDownHandler = event => {
-        refTimestamp.current = event.timeStamp
+        }, 400)
     }
 
     const calculateScroll = () => {
-        let dragWidth = 0
+        let dragWidth = 24
         const innerElements = Array.from(refInner.current.childNodes)
-        innerElements.forEach(el => dragWidth += el.offsetWidth + 12)
+        innerElements.forEach(el => dragWidth += el.clientWidth + 8)
         setDragConstraints(refWrapper.current.clientWidth - dragWidth)
     }
 
-    const mouseUpHandler = (index, event) => {
-        if (event.timeStamp - refTimestamp.current > 200) return
+    const clickHandler = index => {
+        if (refIsStartDrag.current) return
         if (index === activeFilter) setActiveFilter(() => {
-            setTimeout(calculateScroll, 400);
+            setTimeout(calculateScroll, 400)
             return false
         })
         else setActiveFilter(() => {
-            setTimeout(calculateScroll, 400);
+            setTimeout(calculateScroll, 400)
             return index
         })
     }
 
     useEffect(() => {
-        const scrollWidth = refWrapper.current.scrollWidth
-        const clientWidth = refWrapper.current.clientWidth
-
-        if (scrollWidth > clientWidth) {
-            let dragWidth = 0
-            const innerElements = Array.from(refInner.current.childNodes)
-            innerElements.forEach(el => dragWidth += el.offsetWidth + 12)
-
-            setDragConstraints(refWrapper.current.clientWidth - dragWidth)
-
-            refScrollLimit.current = Math.floor((dragWidth - clientWidth) / scrollPixels)
-            refScrollOfset.current = (dragWidth - clientWidth) / refScrollLimit.current
-            animateInner.start({ x: 0 })
-            refScrollPos.current = 0
-            setPosition('start')
-        } else setPosition('none')
+        setTimeout(() => {
+            const scrollWidth = refWrapper.current.scrollWidth
+            const clientWidth = refWrapper.current.clientWidth
+    
+            if (scrollWidth > clientWidth) {
+                let dragWidth = 24
+                const innerElements = Array.from(refInner.current.childNodes)
+                innerElements.forEach(el => dragWidth += el.clientWidth + 8)
+                setDragConstraints(refWrapper.current.clientWidth - dragWidth)
+    
+                refScrollLimit.current = Math.floor((dragWidth - clientWidth) / scrollPixels)
+                refScrollOfset.current = (dragWidth - clientWidth) / refScrollLimit.current
+                animateInner.start({ x: 0 })
+                refScrollPos.current = 0
+                setPosition('start')
+            } else setPosition('none')
+        }, 2500)
     }, updated)
 
     return (
@@ -541,14 +545,14 @@ function FastFilter({ items, updated }) {
                     ref={refInner}
                     animate={animateInner}
                     onDragEnd={dragEndHandler}
+                    onDragStart={dragStartHandler}
                     className={style.fastFilterInner}
                     dragConstraints={{ right: 0, left: dragConstraints }}>
                     {itemList.map((item, index) => (
                         <div
                             key={item}
                             data-active={index === activeFilter}
-                            onMouseDown={event => mouseDownHandler(event)}
-                            onMouseUp={event => mouseUpHandler(index, event)}
+                            onClick={() => clickHandler(index)}
                             className={`${style.fastFilterItem} text--p5 text--upper`}>{item}
                         </div>
                     ))}
