@@ -224,31 +224,34 @@ export default function Catalog({ detail }) {
                 toggleSidebar={toggleSidebar}
                 isSidebarHidden={isSidebarHidden} />
 
-            {detail.isBrands ? null : <FastFilter updated={[filters, info]} />}
+            <div className={style.navContainer}>
+                {detail.isBrands ? null : <FastFilter updated={[filters, info]} />}
 
-            <div ref={refNav} className={`${style.nav} mb-2`}>
-                <SidebarHead activeCategory={activeCategory} toggleSidebar={toggleSidebar} isBrands={detail.isBrands} />
-                <div data-toggled={isSidebarHidden && isSidebarHidden !== 'new'} className={`${style.navInner} pl-1:xl pr-1:xl`}>
-                    <div className={style.navFiller} />
-                    <div className='is-hidden--lg-down text--t5 text--bold text--upper text--color-small'>НАЙДЕНО 668 ТОВАРОВ</div>
-                    <Dropdown title='Популярные' external='text--t5 text--bold text--upper' afterChose={sortHandler}>
-                        <>
-                            <span data-value='popular' data-active='true' className='text--t4'>Популярные</span>
-                            <span data-value='new' className='text--t4'>Новинки</span>
-                            <span data-value='price-down' className='text--t4'>Цена по возрастанию</span>
-                            <span data-value='price-up' className='text--t4'>Цена по убыванию</span>
-                        </>
-                    </Dropdown>
-                    <a
-                        href='#'
-                        onClick={openFilters}
-                        style={{ display: filters ? 'block' : 'none' }}
-                        className='is-hidden--xl-up'>
-                        <span className='text--t5 link text--bold text--upper'>фильтры</span>
-                        <span data-selected={!!countSelectedFilters} className={style.filterLinkIcon}>{countSelectedFilters}</span>
-                    </a>
+                <div ref={refNav} className={`${style.nav} pb-2`}>
+                    <SidebarHead activeCategory={activeCategory} toggleSidebar={toggleSidebar} isBrands={detail.isBrands} />
+                    <div data-toggled={isSidebarHidden && isSidebarHidden !== 'new'} className={`${style.navInner} pl-1:xl pr-1:xl`}>
+                        <div className={style.navFiller} />
+                        <div className='is-hidden--lg-down text--t5 text--bold text--upper text--color-small'>НАЙДЕНО 668 ТОВАРОВ</div>
+                        <Dropdown title='Популярные' external='text--t5 text--bold text--upper' afterChose={sortHandler}>
+                            <>
+                                <span data-value='popular' data-active='true' className='text--t4'>Популярные</span>
+                                <span data-value='new' className='text--t4'>Новинки</span>
+                                <span data-value='price-down' className='text--t4'>Цена по возрастанию</span>
+                                <span data-value='price-up' className='text--t4'>Цена по убыванию</span>
+                            </>
+                        </Dropdown>
+                        <a
+                            href='#'
+                            onClick={openFilters}
+                            style={{ display: filters ? 'block' : 'none' }}
+                            className='is-hidden--xl-up'>
+                            <span className='text--t5 link text--bold text--upper'>фильтры</span>
+                            <span data-selected={!!countSelectedFilters} className={style.filterLinkIcon}>{countSelectedFilters}</span>
+                        </a>
+                    </div>
                 </div>
             </div>
+
             <div className={style.container}>
                 <div data-hidden={isSidebarHidden} className={`${style.wrapper} ${detail.isBrands ? style.wrapperBrand : ''}`}>
                     {!detail.isBrands
@@ -495,7 +498,12 @@ function FastFilter({ items, updated }) {
     }
 
     const calculateScroll = () => {
-        let dragWidth = 24
+        let dragWidth = 0
+        const ww = window.innerWidth
+        if (ww < globalState.sizes.sm) dragWidth = 24
+        else if (ww >= globalState.sizes.sm && ww < globalState.sizes.lg) dragWidth = 32
+        else dragWidth = 8
+
         const innerElements = Array.from(refInner.current.childNodes)
         innerElements.forEach(el => dragWidth += el.clientWidth + 8)
         setDragConstraints(refWrapper.current.clientWidth - dragWidth)
@@ -519,7 +527,12 @@ function FastFilter({ items, updated }) {
             const clientWidth = refWrapper.current.clientWidth
     
             if (scrollWidth > clientWidth) {
-                let dragWidth = 24
+                let dragWidth = 0
+                const ww = window.innerWidth
+                if (ww < globalState.sizes.sm) dragWidth = 24
+                else if (ww >= globalState.sizes.sm && ww < globalState.sizes.lg) dragWidth = 32
+                else dragWidth = 8
+                
                 const innerElements = Array.from(refInner.current.childNodes)
                 innerElements.forEach(el => dragWidth += el.clientWidth + 8)
                 setDragConstraints(refWrapper.current.clientWidth - dragWidth)

@@ -161,6 +161,15 @@
     }
 }
 
+.navContainer {
+    display: flex;
+    flex-direction: column-reverse;
+
+    @include media-breakpoint(lg-up) {
+        flex-direction: column;
+    }
+}
+
 .nav {
     display: flex;
     flex-wrap: wrap;
@@ -175,6 +184,7 @@
     right: 0;
     display: flex;
     position: unset;
+    align-items: center;
     justify-content: space-between;
     left: adaptive-value((
         xs: 0,
