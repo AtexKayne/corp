@@ -88,6 +88,10 @@
     @include media-breakpoint(md) {
         min-height: 65px;
     }
+
+    > span:last-child {
+        transform: translateY(-2px);
+    }
 }
 
 .buyOpen {

@@ -39,15 +39,14 @@ export default function BuyButton({ children, max, activeValue, isProfi, setInBa
         const classList = event.target.classList
 
         if (!classList.contains(style.counterInput) && !classList.contains(style.counterBtnReject)) {
-            document.removeEventListener('click', documentClick)
-            setIsSelected(false)
             refInput.current.value = getValue()
-
-            if (+refInput.current.value === 0) setCount(0)
-        } else if (classList.contains(style.counterBtnReject)) {
-            document.removeEventListener('click', documentClick)
-            setIsSelected(false)
+            setCount(+refInput.current.value)
+        } else if (classList.contains(style.counterInput)) {
+            return
         }
+        
+        setIsSelected(false)
+        document.removeEventListener('click', documentClick)
     }
 
     const cancelHandler = () => {
@@ -118,6 +117,13 @@ export default function BuyButton({ children, max, activeValue, isProfi, setInBa
 
     const keyDownHandler = event => {
         if (event.keyCode === 13) document.body.click()
+        else if (event.keyCode === 38) {
+            const newValue = +refInput.current.value + 1
+            if (newValue <= max) refInput.current.value = newValue
+        } else if (event.keyCode === 40) {
+            const newValue = +refInput.current.value - 1
+            if (newValue >= 0) refInput.current.value = newValue
+        }
     }
 
     const blurHandler = () => {
@@ -234,7 +240,7 @@ export default function BuyButton({ children, max, activeValue, isProfi, setInBa
             }
 
             <div className={`${isEmpty ? style.favouriteEmpty : style.favourite} btn btn--md btn--shadow`}>
-                <Favourite width='24' height='21' info={infoFavourite} />
+                <Favourite width='21' height='18' info={infoFavourite} />
             </div>
 
             {!isProfi && !isEmpty
