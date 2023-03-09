@@ -5,7 +5,7 @@ import style from '../../styles/module/usefull/Tabs.module.scss'
 export default function Tabs({ tabs, children }) {
     const [activeTab, setActiveTab] = useState(0)
     return (
-        <div>
+        <>
             <div className={style.tabsHead}>
                 {tabs.map((tab, index) => (
                     <div
@@ -27,6 +27,6 @@ export default function Tabs({ tabs, children }) {
                     )
                 })}
             </div>
-        </div>
+        </>
     )
 }

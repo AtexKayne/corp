@@ -110,6 +110,7 @@ $text-a3:      ( font-size: 2.8rem,  line-height: 16 / 12 * 1em );
 $text-a4:      ( font-size: 2.0rem,  line-height: 10 / 10 * 1em );
 $text-a5:      ( font-size: 1.6rem,  line-height: 14 / 10 * 1em );
 $text-a6:      ( font-size: 1.4rem,  line-height: 10 / 10 * 1em );
+$text-a7:      ( font-size: 1.0rem,  line-height: 10 / 10 * 1em );
 
 $text-sizes: (
     xs: (
@@ -136,6 +137,7 @@ $text-sizes: (
         'a4':           $text-a6, // used
         'a5':           $text-a5, // used
         'a6':           $text-a6, // used
+        'a7':           $text-a7, // used
 
         // Text
         't1':           $text-t1, // used
@@ -186,6 +188,7 @@ $text-sizes: (
         'c3':           $text-c3,
         'c4':           $text-c4,
         'c5':           $text-c5,
+        'a7':           $text-a6, // used
     ),
 
     xl: (

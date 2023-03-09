@@ -55,7 +55,7 @@ export default function FavouritePage({ detail }) {
 function Products({ items }) {
     return (
         <div className={style.tabInner}>
-            <div className={`${style.countItems} text--t6 text--bold text--upper text--color-small`}>2 товара</div>
+            <div className={`${style.countItems} text--t6 text--bold text--upper text--sparse text--color-small`}>2 товара</div>
             <div className={style.productsContainer}>
                 {items.map(item => (
                     <div key={item.id} className={style.cardWrapper}>
@@ -77,7 +77,7 @@ function Products({ items }) {
 function Brands({ items }) {
     return (
         <div className={style.tabInner}>
-            <div className={`${style.countItems} text--t6 text--bold text--upper text--color-small`}>2 бренда</div>
+            <div className={`${style.countItems} text--t6 text--bold text--upper text--sparse text--color-small`}>2 бренда</div>
 
             <div className={style.brandsContainer}>
                 {items.map(item => (
@@ -85,7 +85,7 @@ function Brands({ items }) {
                         <span className={style.brandImage}>
                             <Image src={item.logo} alt={item.name} layout='fill' />
                         </span>
-                        <span>{item.name}</span>
+                        <span className='text--a7 text--upper'>{item.name}</span>
                         <span className={`${style.iconFav}`}>
                             <Favourite width='16' height='16' info={{ primary: `Бренд ${item.name}` }} isActive={true} />
                         </span>
@@ -98,7 +98,7 @@ function Brands({ items }) {
                         <span className={style.brandImage}>
                             <Image src={item.logo} alt={item.name} layout='fill' />
                         </span>
-                        <span>{item.name}</span>
+                        <span className='text--a7 text--upper'>{item.name}</span>
                         <span className={`${style.iconFav}`}>
                             <Favourite width='16' height='16' info={{ primary: `Бренд ${item.name}` }} isActive={true} />
                         </span>
@@ -113,7 +113,7 @@ function Chapters({ items }) {
     const info = { primary: '', image: false }
     return (
         <div className={style.tabInner}>
-            <div className={`${style.countItems} text--t6 text--bold text--upper text--color-small`}>5 разделов</div>
+            <div className={`${style.countItems} text--t6 text--bold text--upper text--sparse text--color-small`}>5 разделов</div>
 
             <div className={style.chaptersContainer}>
                 {items.map(item => (
