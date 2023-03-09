@@ -3,8 +3,8 @@ import { useState } from 'react'
 import { globalState } from '../helpers/globalState'
 import style from '../../styles/module/usefull/Favourite.module.scss'
 
-export default function Favourite({ width, height, info, external = '' }) {
-    const [isFavourite, setIsFavourite] = useState(false)
+export default function Favourite({ width, height, info, isActive = false, external = '' }) {
+    const [isFavourite, setIsFavourite] = useState(isActive)
 
     const favouriteHandler = () => {
         const text = !isFavourite ? 'ТЕПЕРЬ В ИЗБРАННОМ' : 'БОЛЬШЕ НЕ В ИЗБРАННОМ'

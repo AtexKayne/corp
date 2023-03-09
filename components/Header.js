@@ -66,6 +66,7 @@ export default function Header() {
         }
 
         refIsHandled.current = setTimeout(() => {
+            if (!refRabbit.current) return
             refRabbit.current.style.pointerEvents = 'all'
         }, 300)
     }

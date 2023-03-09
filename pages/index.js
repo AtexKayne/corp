@@ -69,6 +69,19 @@ export default function Home() {
           <a href='/brands/Sensido' className='link'>Каталожная выдача бренда (круг sensido)</a>
         </Link>
       </div>
+
+      <div className='text--t1 pb-1 pt-1.5'>Избранное</div>
+      <div className='ml-1'>
+        <Link href='/favourite'>
+          <a href='/favourite' className='link'>Избранное (есть элементы)</a>
+        </Link>
+      </div>
+      <div className='ml-1'>
+        <Link href='/favourite#empty'>
+          <a href='/favourite' className='link'>Избранное (нет элементов)</a>
+        </Link>
+      </div>
+
       <div className='pt-5' />
 
     </MainLayout>

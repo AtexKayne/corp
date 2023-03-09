@@ -35,7 +35,7 @@
 .inner {
     display: flex;
 
-    > span {
+    > * {
         cursor: pointer;
         transition: .3s;
         margin-right: 8px;
@@ -76,7 +76,7 @@
     }
 
     &[data-theme='ui-dark'] {
-        > span::after {
+        > *::after {
             background-image: url('/icons/icon-chevron-right-white.svg');
         }
     }

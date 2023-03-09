@@ -651,6 +651,85 @@ export const cards = [
     },
 ]
 
+export const favourite = {
+    brands: [
+        {id: 1, name: 'DS', logo: '/images/brands/logos/image-1.png', link: ''},
+        {id: 2, name: 'Sensido', logo: '/images/brands/logos/image-2.png', link: ''},
+        {id: 3, name: 'Reusel', logo: '/images/brands/logos/image-3.png', link: ''},
+        {id: 4, name: 'Feather', logo: '/images/brands/logos/image-4.png', link: ''},
+        {id: 5, name: 'DS', logo: '/images/brands/logos/image-1.png', link: ''},
+        {id: 6, name: 'Sensido', logo: '/images/brands/logos/image-2.png', link: ''},
+    ],
+    products: [
+        {
+            id: 2,
+            images: [
+                '/images/product/image-0.jpg',
+                '/images/product/image-1.jpg',
+                '/images/product/image-2.jpg',
+                '/images/product/image-3.jpg',
+            ],
+            primaryName: 'Шейвер для бритья',
+            secondaryName: 'Wahl Shaver Finale Lithium 8164-116',
+            values: [
+                { value: '100 мл', price: { actual: '13 160' }, max: 10 },
+            ],
+            isFavourite: true,
+        },
+        {
+            id: 3,
+            images: [
+                '/images/product/image-0.jpg',
+                '/images/product/image-1.jpg',
+                '/images/product/image-2.jpg',
+                '/images/product/image-3.jpg',
+            ],
+            primaryName: 'Шейвер для бритья',
+            secondaryName: 'Wahl Shaver Finale Lithium 8164-116',
+            values: [
+                { value: '100 мл', price: { actual: '13 160' }, max: 10 },
+            ],
+            isFavourite: true,
+        },
+        {
+            id: 4,
+            images: [
+                '/images/product/image-0.jpg',
+                '/images/product/image-1.jpg',
+                '/images/product/image-2.jpg',
+                '/images/product/image-3.jpg',
+            ],
+            primaryName: 'Шейвер для бритья',
+            secondaryName: 'Wahl Shaver Finale Lithium 8164-116',
+            values: [
+                { value: '100 мл', price: { actual: '13 160' }, max: 10 },
+            ],
+            isFavourite: true,
+        },
+        {
+            id: 5,
+            images: [
+                '/images/product/image-0.jpg',
+                '/images/product/image-1.jpg',
+                '/images/product/image-2.jpg',
+                '/images/product/image-3.jpg',
+            ],
+            primaryName: 'Шейвер для бритья',
+            secondaryName: 'Wahl Shaver Finale Lithium 8164-116',
+            values: [
+                { value: '100 мл', price: { actual: '13 160' }, max: 10 },
+            ],
+            isFavourite: true,
+        },
+    ],
+    chapters: [
+        {id: 1, name: 'Машинки, тримеры, шейверы', link: ''},
+        {id: 2, name: 'Шейверы', link: ''},
+        {id: 3, name: 'Зажимы, распылители, щетки-сметки', link: ''},
+        {id: 4, name: 'Помады, воски, глины, крем', link: ''},
+    ]
+}
+
 export const brands = [
     {
         letter: '0-9',

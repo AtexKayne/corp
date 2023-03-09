@@ -132,11 +132,11 @@ export default function Card({ info, updated }) {
             </Link>
 
             <div className={`${style.favourite} is-hidden--lg-down`}>
-                <Favourite width='24' height='21' info={infoFavourite} />
+                <Favourite width='24' height='21' isActive={info.isFavourite} info={infoFavourite} />
             </div>
 
             <div className={`${style.favourite} is-hidden--xl-up`}>
-                <Favourite width='20' height='17' info={infoFavourite} />
+                <Favourite width='20' height='17' isActive={info.isFavourite} info={infoFavourite} />
             </div>
 
             <div className='text--t6 text--normal text--upper pb-0.6 pt-1.5'>{info.primaryName}</div>

@@ -20,6 +20,10 @@ body {
     }
 }
 
+body {
+    overflow: hidden;
+}
+
 * {
     scrollbar-width: thin;
     scrollbar-color: color-use(_red) color-use(_lightest);

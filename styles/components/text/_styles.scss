@@ -68,6 +68,8 @@ figure {
     &--a2 { @extend %text--size-a2; }
     &--a3 { @extend %text--size-a3; }
     &--a4 { @extend %text--size-a4; }
+    &--a5 { @extend %text--size-a5; }
+    &--a6 { @extend %text--size-a6; }
 }
 
 .text--left   { text-align: left;   }

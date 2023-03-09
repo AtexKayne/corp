@@ -24,17 +24,20 @@ export default function Breadcrumbs({ link, theme }) {
         <div ref={refBreadcrumbs} className={`${style.breadcrumbs} ${theme === 'dark' ? 'ui-dark' : ''} text--p5 text--color-small`}>
             <div ref={refInner} data-theme={theme === 'dark' ? 'ui-dark' : 'ui-light'} className={style.inner}>
                 <Link href='/'>
-                    <span>Главная</span>
+                    <a href='/'>Главная</a>
                 </Link>
-                {
-                    link === 'Бренды'
-                        ? <span>Бренды</span>
-                        : <>
-                            <span>Каталог</span>
-                            <span>Косметика для волос</span>
-                            <span>Лечение волос</span>
-                            <span>Бальзамы и кондиционеры</span>
-                        </>
+                {Array.isArray(link)
+                    ? link.map(element => (
+                        <Link key={element} href={element.split('|')[1]}>
+                            <a href={element.split('|')[1]}>{element.split('|')[0]}</a>
+                        </Link>
+                    ))
+                    : <>
+                        <span>Каталог</span>
+                        <span>Косметика для волос</span>
+                        <span>Лечение волос</span>
+                        <span>Бальзамы и кондиционеры</span>
+                    </>
                 }
             </div>
         </div>

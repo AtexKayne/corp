@@ -45,6 +45,7 @@
     &--column { flex-direction: column; }
     &--align-center { align-items: center; }
     &--between { justify-content: space-between; }
+    &--justify-center { justify-content: center; }
     &--column-reverse { flex-direction: column-reverse; }
     &--center { align-items: center; justify-content: center; }
     &--end { align-items: flex-end; justify-content: flex-end; }
