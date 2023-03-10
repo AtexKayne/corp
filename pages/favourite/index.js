@@ -1,5 +1,7 @@
 import { useState, useEffect, useRef } from 'react'
+import { numWord } from '../../components/helpers/generator'
 import { favourite } from '../../components/helpers/constants'
+import { globalState } from '../../components/helpers/globalState'
 import style from '../../styles/module/Favourite/Favourite.module.scss'
 
 import Link from 'next/link'
@@ -7,7 +9,6 @@ import Image from 'next/image'
 import Icon from '../../components/Icon'
 import MainLayout from '../../layout/MainLayout'
 import Breadcrumbs from '../../components/Breadcrumbs'
-import { globalState } from '../../components/helpers/globalState'
 import Tabs from '../../components/usefull/Tabs'
 import Card from '../../components/product/Card'
 import Favourite from '../../components/usefull/Favourite'
@@ -55,15 +56,10 @@ export default function FavouritePage({ detail }) {
 function Products({ items }) {
     return (
         <div className={style.tabInner}>
-            <div className={`${style.countItems} text--t6 text--bold text--upper text--sparse text--color-small`}>2 товара</div>
+            <div className={`${style.countItems} text--t6 text--bold text--upper text--sparse text--color-small`}>
+                {items.length} {numWord(items.length, ['Товар','Товара','Товаров'])}
+            </div>
             <div className={style.productsContainer}>
-                {items.map(item => (
-                    <div key={item.id} className={style.cardWrapper}>
-                        <Card info={item} updated={[]} />
-                    </div>
-                ))}
-
-                {/* @TODO FOR TEST */}
                 {items.map(item => (
                     <div key={item.id} className={style.cardWrapper}>
                         <Card info={item} updated={[]} />
@@ -77,22 +73,11 @@ function Products({ items }) {
 function Brands({ items }) {
     return (
         <div className={style.tabInner}>
-            <div className={`${style.countItems} text--t6 text--bold text--upper text--sparse text--color-small`}>2 бренда</div>
+            <div className={`${style.countItems} text--t6 text--bold text--upper text--sparse text--color-small`}>
+                {items.length} {numWord(items.length, ['Бренд','Бренда','Брендов'])}
+            </div>
 
             <div className={style.brandsContainer}>
-                {items.map(item => (
-                    <div key={item.id} className={style.brandItem}>
-                        <span className={style.brandImage}>
-                            <Image src={item.logo} alt={item.name} layout='fill' />
-                        </span>
-                        <span className='text--a7 text--upper'>{item.name}</span>
-                        <span className={`${style.iconFav}`}>
-                            <Favourite width='16' height='16' info={{ primary: `Бренд ${item.name}` }} isActive={true} />
-                        </span>
-                    </div>
-                ))}
-
-                {/* @TODO FOR TEST */}
                 {items.map(item => (
                     <div key={item.id} className={style.brandItem}>
                         <span className={style.brandImage}>
@@ -113,27 +98,11 @@ function Chapters({ items }) {
     const info = { primary: '', image: false }
     return (
         <div className={style.tabInner}>
-            <div className={`${style.countItems} text--t6 text--bold text--upper text--sparse text--color-small`}>5 разделов</div>
+            <div className={`${style.countItems} text--t6 text--bold text--upper text--sparse text--color-small`}>
+                {items.length} {numWord(items.length, ['Раздел','Раздела','Разделов'])}
+            </div>
 
             <div className={style.chaptersContainer}>
-                {items.map(item => (
-                    <div key={item.id} className={style.chapterItem}>
-                        <span className='text--a5 text--bold'>{item.name}</span>
-                        <span className={`${style.iconFav}`}>
-                            <Favourite width='16' height='16' info={{ primary: `Раздел ${item.name}` }} isActive={true} />
-                        </span>
-                    </div>
-                ))}
-
-                {/* @TODO FOR TEST */}
-                {items.map(item => (
-                    <div key={item.id} className={style.chapterItem}>
-                        <span className='text--a5 text--bold'>{item.name}</span>
-                        <span className={`${style.iconFav}`}>
-                            <Favourite width='16' height='16' info={{ primary: `Раздел ${item.name}` }} isActive={true} />
-                        </span>
-                    </div>
-                ))}
                 {items.map(item => (
                     <div key={item.id} className={style.chapterItem}>
                         <span className='text--a5 text--bold'>{item.name}</span>
