@@ -1,8 +1,7 @@
-import { useState, useEffect, useRef } from 'react'
+import MainLayout from '../../layout/MainLayout'
+import Banner from '../../components/product/Banner'
 import Breadcrumbs from '../../components/Breadcrumbs'
 import { promo } from '../../components/helpers/constants'
-import Banner from '../../components/product/Banner'
-import MainLayout from '../../layout/MainLayout'
 
 export default function Promo({detail}) {
 

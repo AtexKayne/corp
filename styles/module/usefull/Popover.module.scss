@@ -100,8 +100,8 @@
 }
 
 .popoverText {
-    max-width: 250px;
-    min-width: 200px;
+    max-width: 95%;
+    min-width: 95%;
     margin-left: 16px;
     padding-right: 16px;
     color: var(--t-background);
@@ -111,10 +111,17 @@
         white-space: nowrap;
         text-overflow: ellipsis;
     }
+
+    @include media-breakpoint(md-up) {
+        max-width: 250px;
+        min-width: 200px;
+    }
 }
 
 .popoverImage+.popoverText {
     margin-left: 12px;
+    max-width: calc(90% - 50px);
+    min-width: calc(90% - 50px);
 }
 
 .popoverBasket {
