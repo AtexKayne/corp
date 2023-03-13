@@ -822,3 +822,20 @@ export const brands = [
     
 
 ]
+
+export const promo = [
+    {
+        id: 0,
+        title: 'SensiDO Match -15%',
+        description: 'Подчеркните свою индивидуальность с оттеночными бальзамами SensiDO Match',
+        images: {desktop: '/images/promo/image-1-xl.jpg', mobile: '/images/promo/image-1-sm.jpg'},
+        items: [cards[0], cards[1], cards[2], cards[3]]
+    },
+    {
+        id: 1,
+        title: 'Lock Stock & Barrel -35%',
+        description: 'Только с 1 по 31 октября',
+        images: {desktop: '/images/promo/image-2-xl.jpg', mobile: '/images/promo/image-2-sm.jpg'},
+        items: [cards[0], cards[1], cards[2], cards[3]]
+    },
+]

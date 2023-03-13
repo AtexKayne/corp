@@ -89,7 +89,7 @@
         min-height: 65px;
     }
 
-    > span:last-child {
+    span + span {
         transform: translateY(-2px);
     }
 }

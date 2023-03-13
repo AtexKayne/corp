@@ -1,0 +1,147 @@
+@import '../../mixins/helpers/media';
+@import '../../mixins/helpers/adaptive-value';
+
+.banner {
+    width: 100%;
+
+}
+
+.bannerWrapper {
+    width: 100%;
+    display: flex;
+    overflow: hidden;
+    position: relative;
+    border-radius: 8px;
+    margin-bottom: 32px;
+    flex-direction: column;
+    justify-content: flex-end;
+    padding: adaptive-value((
+        xs: 0 16px 24px,
+        md: 0 32px 24px,
+        lg: 0 48px 48px,
+        xxl: 0 72px 48px,
+    ));
+    height: adaptive-value((
+        xs: 240px,
+        md: 250px,
+        lg: 310px,
+        xl: 400px,
+        xxxl: 440px
+    ));
+
+    @include media-breakpoint(md) {
+        margin-bottom: 40px;
+    }
+
+    @include media-breakpoint(lg-up) {
+        margin-bottom: 48px;
+    }
+}
+
+.bannerImage {
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    position: absolute;
+
+    >span:first-child {
+        filter: opacity(0);
+    }
+
+    img {
+        object-fit: cover;
+    }
+
+    &::after {
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        content: '';
+        opacity: 0.5;
+        position: absolute;
+        pointer-events: none;
+        background-color: rgba(17, 34, 51, 0.7);
+    }
+
+    @include media-breakpoint(md-up) {
+        >span:first-child {
+            filter: opacity(1);
+        }
+
+        >span:last-child {
+            filter: opacity(0);
+        }
+    }
+}
+
+.items {
+    width: 100%;
+    display: grid;
+    row-gap: 24px;
+    column-gap: 16px;
+    grid-template-columns: repeat(4, 1fr);
+
+    @include media-breakpoint(md-down) {
+        display: none;
+    }
+
+    @include media-breakpoint(lg) {
+        column-gap: 24px;
+    }
+
+    @include media-breakpoint(xl-up) {
+        column-gap: 32px;
+    }
+
+    @include media-breakpoint(xxxl) {
+        column-gap: 40px;
+    }
+}
+
+.title {
+    z-index: 1;
+    position: relative;
+    color: var(--t-background);
+    font-size: adaptive-value((
+        xs: 20px,
+        md: 28px,
+        xl: 36px
+    ));
+}
+
+.description {
+    z-index: 1;
+    max-width: 80%;
+    position: relative;
+    line-height: 1.5em;
+    color: var(--t-background);
+    font-size: adaptive-value((
+        xs: 14px,
+        md: 16px,
+        lg: 18px,
+        xxl: 24px
+    ));
+
+    @include media-breakpoint(md-up) {
+        max-width: 70%;
+    }
+}
+
+.moreBtn {
+    width: 100%;
+    display: flex;
+    margin-top: 24px;
+    margin-bottom: 64px;
+    justify-content: center;
+
+    @include media-breakpoint(md-down) {
+        display: none;
+    }
+}
+
+.btn {
+    width: 288px;
+    min-height: 60px;
+}

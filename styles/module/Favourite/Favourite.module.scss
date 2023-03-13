@@ -331,8 +331,8 @@
         grid-template-columns: repeat(6, 1fr);
 
         .brandImage {
-            width: calc(100vw / 1600 * 110);
-            height: calc(100vw / 1600 * 110);
+            width: 110px;
+            height: 110px;
         }
     }
 }
