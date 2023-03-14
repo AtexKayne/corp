@@ -11,7 +11,7 @@
     max-height: calc(70vh - 60px);
 
     @include media-breakpoint(md-up) {
-        max-height: calc(80vh - 60px);
+        max-height: calc(100vh - 130px);
     }
 }
 

@@ -1,14 +1,14 @@
 import MainLayout from '../../layout/MainLayout'
 import Catalog from '../../components/catalog/Catalog'
 import Breadcrumbs from '../../components/Breadcrumbs'
-import { brands as categories } from '../../components/helpers/categories'
+import { set as categories } from '../../components/helpers/categories'
 
-export default function BrandPage({detail}) {
+export default function PromoPage({detail}) {
     const c = detail.currentCategory
 
     return (
-        <MainLayout title={`Бренд | ${c.name}`}>
-            <Breadcrumbs theme={c.theme ? c.theme : false} />
+        <MainLayout title={`Подборка | ${c.name}`}>
+            <Breadcrumbs theme={c.theme ? c.theme : false} link={['Подборки|/set', `${c.name}|/test`]} />
 
             <Catalog detail={detail} />
         </MainLayout>
@@ -36,7 +36,7 @@ export async function getServerSideProps(context) {
     }
 
     json.currentCategory = currentCategory
-    json.isBrands = true
+    json.isPromo = true
 
     // json = persone
     // try {

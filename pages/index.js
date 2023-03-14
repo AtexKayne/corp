@@ -88,11 +88,21 @@ export default function Home() {
           <a href='/promo' className='link'>Акции</a>
         </Link>
       </div>
+      <div className='ml-1'>
+        <Link href='/promo/test'>
+          <a href='/promo/test' className='link'>Акции (детальная)</a>
+        </Link>
+      </div>
 
       <div className='text--t1 pb-1 pt-1.5'>Подборки</div>
       <div className='ml-1'>
         <Link href='/set'>
           <a href='/set' className='link'>Подборки</a>
+        </Link>
+      </div>
+      <div className='ml-1'>
+        <Link href='/set/test'>
+          <a href='/set/test' className='link'>Подборки (детальная)</a>
         </Link>
       </div>
 

@@ -50,6 +50,13 @@
     }
 }
 
+.favouriteXL::before {
+    top: -20px;
+    left: -20px;
+    right: -20px;
+    bottom: -20px;
+}
+
 @keyframes ripple {
     0%   { transform: scale(0.3); }
     50%  { transform: scale(1.3); }

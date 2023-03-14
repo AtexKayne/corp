@@ -92,6 +92,7 @@ function LoadTemplate({ name, data }) {
             colors: dynamic(() => import('./usefull/templates/ModalColors'), { ssr: false }),
             filters: dynamic(() => import('./usefull/templates/ModalFilters'), { ssr: false }),
             priceInfo: dynamic(() => import('./usefull/templates/ModalPriceInfo'), { ssr: false }),
+            promoAbout: dynamic(() => import('./usefull/templates/ModalPromoAbout'), { ssr: false }),
             brandAbout: dynamic(() => import('./usefull/templates/ModalBrandAbout'), { ssr: false }),
             colorCircle: dynamic(() => import('./usefull/templates/ModalColorCircle'), { ssr: false }),
             notification: dynamic(() => import('./usefull/templates/ModalNotification'), { ssr: false }),

@@ -85,7 +85,7 @@ function Brands({ items }) {
                         </span>
                         <span className='text--a7 text--upper'>{item.name}</span>
                         <span className={`${style.iconFav}`}>
-                            <Favourite width='16' height='16' info={{ primary: `Бренд ${item.name}` }} isActive={true} />
+                            <Favourite width='16' height='16' size='xl' info={{ primary: `Бренд ${item.name}` }} isActive={true} />
                         </span>
                     </div>
                 ))}
@@ -107,7 +107,7 @@ function Chapters({ items }) {
                     <div key={item.id} className={style.chapterItem}>
                         <span className='text--a5 text--bold'>{item.name}</span>
                         <span className={`${style.iconFav}`}>
-                            <Favourite width='16' height='16' info={{ primary: `Раздел ${item.name}` }} isActive={true} />
+                            <Favourite width='16' height='16' size='xl' info={{ primary: `Раздел ${item.name}` }} isActive={true} />
                         </span>
                     </div>
                 ))}

@@ -7716,3 +7716,83 @@ export const brands = {
         },
     ]
 }
+
+export const promo = {
+    "success": true,
+    "data": [
+        {
+            "id": 2117,
+            "filter": [
+                {
+                    "id": 666,
+                    "code": "price",
+                    "name": "Цена"
+                },
+                {
+                    "id": 981,
+                    "code": "vid",
+                    "name": "Вид товара"
+                },
+                {
+                    "id": 751,
+                    "code": "proizvodstvo",
+                    "name": "Производство"
+                },
+                { id: 566, code: 'market', name: 'Новинки' },
+                { id: 466, code: 'available', name: 'Наборы' },
+                { id: 5633, code: 'hits', name: 'Хиты' },
+                { id: 4663, code: 'discont', name: 'Со скидкой' },
+            ],
+            "coloristic": null,
+            "logo": null,
+            "url": "https://redharemarket.ru/catalog/test/",
+            "name": "Lock Stock & Barrel - 35%",
+            "description": "Только с 1 по 31 октября",
+            "depth_level": 1,
+            "img_mini": "/images/promo/image-2-sm.jpg",
+            "img_big": "/images/promo/image-2-xl.jpg",
+            "theme": "dark",
+            "parent_id": null,
+        },
+    ]
+}
+
+export const set = {
+    "success": true,
+    "data": [
+        {
+            "id": 2117,
+            "filter": [
+                {
+                    "id": 666,
+                    "code": "price",
+                    "name": "Цена"
+                },
+                {
+                    "id": 981,
+                    "code": "vid",
+                    "name": "Вид товара"
+                },
+                {
+                    "id": 751,
+                    "code": "proizvodstvo",
+                    "name": "Производство"
+                },
+                { id: 566, code: 'market', name: 'Новинки' },
+                { id: 466, code: 'available', name: 'Наборы' },
+                { id: 5633, code: 'hits', name: 'Хиты' },
+                { id: 4663, code: 'discont', name: 'Со скидкой' },
+            ],
+            "coloristic": null,
+            "logo": null,
+            "url": "https://redharemarket.ru/catalog/test/",
+            "name": "Профессиональный барбер",
+            "description": "Все, что нужно для рабочего стола профессионала",
+            "depth_level": 1,
+            "img_mini": "/images/set/image-1-xs.jpg",
+            "img_big": "/images/set/image-1-xl.jpg",
+            "theme": "dark",
+            "parent_id": null,
+        },
+    ]
+}
