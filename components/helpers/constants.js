@@ -839,3 +839,20 @@ export const promo = [
         items: [cards[0], cards[1], cards[2], cards[3]]
     },
 ]
+
+export const set = [
+    {
+        id: 0,
+        title: 'Профессиональный барбер',
+        description: 'Все, что нужно для рабочего стола профессионала',
+        images: {desktop: '/images/set/image-1-xl.jpg', mobile: '/images/set/image-1-xs.jpg'},
+        items: [cards[0], cards[1], cards[2], cards[3]]
+    },
+    {
+        id: 1,
+        title: 'Колорист SensiDO',
+        description: 'Все, что нужно профессиональному колористу',
+        images: {desktop: '/images/set/image-2-xl.jpg', mobile: '/images/set/image-2-xs.jpg'},
+        items: [cards[0], cards[1], cards[2], cards[3]]
+    },
+]

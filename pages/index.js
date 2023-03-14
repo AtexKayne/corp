@@ -89,6 +89,13 @@ export default function Home() {
         </Link>
       </div>
 
+      <div className='text--t1 pb-1 pt-1.5'>Подборки</div>
+      <div className='ml-1'>
+        <Link href='/set'>
+          <a href='/set' className='link'>Подборки</a>
+        </Link>
+      </div>
+
       <div className='pt-5' />
 
     </MainLayout>

@@ -18,7 +18,7 @@
     padding: adaptive-value((
         xs: 0 16px 24px,
         md: 0 32px 24px,
-        lg: 0 48px 48px,
+        lg: 0 48px 32px,
         xxl: 0 72px 48px,
     ));
     height: adaptive-value((
@@ -34,7 +34,7 @@
     }
 
     @include media-breakpoint(lg-up) {
-        margin-bottom: 48px;
+        margin-bottom: 32px;
     }
 }
 
@@ -109,13 +109,16 @@
         md: 28px,
         xl: 36px
     ));
+
+    @include media-breakpoint(md-up) {
+        max-width: 70%;
+    }
 }
 
 .description {
     z-index: 1;
-    max-width: 80%;
     position: relative;
-    line-height: 1.5em;
+    line-height: 1.3em;
     color: var(--t-background);
     font-size: adaptive-value((
         xs: 14px,
@@ -133,7 +136,7 @@
     width: 100%;
     display: flex;
     margin-top: 24px;
-    margin-bottom: 64px;
+    margin-bottom: 96px;
     justify-content: center;
 
     @include media-breakpoint(md-down) {
