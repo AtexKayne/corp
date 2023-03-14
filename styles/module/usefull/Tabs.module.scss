@@ -2,10 +2,18 @@
 
 .tabsHead {
     display: flex;
-    margin-bottom: 48px;
+    margin-bottom: 32px;
 
     @media (max-width: 374px) {
         flex-direction: column;
+    }
+
+    @include media-breakpoint(md) {
+        margin-bottom: 40px;
+    }
+
+    @include media-breakpoint(lg-up) {
+        margin-bottom: 48px;
     }
 }
 
