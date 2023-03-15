@@ -307,10 +307,10 @@ function Head({ toggleSidebar, isSidebarHidden, categoryName, titleOpacity, isBr
 
     const openDescription = () => {
         if (isPromo) {
-            globalState.modal.setData({name: info.name})
+            globalState.modal.setData({ name: info.name })
             globalState.modal.setTemplate('promoAbout')
         } else globalState.modal.setTemplate('brandAbout')
-        
+
         globalState.modal.setIsZero(false)
         globalState.modal.setIsOpen(true)
     }
@@ -329,9 +329,12 @@ function Head({ toggleSidebar, isSidebarHidden, categoryName, titleOpacity, isBr
                         : <div className='mr-1.5 px-1 py-1 is-hidden--lg-down'><Image src={imageLogo} width='100' height='100' alt={info.name} /></div>
                     }
                     <div className={style.brandInfo}>
-                        <h2 className={`${style.brandDescription} text--p2 text--normal mb-0.6:xl mb-1.5:xxxl is-hidden--lg-down`}>{info.description}</h2>
+                        {isPromo
+                            ? null
+                            : <h2 className={`${style.brandDescription} text--p2 text--normal mb-0.6:xl mb-1.5:xxxl is-hidden--lg-down`}>{info.description}</h2>
+                        }
 
-                        <div className={`${style.head} mb-0.5:md mb-0.6:xl mb-1.5:xxxl`}>
+                        <div className={`${style.head} ${isPromo ? 'mb-0.5 mb-1:xl' : 'mb-0.5:md mb-0.6:xl mb-1.5:xxxl'}`}>
                             <div data-shown={!isSidebarHidden} data-opacity={titleOpacity} className={`${style.title}`}>
                                 <h1 className={`text--a2 text--bold is-decorative`}>{categoryName}</h1>
                             </div>
@@ -344,7 +347,13 @@ function Head({ toggleSidebar, isSidebarHidden, categoryName, titleOpacity, isBr
                             {categoryName === 'Sensido' ? <ColorCircle isFullSize={true} /> : null}
                         </div>
 
-                        <div onClick={openDescription} className={`${style.aboutBrand} text--t5 text--upper text--bold`}>{isPromo ? 'Подробнее' : 'Подробнее о бренде'}</div>
+                        {!isPromo
+                            ? null
+                            : <h2 className={`${style.brandDescription} text--p2 text--normal mb-0.6:xl mb-1.5:xxxl is-hidden--lg-down`}>{info.description}</h2>
+                        }
+
+                        <div onClick={openDescription} className={`${style.aboutBrand} text--t5 text--upper text--bold is-hidden--sm-down`}>{isPromo ? 'Подробнее' : 'Подробнее о бренде'}</div>
+                        <div onClick={openDescription} className={`${style.aboutBrand} text--t6 text--upper text--bold is-hidden--md-up`}>{isPromo ? 'Подробнее' : 'Подробнее о бренде'}</div>
                     </div>
                 </div>
             </div>

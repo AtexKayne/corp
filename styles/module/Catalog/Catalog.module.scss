@@ -130,6 +130,10 @@
         display: inline-block;
     }
 
+    h1 {
+        line-height: 1em;
+    }
+
     &[data-shown='true'] {
         .titleArrow {
             transform: translateY(1px) rotate(180deg);

@@ -87,7 +87,7 @@ export default function Brands({ detail }) {
     return (
         <MainLayout title={`Бренды`}>
             <Breadcrumbs link='Бренды' />
-            <h1 className='text--h4 mb-2.5 mb-4:lg mt-2 mt-1.5:md mt-2:lg'>Бренды</h1>
+            <h1 className='text--a2 text--bold mb-2.5 mb-4:lg mt-2 mt-1.5:md mt-2:lg'>Бренды</h1>
 
             <Sticky external={style.brandSearch} fixed={style.brandSearchFixed} offset={stickyOffset}>
                 <div className={`${style.search}`}>

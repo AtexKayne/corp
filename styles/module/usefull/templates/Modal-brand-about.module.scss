@@ -8,9 +8,25 @@
 .content {
     overflow: auto;
     touch-action: auto;
-    max-height: calc(70vh - 60px);
+    margin-bottom: 16px;
+    height: calc(100% - 60px);
+    max-height: calc(100% - 60px);
+    padding-right: adaptive-value((
+        xs: 0,
+        md: 32px,
+        lg: 48px,
+        xl: 72px,
+    ));
+    margin-right: adaptive-value((
+        xs: 0,
+        md: -32px,
+        lg: -48px,
+        xl: -72px,
+    ));
 
     @include media-breakpoint(md-up) {
+        height: auto;
+        margin-bottom: 0;
         max-height: calc(100vh - 130px);
     }
 }
@@ -21,7 +37,6 @@
 
 .footer {
     position: unset;
-    // top: calc(70vh + 68px);
     left: adaptive-value((
         xs: 16px,
         md: 32px,

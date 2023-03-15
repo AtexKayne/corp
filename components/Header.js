@@ -40,7 +40,7 @@ export default function Header() {
         setTheme('ui-light')
         setIsHeaderHover(true)
     }
-    
+
     const setThemeDefault = () => {
         setTheme(refThemeDefault.current)
         setIsHeaderHover(false)
@@ -75,9 +75,9 @@ export default function Header() {
 
     useEffect(() => {
         if (isHeaderFixed) {
-            animateHeader.start({position: 'fixed', y: -180, transition: {duration: 0}})
+            animateHeader.start({ position: 'fixed', y: -180, transition: { duration: 0 } })
         } else {
-            animateHeader.start({position: 'absolute', y: 0, transition: {duration: 0}})
+            animateHeader.start({ position: 'absolute', y: 0, transition: { duration: 0 } })
         }
     }, [isHeaderFixed])
 
@@ -95,9 +95,9 @@ export default function Header() {
         if (!isHeaderFixed) return
         const yPosition = getTranslate()
         if (isTranslated) {
-            animateHeader.start({y: yPosition, transition: {duration: 0.4}})
+            animateHeader.start({ y: yPosition, transition: { duration: 0.4 } })
         } else {
-            animateHeader.start({y: -180, transition: {duration: 0.4}})
+            animateHeader.start({ y: -180, transition: { duration: 0.4 } })
         }
     }, [isTranslated])
 
@@ -223,7 +223,7 @@ export default function Header() {
                 <div className={`${style.fixedContainerInnerDesktop} is-hidden--md-down`}>
                     <div className={`${style.groupMD} ${style.textt1} text--semi`}>
                         <Link href='/'>
-                            <div className='logo-light'>
+                            <a href='/' className='logo-light'>
                                 <div className='is-hidden--xxl-down' style={{ width: 297, height: 52 }}>
                                     <Image src='/images/layout/logo-xxl.svg' width='297' height='52' alt='RedHair market' />
                                 </div>
@@ -233,11 +233,11 @@ export default function Header() {
                                 <div className='is-hidden--xxl-up' style={{ width: 44, height: 44 }}>
                                     <Image src='/images/layout/logo-lg.svg' width='44' height='44' alt='RedHair market' />
                                 </div>
-                            </div>
+                            </a>
                         </Link>
 
                         <Link href='/'>
-                            <div className='logo-dark'>
+                            <a href='/' className='logo-dark'>
                                 <div className='is-hidden--xxl-down' style={{ width: 297, height: 52 }}>
                                     <Image src='/images/layout/logo-dark-xxl.svg' width='297' height='52' alt='RedHair market' />
                                 </div>
@@ -247,7 +247,7 @@ export default function Header() {
                                 <div className='is-hidden--xxl-up' style={{ width: 44, height: 44 }}>
                                     <Image src='/images/layout/logo-dark-lg.svg' width='44' height='44' alt='RedHair market' />
                                 </div>
-                            </div>
+                            </a>
                         </Link>
 
                         <div className={`${style.catalogBtn} btn btn--md btn--secondary`}>

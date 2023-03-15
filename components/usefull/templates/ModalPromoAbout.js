@@ -10,7 +10,7 @@ export default function ModalBrandAbout({ data }) {
         <div className={style.brandAbout}>
             <div className={`${style.content} modal-scroll-content`}>
                 <div className={`text--p4 text--normal pt-1 pb-1`}>
-                    <div className='text--a2 text--bold pb-2'>{data.name}</div>
+                    <div className='text--a2 text--bold pb-2 pt-0.5'>{data.name}</div>
                     {data.name === 'Профессиональный барбер'
                         ? <>
                             <p className='pb-1'>

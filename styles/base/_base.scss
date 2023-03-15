@@ -26,7 +26,7 @@ body {
 
 * {
     scrollbar-width: thin;
-    scrollbar-color: color-use(_red) color-use(_lightest);
+    scrollbar-color: var(--t-smallish) var(--c-_lightest);
 
     &::-webkit-scrollbar {
         width: 12px;
@@ -39,8 +39,8 @@ body {
     
     &::-webkit-scrollbar-thumb {
         border-radius: 20px;
-        background-color: color-use(_red);
-        border: 3px solid color-use(_lightest);
+        background-color: var(--t-smallish);
+        border: 3px solid var(--c-_lightest);
     }
 
     &,

@@ -23,7 +23,7 @@ export default function FavouritePage({ detail }) {
     return (
         <MainLayout title={`Избранное`}>
             <Breadcrumbs link={['Избранное|/favourite']} />
-            <h1 className='text--h4 mb-2 mt-2 mt-1.5:md mt-2:lg'>Избранное</h1>
+            <h1 className='text--a2 text--bold mb-2 mt-2 mt-1.5:md mt-2:lg'>Избранное</h1>
             <Tabs tabs={['Товары', 'Бренды', 'Разделы']}>
                 <>
                     <div className={style.tabsInner}>
