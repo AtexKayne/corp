@@ -2,7 +2,11 @@
 @import '../../../mixins/helpers/adaptive-value';
 
 .brandAbout {
-    height: calc(70vh + 98px);
+    height: calc(60vh + 98px);
+
+    @include media-breakpoint(md-up) {
+        height: calc(70vh + 98px);
+    }
 }
 
 .content {
