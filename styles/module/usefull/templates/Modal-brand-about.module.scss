@@ -13,8 +13,8 @@
     overflow: auto;
     touch-action: auto;
     margin-bottom: 16px;
-    height: calc(100% - 60px);
-    max-height: calc(100% - 60px);
+    height: calc(100% - 88px);
+    max-height: calc(100% - 88px);
     padding-right: adaptive-value((
         xs: 0,
         md: 32px,
@@ -31,7 +31,33 @@
     @include media-breakpoint(md-up) {
         height: auto;
         margin-bottom: 0;
-        max-height: calc(100vh - 130px);
+        max-height: calc(100vh - 240px);
+    }
+}
+
+.contentPromo {
+    height: 100%;
+    overflow: auto;
+    max-height: 100%;
+    touch-action: auto;
+    margin-bottom: 16px;
+    padding-right: adaptive-value((
+        xs: 0,
+        md: 32px,
+        lg: 48px,
+        xl: 72px,
+    ));
+    margin-right: adaptive-value((
+        xs: 0,
+        md: -32px,
+        lg: -48px,
+        xl: -72px,
+    ));
+
+    @include media-breakpoint(md-up) {
+        height: auto;
+        margin-bottom: 0;
+        max-height: calc(100vh - 240px);
     }
 }
 

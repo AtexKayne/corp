@@ -8,7 +8,7 @@ export default function ModalBrandAbout({ data }) {
 
     return (
         <div className={style.brandAbout}>
-            <div className={`${style.content} modal-scroll-content`}>
+            <div className={`${style.contentPromo} modal-scroll-content`}>
                 <div className={`text--p4 text--normal pt-1 pb-1`}>
                     <div className='text--a2 text--bold pb-2 pt-0.5'>{data.name}</div>
                     {data.name === 'Профессиональный барбер'
@@ -45,8 +45,12 @@ export default function ModalBrandAbout({ data }) {
                         Напишите в Telegram
                     </a>
                 </div>
+
+                <div onClick={clickHandler} className={`${style.button} is-hidden--md-up btn btn--md btn--fill btn--primary`}>
+                    <span className='text--upper text--p5 text--bold'>перейти к покупкам</span>
+                </div>
             </div>
-            <div className={style.footer}>
+            <div className={`${style.footer} is-hidden--sm-down`}>
                 <div onClick={clickHandler} className={`${style.button} btn btn--md btn--fill btn--primary`}>
                     <span className='text--upper text--p5 text--bold'>перейти к покупкам</span>
                 </div>

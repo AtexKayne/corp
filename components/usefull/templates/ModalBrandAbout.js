@@ -42,8 +42,12 @@ export default function ModalBrandAbout() {
                         Напишите в Telegram
                     </a>
                 </div>
+
+                <div onClick={clickHandler} className={`${style.button} is-hidden--md-up btn btn--md btn--fill btn--primary`}>
+                    <span className='text--upper text--p5 text--bold'>перейти к покупкам</span>
+                </div>
             </div>
-            <div className={style.footer}>
+            <div className={`${style.footer} is-hidden--sm-down`}>
                 <div onClick={clickHandler} className={`${style.button} btn btn--md btn--fill btn--primary`}>
                     <span className='text--upper text--p5 text--bold'>перейти к покупкам</span>
                 </div>

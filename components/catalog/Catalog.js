@@ -334,7 +334,7 @@ function Head({ toggleSidebar, isSidebarHidden, categoryName, titleOpacity, isBr
                             : <h2 className={`${style.brandDescription} text--p2 text--normal mb-0.6:xl mb-1.5:xxxl is-hidden--lg-down`}>{info.description}</h2>
                         }
 
-                        <div className={`${style.head} ${isPromo ? 'mb-0.5 mb-1:xl' : 'mb-0.5:md mb-0.6:xl mb-1.5:xxxl'}`}>
+                        <div className={`${style.head} ${isPromo ? 'mb-0.5 mb-1:xl' : 'mb-0.5 mb-0.6:xl mb-1.5:xxxl'}`}>
                             <div data-shown={!isSidebarHidden} data-opacity={titleOpacity} className={`${style.title}`}>
                                 <h1 className={`text--a2 text--bold is-decorative`}>{categoryName}</h1>
                             </div>

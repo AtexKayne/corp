@@ -85,17 +85,17 @@
         xxxl: 440px,
     ));
 
-    &::after {
-        top: 0;
-        left: 0;
-        right: 0;
-        bottom: 0;
-        content: '';
-        opacity: 0.5;
-        position: absolute;
-        pointer-events: none;
-        background-color: rgba(17, 34, 51, 0.7);
-    }
+    // &::after {
+    //     top: 0;
+    //     left: 0;
+    //     right: 0;
+    //     bottom: 0;
+    //     content: '';
+    //     opacity: 0.5;
+    //     position: absolute;
+    //     pointer-events: none;
+    //     background-color: rgba(17, 34, 51, 0.7);
+    // }
 
     img {
         object-fit: cover;
