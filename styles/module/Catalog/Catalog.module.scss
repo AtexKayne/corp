@@ -65,8 +65,10 @@
     transition: .3s;
     max-width: 240px;
 
-    &:hover {
-        color: var(--t-primary);
+    @include media-breakpoint(lg-up) {
+        &:hover {
+            color: var(--t-primary);
+        }
     }
 }
 
