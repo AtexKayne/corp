@@ -16,7 +16,7 @@
     height: calc(100% - 88px);
     max-height: calc(100% - 88px);
     padding-right: adaptive-value((
-        xs: 0,
+        xs: 12px,
         md: 32px,
         lg: 48px,
         xl: 72px,
@@ -42,7 +42,7 @@
     touch-action: auto;
     margin-bottom: 16px;
     padding-right: adaptive-value((
-        xs: 0,
+        xs: 12px,
         md: 32px,
         lg: 48px,
         xl: 72px,
