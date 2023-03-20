@@ -100,8 +100,17 @@
     img {
         object-fit: cover;
     }
+}
 
-
+.imageOverlayFull {
+    height: adaptive-value((
+        xs: 210px,
+        sm: 200px,
+        md: 250px,
+        lg: 310px,
+        xl: 400px,
+        xxxl: 440px,
+    ));
 }
 
 .selector {

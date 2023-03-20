@@ -319,8 +319,9 @@ function Head({ toggleSidebar, isSidebarHidden, categoryName, titleOpacity, isBr
         return (
             <div className={`${themeHead} ${imageOverlay ? 'mb-2 mb-3.5:md mb-4:lg mb-5:xl mb-6:xxxl' : 'mb-1.5 mb-2:md mb-3:xxl'}`}>
                 {imageOverlay
-                    ? <div className={style.imageOverlay}><Image src={imageOverlay} layout='fill' alt={info.name} /></div>
-                    : null
+                    ? <div className={`${style.imageOverlay} ${categoryName.length >= 20 ? style.imageOverlayFull : '' }`}>
+                        <Image src={imageOverlay} layout='fill' alt={info.name} />
+                    </div> : null
                 }
 
                 <div className={style.brandHead}>
