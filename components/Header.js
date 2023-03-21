@@ -10,7 +10,6 @@ import { motion, useAnimationControls } from 'framer-motion'
 export default function Header() {
     const refRabbit = useRef(null)
     const refThemeDefault = useRef('ui-light')
-    const [isAuth, setIsAuth] = useState(false)
     const [theme, setTheme] = useState('ui-light')
     const [basketCount, setBasketCount] = useState(0)
     const [themeImage, setThemeImage] = useState('ui-light')
@@ -73,14 +72,6 @@ export default function Header() {
 
     const debounceScroll = debounce(scrollHandler, 5)
 
-    useEffect(() => {
-        if (isHeaderFixed) {
-            animateHeader.start({ position: 'fixed', y: -180, transition: { duration: 0 } })
-        } else {
-            animateHeader.start({ position: 'absolute', y: 0, transition: { duration: 0 } })
-        }
-    }, [isHeaderFixed])
-
     const getTranslate = () => {
         const ww = window.innerWidth
         let translate = 0
@@ -90,6 +81,14 @@ export default function Header() {
         // else if (ww < globalState.sizes.lg && ww >= globalState.sizes.md) translate = 
         return translate
     }
+
+    useEffect(() => {
+        if (isHeaderFixed) {
+            animateHeader.start({ position: 'fixed', y: -180, transition: { duration: 0 } })
+        } else {
+            animateHeader.start({ position: 'absolute', y: 0, transition: { duration: 0 } })
+        }
+    }, [isHeaderFixed])
 
     useEffect(() => {
         if (!isHeaderFixed) return
@@ -122,17 +121,11 @@ export default function Header() {
         globalState.body = { addClass, removeClass, toggleClass }
         globalState.basket = { setBasketCount, basketCount }
         globalState.header = { setTheme: setHeaderTheme }
-        globalState.auth = { setIsAuth, isAuth }
 
         return () => {
             window.removeEventListener('scroll', debounceScroll)
         }
     }, [])
-
-    useEffect(() => {
-        globalState.auth.isAuth = isAuth
-    }, [isAuth])
-
 
     return (
         <>
@@ -278,14 +271,7 @@ export default function Header() {
                             <div className={`${style.countBasket} ${!!basketCount ? '' : 'is-hidden'}`}>{basketCount}</div>
                             <Icon width='27' height='25' name='basketMD' />
                         </div>
-                        {
-                            isAuth
-                                ? <div onClick={() => setIsAuth(false)} className='btn btn--empty btn--sm p-relative'>
-                                    {/* <div className={`${style.countBasket} ${!!basketCount ? '' : 'is-hidden'}`}>{basketCount}</div> */}
-                                    <Icon name='person' width='25' height='25' />
-                                </div>
-                                : <div onClick={() => setIsAuth(true)} className={`${style.textt6} btn btn--tetriary btn--md text--bold ml-0.5`}>ВОЙТИ</div>
-                        }
+                        <AuthBtn size='25' />
                     </div>
 
                     <div className={`${style.groupSM} is-hidden--xl-up`}>
@@ -295,14 +281,7 @@ export default function Header() {
                             <div className={`${style.countBasket} ${!!basketCount ? '' : 'is-hidden'}`}>{basketCount}</div>
                             <Icon width='22' height='21' name='basketMD' />
                         </div>
-                        {
-                            isAuth
-                                ? <div onClick={() => setIsAuth(false)} className={`btn btn--empty btn--sm p-relative`}>
-                                    {/* <div className={`${style.countBasket} ${!!basketCount ? '' : 'is-hidden'}`}>{basketCount}</div> */}
-                                    <Icon name='person' width='20' height='20' />
-                                </div>
-                                : <div onClick={() => setIsAuth(true)} className={`${style.textt6} btn btn--tetriary btn--md text--bold ml-0.5`}>ВОЙТИ</div>
-                        }
+                        <AuthBtn size='20' />
                     </div>
                 </div>
             </motion.div>
@@ -317,4 +296,31 @@ export default function Header() {
             </div>
         </>
     )
+}
+
+function AuthBtn({ size }) {
+    const [isAuth, setIsAuth] = useState(false)
+
+    const authHandler = () => {
+        globalState.modal.setData({ type: 'auth' })
+        globalState.modal.setTemplate('auth')
+        globalState.modal.setIsZero(true)
+        globalState.modal.setIsOpen(true)
+    }
+
+    useEffect(() => {
+        globalState.auth = { setIsAuth, isAuth }
+    }, [])
+
+    useEffect(() => {
+        globalState.auth.isAuth = isAuth
+    }, [isAuth])
+
+    return isAuth
+        ? (
+            <div onClick={() => setIsAuth(false)} className={`btn btn--empty btn--sm p-relative`}>
+                {/* <div className={`${style.countBasket} ${!!basketCount ? '' : 'is-hidden'}`}>{basketCount}</div> */}
+                <Icon name='person' width={size} height={size} />
+            </div>
+        ) : <div onClick={authHandler} className={`${style.textt6} btn btn--tetriary btn--md text--bold ml-0.5`}>ВОЙТИ</div>
 }

@@ -150,7 +150,8 @@ export default function BuyButton({ children, max, activeValue, isProfi, setInBa
             globalState.popover.setIsBasket(false)
             globalState.popover.setIsOpen(true)
         } else {
-            globalState.modal.setTemplate('notification')
+            globalState.modal.setData({type: 'notification'})
+            globalState.modal.setTemplate('auth')
             globalState.modal.setIsZero(true)
             globalState.modal.setIsOpen(true)
         }

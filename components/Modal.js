@@ -88,6 +88,7 @@ function LoadTemplate({ name, data }) {
     const [LoadedTemplate, setLoadedTemplate] = useState(false)
     const loadTemplate = templateName => {
         const dynamicComponents = {
+            auth: dynamic(() => import('./usefull/templates/ModalAuth'), { ssr: false }),
             profi: dynamic(() => import('./usefull/templates/ModalProfi'), { ssr: false }),
             colors: dynamic(() => import('./usefull/templates/ModalColors'), { ssr: false }),
             filters: dynamic(() => import('./usefull/templates/ModalFilters'), { ssr: false }),
@@ -95,7 +96,6 @@ function LoadTemplate({ name, data }) {
             promoAbout: dynamic(() => import('./usefull/templates/ModalPromoAbout'), { ssr: false }),
             brandAbout: dynamic(() => import('./usefull/templates/ModalBrandAbout'), { ssr: false }),
             colorCircle: dynamic(() => import('./usefull/templates/ModalColorCircle'), { ssr: false }),
-            notification: dynamic(() => import('./usefull/templates/ModalNotification'), { ssr: false }),
             colorsSecond: dynamic(() => import('./usefull/templates/ModalColorsSecond'), { ssr: false }),
         }
         setLoadedTemplate(dynamicComponents[templateName])
