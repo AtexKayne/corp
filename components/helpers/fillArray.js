@@ -1,0 +1,1 @@
+export const fillArray = length => Array.from({ length: length }, (_, index) => index)

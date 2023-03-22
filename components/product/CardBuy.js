@@ -5,7 +5,7 @@ import { motion, useAnimationControls } from 'framer-motion'
 import style from '../../styles/module/Product/Product-buy-button.module.scss'
 
 
-export default function CardBuy({ 
+export default function CardBuy({
     max,
     name,
     image,
@@ -16,7 +16,7 @@ export default function CardBuy({
     setInBasket,
     activeValue,
     setIsSelected }) {
-    
+
     const [isShaked, setIsShaked] = useState(false)
     const [isRinged, setIsRinged] = useState(false)
     // const [isNotify, setIsNotify] = useState(false)
@@ -50,7 +50,7 @@ export default function CardBuy({
         } else if (classList.contains(style.counterInput)) {
             return
         }
-        
+
         setIsSelected(false)
         document.removeEventListener('click', documentClick)
     }
@@ -128,7 +128,7 @@ export default function CardBuy({
             globalState.popover.setIsBasket(false)
             globalState.popover.setIsOpen(true)
         }
-        
+
         refInput.current.value = value
 
         // if (!!value) setCount(value)
@@ -169,7 +169,7 @@ export default function CardBuy({
             globalState.popover.setIsBasket(false)
             globalState.popover.setIsOpen(true)
         } else {
-            globalState.modal.setData({type: 'notification'})
+            globalState.modal.setData({ type: 'notification', name, image, setIsRinged, setIsNotify })
             globalState.modal.setTemplate('auth')
             globalState.modal.setIsZero(true)
             globalState.modal.setIsOpen(true)
@@ -236,73 +236,70 @@ export default function CardBuy({
 
     return (
         <div ref={refButton} className={style.cardBuybtn}>
-            {
-                !isProfi && !isEmpty
-                    ? <div className={style.btnWrapper}>
-                        <div onClick={buyHandler} data-open={isOpen} className={`${style.btnMain} btn btn--md btn--primary`}>
-                            <span className='text--upper text--p5 text--bold'>в корзину</span>
-                        </div>
+            {!isProfi && !isEmpty
+                ? <div className={style.btnWrapper}>
+                    <div onClick={buyHandler} data-open={isOpen} className={`${style.btnMain} btn btn--md btn--primary`}>
+                        <span className='text--upper text--p5 text--bold'>в корзину</span>
+                    </div>
 
-                        <div data-open={isOpen} className={style.buyOpen}>
-                            <div
-                                ref={refCounter}
-                                data-active={isSelected}
-                                className={`${style.cardCountSelector} text--p5 text--bold`}>
-                                <span data-disabled={diabled === 'minus'} onClick={() => updateCount(-1)} className={style.counterBtn}>
-                                    <Icon name='minus' width='16' height='16' />
-                                </span>
-                                <span onClick={cancelHandler} className={`${style.counterBtnReject} ${style.counterBtnReject}`}>
-                                    <Icon name='close' width='16' height='16' />
-                                </span>
+                    <div data-open={isOpen} className={style.buyOpen}>
+                        <div
+                            ref={refCounter}
+                            data-active={isSelected}
+                            className={`${style.cardCountSelector} text--p5 text--bold`}>
+                            <span data-disabled={diabled === 'minus'} onClick={() => updateCount(-1)} className={style.counterBtn}>
+                                <Icon name='minus' width='16' height='16' />
+                            </span>
+                            <span onClick={cancelHandler} className={`${style.counterBtnReject} ${style.counterBtnReject}`}>
+                                <Icon name='close' width='16' height='16' />
+                            </span>
 
-                                <input
-                                    min={0}
-                                    max={max}
-                                    type='tel'
-                                    ref={refInput}
-                                    placeholder={count}
-                                    onBlur={blurHandler}
-                                    data-shake={isShaked}
-                                    onChange={changeHandler}
-                                    onKeyDown={keyDownHandler}
-                                    className={`${style.counterInput} text--p5 text--bold`} />
+                            <input
+                                min={0}
+                                max={max}
+                                type='tel'
+                                ref={refInput}
+                                placeholder={count}
+                                onBlur={blurHandler}
+                                data-shake={isShaked}
+                                onChange={changeHandler}
+                                onKeyDown={keyDownHandler}
+                                className={`${style.counterInput} text--p5 text--bold`} />
 
-                                <div onClick={counterClick} className={style.counterDiv}>
-                                    <motion.span animate={animateCount}>{count}</motion.span>
-                                    <span>&nbsp;ШТ</span>
-                                </div>
-
-                                <span data-disabled={diabled === 'plus'} onClick={() => updateCount(+1)} className={style.counterBtn}>
-                                    <Icon name='plus' width='16' height='16' />
-                                </span>
-                                <span className={style.counterBtnAccept}>
-                                    <Icon name='check' width='16' height='16' />
-                                </span>
+                            <div onClick={counterClick} className={style.counterDiv}>
+                                <motion.span animate={animateCount}>{count}</motion.span>
+                                <span>&nbsp;ШТ</span>
                             </div>
-                        </div>
-                    </div> : null
-            }
 
-            {
-                isProfi && !isEmpty
-                    ? <div className={style.btnWrapper}>
-                        <div onClick={profiClickHandler} className={`${style.btnMain} btn btn--md btn--primary`}>
-                            <span className='text--upper text--p5 text--bold'>ДЛЯ ПРОФИ</span>
-                        </div>
-                    </div> : null
-            }
-
-            {
-                isEmpty
-                    ? <div className={style.btnWrapper}>
-                        <div data-active={isNotify} data-shaked={isRinged} onClick={notificationClickHandler} className={`${style.btnMain} ${style.notify} btn btn--md btn--yellow`}>
-                            <span className='text--upper text--p5 text--bold mr-0.8'>{isNotify ? 'сообщим' : 'сообщить'}</span>
-                            <span className={style.iconBell}>
-                                <Icon name='bell' width='16' height='16' />
-                                <Icon name='bellFill' width='16' height='16' />
+                            <span data-disabled={diabled === 'plus'} onClick={() => updateCount(+1)} className={style.counterBtn}>
+                                <Icon name='plus' width='16' height='16' />
+                            </span>
+                            <span className={style.counterBtnAccept}>
+                                <Icon name='check' width='16' height='16' />
                             </span>
                         </div>
-                    </div> : null
+                    </div>
+                </div> : null
+            }
+
+            {isProfi && !isEmpty
+                ? <div className={style.btnWrapper}>
+                    <div onClick={profiClickHandler} className={`${style.btnMain} btn btn--md btn--primary`}>
+                        <span className='text--upper text--p5 text--bold'>ДЛЯ ПРОФИ</span>
+                    </div>
+                </div> : null
+            }
+
+            {isEmpty
+                ? <div className={style.btnWrapper}>
+                    <div data-active={isNotify} data-shaked={isRinged} onClick={notificationClickHandler} className={`${style.notify} btn btn--md btn--yellow`}>
+                        <span className='text--upper text--p5 text--bold mr-0.8'>{isNotify ? 'сообщим' : 'сообщить'}</span>
+                        <span className={style.iconBell}>
+                            <Icon name='bell' width='16' height='16' />
+                            <Icon name='bellFill' width='16' height='16' />
+                        </span>
+                    </div>
+                </div> : null
             }
         </div>
     )

@@ -1,0 +1,30 @@
+.authWrapper {
+    height: 100%;
+    display: flex;
+    align-items: center;
+    padding-bottom: 48px;
+    flex-direction: column;
+}
+
+.image {
+    width: 200px;
+    height: 200px;
+    min-width: 200px;
+    margin-top: 48px;
+    min-height: 200px;
+    position: relative;
+}
+
+.footer {
+    width: 100%;
+    display: flex;
+    flex-basis: 100%;
+    flex-direction: column;
+    justify-content: flex-end;
+}
+
+.button {
+    width: 100%;
+    min-height: 60px;
+    margin-bottom: 16px;
+}

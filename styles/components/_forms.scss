@@ -342,3 +342,33 @@
         min-width: 10px;
     }
 }
+
+.input-code {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    >* {
+        max-width: 44px;
+        margin-right: 8px;
+        text-align: center;
+
+        &:last-child {
+            margin-right: 0;
+        }
+    }
+
+    &.code-error > * {
+        color: var(--t-primary);
+        border-color: var(--t-primary);
+    }
+}
+
+.input-error {
+    display: none;
+    padding-top: 16px;
+
+    &[data-error='true'] {
+        display: block;
+    }
+}

@@ -5,7 +5,7 @@
     position: relative;
 }
 
-.step {
+.stepOne {
     height: 100%;
     display: flex;
     flex-direction: column;
@@ -45,12 +45,6 @@
     }
 }
 
-.footer {
-    display: flex;
-    flex-basis: 100%;
-    align-items: flex-end;
-}
-
 .btn {
     margin-top: 40px;
     min-height: 60px;
@@ -67,29 +61,47 @@
 
 .stepTwo {
     top: 0;
-    left: 0;
-    width: 100%;
+    left: -3px;
+    opacity: 0;
+    z-index: 1;
+    right: -3px;
     height: 100%;
     display: flex;
     position: absolute;
+    pointer-events: none;
     flex-direction: column;
     padding: 125px 50px 48px;
+    transition: .5s ease-in-out;
     min-height: -webkit-fill-available;
     background-color: var(--t-background);
+
+    &[data-active='true'] {
+        opacity: 1;
+        pointer-events: all;
+    }
+
+    &[data-blure='true'] {
+        opacity: 1;
+        filter: blur(3px);
+    }
 }
 
-.codeInput {
+.backBtn {
+    top: 0;
+    left: 0;
+    width: 20px;
+    height: 20px;
     display: flex;
+    cursor: pointer;
+    transition: .3s;
+    position: absolute;
     align-items: center;
     justify-content: center;
+    background-color: var(--t-background);
 
-    >* {
-        max-width: 44px;
-        margin-right: 8px;
-        text-align: center;
-
-        &:last-child {
-            margin-right: 0;
+    @include media-breakpoint(md-up) {
+        &:hover {
+            color: var(--t-primary);
         }
     }
 }
@@ -100,4 +112,37 @@
     align-items: center;
     flex-direction: column;
     justify-content: flex-end;
+}
+
+.stepThree {
+    top: 0;
+    left: -1px;
+    opacity: 0;
+    z-index: 2;
+    right: -1px;
+    height: 100%;
+    display: flex;
+    position: absolute;
+    align-items: center;
+    pointer-events: none;
+    flex-direction: column;
+    justify-content: center;
+    transition: .5s ease-in-out;
+    min-height: -webkit-fill-available;
+    background-color: rgba(255,255,255, 0.7);
+
+    &[data-active='true'] {
+        opacity: 1;
+        pointer-events: all;
+    }
+}
+
+.loading {
+    width: 200px;
+    height: 200px;
+
+    >* {
+        width: 200px;
+        height: 200px;
+    }
 }
