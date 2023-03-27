@@ -205,10 +205,8 @@ export default function Header() {
                                 <Icon width='24' height='21' external='is-hidden--md-up' name='basket' />
                                 <div className={`${style.countBasket} ${!!basketCount ? '' : 'is-hidden'}`}>{basketCount}</div>
                             </div>
-                            <div className='btn btn--empty btn--sm'>
-                                <Icon width='24' height='24' external='is-hidden--sm-down' name='person' />
-                                <Icon width='21' height='21' external='is-hidden--md-up' name='person' />
-                            </div>
+
+                            <AuthMobile />
                         </div>
                     </div>
                 </div>
@@ -313,7 +311,6 @@ function AuthBtn({ size }) {
     }, [])
 
     useEffect(() => {
-        console.log(isAuth);
         globalState.auth.isAuth = isAuth
     }, [isAuth])
 
@@ -324,4 +321,22 @@ function AuthBtn({ size }) {
                 <Icon name='person' width={size} height={size} />
             </div>
         ) : <div onClick={authHandler} className={`${style.textt6} btn btn--tetriary btn--md text--bold ml-0.5`}>ВОЙТИ</div>
+}
+
+function AuthMobile() {
+    const authHandler = () => {
+        if (!globalState.auth.isAuth) {
+            globalState.modal.setData({ type: 'auth' })
+            globalState.modal.setTemplate('auth')
+            globalState.modal.setIsZero(true)
+            globalState.modal.setIsOpen(true)
+        }
+    }
+
+    return (
+        <div onClick={authHandler} className='btn btn--empty btn--sm'>
+            <Icon width='24' height='24' external='is-hidden--sm-down' name='person' />
+            <Icon width='21' height='21' external='is-hidden--md-up' name='person' />
+        </div>
+    )
 }
