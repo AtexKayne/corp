@@ -54,7 +54,7 @@ function StepOne({ setStep, step, data, setPhone }) {
                 <Image src='/images/layout/logo-xs.svg' width='117' height='117' alt='RedHair market' />
             </div>
 
-            <div className={`${style.title} text--h4 text--bold pb-2`}>
+            <div className={`${style.title} text--a2 text--bold pb-2`}>
                 <AuthModalTitle type={data.type} />
             </div>
 
