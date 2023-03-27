@@ -105,12 +105,9 @@ function StepTwo({ phone, setStep, step, data }) {
         if (step === 2) {
             refTimer.current = setInterval(() => {
                 setTimer(prev => {
-                    if (prev > 1) {
-                        return prev - 1
-                    } else {
-                        clearInterval(refTimer.current)
-                        return 0
-                    }
+                    if (prev > 1) return prev - 1
+                    clearInterval(refTimer.current)
+                    return 0
                 })
             }, 1000)
         } else if (step === 1) {
@@ -182,7 +179,7 @@ function StepTwo({ phone, setStep, step, data }) {
                 <Icon name='chevronLeft' width='20' height='20' />
             </div>
 
-            <div className={`${style.title} text--h4 text--bold pb-2`}>
+            <div className={`${style.title} text--a2 text--bold pb-2`}>
                 <span>Введите код</span>
             </div>
 

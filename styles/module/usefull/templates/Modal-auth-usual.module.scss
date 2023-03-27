@@ -82,6 +82,13 @@
     min-height: 200px;
     position: relative;
     text-align: center;
+
+    @media (max-height: 750px) and (min-width: 420px) {
+        height: 0;
+        opacity: 0;
+        min-height: 0;
+        overflow: hidden;
+    }
 }
 
 .footer {
