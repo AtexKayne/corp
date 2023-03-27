@@ -72,6 +72,8 @@ function StepTwo({ setStep, step }) {
     }
 
     const codeValidate = code => {
+        const active = document.activeElement
+        if (active && typeof active.blur === 'function') active.blur()
         setStep(3)
         setTimeout(() => {
             if (code.includes('666')) {

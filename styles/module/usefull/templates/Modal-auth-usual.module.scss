@@ -19,14 +19,14 @@
         overflow: hidden;
     }
 
-    @media (max-height: 650px) {
+    @media (max-height: 700px) {
         .image {
             display: none;
         }
     }
 
     @include media-breakpoint(sm-down) {
-        padding-bottom: 0;
+        // padding-bottom: 0;
 
         .image {
             width: 120px;

@@ -15,7 +15,7 @@ export default function ModalAuth({ data }) {
 
     return (
         <div className={`${style.authWrapper} full-height`}>
-            <StepOne data={data} setStep={setStep} setPhone={setPhone} />
+            <StepOne data={data} setStep={setStep} step={step} setPhone={setPhone} />
             <StepTwo phone={phone} setStep={setStep} step={step} data={data} />
             <StepThree step={step} />
         </div>
@@ -33,7 +33,7 @@ function AuthModalTitle({ type }) {
     }
 }
 
-function StepOne({ setStep, data, setPhone }) {
+function StepOne({ setStep, step, data, setPhone }) {
     const [isDisabled, setIsDisabled] = useState(true)
     const refInput = useRef(null)
 
@@ -49,7 +49,7 @@ function StepOne({ setStep, data, setPhone }) {
     }
 
     return (
-        <div className={style.stepOne}>
+        <div data-active={step === 1} className={style.stepOne}>
             <div className={style.image}>
                 <Image src='/images/layout/logo-xs.svg' width='117' height='117' alt='RedHair market' />
             </div>
@@ -137,6 +137,10 @@ function StepTwo({ phone, setStep, step, data }) {
     }
 
     const codeValidate = code => {
+        const active = document.activeElement
+        console.log(active);
+        if (active && typeof active.blur === 'function') active.blur()
+
         setStep(3)
         setTimeout(() => {
             if (code.includes('666')) {
