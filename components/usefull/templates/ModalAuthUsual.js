@@ -44,8 +44,9 @@ function StepOne({ setStep, step }) {
                 Подтверждение происходит в нашем телеграм-боте.
             </div>
             <div className={style.footer}>
-                <div onClick={clickHandler} className={`${style.button} btn btn--md btn--fill btn--primary`}>
-                    <span className='text--upper text--sparse text--p5 text--bold'>Подтвердить статус профессионала</span>
+                <div onClick={clickHandler} className={`${style.button} ${style.profiBtn} btn btn--md btn--fill btn--primary`}>
+                    <span className='text--upper text--sparse text--p5 text--bold'>Подтвердить&nbsp;</span>
+                    <span className='text--upper text--sparse text--p5 text--bold'>статус профессионала</span>
                 </div>
                 <div onClick={clickHandler} className={`${style.button} btn btn--md btn--fill btn--shadow`}>
                     <span className='text--upper text--sparse text--p5 text--bold'>Перейти к покупкам</span>

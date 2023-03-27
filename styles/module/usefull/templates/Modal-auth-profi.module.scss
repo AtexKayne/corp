@@ -1,3 +1,5 @@
+@import '../../../mixins/helpers/media';
+
 .authWrapper {
     height: 100%;
     display: flex;
@@ -13,6 +15,10 @@
     margin-top: 48px;
     min-height: 200px;
     position: relative;
+
+    @include media-breakpoint(sm-down) {
+        margin-top: 0;
+    }
 
     @media (max-height: 750px) and (min-width: 420px) {
         height: 0;

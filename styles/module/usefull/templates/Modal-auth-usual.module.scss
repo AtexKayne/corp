@@ -281,3 +281,11 @@
         }
     }
 }
+
+.profiBtn {
+    @media (max-width: 374px) {
+        span:first-child {
+            display: none;
+        }
+    }
+}
