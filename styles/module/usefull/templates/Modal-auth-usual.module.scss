@@ -13,6 +13,29 @@
     padding-bottom: 48px;
     flex-direction: column;
     min-height: -webkit-fill-available;
+
+    &[data-active='false'] {
+        max-height: 40px;
+        overflow: hidden;
+    }
+
+    @media (max-height: 650px) {
+        .image {
+            display: none;
+        }
+    }
+
+    @include media-breakpoint(sm-down) {
+        padding-bottom: 0;
+
+        .image {
+            width: 120px;
+            height: 120px;
+            margin-top: 0;
+            min-width: 120px;
+            min-height: 120px;
+        }
+    }
 }
 
 .stepTwo {
@@ -27,10 +50,17 @@
     align-items: center;
     pointer-events: none;
     flex-direction: column;
-    padding: 125px 50px 16px;
     transition: .5s ease-in-out;
     min-height: -webkit-fill-available;
     background-color: var(--t-background);
+    padding: adaptive-value((
+        xs: 16px 0 32px,
+        md: 125px 20px 32px,
+        lg: 125px 0 32px,
+        xl: 125px 20px 48px,
+        xxl: 125px 92px 48px,
+        xxxl: 200px 92px 80px,
+    ));
 
     &[data-active='true'] {
         opacity: 1;

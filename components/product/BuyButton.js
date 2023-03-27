@@ -251,7 +251,7 @@ export default function BuyButton({ children, max, activeValue, isProfi, setInBa
                             <span className='is-hidden--lg is-hidden--md'>Добавить </span>
                             <span>в корзину</span>
                         </span>
-                        <Icon name='basketMD' width='18' height='18' />
+                        <Icon name='basketMD' external={style.iconBasket} width='18' height='18' />
                     </div>
 
                     <div data-open={isOpen} className={style.buyOpen}>

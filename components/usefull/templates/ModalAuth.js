@@ -101,33 +101,6 @@ function StepTwo({ phone, setStep, step, data }) {
     const [error, setError] = useState('')
     const refTimer = useRef(false)
 
-    useEffect(() => {
-        if (step === 2) {
-            refTimer.current = setInterval(() => {
-                setTimer(prev => {
-                    if (prev > 1) return prev - 1
-                    clearInterval(refTimer.current)
-                    return 0
-                })
-            }, 1000)
-        } else if (step === 1) {
-            setError('')
-            if (refTimer.current) clearInterval(refTimer.current)
-            refTimer.current = false
-            setTimer(60)
-        } else {
-            if (refTimer.current) clearInterval(refTimer.current)
-            refTimer.current = false
-            setTimer(60)
-        }
-    }, [step])
-
-    useEffect(() => {
-        return () => {
-            if (refTimer.current) clearInterval(refTimer.current)
-        }
-    }, [])
-
     const notificateHandler = () => {
         data.setIsRinged(true)
         setTimeout(() => data.setIsRinged(false), 1100)
@@ -172,6 +145,33 @@ function StepTwo({ phone, setStep, step, data }) {
             } else nextAction(code)
         }, 3000)
     }
+
+    useEffect(() => {
+        if (step === 2) {
+            refTimer.current = setInterval(() => {
+                setTimer(prev => {
+                    if (prev > 1) return prev - 1
+                    clearInterval(refTimer.current)
+                    return 0
+                })
+            }, 1000)
+        } else if (step === 1) {
+            setError('')
+            if (refTimer.current) clearInterval(refTimer.current)
+            refTimer.current = false
+            setTimer(60)
+        } else {
+            if (refTimer.current) clearInterval(refTimer.current)
+            refTimer.current = false
+            setTimer(60)
+        }
+    }, [step])
+
+    useEffect(() => {
+        return () => {
+            if (refTimer.current) clearInterval(refTimer.current)
+        }
+    }, [])
 
     return (
         <div data-active={step === 2} data-blure={step === 3} className={style.stepTwo}>

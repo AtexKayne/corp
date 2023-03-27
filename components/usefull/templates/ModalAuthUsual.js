@@ -13,14 +13,14 @@ export default function ModalAuthUsual() {
 
     return (
         <div className={`${style.authWrapper} full-height`}>
-            <StepOne setStep={setStep} />
+            <StepOne setStep={setStep} step={step} />
             <StepTwo setStep={setStep} step={step} />
             <StepThree step={step} />
         </div>
     )
 }
 
-function StepOne({ setStep }) {
+function StepOne({ setStep, step }) {
     const clickHandler = () => {
         globalState.modal.setIsOpen(false)
     }
@@ -31,7 +31,7 @@ function StepOne({ setStep }) {
     }
 
     return (
-        <div className={style.stepOne}>
+        <div data-active={step === 1} className={style.stepOne}>
             <div className={style.image}>
                 <Image src='/images/usefull/templates/machina.png' layout='fill' alt='profi icon' />
             </div>
@@ -66,7 +66,8 @@ function StepTwo({ setStep, step }) {
     }
 
     const nextAction = () => {
-
+        globalState.auth.setIsAuth(true)
+        globalState.modal.setIsOpen(false)
     }
 
     const codeValidate = code => {

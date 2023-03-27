@@ -313,6 +313,7 @@ function AuthBtn({ size }) {
     }, [])
 
     useEffect(() => {
+        console.log(isAuth);
         globalState.auth.isAuth = isAuth
     }, [isAuth])
 
