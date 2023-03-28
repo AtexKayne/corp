@@ -25,7 +25,7 @@ export default function ModalAuthProfi() {
             </div>
             <div className={style.footer}>
                 <div onClick={clickHandler} className={`${style.button} btn btn--md btn--fill btn--primary`}>
-                    <span className='text--upper text--p5 text--bold'>перейти к покупкам</span>
+                    <span className='text--upper text--p5 text--bold'>вперед к покупкам</span>
                 </div>
             </div>
         </div>

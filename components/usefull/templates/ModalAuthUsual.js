@@ -35,7 +35,9 @@ function StepOne({ setStep, step }) {
             <div className={style.image}>
                 <Image src='/images/usefull/templates/machina.png' layout='fill' alt='profi icon' />
             </div>
-            <div style={{ maxWidth: 400 }} className='text--a2 text--center text--bold py-1.5'>В одном шаге от&nbsp;выгодных цен</div>
+            <div style={{ maxWidth: 400, lineHeight: '1em' }} className='text--a2 text--center text--bold py-1.5'>
+                В одном шаге <br /> от&nbsp;выгодных цен
+            </div>
 
             <div className='text--p4 text--center pb-1.5'>
                 Чтобы вы могли покупать товары по специальным оптовым ценам, нам нужно подтвердить ваш статус профессионала.
@@ -45,8 +47,8 @@ function StepOne({ setStep, step }) {
             </div>
             <div className={style.footer}>
                 <div onClick={clickHandler} className={`${style.button} ${style.profiBtn} btn btn--md btn--fill btn--primary`}>
-                    <span className='text--upper text--sparse text--p5 text--bold'>Подтвердить&nbsp;</span>
-                    <span className='text--upper text--sparse text--p5 text--bold'>статус профессионала</span>
+                    <span className='text--upper text--sparse text--p5 text--bold'>Подтвердить статус&nbsp;</span>
+                    <span className='text--upper text--sparse text--p5 text--bold'>профессионала</span>
                 </div>
                 <div onClick={clickHandler} className={`${style.button} btn btn--md btn--fill btn--shadow`}>
                     <span className='text--upper text--sparse text--p5 text--bold'>Перейти к покупкам</span>
@@ -86,6 +88,7 @@ function StepTwo({ setStep, step }) {
     return (
         <>
             <div data-active={step === 2} data-blure={step === 3 || isHelpOpen} className={style.stepTwo}>
+                <div className={style.background} />
                 <div onClick={() => setStep(1)} className={style.backBtn}>
                     <Icon name='chevronLeft' width='20' height='20' />
                 </div>
@@ -94,9 +97,9 @@ function StepTwo({ setStep, step }) {
                     <Image src='/images/usefull/templates/invite.png' layout='fill' alt='invite icon' />
                 </div>
 
-                <div style={{ maxWidth: 400 }} className='text--a2 text--center text--bold py-1.5'>Инвайт-код</div>
+                <div style={{ maxWidth: 400 }} className='text--a2 text--bold py-1.5'>Инвайт-код</div>
 
-                <div className='text--p4 text--center pb-3'>
+                <div className='text--p4 pb-3'>
                     Правильно введённый пригласительный код сразу откроет вам все преимущества профессионального покупателя RedHare Market
                 </div>
 
@@ -134,9 +137,9 @@ function HelpWindow({ isHelpOpen, setIsHelpOpen }) {
                 </div>
 
                 <div className={style.helpInfo}>
-                    <div className='text--t2'>Чат с консультантом</div>
+                    <div className='text--t2 text--regular'>Чат с консультантом</div>
                     <div className='btn btn--md btn--grey'>
-                        <Icon name='telegram' width='16' height='16' />
+                        <Icon name='telegramEmpty' width='16' height='16' />
                     </div>
                     <div className={style.helpOr}>Или</div>
                     <div className='btn btn--md btn--grey'>

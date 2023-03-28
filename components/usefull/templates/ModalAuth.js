@@ -150,6 +150,15 @@ function StepTwo({ phone, setStep, step, data }) {
         }, 3000)
     }
 
+    const newCodeHandler = event => {
+        event.preventDefault()
+        // Костыль для сброса инпутов
+        setStep(() => {
+            setTimeout(() => setStep(2), 50)
+            return 1
+        })
+    }
+
     useEffect(() => {
         if (step === 2) {
             refTimer.current = setInterval(() => {
@@ -199,18 +208,20 @@ function StepTwo({ phone, setStep, step, data }) {
             </div>
 
             <div className='pb-3'>
-                <span className='text--p4'>Пожалуйста, введите код ниже:</span>
+                <span className='text--p4'>
+                    {!error ? 'Пожалуйста, введите код ниже:' : 'Ой, этот код не подходит. Попробуйте ещё раз'}
+                </span>
             </div>
 
-            <InputCode setError={setError} resetExcludes={[2, 3]} count={4} error={error} reset={step} onAfterChange={codeValidate} />
+            <InputCode setError={setError} resetExcludes={[2, 3]} type='tel' count={4} error={error} reset={step} onAfterChange={codeValidate} />
 
             {timer
-                ? <div className={`${style.footer} text--p5`}>
+                ? <div onClick={newCodeHandler} className={`${style.footer} text--p5`}>
                     <p>Отправить новый код</p>
                     <p>через {timer} секунд</p>
                 </div>
                 : <div className={`${style.footer} text--p5`}>
-                    <a href='#' className='link text--p6 text--upper text--bold text--color-primary'>Отправить новый код</a>
+                    <a onClick={newCodeHandler} href='#' className='link text--p6 text--upper text--bold text--color-primary'>Отправить новый код</a>
                 </div>
             }
         </div>

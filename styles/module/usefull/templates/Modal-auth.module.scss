@@ -4,13 +4,19 @@
 .authWrapper {
     height: 100%;
     position: relative;
+    pointer-events: none;
 }
 
 .stepOne {
     height: 100%;
     display: flex;
+    pointer-events: none;
     flex-direction: column;
     min-height: -webkit-fill-available;
+
+    >*{
+        pointer-events: all;
+    }
 
     &[data-active='false'] {
         max-height: 40px;
@@ -19,9 +25,13 @@
 }
 
 .image {
-    margin-top: 20px;
+    margin-top: 42px;
     align-self: center;
     margin-bottom: 20px;
+
+    @include media-breakpoint(md) {
+        margin-top: 60px;
+    }
 
     @include media-breakpoint(md-up) {
         margin-bottom: 50px;
@@ -84,13 +94,17 @@
         md: 125px 20px 32px,
         lg: 125px 0 32px,
         xl: 125px 20px 48px,
-        xxl: 125px 92px 48px,
+        xxl: 125px 64px 48px,
         xxxl: 200px 92px 80px,
     ));
 
     &[data-active='true'] {
         opacity: 1;
-        pointer-events: all;
+        // pointer-events: all;
+
+        >* {
+            pointer-events: all;
+        }
     }
 
     &[data-blure='true'] {
@@ -98,8 +112,12 @@
         filter: blur(3px);
     }
 
+    @include media-breakpoint(md-up) {
+        margin-left: -16px;
+    }
+
     @include media-breakpoint(xl-up) {
-        
+        margin-left: -24px;
     }
 }
 
@@ -115,6 +133,15 @@
     align-items: center;
     justify-content: center;
     background-color: var(--t-background);
+
+    &::before {
+        top: -10px;
+        left: -10px;
+        content: '';
+        right: -10px;
+        bottom: -10px;
+        position: absolute;
+    }
 
     @include media-breakpoint(md-up) {
         &:hover {

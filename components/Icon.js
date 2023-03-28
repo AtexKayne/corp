@@ -21,6 +21,7 @@ export default function Icon({ name, external = '', width = 16, height = 16, siz
             person:         dynamic(() => import('../public/icons/icon-person.svg'),        { ssr: false }),
             VK:             dynamic(() => import('../public/icons/icon-vk-fill.svg'),       { ssr: false }),
             telegram:       dynamic(() => import('../public/icons/icon-telegram-fill.svg'), { ssr: false }),
+            telegramEmpty:  dynamic(() => import('../public/icons/icon-telegram.svg'),      { ssr: false }),
             whatsapp:       dynamic(() => import('../public/icons/icon-whatsapp.svg'),      { ssr: false }),
             chevronUp:      dynamic(() => import('../public/icons/icon-chevron-up.svg'),    { ssr: false }),
             chevronDown:    dynamic(() => import('../public/icons/icon-chevron-down.svg'),  { ssr: false }),

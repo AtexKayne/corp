@@ -12,7 +12,7 @@
     display: flex;
     align-items: center;
     pointer-events: none;
-    padding-bottom: 48px;
+    padding-bottom: 52px;
     flex-direction: column;
     min-height: -webkit-fill-available;
 
@@ -38,6 +38,10 @@
             min-height: 120px;
         }
     }
+
+    @include media-breakpoint(lg-up) {
+        padding-bottom: 16px;
+    }
 }
 
 .stepTwo {
@@ -49,12 +53,11 @@
     height: 100%;
     display: flex;
     position: absolute;
-    align-items: center;
     pointer-events: none;
     flex-direction: column;
     transition: .5s ease-in-out;
+    background-color: var(--t-light);
     min-height: -webkit-fill-available;
-    background-color: var(--t-background);
     padding: adaptive-value((
         xs: 16px 0 48px,
         md: 125px 20px 32px,
@@ -63,6 +66,11 @@
         xxl: 125px 92px 48px,
         xxxl: 200px 92px 80px,
     ));
+
+    >* {
+        z-index: 1;
+        position: relative;
+    }
 
     &[data-active='true'] {
         opacity: 1;
@@ -76,12 +84,24 @@
 
     .image {
         margin-top: 0;
+        align-self: center;
     }
 
+    
     @include media-breakpoint(md-up) {
         padding-bottom: 48px;
     }
+
+    .background {
+        top: -28px;
+        left: -96px;
+        width: 100vw;
+        height: 100vh;
+        position: absolute;
+        background-color: var(--t-light);
+    }
 }
+
 
 .stepThree {
     top: 0;
@@ -116,10 +136,11 @@
     text-align: center;
 
     @media (max-height: 750px) and (min-width: 420px) {
-        height: 0;
-        opacity: 0;
-        min-height: 0;
-        overflow: hidden;
+        // height: 0;
+        // opacity: 0;
+        // min-height: 0;
+        margin-top: 0;
+        // overflow: hidden;
     }
 }
 
@@ -152,7 +173,6 @@
     position: absolute;
     align-items: center;
     justify-content: center;
-    background-color: var(--t-background);
 
     @include media-breakpoint(md-up) {
         &:hover {
@@ -213,7 +233,7 @@
         background-color: rgba(17, 34, 51, 0.7);
         
         @include media-breakpoint(md-up) {
-            background-color: var(--t-background);
+            background-color: var(--t-light);
         }
     }
 
@@ -228,10 +248,9 @@
         background-color: var(--t-background);
         box-shadow: 0px -13px 30px 0px #7F8CA026;
         padding: adaptive-value((
-            xs: 0 16px 48px,
-            md: 0 32px,
-            lg: 0 48px,
-            xl: 0 72px,
+            xs: 0 16px 52px,
+            md: 0 64px,
+            lg: 0 32px,
         ));
     }
 
@@ -281,16 +300,20 @@
             justify-content: space-between;
         }
 
-        @include media-breakpoint(xxl-up) {
+        @include media-breakpoint(xl-up) {
             flex-direction: row;
             justify-content: space-between;
+        }
+
+        a {
+            padding-top: 2px;
         }
     }
 }
 
 .profiBtn {
     @media (max-width: 374px) {
-        span:first-child {
+        span:last-child {
             display: none;
         }
     }

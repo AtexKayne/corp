@@ -1,7 +1,7 @@
 import { useEffect, useRef } from 'react'
 import { fillArray } from '../../helpers/fillArray'
 
-export default function InputCode({ count, error, setError, reset, resetExcludes, onAfterChange }) {
+export default function InputCode({ count, error, setError, reset, resetExcludes, onAfterChange, type = 'text' }) {
     const items = fillArray(count)
     const refInputWrapper = useRef(null)
 
@@ -37,7 +37,7 @@ export default function InputCode({ count, error, setError, reset, resetExcludes
     return (
         <>
             <div ref={refInputWrapper} className={`input-code ${!error ? '' : 'code-error'}`}>
-                {items.map(item => <input key={item} onChange={event => changeHandler(event, item)} className='input' type='text' />)}
+                {items.map(item => <input key={item} onChange={event => changeHandler(event, item)} className='input' type={type} />)}
             </div>
 
             <div data-error={!!error} className={`input-error text--center text--p4 text--color-primary`}>{error}</div>
