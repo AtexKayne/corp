@@ -158,13 +158,13 @@ function HelpWindow({ isHelpOpen, setIsHelpOpen }) {
 
                 <div className={style.helpInfo}>
                     <div className='text--t2 text--regular'>Чат с консультантом</div>
-                    <div className='btn btn--md btn--grey'>
+                    <span className='btn btn--grey'>
                         <Icon name='telegramEmpty' width='16' height='16' />
-                    </div>
+                    </span>
                     <div className={style.helpOr}>Или</div>
-                    <div className='btn btn--md btn--grey'>
+                    <span className='btn btn--grey'>
                         <Icon name='whatsapp' width='16' height='16' />
-                    </div>
+                    </span>
                 </div>
 
                 <div className={style.helpContacts}>
