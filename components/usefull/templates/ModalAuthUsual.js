@@ -75,6 +75,14 @@ function StepTwo({ setStep, step }) {
     const nextAction = () => {
         globalState.auth.setIsAuth(true)
         globalState.modal.setIsOpen(false)
+
+        setTimeout(() => {
+            globalState.popover.setTextPrimary('Ура! Вам присвоен статус<br />профессионального покупателя!')
+            globalState.popover.setTextSecondary('теперь вы можете покупать товары<br /> по оптовым ценам')
+            globalState.popover.setImage('/images/usefull/templates/auth-popover.png')
+            globalState.popover.setIsBasket(false)
+            globalState.popover.setIsOpen(true)
+        }, 700)
     }
 
     const codeValidate = code => {

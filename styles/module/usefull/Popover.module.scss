@@ -61,15 +61,16 @@
 }
 
 .popoverClose {
-    width: 14px;
-    height: 14px;
+    width: 16px;
+    height: 16px;
     cursor: pointer;
     transition: .3s;
-    margin-top: 14px;
+    // margin-top: 14px;
     position: relative;
-    margin-right: 16px;
+    // margin-right: 16px;
     align-self: flex-start;
     color: var(--t-background);
+    transform: translate(-10px, 10px);
 
     &:hover {
         color: var(--t-primary);
@@ -103,25 +104,33 @@
     max-width: 95%;
     min-width: 95%;
     margin-left: 16px;
-    padding-right: 16px;
+    margin-right: 30px;
     color: var(--t-background);
 
     * {
         overflow: hidden;
         white-space: nowrap;
         text-overflow: ellipsis;
+
+        &:first-child {
+            line-height: 16px;
+        }
+
+        &:last-child {
+            line-height: 10px;
+        }
     }
 
     @include media-breakpoint(md-up) {
-        max-width: 250px;
+        max-width: 236px;
         min-width: 200px;
     }
 }
 
 .popoverImage+.popoverText {
     margin-left: 12px;
-    max-width: calc(90% - 50px);
-    min-width: calc(90% - 50px);
+    // max-width: calc(90% - 70px);
+    // min-width: calc(90% - 70px);
 }
 
 .popoverBasket {
