@@ -159,6 +159,10 @@ function StepTwo({ phone, setStep, step, data }) {
         })
     }
 
+    const clickHandler = () => {
+        globalState.modal.setIsOpen(false)
+    }
+
     useEffect(() => {
         if (step === 2) {
             refTimer.current = setInterval(() => {
@@ -188,9 +192,21 @@ function StepTwo({ phone, setStep, step, data }) {
 
     return (
         <div data-active={step === 2} data-blure={step === 3} className={style.stepTwo}>
-            <div onClick={() => setStep(1)} className={style.backBtn}>
-                <Icon name='chevronLeft' width='20' height='20' />
+            <div className={style.headNav}>
+                <div onClick={() => setStep(1)} className={style.backBtn}>
+                    <Icon name='chevronLeft' width='20' height='20' />
+                </div>
+
+                <span className='text--t6 text--upper text--bold is-hidden--md-up'>Подтвердить номер</span>
+
+                <div onClick={clickHandler} className={style.backBtn}>
+                    <Icon name='close' width='20' height='20' />
+                </div>
             </div>
+
+            {/* <div onClick={() => setStep(1)} className={style.backBtn}>
+                <Icon name='chevronLeft' width='20' height='20' />
+            </div> */}
 
             <div className={`${style.title} text--a2 text--bold pb-2`}>
                 <span>Введите код</span>

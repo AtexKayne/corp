@@ -176,32 +176,30 @@
         transform: translateY(1.5px);
     }
 
+    .backBtn {
+        width: 20px;
+        height: 20px;
+        display: flex;
+        cursor: pointer;
+        transition: .3s;
+        position: relative;
+        align-items: center;
+        justify-content: center;
+    
+        &::before {
+            top: -10px;
+            left: -10px;
+            content: '';
+            right: -10px;
+            bottom: -10px;
+            position: absolute;
+        }
+    }
+
     @include media-breakpoint(md-up) {
         right: -17px;
-    }
-}
 
-.backBtn {
-    width: 20px;
-    height: 20px;
-    display: flex;
-    cursor: pointer;
-    transition: .3s;
-    position: relative;
-    align-items: center;
-    justify-content: center;
-
-    &::before {
-        top: -10px;
-        left: -10px;
-        content: '';
-        right: -10px;
-        bottom: -10px;
-        position: absolute;
-    }
-
-    @include media-breakpoint(md-up) {
-        &:hover {
+        .backBtn:hover {
             color: var(--t-primary);
         }
     }
@@ -218,10 +216,10 @@
 }
 
 .helpWindow {
-    top: 0;
-    bottom: 0;
     opacity: 0;
     z-index: 1;
+    top: -16px;
+    bottom: -28px;
     transition: .5s;
     overflow: hidden;
     position: absolute;
@@ -239,7 +237,6 @@
         xl: -72px,
     ));
 
-
     &[data-active='true'] {
         opacity: 1;
         pointer-events: all;
@@ -250,8 +247,8 @@
     }
 
     .helpBackground {
-        top: 0;
         left: 0;
+        top: -16px;
         width: 100%;
         height: 100%;
         opacity: 0.7;
@@ -333,6 +330,15 @@
 
         a {
             padding-top: 2px;
+        }
+    }
+
+    @include media-breakpoint(md-up) {
+        top: 0;
+        bottom: 0;
+
+        .helpBackground {
+            top: 0;
         }
     }
 }
