@@ -53,7 +53,7 @@ function StepOne({ setStep, step }) {
                 <div onClick={clickHandler} className={`${style.button} btn btn--md btn--fill btn--shadow`}>
                     <span className='text--upper text--sparse text--p5 text--bold'>Перейти к покупкам</span>
                 </div>
-                <a href='#' onClick={codeHandler} className='link text--p6 text--center text--upper text--bold text--color-primary py-1'>Ввести инвайт-код</a>
+                <a href='#' onClick={codeHandler} className='link text--p5 text--center text--upper text--bold text--color-primary py-1'>Ввести инвайт-код</a>
             </div>
         </div>
     )
