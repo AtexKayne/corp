@@ -6,26 +6,35 @@ export default function InputCode({ count, error, setError, reset, resetExcludes
     const refInputWrapper = useRef(null)
 
     const changeHandler = (event, index) => {
+        event.preventDefault()
         const target = event.target
+        const key = event.key
+        const keyCode = event.keyCode
         const childrens = refInputWrapper.current.childNodes
+
         setError('')
-        if (target.value.length > 1) {
-            target.value = target.value.split('')[1]
+        
+        if (key === 'Backspace' || keyCode === 8) {
+            if (target.value.length !== 0) target.value = ''
+            else if (index !== 0) childrens[index - 1].focus()
+            target.setAttribute('data-focus', false)
             return
         }
 
-        if (target.value.length === 1) {
-            target.setAttribute('data-focus', true)
-            if (index !== count - 1) return childrens[index + 1].focus()
+        if (key.length > 1) return
 
-            let code = ''
-            childrens.forEach(input => code += input.value)
+        target.value = key
+        target.setAttribute('data-focus', true)
 
-            return code.length !== +count ? null : onAfterChange(code)
+        if (index !== count - 1) {
+            childrens[index + 1].value = ''
+            setTimeout(() => childrens[index + 1].focus(), 50)
+            return
         }
 
-        target.setAttribute('data-focus', false)
-        if (index !== 0) refInputWrapper.current.children[index - 1].focus()
+        let code = ''
+        childrens.forEach(input => code += input.value)
+        onAfterChange(code)
     }
 
     useEffect(() => {
@@ -37,7 +46,7 @@ export default function InputCode({ count, error, setError, reset, resetExcludes
     return (
         <>
             <div ref={refInputWrapper} className={`input-code ${!error ? '' : 'code-error'}`}>
-                {items.map(item => <input key={item} onChange={event => changeHandler(event, item)} className='input' type={type} />)}
+                {items.map(item => <input key={item} onKeyDown={event => changeHandler(event, item)} className='input' type={type} />)}
             </div>
 
             <div data-error={!!error} className={`input-error text--center text--p4 text--color-primary`}>{error}</div>
