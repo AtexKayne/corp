@@ -62,6 +62,10 @@ function StepOne({ setStep, step }) {
 function StepTwo({ setStep, step }) {
     const [error, setError] = useState('')
     const [isHelpOpen, setIsHelpOpen] = useState(false)
+    
+    const clickHandler = () => {
+        globalState.modal.setIsOpen(false)
+    }
 
     const helpHandler = event => {
         event.preventDefault()
@@ -89,8 +93,16 @@ function StepTwo({ setStep, step }) {
         <>
             <div data-active={step === 2} data-blure={step === 3 || isHelpOpen} className={style.stepTwo}>
                 <div className={style.background} />
-                <div onClick={() => setStep(1)} className={style.backBtn}>
-                    <Icon name='chevronLeft' width='20' height='20' />
+                <div className={style.headNav}>
+                    <div onClick={() => setStep(1)} className={style.backBtn}>
+                        <Icon name='chevronLeft' width='20' height='20' />
+                    </div>
+
+                    <span className='text--t6 text--upper text--bold is-hidden--md-up'>Инвайт-код</span>
+
+                    <div onClick={clickHandler} className={style.backBtn}>
+                        <Icon name='close' width='20' height='20' />
+                    </div>
                 </div>
 
                 <div className={style.image}>
