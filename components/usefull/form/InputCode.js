@@ -8,6 +8,7 @@ export default function InputCode({ count, error, setError, reset, resetExcludes
 
     const changeHandler = (event, index) => {
         event.preventDefault()
+        console.log(event);
         const target = event.target
         const key = event.key
         const keyCode = event.keyCode
@@ -23,7 +24,7 @@ export default function InputCode({ count, error, setError, reset, resetExcludes
         }
 
         // if (key.length > 1) return
-        setTest(`${key} ${key.length}`)
+        setTest(`${key} ${key.length} ${event.nativeEvent.code}`)
 
         target.value = key
         target.setAttribute('data-focus', true)
