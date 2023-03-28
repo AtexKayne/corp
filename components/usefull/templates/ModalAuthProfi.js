@@ -9,7 +9,7 @@ export default function ModalAuthProfi() {
     const clickHandler = () => {
         globalState.modal.setIsOpen(false)
         setTimeout(() => {
-            globalState.popover.setTextPrimary('Вы вошли как профпокупатель')
+            globalState.popover.setTextPrimary('Вы вошли как профессиональный покупатель')
             globalState.popover.setTextSecondary('Цены пересчитаны до оптовых')
             globalState.popover.setImage(false)
             globalState.popover.setIsBasket(false)
