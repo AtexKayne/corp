@@ -127,7 +127,7 @@ function StepTwo({ setStep, step }) {
 
                 {!!error
                     ? <div className={`${style.footer} text--p5`}>
-                        <a href='#' onClick={helpHandler} className='link text--p6 text--upper text--bold text--color-primary'>Связаться с поддержкой</a>
+                        <a href='#' onClick={helpHandler} className='link text--p5 text--upper text--bold text--color-primary'>Связаться с поддержкой</a>
                     </div> : null
                 }
 
