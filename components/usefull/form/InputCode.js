@@ -1,9 +1,10 @@
-import { useEffect, useRef } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import { fillArray } from '../../helpers/fillArray'
 
 export default function InputCode({ count, error, setError, reset, resetExcludes, onAfterChange, type = 'text' }) {
     const items = fillArray(count)
     const refInputWrapper = useRef(null)
+    const [test, setTest] = useState('')
 
     const changeHandler = (event, index) => {
         event.preventDefault()
@@ -21,7 +22,8 @@ export default function InputCode({ count, error, setError, reset, resetExcludes
             return
         }
 
-        if (key.length > 1) return
+        // if (key.length > 1) return
+        setTest(`${key} ${key.length}`)
 
         target.value = key
         target.setAttribute('data-focus', true)
@@ -48,6 +50,8 @@ export default function InputCode({ count, error, setError, reset, resetExcludes
             <div ref={refInputWrapper} className={`input-code ${!error ? '' : 'code-error'}`}>
                 {items.map(item => <input key={item} onKeyDown={event => changeHandler(event, item)} className='input' type={type} />)}
             </div>
+
+            <div>{test}</div>
 
             <div data-error={!!error} className={`input-error text--center text--p4 text--color-primary`}>{error}</div>
         </>

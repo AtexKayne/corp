@@ -59,7 +59,7 @@
     background-color: var(--t-light);
     min-height: -webkit-fill-available;
     padding: adaptive-value((
-        xs: 16px 0 48px,
+        xs: 16px 0 60px,
         md: 100px 20px 32px,
         lg: 50px 0 32px,
         xl: 50px 20px 48px,
@@ -271,7 +271,7 @@
         background-color: var(--t-background);
         box-shadow: 0px -13px 30px 0px #7F8CA026;
         padding: adaptive-value((
-            xs: 0 16px 52px,
+            xs: 0 16px 80px,
             md: 0 64px,
             lg: 0 48px 15px,
         ));
