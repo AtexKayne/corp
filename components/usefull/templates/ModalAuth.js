@@ -232,7 +232,7 @@ function StepTwo({ phone, setStep, step, data }) {
             <InputCode setError={setError} resetExcludes={[2, 3]} type='tel' count={4} error={error} reset={step} onAfterChange={codeValidate} />
 
             {timer
-                ? <div onClick={newCodeHandler} className={`${style.footer} text--p5`}>
+                ? <div className={`${style.footer} text--p5`}>
                     <p>Отправить новый код</p>
                     <p>через {timer} секунд</p>
                 </div>

@@ -46,7 +46,10 @@ export default function InputCode({ count, error, setError, reset, resetExcludes
     useEffect(() => {
         if (resetExcludes.includes(reset)) return
         const childrens = refInputWrapper.current.childNodes
-        childrens.forEach(input => input.value = '')
+        childrens.forEach(input => {
+            input.value = ''
+            input.setAttribute('data-focus', false)
+        })
     }, [reset])
 
     return (
