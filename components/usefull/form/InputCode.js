@@ -4,10 +4,10 @@ import { fillArray } from '../../helpers/fillArray'
 export default function InputCode({ count, error, setError, reset, resetExcludes, onAfterChange, type = 'text' }) {
     const items = fillArray(count)
     const refInputWrapper = useRef(null)
-    const [test, setTest] = useState('')
+    // const [test, setTest] = useState('')
 
     const changeHandler = (event, index) => {
-        event.preventDefault()
+        // event.preventDefault()
         console.log(event);
         const target = event.target
         const key = event.key
@@ -24,9 +24,9 @@ export default function InputCode({ count, error, setError, reset, resetExcludes
         }
 
         // if (key.length > 1) return
-        setTest(`${key} ${key.length} ${event.nativeEvent.code}`)
+        // setTest(`${key} ${key.length} ${event.nativeEvent.code}`)
 
-        target.value = key
+        // target.value = key
         target.setAttribute('data-focus', true)
 
         if (index !== count - 1) {
@@ -35,9 +35,12 @@ export default function InputCode({ count, error, setError, reset, resetExcludes
             return
         }
 
-        let code = ''
-        childrens.forEach(input => code += input.value)
-        onAfterChange(code)
+        setTimeout(() => {
+            let code = ''
+            childrens.forEach(input => code += input.value)
+    
+            if (code.length === count) onAfterChange(code)
+        }, 50)
     }
 
     useEffect(() => {
@@ -52,7 +55,7 @@ export default function InputCode({ count, error, setError, reset, resetExcludes
                 {items.map(item => <input key={item} onKeyDown={event => changeHandler(event, item)} className='input' type={type} />)}
             </div>
 
-            <div>{test}</div>
+            {/* <div>{test}</div> */}
 
             <div data-error={!!error} className={`input-error text--center text--p4 text--color-primary`}>{error}</div>
         </>
