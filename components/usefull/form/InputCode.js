@@ -17,6 +17,16 @@ export default function InputCode({ count, onChange, reset, onAfterComplete, typ
             if (input.value.length > 1) input.value = input.value[0]
         })
 
+        if (key === 'ArrowLeft' || keyCode === 37) {
+            if (index !== 0) childrens[index - 1].focus()
+            return
+        }
+
+        if (key === 'ArrowRight' || keyCode === 39) {
+            if (!!childrens[index + 1].value) childrens[index + 1].focus()
+            return
+        }
+
         if (key === 'Backspace' || keyCode === 8) {
             if (target.value.length !== 0) target.value = ''
             else if (index !== 0) {
