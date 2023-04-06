@@ -105,9 +105,11 @@ function StepTwo({ setStep, step }) {
 
     useEffect(() => {
         if (step === 2) {
-            setTimeout(() => {
-                refCode.current.querySelector('input').focus({})
-            }, 700)
+            if (window.innerWidth > globalState.sizes.md) {
+                setTimeout(() => {
+                    refCode.current.querySelector('input').focus({})
+                }, 700)
+            }
         } else if (step === 1) {
             setError('')
             setReset(prev => prev + 1)

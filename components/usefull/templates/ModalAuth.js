@@ -238,9 +238,11 @@ function StepTwo({ phone, setStep, step, data }) {
                     return 0
                 })
             }, 1000)
-            setTimeout(() => {
-                refCode.current.querySelector('input').focus({})
-            }, 700)
+            if (window.innerWidth > globalState.sizes.md) {
+                setTimeout(() => {
+                    refCode.current.querySelector('input').focus({})
+                }, 700)
+            }
         } else if (step === 1) {
             setReset(prev => prev + 1)
             setError('')
@@ -306,7 +308,7 @@ function StepTwo({ phone, setStep, step, data }) {
 
             {timer
                 ? <div className={`${style.footer} text--p5`}>
-                    <p>{codeNew ? 'Код отправлен' : ''}</p>
+                    <p>{codeNew ? 'Код отправлен.' : ''}</p>
                     <p>Отправить новый код</p>
                     <p>через {timer} секунд</p>
                 </div>
