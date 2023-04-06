@@ -143,9 +143,10 @@
         margin-top: 16px;
     }
 
-    @media (max-height: 700px) and (max-width: 380px) {
+    @media (max-height: 750px) and (max-width: 400px) {
         width: 120px;
         height: 120px;
+        margin-top: 0;
         min-width: 120px;
         min-height: 120px;
     }

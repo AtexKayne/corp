@@ -124,7 +124,7 @@ function StepTwo({ setStep, step }) {
                         <Icon name='chevronLeft' width='20' height='20' />
                     </div>
 
-                    <span className='text--t6 text--upper text--bold is-hidden--md-up'>Инвайт-код</span>
+                    {/* <span className='text--t6 text--upper text--bold is-hidden--md-up'>Инвайт-код</span> */}
 
                     <div onClick={clickHandler} className={style.backBtn}>
                         <Icon name='close' width='20' height='20' />
@@ -135,16 +135,15 @@ function StepTwo({ setStep, step }) {
                     <Image src='/images/usefull/templates/invite.png' layout='fill' alt='invite icon' />
                 </div>
 
-                <div style={{ maxWidth: 400 }} className='text--a2 text--bold py-1.5'>Инвайт-код</div>
-
-                <div className='text--p4 pb-3'>
-                    Правильно введённый пригласительный код сразу откроет вам все преимущества профессионального покупателя RedHare Market
-                </div>
-
+                <div style={{ maxWidth: 400 }} className='text--a2 text--bold pb-2 pt-2'>Инвайт-код</div>
 
                 <div ref={refCode} className={`code-error`} data-error={!!error}>
                     <InputCode count={6} reset={reset} onChange={changeHandler} onAfterComplete={codeValidate} />
                     <div data-error={!!error} className={`input-error text--center text--p4 text--color-primary`}>{error}</div>
+                </div>
+
+                <div className='text--p4 pb-3 pt-3'>
+                    Правильно введённый пригласительный код сразу откроет вам все преимущества профессионального покупателя RedHare Market
                 </div>
 
                 {!!error
