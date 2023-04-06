@@ -352,6 +352,7 @@
         max-width: 44px;
         margin-right: 8px;
         text-align: center;
+        text-transform: uppercase;
         background-color: transparent;
 
         &:last-child {
@@ -359,10 +360,11 @@
         }
     }
 
-    &.code-error > * {
-        color: var(--t-primary);
-        border-color: var(--t-primary);
-    }
+}
+
+.code-error[data-error='true'] * {
+    color: var(--t-primary);
+    border-color: var(--t-primary);
 }
 
 .input-error {

@@ -35,18 +35,64 @@ function AuthModalTitle({ type }) {
 
 function StepOne({ setStep, step, data, setPhone }) {
     const [isDisabled, setIsDisabled] = useState(true)
+    const [isNotEmpty, setIsNotEmpty] = useState(false)
     const refInput = useRef(null)
 
-    const getValueLength = () => refInput.current.value.trim().length
+    const getValueLength = () => refInput.current.value.replaceAll('_', '').replaceAll(' ', '').length
 
     const changeHandler = () => {
         setPhone(refInput.current.value)
-        setIsDisabled(getValueLength() !== 18)
+        setIsDisabled(getValueLength() !== 14)
     }
 
     const validateHandler = () => {
-        if (getValueLength() === 18) setStep(2)
+        if (getValueLength() === 14) setStep(2)
     }
+
+    const clickHandler = () => {
+        refInput.current.setCursorToEnd()
+    }
+
+    const blurHandler = () => {
+        setIsNotEmpty(getValueLength !== 4)
+    }
+
+    const keyDownHandler = event => {
+        if (event.key !== 'Enter' && event.keyCode !== 13) return
+        if (isDisabled) return
+        validateHandler()
+    }
+
+    const pasteHandler = event => {
+        event.preventDefault()
+        const paste = (event.clipboardData || window.clipboardData).getData('text')
+        const number = paste.replaceAll(/[^\d]/g, '').toString()
+        const numberArr = number.split('')
+        if (number.length > 9 && number.length < 15) {
+            let phone = ''
+
+            numberArr.forEach((n, i) => {
+                if (i === 0) phone += '+7'
+                else if (i === 1) phone += ` (${n}`
+                else if (i === 3) phone += `${n}) `
+                else if (i === 7 || i === 9) phone += ` ${n}`
+                else if (i < 11) phone += `${n}`
+            })
+
+            refInput.current.setInputValue(phone)
+            changeHandler()
+        }
+    }
+
+    const clearHandler = () => {
+        setIsNotEmpty(false)
+        refInput.current.setInputValue('')
+        refInput.current.getInputDOMNode().focus()
+    }
+
+    useEffect(() => {
+        if (step === 1) refInput.current.getInputDOMNode().focus()
+    }, [step])
 
     return (
         <div data-active={step === 1} className={style.stepOne}>
@@ -72,14 +118,24 @@ function StepOne({ setStep, step, data, setPhone }) {
                 <a className='link text--bold text--upper text--p6 text--color-primary' href='#'>Напишите в Telegram</a>
             </div>
 
-            <InputMask
-                type='tel'
-                maskChar=' '
-                ref={refInput}
-                className='input'
-                onChange={changeHandler}
-                mask='+7 (999) 999 99 99'
-                placeholder='+7 (___) ___ __ __' />
+            <div className={style.inputMask}>
+                <div onClick={clearHandler} className={style.clearIcon}>
+                    <Icon name='close' width='16' height='16' />
+                </div>
+                <InputMask
+                    type='tel'
+                    maskChar='_'
+                    ref={refInput}
+                    className='input'
+                    onBlur={blurHandler}
+                    onClick={clickHandler}
+                    onPaste={pasteHandler}
+                    data-focus={isNotEmpty}
+                    onChange={changeHandler}
+                    onKeyDown={keyDownHandler}
+                    mask='+7 (999) 999 99 99'
+                    placeholder='+7 (___) ___ __ __' />
+            </div>
 
             <div data-disabled={isDisabled} onClick={validateHandler} className={`${style.btn} btn btn--md btn--fill ${isDisabled ? 'btn--grey' : 'btn--primary'}`}>
                 <span className={`text--upper text--p6 text--bold ${isDisabled ? 'text--color-disabled' : ''}`}>Получить код</span>
@@ -97,9 +153,12 @@ function StepOne({ setStep, step, data, setPhone }) {
 }
 
 function StepTwo({ phone, setStep, step, data }) {
+    const [codeNew, setCodeNew] = useState(false)
     const [timer, setTimer] = useState(60)
     const [error, setError] = useState('')
+    const [reset, setReset] = useState(0)
     const refTimer = useRef(false)
+    const refCode = useRef(null)
 
     const notificateHandler = () => {
         data.setIsRinged(true)
@@ -127,18 +186,14 @@ function StepTwo({ phone, setStep, step, data }) {
     const nextAction = (code) => {
         globalState.auth.setIsAuth(true)
         setTimeout(() => {
-            if (data.type === 'notification') {
-                notificateHandler()
-            } else if (data.type === 'auth') {
-                authHandler(code)
-            }
+            if (data.type === 'notification') notificateHandler()
+            else if (data.type === 'auth') authHandler(code)
         }, 800)
         globalState.modal.setIsOpen(false)
     }
 
     const codeValidate = code => {
         const active = document.activeElement
-        console.log(active);
         if (active && typeof active.blur === 'function') active.blur()
 
         setStep(3)
@@ -152,15 +207,26 @@ function StepTwo({ phone, setStep, step, data }) {
 
     const newCodeHandler = event => {
         event.preventDefault()
-        // Костыль для сброса инпутов
-        setStep(() => {
-            setTimeout(() => setStep(2), 50)
-            return 1
-        })
+        setCodeNew(true)
+        setError('')
+        setReset(prev => prev + 1)
+        if (refTimer.current) clearInterval(refTimer.current)
+        setTimer(60)
+        refTimer.current = setInterval(() => {
+            setTimer(prev => {
+                if (prev > 1) return prev - 1
+                clearInterval(refTimer.current)
+                return 0
+            })
+        }, 1000)
     }
 
     const clickHandler = () => {
         globalState.modal.setIsOpen(false)
+    }
+
+    const changeHandler = event => {
+        setError('')
     }
 
     useEffect(() => {
@@ -172,7 +238,11 @@ function StepTwo({ phone, setStep, step, data }) {
                     return 0
                 })
             }, 1000)
+            setTimeout(() => {
+                refCode.current.querySelector('input').focus({})
+            }, 700)
         } else if (step === 1) {
+            setReset(prev => prev + 1)
             setError('')
             if (refTimer.current) clearInterval(refTimer.current)
             refTimer.current = false
@@ -229,10 +299,14 @@ function StepTwo({ phone, setStep, step, data }) {
                 </span>
             </div>
 
-            <InputCode setError={setError} resetExcludes={[2, 3]} type='tel' count={4} error={error} reset={step} onAfterChange={codeValidate} />
+            <div ref={refCode} className={`code-error`} data-error={!!error}>
+                <InputCode type='tel' reset={reset} count={4} onChange={changeHandler} onAfterComplete={codeValidate} />
+                <div data-error={!!error} className={`input-error text--center text--p4 text--color-primary`}>{error}</div>
+            </div>
 
             {timer
                 ? <div className={`${style.footer} text--p5`}>
+                    <p>{codeNew ? 'Код отправлен' : ''}</p>
                     <p>Отправить новый код</p>
                     <p>через {timer} секунд</p>
                 </div>

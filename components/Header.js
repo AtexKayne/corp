@@ -1,16 +1,22 @@
-import Icon from './Icon'
-import Link from 'next/link'
-import Image from 'next/image'
 import { debounce } from './helpers/debounce'
 import { globalState } from './helpers/globalState'
 import { useState, useEffect, useRef } from 'react'
-import style from '../styles/module/Header.module.scss'
 import { motion, useAnimationControls } from 'framer-motion'
 
+import Icon from './Icon'
+import Link from 'next/link'
+import Image from 'next/image'
+import HeaderNav from './usefull/ui/HeaderNav/HeaderNav'
+import style from '../styles/module/Header.module.scss'
+
 export default function Header() {
+    const scrolloffset = 300
+    const refHeader = useRef(null)
     const refRabbit = useRef(null)
+    const refIsHandled = useRef(false)
     const refThemeDefault = useRef('ui-light')
     const [theme, setTheme] = useState('ui-light')
+    const [navIsOpen, setNavIsOpen] = useState(false)
     const [basketCount, setBasketCount] = useState(0)
     const [themeImage, setThemeImage] = useState('ui-light')
     const [isTranslated, setIsTranslated] = useState(false)
@@ -18,9 +24,6 @@ export default function Header() {
     const [isRabbitFixed, setIsRabbitFixed] = useState(false)
     const [isHeaderHover, setIsHeaderHover] = useState(false)
     const animateHeader = useAnimationControls()
-    const refHeader = useRef(null)
-    const refIsHandled = useRef(false)
-    const scrolloffset = 300
 
     const hoverEnterHandler = () => {
         setIsTranslated(true)
@@ -30,7 +33,7 @@ export default function Header() {
 
     const hoverLeaveHandler = () => {
         setThemeDefault()
-        if (window.scrollY <= scrolloffset) return
+        if (window.scrollY <= scrolloffset || !!navIsOpen) return
         setIsTranslated(false)
         setIsRabbitFixed(true)
     }
@@ -48,6 +51,17 @@ export default function Header() {
     const setHeaderTheme = theme => {
         refThemeDefault.current = theme
         setTheme(theme)
+    }
+
+    const openNavHandler = type => {
+        setNavIsOpen(prev => {
+            if (isHeaderFixed) {
+                setIsTranslated(true)
+                setIsHeaderFixed(true)
+                setIsRabbitFixed(false)
+            }
+            return prev !== type ? type : false
+        })
     }
 
     const scrollHandler = () => {
@@ -167,7 +181,7 @@ export default function Header() {
                 <div className={`${style.fixedContainerInnerTablet} is-hidden--lg-up`}>
                     <div className={`${style.top} ${style.textt4} text--regular`}>
                         <div className={style.groupMD}>
-                            <div className='btn btn--empty btn--xs'>
+                            <div onClick={() => setNavIsOpen('mobile')} className='btn btn--empty btn--xs'>
                                 <Icon width='24' height='24' external='is-hidden--sm-down' name='burger' />
                                 <Icon width='21' height='21' external='is-hidden--md-up' name='burger' />
                             </div>
@@ -246,8 +260,8 @@ export default function Header() {
                                 <Icon width='20' height='20' external='is-hidden--lg-down' name='catalogMD' />
                                 <Icon width='16' height='16' external='is-hidden--xl-up' name='catalogMD' />
                             </div>
-                            <span className='btn__text is-hidden--xxl-down'>Каталог товаров</span>
-                            <span className='btn__text is-hidden--xxxl-up'>Каталог</span>
+                            <span onClick={() => openNavHandler('catalog')} className='btn__text is-hidden--xxl-down'>Каталог товаров</span>
+                            <span onClick={() => openNavHandler('catalog')} className='btn__text is-hidden--xxxl-up'>Каталог</span>
                         </div>
 
                         <div className='btn btn--label btn--md'>
@@ -255,11 +269,8 @@ export default function Header() {
                                 <Icon width='22' height='22' external='is-hidden--lg-down' name='brandsMD' />
                                 <Icon width='18' height='18' external='is-hidden--xl-up' name='brandsMD' />
                             </div>
-                            <span className='btn__text'>Бренды</span>
+                            <span onClick={() => openNavHandler('brand')} className='btn__text'>Бренды</span>
                         </div>
-
-                        <div className='btn btn--label btn--md'>Подборки</div>
-                        <div className='btn btn--label btn--md'>Со скидкой</div>
                     </div>
 
                     <div className={`${style.groupSM} is-hidden--lg-down`}>
@@ -292,6 +303,8 @@ export default function Header() {
                 className={`${style.rabbit}`}>
                 <Image src='/images/layout/logo-lg.svg' layout='fill' alt='RedHair market' />
             </div>
+
+            <HeaderNav isOpen={navIsOpen} setIsOpen={setNavIsOpen} isHeaderFixed={isHeaderFixed} />
         </>
     )
 }

@@ -1,0 +1,150 @@
+@import '../../../../styles/mixins/helpers/media';
+@import '../../../../styles/mixins/helpers/adaptive-value';
+
+.navWrapper {
+    --height-offset: 68px;
+
+    left: 0;
+    z-index: 12;
+    width: 100vw;
+    position: fixed;
+    transition: .5s;
+    border-top: 1px solid black;
+    top: var(--height-offset);
+    height: calc(100vh - var(--height-offset));
+
+    &[data-open='false'] {
+        opacity: 0;
+        pointer-events: none;
+    }
+
+    @include media-breakpoint(md) {
+        --height-offset: 70px;
+    }
+
+    @include media-breakpoint(lg) {
+        --height-offset: 126px;
+
+        &[data-fixed='true'] {
+            --height-offset: 80px;
+        }
+    }
+
+    @include media-breakpoint(xl-up) {
+        --height-offset: 138px;
+
+        &[data-fixed='true'] {
+            --height-offset: 86px;
+        }
+    }
+
+    @include media-breakpoint(xxxl) {
+        --height-offset: 150px;
+
+        &[data-fixed='true'] {
+            --height-offset: 94px;
+        }
+    }
+
+}
+
+.background {
+    top: 0;
+    left: 0;
+    z-index: 1;
+    width: 100%;
+    height: 100%;
+    cursor: pointer;
+    position: absolute;
+    backdrop-filter: blur(5px);
+    background-color: rgba(17, 34, 51, 0.7);
+}
+
+.containerWrapper {
+    top: 0;
+    left: 0;
+    z-index: 2;
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    background-color: var(--t-background);
+
+    @include media-breakpoint(lg-up) {
+        height: 90%;
+    }
+
+    @include media-breakpoint(xxl) {
+        padding-top: 24px;
+    }
+
+    @include media-breakpoint(xxxl) {
+        padding-top: 48px;
+    }
+}
+
+.container {
+    height: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    overflow: hidden;
+
+    @include media-breakpoint(lg-up) {
+        .panel { width: 100%; }
+        .column { width: calc(100% / 4); }
+    }
+
+    @include media-breakpoint(xxl-up) {
+        .panel { width: calc(100% / 5); }
+        .column { width: calc(100% / 5); }
+    }
+
+    
+}
+
+.panel {
+    display: flex;
+    flex-direction: column;
+
+    @include media-breakpoint(lg) {
+        flex-direction: row;
+    }
+
+    @include media-breakpoint(xl) {
+        flex-direction: row;
+    }
+}
+
+.column {
+    height: 100%;
+    overflow: auto;
+    padding-bottom: 16px;
+}
+
+.panelLink {
+    display: block;
+    font-weight: bold;
+    padding: 10px 12px;
+    font-size: adaptive-value((
+        xs: 24px,
+        md: 28px,
+        lg: 16px,
+        xxl: 20px,
+        xxxl: 24px,
+    ));
+
+    @include media-breakpoint(xxl-up) {
+        padding-left: 0;
+    }
+}
+
+.catalogLink {
+    display: block;
+    padding: 10px 0;
+    font-weight: bold;
+    font-size: adaptive-value((
+        xs: 16px,
+        md: 20px,
+        lg: 16px,
+        xxxl: 18px,
+    ));
+}

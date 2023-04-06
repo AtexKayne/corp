@@ -44,23 +44,6 @@
     }
 }
 
-.phoneInput {
-    border: 0;
-    width: 100%;
-    outline: none;
-    display: block;
-    font-size: 20px;
-    font-weight: 400;
-    border-radius: 0;
-    padding-bottom: 12px;
-    color: var(--t-disabled);
-    border-bottom: 1px solid var(--t-disabled);
-
-    &::placeholder {
-        color: var(--t-disabled);
-    }
-}
-
 .btn {
     margin-top: 40px;
     min-height: 60px;
@@ -78,7 +61,6 @@
 .stepTwo {
     top: 0;
     left: -3px;
-    opacity: 0;
     z-index: 1;
     right: -3px;
     height: 100%;
@@ -86,6 +68,7 @@
     position: absolute;
     pointer-events: none;
     flex-direction: column;
+    transform: translateX(120%);
     transition: .5s ease-in-out;
     min-height: -webkit-fill-available;
     background-color: var(--t-background);
@@ -99,8 +82,7 @@
     ));
 
     &[data-active='true'] {
-        opacity: 1;
-        // pointer-events: all;
+        transform: translateX(0);
 
         >* {
             pointer-events: all;
@@ -108,8 +90,8 @@
     }
 
     &[data-blure='true'] {
-        opacity: 1;
         filter: blur(3px);
+        transform: translateX(0);
     }
 
     @include media-breakpoint(md-up) {
@@ -201,5 +183,33 @@
     >* {
         width: 200px;
         height: 200px;
+    }
+}
+
+.inputMask {
+    position: relative;
+
+    .clearIcon {
+        top: 5px;
+        right: 5px;
+        z-index: 1;
+        cursor: pointer;
+        position: absolute;
+        transition: .3s color;
+
+        &::before {
+            top: -10px;
+            left: -10px;
+            right: -10px;
+            bottom: -10px;
+            content: '  ';
+            position: absolute;
+        }
+    }
+
+    @include media-breakpoint(md-up) {
+        .clearIcon:hover {
+            color: var(--t-primary);
+        }
     }
 }

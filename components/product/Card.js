@@ -158,7 +158,7 @@ export default function Card({ info, updated }) {
 
             {info.values[0].max === 0
                 ? <div className='text--t2 text--normal pb-0.8'>
-                    <span className={`text--color-tetriary pr-0.5 ${isNotify ? '' : 'is-hidden'}`}>
+                    <span className={`text--color-tetriary pr-0.5 is-hidden--lg-down ${isNotify ? '' : 'is-hidden'}`}>
                         <Icon name='bellFill' width='14' height='14' />
                     </span>
                     <span>Нет в наличии</span>

@@ -47,7 +47,6 @@
 .stepTwo {
     top: 0;
     left: -3px;
-    opacity: 0;
     z-index: 1;
     right: -3px;
     height: 100%;
@@ -55,7 +54,8 @@
     position: absolute;
     pointer-events: none;
     flex-direction: column;
-    transition: .5s ease-in-out;
+    transform: translateX(150%);
+    transition: .6s ease-in-out;
     background-color: var(--t-light);
     min-height: -webkit-fill-available;
     padding: adaptive-value((
@@ -73,13 +73,13 @@
     }
 
     &[data-active='true'] {
-        opacity: 1;
         pointer-events: all;
+        transform: translateX(0);
     }
 
     &[data-blure='true'] {
-        opacity: 1;
         filter: blur(3px);
+        transform: translateX(0);
     }
 
     .image {
@@ -106,7 +106,6 @@
         }
     }
 }
-
 
 .stepThree {
     top: 0;
@@ -140,8 +139,19 @@
     position: relative;
     text-align: center;
 
-    @media (max-height: 750px) and (min-width: 420px) {
-        margin-top: 0;
+    @media (max-height: 750px) and (min-width: 500px) {
+        margin-top: 16px;
+    }
+
+    @media (max-height: 700px) and (max-width: 380px) {
+        width: 120px;
+        height: 120px;
+        min-width: 120px;
+        min-height: 120px;
+    }
+
+    @media (max-height: 640px) {
+        display: none;
     }
 }
 
@@ -220,10 +230,11 @@
     z-index: 1;
     top: -16px;
     bottom: -28px;
-    transition: .5s;
+    transition: .3s;
     overflow: hidden;
     position: absolute;
     pointer-events: none;
+    transition-delay: .3s;
     left: adaptive-value((
         xs: -16px,
         md: -32px,
@@ -240,8 +251,10 @@
     &[data-active='true'] {
         opacity: 1;
         pointer-events: all;
+        transition-delay: 0s;
 
         .helpContainer {
+            transition-delay: 0s;
             transform: translateY(0);
         }
     }
@@ -265,6 +278,7 @@
         right: 0;
         bottom: 0;
         position: absolute;
+        transition-delay: .3s;
         transition: .4s ease-in;
         transform: translateY(100%);
         border-radius: 16px 16px 0px 0px;

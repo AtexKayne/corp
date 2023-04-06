@@ -60,9 +60,11 @@ function StepOne({ setStep, step }) {
 }
 
 function StepTwo({ setStep, step }) {
+    const refCode = useRef(null)
+    const [reset, setReset] = useState(0)
     const [error, setError] = useState('')
     const [isHelpOpen, setIsHelpOpen] = useState(false)
-    
+
     const clickHandler = () => {
         globalState.modal.setIsOpen(false)
     }
@@ -70,6 +72,10 @@ function StepTwo({ setStep, step }) {
     const helpHandler = event => {
         event.preventDefault()
         setIsHelpOpen(true)
+    }
+
+    const changeHandler = event => {
+        setError('')
     }
 
     const nextAction = () => {
@@ -97,6 +103,18 @@ function StepTwo({ setStep, step }) {
         }, 3000)
     }
 
+    useEffect(() => {
+        if (step === 2) {
+            setTimeout(() => {
+                refCode.current.querySelector('input').focus({})
+            }, 700)
+        } else if (step === 1) {
+            setError('')
+            setReset(prev => prev + 1)
+        }
+    }, [step])
+
+
     return (
         <>
             <div data-active={step === 2} data-blure={step === 3 || isHelpOpen} className={style.stepTwo}>
@@ -123,7 +141,11 @@ function StepTwo({ setStep, step }) {
                     Правильно введённый пригласительный код сразу откроет вам все преимущества профессионального покупателя RedHare Market
                 </div>
 
-                <InputCode setError={setError} resetExcludes={[2, 3]} count={6} error={error} reset={step} onAfterChange={codeValidate} />
+
+                <div ref={refCode} className={`code-error`} data-error={!!error}>
+                    <InputCode count={6} reset={reset} onChange={changeHandler} onAfterComplete={codeValidate} />
+                    <div data-error={!!error} className={`input-error text--center text--p4 text--color-primary`}>{error}</div>
+                </div>
 
                 {!!error
                     ? <div className={`${style.footer} text--p5`}>
