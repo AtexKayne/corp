@@ -135,14 +135,14 @@ function StepTwo({ setStep, step }) {
                     <Image src='/images/usefull/templates/invite.png' layout='fill' alt='invite icon' />
                 </div>
 
-                <div style={{ maxWidth: 400 }} className='text--a2 text--bold pb-2 pt-2'>Инвайт-код</div>
+                <div className={`${style.title} text--a2 text--bold pb-2 pt-2`}>Инвайт-код</div>
 
-                <div ref={refCode} className={`code-error`} data-error={!!error}>
+                <div ref={refCode} className={`${style.codeInput} code-error`} data-error={!!error}>
                     <InputCode count={6} reset={reset} onChange={changeHandler} onAfterComplete={codeValidate} />
                     <div data-error={!!error} className={`input-error text--center text--p4 text--color-primary`}>{error}</div>
                 </div>
 
-                <div className='text--p4 pb-3 pt-3'>
+                <div className={`${style.text} text--p4 pb-3 pt-3`}>
                     Правильно введённый пригласительный код сразу откроет вам все преимущества профессионального покупателя RedHare Market
                 </div>
 
