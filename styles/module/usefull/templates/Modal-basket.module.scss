@@ -1,0 +1,193 @@
+@import '../../../mixins/helpers/media';
+@import '../../../mixins/helpers/adaptive-value';
+
+.basketWrapper {
+    position: relative;
+    overflow-y: hidden;
+    overflow-x: visible;
+    margin-right: adaptive-value((
+        xs: -16px,
+        md: -32px,
+        lg: -48px,
+        xl: -72px,
+    ));
+    height: calc(100vh - 28px);
+    // overflow: hidden visible;
+}
+
+.emptyText {
+    a {
+        color: var(--t-primary);
+    }
+}
+
+.basketInner {
+    height: 100%;
+    overflow: auto;
+    padding-bottom: 80px;
+    padding-right: adaptive-value((
+        xs: 16px,
+        md: 32px,
+        lg: 48px,
+        xl: 72px,
+    ));
+
+    &::-webkit-scrollbar {
+        width: 0;
+        margin-right: 0;
+    }
+}
+
+.product {
+    overflow: hidden;
+    padding-top: 16px;
+    position: relative;
+    // margin-right: -32px;
+    padding-right: 38px;
+
+    &:hover {
+        .settings {
+            opacity: 1;
+        }
+    }
+}
+
+.controls {
+    top: 16px;
+    left: 2px;
+    bottom: 0;
+    right: 40px;
+    display: flex;
+    overflow: hidden;
+    position: absolute;
+    border-radius: 16px;
+    justify-content: flex-end;
+    background-color: var(--t-light);
+}
+
+.control {
+    height: 100%;
+    display: flex;
+    cursor: pointer;
+    align-items: center;
+    flex-direction: column;
+    justify-content: center;
+
+    >*:first-child {
+        margin-bottom: 8px;
+        pointer-events: none;
+    }
+
+    &:last-child {
+        width: 131px;
+        color: var(--t-text);
+        background-color: var(--t-light);
+    }
+
+    &:first-child {
+        width: 140px;
+        color: var(--t-background);
+        background-color: var(--c-_yellow);
+    }
+}
+
+.productInner {
+    display: flex;
+    transition: .3s;
+    overflow: hidden;
+    position: relative;
+    border-radius: 16px;
+    padding: 16px 30px 16px 0;
+    background-color: var(--t-background);
+
+    &[data-open='true'] {
+        transform: translateX(-260px) !important;
+    }
+}
+
+.checkbox {
+    margin-top: 19px;
+}
+
+.settings {
+    top: 6px;
+    right: 6px;
+    opacity: 0;
+    cursor: pointer;
+    transition: .3s;
+    position: absolute;
+    color: var(--t-small);
+    transform: rotate(90deg);
+
+    &::before {
+        top: -20px;
+        left: -20px;
+        content: '';
+        right: -20px;
+        bottom: -20px;
+        position: absolute;
+    }
+
+    &:hover {
+        transform: rotate(0deg);
+
+        &~.productInner {
+            transform: translateX(-30px);
+        }
+    }
+}
+
+.deleteNotification {
+    bottom: 0;
+    width: 100%;
+    height: 58px;
+    display: flex;
+    position: absolute;
+    border-radius: 8px;
+    padding: 0 16px 0 0;
+    align-items: center;
+    background-color: var(--t-background);
+    box-shadow: 0px 4px 15px 3px #0000001F;
+    width: adaptive-value((
+        xs: calc(100% - 32px),
+        md: calc(100% - 64px),
+        lg: calc(100% - 96px),
+        xl: calc(100% - 144px),
+    ));
+}
+
+.deleteTimer {
+    height: 36px;
+    display: flex;
+    position: relative;
+    align-items: center;
+    transform: scale(-1, 1);
+    justify-content: center;
+}
+
+.deleteTimerText {
+    font-size: 12px;
+    margin-top: 2px;
+    font-weight: 700;
+    margin-left: -1px;
+    line-height: 12px;
+    position: absolute;
+    font-style: normal;
+    transform: scale(-1, 1);
+}
+
+.deleteNotificationText {
+    width: 100%;
+}
+
+.deleteNotificationReturn {
+    cursor: pointer;
+    font-size: 10px;
+    color: #E21B25;
+    font-weight: 700;
+    line-height: 10px;
+    font-style: normal;
+    white-space: nowrap;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+}

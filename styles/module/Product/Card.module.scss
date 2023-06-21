@@ -31,6 +31,95 @@
     }
 }
 
+.cardInline {
+    display: grid;
+    position: relative;
+    grid-template-columns: 85px 1fr 170px;
+    grid-column-gap: 16px;
+    grid-template-areas:
+        'image art price'
+        'image title bonuses'
+        'image text btn'
+        'image colors btn';
+    
+    .image,
+    .images {
+        width: 85px;
+        height: 85px;
+    }
+
+    .images {
+        grid-area: image;
+    }
+
+    .nav {
+        display: none;
+    }
+
+    .buyBtn {
+        left: auto;
+        opacity: 1;
+        right: auto;
+        bottom: auto;
+        grid-area: btn;
+        margin-top: 0px;
+        min-width: 170px;
+        position: relative;
+    }
+
+    .bonuses ~ .buyBtn {
+        margin-top: 8px;
+    }
+
+    .priceContainer {
+        grid-area: price;
+        text-align: right;
+        padding-bottom: 0;
+        // margin-bottom: 20px;
+    }
+
+    .colors {
+        height: 20px;
+        font-size: 14px;
+        padding-top: 8px;
+        grid-area: colors;
+        text-transform: none;
+        color: var(--t-small);
+    }
+
+    .color {
+        display: none;
+    }
+
+    .art {
+        grid-area: art;
+    }
+
+    .bonuses {
+        padding-top: 8px;
+        grid-area: bonuses;
+    }
+
+    .title {
+        padding-top: 8px;
+        grid-area: title;
+        line-height: 16px;
+        padding-bottom: 0;
+        letter-spacing: 1.5px;
+    }
+
+    .text {
+        grid-area: text;
+        padding-top: 8px;
+        line-height: 21px;
+        padding-bottom: 0px;
+    }
+
+    .basket {
+        display: none;
+    }
+}
+
 .basket {
     height: 1px;
     align-items: center;

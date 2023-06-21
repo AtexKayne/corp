@@ -118,6 +118,12 @@
     height: 100%;
     overflow: auto;
     padding-bottom: 16px;
+
+    &:nth-child(2) {
+        .catalogLink {
+            display: block;
+        }
+    }
 }
 
 .panelLink {
@@ -138,7 +144,7 @@
 }
 
 .catalogLink {
-    display: block;
+    display: none;
     padding: 10px 0;
     font-weight: bold;
     font-size: adaptive-value((
@@ -147,4 +153,8 @@
         lg: 16px,
         xxxl: 18px,
     ));
+
+    &[data-selected='true'] {
+        display: block;
+    }
 }

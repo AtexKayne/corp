@@ -7297,15 +7297,6 @@ export const catalogNav = {
                             "name": "Брашинги",
                             "depth_level": 3,
                             "parent_id": 1955,
-                            "include_sections": [
-                                {
-                                    "id": 9999,
-                                    "url": "/test-1/",
-                                    "name": "4 уровень",
-                                    "depth_level": 4,
-                                    "parent_id": 1955,
-                                }
-                            ]
                         },
                         {
                             "id": 1957,

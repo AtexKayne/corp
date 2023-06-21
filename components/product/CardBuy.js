@@ -15,15 +15,16 @@ export default function CardBuy({
     setIsNotify,
     setInBasket,
     activeValue,
-    setIsSelected }) {
+    setIsSelected,
+    countInBasket = 0 }) {
 
     const [isShaked, setIsShaked] = useState(false)
     const [isRinged, setIsRinged] = useState(false)
     // const [isNotify, setIsNotify] = useState(false)
     const [diabled, setDiabled] = useState(false)
     const [isEmpty, setIsEmpty] = useState(false)
-    const [isOpen, setIsOpen] = useState(false)
-    const [count, setCount] = useState(0)
+    const [isOpen, setIsOpen] = useState(!!countInBasket)
+    const [count, setCount] = useState(countInBasket)
 
     const animateCount = useAnimationControls()
 
@@ -212,27 +213,28 @@ export default function CardBuy({
     }, [count])
 
     useEffect(() => {
+        setIsEmpty(max === 0)
         setTimeout(() => refValuesUpdate.current = false, 200) //@TODO для предотвращение уведомления при первой загруке
     }, [])
 
-    useEffect(() => {
-        if (max === 0) setIsEmpty(true)
-        else setIsEmpty(false)
+    // useEffect(() => {
+    //     console.log(activeValue);
+    //     setIsEmpty(max === 0)
 
-        refValuesUpdate.current = true
-        if (activeValue.basket) {
-            setCount(activeValue.basket)
-            setIsOpen(true)
-        } else {
-            setCount(0)
-            setIsOpen(false)
-        }
+    //     refValuesUpdate.current = true
+    //     if (activeValue.basket) {
+    //         setCount(activeValue.basket)
+    //         setIsOpen(true)
+    //     } else {
+    //         setCount(0)
+    //         setIsOpen(false)
+    //     }
 
-        setTimeout(() => {
-            refValuesUpdate.current = false
-        }, 300)
+    //     setTimeout(() => {
+    //         refValuesUpdate.current = false
+    //     }, 300)
 
-    }, [activeValue])
+    // }, [activeValue])
 
     return (
         <div ref={refButton} className={style.cardBuybtn}>

@@ -1,7 +1,19 @@
-import Link from "next/link";
-import MainLayout from "../layout/MainLayout";
+import Link from 'next/link'
+import MainLayout from '../layout/MainLayout'
+import { basket } from '../components/helpers/constants'
+import { globalState } from '../components/helpers/globalState'
 
 export default function Home() {
+
+  const openBasket = (event, isEmpty) => {
+    event.preventDefault()
+    const data = isEmpty ? { count: 0 } : { count: 4, items: basket }
+    globalState.modal.setData(data)
+    globalState.modal.setTemplate('basket')
+    globalState.modal.setIsZero(true)
+    globalState.modal.setIsOpen(true)
+  }
+
   return (
     <MainLayout title='Главная'>
       <div className='pt-3' />
@@ -104,6 +116,14 @@ export default function Home() {
         <Link href='/set/test'>
           <a href='/set/test' className='link'>Подборки (детальная)</a>
         </Link>
+      </div>
+
+      <div className='text--t1 pb-1 pt-1.5'>Корзина</div>
+      <div className='ml-1'>
+        <a onClick={event => openBasket(event, true)} href='#' className='link'>Корзина (пустая)</a>
+      </div>
+      <div className='ml-1'>
+        <a onClick={event => openBasket(event, false)} href='#' className='link'>Корзина (с товарами)</a>
       </div>
 
       <div className='pt-5' />

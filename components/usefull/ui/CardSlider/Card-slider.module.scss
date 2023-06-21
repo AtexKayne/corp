@@ -1,0 +1,51 @@
+.swiper {
+    width: 100%;
+    height: 100%;
+}
+
+.swiper-slide {
+    text-align: center;
+    font-size: 18px;
+    background: #fff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.swiper-slide img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.swiper {
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.navIconNext {
+    top: 0.5em;
+    right: 0;
+    width: 20px;
+    height: 20px;
+    cursor: pointer;
+    position: absolute;
+
+    &[data-disabled='true'] {
+        color: var(--t-small);
+    }
+}
+
+.navIconPrev {
+    top: 0.5em;
+    right: 40px;
+    width: 20px;
+    height: 20px;
+    cursor: pointer;
+    position: absolute;
+
+    &[data-disabled='true'] {
+        color: var(--t-small);
+    }
+}

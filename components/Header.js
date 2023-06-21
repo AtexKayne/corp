@@ -17,7 +17,7 @@ export default function Header() {
     const refThemeDefault = useRef('ui-light')
     const [theme, setTheme] = useState('ui-light')
     const [navIsOpen, setNavIsOpen] = useState(false)
-    const [basketCount, setBasketCount] = useState(0)
+
     const [themeImage, setThemeImage] = useState('ui-light')
     const [isTranslated, setIsTranslated] = useState(false)
     const [isHeaderFixed, setIsHeaderFixed] = useState(false)
@@ -133,7 +133,6 @@ export default function Header() {
         }
 
         globalState.body = { addClass, removeClass, toggleClass }
-        globalState.basket = { setBasketCount, basketCount }
         globalState.header = { setTheme: setHeaderTheme }
 
         return () => {
@@ -214,11 +213,11 @@ export default function Header() {
                             {/* </Link> */}
                         </div>
                         <div className={style.groupMD}>
-                            <div className='btn btn--empty btn--xs p-relative'>
+                            {/* <div className='btn btn--empty btn--xs p-relative'>
                                 <Icon width='27' height='24' external='is-hidden--sm-down' name='basket' />
                                 <Icon width='24' height='21' external='is-hidden--md-up' name='basket' />
                                 <div className={`${style.countBasket} ${!!basketCount ? '' : 'is-hidden'}`}>{basketCount}</div>
-                            </div>
+                            </div> */}
 
                             <AuthMobile />
                         </div>
@@ -276,20 +275,17 @@ export default function Header() {
                     <div className={`${style.groupSM} is-hidden--lg-down`}>
                         <div className='btn btn--empty btn--sm'><Icon width='21' height='21' name='searchMD' /></div>
                         <div className='btn btn--empty btn--sm'><Icon width='24' height='21' name='heartMD' /></div>
-                        <div className='btn btn--empty btn--sm p-relative'>
-                            <div className={`${style.countBasket} ${!!basketCount ? '' : 'is-hidden'}`}>{basketCount}</div>
-                            <Icon width='27' height='25' name='basketMD' />
-                        </div>
+                        <Basket />
                         <AuthBtn size='25' />
                     </div>
 
                     <div className={`${style.groupSM} is-hidden--xl-up`}>
                         <div className='btn btn--empty btn--sm'><Icon width='18' height='20' name='searchMD' /></div>
                         <div className='btn btn--empty btn--sm'><Icon width='20' height='18' name='heartMD' /></div>
-                        <div className={`btn btn--empty btn--sm p-relative`}>
+                        {/* <div className={`btn btn--empty btn--sm p-relative`}>
                             <div className={`${style.countBasket} ${!!basketCount ? '' : 'is-hidden'}`}>{basketCount}</div>
                             <Icon width='22' height='21' name='basketMD' />
-                        </div>
+                        </div> */}
                         <AuthBtn size='20' />
                     </div>
                 </div>
@@ -330,7 +326,6 @@ function AuthBtn({ size }) {
     return isAuth
         ? (
             <div onClick={() => setIsAuth(false)} className={`btn btn--empty btn--sm p-relative`}>
-                {/* <div className={`${style.countBasket} ${!!basketCount ? '' : 'is-hidden'}`}>{basketCount}</div> */}
                 <Icon name='person' width={size} height={size} />
             </div>
         ) : <div onClick={authHandler} className={`${style.textt6} btn btn--tetriary btn--md text--bold ml-0.5`}>ВОЙТИ</div>
@@ -350,6 +345,29 @@ function AuthMobile() {
         <div onClick={authHandler} className='btn btn--empty btn--sm'>
             <Icon width='24' height='24' external='is-hidden--sm-down' name='person' />
             <Icon width='21' height='21' external='is-hidden--md-up' name='person' />
+        </div>
+    )
+}
+
+function Basket({ size }) {
+    const [basketCount, setBasketCount] = useState(0)
+
+    const openBasket = () => {
+        const data = { count: basketCount }
+        globalState.modal.setData(data)
+        globalState.modal.setTemplate('basket')
+        globalState.modal.setIsZero(true)
+        globalState.modal.setIsOpen(true)
+    }
+
+    useEffect(() => {
+        globalState.basket = { setBasketCount, basketCount }
+    }, [])
+
+    return (
+        <div onClick={openBasket} className='btn btn--empty btn--sm p-relative'>
+            <div className={`${style.countBasket} ${!!basketCount ? '' : 'is-hidden'}`}>{basketCount}</div>
+            <Icon width='27' height='25' name='basketMD' />
         </div>
     )
 }

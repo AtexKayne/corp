@@ -91,6 +91,7 @@ function LoadTemplate({ name, data }) {
             auth: dynamic(() => import('./usefull/templates/ModalAuth'), { ssr: false }),
             profi: dynamic(() => import('./usefull/templates/ModalProfi'), { ssr: false }),
             colors: dynamic(() => import('./usefull/templates/ModalColors'), { ssr: false }),
+            basket: dynamic(() => import('./usefull/templates/ModalBasket'), { ssr: false }),
             filters: dynamic(() => import('./usefull/templates/ModalFilters'), { ssr: false }),
             priceInfo: dynamic(() => import('./usefull/templates/ModalPriceInfo'), { ssr: false }),
             authProfi: dynamic(() => import('./usefull/templates/ModalAuthProfi'), { ssr: false }),

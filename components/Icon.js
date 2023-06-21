@@ -46,7 +46,9 @@ export default function Icon({ name, external = '', width = 16, height = 16, siz
             colorPicker:    dynamic(() => import('../public/icons/icon-color-picker.svg'),  { ssr: false }),
             maximize:       dynamic(() => import('../public/icons/icon-maximize.svg'),      { ssr: false }),
             minimize:       dynamic(() => import('../public/icons/icon-minimize.svg'),      { ssr: false }),
-            // 
+            settings:       dynamic(() => import('../public/icons/icon-settings.svg'),      { ssr: false }),
+            remove:         dynamic(() => import('../public/icons/icon-trashcan.svg'),      { ssr: false }),
+            // icon-trashcan
         }
         const Component = dynamicComponents[iconName]
         setLoadedIcon(Component)
