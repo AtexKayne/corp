@@ -13,6 +13,7 @@ export default function CardBuy({ value, info, updateInBasket, countInBasket = 0
     const [startValue, setStartValue] = useState(countInBasket)
 
     const buyHandler = () => {
+        setCount(1)
         setIsOpen(true)
         setStartValue(1)
         updateInBasket(1)
@@ -22,6 +23,7 @@ export default function CardBuy({ value, info, updateInBasket, countInBasket = 0
     useEffect(() => {
         if (count <= 0) {
             setIsOpen(false)
+            setStartValue(0)
         }
     }, [count])
 
@@ -50,7 +52,7 @@ export default function CardBuy({ value, info, updateInBasket, countInBasket = 0
         <div className={style.cardBuybtn}>
             {!info.isProfi && !isEmpty
                 ? <div className={style.btnWrapper}>
-                    <div onClick={buyHandler} data-open={isOpen} className={`${style.btnMain} btn btn--md btn--primary`}>
+                    <div onClick={buyHandler} data-open={isOpen} className={`${style.btnMain} btn btn--md btn--primary js-button`}>
                         <span className='text--upper text--p5 text--bold'>в корзину</span>
                     </div>
 

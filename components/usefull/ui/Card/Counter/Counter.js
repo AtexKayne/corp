@@ -155,13 +155,6 @@ export default function Counter({ onAfterChange, max, startValue }) {
         setCount(startValue)
         refSafeValue.current = startValue
         if (!!startValue) checkValue(startValue)
-        // setIsSelected(!!startValue)
-        // console.log(startValue, !!startValue);
-        // if (startValue) {
-        // } else {
-        //     setIsSelected(false)
-        // }
-        // console.log(startValue);
     }, [startValue])
 
     return (

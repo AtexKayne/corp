@@ -6,7 +6,7 @@ import CardPrice from './CardPrice/CardPrice'
 import CardBuy from './CardBuy/CardBuy'
 
 
-export default function Card({ info, mode = 'normal' }) {
+export default function Card({ info, mode = 'normal', onChangeCount = () => {} }) {
     // @TODO Постарайся от этого избавиться
     const [countInBasket, setCountInBasket] = useState(info.values[0].basket)
     const [activeValue, setActiveValue] = useState(info.values[0])
@@ -27,6 +27,7 @@ export default function Card({ info, mode = 'normal' }) {
             const index = update.findIndex(element => element.value === activeValue.value)
             update[index].basket = val
             setCountInBasket(val)
+            onChangeCount(val, activeValue, info)
             return update
         })
     }

@@ -2,16 +2,19 @@
 @import '../../../mixins/helpers/adaptive-value';
 
 .basketWrapper {
+    height: 100vh;
+    margin-top: -28px;
+    // padding-top: 28px;
     position: relative;
     overflow-y: hidden;
     overflow-x: visible;
+    pointer-events: none;
     margin-right: adaptive-value((
         xs: -16px,
         md: -32px,
         lg: -48px,
         xl: -72px,
     ));
-    height: calc(100vh - 28px);
     // overflow: hidden visible;
 }
 
@@ -22,9 +25,12 @@
 }
 
 .basketInner {
+    z-index: 1;
     height: 100%;
     overflow: auto;
-    padding-bottom: 80px;
+    position: relative;
+    pointer-events: all;
+    padding-bottom: 110px;
     padding-right: adaptive-value((
         xs: 16px,
         md: 16px,
@@ -42,6 +48,7 @@
     overflow: hidden;
     padding-top: 16px;
     position: relative;
+    pointer-events: all;
     // margin-right: -32px;
     padding-right: 38px;
 
@@ -49,6 +56,22 @@
         .settings {
             opacity: 1;
         }
+    }
+}
+
+.checker {
+    height: 16px;
+    display: flex;
+    transition: .3s;
+    margin-top: 34px;
+    align-items: center;
+
+    >* {
+        cursor: pointer;
+    }
+
+    &:hover {
+        color: var(--t-primary);
     }
 }
 
@@ -138,21 +161,23 @@
 }
 
 .deleteNotification {
+    left: 9px;
     bottom: 0;
-    width: 100%;
+    z-index: 3;
     height: 58px;
     display: flex;
     position: absolute;
     border-radius: 8px;
     padding: 0 16px 0 0;
     align-items: center;
+    pointer-events: all;
     background-color: var(--t-background);
     box-shadow: 0px 4px 15px 3px #0000001F;
-    width: adaptive-value((
-        xs: calc(100% - 32px),
-        md: calc(100% - 64px),
-        lg: calc(100% - 96px),
-        xl: calc(100% - 144px),
+    right: adaptive-value((
+        xs: 25px,
+        md: 41px,
+        lg: 57px,
+        xl: 81px,
     ));
 }
 
@@ -190,4 +215,46 @@
     white-space: nowrap;
     letter-spacing: 0.04em;
     text-transform: uppercase;
+}
+
+
+.basketMenu {
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 4;
+    height: 108px;
+    display: flex;
+    transition: .4s;
+    position: absolute;
+    align-items: center;
+    pointer-events: all;
+    transform: translateY(110px);
+    background-color: var(--t-background);
+    padding-right: adaptive-value((
+        xs: 16px,
+        md: 32px,
+        lg: 48px,
+        xl: 72px,
+    ));
+
+    &[data-active='true'] {
+        transform: translateY(0);
+    }
+}
+
+.basketPrice {
+    margin-right: 30px;
+
+    * {
+        white-space: nowrap;
+    }
+}
+
+.summText {
+    white-space: nowrap;
+
+    >*{
+        transition: 0.07s;
+    }
 }

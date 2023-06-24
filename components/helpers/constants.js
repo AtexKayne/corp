@@ -747,7 +747,7 @@ export const basket = [
             {
                 value: '100 мл',
                 price: {
-                    actual: '13 160',
+                    actual: '100',
                     old: '16 160' // Can be empty
                 },
                 art: '5304',
@@ -772,7 +772,7 @@ export const basket = [
             {
                 value: '100 мл',
                 price: {
-                    actual: '13 160',
+                    actual: '100',
                     old: '16 160' // Can be empty
                 },
                 art: '53024',
@@ -796,7 +796,7 @@ export const basket = [
             {
                 value: '100 мл',
                 price: {
-                    actual: '13 160',
+                    actual: '200',
                 },
                 max: 10,
                 art: '53104',
@@ -819,7 +819,7 @@ export const basket = [
             {
                 value: '100 мл',
                 price: {
-                    actual: '13 160',
+                    actual: '100',
                 },
                 max: 10,
                 art: '51204',
@@ -843,7 +843,7 @@ export const basket = [
             {
                 value: '100 мл',
                 price: {
-                    actual: '13 160',
+                    actual: '200',
                 },
                 max: 10,
                 art: '53049',

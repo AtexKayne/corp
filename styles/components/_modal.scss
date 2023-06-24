@@ -123,6 +123,7 @@
     &__close {
         width: 0;
         height: 0;
+        z-index: 2;
         cursor: pointer;
         position: relative;
         transition: .3s color;

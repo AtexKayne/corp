@@ -1,13 +1,16 @@
-import { cards } from '../../helpers/constants'
+import { motion, useAnimationControls } from 'framer-motion'
 import { globalState } from '../../helpers/globalState'
+import { useRef, useState, useEffect } from 'react'
+import { word } from '../../helpers/wordTranslator'
+import { cards } from '../../helpers/constants'
 import style from '../../../styles/module/usefull/templates/Modal-basket.module.scss'
 import CardSlider from '../ui/CardSlider/CardSlider'
+import InputSelectAll from '../form/InputSelectAll'
 import InputCheckbox from '../form/InputCheckbox'
-import Icon from '../../Icon'
 import Favourite from '../Favourite'
-import { useRef, useState, useEffect } from 'react'
-import { motion, useAnimationControls } from 'framer-motion'
 import Card from '../ui/Card/Card'
+import Odometer from 'odometer'
+import Icon from '../../Icon'
 
 export default function ModalBasketProfi() {
     const [isEmpty, setIsEmpty] = useState(!!globalState.basket.items.length)
@@ -54,18 +57,91 @@ function EmptyBasket({ }) {
 }
 
 function FilledBasket({ items, setItems }) {
-    const [timerText, setTimerText] = useState(5)
     const [returnedItem, setReturnedItem] = useState(false)
-    const animationPath = useAnimationControls()
+    const [productsText, setProductsText] = useState(0)
+    const [isChecked, setIsChecked] = useState(false)
+    const [timerText, setTimerText] = useState(5)
+    const [summ, setSumm] = useState(0)
     const animateNotification = useAnimationControls()
-    const refDeletedItem = useRef(0)
+    const animationPath = useAnimationControls()
+    const refDeletedItemNode = useRef(null)
+    const refInputWrapper = useRef(null)
+    const refOdometrNode = useRef(null)
+    const refItemsInfo = useRef(false)
     const refInterval = useRef(false)
+    const refDeletedItem = useRef(0)
+    const refInputs = useRef(false)
+    const refOdometr = useRef(null)
 
-    const select = item => {
-        console.log(item);
+    const changeCount = (count, _, item) => {
+        const indexSelected = refItemsInfo.current.findIndex(element => element.item.id === item.id)
+        refItemsInfo.current[indexSelected].count = count
+        updateItemsCount()
+        updateSumm()
+
+    }
+
+    const updateSumm = () => {
+        const filtered = refItemsInfo.current.filter(element => element.isSelected && !element.isDeleted)
+        const newSumm = filtered.reduce((prev, curr) => {
+            return prev + curr.price * curr.count
+        }, 0)
+        setSumm(newSumm)
+        // refOdometr.current.innerHTML = newSumm
+        refOdometr.current.update(newSumm)
+        console.log(refOdometr.current);
+    }
+
+    const updateItemsCount = () => {
+        const filtered = refItemsInfo.current.filter(element => !element.isDeleted)
+        const itemsCount = filtered.reduce((prev, curr) => {
+            return prev + curr.count
+        }, 0)
+
+        setProductsText(word(itemsCount, ['товар', 'товара', 'товаров']))
+    }
+
+    const removeItem = () => {
+        const index = refItemsInfo.current.findIndex(
+            element => element.item.id === refDeletedItem.current.id
+        )
+        refItemsInfo.current[index].isDeleted = true
+    }
+
+    const selectHandler = item => {
+        const index = refItemsInfo.current.findIndex(element => element.item.id === item.id)
+        let isAllSelected = true
+        refItemsInfo.current[index].isSelected = !refItemsInfo.current[index].isSelected
+
+        refInputs.current.forEach(input => {
+            if (!input.checked) isAllSelected = false
+        })
+
+        setIsChecked(isAllSelected)
+        updateSumm()
+    }
+
+    const selectAllHandler = () => {
+        if (isChecked) {
+            refInputs.current.forEach(input => {
+                if (input.checked) input.click()
+            })
+        } else {
+            refInputs.current.forEach(input => {
+                if (!input.checked) input.click()
+            })
+        }
     }
 
     const returnHandler = async () => {
+        const index = refItemsInfo.current.findIndex(element => element.item.id === refDeletedItem.current.id)
+        refItemsInfo.current[index].isDeleted = false
+        if (refItemsInfo.current[index].count === 0) {
+            const button = refDeletedItemNode.current.querySelector('.js-button')
+            button.click()
+        }
+        updateSumm()
+        updateItemsCount()
         setReturnedItem(refDeletedItem.current)
         await animateNotification.start({ opacity: 0, y: 500, transition: { duration: 0.3 } })
         if (refInterval.current) clearInterval(refInterval.current)
@@ -73,7 +149,7 @@ function FilledBasket({ items, setItems }) {
         setReturnedItem(false)
     }
 
-    const deleteItem = async item => {
+    const deleteItem = async (item, node) => {
         if (refDeletedItem.current) {
             setItems(prev => {
                 const filtered = prev.filter(element => refDeletedItem.current.id !== element.id)
@@ -81,9 +157,14 @@ function FilledBasket({ items, setItems }) {
             })
         }
         refDeletedItem.current = item
+        refDeletedItemNode.current = node
+        removeItem()
+        updateSumm()
+        updateItemsCount()
         animationPath.start({ pathLength: 1, transition: { duration: 0 } })
+        const yPosition = !!summ ? -120 : -60
         await animateNotification.start({ opacity: 0, y: 500, transition: { duration: 0.3 } })
-        await animateNotification.start({ opacity: 1, y: -60, transition: { duration: 0.6 } })
+        await animateNotification.start({ opacity: 1, y: yPosition, transition: { duration: 0.6 } })
         setTimerText(5)
         if (refInterval.current) clearInterval(refInterval.current)
         refInterval.current = setInterval(() => {
@@ -99,14 +180,44 @@ function FilledBasket({ items, setItems }) {
         if (refDeletedItem.current) {
             setItems(prev => {
                 const filtered = prev.filter(element => element.id !== item.id)
+                refDeletedItem.current = false
+                refDeletedItemNode.current = null
                 return filtered
             })
-            refDeletedItem.current = false
+        }
+    }
+
+    const createOdometr = tryCount => {
+        if (tryCount >= 20) return
+        if (typeof Odometer === 'function') {
+            refOdometr.current = new Odometer({
+                el: refOdometrNode.current,
+                value: 0,
+                // duration: 3000,
+                format: '( ddd)',
+                theme: 'car'
+            })
+        } else {
+            setTimeout(() => createOdometr(tryCount + 1), 700)
         }
     }
 
     useEffect(() => {
+        createOdometr(0)
+        refItemsInfo.current = items.map(item => {
+            const info = {
+                item,
+                isDeleted: false,
+                isSelected: false,
+                count: item.values[0].basket,
+                price: item.values[0].price.actual.replaceAll(' ', ''),
+            }
 
+            return info
+        })
+        refInputs.current = refInputWrapper.current.querySelectorAll('input[type="checkbox"]')
+        // selectAllHandler()
+        updateItemsCount()
         return () => {
             if (refInterval.current) clearInterval(refInterval.current)
         }
@@ -114,18 +225,28 @@ function FilledBasket({ items, setItems }) {
 
     return (
         <div className={`${style.basketWrapper} full-height`}>
+
             <div className={style.basketInner}>
                 <div className={`${style.title} text--a2 text--bold pt-2 pb-2`}>Корзина</div>
-                {items.map(item => {
-                    if (item.values[0].max !== 0) {
-                        return <ProductCard
-                            item={item}
-                            key={item.id}
-                            select={select}
-                            deleteItem={deleteItem}
-                            returnedItem={returnedItem} />
-                    }
-                })}
+                <div className='text--t5 text--bold text--center text--color-small text--upper'>
+                    {productsText}
+                </div>
+                <div className={`${style.checker}`}>
+                    <InputSelectAll isChecked={isChecked} setIsChecked={setIsChecked} onAfterComplete={selectAllHandler} text='Выбрать все' />
+                </div>
+                <div ref={refInputWrapper}>
+                    {items.map(item => {
+                        if (item.values[0].max !== 0) {
+                            return <ProductCard
+                                item={item}
+                                key={item.id}
+                                deleteItem={deleteItem}
+                                onChangeCount={changeCount}
+                                returnedItem={returnedItem}
+                                selectHandler={selectHandler} />
+                        }
+                    })}
+                </div>
             </div>
             <motion.div animate={animateNotification} initial={{ y: 400, opacity: 0 }} className={style.deleteNotification}>
                 <div className={style.deleteTimer}>
@@ -148,13 +269,27 @@ function FilledBasket({ items, setItems }) {
                     вернуть обратно
                 </div>
             </motion.div>
+
+            <div data-active={!!summ} className={`${style.basketMenu}`}>
+                <div className={`${style.basketPrice}`}>
+                    <div className='text--p4'>Итого</div>
+                    <div className='text--nowrap text--p1 text--bold'>
+                        <span ref={refOdometrNode} className='odometer odometer-theme-car'>0</span>
+                        <span> ₽</span>
+                    </div>
+                </div>
+                <div className={`${style.showBtn} btn btn--md btn--primary btn--fill`}>
+                    <span className='text--upper text--p5 text--sparse text--bold'>Оформить заказ</span>
+                </div>
+            </div>
         </div>
     )
 }
 
-function ProductCard({ item, select, returnedItem, deleteItem }) {
+function ProductCard({ item, selectHandler, returnedItem, deleteItem, onChangeCount }) {
     const animationProduct = useAnimationControls()
     const [isControlOpen, setIsControlOpen] = useState(false)
+    const refItem = useRef(null)
 
     const favouriteHandler = event => {
         const target = event.target.children[0]
@@ -182,8 +317,13 @@ function ProductCard({ item, select, returnedItem, deleteItem }) {
         })
     }
 
+    const onChangeCountHandler = (count, val, getItem) => {
+        if (count === 0) deleteHandler(item)
+        onChangeCount(count, val, getItem)
+    }
+
     const deleteHandler = async () => {
-        deleteItem(item)
+        deleteItem(item, refItem.current)
         await animationProduct.start({ opacity: 0 })
         await animationProduct.start({ height: 0, marginTop: 0, paddingTop: 0 })
     }
@@ -197,7 +337,7 @@ function ProductCard({ item, select, returnedItem, deleteItem }) {
     }, [returnedItem])
 
     return (
-        <motion.div animate={animationProduct} transition={{ duration: 0.4 }} initial={{ marginTop: 16, paddingTop: 16 }} className={style.product}>
+        <motion.div ref={refItem} animate={animationProduct} transition={{ duration: 0.4 }} initial={{ marginTop: 16, paddingTop: 16 }} className={style.product}>
             <div className={style.controls}>
                 <div onClick={favouriteHandler} className={style.control}>
                     <Favourite info={item} width='16' height='16' />
@@ -212,8 +352,8 @@ function ProductCard({ item, select, returnedItem, deleteItem }) {
                 <Icon name='settings' width='16' height='16' />
             </div>
             <div data-open={isControlOpen} className={style.productInner}>
-                <InputCheckbox external={style.checkbox} onAfterComplete={() => select(item)} />
-                <Card info={item} mode='inline' />
+                <InputCheckbox external={style.checkbox} onAfterComplete={() => selectHandler(item)} />
+                <Card info={item} mode='inline' onChangeCount={onChangeCountHandler} />
             </div>
         </motion.div>
     )
