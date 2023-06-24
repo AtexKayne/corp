@@ -6,6 +6,7 @@ import Modal from '../components/Modal'
 import Footer from '../components/Footer'
 import Header from '../components/Header'
 import Popover from '../components/usefull/Popover'
+import Settings from '../components/helpers/settings'
 
 export default function MainLayout({ children, title }) {
     useEffect(() => {
@@ -17,6 +18,7 @@ export default function MainLayout({ children, title }) {
             <Head>
                 <title>{title}</title>
             </Head>
+            <Settings />
             <Header />
             <Popover />
             <div className='container'>

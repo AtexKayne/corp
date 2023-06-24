@@ -9,9 +9,7 @@ import style from '../../styles/module/Catalog/Catalog.module.scss'
 import Link from 'next/link'
 import Image from 'next/image'
 import Icon from '../../components/Icon'
-import Card from '../../components/product/Card'
-import MainLayout from '../../layout/MainLayout'
-import Breadcrumbs from '../../components/Breadcrumbs'
+import Card from '../usefull/ui/Card/Card'
 import Dropdown from '../../components/usefull/Dropdown'
 import Favourite from '../../components/usefull/Favourite'
 import InputRange from '../../components/usefull/form/InputRange'
@@ -118,10 +116,7 @@ export default function Catalog({ detail }) {
         event.preventDefault()
         setFilters(() => {
             if (info.filter) {
-                globalState.modal.setTemplate('filters')
-                globalState.modal.setIsZero(true)
-                globalState.modal.setData(info.filter)
-                globalState.modal.setIsOpen(true)
+                globalState.modal.open('filters', true, info.filter)
                 return info.filter
             } else return false
         })
@@ -306,13 +301,9 @@ function Head({ toggleSidebar, isSidebarHidden, categoryName, titleOpacity, isBr
     }, [info])
 
     const openDescription = () => {
-        if (isPromo) {
-            globalState.modal.setData({ name: info.name })
-            globalState.modal.setTemplate('promoAbout')
-        } else globalState.modal.setTemplate('brandAbout')
-
-        globalState.modal.setIsZero(false)
-        globalState.modal.setIsOpen(true)
+        const template = isPromo ? 'promoAbout' : 'brandAbout'
+        // Здесь были непонятки с передаваемым именем.
+        globalState.modal.open(template, false, { name: info.name })
     }
 
     if (isBrands) {
@@ -386,9 +377,7 @@ function ColorCircle({ isFullSize = false }) {
     const openColors = event => {
         setIsOnboard(false)
         if (event.target.closest(`.${style.onboard}`)) return
-        globalState.modal.setTemplate('colorCircle')
-        globalState.modal.setIsZero(true)
-        globalState.modal.setIsOpen(true)
+        globalState.modal.open('colorCircle', true)
     }
 
     useEffect(() => {

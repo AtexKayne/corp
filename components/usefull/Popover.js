@@ -142,6 +142,14 @@ export default function Popover() {
     const setTextSecondary = text => refTextSecondary.current = text
     const setTextPrimary = text => refTextPrimary.current = text
 
+    const open = (texts, image = '', isBasket = false) => {
+        setTextPrimary(texts[0])
+        setTextSecondary(texts[1])
+        setImage(image)
+        setIsBasket(isBasket)
+        openHandler(true)
+    }
+
     useEffect(() => {
         globalState.popover = {
             setIsOpen: openHandler,
@@ -150,7 +158,8 @@ export default function Popover() {
             setTextPrimary,
             setTopPosition,
             setIsBasket,
-            setImage
+            setImage,
+            open,
         }
 
         if (typeof window === 'undefined') return

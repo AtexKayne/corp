@@ -27,9 +27,9 @@
     padding-bottom: 80px;
     padding-right: adaptive-value((
         xs: 16px,
-        md: 32px,
-        lg: 48px,
-        xl: 72px,
+        md: 16px,
+        lg: 18px,
+        xl: 22px,
     ));
 
     &::-webkit-scrollbar {

@@ -13,6 +13,7 @@ export default function Modal() {
 
     const animateContent = useAnimationControls()
     const refContent = useRef(null)
+    const refIsOpen = useRef(false)
 
     const dragEndHandler = (event, info) => {
         if (isZero || !isMobile) return
@@ -21,39 +22,65 @@ export default function Modal() {
         setIsOpen(false)
     }
 
+    const hideContent = () => {
+        const ease = 'easeInOut'
+        const duration = isMobile ? 0.3 : 0.5
+        const posStart = window.innerWidth >= globalState.sizes.sm || isZero
+            ? { x: '100%', y: 0, transition: { duration, ease } }
+            : { y: '120%', x: 0, transition: { duration, ease } }
+
+        return animateContent.start(posStart)
+    }
+
+    const showContent = () => {
+        const ease = 'easeInOut'
+        const duration = isMobile ? 0.3 : 0.5
+        const pos = window.innerWidth >= globalState.sizes.sm || isZero
+            ? { x: 0, y: 0, transition: { duration, ease } }
+            : { y: 0, x: 0, transition: { duration, ease } }
+        const posStart = window.innerWidth >= globalState.sizes.sm || isZero
+            ? { x: '100%', y: 0, transition: { duration: 0 } }
+            : { y: '120%', x: 0, transition: { duration: 0 } }
+
+        animateContent.start(posStart).then(() => {
+            animateContent.start(pos)
+        })
+    }
+
+    const setClose = function () {
+        setIsOpen(false)
+    }
+
+    const setOpen = async function (template, label, data = null) {
+        if (refIsOpen.current) await hideContent()
+        setTemplate(template)
+        if (data !== null) setData(data)
+        setIsZero(label)
+        if (refIsOpen.current) setTimeout(showContent, 250)
+        else setTimeout(() => setIsOpen(true), 140)
+    }
+
     useEffect(() => {
         globalState.modal = {
-            setIsOpen: open => { setTimeout(() => setIsOpen(open), 120) },
-            setTemplate,
-            setIsZero,
-            setData
+            close: setClose,
+            open: setOpen
         }
     }, [])
 
+
+
     // @TODO REWIRITE!
     useEffect(() => {
+        refIsOpen.current = isOpen
         const mobile = window.innerWidth < globalState.sizes.sm
         setIsMobile(mobile)
-        const duration = mobile ? 0.3 : 0.5
 
         if (isOpen) {
-            const pos = window.innerWidth >= globalState.sizes.sm || isZero
-                ? { x: 0, y: 0, transition: { duration, ease: 'easeInOut' } }
-                : { y: 0, x: 0, transition: { duration, ease: 'easeInOut' } }
-            const posStart = window.innerWidth >= globalState.sizes.sm || isZero
-                ? { x: '100%', y: 0, transition: { duration: 0 } }
-                : { y: '120%', x: 0, transition: { duration: 0 } }
+            showContent()
 
-            animateContent.start(posStart).then(() => {
-                animateContent.start(pos)
-            })
             globalState.body.addClass('overflow-hidden')
         } else {
-            const posStart = window.innerWidth >= globalState.sizes.sm || isZero
-                ? { x: '100%', y: 0, transition: { duration, ease: 'easeInOut' } }
-                : { y: '120%', x: 0, transition: { duration, ease: 'easeInOut' } }
-
-            animateContent.start(posStart)
+            hideContent()
 
             setTimeout(() => {
                 setTemplate(null)

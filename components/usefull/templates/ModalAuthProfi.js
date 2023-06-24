@@ -7,7 +7,7 @@ import Icon from '../../Icon'
 
 export default function ModalAuthProfi() {
     const clickHandler = () => {
-        globalState.modal.setIsOpen(false)
+        globalState.modal.close()
         setTimeout(() => {
             globalState.popover.setTextPrimary('Вы вошли как профпокупатель')
             globalState.popover.setTextSecondary('Цены пересчитаны до оптовых')

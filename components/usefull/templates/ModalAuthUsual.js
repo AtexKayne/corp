@@ -22,7 +22,7 @@ export default function ModalAuthUsual() {
 
 function StepOne({ setStep, step }) {
     const clickHandler = () => {
-        globalState.modal.setIsOpen(false)
+        globalState.modal.close()
     }
 
     const codeHandler = event => {
@@ -66,7 +66,7 @@ function StepTwo({ setStep, step }) {
     const [isHelpOpen, setIsHelpOpen] = useState(false)
 
     const clickHandler = () => {
-        globalState.modal.setIsOpen(false)
+        globalState.modal.close()
     }
 
     const helpHandler = event => {
@@ -80,7 +80,7 @@ function StepTwo({ setStep, step }) {
 
     const nextAction = () => {
         globalState.auth.setIsAuth(true)
-        globalState.modal.setIsOpen(false)
+        globalState.modal.close()
 
         setTimeout(() => {
             globalState.popover.setTextPrimary('Ура! Вам присвоен статус<br />профессионального покупателя!')

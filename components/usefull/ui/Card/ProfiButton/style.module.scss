@@ -1,0 +1,12 @@
+@import '../../../../../styles/mixins/helpers/media';
+
+.btnMain {
+    left: 0;
+    right: 0;
+    height: 100%;
+    position: absolute;
+
+    @include media-breakpoint(md) {
+        min-height: 65px;
+    }
+}

@@ -7,11 +7,12 @@ export default function Home() {
 
   const openBasket = (event, isEmpty) => {
     event.preventDefault()
-    const data = isEmpty ? { count: 0 } : { count: 4, items: basket }
-    globalState.modal.setData(data)
-    globalState.modal.setTemplate('basket')
-    globalState.modal.setIsZero(true)
-    globalState.modal.setIsOpen(true)
+    if (isEmpty) {
+      globalState.basket.setItems([])
+    } else {
+      globalState.basket.setItems(basket)
+    }
+    globalState.modal.open('basket', true)
   }
 
   return (

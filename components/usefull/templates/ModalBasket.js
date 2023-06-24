@@ -2,18 +2,32 @@ import { cards } from '../../helpers/constants'
 import { globalState } from '../../helpers/globalState'
 import style from '../../../styles/module/usefull/templates/Modal-basket.module.scss'
 import CardSlider from '../ui/CardSlider/CardSlider'
-import Card from '../../product/Card'
 import InputCheckbox from '../form/InputCheckbox'
 import Icon from '../../Icon'
 import Favourite from '../Favourite'
 import { useRef, useState, useEffect } from 'react'
 import { motion, useAnimationControls } from 'framer-motion'
+import Card from '../ui/Card/Card'
 
-export default function ModalBasketProfi({ data }) {
-    const [items, setItems] = useState(data.items)
+export default function ModalBasketProfi() {
+    const [isEmpty, setIsEmpty] = useState(!!globalState.basket.items.length)
+    const [items, setItems] = useState([])
+
+    useEffect(() => {
+        const items = localStorage.basket ?? JSON.stringify([])
+        const parsed = JSON.parse(items)
+        setItems(parsed)
+        setIsEmpty(!!parsed.length)
+    }, [])
+
+    useEffect(() => {
+        setIsEmpty(!!items.length)
+        globalState.basket.setItems(items)
+    }, [items])
+
     return (
         <>
-            {items && items.length
+            {isEmpty
                 ? <FilledBasket items={items} setItems={setItems} />
                 : <EmptyBasket />
             }
@@ -29,7 +43,12 @@ function EmptyBasket({ }) {
                 Вы можете посмотреть <a href='#'>новые товары</a>, <a href='#'>наши хиты</a>, ознакомиться с <a href='#'>брендами</a>.
                 Или поискать что-нибудь в каталоге.
             </div>
-            <CardSlider items={cards} />
+
+            <motion.div initial={{ y: 100, opacity: 0 }} animate={{ y: 0, opacity: 1 }} transition={{ duration: 0.3, delay: 0.7, ease: 'easeOut' }}>
+                <CardSlider items={cards} />
+            </motion.div>
+
+            <div className='btn btn--primary'></div>
         </div>
     )
 }
@@ -55,6 +74,12 @@ function FilledBasket({ items, setItems }) {
     }
 
     const deleteItem = async item => {
+        if (refDeletedItem.current) {
+            setItems(prev => {
+                const filtered = prev.filter(element => refDeletedItem.current.id !== element.id)
+                return filtered
+            })
+        }
         refDeletedItem.current = item
         animationPath.start({ pathLength: 1, transition: { duration: 0 } })
         await animateNotification.start({ opacity: 0, y: 500, transition: { duration: 0.3 } })
@@ -76,6 +101,7 @@ function FilledBasket({ items, setItems }) {
                 const filtered = prev.filter(element => element.id !== item.id)
                 return filtered
             })
+            refDeletedItem.current = false
         }
     }
 
@@ -129,7 +155,6 @@ function FilledBasket({ items, setItems }) {
 function ProductCard({ item, select, returnedItem, deleteItem }) {
     const animationProduct = useAnimationControls()
     const [isControlOpen, setIsControlOpen] = useState(false)
-    const count = item.id
 
     const favouriteHandler = event => {
         const target = event.target.children[0]
@@ -188,7 +213,7 @@ function ProductCard({ item, select, returnedItem, deleteItem }) {
             </div>
             <div data-open={isControlOpen} className={style.productInner}>
                 <InputCheckbox external={style.checkbox} onAfterComplete={() => select(item)} />
-                <Card info={item} isInline={true} countInBasket={count} />
+                <Card info={item} mode='inline' />
             </div>
         </motion.div>
     )

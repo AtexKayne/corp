@@ -131,9 +131,7 @@ export default function BuyButton({ children, max, activeValue, isProfi, setInBa
     }
 
     const profiClickHandler = () => {
-        globalState.modal.setTemplate('profi')
-        globalState.modal.setIsZero(false)
-        globalState.modal.setIsOpen(true)
+        globalState.modal.open('profi', false)
     }
 
     const notificationClickHandler = () => {
@@ -150,10 +148,13 @@ export default function BuyButton({ children, max, activeValue, isProfi, setInBa
             globalState.popover.setIsBasket(false)
             globalState.popover.setIsOpen(true)
         } else {
-            globalState.modal.setData({type: 'notification', name, image, setIsRinged, setIsNotify })
-            globalState.modal.setTemplate('auth')
-            globalState.modal.setIsZero(true)
-            globalState.modal.setIsOpen(true)
+            const data = {
+                type: 'notification',
+                name, image,
+                setIsRinged,
+                setIsNotify
+            }
+            globalState.modal.open('auth', true, data)
         }
 
     }
@@ -182,7 +183,6 @@ export default function BuyButton({ children, max, activeValue, isProfi, setInBa
             globalState.popover.setTextSecondary('Максимум для этого заказа')
             globalState.popover.setImage(image)
             globalState.popover.setIsBasket(false)
-
             globalState.popover.setIsOpen(true)
         } else if (count === max) {
             setDiabled('plus')

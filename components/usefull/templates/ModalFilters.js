@@ -68,7 +68,7 @@ export default function ModalFilters({ data }) {
     return (
         <div ref={refModal} className={`${style.modalFilters} full-height`}>
             <div className={`${style.title} pb-2`}>
-                <div className={`${style.closer} ${style.closerFiller}`} onClick={() => globalState.modal.setIsOpen(false)}>
+                <div className={`${style.closer} ${style.closerFiller}`} onClick={() => globalState.modal.close()}>
                     <Icon name='close' width='20' height='20' />
                 </div>
                 <div className='text--a4 text--bold text--upper'>Фильтры</div>
@@ -84,7 +84,7 @@ export default function ModalFilters({ data }) {
             }
 
             <div className={style.footer}>
-                <div onClick={() => globalState.modal.setIsOpen(false)} className={`${style.showBtn} btn btn--primary btn--fill`}>
+                <div onClick={() => globalState.modal.close()} className={`${style.showBtn} btn btn--primary btn--fill`}>
                     <span className='text--upper text--p5 text--sparse text--bold'>Показать {countItems} товаров</span>
                 </div>
             </div>
@@ -115,7 +115,7 @@ function ModalFilterWrapper({ children, name, isChanged }) {
                 </div>
                 {children}
 
-                {/* <div onClick={() => globalState.modal.setIsOpen(false)} className={`${style.showBtn} btn btn--primary btn--fill`}>
+                {/* <div onClick={() => globalState.modal.close()} className={`${style.showBtn} btn btn--primary btn--fill`}>
                     <span className='text--upper text--p6 text--bold'>Показать 100 товаров</span>
                 </div> */}
             </div>

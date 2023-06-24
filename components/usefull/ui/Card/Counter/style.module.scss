@@ -1,0 +1,166 @@
+@import '../../../../../styles/mixins/helpers/media';
+@import '../../../../../styles/mixins/helpers/adaptive-value';
+
+.counterInput {
+    width: 100%;
+    border: none;
+    outline: none;
+    display: none;
+    padding: 0 12px;
+    flex-basis: 100%;
+    padding-right: 0;
+    text-align: center;
+    align-items: center;
+    justify-content: center;
+    text-transform: uppercase;
+    -moz-appearance: textfield;
+    user-select: all!important;
+    background-color: var(--t-light);
+
+    &[data-shake='true'] {
+        animation: shake 1s ease;
+    }
+
+    &::-webkit-outer-spin-button,
+    &::-webkit-inner-spin-button {
+        -webkit-appearance: none;
+    }
+}
+
+@keyframes shake {
+    0% {
+        transform: translateX(-20px);
+    }
+
+    20% {
+        transform: translateX(20px);
+    }
+
+    40% {
+        transform: translateX(-10px);
+    }
+
+    60% {
+        transform: translateX(10px);
+    }
+
+    80% {
+        transform: translateX(-5px);
+    }
+
+    100% {
+        transform: translateX(0);
+    }
+}
+
+.counterDiv {
+    width: 100%;
+    display: flex;
+    transition: .3s;
+    overflow: hidden;
+    flex-basis: 100%;
+    align-items: center;
+    justify-content: center;
+    text-transform: uppercase;
+
+    > span {
+        min-width: 13px;
+        display: inline-block;
+    }
+
+    @include media-breakpoint(md-up) {
+        &:hover {
+            color: var(--t-primary);
+        }
+    }
+}
+
+.countSelector {
+    display: flex;
+    cursor: pointer;
+    flex-basis: 100%;
+    border-radius: 8px;
+    background-color: var(--t-light);
+
+    &[data-active='false'] {
+        .counterBtnAccept {
+            display: none;
+        }
+    }
+
+    &[data-active='true'] {
+        .counterInput,
+        .counterBtnAccept {
+            display: flex;
+        }
+
+        .counterDiv,
+        .counterBtn {
+            display: none;
+        }
+    }
+
+    @include media-breakpoint(xxl-up) {
+        margin-left: 8px;
+    }
+}
+
+.cardCountSelector {
+    display: flex;
+    cursor: pointer;
+    flex-basis: 100%;
+    border-radius: 8px;
+    background-color: var(--t-light);
+
+    &[data-active='false'] {
+        .counterBtnReject,
+        .counterBtnAccept {
+            display: none;
+        }
+    }
+
+    &[data-active='true'] {
+        .counterInput,
+        .counterBtnAccept,
+        .counterBtnReject {
+            display: flex;
+        }
+
+        .counterDiv,
+        .counterBtn {
+            display: none;
+        }
+    }
+}
+
+.counterBtn,
+.counterBtnReject,
+.counterBtnAccept {
+    display: flex;
+    cursor: pointer;
+    min-width: 40px;
+    align-items: center;
+    transition: .3s color;
+    justify-content: center;
+
+    >*{
+        pointer-events: none;
+    }
+    
+    &[data-disabled='true'] {
+        opacity: .3;
+        pointer-events: none;
+    }
+
+    [data-hover='false'] & {
+        pointer-events: none;
+    }
+    
+    @include media-breakpoint(md-up) {
+        min-width: 60px;
+
+        &:hover {
+            color: var(--t-primary);
+        }
+    }
+}

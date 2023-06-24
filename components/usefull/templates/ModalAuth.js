@@ -173,13 +173,9 @@ function StepTwo({ phone, setStep, step, data }) {
 
     const authHandler = (code) => {
         if (code.includes('5555')) {
-            globalState.modal.setTemplate('authProfi')
-            globalState.modal.setIsZero(true)
-            globalState.modal.setIsOpen(true)
+            globalState.modal.open('authProfi', true)
         } else {
-            globalState.modal.setTemplate('authUsual')
-            globalState.modal.setIsZero(true)
-            globalState.modal.setIsOpen(true)
+            globalState.modal.open('authUsual', true)
         }
     }
 
@@ -189,7 +185,7 @@ function StepTwo({ phone, setStep, step, data }) {
             if (data.type === 'notification') notificateHandler()
             else if (data.type === 'auth') authHandler(code)
         }, 800)
-        globalState.modal.setIsOpen(false)
+        globalState.modal.close()
     }
 
     const codeValidate = code => {
@@ -222,7 +218,7 @@ function StepTwo({ phone, setStep, step, data }) {
     }
 
     const clickHandler = () => {
-        globalState.modal.setIsOpen(false)
+        globalState.modal.close()
     }
 
     const changeHandler = event => {

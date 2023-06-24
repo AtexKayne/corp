@@ -1,9 +1,9 @@
 import style from './Card-slider.module.scss'
 import { Swiper, SwiperSlide } from 'swiper/react'
 import { Navigation } from 'swiper'
-import Card from '../../../product/Card'
 import Icon from '../../../Icon'
 import { useRef, useState } from 'react'
+import Card from '../Card/Card'
 
 export default function CardSlider({ items, title }) {
     const [disabled, setDisabled] = useState('prev')

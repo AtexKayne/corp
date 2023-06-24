@@ -1,0 +1,33 @@
+.values {
+    // display: flex;
+}
+
+.volumePicker {
+    display: flex;
+    flex-wrap: wrap;
+
+    > * {
+        cursor: pointer;
+        transition: .3s;
+        margin-right: 6px;
+        margin-bottom: 6px;
+        border-radius: 4px;
+        padding: 5px 4px 4px;
+        text-transform: uppercase;
+
+        &[data-disabled='true'] {
+            pointer-events: none;
+            color: var(--c-_light-gray);
+        }
+
+        &:hover,
+        &[data-active='true'] {
+            color: var(--t-background);
+            background-color: var(--t-primary);
+        }
+    }
+}
+
+[data-mode='inline'] .values {
+    grid-area: colors;
+}

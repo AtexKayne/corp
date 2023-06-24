@@ -12,6 +12,7 @@ import Gallery from '../../components/product/Gallery'
 import Breadcrumbs from '../../components/Breadcrumbs'
 import BuyButton from '../../components/product/BuyButton'
 import Accordeon from '../../components/usefull/Accordeon'
+import ColorPicker from '../../components/usefull/ui/ColorPicker/ColorPicker'
 
 export default function Product({ detail }) {
     const [currentImages, setCurrentImages] = useState(detail.images)
@@ -30,9 +31,7 @@ export default function Product({ detail }) {
     const [activeValue, setActiveValue] = useState(detail.values[0])
 
     const colorsHandler = () => {
-        globalState.modal.setTemplate('colors')
-        globalState.modal.setIsZero(true)
-        globalState.modal.setIsOpen(true)
+        globalState.modal.open('colors', true)
     }
 
     const copyHandler = () => {
@@ -44,9 +43,7 @@ export default function Product({ detail }) {
     }
 
     const infoHandler = () => {
-        globalState.modal.setTemplate('priceInfo')
-        globalState.modal.setIsZero(true)
-        globalState.modal.setIsOpen(true)
+        globalState.modal.open('priceInfo', true)
     }
 
     useEffect(() => {
@@ -64,7 +61,7 @@ export default function Product({ detail }) {
                 countInBasket.current = countInBasket.current + value.basket
             }
         })
-        globalState.basket.setBasketCount(countInBasket.current)
+        // globalState.basket.setBasketCount(countInBasket.current)
     }
 
     // @TODO Rewrite this fckn shit
@@ -365,61 +362,6 @@ function RadioButton({ items = [], setActiveValue }) {
                     {item.value}
                 </div>
             ))}
-        </div>
-    )
-}
-
-function ColorPicker({ items = [] }) {
-    if (!items || !items.length) return null
-    const [isActive, setIsActive] = useState(false)
-
-    const clickHandler = () => {
-        setIsActive(false)
-        document.removeEventListener('click', clickHandler)
-    }
-    const openHandler = () => {
-        if (window.innerWidth >= globalState.sizes.lg) {
-            if (!isActive) {
-                setTimeout(() => document.addEventListener('click', clickHandler), 100)
-            }
-            setIsActive(!isActive)
-        } else {
-            globalState.modal.setTemplate('colorsSecond')
-            globalState.modal.setIsZero(true)
-            globalState.modal.setIsOpen(true)
-        }
-    }
-
-    return (
-        <div data-active={isActive} className={`${style.colorPicker} text--t4`}>
-            <div onClick={openHandler} className={style.colorActive}>
-                <span className={style.colorActiveIcon} style={{ backgroundColor: items[0].iconColor }} />
-                <span className={style.colorActiveName}>{items[0].name}</span>
-            </div>
-
-            <div className={style.dropdown}>
-                <div className={style.dropdownList}>
-                    {
-                        items.map(item => {
-                            let iconStyle = ''
-                            const name = item.name.toLowerCase()
-                            if (name === 'белый') {
-                                iconStyle = style.iconWhite
-                            } else if (name === 'разноцветный') {
-                                iconStyle = style.iconColorfull
-                            }
-                            return (
-                                <Link key={item.name} href={item.link}>
-                                    <div data-active={item.current} className={style.colorItem}>
-                                        <span className={`${style.colorItemIcon} ${iconStyle}`} style={{ backgroundColor: item.iconColor }} />
-                                        <span className={style.colorItemName}>{item.name}</span>
-                                    </div>
-                                </Link>
-                            )
-                        })
-                    }
-                </div>
-            </div>
         </div>
     )
 }

@@ -1,7 +1,7 @@
 import Image from 'next/image'
 import { useState, useEffect, useRef } from 'react'
 import style from '../../styles/module/Product/Banner.module.scss'
-import Card from './Card'
+import Card from '../usefull/ui/Card/Card'
 
 export default function Banner({ items, title, description, images }) {
 
@@ -21,7 +21,7 @@ export default function Banner({ items, title, description, images }) {
                 {items && items.length
                     ? items.map(item => (
                         <div key={item.id} className={style.cardWrapper}>
-                            <Card info={item} updated={[]} />
+                            <Card info={item} />
                         </div>
                     )) : null
                 }

@@ -3,7 +3,7 @@ import style from '../../../styles/module/usefull/templates/Modal-profi.module.s
 
 export default function ModalProfi() {
     const clickHandler = () => {
-        globalState.modal.setIsOpen(false)
+        globalState.modal.close()
     }
 
     return (

@@ -5,15 +5,14 @@ import style from '../../styles/module/Product/Card.module.scss'
 
 import Icon from '../Icon'
 import Image from 'next/image'
-import CardBuy from './CardBuy'
+import CardBuy from '../usefull/ui/Card/CardBuy/CardBuy'
 import { globalState } from '../helpers/globalState'
 import Favourite from '../usefull/Favourite'
 import Link from 'next/link'
 
-export default function Card({ info, updated, isInline, countInBasket = 0 }) {
+export default function CardOld({ info, updated, isInline, countInBasket = 0 }) {
     const [isSelected, setIsSelected] = useState(false)
     const [activeImage, setActiveImage] = useState(0)
-    const [isNotify, setIsNotify] = useState(false)
     const [isHover, setIsHover] = useState(false)
     const [count, setCount] = useState(countInBasket)
     const animateDrag = useAnimationControls()
@@ -45,7 +44,7 @@ export default function Card({ info, updated, isInline, countInBasket = 0 }) {
         if (refIsSelected.current) return
         const target = event.target
         const parent = target.closest(`.${style.card}`)
-        if (!parent || parent !== refCardWrapper.current) setIsHover(false)
+        // if (!parent || parent !== refCardWrapper.current) setIsHover(false)
         document.body.removeEventListener('mousemove', bodyMouseMoveHandler)
     }
 
@@ -56,7 +55,7 @@ export default function Card({ info, updated, isInline, countInBasket = 0 }) {
 
     const mouseLeaveHandler = () => {
         if (isInline) return
-        if (!isSelected) setIsHover(false)
+        // if (!isSelected) setIsHover(false)
         else {
             document.body.addEventListener('mousemove', bodyMouseMoveHandler)
         }
@@ -173,7 +172,7 @@ export default function Card({ info, updated, isInline, countInBasket = 0 }) {
             }
 
             {info.values[0].bonuses && isInline
-                ? <div className={`${style.bonuses} d-flex flex--justify-end text--t5 text--normal text--color-small`}>
+                ? <div className={`${style.bonuses} text--t5 text--normal text--color-small`}>
                     <span>
                         {info.values[0].bonuses}
                     </span>
@@ -187,9 +186,6 @@ export default function Card({ info, updated, isInline, countInBasket = 0 }) {
 
             {info.values[0].max === 0
                 ? <div className={`${style.priceContainer} text--t2 text--normal pb-0.8`}>
-                    <span className={`text--color-tetriary pr-0.5 is-hidden--lg-down ${isNotify ? '' : 'is-hidden'}`}>
-                        <Icon name='bellFill' width='14' height='14' />
-                    </span>
                     <span>Нет в наличии</span>
                 </div> : null
             }
@@ -200,15 +196,15 @@ export default function Card({ info, updated, isInline, countInBasket = 0 }) {
 
             <div className={`${style.buyBtn} mt-2`}>
                 <CardBuy
+                    item={info}
                     image={info.images[0]}
+                    isProfi={info.isProfi}
+                    setInBasket={setCount}
+                    isSelected={isSelected}
                     max={info.values[0].max}
                     name={info.secondaryName}
-                    activeValue={info.values[0]}
-                    isNotify={isNotify}
-                    isProfi={info.isProfi}
-                    isSelected={isSelected}
-                    setInBasket={setCount}
                     setIsNotify={setIsNotify}
+                    activeValue={info.values[0]}
                     setIsSelected={setIsSelected}
                     countInBasket={countInBasket}
                 />

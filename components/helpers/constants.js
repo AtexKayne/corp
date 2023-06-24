@@ -456,11 +456,47 @@ export const cards = [
             {
                 value: '100 мл',
                 price: {
-                    actual: '13 160',
+                    actual: 931,
+                    old: 1299 // Can be empty
                 },
-                max: 10,
+                bonuses: 24,
+                art: 5414,
+                link: '100',
+                max: 109,
             },
-        ]
+            {
+                value: '200 мл',
+                price: {
+                    actual: 1931,
+                },
+                bonuses: 28,
+                art: 5415,
+                link: '200',
+                max: 880,
+                basket: 4,
+            },
+            {
+                value: '500 мл',
+                price: {
+                    actual: 2931,
+                    old: 1299 // Can be empty
+                },
+                bonuses: 30,
+                art: 5416,
+                link: '500',
+                max: 85,
+            },
+            {
+                value: '1000 мл',
+                price: {
+                    actual: 6931,
+                },
+                bonuses: 74,
+                art: 5417,
+                link: '1000',
+                max: 0,
+            },
+        ],
     },
     {
         id: 4,
@@ -476,30 +512,75 @@ export const cards = [
             {
                 value: '100 мл',
                 price: {
-                    actual: '13 160',
+                    actual: 931,
+                    old: 1299 // Can be empty
                 },
-                max: 10,
+                bonuses: 24,
+                art: 5414,
+                link: '100',
+                max: 109,
             },
-        ]
+            {
+                value: '200 мл',
+                price: {
+                    actual: 1931,
+                },
+                bonuses: 28,
+                art: 5415,
+                link: '200',
+                max: 880,
+                basket: 4,
+            },
+            {
+                value: '500 мл',
+                price: {
+                    actual: 2931,
+                    old: 1299 // Can be empty
+                },
+                bonuses: 30,
+                art: 5416,
+                link: '500',
+                max: 85,
+            },
+            {
+                value: '1000 мл',
+                price: {
+                    actual: 6931,
+                },
+                bonuses: 74,
+                art: 5417,
+                link: '1000',
+                max: 0,
+            },
+        ],
     },
     {
         id: 5,
         images: [
-            '/images/product/image-0.jpg',
-            '/images/product/image-1.jpg',
-            '/images/product/image-2.jpg',
-            '/images/product/image-3.jpg',
+            '/images/product/image-7.jpg',
+            '/images/product/image-8.jpg',
         ],
-        primaryName: 'Шейвер для бритья Шейвер для бритья Шейвер для бритья',
-        secondaryName: 'Wahl Shaver Finale Lithium 8164-116 Wahl Shaver Finale Lithium 8164-116',
+        primaryName: 'Canway SZ-A7116-4 blue',
+        secondaryName: 'Расческа с хвостиком',
         values: [
             {
-                value: '100 мл',
+                value: '',
                 price: {
-                    actual: '13 160',
+                    actual: 277,
                 },
-                max: 10,
+                bonuses: 24,
+                art: 'SZ-A7116-4',
+                link: '100',
+                max: 109,
             },
+        ],
+        valuePicker: [
+            { name: 'Голубой', iconColor: '#00BEFF', link: '/product/test-2', current: true },
+            { name: 'Желтый', iconColor: '#E7B820', link: '/product/test-3' },
+            { name: 'Розовый', iconColor: '#FFB5B5', link: '/product/test-3' },
+            { name: 'Черный', iconColor: '#112233', link: '/product/test-3' },
+            { name: 'Белый', iconColor: '#FFFFFF', link: '/product/test-3' },
+            { name: 'Разноцветный', iconColor: '#FFFFFF', link: '/product/test-3' },
         ]
     },
     {
@@ -672,8 +753,10 @@ export const basket = [
                 art: '5304',
                 max: 10,
                 bonuses: 24,
+                basket: 4,
             },
         ],
+        count: 1,
     },
     {
         id: 2,
@@ -693,9 +776,11 @@ export const basket = [
                     old: '16 160' // Can be empty
                 },
                 art: '53024',
-                max: 0,
+                max: 5,
+                basket: 1,
             },
-        ]
+        ],
+        count: 1,
     },
     {
         id: 3,
@@ -715,8 +800,10 @@ export const basket = [
                 },
                 max: 10,
                 art: '53104',
+                basket: 2,
             },
-        ]
+        ],
+        count: 1,
     },
     {
         id: 4,
@@ -737,8 +824,10 @@ export const basket = [
                 max: 10,
                 art: '51204',
                 bonuses: 24,
+                basket: 6,
             },
-        ]
+        ],
+        count: 1,
     },
     {
         id: 5,
@@ -758,8 +847,10 @@ export const basket = [
                 },
                 max: 10,
                 art: '53049',
+                basket: 1,
             },
-        ]
+        ],
+        count: 1,
     }
 ]
 

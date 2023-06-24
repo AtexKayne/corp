@@ -1,0 +1,86 @@
+@import '../../../../styles/mixins/helpers/media';
+@import '../../../../styles/mixins/helpers/adaptive-value';
+
+.card {
+    width: 100%;
+    padding: 16px;
+    transition: .3s;
+    border-radius: 8px;
+    position: relative;
+
+    &[data-hover='true'] {
+        z-index: 2;
+        box-shadow: 0px 10px 30px 2px #69748633;
+
+        .buyBtn {
+            opacity: 1;
+        }
+    }
+
+    @include media-breakpoint(lg-down) {
+        box-shadow: none !important;
+    }
+}
+
+.cardInline {
+    display: grid;
+    grid-gap: 8px;
+    position: relative;
+    grid-template-columns: 85px 1fr 170px;
+    grid-column-gap: 16px;
+    grid-template-areas:
+        'image art price'
+        'image title bonuses'
+        'image text btn'
+        'image colors btn';
+
+    .title {
+        padding: 0;
+        grid-area: title;
+        line-height: 16px;
+        padding-bottom: 0;
+        letter-spacing: 1.5px;
+    }
+
+    .text {
+        grid-area: text;
+        padding: 0;
+        line-height: 21px;
+        padding-bottom: 0px;
+    }
+
+    .buyBtn {
+        margin: 0;
+        opacity: 1;
+        align-self: flex-end;
+        justify-self: flex-end;
+
+        >* {
+            left: auto;
+            right: auto;
+            bottom: auto;
+            width: 170px;
+            height: 40px;
+            grid-area: btn;
+            margin-top: 0px;
+            min-width: 170px;
+            min-height: 40px;
+            position: relative;
+            align-self: flex-end;
+            justify-self: flex-end;
+    
+            div {
+                height: 44px;
+                min-height: 44px;
+            }
+        }
+    }
+}
+
+
+.buyBtn {
+    @include media-breakpoint(xl-up) {
+        opacity: 0;
+        transition: .3s;
+    }
+}

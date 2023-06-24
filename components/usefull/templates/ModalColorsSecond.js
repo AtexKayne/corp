@@ -14,7 +14,7 @@ export default function ModalColorsSecond() {
         setCurrentId(index)
         setCurrentLink(link)
 
-        // globalState.modal.setIsOpen(false)
+        // globalState.modal.close()
     }
 
     useEffect(() => {
@@ -63,7 +63,7 @@ export default function ModalColorsSecond() {
 
             <div className={style.footer}>
                 <Link href={currentLink}>
-                    <div onClick={() => globalState.modal.setIsOpen(false)} className={`${style.showBtn} btn btn--primary btn--fill`}>
+                    <div onClick={() => globalState.modal.close()} className={`${style.showBtn} btn btn--primary btn--fill`}>
                         <span className='text--upper text--p6 text--bold'>Показать товар</span>
                     </div>
                 </Link>

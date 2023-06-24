@@ -3,7 +3,7 @@ import style from '../../../styles/module/usefull/templates/Modal-brand-about.mo
 
 export default function ModalBrandAbout({ data }) {
     const clickHandler = () => {
-        globalState.modal.setIsOpen(false)
+        globalState.modal.close()
     }
 
     return (

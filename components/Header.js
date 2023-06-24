@@ -309,10 +309,7 @@ function AuthBtn({ size }) {
     const [isAuth, setIsAuth] = useState(false)
 
     const authHandler = () => {
-        globalState.modal.setData({ type: 'auth' })
-        globalState.modal.setTemplate('auth')
-        globalState.modal.setIsZero(true)
-        globalState.modal.setIsOpen(true)
+        globalState.modal.open('auth', true, {type: 'auth'})
     }
 
     useEffect(() => {
@@ -334,10 +331,7 @@ function AuthBtn({ size }) {
 function AuthMobile() {
     const authHandler = () => {
         if (!globalState.auth.isAuth) {
-            globalState.modal.setData({ type: 'auth' })
-            globalState.modal.setTemplate('auth')
-            globalState.modal.setIsZero(true)
-            globalState.modal.setIsOpen(true)
+            globalState.modal.open('auth', true, {type: 'auth'})
         }
     }
 
@@ -353,16 +347,13 @@ function Basket({ size }) {
     const [basketCount, setBasketCount] = useState(0)
 
     const openBasket = () => {
-        const data = { count: basketCount }
-        globalState.modal.setData(data)
-        globalState.modal.setTemplate('basket')
-        globalState.modal.setIsZero(true)
-        globalState.modal.setIsOpen(true)
+        globalState.modal.open('basket', true)
     }
 
     useEffect(() => {
-        globalState.basket = { setBasketCount, basketCount }
-    }, [])
+        console.log(globalState.basket.count);
+        setBasketCount(globalState.basket.count)
+    }, [globalState.basket])
 
     return (
         <div onClick={openBasket} className='btn btn--empty btn--sm p-relative'>

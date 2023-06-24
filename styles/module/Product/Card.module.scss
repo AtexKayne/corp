@@ -61,10 +61,20 @@
         opacity: 1;
         right: auto;
         bottom: auto;
+        width: 170px;
+        height: 40px;
         grid-area: btn;
         margin-top: 0px;
         min-width: 170px;
+        min-height: 40px;
         position: relative;
+        align-self: flex-end;
+        justify-self: flex-end;
+
+        div {
+            height: 44px;
+            min-height: 44px;
+        }
     }
 
     .bonuses ~ .buyBtn {
@@ -96,8 +106,10 @@
     }
 
     .bonuses {
+        display: flex;
         padding-top: 8px;
         grid-area: bonuses;
+        justify-content: flex-end;
     }
 
     .title {
@@ -117,6 +129,99 @@
 
     .basket {
         display: none;
+    }
+
+    @include media-breakpoint(xl) {
+        grid-template-columns: 85px 1fr;
+        grid-template-areas:
+            'image art'
+            'image title'
+            'image text'
+            'image colors'
+            'image price'
+            'image bonuses'
+            'image btn';
+
+        .colors {
+            padding-top: 16px;
+            padding-bottom: 16px;
+        }
+
+        .priceContainer {
+            text-align: left;
+            padding-bottom: 0;
+            // margin-bottom: 20px;
+        }
+
+        .bonuses {
+            justify-content: flex-start;
+        }
+
+        .buyBtn {
+            margin-top: 4px;
+        }
+    }
+
+    @include media-breakpoint(lg) {
+        grid-template-columns: 85px 1fr;
+        grid-template-areas:
+            'image art'
+            'image title'
+            'image text'
+            'image colors'
+            'image price'
+            'image bonuses'
+            'image btn';
+
+        .colors {
+            padding-top: 16px;
+            padding-bottom: 16px;
+        }
+
+        .priceContainer {
+            text-align: left;
+            padding-bottom: 0;
+            // margin-bottom: 20px;
+        }
+
+        .bonuses {
+            justify-content: flex-start;
+        }
+
+        .buyBtn {
+            margin-top: 4px;
+        }
+    }
+
+    @include media-breakpoint(sm-down) {
+        grid-template-columns: 85px 1fr;
+        grid-template-areas:
+            'image art'
+            'image title'
+            'image text'
+            'image colors'
+            'image price'
+            'image bonuses'
+            'image btn';
+
+        .colors {
+            padding-top: 16px;
+            padding-bottom: 16px;
+        }
+
+        .priceContainer {
+            text-align: left;
+            padding-bottom: 0;
+            // margin-bottom: 20px;
+        }
+
+        .bonuses {
+            justify-content: flex-start;
+        }
+
+        .buyBtn {
+            margin-top: 4px;
+        }
     }
 }
 
@@ -157,7 +262,6 @@
     ));
 
     > div {
-        // width: 100%;
         display: flex;
     }
 

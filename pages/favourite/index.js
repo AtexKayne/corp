@@ -10,8 +10,8 @@ import Icon from '../../components/Icon'
 import MainLayout from '../../layout/MainLayout'
 import Breadcrumbs from '../../components/Breadcrumbs'
 import Tabs from '../../components/usefull/Tabs'
-import Card from '../../components/product/Card'
 import Favourite from '../../components/usefull/Favourite'
+import Card from '../../components/usefull/ui/Card/Card'
 
 
 export default function FavouritePage({ detail }) {
@@ -62,7 +62,7 @@ function Products({ items }) {
             <div className={style.productsContainer}>
                 {items.map(item => (
                     <div key={item.id} className={style.cardWrapper}>
-                        <Card info={item} updated={[]} />
+                        <Card info={item} />
                     </div>
                 ))}
             </div>
