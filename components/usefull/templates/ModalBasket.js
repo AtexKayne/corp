@@ -23,6 +23,11 @@ export default function ModalBasketProfi() {
         // const parsed = JSON.parse(items)
         // setItems(parsed)
         // setIsEmpty(!!parsed.length)
+        if (window.innerWidth <= globalState.sizes.sm) {
+            const close = document.querySelector('.modal__close')
+            close.style.position = 'absolute'
+            close.style.right = '40px'
+        }
     }, [])
 
     useEffect(() => {

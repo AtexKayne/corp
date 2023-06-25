@@ -351,7 +351,6 @@ function Basket({ size }) {
     }
 
     useEffect(() => {
-        console.log(globalState.basket.count);
         setBasketCount(globalState.basket.count)
     }, [globalState.basket])
 

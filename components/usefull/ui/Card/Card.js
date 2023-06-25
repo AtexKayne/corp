@@ -43,7 +43,6 @@ export default function Card({ info, mode = 'normal', onChangeCount = () => { } 
             const element = { ...info }
             element.values = [item]
             isExist = isEqual(basketStorage, element)
-            console.log(element, isExist);
             if (isExist !== false) {
                 newInfo.values[index].basket = isExist.count
             }

@@ -3,7 +3,7 @@
 
 .basketWrapper {
     height: 100vh;
-    margin-top: -28px;
+    margin-top: -16px;
     // padding-top: 28px;
     position: relative;
     overflow-y: hidden;
@@ -15,6 +15,10 @@
         lg: -48px,
         xl: -72px,
     ));
+
+    @include media-breakpoint(md-up) {
+        margin-top: -28px;
+    }
     // overflow: hidden visible;
 }
 
@@ -259,13 +263,14 @@
     right: 0;
     bottom: 0;
     z-index: 4;
-    height: 108px;
+    height: 138px;
     display: flex;
     transition: .4s;
     position: absolute;
     align-items: center;
     pointer-events: all;
-    transform: translateY(110px);
+    padding-bottom: 40px;
+    transform: translateY(140px);
     background-color: var(--t-background);
     padding-right: adaptive-value((
         xs: 16px,
@@ -275,7 +280,13 @@
     ));
 
     &[data-active='true'] {
-        transform: translateY(0);
+        transform: translateY(0)!important;
+    }
+
+    @include media-breakpoint(md-up) {
+        height: 108px;
+        padding-bottom: 0;
+        transform: translateY(110px);
     }
 }
 
