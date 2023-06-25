@@ -57,7 +57,7 @@ export default function Modal() {
         if (data !== null) setData(data)
         setIsZero(label)
         if (refIsOpen.current) setTimeout(showContent, 250)
-        else setTimeout(() => setIsOpen(true), 140)
+        else setTimeout(() => setIsOpen(true), 400)
     }
 
     useEffect(() => {

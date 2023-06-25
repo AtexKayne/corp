@@ -1,0 +1,13 @@
+.info {
+    display: flex;
+    padding: 16px;
+    border-radius: 8px;
+    align-items: flex-start;
+    background-color: var(--t-light);
+}
+
+.icon {
+    min-width: 16px;
+    margin-right: 16px;
+    // transform: translateY(-3px);
+}

@@ -8,9 +8,9 @@ export default function Home() {
   const openBasket = (event, isEmpty) => {
     event.preventDefault()
     if (isEmpty) {
-      globalState.basket.setItems([])
+      globalState.basket.replace([])
     } else {
-      globalState.basket.setItems(basket)
+      globalState.basket.replace(basket)
     }
     globalState.modal.open('basket', true)
   }

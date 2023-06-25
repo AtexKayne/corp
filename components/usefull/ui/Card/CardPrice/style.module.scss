@@ -86,4 +86,15 @@
     .basket {
         display: none;
     }
+
+    @include media-breakpoint(xl-down) {
+        .priceContainer {
+            text-align: left;
+            padding-bottom: 0;
+        }
+
+        .bonuses {
+            justify-content: flex-start;
+        }
+    }
 }

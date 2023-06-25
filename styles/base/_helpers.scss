@@ -10,6 +10,10 @@
     position: absolute !important;
 }
 
+*[data-is-hidden='true'] {
+    display: none!important;
+}
+
 .is-invisible {
     opacity: 0;
     pointer-events: none;
@@ -33,6 +37,14 @@
 
 .c-pointer {
     cursor: pointer;
+
+    @include media-breakpoint(lg-up) {
+        transition: .3s;
+
+        &:hover {
+            color: color-use(primary);
+        }
+    }
 }
 
 .d-none { display: none; }

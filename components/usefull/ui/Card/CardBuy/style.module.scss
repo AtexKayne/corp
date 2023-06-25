@@ -13,8 +13,9 @@
         }
     }
 
+    // @TODO Переделай, блин
     @include media-breakpoint(lg-down) {
-        >* {
+        div {
             min-height: 44px;
         }
     }

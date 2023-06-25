@@ -23,6 +23,7 @@
 }
 
 .cardInline {
+    width: 100%;
     display: grid;
     grid-gap: 8px;
     position: relative;
@@ -52,6 +53,7 @@
     .buyBtn {
         margin: 0;
         opacity: 1;
+        grid-area: btn;
         align-self: flex-end;
         justify-self: flex-end;
 
@@ -61,19 +63,48 @@
             bottom: auto;
             width: 170px;
             height: 40px;
-            grid-area: btn;
             margin-top: 0px;
             min-width: 170px;
             min-height: 40px;
             position: relative;
-            align-self: flex-end;
-            justify-self: flex-end;
+            
     
             div {
                 height: 44px;
                 min-height: 44px;
             }
         }
+    }
+
+    @include media-breakpoint(xl-down) {
+        grid-template-columns: 85px 1fr;
+        grid-template-areas:
+            'image art'
+            'image title'
+            'image text'
+            'image colors'
+            'image price'
+            'image bonuses'
+            'image btn';
+
+        // .colors {
+        //     padding-top: 16px;
+        //     padding-bottom: 16px;
+        // }
+
+        // .priceContainer {
+        //     text-align: left;
+        //     padding-bottom: 0;
+        //     // margin-bottom: 20px;
+        // }
+
+        // .bonuses {
+        //     justify-content: flex-start;
+        // }
+
+        // .buyBtn {
+        //     margin-top: 4px;
+        // }
     }
 }
 

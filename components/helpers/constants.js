@@ -70,7 +70,6 @@ export const product1 = {
             art: 5415,
             link: '200',
             max: 880,
-            basket: 4,
         },
         {
             value: '500 мл',
@@ -165,7 +164,6 @@ export const product3 = {
             art: 5415,
             link: '200',
             max: 880,
-            basket: 4,
         },
         {
             value: '500 мл',
@@ -400,7 +398,7 @@ export const filters = {
 
 export const cards = [
     {
-        id: 1,
+        id: 91,
         images: [
             '/images/product/image-0.jpg',
             '/images/product/image-1.jpg',
@@ -422,7 +420,7 @@ export const cards = [
         isProfi: true
     },
     {
-        id: 2,
+        id: 92,
         images: [
             '/images/product/image-0.jpg',
             '/images/product/image-1.jpg',
@@ -443,7 +441,7 @@ export const cards = [
         ]
     },
     {
-        id: 3,
+        id: 93,
         images: [
             '/images/product/image-0.jpg',
             '/images/product/image-1.jpg',
@@ -473,7 +471,6 @@ export const cards = [
                 art: 5415,
                 link: '200',
                 max: 880,
-                basket: 4,
             },
             {
                 value: '500 мл',
@@ -499,7 +496,7 @@ export const cards = [
         ],
     },
     {
-        id: 4,
+        id: 94,
         images: [
             '/images/product/image-0.jpg',
             '/images/product/image-1.jpg',
@@ -529,7 +526,6 @@ export const cards = [
                 art: 5415,
                 link: '200',
                 max: 880,
-                basket: 4,
             },
             {
                 value: '500 мл',
@@ -555,7 +551,7 @@ export const cards = [
         ],
     },
     {
-        id: 5,
+        id: 95,
         images: [
             '/images/product/image-7.jpg',
             '/images/product/image-8.jpg',
@@ -584,7 +580,7 @@ export const cards = [
         ]
     },
     {
-        id: 6,
+        id: 96,
         images: [
             '/images/product/image-0.jpg',
             '/images/product/image-1.jpg',
@@ -605,7 +601,7 @@ export const cards = [
         ]
     },
     {
-        id: 7,
+        id: 97,
         images: [
             '/images/product/image-0.jpg',
             '/images/product/image-1.jpg',
@@ -626,7 +622,7 @@ export const cards = [
         ]
     },
     {
-        id: 8,
+        id: 98,
         images: [
             '/images/product/image-0.jpg',
             '/images/product/image-1.jpg',
@@ -647,7 +643,7 @@ export const cards = [
         ]
     },
     {
-        id: 9,
+        id: 99,
         images: [
             '/images/product/image-0.jpg',
             '/images/product/image-1.jpg',
@@ -668,7 +664,7 @@ export const cards = [
         ]
     },
     {
-        id: 10,
+        id: 910,
         images: [
             '/images/product/image-0.jpg',
             '/images/product/image-1.jpg',
@@ -689,7 +685,7 @@ export const cards = [
         ]
     },
     {
-        id: 11,
+        id: 911,
         images: [
             '/images/product/image-0.jpg',
             '/images/product/image-1.jpg',
@@ -710,7 +706,7 @@ export const cards = [
         ]
     },
     {
-        id: 12,
+        id: 912,
         images: [
             '/images/product/image-0.jpg',
             '/images/product/image-1.jpg',
@@ -734,12 +730,9 @@ export const cards = [
 
 export const basket = [
     {
-        id: 1,
+        id: 41,
         images: [
             '/images/product/image-0.jpg',
-            '/images/product/image-1.jpg',
-            '/images/product/image-2.jpg',
-            '/images/product/image-3.jpg',
         ],
         primaryName: 'Шейвер для бритья',
         secondaryName: 'Wahl Shaver Finale Lithium 8164-116',
@@ -750,6 +743,9 @@ export const basket = [
                     actual: '100',
                     old: '16 160' // Can be empty
                 },
+                discount: [
+                    {summ: 16160, name: 'Серебрянный статус'},
+                ],
                 art: '5304',
                 max: 10,
                 bonuses: 24,
@@ -759,12 +755,9 @@ export const basket = [
         count: 1,
     },
     {
-        id: 2,
+        id: 42,
         images: [
             '/images/product/image-0.jpg',
-            '/images/product/image-1.jpg',
-            '/images/product/image-2.jpg',
-            '/images/product/image-3.jpg',
         ],
         primaryName: 'Шейвер для бритья',
         secondaryName: 'Wahl Shaver Finale Lithium 8164-116',
@@ -775,6 +768,10 @@ export const basket = [
                     actual: '100',
                     old: '16 160' // Can be empty
                 },
+                discount: [
+                    {summ: 10000, name: 'Серебрянный статус'},
+                    {summ: 6160, name: 'Скидка по акциям'}
+                ],
                 art: '53024',
                 max: 5,
                 basket: 1,
@@ -783,12 +780,9 @@ export const basket = [
         count: 1,
     },
     {
-        id: 3,
+        id: 43,
         images: [
             '/images/product/image-0.jpg',
-            '/images/product/image-1.jpg',
-            '/images/product/image-2.jpg',
-            '/images/product/image-3.jpg',
         ],
         primaryName: 'Шейвер для бритья',
         secondaryName: 'Wahl Shaver Finale Lithium 8164-116',
@@ -806,12 +800,9 @@ export const basket = [
         count: 1,
     },
     {
-        id: 4,
+        id: 44,
         images: [
             '/images/product/image-0.jpg',
-            '/images/product/image-1.jpg',
-            '/images/product/image-2.jpg',
-            '/images/product/image-3.jpg',
         ],
         primaryName: 'Шейвер для бритья',
         secondaryName: 'Wahl Shaver Finale Lithium 8164-116',
@@ -830,12 +821,9 @@ export const basket = [
         count: 1,
     },
     {
-        id: 5,
+        id: 45,
         images: [
             '/images/product/image-0.jpg',
-            '/images/product/image-1.jpg',
-            '/images/product/image-2.jpg',
-            '/images/product/image-3.jpg',
         ],
         primaryName: 'Шейвер для бритья',
         secondaryName: 'Wahl Shaver Finale Lithium 8164-116 Wahl Shaver Finale Lithium 8164-116',
@@ -846,6 +834,26 @@ export const basket = [
                     actual: '200',
                 },
                 max: 10,
+                art: '53049',
+                basket: 1,
+            },
+        ],
+        count: 1,
+    },
+    {
+        id: 46,
+        images: [
+            '/images/product/image-5.jpg',
+        ],
+        primaryName: 'Шейвер для бритья',
+        secondaryName: 'Wahl Shaver Finale Lithium 8164-116',
+        values: [
+            {
+                value: '100 мл',
+                price: {
+                    actual: '200',
+                },
+                max: 0,
                 art: '53049',
                 basket: 1,
             },
