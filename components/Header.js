@@ -213,11 +213,11 @@ export default function Header() {
                             {/* </Link> */}
                         </div>
                         <div className={style.groupMD}>
-                            {/* <div className='btn btn--empty btn--xs p-relative'>
+                            <div className='btn btn--empty btn--xs p-relative'>
                                 <Icon width='27' height='24' external='is-hidden--sm-down' name='basket' />
                                 <Icon width='24' height='21' external='is-hidden--md-up' name='basket' />
-                                <div className={`${style.countBasket} ${!!basketCount ? '' : 'is-hidden'}`}>{basketCount}</div>
-                            </div> */}
+                                <div className={`${style.countBasket} ${!!false ? '' : 'is-hidden'}`}>{0}</div>
+                            </div>
 
                             <AuthMobile />
                         </div>
@@ -282,10 +282,10 @@ export default function Header() {
                     <div className={`${style.groupSM} is-hidden--xl-up`}>
                         <div className='btn btn--empty btn--sm'><Icon width='18' height='20' name='searchMD' /></div>
                         <div className='btn btn--empty btn--sm'><Icon width='20' height='18' name='heartMD' /></div>
-                        {/* <div className={`btn btn--empty btn--sm p-relative`}>
-                            <div className={`${style.countBasket} ${!!basketCount ? '' : 'is-hidden'}`}>{basketCount}</div>
+                        <div className={`btn btn--empty btn--sm p-relative`}>
+                            <div className={`${style.countBasket} ${!!false ? '' : 'is-hidden'}`}>{0}</div>
                             <Icon width='22' height='21' name='basketMD' />
-                        </div> */}
+                        </div>
                         <AuthBtn size='20' />
                     </div>
                 </div>
