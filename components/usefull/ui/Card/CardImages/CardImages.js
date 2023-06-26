@@ -73,7 +73,7 @@ export default function CardImages({ link = '/', images, mode, count }) {
                 className={`${style.images} ${mode === 'inline' ? style.inline : ''}`}>
 
                 {mode === 'inline'
-                    ? <div data-is-hidden={!count} className={`${style.labelCount} text--t6`}>
+                    ? <div data-is-hidden={count <= 1} className={`${style.labelCount} text--t6`}>
                         x{count}
                     </div>
                     : null
