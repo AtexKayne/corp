@@ -55,7 +55,7 @@ export default function CardSlider({ items, title }) {
             </div>
             <div className={style.swiperWrapper}>
                 <Swiper
-                    spaceBetween={30}
+                    spaceBetween={0}
                     slidesPerView={slidesPerView}
                     navigation={true}
                     modules={[Navigation]}
