@@ -62,7 +62,7 @@ export default function Card({ info, mode = 'normal', onChangeCount = () => { } 
             className={mode === 'normal' ? style.card : style.cardInline}
             onMouseEnter={mouseEnterHandler}
             onMouseLeave={mouseLeaveHandler}>
-            <CardImages images={info.images} link='/product/rp-no-coloristic' mode={mode} />
+            <CardImages count={countInBasket} images={info.images} link='/product/rp-no-coloristic' mode={mode} />
 
             <div className={`${style.title} text--t6 text--normal text--upper pb-0.6 pt-1.5`}>{info.primaryName}</div>
             <div className={`${style.text} text--t4 text--normal pb-1`}>{info.secondaryName}</div>

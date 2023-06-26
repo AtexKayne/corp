@@ -1,0 +1,84 @@
+@import '../../../../styles/mixins/helpers/media';
+
+.delivery {
+    height: 20px;
+    display: flex;
+    position: relative;
+    align-items: flex-start;
+    transform: translateX(-45px);
+
+    @include media-breakpoint(xxl-down) {
+        margin-top: 32px;
+        margin-bottom: 5px;
+        transform: translateX(20px);
+    }
+    
+    &[data-active='true'] {
+        .icon,
+        .arrow {
+            color: #34C369;
+        }
+
+        .line {
+            border-color: #34C369;
+        }
+    }
+}
+
+.text {
+    width: 250px;
+    margin: 0 20px;
+    text-align: right;
+    >* {
+        white-space: nowrap;
+    }
+}
+
+.icon {
+    top: 2px;
+    position: absolute;
+
+    &:nth-child(1) {
+        left: -15px;
+    }
+
+    &:nth-child(2) {
+        right: -15px;
+    }
+}
+
+.inline {
+    bottom: 0;
+    width: 250px;
+    display: flex;
+    position: absolute;
+
+    &::after {
+        left: 0;
+        bottom: 0;
+        content: '';
+        right: -20px;
+        position: absolute;
+        border-bottom: 2px solid #E5E5E5;
+    }
+}
+
+.line {
+    left: 0;
+    bottom: 0;
+    z-index: 1;
+    position: absolute;
+    will-change: width;
+    transition: .3s width;
+    border-bottom: 2px solid #E21B25;
+}
+
+.arrow {
+    left: -5px;
+    z-index: 1;
+    bottom: -9px;
+    transition: .3s;
+    color: #E21B25;
+    position: absolute;
+    will-change: transform;
+}

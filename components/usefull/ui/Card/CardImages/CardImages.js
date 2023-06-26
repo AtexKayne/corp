@@ -5,7 +5,7 @@ import style from './style.module.scss'
 import Image from 'next/image'
 import { globalState } from '../../../../helpers/globalState'
 
-export default function CardImages({ link = '/', images, mode }) {
+export default function CardImages({ link = '/', images, mode, count }) {
     const [activeImage, setActiveImage] = useState(0)
     const animateDrag = useAnimationControls()
     const refImages = useRef(null)
@@ -71,6 +71,13 @@ export default function CardImages({ link = '/', images, mode }) {
                 onMouseEnter={mouseEnterHandler}
                 onMouseLeave={() => setActiveImage(0)}
                 className={`${style.images} ${mode === 'inline' ? style.inline : ''}`}>
+
+                {mode === 'inline'
+                    ? <div data-is-hidden={!count} className={`${style.labelCount} text--t6`}>
+                        x{count}
+                    </div>
+                    : null
+                }
 
                 <motion.div animate={animateDrag} drag='x' onDragEnd={dragEdHandler} >
                     {images.map((image, index) => (

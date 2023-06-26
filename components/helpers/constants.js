@@ -740,7 +740,7 @@ export const basket = [
             {
                 value: '100 мл',
                 price: {
-                    actual: '100',
+                    actual: '1256',
                     old: '16 160' // Can be empty
                 },
                 discount: [
@@ -765,7 +765,7 @@ export const basket = [
             {
                 value: '100 мл',
                 price: {
-                    actual: '100',
+                    actual: '123',
                     old: '16 160' // Can be empty
                 },
                 discount: [
@@ -788,9 +788,9 @@ export const basket = [
         secondaryName: 'Wahl Shaver Finale Lithium 8164-116',
         values: [
             {
-                value: '100 мл',
+                value: '250 мл',
                 price: {
-                    actual: '200',
+                    actual: '250',
                 },
                 max: 10,
                 art: '53104',
@@ -810,7 +810,7 @@ export const basket = [
             {
                 value: '100 мл',
                 price: {
-                    actual: '100',
+                    actual: '442',
                 },
                 max: 10,
                 art: '51204',
@@ -831,9 +831,9 @@ export const basket = [
             {
                 value: '100 мл',
                 price: {
-                    actual: '200',
+                    actual: '500',
                 },
-                max: 10,
+                max: 100,
                 art: '53049',
                 basket: 1,
             },

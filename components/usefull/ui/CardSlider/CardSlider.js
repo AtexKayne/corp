@@ -76,6 +76,13 @@ export default function CardSlider({ items, title }) {
                     .swiper {
                         overflow: visible;
                     }
+                    .swiper a >div {
+                        pointer-events: none;
+                    }
+                    .swiper a >div+div {
+                        display: none;
+                    }
+
                     .swiper-button-next,
                     .swiper-button-prev {
                         cursor: pointer;

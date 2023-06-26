@@ -13,6 +13,7 @@ import Odometer from 'odometer'
 import Icon from '../../Icon'
 import InfoNotify from '../ui/InfoNotify/InfoNotify'
 import Link from 'next/link'
+import Delivery from '../ui/Delivery/Delivery'
 // @TODO Перенести стили одометра в локальную зону
 export default function ModalBasketProfi() {
     const [isEmpty, setIsEmpty] = useState(!!globalState.basket.items.length)
@@ -110,7 +111,8 @@ function FilledBasket({ items, setItems }) {
             const priceOld = curr.item.values[0].price.old ?? 0
             const detailDiscount = curr.item.values[0].discount
             newBonuses += +curr.bonuses
-            if (priceOld) newDiscount.total += +priceOld
+
+            if (priceOld) newDiscount.total += +priceOld.replaceAll(' ', '')
 
             if (detailDiscount) {
                 detailDiscount.forEach(element => {
@@ -189,8 +191,8 @@ function FilledBasket({ items, setItems }) {
             setItems(prev => {
                 const filtered = prev.filter(element => {
                     const equalId = element.id !== refDeletedItem.current.id
-                    const equalValue = element.values[0].value !== refDeletedItem.current.values[0].value
-                    return equalId && equalValue
+                    // const equalValue = element.values[0].value !== refDeletedItem.current.values[0].value
+                    return equalId
                 })
                 return filtered
             })
@@ -220,8 +222,8 @@ function FilledBasket({ items, setItems }) {
             setItems(prev => {
                 const filtered = prev.filter(element => {
                     const equalId = element.id !== item.id
-                    const equalValue = element.values[0].value !== item.values[0].value
-                    return equalId && equalValue
+                    // const equalValue = element.values[0].value !== item.values[0].value
+                    return equalId
                 })
                 refDeletedItem.current = false
                 refDeletedItemNode.current = null
@@ -290,7 +292,7 @@ function FilledBasket({ items, setItems }) {
             <div className={style.basketInner}>
                 <div className={`${style.title} pt-3.5 pb-2`}>
                     <span className='text--a2 text--bold'>Корзина</span>
-
+                    <Delivery summ={summ} maxSumm={10000} />
                 </div>
                 <div className='text--t5 text--bold text--center text--color-small text--upper'>
                     {productsText}
@@ -444,8 +446,8 @@ function ProductCard({ item, selectHandler, returnedItem, deleteItem, onChangeCo
         <motion.div ref={refItem} animate={animationProduct} transition={{ duration: 0.4 }} initial={{ marginTop: 16, paddingTop: 16 }} className={style.product}>
             <div className={style.controls}>
                 <div onClick={favouriteHandler} className={style.control}>
-                    <Favourite info={item} width='16' height='16' />
-                    <span className='text--t4'>В избранное</span>
+                    <Favourite external={style.favourite} info={item} width='16' height='16' />
+                    <span className='text--t4 is-decorative'>В избранное</span>
                 </div>
                 <div onClick={deleteHandler} className={style.control}>
                     <Icon name='remove' width='16' height='16' />
