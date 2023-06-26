@@ -31,6 +31,10 @@
     scroll-behavior: initial;
 }
 
+.is-overflow-hidden {
+    overflow: hidden
+}
+
 .overflow-fix {
     @extend %overflow-fix;
 }

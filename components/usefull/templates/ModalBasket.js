@@ -86,11 +86,13 @@ function FilledBasket({ items, setItems }) {
     const [bonuses, setBonuses] = useState(0)
     const [summ, setSumm] = useState(0)
     const animateNotification = useAnimationControls()
+    // @TODO Убрать это дерьмо. Не знаю, почему работает корректно только с ним
     const animationPath = useAnimationControls()
     const refDeletedItemNode = useRef(null)
     const refInputWrapper = useRef(null)
     const refOdometrNode = useRef(null)
     const refInterval = useRef(false)
+    const refTimerSvg = useRef(null)
     const refDeletedItem = useRef(0)
     const refItemsInfo = useRef([])
     const refInputs = useRef(false)
@@ -186,6 +188,8 @@ function FilledBasket({ items, setItems }) {
         setReturnedItem(false)
     }
 
+    const delay = timer => new Promise(resolve => setTimeout(resolve, timer))
+
     const deleteItem = async (item, node) => {
         if (refDeletedItem.current) {
             setItems(prev => {
@@ -202,8 +206,9 @@ function FilledBasket({ items, setItems }) {
         removeItem()
         updateSumm()
         updateItemsCount()
+        refTimerSvg.current.classList.remove(style.animated)
         animationPath.start({ pathLength: 1, transition: { duration: 0 } })
-        const yPosition = !!summ && !isShownBasket ? -120 : -60
+        const yPosition = !!summ && !isShownBasket ? -140 : -60
         await animateNotification.start({ opacity: 0, y: 500, transition: { duration: 0.3 } })
         await animateNotification.start({ opacity: 1, y: yPosition, transition: { duration: 0.6 } })
         setTimerText(5)
@@ -214,8 +219,10 @@ function FilledBasket({ items, setItems }) {
                 return newValue
             })
         }, 1000)
+        refTimerSvg.current.classList.add(style.animated)
         await animationPath.start({ pathLength: 0, transition: { duration: 4.9 } })
         await animateNotification.start({ opacity: 0, y: 500, transition: { duration: 0.3 } })
+        refTimerSvg.current.classList.remove(style.animated)
         animationPath.start({ pathLength: 1, transition: { duration: 0 } })
         clearInterval(refInterval.current)
         if (refDeletedItem.current) {
@@ -325,28 +332,25 @@ function FilledBasket({ items, setItems }) {
                     productsText={productsText}
                     setIsShownBasket={setIsShownBasket} />
 
-                <div className='mt-3'>
-                    <CardSlider items={cards} title='Добавьте к заказу' />
+                <div className='mt-3 is-overflow-hidden'>
+                    <CardSlider items={cards} title='Добавьте к заказу' perView={2} />
                 </div>
             </div>
 
 
             <motion.div animate={animateNotification} initial={{ y: 400, opacity: 0 }} className={style.deleteNotification}>
-                <div className={style.deleteTimer}>
-                    <svg width='100%' height='100%' viewBox='0 0 1440 788' fill='none'>
-                        <motion.path
-                            stroke='#112233'
-                            strokeWidth='30'
-                            animate={animationPath}
-                            initial={{ pathLength: 1 }}
-                            d='M719.5 123.175C755.131 123.175 790.413 130.193 823.332 143.828C856.25 157.464 886.161 177.449 911.356 202.644C936.551 227.839 956.536 257.75 970.172 290.668C983.807 323.587 990.825 358.869 990.825 394.5C990.825 430.131 983.807 465.413 970.172 498.332C956.536 531.25 936.551 561.161 911.356 586.356C886.161 611.551 856.25 631.536 823.332 645.172C790.413 658.807 755.131 665.825 719.5 665.825C683.869 665.825 648.587 658.807 615.668 645.172C582.75 631.536 552.839 611.551 527.644 586.356C502.449 561.161 482.464 531.25 468.828 498.331C455.193 465.413 448.175 430.131 448.175 394.5C448.175 358.869 455.193 323.587 468.828 290.668C482.464 257.75 502.449 227.839 527.644 202.644C552.839 177.449 582.75 157.464 615.669 143.828C648.587 130.193 683.869 123.175 719.5 123.175L719.5 123.175Z'
-                        />
+                <div ref={refTimerSvg} className={style.deleteTimer}>
+                    <svg>
+                        {/* <circle cx="50%" cy="50%" r="90" /> */}
+                        <circle cx="50%" cy="50%" r="13" pathLength="1" />
+                        <text x="50%" y="50%" textAnchor="middle">
+                            <tspan>{timerText}</tspan>
+                        </text>
                     </svg>
-                    <span className={style.deleteTimerText}>{timerText}</span>
                 </div>
-                <div className={`${style.deleteNotificationText} text--t5`}>
+                <motion.div animate={animationPath} initial={{ pathLength: 1 }} className={`${style.deleteNotificationText} text--t5`}>
                     Товар удалён
-                </div>
+                </motion.div>
 
                 <div onClick={returnHandler} className={`${style.deleteNotificationReturn}`}>
                     вернуть обратно
