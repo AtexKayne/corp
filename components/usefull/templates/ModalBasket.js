@@ -362,7 +362,7 @@ function FilledBasket({ items, setItems }) {
                     <div className='text--p4'>Итого</div>
                     <div className='text--nowrap text--p1 text--bold'>
                         <span ref={refOdometrNode} className='odometer odometer-theme-car'>0</span>
-                        <span> ₽</span>
+                        <span style={{transform: 'scale(0.95) translateY(2px)'}} className='rub'>&nbsp;₽</span>
                     </div>
                 </div>
                 <div className={`${style.showBtn} btn btn--lg btn--primary btn--fill`}>
@@ -505,7 +505,7 @@ function BasketTotal({ summ, discount, productsText, bonuses, setIsShownBasket }
                 <div className={`${style.totalLine}`}>
                     <span className='text--t4'>{productsText}</span>
                     <div />
-                    <span className='text--t3'>{summ.toLocaleString()} ₽</span>
+                    <span className='text--t3'>{summ.toLocaleString()} <span className='rub'> ₽</span></span>
                 </div>
                 <div data-is-hidden={!discount.total} className={`${style.totalLine}`}>
                     <span
@@ -518,7 +518,7 @@ function BasketTotal({ summ, discount, productsText, bonuses, setIsShownBasket }
                         <Icon external={style.subOpenIcon} name='chevronDown' width='12' height='12' />
                     </span>
                     <div />
-                    <span className='text--t3'>{discount.total.toLocaleString()} ₽</span>
+                    <span className='text--t3'>-{discount.total.toLocaleString()} <span className='rub'> ₽</span></span>
                 </div>
                 <motion.div animate={animateSubs} initial={{ height: 0 }} className={`${style.totalLineSubs}`}>
                     {discount.detail && discount.detail.length
@@ -526,13 +526,13 @@ function BasketTotal({ summ, discount, productsText, bonuses, setIsShownBasket }
                             <div key={detail.name} className={`${style.totalLine}`}>
                                 <span className='text--t4'>{detail.name}</span>
                                 <div />
-                                <span className='text--t3'>{detail.summ.toLocaleString()} ₽</span>
+                                <span className='text--t3'>-{detail.summ.toLocaleString()} <span className='rub'> ₽</span></span>
                             </div>
                         )) : null}
                 </motion.div>
                 <div className='text--right pb-2'>
                     <div className='pt-1 text--t4'>Итого</div>
-                    <div className='pt-0.5 text--a3 text--bold'>{summ.toLocaleString()} ₽</div>
+                    <div className='pt-0.5 text--a3 text--bold'>{summ.toLocaleString()} <span className='rub'> ₽</span></div>
                     <div data-is-hidden={!bonuses} className='text--t4 pt-1'>
                         <span>Вернется Red-баллов&nbsp;</span>
                         <span>{bonuses}&nbsp;</span>

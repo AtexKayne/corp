@@ -51,6 +51,11 @@
     }
 }
 
+.rub {
+    display: inline-block;
+    transform: scaleY(0.95);
+}
+
 .d-none { display: none; }
 .d-flex { display: flex; }
 .d-block { display: block; }

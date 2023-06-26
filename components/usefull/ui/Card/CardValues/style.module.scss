@@ -20,10 +20,15 @@
             color: var(--c-_light-gray);
         }
 
+        &[data-active='false'] {
+            color: var(--c-_light-gray);
+            background-color: var(--c-_light);
+        }
+
         &:hover,
         &[data-active='true'] {
-            color: var(--t-background);
-            background-color: var(--t-primary);
+            color: var(--t-text);
+            background-color: var(--c-_light);
         }
     }
 }
