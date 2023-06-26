@@ -299,7 +299,7 @@ function FilledBasket({ items, setItems }) {
             <div className={style.basketInner}>
                 <div className={`${style.title} pt-3.5 pb-2`}>
                     <span className='text--a2 text--bold'>Корзина</span>
-                    {/* <Delivery summ={summ} maxSumm={10000} /> */}
+                    <Delivery summ={summ} maxSumm={10000} />
                 </div>
                 <div className='text--t5 text--bold text--center text--color-small text--upper'>
                     {productsText}
