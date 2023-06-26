@@ -6,7 +6,7 @@ import { useRef, useState, useEffect } from 'react'
 import Card from '../Card/Card'
 import { globalState } from '../../../helpers/globalState'
 
-export default function CardSlider({ items, title, perView }) {
+export default function CardSlider({ items, title, perView = 1.8 }) {
     const [disabled, setDisabled] = useState('prev')
     const [slidesPerView, setSlidesPerView] = useState(perView)
     const refContainer = useRef(null)
