@@ -8,7 +8,7 @@ import { globalState } from '../../../helpers/globalState'
 
 export default function CardSlider({ items, title }) {
     const [disabled, setDisabled] = useState('prev')
-    const [slidesPerView, setSlidesPerView] = useState(2)
+    const [slidesPerView, setSlidesPerView] = useState(1.8)
     const refContainer = useRef(null)
     const refNext = useRef(false)
     const refPrev = useRef(false)

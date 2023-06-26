@@ -64,7 +64,7 @@ function EmptyBasket({ }) {
                 <CardSlider items={cards} title='Недавно просмотрено' />
             </motion.div>
 
-            <div className='d-flex flex--justify-center pb-3 mt-2.5'>
+            <div className='d-flex flex--justify-center is-hidden--md-up pb-3 mt-2.5'>
                 <Link href='/catalog/main'>
                     <div className='btn btn--lg btn--primary'>
                         <span className='text--upper text--p5 text--sparse text--bold'>Перейти в каталог</span>
