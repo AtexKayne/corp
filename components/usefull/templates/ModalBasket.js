@@ -56,8 +56,8 @@ function EmptyBasket({ }) {
         <div>
             <div className={`${style.title} text--a2 text--bold pt-2.5 pb-2`}>В корзине пусто</div>
             <div className={`${style.emptyText} text--t2 text--normal pb-3`}>
-                Вы можете посмотреть <a href='#'>новые товары</a>, <a href='#'>наши хиты</a>, ознакомиться с <a href='#'>брендами</a>.
-                Или поискать что-нибудь в каталоге.
+                Вы можете посмотреть <a href='/catalog/main'>новые товары</a>, <a href='/catalog/main'>наши хиты</a>, ознакомиться с <a href='/catalog/main'>брендами</a>.
+                Или поискать что-нибудь в <a href='/catalog/main'>каталоге</a>.
             </div>
 
             <motion.div initial={{ y: 100, opacity: 0 }} animate={{ y: 0, opacity: 1 }} transition={{ duration: 0.3, delay: 0.7, ease: 'easeOut' }}>
