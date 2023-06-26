@@ -272,7 +272,7 @@ function FilledBasket({ items, setItems }) {
     useEffect(() => {
         createOdometr(0)
         // updateItems(items)
-        // selectAllHandler()
+        setTimeout(selectAllHandler, 600)
         return () => {
             if (refInterval.current) clearInterval(refInterval.current)
         }
