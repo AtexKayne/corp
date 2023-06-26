@@ -1,37 +1,54 @@
-import { useState, useEffect, useRef } from 'react'
+import { useState, useEffect } from 'react'
 import style from './style.module.scss'
-import ColorPicker from '../../ColorPicker/ColorPicker'
 
-export default function CardValues({ values, valuePicker, onAfterChange }) {
+export default function CardValues({ info }) {
 
     return (
         <div className={`${style.values}`}>
-            {valuePicker && valuePicker.length
-                ? <ColorPicker items={valuePicker} isChose />
-                : <VolumePicker items={values} onAfterChange={onAfterChange} />
+            {!info.value
+                ? <Color color={info.color} />
+                : <Volume value={info.value} values={info.values} />
             }
         </div>
     )
 }
 
-function VolumePicker({items, onAfterChange}) {
-    const [active, setActive] = useState(0)
-    const clickHandler = (item, index) => {
-        setActive(index)
-        onAfterChange(item)
-    }
+function Color({ color }) {
+    const [iconStyle, setIconStyle] = useState('')
+    useEffect(() => {
+        let newIconStyle = ''
+        if (color.name.toLowerCase() === 'белый') {
+            newIconStyle = 'iconColorWhite'
+        } else if (color.name.toLowerCase() === 'разноцветный') {
+            newIconStyle = 'iconColorFull'
+        }
+        setIconStyle(newIconStyle)
+    }, [])
 
     return (
+        <div className='iconColorVariant'>
+            <span className={`iconColor ${iconStyle}`} style={{ backgroundColor: color.iconColor }} />
+
+            <div className=''>
+                <div className='text--t4 text--normal'>{color.name}</div>
+            </div>
+        </div>
+    )
+}
+
+function Volume({ value, values }) {
+    return (
         <div className={`${style.volumePicker} text--t6 text--normal`}>
-            {items.map((item, index) => (
-                <div
-                    key={index}
-                    data-disabled={item.max === 0}
-                    onClick={() => clickHandler(item, index)}
-                    data-active={active === index}>
-                    {item.value}
-                </div>
-            ))}
+            <div data-disabled={false} data-active={true}>{value}</div>
+            {values && values.length
+                ? values.map(item => {
+                    if (item === value) return null
+                    return (
+                        <div key={item} data-disabled={true} data-active={false}>
+                            {item}
+                        </div>
+                    )
+                }) : null}
         </div>
     )
 }

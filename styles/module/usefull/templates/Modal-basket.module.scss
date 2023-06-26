@@ -3,17 +3,16 @@
 
 .basketWrapper {
     height: 100vh;
-    margin-top: -16px;
     // padding-top: 28px;
     position: relative;
     overflow-y: hidden;
     overflow-x: visible;
     pointer-events: none;
-    margin-right: adaptive-value((
-        xs: -16px,
-        md: -32px,
-        lg: -48px,
-        xl: -72px,
+    margin: adaptive-value((
+        xs: -16px -16px 0,
+        md: -28px -32px 0,
+        lg: -28px -48px 0,
+        xl: -28px -72px 0,
     ));
 
     @include media-breakpoint(md-up) {
@@ -44,14 +43,18 @@
 .basketInner {
     z-index: 1;
     height: 100%;
-    overflow: auto;
     position: relative;
     pointer-events: all;
+    overflow: hidden auto;
     padding-bottom: 110px;
-    padding-right: adaptive-value((
+    padding-left: adaptive-value((
         xs: 16px,
-        md: 16px,
-        lg: 18px,
+        md: 32px,
+        lg: 48px,
+        xl: 72px,
+    ));
+    padding-right: adaptive-value((
+        xs: 18px,
         xl: 22px,
     ));
 
@@ -62,12 +65,10 @@
 }
 
 .product {
-    overflow: hidden;
     padding-top: 16px;
     position: relative;
-    pointer-events: all;
-    // margin-right: -32px;
     padding-right: 38px;
+    pointer-events: all;
 
     &:hover {
         .settings {
@@ -93,16 +94,15 @@
 }
 
 .controls {
-    top: 16px;
+    top: 17px;
     left: 2px;
-    bottom: 0;
     right: 40px;
+    bottom: 1px;
     display: flex;
     overflow: hidden;
     position: absolute;
     border-radius: 16px;
     justify-content: flex-end;
-    background-color: var(--t-light);
 
     @include media-breakpoint(xl-down) {
         align-items: flex-end;
@@ -130,13 +130,23 @@
     }
 
     &:first-child {
-        width: 140px;
+        width: 155px;
+        padding-left: 15px;
         color: var(--t-background);
         background-color: var(--c-_yellow);
     }
 
     .favourite[data-active='true'] {
         color: var(--t-background);
+    }
+
+    @include media-breakpoint(xl-down) {
+        &:last-child {
+            width: 155px;
+            padding-left: 15px;
+            color: var(--t-text);
+            background-color: var(--t-light);
+        }
     }
 }
 
@@ -150,12 +160,12 @@
     background-color: var(--t-background);
 
     &[data-open='true'] {
-        transform: translateX(-130px) !important;
+        transform: translateX(-140px) !important;
     }
 
     @include media-breakpoint(xxl-up) {
         &[data-open='true'] {
-            transform: translateX(-260px) !important;
+            transform: translateX(-273px) !important;
         }
     }
 }
@@ -218,7 +228,6 @@
 }
 
 .deleteNotification {
-    left: 10px;
     bottom: 0;
     z-index: 3;
     height: 58px;
@@ -231,10 +240,16 @@
     background-color: var(--t-background);
     box-shadow: 0px 4px 15px 3px #0000001F;
     right: adaptive-value((
-        xs: 26px,
-        md: 42px,
-        lg: 58px,
-        xl: 82px,
+        xs: 33px,
+        md: 49px,
+        lg: 65px,
+        xl: 89px,
+    ));
+    left: adaptive-value((
+        xs: 33px,
+        md: 49px,
+        lg: 65px,
+        xl: 89px,
     ));
 
     // opacity: 1!important;
@@ -333,11 +348,11 @@
     padding-bottom: 40px;
     transform: translateY(140px);
     background-color: var(--t-background);
-    padding-right: adaptive-value((
-        xs: 16px,
-        md: 32px,
-        lg: 48px,
-        xl: 72px,
+    padding: adaptive-value((
+        xs: 0 16px,
+        md: 0 32px,
+        lg: 0 48px,
+        xl: 0 72px,
     ));
 
     &[data-active='true'] {
@@ -461,6 +476,21 @@
     display: none;
 }
 
-.lackItems {
+.slider {
     overflow: hidden;
+    margin-top: 40px;
+    margin-right: -21px;
+    padding-right: 28px;
+    margin-left: adaptive-value((
+        xs: -16px,
+        md: -32px,
+        lg: -48px,
+        xl: -72px,
+    ));
+    padding-left: adaptive-value((
+        xs: 16px,
+        md: 32px,
+        lg: 48px,
+        xl: 72px,
+    ));
 }

@@ -7,16 +7,14 @@
     flex-wrap: wrap;
 
     > * {
-        cursor: pointer;
-        transition: .3s;
         margin-right: 6px;
         margin-bottom: 6px;
         border-radius: 4px;
         padding: 5px 4px 4px;
+        pointer-events: none;
         text-transform: uppercase;
 
         &[data-disabled='true'] {
-            pointer-events: none;
             color: var(--c-_light-gray);
         }
 

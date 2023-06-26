@@ -110,8 +110,8 @@ function FilledBasket({ items, setItems }) {
         const newDiscount = { total: 0, detail: [] }
         let newBonuses = 0
         const newSumm = filtered.reduce((prev, curr) => {
-            const priceOld = curr.item.values[0].price.old ?? 0
-            const detailDiscount = curr.item.values[0].discount
+            const priceOld = curr.item.price.old ?? 0
+            const detailDiscount = curr.item.discount
             newBonuses += +curr.bonuses
 
             if (priceOld) newDiscount.total += +priceOld.replaceAll(' ', '')
@@ -195,7 +195,6 @@ function FilledBasket({ items, setItems }) {
             setItems(prev => {
                 const filtered = prev.filter(element => {
                     const equalId = element.id !== refDeletedItem.current.id
-                    // const equalValue = element.values[0].value !== refDeletedItem.current.values[0].value
                     return equalId
                 })
                 return filtered
@@ -229,7 +228,6 @@ function FilledBasket({ items, setItems }) {
             setItems(prev => {
                 const filtered = prev.filter(element => {
                     const equalId = element.id !== item.id
-                    // const equalValue = element.values[0].value !== item.values[0].value
                     return equalId
                 })
                 refDeletedItem.current = false
@@ -257,14 +255,14 @@ function FilledBasket({ items, setItems }) {
     const updateItems = newItems => {
         const newLackItems = []
         newItems.forEach(item => {
-            if (!!item.values[0].max) {
-                const price = '' + item.values[0].price.actual
+            if (!!item.max) {
+                const price = '' + item.price.actual
                 const info = {
                     item,
                     isDeleted: false,
                     isSelected: false,
-                    count: item.values[0].basket,
-                    bonuses: item.values[0].bonuses ?? 0,
+                    count: item.basket,
+                    bonuses: item.bonuses ?? 0,
                     price: price.replaceAll(' ', ''),
                 }
 
@@ -301,7 +299,7 @@ function FilledBasket({ items, setItems }) {
                     <span className='text--a2 text--bold'>Корзина</span>
                     <Delivery summ={summ} maxSumm={10000} />
                 </div>
-                <div className='text--t5 text--bold text--center text--color-small text--upper'>
+                <div style={{ paddingRight: '32px' }} className='text--t5 text--bold text--center text--color-small text--upper'>
                     {productsText}
                 </div>
                 <div className={`${style.checker}`}>
@@ -309,10 +307,10 @@ function FilledBasket({ items, setItems }) {
                 </div>
                 <div ref={refInputWrapper}>
                     {items.map(item => {
-                        if (item.values[0].max !== 0) {
+                        if (item.max !== 0) {
                             return <ProductCard
                                 item={item}
-                                key={item.id + item.values[0].value}
+                                key={item.id}
                                 deleteItem={deleteItem}
                                 returnedItem={returnedItem}
                                 onChangeCount={changeCount}
@@ -332,7 +330,7 @@ function FilledBasket({ items, setItems }) {
                     productsText={productsText}
                     setIsShownBasket={setIsShownBasket} />
 
-                <div className='mt-3 is-overflow-hidden'>
+                <div className={style.slider}>
                     <CardSlider items={cards} title='Добавьте к заказу' perView={2} />
                 </div>
             </div>
@@ -362,7 +360,7 @@ function FilledBasket({ items, setItems }) {
                     <div className='text--p4'>Итого</div>
                     <div className='text--nowrap text--p1 text--bold'>
                         <span ref={refOdometrNode} className='odometer odometer-theme-car'>0</span>
-                        <span style={{transform: 'scale(0.95) translateY(2px)'}} className='rub'>&nbsp;₽</span>
+                        <span style={{ transform: 'scale(0.95) translateY(2px)' }} className='rub'>&nbsp;₽</span>
                     </div>
                 </div>
                 <div className={`${style.showBtn} btn btn--lg btn--primary btn--fill`}>
@@ -384,13 +382,13 @@ function BasketLackItems({ lackItems, setLackItems }) {
     }
 
     return (
-        <motion.div data-is-hidden={!lackItems.length} animate={animateWrapper} initial={{ height: 'auto' }} className={`${style.lackItems} pt-2.5`}>
+        <motion.div data-is-hidden={!lackItems.length} animate={animateWrapper} initial={{ height: 'auto' }} className={`is-overflow-hidden pt-2.5`}>
             <div className='d-flex flex--between'>
                 <div className='text--t1'>Нет в наличии</div>
-                <div onClick={removeHandler} className='text--t6 text--upper text--color-primary c-pointer'>Удалить все</div>
+                <div onClick={removeHandler} style={{ paddingRight: '69px' }} className='text--t6 text--upper text--color-primary c-pointer'>Удалить все</div>
             </div>
             {lackItems.map(item => {
-                return <ProductCardEmpty item={item} key={item.id + item.values[0].value} />
+                return <ProductCardEmpty item={item} key={item.id} />
             })}
         </motion.div>
     )
@@ -518,7 +516,7 @@ function BasketTotal({ summ, discount, productsText, bonuses, setIsShownBasket }
                         <Icon external={style.subOpenIcon} name='chevronDown' width='12' height='12' />
                     </span>
                     <div />
-                    <span className='text--t3'>-{discount.total.toLocaleString()} <span className='rub'> ₽</span></span>
+                    <span className='text--t3'>–{discount.total.toLocaleString()} <span className='rub'> ₽</span></span>
                 </div>
                 <motion.div animate={animateSubs} initial={{ height: 0 }} className={`${style.totalLineSubs}`}>
                     {discount.detail && discount.detail.length
@@ -526,7 +524,7 @@ function BasketTotal({ summ, discount, productsText, bonuses, setIsShownBasket }
                             <div key={detail.name} className={`${style.totalLine}`}>
                                 <span className='text--t4'>{detail.name}</span>
                                 <div />
-                                <span className='text--t3'>-{detail.summ.toLocaleString()} <span className='rub'> ₽</span></span>
+                                <span className='text--t3'>–{detail.summ.toLocaleString()} <span className='rub'> ₽</span></span>
                             </div>
                         )) : null}
                 </motion.div>

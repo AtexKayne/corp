@@ -6,47 +6,25 @@ import NotifyButton from '../NotifyButton/NotifyButton'
 import ProfiButton from '../ProfiButton/ProfiButton'
 
 
-export default function CardBuy({ value, info, updateInBasket, countInBasket = 0 }) {
+export default function CardBuy({ info, onUpdateInBasket, count }) {
     const [isEmpty, setIsEmpty] = useState(false)
-    const [isOpen, setIsOpen] = useState(!!countInBasket)
-    const [count, setCount] = useState(countInBasket)
-    const [startValue, setStartValue] = useState(countInBasket)
+    const [isOpen, setIsOpen] = useState(!!count)
 
     const buyHandler = () => {
-        setCount(1)
         setIsOpen(true)
-        setStartValue(1)
-        updateInBasket(1)
+        onUpdateInBasket({value: 1, isMin: false, isMax: false})
         globalState.popover.open([info.primaryName, 'ТЕПЕРЬ В КОРЗИНЕ'], info.images[0], true)
     }
 
     useEffect(() => {
         if (count <= 0) {
             setIsOpen(false)
-            setStartValue(0)
         }
     }, [count])
 
     useEffect(() => {
-        setStartValue(value.basket ?? 0)
-        setIsOpen(!!value.basket)
-    }, [value])
-
-    useEffect(() => {
-        setIsEmpty(value.max === 0)
+        setIsEmpty(info.max === 0)
     }, [])
-
-    const counterChangeHandler = ({ value, isMax, isMin }) => {
-        setCount(value)
-        if (isMax) {
-            globalState.popover.open([info.primaryName, 'Максимум для этого заказа'], info.images[0])
-        }
-        if (isMin) {
-            globalState.popover.open([info.primaryName, 'БОЛЬШЕ НЕ В КОРЗИНЕ'], info.images[0])
-        }
-        
-        updateInBasket(value)
-    }
 
     return (
         <div className={style.cardBuybtn}>
@@ -57,7 +35,7 @@ export default function CardBuy({ value, info, updateInBasket, countInBasket = 0
                     </div>
 
                     <div data-open={isOpen} className={style.buyOpen}>
-                        <Counter max={value.max} onAfterChange={counterChangeHandler} startValue={startValue} />
+                        <Counter info={info} max={info.max} onAfterChange={onUpdateInBasket} count={count} />
                     </div>
                 </div> : null
             }
