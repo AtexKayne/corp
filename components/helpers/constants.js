@@ -740,14 +740,14 @@ export const basket = [
             {
                 value: '100 мл',
                 price: {
-                    actual: '1256',
+                    actual: '12560',
                     old: '16 160' // Can be empty
                 },
                 discount: [
                     {summ: 16160, name: 'Серебрянный статус'},
                 ],
                 art: '5304',
-                max: 10,
+                max: 1000,
                 bonuses: 24,
                 basket: 4,
             },
