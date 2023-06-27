@@ -21,7 +21,6 @@ export default function Odometer({ number }) {
         const children = Array.from(refNumbersContainer.current.children).reverse()
         const refChidren = Array.from(refNumber.current.children).reverse()
         const arrPrev = refLastCount.current.toLocaleString().split('').reverse()
-        console.log(arrPrev);
         number.toLocaleString().split('').reverse().forEach((item, index) => {
             let height
             if (item !== ' ') {
@@ -29,7 +28,7 @@ export default function Odometer({ number }) {
                 if (arrPrev[index] === item) {
                     const data = children[index].data ?? false
                     children[index].data = !data
-                    coef = data ? 0 : 11
+                    coef = data ? 11 : 0
                 }
                 height = (+item + coef) * -refHeight.current
             } else {
@@ -78,7 +77,7 @@ export default function Odometer({ number }) {
 }
 
 function Numbers() {
-    const ns = [0,1,2,3,4,5,6,7,8,9]
+    const ns = fillArray(10)
     return (
         <div className={`${style.numberContainer}`}>
             {ns.map((n, i) => <div key={i} className={`${style.number}`}>{n}</div>)}

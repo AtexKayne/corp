@@ -66,7 +66,7 @@ function EmptyBasket({ }) {
 
             <div className='d-flex flex--justify-center is-hidden--md-up pb-3 mt-2.5'>
                 <Link href='/catalog/main'>
-                    <div className='btn btn--lg btn--primary'>
+                    <div className='btn btn--lg btn--fill btn--primary'>
                         <span className='text--upper text--p5 text--sparse text--bold'>Перейти в каталог</span>
                     </div>
                 </Link>
@@ -497,7 +497,7 @@ function BasketTotal({ summ, discount, productsText, bonuses, setIsShownBasket }
                         <Icon external={style.subOpenIcon} name='chevronDown' width='12' height='12' />
                     </span>
                     <div />
-                    <span className='text--t3'>–{discount.total.toLocaleString()} <span className='rub'> ₽</span></span>
+                    <span className='text--t3'>– {discount.total.toLocaleString()} <span className='rub'> ₽</span></span>
                 </div>
                 <motion.div animate={animateSubs} initial={{ height: 0 }} className={`${style.totalLineSubs}`}>
                     {discount.detail && discount.detail.length
@@ -505,7 +505,7 @@ function BasketTotal({ summ, discount, productsText, bonuses, setIsShownBasket }
                             <div key={detail.name} className={`${style.totalLine}`}>
                                 <span className='text--t4'>{detail.name}</span>
                                 <div />
-                                <span className='text--t3'>–{detail.summ.toLocaleString()} <span className='rub'> ₽</span></span>
+                                <span className='text--t3'>– {detail.summ.toLocaleString()} <span className='rub'> ₽</span></span>
                             </div>
                         )) : null}
                 </motion.div>

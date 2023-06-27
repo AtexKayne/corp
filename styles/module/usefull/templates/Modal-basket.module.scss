@@ -383,8 +383,12 @@
     }
 }
 
-.total[data-active='false'] {
-    display: none;
+.total {
+    padding-right: 59px;
+
+    [data-active='false'] {
+        display: none;
+    }
 }
 
 .totalContainer {
@@ -480,7 +484,7 @@
     overflow: hidden;
     margin-top: 40px;
     margin-right: -21px;
-    padding-right: 28px;
+    padding-right: 81px;
     margin-left: adaptive-value((
         xs: -16px,
         md: -32px,
