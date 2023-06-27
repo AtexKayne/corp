@@ -265,7 +265,25 @@
     align-items: center;
     justify-content: center;
     
+    &::after {
+        width: 7px;
+        height: 5px;
+        content: '5';
+        font-size: 12px;
+        font-weight: 700;
+        line-height: 12px;
+        position: absolute;
+        font-style: normal;
+        transform: translateY(-2px);
+
+        // animation: changeText 5s linear 0s infinite;
+    }
+    
     &.animated {
+        &::after {
+            animation: changeText 5s linear 0s;
+        }
+
         circle {
             stroke: #E21B25;
             stroke-dashoffset: 1;
@@ -295,16 +313,28 @@
         stroke-linecap: round;
         transform-origin: center;
         transform: rotate(-90deg) scale(1, -1);
+
+        
         // animation: name 5s linear 0s infinite;
     }
 
     text {
+        opacity: 0;
         font-size: 12px;
         font-weight: 700;
         line-height: 12px;
         font-style: normal;
         transform: translateY(4px);
     }
+}
+
+@keyframes changeText {
+    0% { content:  '5'; }
+    20% { content: '4'; }
+    40% { content: '3'; }
+    60% { content: '2'; color: #E21B25;}
+    80% { content: '1'; color: #E21B25;}
+    100% { content: '0'; color: #E21B25;}
 }
 
 @keyframes name {

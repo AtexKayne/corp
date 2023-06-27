@@ -15,10 +15,12 @@ export default function Card({ info, mode = 'normal', onChangeCount = () => { } 
     const mouseEnterHandler = () => setIsHover(true)
     const mouseLeaveHandler = () => setIsHover(false)
 
-    const updateHandler = ({value, isMax, isMin}) => {
+    const updateHandler = ({ value, isMax, isMin }) => {
         // setCount(val)
         onChangeCount(value, false, info)
-        setCount(value)
+        if (value === 0) setTimeout(() => setCount(value), 300)
+        else setCount(value)
+        
         if (isMax) {
             globalState.popover.open([info.primaryName, 'Максимум для этого заказа'], info.images[0])
         }

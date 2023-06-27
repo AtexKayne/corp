@@ -82,7 +82,6 @@ function FilledBasket({ items, setItems }) {
     const [productsText, setProductsText] = useState(0)
     const [isChecked, setIsChecked] = useState(false)
     const [lackItems, setLackItems] = useState([])
-    const [timerText, setTimerText] = useState(5)
     const [bonuses, setBonuses] = useState(0)
     const [summ, setSumm] = useState(0)
     const animateNotification = useAnimationControls()
@@ -90,7 +89,6 @@ function FilledBasket({ items, setItems }) {
     const animationPath = useAnimationControls()
     const refDeletedItemNode = useRef(null)
     const refInputWrapper = useRef(null)
-    const refInterval = useRef(false)
     const refTimerSvg = useRef(null)
     const refDeletedItem = useRef(0)
     const refItemsInfo = useRef([])
@@ -180,23 +178,23 @@ function FilledBasket({ items, setItems }) {
         updateItemsCount()
         setReturnedItem(refDeletedItem.current)
         await animateNotification.start({ opacity: 0, y: 500, transition: { duration: 0.3 } })
-        if (refInterval.current) clearInterval(refInterval.current)
         refDeletedItem.current = false
         setReturnedItem(false)
     }
 
-    const delay = timer => new Promise(resolve => setTimeout(resolve, timer))
+    const removeItemFromList = () => {
+        if (!refDeletedItem.current) return false
+        setItems(prev => {
+            const filtered = prev.filter(element => {
+                const equalId = element.id !== refDeletedItem.current.id
+                return equalId
+            })
+            return filtered
+        })
+    }
 
     const deleteItem = async (item, node) => {
-        if (refDeletedItem.current) {
-            setItems(prev => {
-                const filtered = prev.filter(element => {
-                    const equalId = element.id !== refDeletedItem.current.id
-                    return equalId
-                })
-                return filtered
-            })
-        }
+        removeItemFromList()
         refDeletedItem.current = item
         refDeletedItemNode.current = node
         removeItem()
@@ -207,31 +205,14 @@ function FilledBasket({ items, setItems }) {
         const yPosition = !!summ && !isShownBasket ? -140 : -60
         await animateNotification.start({ opacity: 0, y: 500, transition: { duration: 0.3 } })
         await animateNotification.start({ opacity: 1, y: yPosition, transition: { duration: 0.6 } })
-        setTimerText(5)
-        if (refInterval.current) clearInterval(refInterval.current)
-        refInterval.current = setInterval(() => {
-            setTimerText(prev => {
-                const newValue = prev - 1
-                return newValue
-            })
-        }, 1000)
         refTimerSvg.current.classList.add(style.animated)
         await animationPath.start({ pathLength: 0, transition: { duration: 4.9 } })
         await animateNotification.start({ opacity: 0, y: 500, transition: { duration: 0.3 } })
         refTimerSvg.current.classList.remove(style.animated)
         animationPath.start({ pathLength: 1, transition: { duration: 0 } })
-        clearInterval(refInterval.current)
-        if (refDeletedItem.current) {
-            setItems(prev => {
-                const filtered = prev.filter(element => {
-                    const equalId = element.id !== item.id
-                    return equalId
-                })
-                refDeletedItem.current = false
-                refDeletedItemNode.current = null
-                return filtered
-            })
-        }
+        removeItemFromList()
+        refDeletedItem.current = false
+        refDeletedItemNode.current = null
     }
 
     const updateItems = newItems => {
@@ -259,9 +240,6 @@ function FilledBasket({ items, setItems }) {
     useEffect(() => {
         // updateItems(items)
         setTimeout(selectAllHandler, 600)
-        return () => {
-            if (refInterval.current) clearInterval(refInterval.current)
-        }
     }, [])
 
     useEffect(() => {
@@ -320,11 +298,7 @@ function FilledBasket({ items, setItems }) {
             <motion.div animate={animateNotification} initial={{ y: 400, opacity: 0 }} className={style.deleteNotification}>
                 <div ref={refTimerSvg} className={style.deleteTimer}>
                     <svg>
-                        {/* <circle cx="50%" cy="50%" r="90" /> */}
                         <circle cx="50%" cy="50%" r="13" pathLength="1" />
-                        <text x="50%" y="50%" textAnchor="middle">
-                            <tspan>{timerText}</tspan>
-                        </text>
                     </svg>
                 </div>
                 <motion.div animate={animationPath} initial={{ pathLength: 1 }} className={`${style.deleteNotificationText} text--t5`}>
@@ -407,7 +381,7 @@ function ProductCard({ item, selectHandler, returnedItem, deleteItem, onChangeCo
     }
 
     const onChangeCountHandler = (count, val, getItem) => {
-        if (count === 0) deleteHandler(item)
+        if (count === 0) deleteHandler()
         onChangeCount(count, val, getItem)
     }
 
@@ -460,7 +434,6 @@ function ProductCardEmpty({ item }) {
         </div>
     )
 }
-
 
 function BasketTotal({ summ, discount, productsText, bonuses, setIsShownBasket }) {
     const [isOpen, setIsOpen] = useState(false)
