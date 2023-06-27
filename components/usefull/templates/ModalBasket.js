@@ -9,11 +9,11 @@ import InputSelectAll from '../form/InputSelectAll'
 import InputCheckbox from '../form/InputCheckbox'
 import Favourite from '../Favourite'
 import Card from '../ui/Card/Card'
-import Odometer from 'odometer'
 import Icon from '../../Icon'
 import InfoNotify from '../ui/InfoNotify/InfoNotify'
 import Link from 'next/link'
 import Delivery from '../ui/Delivery/Delivery'
+import Odometer from '../ui/Odometer/Odometer'
 // @TODO Перенести стили одометра в локальную зону
 export default function ModalBasketProfi() {
     const [isEmpty, setIsEmpty] = useState(!!globalState.basket.items.length)
@@ -90,13 +90,11 @@ function FilledBasket({ items, setItems }) {
     const animationPath = useAnimationControls()
     const refDeletedItemNode = useRef(null)
     const refInputWrapper = useRef(null)
-    const refOdometrNode = useRef(null)
     const refInterval = useRef(false)
     const refTimerSvg = useRef(null)
     const refDeletedItem = useRef(0)
     const refItemsInfo = useRef([])
     const refInputs = useRef(false)
-    const refOdometr = useRef(null)
 
     const changeCount = (count, _, item) => {
         const indexSelected = refItemsInfo.current.findIndex(element => element.item.id === item.id)
@@ -128,7 +126,6 @@ function FilledBasket({ items, setItems }) {
         setSumm(newSumm)
         setBonuses(newBonuses)
         setDiscount(newDiscount)
-        refOdometr.current.update(newSumm)
     }
 
     const updateItemsCount = () => {
@@ -237,21 +234,6 @@ function FilledBasket({ items, setItems }) {
         }
     }
 
-    const createOdometr = tryCount => {
-        if (tryCount >= 20) return
-        if (typeof Odometer === 'function') {
-            refOdometr.current = new Odometer({
-                el: refOdometrNode.current,
-                value: 0,
-                // duration: 3000,
-                format: '( ddd)',
-                theme: 'car',
-            })
-        } else {
-            setTimeout(() => createOdometr(tryCount + 1), 700)
-        }
-    }
-
     const updateItems = newItems => {
         const newLackItems = []
         newItems.forEach(item => {
@@ -275,7 +257,6 @@ function FilledBasket({ items, setItems }) {
     }
 
     useEffect(() => {
-        createOdometr(0)
         // updateItems(items)
         setTimeout(selectAllHandler, 600)
         return () => {
@@ -359,8 +340,8 @@ function FilledBasket({ items, setItems }) {
                 <div className={`${style.basketPrice}`}>
                     <div className='text--p4'>Итого</div>
                     <div className='text--nowrap text--p1 text--bold'>
-                        <span ref={refOdometrNode} className='odometer odometer-theme-car'>0</span>
-                        <span style={{ transform: 'scale(0.95) translateY(2px)' }} className='rub'>&nbsp;₽</span>
+                        <Odometer number={summ} count={6} />
+                        <span style={{ transform: 'scale(0.95) translateY(-15px)' }} className='rub'>&nbsp;₽</span>
                     </div>
                 </div>
                 <div className={`${style.showBtn} btn btn--lg btn--primary btn--fill`}>

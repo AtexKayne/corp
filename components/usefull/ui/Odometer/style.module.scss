@@ -1,0 +1,34 @@
+.odometer {
+    height: 1em;
+    overflow: hidden;
+    position: relative;
+    display: inline-block;
+}
+
+.refNumber {
+    opacity: 0;
+    position: absolute;
+    pointer-events: none;
+}
+
+.numbers {
+    top: 0;
+    right: 0;
+    position: absolute;
+}
+
+.numberContainer {
+    // text-align: center;
+    display: inline-flex;
+    flex-direction: column;
+    transition: 1s transform cubic-bezier(.7, -0.23, .14, 1.15), 0.1s width linear;
+}
+
+.number {
+    height: 47px;
+}
+
+.deffer {
+    width: 4px;
+    height: 47px;
+}
