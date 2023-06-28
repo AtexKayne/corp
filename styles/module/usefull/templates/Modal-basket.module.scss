@@ -360,9 +360,9 @@
 .basketMenu {
     left: 0;
     right: 0;
-    bottom: 0;
+    top: calc(var(--viewport-height) - 110px);
     z-index: 4;
-    height: 138px;
+    height: 90px;
     display: flex;
     transition: .4s;
     position: absolute;
@@ -383,6 +383,8 @@
     }
 
     @include media-breakpoint(md-up) {
+        top: auto;
+        bottom: 0;
         height: 108px;
         padding-bottom: 0;
         transform: translateY(110px);

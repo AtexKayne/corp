@@ -29,10 +29,13 @@ export default function Settings() {
     }
 
     const resizeHandler = () => {
-        if (window.innerHeight !== globalState.window.height) {
-            document.body.setAttribute('data-swap', false)
+        const wh = window.innerHeight
+        const gwh = globalState.window.height
+        if (wh !== gwh) {
+            const attr = wh > gwh ? 'biggest' : 'smallest'
+            document.body.setAttribute('data-swap', attr)
         } else {
-            document.body.setAttribute('data-swap', true)
+            document.body.setAttribute('data-swap', false)
         }
     }
     
@@ -54,7 +57,7 @@ export default function Settings() {
         }
 
         if (window.innerWidth <= globalState.sizes.sm) {
-            document.body.setAttribute('data-swap', true)
+            document.body.setAttribute('data-swap', false)
             window.addEventListener('resize', resizeHandler)
         }
 
