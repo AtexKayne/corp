@@ -639,7 +639,7 @@ export const basket = [
             {summ: 16160, name: 'Серебрянный статус'},
         ],
         art: '5304',
-        max: 1000,
+        max: 700,
         bonuses: 24,
         basket: 4,
     },

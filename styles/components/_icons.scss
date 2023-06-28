@@ -209,7 +209,6 @@
     }
 }
 
-
 .iconColorVariant {
     display: flex;
     transition: .3s;
@@ -233,4 +232,64 @@
 
 .iconColorfull {
     background: linear-gradient(223deg, rgba(4, 255, 14, 1) 0%, rgba(253, 196, 0, 1) 50%, rgba(225, 41, 33, 1) 100%)!important;
+}
+
+.button {
+    cursor: pointer;
+    transition: .3s;
+    border-radius: 8px;
+    align-items: center;
+    white-space: nowrap;
+    display: inline-flex;
+    justify-content: center;
+
+    * {
+        white-space: nowrap;
+    }
+
+    &[d-size='sm'] {
+        height: 44px;
+        padding: 0 16px;
+    }
+
+    &[d-size='md'] {
+        height: 60px;
+        padding: 0 16px;
+    }
+
+    &[d-size='md-adaptive'] {
+        height: 60px;
+        padding: 0 16px;
+
+        @include media-breakpoint(lg-down) {
+            height: 44px;
+        }
+    }
+
+    &[fill='true'] {
+        width: 100%;
+    }
+
+    &[theme='primary'] {
+        color: var(--t-background);
+        background-color: var(--t-primary);
+    }
+
+    &[theme='secondary'] {
+        color: var(--t-background);
+        background-color: var(--t-notify);
+    }
+    
+
+    @include media-breakpoint(md-up) {
+        &:hover {
+            &[theme='primary'] {
+                background-color: #D41922;
+            }
+
+            &[theme='secondary'] {
+                background-color: #EFBE1F;
+            }
+        }
+    }
 }

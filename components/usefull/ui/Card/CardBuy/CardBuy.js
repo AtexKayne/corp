@@ -5,14 +5,13 @@ import Counter from '../Counter/Counter'
 import NotifyButton from '../NotifyButton/NotifyButton'
 import ProfiButton from '../ProfiButton/ProfiButton'
 
-
 export default function CardBuy({ info, onUpdateInBasket, count }) {
     const [isEmpty, setIsEmpty] = useState(false)
     const [isOpen, setIsOpen] = useState(!!count)
 
     const buyHandler = () => {
         setIsOpen(true)
-        onUpdateInBasket({value: 1, isMin: false, isMax: false})
+        onUpdateInBasket({ value: 1, isMin: false, isMax: false })
         globalState.popover.open([info.primaryName, 'ТЕПЕРЬ В КОРЗИНЕ'], info.images[0], true)
     }
 
@@ -30,7 +29,14 @@ export default function CardBuy({ info, onUpdateInBasket, count }) {
         <div className={style.cardBuybtn}>
             {!info.isProfi && !isEmpty
                 ? <div className={style.btnWrapper}>
-                    <div onClick={buyHandler} data-open={isOpen} className={`${style.btnMain} btn btn--md btn--primary js-button`}>
+                    <div
+                        fill='true'
+                        theme='primary'
+                        data-open={isOpen}
+                        d-size='md-adaptive'
+                        onClick={buyHandler}
+                        className={`${style.btnMain} button js-button`}
+                    >
                         <span className='text--upper text--p5 text--bold'>в корзину</span>
                     </div>
 

@@ -130,6 +130,19 @@
 }
 
 .item-selector {
+    &[data-checked='partial'] {
+        .item-selector__checkbox::after {
+            content: '–';
+            color: white;
+            line-height: 0;
+            font-size: 19px;
+            font-weight: 900;
+            text-align: center;
+            background-image: none;
+            transform: translateY(8px);
+        }
+    }
+
     &__label {
         display: flex;
         cursor: pointer;
@@ -208,6 +221,18 @@
     &__name {
         font-size: 16px;
     }
+
+    @include media-breakpoint(md-up) {
+        &:hover {
+            .item-selector__checkbox {
+                border-color: #D41922;
+            }
+
+            input:checked ~ .item-selector__checkbox {
+                background-color: #D41922;
+            }
+        }
+    }
 }
 
 .input-switch {
@@ -218,6 +243,12 @@
     position: relative;
     border-radius: 20px;
     display: inline-block;
+
+    @include media-breakpoint(md-up) {
+        &:hover {
+    
+        }
+    }
 
     input {
         display: none;

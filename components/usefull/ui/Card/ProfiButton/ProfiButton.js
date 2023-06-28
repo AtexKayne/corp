@@ -9,7 +9,11 @@ export default function ProfiButton() {
     }
 
     return (
-        <div onClick={profiClickHandler} className={`${style.btnMain} btn btn--md btn--primary`}>
+        <div
+            fill='true'
+            theme='primary'
+            d-size='md-adaptive'
+            onClick={profiClickHandler} className={`button`}>
             <span className='text--upper text--p5 text--bold'>ДЛЯ ПРОФИ</span>
         </div>
     )

@@ -61,7 +61,7 @@ function EmptyBasket({ }) {
             </div>
 
             <motion.div initial={{ y: 100, opacity: 0 }} animate={{ y: 0, opacity: 1 }} transition={{ duration: 0.3, delay: 0.7, ease: 'easeOut' }}>
-                <CardSlider items={cards} title='Недавно просмотрено' />
+                <CardSlider items={cards} title='Недавно просмотрено' perView={2} />
             </motion.div>
 
             <div className='d-flex flex--justify-center is-hidden--md-up pb-3 mt-2.5'>
@@ -144,19 +144,26 @@ function FilledBasket({ items, setItems }) {
 
     const selectHandler = item => {
         const index = refItemsInfo.current.findIndex(element => element.item.id === item.id)
+        let newChecked = false
         let isAllSelected = true
+        let isOneSelected = false
         refItemsInfo.current[index].isSelected = !refItemsInfo.current[index].isSelected
 
         refInputs.current.forEach(input => {
-            if (!input.checked) isAllSelected = false
+            if (input.checked) isOneSelected = true
+            else isAllSelected = false
         })
 
-        setIsChecked(isAllSelected)
+        if (isAllSelected) newChecked = true
+        else if (isOneSelected) newChecked = 'partial'
+        else newChecked = false
+
+        setIsChecked(newChecked)
         updateSumm()
     }
 
     const selectAllHandler = () => {
-        if (isChecked) {
+        if (isChecked && isChecked !== 'partial') {
             refInputs.current.forEach(input => {
                 if (input.checked) input.click()
             })
@@ -262,7 +269,7 @@ function FilledBasket({ items, setItems }) {
                     {productsText}
                 </div>
                 <div className={`${style.checker}`}>
-                    <InputSelectAll isChecked={isChecked} setIsChecked={setIsChecked} onAfterComplete={selectAllHandler} text='Выбрать все' />
+                    <InputSelectAll isChecked={isChecked} onAfterComplete={selectAllHandler} text='Выбрать все' />
                 </div>
                 <div ref={refInputWrapper}>
                     {items.map(item => {
@@ -352,12 +359,17 @@ function BasketLackItems({ lackItems, setLackItems }) {
 function ProductCard({ item, selectHandler, returnedItem, deleteItem, onChangeCount }) {
     const animationProduct = useAnimationControls()
     const [isControlOpen, setIsControlOpen] = useState(false)
+    const [isFavourite, setIsFavourite] = useState('В избранное')
     const refItem = useRef(null)
 
     const favouriteHandler = event => {
         const target = event.target.children[0]
         if (target && typeof target.click === 'function') {
             target.click()
+            const newFavourite = isFavourite === 'В избранное'
+                ? 'В избранном'
+                : 'В избранное'
+            setIsFavourite(newFavourite)
         }
     }
 
@@ -404,7 +416,7 @@ function ProductCard({ item, selectHandler, returnedItem, deleteItem, onChangeCo
             <div className={style.controls}>
                 <div onClick={favouriteHandler} className={style.control}>
                     <Favourite external={style.favourite} info={item} width='16' height='16' />
-                    <span className='text--t4 is-decorative'>В избранное</span>
+                    <span className='text--t4 is-decorative'>{isFavourite}</span>
                 </div>
                 <div onClick={deleteHandler} className={style.control}>
                     <Icon name='remove' width='16' height='16' />
@@ -440,6 +452,7 @@ function BasketTotal({ summ, discount, productsText, bonuses, setIsShownBasket }
     const refButton = useRef(null)
     const isInView = useInView(refButton)
     const animateSubs = useAnimationControls()
+    const animateWrapper = useAnimationControls()
     const toggleHandler = () => {
         const height = isOpen ? '0' : 'auto'
         animateSubs.start({ height, transition: { duration: 0.3, ease: 'easeInOut' } })
@@ -450,9 +463,16 @@ function BasketTotal({ summ, discount, productsText, bonuses, setIsShownBasket }
         setIsShownBasket(isInView)
     }, [isInView])
 
+    useEffect(() => {
+        const height = !summ ? 0 : 'auto'
+        const opacity = !summ ? 0 : 1
+        const delay = !!summ ? 0.3 : 0
+        animateWrapper.start({ height: height, opacity, transition: { duration: 0.3, delay } })
+    }, [summ])
+
     return (
-        <div data-active={!!summ} className={`${style.total} pt-2.5`}>
-            <div className='text--t1'>Сумма корзины</div>
+        <motion.div animate={animateWrapper} className={`${style.total}`}>
+            <div className='text--t1 pt-2.5'>Сумма корзины</div>
             <div className={`${style.totalContainer} pt-1`}>
                 <div className={`${style.totalLine}`}>
                     <span className='text--t4'>{productsText}</span>
@@ -483,7 +503,7 @@ function BasketTotal({ summ, discount, productsText, bonuses, setIsShownBasket }
                         )) : null}
                 </motion.div>
                 <div className='text--right pb-2'>
-                    <div className='pt-1 text--t4'>Итого</div>
+                    <div className='pt-1.5 text--t4'>Итого</div>
                     <div className='pt-0.5 text--a3 text--bold'>{summ.toLocaleString()} <span className='rub'> ₽</span></div>
                     <div data-is-hidden={!bonuses} className='text--t4 pt-1'>
                         <span>Вернется Red-баллов&nbsp;</span>
@@ -502,14 +522,22 @@ function BasketTotal({ summ, discount, productsText, bonuses, setIsShownBasket }
                     <span className='text--upper text--p5 text--sparse text--bold'>Оформить заказ</span>
                 </div>
             </div>
-        </div>
+        </motion.div>
     )
 }
 
 function BasketTotalEmpty({ summ }) {
+    const animateWrapper = useAnimationControls()
+
+    useEffect(() => {
+        const height = !!summ ? 0 : 'auto'
+        const opacity = !!summ ? 0 : 1
+        const delay = !summ ? 0.3 : 0
+        animateWrapper.start({ height: height, opacity, transition: { duration: 0.3, delay } })
+    }, [summ])
 
     return (
-        <div data-active={!summ} className={`${style.totalEmpty}`}>
+        <motion.div animate={animateWrapper} className={`${style.totalEmpty}`}>
             <div className={`${style.totalContainer}`}>
                 <div className='text--t1 pt-2.5'>Сумма корзины</div>
                 <div className='text--t4 text--color-small pt-2.5'>Выберите хотя бы один товар, чтобы произвести расчет стоимости заказа</div>
@@ -517,6 +545,6 @@ function BasketTotalEmpty({ summ }) {
                     <span className='text--upper text--p5 text--sparse text--bold'>Оформить заказ</span>
                 </div>
             </div>
-        </div>
+        </motion.div>
     )
 }

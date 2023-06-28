@@ -1,0 +1,47 @@
+@import '../../../../styles/mixins/helpers/media';
+@import '../../../../styles/mixins/helpers/adaptive-value';
+
+.button {
+    transition: .3s;
+    border-radius: 8px;
+    align-items: center;
+    display: inline-flex;
+    justify-content: center;
+
+    &[size='sm'] {
+        height: 44px;
+        padding: 0 16px;
+    }
+
+    &[size='md'] {
+        height: 60px;
+        padding: 0 16px;
+    }
+
+    &[fill='true'] {
+        width: 100%;
+    }
+
+    &[theme='primary'] {
+        color: var(--t-background);
+        background-color: var(--t-primary);
+    }
+
+    &[theme='secondary'] {
+        color: var(--t-background);
+        background-color: var(--t-notify);
+    }
+    
+
+    @include media-breakpoint(md-up) {
+        &:hover {
+            &[theme='primary'] {
+                background-color: #D41922;
+            }
+
+            &[theme='secondary'] {
+                background-color: #EFBE1F;
+            }
+        }
+    }
+}

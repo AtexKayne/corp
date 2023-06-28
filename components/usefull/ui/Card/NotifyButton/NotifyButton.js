@@ -3,7 +3,7 @@ import { globalState } from '../../../../helpers/globalState'
 import style from './style.module.scss'
 import Icon from '../../../../Icon'
 
-export default function NotifyButton({name, image}) {
+export default function NotifyButton({ name, image }) {
     const [isRinged, setIsRinged] = useState(false)
     const [isNotify, setIsNotify] = useState(false)
 
@@ -23,13 +23,30 @@ export default function NotifyButton({name, image}) {
     }
 
     return (
-        
-            <div data-active={isNotify} data-shaked={isRinged} onClick={notificationClickHandler} className={`${style.notify} btn btn--md btn--yellow`}>
-                <span className='text--upper text--p5 text--bold mr-0.8'>{isNotify ? 'сообщим' : 'сообщить'}</span>
-                <span className={style.iconBell}>
-                    <Icon name='bell' width='16' height='16' />
-                    <Icon name='bellFill' width='16' height='16' />
-                </span>
-            </div>
+        <div
+            fill='true'
+            theme='secondary'
+            d-size='md-adaptive'
+            data-active={isNotify}
+            data-shaked={isRinged}
+            onClick={notificationClickHandler}
+            className={`${style.notify} button`}>
+
+            <span className='text--upper text--p5 text--bold mr-0.8'>{isNotify ? 'сообщим' : 'сообщить'}</span>
+            <span className={style.iconBell}>
+                <Icon name='bell' width='16' height='16' />
+                <Icon name='bellFill' width='16' height='16' />
+            </span>
+        </div>
+    )
+
+    return (
+        <div data-active={isNotify} data-shaked={isRinged} onClick={notificationClickHandler} className={`${style.notify} btn btn--md btn--yellow`}>
+            <span className='text--upper text--p5 text--bold mr-0.8'>{isNotify ? 'сообщим' : 'сообщить'}</span>
+            <span className={style.iconBell}>
+                <Icon name='bell' width='16' height='16' />
+                <Icon name='bellFill' width='16' height='16' />
+            </span>
+        </div>
     )
 }

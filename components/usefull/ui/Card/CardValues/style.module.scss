@@ -20,7 +20,7 @@
 
         &[data-active='false'] {
             color: var(--c-_light-gray);
-            background-color: var(--c-_light);
+            background-color: transparent;
         }
 
         &:hover,

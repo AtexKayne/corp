@@ -1,19 +1,19 @@
 import { useState, useEffect } from 'react'
 import style from './style.module.scss'
 
-export default function CardValues({ info }) {
+export default function CardValues({ info, mode }) {
 
     return (
         <div className={`${style.values}`}>
             {!info.value
-                ? <Color color={info.color} />
-                : <Volume value={info.value} values={info.values} />
+                ? <Color color={info.color} mode={mode} />
+                : <Volume value={info.value} values={info.values} mode={mode} />
             }
         </div>
     )
 }
 
-function Color({ color }) {
+function Color({ color, mode }) {
     const [iconStyle, setIconStyle] = useState('')
     useEffect(() => {
         let newIconStyle = ''
@@ -36,11 +36,11 @@ function Color({ color }) {
     )
 }
 
-function Volume({ value, values }) {
+function Volume({ value, values, mode }) {
     return (
         <div className={`${style.volumePicker} text--t6 text--normal`}>
             <div data-disabled={false} data-active={true}>{value}</div>
-            {values && values.length
+            {values && values.length && mode !== 'inline'
                 ? values.map(item => {
                     if (item === value) return null
                     return (

@@ -34,6 +34,7 @@ export default function Odometer({ number }) {
             } else {
                 height = 300
             }
+            if (!refChidren[index]) return
             children[index].style.width = `${refChidren[index].offsetWidth}px`
             const transform = `translateY(${height}px)`
             children[index].style.transform = transform
@@ -63,6 +64,7 @@ export default function Odometer({ number }) {
                 {number.toLocaleString().split('').map((item, i) => <span key={i}>{item}</span>)}
             </span>
             <div ref={refNumbersContainer} className={`${style.numbers}`}>
+                <Numbers />
                 <Numbers />
                 <Numbers />
                 <Numbers />

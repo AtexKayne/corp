@@ -6,6 +6,7 @@ import CardPrice from './CardPrice/CardPrice'
 import CardBuy from './CardBuy/CardBuy'
 import { globalState } from '../../../helpers/globalState'
 import { isEqual } from '../../../helpers/isEqual'
+import CardDescrption from './CardDescrption/CardDescrption'
 
 
 export default function Card({ info, mode = 'normal', onChangeCount = () => { } }) {
@@ -20,7 +21,7 @@ export default function Card({ info, mode = 'normal', onChangeCount = () => { } 
         onChangeCount(value, false, info)
         if (value === 0) setTimeout(() => setCount(value), 300)
         else setCount(value)
-        
+
         if (isMax) {
             globalState.popover.open([info.primaryName, 'Максимум для этого заказа'], info.images[0])
         }
@@ -66,12 +67,9 @@ export default function Card({ info, mode = 'normal', onChangeCount = () => { } 
             onMouseEnter={mouseEnterHandler}
             onMouseLeave={mouseLeaveHandler}>
             <CardImages count={count} images={info.images} link='/product/rp-no-coloristic' mode={mode} />
-
-            <div className={`${style.title} text--t6 text--normal text--upper pb-0.6 pt-1.5`}>{info.primaryName}</div>
-            <div className={`${style.text} text--t4 text--normal pb-1`}>{info.secondaryName}</div>
-
+            <CardDescrption info={info} mode={mode} classTitle={style.title} classText={style.text} />
             <CardPrice info={info} mode={mode} count={count} />
-            <CardValues info={info} />
+            <CardValues info={info} mode={mode} />
 
             <div className={`${style.buyBtn} mt-2`}>
                 <CardBuy info={info} count={count} onUpdateInBasket={updateHandler} />

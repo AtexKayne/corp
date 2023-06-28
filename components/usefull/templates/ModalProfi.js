@@ -6,6 +6,10 @@ export default function ModalProfi() {
         globalState.modal.close()
     }
 
+    const authHandler = () => {
+        globalState.modal.open('auth', true, {type: 'auth'})
+    }
+
     return (
         <div className={`${style.profi}`}>
             <div className={`${style.title} text--a3 text--bold pt-2 pb-0.5`}>Для профессионалов</div>
@@ -19,7 +23,7 @@ export default function ModalProfi() {
                     <span className='text--upper text--p5 text--bold'>открыть телеграм-бот</span>
                 </div>
 
-                <div className={`${style.button} btn btn--md btn--fill btn--shadow mb-0.8 mb-1.5:md`}>
+                <div onClick={authHandler} className={`${style.button} btn btn--md btn--fill btn--shadow mb-0.8 mb-1.5:md`}>
                     <span className='text--upper text--p6 text--bold'>я уже профи. авторизоваться</span>
                 </div>
 
@@ -27,9 +31,9 @@ export default function ModalProfi() {
                     или
                 </div>
 
-                <a href='#' className='link d-block text--bold text--upper text--p6 text--color-primary'>
-                позже. перейти к покупкам
-                </a>
+                <div onClick={clickHandler} className='link d-block text--bold text--upper text--p6 text--color-primary'>
+                    позже. перейти к покупкам
+                </div>
             </div>
         </div>
     )

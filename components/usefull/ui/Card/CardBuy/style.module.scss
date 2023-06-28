@@ -3,30 +3,19 @@
 .cardBuybtn {
     display: flex;
     position: relative;
-
-    >* {
-        min-height: 60px;
-        // margin-right: 8px;
-
-        &.btnMain {
-            margin-right: 0;
-        }
-    }
-
-    // @TODO Переделай, блин
-    @include media-breakpoint(lg-down) {
-        div {
-            min-height: 44px;
-        }
-    }
 }
 
 .btnWrapper {
     width: 100%;
+    height: 60px;
     margin-right: 0;
     overflow: hidden;
     position: relative;
     border-radius: 4px;
+
+    @include media-breakpoint(lg-down) {
+        height: 44px;
+    }
 }
 
 .buyOpen {
@@ -40,31 +29,8 @@
     transform: translateX(100%);
     transition: .5s cubic-bezier(.9,0,.5,1);
 
-    * {
-        white-space: nowrap;
-    }
-
-    .toBasket {
-        min-height: 60px;
-        flex-basis: 100%;
-    }
-
     &[data-open='true'] {
         transform: translateX(0);
-    }
-
-    @include media-breakpoint(xxl-up) {
-        .toBasket {
-            flex-basis: 50%;
-        }
-
-        .countSelector {
-            flex-basis: 50%;
-        }
-    }
-
-    @include media-breakpoint(md) {
-        min-height: 65px;
     }
 }
 
@@ -80,10 +46,6 @@
     &[data-open='true'] {
         transform: translateX(-100%);
     }
-
-    // @include media-breakpoint(md) {
-    //     min-height: 65px;
-    // }
 
     .iconBasket {
         transform: translateY(-2px);

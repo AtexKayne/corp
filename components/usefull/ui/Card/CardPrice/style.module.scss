@@ -44,7 +44,7 @@
         }
     }
 
-    @include media-breakpoint(sm-down) {
+    @include media-breakpoint(lg-down) {
         display: none;
     }
 }
