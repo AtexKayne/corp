@@ -22,6 +22,14 @@ body {
 
 body {
     overflow: hidden;
+
+    &[data-swap='true'] {
+        background-color: green;
+    }
+
+    &[data-swap='false'] {
+        background-color: blueviolet;
+    }
 }
 
 * {

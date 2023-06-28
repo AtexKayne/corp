@@ -27,6 +27,14 @@ export default function Settings() {
         globalState.basket.items = refBasketItems.current
         setUpdateItemsCount(refBasketItems.current.length)
     }
+
+    const resizeHandler = () => {
+        if (window.innerHeight !== globalState.window.height) {
+            document.body.setAttribute('data-swap', false)
+        } else {
+            document.body.setAttribute('data-swap', true)
+        }
+    }
     
     useEffect(() => {
         const items = localStorage.basket
@@ -39,6 +47,19 @@ export default function Settings() {
             items: parsed,
             replace,
             update
+        }
+
+        globalState.window = {
+            height: window.innerHeight
+        }
+
+        if (window.innerWidth <= globalState.sizes.sm) {
+            document.body.setAttribute('data-swap', true)
+            window.addEventListener('resize', resizeHandler)
+        }
+
+        return () => {
+            window.removeEventListener('resize', resizeHandler)
         }
     }, [])
 
