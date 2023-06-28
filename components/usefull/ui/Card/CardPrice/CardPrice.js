@@ -28,7 +28,7 @@ export default function CardPrice({ info, mode, count }) {
                 ? <div className={`${style.art} text--t6 text--normal text--color-small`}>{info.art}</div> : null
             }
 
-            <div className={`${style.bonuses} text--t5 text--normal text--color-small`}>
+            <div className={`${style.bonuses} text--t5 text--normal`}>
                 {info.bonuses && mode === 'inline'
                     ? <>
                         <span>{info.bonuses}</span>

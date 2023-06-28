@@ -11,7 +11,7 @@ export default function InputSelectAll({onAfterComplete, isChecked, external, se
             <label className='item-selector__label' onChange={onAfterChange}>
                 <input type='checkbox' readOnly checked={!!isChecked} />
                 <div className='item-selector__checkbox' />
-                <div className='text--t3 text--normal'>{text}</div>
+                <div className='text text--t3 text--normal'>{text}</div>
             </label>
         </div>
     )

@@ -39,7 +39,7 @@ function Color({ color, mode }) {
 function Volume({ value, values, mode }) {
     return (
         <div className={`${style.volumePicker} text--t6 text--normal`}>
-            <div data-disabled={false} data-active={true}>{value}</div>
+            <div data-disabled={false} data-active={mode !== 'inline'}>{value}</div>
             {values && values.length && mode !== 'inline'
                 ? values.map(item => {
                     if (item === value) return null

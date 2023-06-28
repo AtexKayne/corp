@@ -130,16 +130,25 @@
 }
 
 .item-selector {
+    .text {
+        color: var(--t-text)!important;
+    }
+    
     &[data-checked='partial'] {
         .item-selector__checkbox::after {
+            left: 0;
+            right: 0;
+            bottom: 0;
+            width: auto;
+            height: auto;
             content: '–';
+            display: flex;
             color: white;
-            line-height: 0;
             font-size: 19px;
-            font-weight: 900;
-            text-align: center;
+            align-items: center;
             background-image: none;
-            transform: translateY(8px);
+            justify-content: center;
+            transform: translateY(-1px);
         }
     }
 
