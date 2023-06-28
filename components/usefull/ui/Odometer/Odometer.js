@@ -2,6 +2,7 @@ import { useState, useEffect, useRef } from 'react'
 import style from './style.module.scss'
 import { motion, useAnimationControls } from 'framer-motion'
 import { fillArray } from '../../../helpers/fillArray'
+import { globalState } from '../../../helpers/globalState'
 
 export default function Odometer({ number }) {
     const refLastCount = useRef(number)
@@ -21,7 +22,10 @@ export default function Odometer({ number }) {
         const children = Array.from(refNumbersContainer.current.children).reverse()
         const refChidren = Array.from(refNumber.current.children).reverse()
         const arrPrev = refLastCount.current.toLocaleString().split('').reverse()
-        number.toLocaleString().split('').reverse().forEach((item, index) => {
+        const widthCoef = window.innerWidth <= globalState.sizes.sm ? 0.5 : 0
+        const numberArr = number.toLocaleString().split('').reverse()
+        
+        numberArr.forEach((item, index) => {
             let height
             if (item !== ' ' && item !== ',') {
                 let coef = 0
@@ -35,10 +39,16 @@ export default function Odometer({ number }) {
                 height = 300
             }
             if (!refChidren[index]) return
-            children[index].style.width = `${Math.floor(refChidren[index].offsetWidth)}px`
+            const width = Math.floor(refChidren[index].offsetWidth)
+            children[index].style.opacity = '1'
+            children[index].style.width = `${width - widthCoef}px`
             const transform = `translateY(${height}px)`
             children[index].style.transform = transform
         })
+
+        if (children[numberArr.length]) 
+            children[numberArr.length].style.opacity = 0
+
         refPromice.current = new Promise(resolve => setTimeout(() => {
             refIsAnimated.current = false
             refLastCount.current = number
