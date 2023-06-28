@@ -237,7 +237,6 @@
 }
 
 .deleteNotification {
-    bottom: 0;
     z-index: 3;
     height: 58px;
     display: flex;
@@ -247,6 +246,7 @@
     align-items: center;
     pointer-events: all;
     background-color: var(--t-background);
+    top: calc(var(--viewport-height) - 58px);
     box-shadow: 0px 4px 15px 3px #0000001F;
     right: adaptive-value((
         xs: 33px,

@@ -152,13 +152,14 @@
         pointer-events: none;
     }
 
-    [data-hover='false'] & {
-        pointer-events: none;
-    }
     
     @include media-breakpoint(md-up) {
         min-width: 60px;
-
+        
+        [data-hover='false'] & {
+            pointer-events: none;
+        }
+        
         &:hover {
             color: var(--t-primary);
         }
