@@ -246,7 +246,7 @@
     align-items: center;
     pointer-events: all;
     background-color: var(--t-background);
-    top: calc(var(--viewport-height) - 58px);
+    top: calc(var(--viewport-height) - 40px);
     box-shadow: 0px 4px 15px 3px #0000001F;
     right: adaptive-value((
         xs: 33px,
@@ -260,6 +260,10 @@
         lg: 65px,
         xl: 89px,
     ));
+
+    @include media-breakpoint(md-up) {
+        top: calc(var(--viewport-height) - 58px);
+    }
 
     // opacity: 1!important;
     // transform: translateY(-300px)!important;

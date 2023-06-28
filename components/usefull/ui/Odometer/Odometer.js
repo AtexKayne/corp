@@ -22,7 +22,7 @@ export default function Odometer({ number }) {
         const children = Array.from(refNumbersContainer.current.children).reverse()
         const refChidren = Array.from(refNumber.current.children).reverse()
         const arrPrev = refLastCount.current.toLocaleString().split('').reverse()
-        const widthCoef = window.innerWidth <= globalState.sizes.sm ? 0.5 : 0
+        const widthCoef = window.innerWidth <= globalState.sizes.sm ? 1 : 0.5
         const numberArr = number.toLocaleString().split('').reverse()
         
         numberArr.forEach((item, index) => {
