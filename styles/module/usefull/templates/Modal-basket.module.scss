@@ -360,7 +360,6 @@
 .basketMenu {
     left: 0;
     right: 0;
-    top: calc(var(--viewport-height) - 110px);
     z-index: 4;
     height: 90px;
     display: flex;
@@ -371,6 +370,7 @@
     padding-bottom: 40px;
     transform: translateY(140px);
     background-color: var(--t-background);
+    top: calc(var(--viewport-height) - 90px);
     padding: adaptive-value((
         xs: 0 16px,
         md: 0 32px,
