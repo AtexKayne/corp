@@ -23,7 +23,7 @@ export default function Odometer({ number }) {
         const arrPrev = refLastCount.current.toLocaleString().split('').reverse()
         number.toLocaleString().split('').reverse().forEach((item, index) => {
             let height
-            if (item !== ' ') {
+            if (item !== ' ' && item !== ',') {
                 let coef = 0
                 if (arrPrev[index] === item) {
                     const data = children[index].data ?? false
