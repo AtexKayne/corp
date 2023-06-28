@@ -35,7 +35,7 @@ export default function Odometer({ number }) {
                 height = 300
             }
             if (!refChidren[index]) return
-            children[index].style.width = `${refChidren[index].offsetWidth}px`
+            children[index].style.width = `${Math.floor(refChidren[index].offsetWidth)}px`
             const transform = `translateY(${height}px)`
             children[index].style.transform = transform
         })
