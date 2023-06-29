@@ -56,8 +56,8 @@
     height: 100%;
     position: relative;
     pointer-events: all;
+    padding-bottom: 30px;
     overflow: hidden auto;
-    padding-bottom: 110px;
     padding-left: adaptive-value((
         xs: 16px,
         md: 32px,
@@ -195,7 +195,7 @@
     margin-top: 19px;
 }
 
-.checkboxDisabled{
+.checkboxDisabled {
     opacity: 0.2;
     margin-top: 19px;
     pointer-events: none;
@@ -344,7 +344,7 @@
     40%  { content: '3'; color: #E21B25;}
     60%  { content: '2'; color: #E21B25;}
     80%  { content: '1'; color: #E21B25;}
-    100% { content: '0'; color: #E21B25;}
+    100% { content: '1'; color: #E21B25;}
 }
 
 @keyframes name {
@@ -426,11 +426,16 @@
 
 .total {
     overflow: hidden;
-    padding-right: 59px;
+
+    @include media-breakpoint(md-up) {
+        padding-right: 59px;
+    }
 }
 
 .totalContainer {
-    padding-right: 9px;
+    @include media-breakpoint(md-up) {
+        padding-right: 9px;
+    }
 }
 
 .totalLineSubs {

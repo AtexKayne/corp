@@ -5,7 +5,7 @@ import Icon from '../../../Icon'
 export default function Delivery({ summ, maxSumm }) {
     const [width, setWidth] = useState(0)
     const [translateX, setTranslateX] = useState(0)
-    const [text, setText] = useState(maxSumm - summ)
+    const [text, setText] = useState((maxSumm - summ))
     const refInline = useRef(null)
 
     useEffect(() => {
@@ -20,7 +20,7 @@ export default function Delivery({ summ, maxSumm }) {
             <Icon external={style.icon} name='deliveryS' width={18} height={18} />
             <Icon external={style.icon} name='deliveryC' width={21} height={20} />
             <div className={`${style.text} text--t6 text--upper text--sparse`}>
-                <span className='text--bold'>{text}&nbsp;₽</span>
+                <span className='text--bold'>{text.toLocaleString()}&nbsp;₽</span>
                 <span className='text--normal'>&nbsp;До бесплатной доставки</span>
             </div>
             <div ref={refInline} className={`${style.inline}`}>

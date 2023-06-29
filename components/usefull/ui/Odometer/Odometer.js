@@ -12,10 +12,9 @@ export default function Odometer({ number }) {
     const refHeight = useRef(0)
     const refIsAnimated = useRef(false)
     const animateWrapper = useAnimationControls()
-    const refPromice = useRef()
 
     const odometerHandler = async () => {
-        if (refIsAnimated.current) await refPromice.current
+        if (refIsAnimated.current) return
         refIsAnimated.current = true
         const width = refNumber.current.clientWidth
         animateWrapper.start({ width: width })
@@ -49,11 +48,10 @@ export default function Odometer({ number }) {
         if (children[numberArr.length]) 
             children[numberArr.length].style.opacity = 0
 
-        refPromice.current = new Promise(resolve => setTimeout(() => {
+        setTimeout(() => {
             refIsAnimated.current = false
             refLastCount.current = number
-            resolve()
-        }, 1000))
+        }, 400)
     }
 
     useEffect(() => {

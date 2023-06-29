@@ -61,7 +61,7 @@ function EmptyBasket({ }) {
             </div>
 
             <motion.div initial={{ y: 100, opacity: 0 }} animate={{ y: 0, opacity: 1 }} transition={{ duration: 0.3, delay: 0.7, ease: 'easeOut' }}>
-                <CardSlider items={cards} title='Недавно просмотрено' perView={2} />
+                <CardSlider items={cards} title='Недавно просмотрено' />
             </motion.div>
 
             <div className='d-flex flex--justify-center is-hidden--md-up pb-3 mt-2.5'>
@@ -217,20 +217,20 @@ function FilledBasket({ items, setItems }) {
         await animateNotification.start({ opacity: 0, y: 500, transition: { duration: 0.3 } })
         await animateNotification.start({ opacity: 1, y: yPosition, transition: { duration: 0.6 } })
         refTimerSvg.current.classList.add(style.animated)
-        await animationPath.start({ pathLength: 0, transition: { duration: 4.9 } })
-        await animateNotification.start({ opacity: 0, y: 500, transition: { duration: 0.3 } })
+        animateNotification.start({ opacity: 0, y: 500, transition: { duration: 0.3, delay: 4.8 } })
+        await animationPath.start({ pathLength: 0, transition: { duration: 5.2 } })
         refTimerSvg.current.classList.remove(style.animated)
         return animationPath.start({ pathLength: 1, transition: { duration: 0 } })
     }
 
-    const deleteItem = async (item, node) => {
+    const deleteItem = async (item, node, isImmidiatly) => {
         removeItemFromList()
         refDeletedItem.current = item
         refDeletedItemNode.current = node
         removeItem()
         updateSumm()
         updateItemsCount()
-        await deleteAnimation()
+        if (isImmidiatly) await deleteAnimation()
         removeItemFromList()
         refDeletedItem.current = false
         refDeletedItemNode.current = null
@@ -317,7 +317,7 @@ function FilledBasket({ items, setItems }) {
                     setIsShownBasket={setIsShownBasket} />
 
                 <div ref={refSlider} className={style.slider}>
-                    <CardSlider items={cards} title='Добавьте к заказу' perView={2} />
+                    <CardSlider items={cards} title='Добавьте к заказу' />
                 </div>
             </div>
 
@@ -353,7 +353,7 @@ function FilledBasket({ items, setItems }) {
     )
 }
 
-function BasketLackItems({ lackItems, setLackItems, setItems, deleteItem, returnedItem, selectHandler }) {
+function BasketLackItems({ lackItems, setLackItems, setItems, deleteItem, returnedItem }) {
     const animateWrapper = useAnimationControls()
     const removeHandler = () => {
         setTimeout(() => {
@@ -377,7 +377,7 @@ function BasketLackItems({ lackItems, setLackItems, setItems, deleteItem, return
                     deleteItem={deleteItem}
                     onChangeCount={() => { }}
                     returnedItem={returnedItem}
-                    selectHandler={selectHandler} />
+                    selectHandler={false} />
             })}
         </motion.div>
     )
@@ -425,9 +425,14 @@ function ProductCard({ item, selectHandler, returnedItem, deleteItem, onChangeCo
     }
 
     const deleteHandler = async () => {
-        deleteItem(item, refItem.current)
+        deleteItem(item, refItem.current, selectHandler !== false)
         await animationProduct.start({ opacity: 0 })
         await animationProduct.start({ height: 0, marginTop: 0, paddingTop: 0 })
+    }
+
+    const onChangeHandler = () => {
+        if (selectHandler === false) return
+        selectHandler(item)
     }
 
     useEffect(() => {
@@ -455,7 +460,7 @@ function ProductCard({ item, selectHandler, returnedItem, deleteItem, onChangeCo
                 <Icon name='close' width='16' height='16' />
             </div>
             <div data-open={isControlOpen} className={style.productInner}>
-                <InputCheckbox external={style.checkbox} onAfterComplete={() => selectHandler(item)} />
+                <InputCheckbox external={`${style.checkbox} ${selectHandler === false ? style.checkboxDisabled : ''}`} onAfterComplete={onChangeHandler} />
                 <Card info={item} mode='inline' onChangeCount={onChangeCountHandler} />
             </div>
         </motion.div>

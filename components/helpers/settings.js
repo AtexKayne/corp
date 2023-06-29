@@ -30,14 +30,14 @@ export default function Settings() {
     }    
 
     const resizeHandler = () => {
-        let size
+        let size = 'xs'
         for (const key in globalState.sizes) {
             const element = globalState.sizes[key];
             if (window.innerWidth >= globalState.sizes[key]) {
                 size = key
             }
         }
-        console.log(size);
+        // console.log(size);
         globalState.currentSize = size
 
         const rootHeight = window.innerHeight

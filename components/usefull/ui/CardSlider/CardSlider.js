@@ -5,8 +5,9 @@ import Icon from '../../../Icon'
 import { useRef, useState, useEffect } from 'react'
 import Card from '../Card/Card'
 import { globalState } from '../../../helpers/globalState'
+import { debounce } from '../../../helpers/debounce'
 
-export default function CardSlider({ items, title, perView = 1.8 }) {
+export default function CardSlider({ items, title, perView = 1.9 }) {
     const [disabled, setDisabled] = useState('prev')
     const [slidesPerView, setSlidesPerView] = useState(perView)
     const refContainer = useRef(null)
@@ -35,14 +36,28 @@ export default function CardSlider({ items, title, perView = 1.8 }) {
         }, 200)
     }
 
+    const resizeHandler = () => {
+        const cc = globalState.currentSize
+        if (cc === 'xxl' || cc === 'xxxl') setSlidesPerView(1.9)
+        else if (cc === 'xl' || cc === 'lg') setSlidesPerView(1.5)
+        else if (cc === 'md') setSlidesPerView(2)
+        else if (cc === 'sm' || cc === 'xs') setSlidesPerView(1.4)
+    }
+
+    const debounceResize = debounce(resizeHandler, 1000)
+
     useEffect(() => {
-        const ww = window.innerWidth
-        if (ww <= globalState.sizes.lg && ww > globalState.sizes.sm) {
-            setSlidesPerView(2.2)
-        } else if (ww <= globalState.sizes.sm) {
-            setSlidesPerView(1.6)
+        resizeHandler()
+        window.addEventListener('resize', debounceResize)
+
+        return () => {
+            window.removeEventListener('resize', debounceResize)
         }
     }, [])
+
+    useEffect(() => {
+        console.log(globalState.currentSize);
+    }, [globalState.currentSize])
 
     return (
         <div ref={refContainer} className='p-relative'>

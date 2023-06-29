@@ -632,7 +632,7 @@ export const basket = [
         secondaryName: 'Wahl Shaver Finale Lithium 8164-116',
         value: '100 мл',
         price: {
-            actual: '12560',
+            actual: '12 560',
             old: '16 160' // Can be empty
         },
         discount: [
