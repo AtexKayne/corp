@@ -188,6 +188,10 @@
             transform: translateX(-273px) !important;
         }
     }
+
+    @include media-breakpoint(sm-down) {
+        padding-right: 12px;
+    }
 }
 
 .checkbox {
