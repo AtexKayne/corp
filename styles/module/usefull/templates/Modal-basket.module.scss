@@ -515,7 +515,8 @@
 
     div {
         width: 100%;
-        border-bottom: 1px dotted var(--t-small);
+        opacity: .5;
+        border-bottom: 2px dotted var(--t-small);
     }
 }
 
