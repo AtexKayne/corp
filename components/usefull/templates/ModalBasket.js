@@ -93,6 +93,8 @@ function FilledBasket({ items, setItems }) {
     const refDeletedItem = useRef(0)
     const refItemsInfo = useRef([])
     const refInputs = useRef(false)
+    const refSlider = useRef(null)
+    const isInView = useInView(refSlider)
 
     const changeCount = (count, _, item) => {
         const indexSelected = refItemsInfo.current.findIndex(element => element.item.id === item.id)
@@ -139,7 +141,13 @@ function FilledBasket({ items, setItems }) {
         const index = refItemsInfo.current.findIndex(
             element => element.item.id === refDeletedItem.current.id
         )
+        if (!refItemsInfo.current[index]) return
         refItemsInfo.current[index].isDeleted = true
+        if (refItemsInfo.current[index].isSelected) {
+            // refItemsInfo.current[index].isSelected = false
+            // const checkbox = refDeletedItemNode.current.querySelector(`.${style.cheker}`)
+            // checkbox.children[0].click()
+        }
     }
 
     const selectHandler = item => {
@@ -176,13 +184,15 @@ function FilledBasket({ items, setItems }) {
 
     const returnHandler = async () => {
         const index = refItemsInfo.current.findIndex(element => element.item.id === refDeletedItem.current.id)
-        refItemsInfo.current[index].isDeleted = false
-        if (refItemsInfo.current[index].count === 0) {
-            const button = refDeletedItemNode.current.querySelector('.js-button')
-            button.click()
+        if (refItemsInfo.current[index]) {
+            refItemsInfo.current[index].isDeleted = false
+            if (refItemsInfo.current[index].count === 0) {
+                const button = refDeletedItemNode.current.querySelector('.js-button')
+                button.click()
+            }
+            updateSumm()
+            updateItemsCount()
         }
-        updateSumm()
-        updateItemsCount()
         setReturnedItem(refDeletedItem.current)
         await animateNotification.start({ opacity: 0, y: 500, transition: { duration: 0.3 } })
         refDeletedItem.current = false
@@ -200,13 +210,7 @@ function FilledBasket({ items, setItems }) {
         })
     }
 
-    const deleteItem = async (item, node) => {
-        removeItemFromList()
-        refDeletedItem.current = item
-        refDeletedItemNode.current = node
-        removeItem()
-        updateSumm()
-        updateItemsCount()
+    const deleteAnimation = async () => {
         refTimerSvg.current.classList.remove(style.animated)
         animationPath.start({ pathLength: 1, transition: { duration: 0 } })
         const yPosition = !!summ && !isShownBasket ? -140 : -60
@@ -216,7 +220,17 @@ function FilledBasket({ items, setItems }) {
         await animationPath.start({ pathLength: 0, transition: { duration: 4.9 } })
         await animateNotification.start({ opacity: 0, y: 500, transition: { duration: 0.3 } })
         refTimerSvg.current.classList.remove(style.animated)
-        animationPath.start({ pathLength: 1, transition: { duration: 0 } })
+        return animationPath.start({ pathLength: 1, transition: { duration: 0 } })
+    }
+
+    const deleteItem = async (item, node) => {
+        removeItemFromList()
+        refDeletedItem.current = item
+        refDeletedItemNode.current = node
+        removeItem()
+        updateSumm()
+        updateItemsCount()
+        await deleteAnimation()
         removeItemFromList()
         refDeletedItem.current = false
         refDeletedItemNode.current = null
@@ -235,7 +249,6 @@ function FilledBasket({ items, setItems }) {
                     bonuses: item.bonuses ?? 0,
                     price: price.replaceAll(' ', ''),
                 }
-
                 refItemsInfo.current.push(info)
             } else newLackItems.push(item)
         })
@@ -251,7 +264,7 @@ function FilledBasket({ items, setItems }) {
 
     useEffect(() => {
         if (refItemsInfo.current.length) {
-
+            setLackItems(items.filter(item => item.max === 0))
         } else {
             updateItems(items)
         }
@@ -259,33 +272,40 @@ function FilledBasket({ items, setItems }) {
 
     return (
         <div className={`${style.basketWrapper} full-height`}>
-
             <div className={style.basketInner}>
                 <div className={`${style.title} pt-3.5 pb-2`}>
                     <span className='text--a2 text--bold'>Корзина</span>
                     <Delivery summ={summ} maxSumm={10000} />
                 </div>
-                <div style={{ paddingRight: '32px' }} className='text--t5 text--bold text--center text--color-small text--upper'>
-                    {productsText}
-                </div>
-                <div className={`${style.checker}`}>
-                    <InputSelectAll isChecked={isChecked} onAfterComplete={selectAllHandler} text='Выбрать все' />
-                </div>
-                <div ref={refInputWrapper}>
-                    {items.map(item => {
-                        if (item.max !== 0) {
-                            return <ProductCard
-                                item={item}
-                                key={item.id}
-                                deleteItem={deleteItem}
-                                returnedItem={returnedItem}
-                                onChangeCount={changeCount}
-                                selectHandler={selectHandler} />
-                        }
-                    })}
+
+                <div className='p-relative'>
+                    <div data-is-invisible={productsText === '0 товаров'} style={{ paddingRight: '32px' }} className='text--t5 text--bold text--center text--color-small text--upper'>
+                        {productsText}
+                    </div>
+                    <div data-is-invisible={productsText === '0 товаров'} className={`${style.checker}`}>
+                        <InputSelectAll isChecked={isChecked} onAfterComplete={selectAllHandler} text='Выбрать все' />
+                    </div>
+                    <div ref={refInputWrapper}>
+                        {items.map(item => {
+                            if (item.max !== 0) {
+                                return <ProductCard
+                                    item={item}
+                                    key={item.id}
+                                    deleteItem={deleteItem}
+                                    returnedItem={returnedItem}
+                                    onChangeCount={changeCount}
+                                    selectHandler={selectHandler} />
+                            }
+                        })}
+                    </div>
+
+                    <div data-is-invisible={productsText !== '0 товаров'} className={`${style.filledEmptyText} text--color-small`}>
+                        Все товары из вашей корзины закончились. Нажмите на «Сообщить» у нужных позиций, и мы уведомим вас об их поступлении. А пока подберите аналоги в каталоге.
+                    </div>
                 </div>
 
-                <BasketLackItems lackItems={lackItems} setLackItems={setLackItems} />
+
+                <BasketLackItems deleteItem={deleteItem} returnedItem={returnedItem} lackItems={lackItems} setItems={setItems} setLackItems={setLackItems} />
 
                 <BasketTotalEmpty summ={summ} />
 
@@ -296,7 +316,7 @@ function FilledBasket({ items, setItems }) {
                     productsText={productsText}
                     setIsShownBasket={setIsShownBasket} />
 
-                <div className={style.slider}>
+                <div ref={refSlider} className={style.slider}>
                     <CardSlider items={cards} title='Добавьте к заказу' perView={2} />
                 </div>
             </div>
@@ -312,12 +332,12 @@ function FilledBasket({ items, setItems }) {
                     Товар удалён
                 </motion.div>
 
-                <div onClick={returnHandler} className={`${style.deleteNotificationReturn}`}>
+                <div onClick={returnHandler} className={`${style.deleteNotificationReturn} text--sparse`}>
                     вернуть обратно
                 </div>
             </motion.div>
 
-            <div data-active={!!summ && !isShownBasket} className={`${style.basketMenu}`}>
+            <div data-active={!!summ && !isShownBasket && !isInView} className={`${style.basketMenu}`}>
                 <div className={`${style.basketPrice}`}>
                     <div className='text--p4'>Итого</div>
                     <div className='text--nowrap text--p1 text--bold'>
@@ -333,12 +353,13 @@ function FilledBasket({ items, setItems }) {
     )
 }
 
-function BasketLackItems({ lackItems, setLackItems }) {
+function BasketLackItems({ lackItems, setLackItems, setItems, deleteItem, returnedItem, selectHandler }) {
     const animateWrapper = useAnimationControls()
     const removeHandler = () => {
         setTimeout(() => {
             animateWrapper.start({ height: 0, paddingTop: 0, opacity: 0, transition: { duration: 0.4 } }).then(() => {
                 setLackItems([])
+                setItems(prev => prev.filter(item => item.max !== 0))
             })
         }, 450)
     }
@@ -350,7 +371,13 @@ function BasketLackItems({ lackItems, setLackItems }) {
                 <div onClick={removeHandler} style={{ paddingRight: '69px' }} className='text--t6 text--upper text--color-primary c-pointer'>Удалить все</div>
             </div>
             {lackItems.map(item => {
-                return <ProductCardEmpty item={item} key={item.id} />
+                return <ProductCard
+                    item={item}
+                    key={item.id}
+                    deleteItem={deleteItem}
+                    onChangeCount={() => { }}
+                    returnedItem={returnedItem}
+                    selectHandler={selectHandler} />
             })}
         </motion.div>
     )
@@ -432,18 +459,6 @@ function ProductCard({ item, selectHandler, returnedItem, deleteItem, onChangeCo
                 <Card info={item} mode='inline' onChangeCount={onChangeCountHandler} />
             </div>
         </motion.div>
-    )
-}
-
-function ProductCardEmpty({ item }) {
-
-    return (
-        <div style={{ marginTop: 16, paddingTop: 16 }} className={style.product}>
-            <div className={style.productInner}>
-                <InputCheckbox external={style.checkboxDisabled} />
-                <Card info={item} mode='inline' />
-            </div>
-        </div>
     )
 }
 

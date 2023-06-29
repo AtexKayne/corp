@@ -6,7 +6,7 @@ export const globalState = {
         lg: 880,
         xl: 1024,
         xxl: 1256,
-        xxxl: 1600
+        xxxl: 1600,
     },
     path: []
 }

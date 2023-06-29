@@ -1,6 +1,7 @@
 import { useState, useEffect, useRef } from 'react'
 import { globalState } from './globalState'
 import { isEqual } from './isEqual'
+import { debounce } from './debounce'
 
 export default function Settings() {
     const refBasketItems = useRef([])
@@ -26,20 +27,43 @@ export default function Settings() {
         globalState.basket.count = refBasketItems.current.length
         globalState.basket.items = refBasketItems.current
         setUpdateItemsCount(refBasketItems.current.length)
-    }
+    }    
 
     const resizeHandler = () => {
-        const wh = window.innerHeight
-        const gwh = globalState.window.height
-        if (wh !== gwh) {
-            const attr = wh > gwh ? 'biggest' : 'smallest'
-            document.body.setAttribute('data-swap', attr)
-        } else {
-            document.body.setAttribute('data-swap', false)
+        let size
+        for (const key in globalState.sizes) {
+            const element = globalState.sizes[key];
+            if (window.innerWidth >= globalState.sizes[key]) {
+                size = key
+            }
         }
+        console.log(size);
+        globalState.currentSize = size
+
+        const rootHeight = window.innerHeight
+        if (window.innerWidth < globalState.sizes.sm) {
+            document.body.style = `--viewport-height:${rootHeight}px;`
+        } else {
+            document.body.style = `--viewport-height:100vh;`
+        }
+
+        // if (size === 'xs' || size === 'sm') {
+        //     const wh = window.innerHeight
+        //     const gwh = globalState.window.height
+        //     if (wh !== gwh) {
+        //         const attr = wh > gwh ? 'biggest' : 'smallest'
+        //         document.body.setAttribute('data-swap', attr)
+        //     } else {
+        //         document.body.setAttribute('data-swap', false)
+        //     }
+        // }
     }
+
+    const debounceResize = debounce(resizeHandler, 60)
     
     useEffect(() => {
+        resizeHandler()
+
         const items = localStorage.basket
         const parsed = items ? JSON.parse(items) : []
         refBasketItems.current = parsed
@@ -52,17 +76,10 @@ export default function Settings() {
             update
         }
 
-        globalState.window = {
-            height: window.innerHeight
-        }
-
-        if (window.innerWidth <= globalState.sizes.sm) {
-            document.body.setAttribute('data-swap', false)
-            window.addEventListener('resize', resizeHandler)
-        }
+        window.addEventListener('resize', debounceResize)
 
         return () => {
-            window.removeEventListener('resize', resizeHandler)
+            window.removeEventListener('resize', debounceResize)
         }
     }, [])
 

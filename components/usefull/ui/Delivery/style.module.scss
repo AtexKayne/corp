@@ -3,15 +3,12 @@
 .delivery {
     height: 20px;
     display: flex;
+    margin-top: 32px;
+    margin-bottom: 5px;
     position: relative;
     align-items: flex-start;
-    transform: translateX(-45px);
-
-    @include media-breakpoint(xxl-down) {
-        margin-top: 32px;
-        margin-bottom: 5px;
-        transform: translateX(20px);
-    }
+    width: calc(100% - 60px);
+    transform: translateX(8px);
     
     &[data-active='true'] {
         .icon,
@@ -19,24 +16,53 @@
             color: #34C369;
         }
 
-        .line {
+        .line,
+        .line::after {
             border-color: #34C369;
         }
+
+        .icon:first-child {
+            opacity: 0;
+            transform: translateY(-20px);
+        }
+
+        .text {
+            margin-left: 0;
+        }
+    }
+
+    @include media-breakpoint(xxl-up) {
+        width: 290px;
+        margin-top: 0;
+        margin-bottom: 0;
+        transform: translateX(-45px);
+    }
+
+    @include media-breakpoint(sm-down) {
+        width: calc(100% - 35px);
+        transform: translateX(18px);
     }
 }
 
 .text {
     width: 250px;
     margin: 0 20px;
-    text-align: right;
+    will-change: margin;
+    transition: .3s ease-out margin;
+    
     >* {
         white-space: nowrap;
     }
+
+    // @include media-breakpoint(xxl-up) {
+    //     text-align: right;
+    // }
 }
 
 .icon {
     top: 2px;
     position: absolute;
+    transition: .3s ease-out;
 
     &:nth-child(1) {
         left: -15px;
@@ -49,9 +75,9 @@
 
 .inline {
     bottom: 0;
-    width: 250px;
     display: flex;
     position: absolute;
+    width: calc(100% - 40px);
 
     &::after {
         left: 0;
@@ -71,6 +97,19 @@
     will-change: width;
     transition: .3s width;
     border-bottom: 2px solid #E21B25;
+
+    &::after {
+        right: 0;
+        top: -2px;
+        width: 6px;
+        height: 6px;
+        content: '';
+        position: absolute;
+        border-top: 2px solid;
+        border-right: 2px solid;
+        border-color: #E21B25;
+        transform: rotate(45deg);
+    }
 }
 
 .arrow {

@@ -1,31 +1,8 @@
 import Icon from './Icon'
 import Image from 'next/image'
-import { useEffect } from 'react'
-import { globalState } from './helpers/globalState'
 import style from '../styles/module/Footer.module.scss'
-import { debounce } from './helpers/debounce'
 
 export default function Footer() {
-    const resizeHandler = () => {
-        const rootHeight = window.innerHeight
-        if (window.innerWidth < globalState.sizes.sm) {
-            document.body.style = `--viewport-height:${rootHeight}px;`
-        } else {
-            document.body.style = `--viewport-height:100vh;`
-        }
-    }
-
-    const debounceResize = debounce(resizeHandler, 100)
-    
-    useEffect(() => {
-        resizeHandler()
-        window.addEventListener('resize', debounceResize)
-
-        return () => {
-            window.removeEventListener('resize', debounceResize)
-        }
-    }, [])
-
     return (
         <footer className={style.footer}>
             <div className={`container ${style.container}`}>

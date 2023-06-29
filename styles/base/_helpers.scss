@@ -10,6 +10,12 @@
     position: absolute !important;
 }
 
+*[data-is-invisible='true'] {
+    opacity: 0;
+    transition: .3s;
+    pointer-events: none;
+}
+
 *[data-is-hidden='true'] {
     display: none!important;
 }
