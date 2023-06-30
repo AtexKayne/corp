@@ -69,7 +69,7 @@ function EmptyBasket({ }) {
             </div>
 
             <motion.div initial={{ y: 100, opacity: 0 }} animate={{ y: 0, opacity: 1 }} transition={{ duration: 0.3, delay: 0.7, ease: 'easeOut' }}>
-                <CardSlider items={cards} title='Недавно просмотрено' perView={[1.9, 1.5, 2.3, 1.5]} />
+                <CardSlider items={cards} title='Недавно просмотрено' perView={[1.9, 1.5, 2.3, 1.65]} />
             </motion.div>
         </div>
     )
