@@ -457,14 +457,13 @@ function ProductCard({ item, selectHandler, returnedItem, deleteItem, onChangeCo
                     <span className='text--t4'>Удалить</span>
                 </div>
             </div>
+            {index === 0 && selectHandler
+                ? <Onboarding />
+                : null
+            }
             <div onClick={toggleControlsHandler} data-open={isControlOpen} className={style.settings}>
                 <Icon name='settings' width='16' height='16' />
                 <Icon name='close' width='16' height='16' />
-                {index === 0 && selectHandler
-                    ? <Onboarding />
-                    : null
-                }
-
             </div>
             <div data-open={isControlOpen} className={style.productInner}>
                 <InputCheckbox external={`${style.checkbox} ${selectHandler === false ? style.checkboxDisabled : ''}`} onAfterComplete={onChangeHandler} />
@@ -594,7 +593,7 @@ function Onboarding() {
     }, [])
 
     return (
-        <div data-active={isOnboard} onClick={() => setIsOnboard(false)} className={`${style.onboard} is-hidden--xl-up`}>
+        <div data-active={isOnboard} onClick={() => setIsOnboard(false)} className={`${style.onboard}`}>
             <div className={`${style.onboardLink} text--t5 text--bold text--upper`}>Понятно</div>
             <div className={`${style.onboardText} text--p4 text--normal`}>Нажмите, чтобы добавить товар в избранное или удалить товар из корзины</div>
         </div>
