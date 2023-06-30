@@ -507,13 +507,16 @@ function BasketTotal({ summ, discount, productsText, bonuses, setIsShownBasket }
                     <span className='text--t3'>{summ.toLocaleString()} <span className='rub'> ₽</span></span>
                 </div>
                 <div data-is-hidden={!discount.total} className={`${style.totalLine}`}>
+                    {/* @TODO Скидка неверно работает */}
                     <span
                         data-open={isOpen}
                         onClick={toggleHandler}
                         className={`${style.totalSubOpener} text--t4`}
                         data-active={!!(discount.detail && discount.detail.length > 1)}>
-
-                        Скидки
+                        {!!(discount.detail && discount.detail.length > 1)
+                            ? 'Скидки'
+                            : 'Скидка по акциям'
+                        }
                         <Icon external={style.subOpenIcon} name='chevronDown' width='12' height='12' />
                     </span>
                     <div />

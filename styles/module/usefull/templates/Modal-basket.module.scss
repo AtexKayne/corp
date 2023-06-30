@@ -543,6 +543,8 @@
     }
 
     &[data-active='false'] {
+        pointer-events: none;
+        
         .subOpenIcon {
             display: none;
         }
