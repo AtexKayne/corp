@@ -7,7 +7,7 @@ import Card from '../Card/Card'
 import { globalState } from '../../../helpers/globalState'
 import { debounce } from '../../../helpers/debounce'
 
-export default function CardSlider({ items, title, perView = 1.9 }) {
+export default function CardSlider({ items, title, perView = [] }) {
     const [disabled, setDisabled] = useState('prev')
     const [slidesPerView, setSlidesPerView] = useState(perView)
     const refContainer = useRef(null)
@@ -38,10 +38,14 @@ export default function CardSlider({ items, title, perView = 1.9 }) {
 
     const resizeHandler = () => {
         const cc = globalState.currentSize
-        if (cc === 'xxl' || cc === 'xxxl') setSlidesPerView(1.9)
-        else if (cc === 'xl' || cc === 'lg') setSlidesPerView(1.5)
-        else if (cc === 'md') setSlidesPerView(2)
-        else if (cc === 'sm' || cc === 'xs') setSlidesPerView(1.4)
+        // if (cc === 'xxl' || cc === 'xxxl') setSlidesPerView(1.9)
+        // else if (cc === 'xl' || cc === 'lg') setSlidesPerView(1.5)
+        // else if (cc === 'md') setSlidesPerView(2)
+        // else if (cc === 'sm' || cc === 'xs') setSlidesPerView(1.4)
+        if (cc === 'xxl' || cc === 'xxxl') setSlidesPerView(perView[0])
+        else if (cc === 'xl' || cc === 'lg') setSlidesPerView(perView[1])
+        else if (cc === 'md' || cc === 'sm') setSlidesPerView(perView[2])
+        else if (cc === 'xs') setSlidesPerView(perView[3])
     }
 
     const debounceResize = debounce(resizeHandler, 1000)
