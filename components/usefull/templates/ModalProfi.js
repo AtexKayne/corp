@@ -31,7 +31,7 @@ export default function ModalProfi() {
                     или
                 </div>
 
-                <div onClick={clickHandler} className='link d-block text--bold text--upper text--p6 text--color-primary'>
+                <div onClick={clickHandler} className='link d-block text--bold text--upper text--p6 c-pointer text--color-primary'>
                     позже. перейти к покупкам
                 </div>
             </div>

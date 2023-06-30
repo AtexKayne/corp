@@ -3,9 +3,11 @@
 .delivery {
     height: 20px;
     display: flex;
+    transition: .4s;
     margin-top: 32px;
     margin-bottom: 5px;
     position: relative;
+    transform-origin: left;
     align-items: flex-start;
     width: calc(100% - 60px);
     transform: translateX(8px);
@@ -41,6 +43,14 @@
     @include media-breakpoint(sm-down) {
         width: calc(100% - 35px);
         transform: translateX(18px);
+    }
+
+    @include media-breakpoint(xl-down) {
+        &[data-active='true'] {
+            transition-delay: .1s;
+            width: calc(100% - 20px);
+            transform: translateX(0);
+        }
     }
 }
 

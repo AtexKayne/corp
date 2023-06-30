@@ -52,10 +52,10 @@ $media-breakpoint-xs:       375px !default;
 $media-breakpoint-md-min-height: 416px !default;
 
 // Min vertical height on xl, if vertical size is smaller then 'lg' will apply
-$media-breakpoint-xl-min-height: 500px !default;
+$media-breakpoint-xl-min-height: 300px !default;
 
 // Min vertical height on xxl, if vertical size is smaller then 'xl' will apply
-$media-breakpoint-xxl-min-height: 700px !default;
+$media-breakpoint-xxl-min-height: 300px !default;
 
 // Custom queries
 $media-custom-queries: () !default;

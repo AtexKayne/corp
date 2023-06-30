@@ -37,6 +37,16 @@
         transition: .3s;
         transition-delay: .5s;
     }
+
+    @include media-breakpoint(sm-down) {
+        transition: 0s 0s;
+        position: relative;
+
+        &[data-is-invisible='true'] {
+            display: none;
+            transition: 0s 0s;
+        }
+    }
 }
 
 .title {
@@ -58,15 +68,11 @@
     pointer-events: all;
     padding-bottom: 30px;
     overflow: hidden auto;
-    padding-left: adaptive-value((
-        xs: 16px,
-        md: 32px,
-        lg: 48px,
-        xl: 72px,
-    ));
-    padding-right: adaptive-value((
-        xs: 18px,
-        xl: 22px,
+    padding: adaptive-value((
+        xs: 0 18px 60px 16px,
+        md: 0 18px 30px 32px,
+        lg: 0 18px 30px 48px,
+        xl: 0 22px 30px 72px,
     ));
 
     &::-webkit-scrollbar {
@@ -86,6 +92,10 @@
             opacity: 1;
         }
     }
+
+    @include media-breakpoint(sm-down) {
+        padding-right: 16px;
+    }
 }
 
 .checker {
@@ -101,6 +111,14 @@
 
     &:hover {
         color: var(--t-primary);
+    }
+
+    @include media-breakpoint(sm-down) {
+        transition: 0s 0s;
+        &[data-is-invisible='true'] {
+            display: none;
+            transition: 0s 0s;
+        }
     }
 }
 
@@ -118,6 +136,10 @@
     @include media-breakpoint(xl-down) {
         align-items: flex-end;
         flex-direction: column;
+    }
+
+    @include media-breakpoint(sm-down) {
+        right: 32px;
     }
 }
 
@@ -190,7 +212,37 @@
     }
 
     @include media-breakpoint(sm-down) {
-        padding-right: 12px;
+        overflow: visible;
+        padding-right: 16px;
+        border-top-right-radius: 0;
+        border-bottom-right-radius: 0;
+
+        &::after {
+            top: 0;
+            bottom: 0;
+            opacity: 0;
+            width: 12px;
+            content: '';
+            right: -10px;
+            transition: .3s;
+            position: absolute;
+            pointer-events: none;
+            border-top-right-radius: 16px;
+            border-bottom-right-radius: 16px;
+            background-color: var(--t-background);
+        }
+
+        &[data-open='true'] {
+            transform: translateX(-160px) !important;
+            
+            &::after {
+                opacity: 1;
+            }
+        }
+    }
+
+    @media screen and (max-width: 350px) {
+        padding-right: 16px;
     }
 }
 
@@ -209,6 +261,7 @@
     top: 6px;
     right: 6px;
     opacity: 1;
+    z-index: 2;
     cursor: pointer;
     transition: .3s;
     position: absolute;
@@ -239,7 +292,7 @@
         }
     }
 
-    @include media-breakpoint(md-up) {
+    @include media-breakpoint(lg-up) {
         opacity: 0;
 
         &:hover {
@@ -413,6 +466,7 @@
 
 .basketPrice {
     // min-width: 136px;
+    height: 64px;
     margin-right: 30px;
 
     * {
@@ -545,4 +599,57 @@
         lg: 48px,
         xl: 72px,
     ));
+}
+
+.showBtn {
+    >*:first-child {
+        display: block;
+    }
+    >*:last-child {
+        display: none;
+    }
+
+    @media screen and (max-width: 350px) {
+        >*:first-child {
+            display: none;
+        }
+        >*:last-child {
+            display: block;
+        }
+    }
+}
+
+.countText {
+    font-size: 12px;
+    font-weight: 600;
+    text-align: center;
+    text-transform: uppercase;
+
+    @include media-breakpoint(md-up) {
+        font-size: 14px;
+        padding-right: 32px;
+    }
+
+    @include media-breakpoint(sm-down) {
+        transition: 0s 0s;
+
+        &[data-is-invisible='true'] {
+            display: none;
+            transition: 0s 0s;
+        }
+    }
+}
+
+.lackDeleteTitle {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    >*:last-child {
+        margin-bottom: -2px;
+    }
+
+    @include media-breakpoint(md-up) {
+        padding-right: 69px;
+    }
 }

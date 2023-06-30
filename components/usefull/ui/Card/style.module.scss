@@ -86,25 +86,20 @@
             'image price'
             'image bonuses'
             'image btn';
+    }
 
-        // .colors {
-        //     padding-top: 16px;
-        //     padding-bottom: 16px;
-        // }
-
-        // .priceContainer {
-        //     text-align: left;
-        //     padding-bottom: 0;
-        //     // margin-bottom: 20px;
-        // }
-
-        // .bonuses {
-        //     justify-content: flex-start;
-        // }
-
-        // .buyBtn {
-        //     margin-top: 4px;
-        // }
+    @media screen and (max-width: 350px) {
+        grid-template-columns: 1fr;
+        grid-template-rows: 85px repeat(7, auto);
+        grid-template-areas:
+            'image'
+            'art'
+            'title'
+            'text'
+            'colors'
+            'price'
+            'bonuses'
+            'btn';
     }
 }
 

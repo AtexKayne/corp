@@ -5,6 +5,10 @@
     height: 100%;
     position: relative;
     pointer-events: none;
+    
+    @include media-breakpoint(sm-down) {
+        height: calc(100% - 28px);
+    }
 }
 
 .stepOne {

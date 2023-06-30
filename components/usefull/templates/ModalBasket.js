@@ -29,6 +29,14 @@ export default function ModalBasketProfi() {
             close.style.position = 'absolute'
             close.style.right = '40px'
         }
+
+        return () => {
+            const close = document.querySelector('.modal__close')
+            if (close) {
+                close.style.position = ''
+                close.style.right = ''
+            }
+        }
     }, [])
 
     useEffect(() => {
@@ -63,14 +71,6 @@ function EmptyBasket({ }) {
             <motion.div initial={{ y: 100, opacity: 0 }} animate={{ y: 0, opacity: 1 }} transition={{ duration: 0.3, delay: 0.7, ease: 'easeOut' }}>
                 <CardSlider items={cards} title='Недавно просмотрено' />
             </motion.div>
-
-            <div className='d-flex flex--justify-center is-hidden--md-up pb-3 mt-2.5'>
-                <Link href='/catalog/main'>
-                    <div className='btn btn--lg btn--fill btn--primary'>
-                        <span className='text--upper text--p5 text--sparse text--bold'>Перейти в каталог</span>
-                    </div>
-                </Link>
-            </div>
         </div>
     )
 }
@@ -279,7 +279,7 @@ function FilledBasket({ items, setItems }) {
                 </div>
 
                 <div className='p-relative'>
-                    <div data-is-invisible={productsText === '0 товаров'} style={{ paddingRight: '32px' }} className='text--t5 text--bold text--center text--color-small text--upper'>
+                    <div data-is-invisible={productsText === '0 товаров'} className={`${style.countText} text--a6 text--color-small`}>
                         {productsText}
                     </div>
                     <div data-is-invisible={productsText === '0 товаров'} className={`${style.checker}`}>
@@ -347,6 +347,7 @@ function FilledBasket({ items, setItems }) {
                 </div>
                 <div className={`${style.showBtn} btn btn--lg btn--primary btn--fill`}>
                     <span className='text--upper text--p5 text--sparse text--bold'>Оформить заказ</span>
+                    <span className='text--upper text--p5 text--sparse text--bold'>Оформить</span>
                 </div>
             </div>
         </div>
@@ -366,9 +367,9 @@ function BasketLackItems({ lackItems, setLackItems, setItems, deleteItem, return
 
     return (
         <motion.div data-is-hidden={!lackItems.length} animate={animateWrapper} initial={{ height: 'auto' }} className={`is-overflow-hidden pt-2.5`}>
-            <div className='d-flex flex--between'>
+            <div className={style.lackDeleteTitle}>
                 <div className='text--t1'>Нет в наличии</div>
-                <div onClick={removeHandler} style={{ paddingRight: '69px' }} className='text--t6 text--upper text--color-primary c-pointer'>Удалить все</div>
+                <div onClick={removeHandler} className='text--t6 text--upper text--color-primary c-pointer'>Удалить все</div>
             </div>
             {lackItems.map(item => {
                 return <ProductCard

@@ -6,7 +6,7 @@
     display: flex;
     flex-wrap: wrap;
 
-    > * {
+    >* {
         margin-right: 6px;
         margin-bottom: 6px;
         border-radius: 4px;
@@ -33,4 +33,9 @@
 
 [data-mode='inline'] .values {
     grid-area: colors;
+
+    .volumePicker>* {
+        padding-left: 0;
+        padding-bottom: 0;
+    }
 }

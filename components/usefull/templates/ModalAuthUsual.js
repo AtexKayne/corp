@@ -104,13 +104,20 @@ function StepTwo({ setStep, step }) {
     }
 
     useEffect(() => {
+        const close = document.querySelector('.modal__close')
         if (step === 2) {
+            if (window.innerWidth <= globalState.sizes.sm) {
+                close.style.display = 'none'
+            }
             if (window.innerWidth > globalState.sizes.md) {
                 setTimeout(() => {
                     refCode.current.querySelector('input').focus({})
                 }, 700)
             }
         } else if (step === 1) {
+            if (window.innerWidth <= globalState.sizes.sm) {
+                close.style.display = ''
+            }
             setError('')
             setReset(prev => prev + 1)
         }

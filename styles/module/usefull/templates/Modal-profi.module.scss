@@ -3,11 +3,8 @@
 .profi {
     height: 100%;
     display: flex;
+    padding-bottom: 32px;
     flex-direction: column;
-    
-    @include media-breakpoint(sm-up) {
-        padding-bottom: 32px;
-    }
 }
 
 .title {

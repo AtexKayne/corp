@@ -226,7 +226,11 @@ function StepTwo({ phone, setStep, step, data }) {
     }
 
     useEffect(() => {
+        const close = document.querySelector('.modal__close')
         if (step === 2) {
+            if (window.innerWidth <= globalState.sizes.sm) {
+                close.style.display = 'none'
+            }
             refTimer.current = setInterval(() => {
                 setTimer(prev => {
                     if (prev > 1) return prev - 1
@@ -245,6 +249,9 @@ function StepTwo({ phone, setStep, step, data }) {
             if (refTimer.current) clearInterval(refTimer.current)
             refTimer.current = false
             setTimer(60)
+            if (window.innerWidth <= globalState.sizes.sm) {
+                close.style.display = ''
+            }
         } else {
             if (refTimer.current) clearInterval(refTimer.current)
             refTimer.current = false
@@ -255,6 +262,8 @@ function StepTwo({ phone, setStep, step, data }) {
     useEffect(() => {
         return () => {
             if (refTimer.current) clearInterval(refTimer.current)
+            const close = document.querySelector('.modal__close')
+            close.style.display = ''
         }
     }, [])
 

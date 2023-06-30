@@ -4,7 +4,6 @@ import Icon from '../../../Icon'
 
 export default function Delivery({ summ, maxSumm }) {
     const [width, setWidth] = useState(0)
-    const [translateX, setTranslateX] = useState(0)
     const [text, setText] = useState((maxSumm - summ))
     const refInline = useRef(null)
 
@@ -20,8 +19,9 @@ export default function Delivery({ summ, maxSumm }) {
             <Icon external={style.icon} name='deliveryS' width={18} height={18} />
             <Icon external={style.icon} name='deliveryC' width={21} height={20} />
             <div className={`${style.text} text--t6 text--upper text--sparse`}>
-                <span className='text--bold'>{text.toLocaleString()}&nbsp;₽</span>
-                <span className='text--normal'>&nbsp;До бесплатной доставки</span>
+                <span data-is-hidden={text == 0} className='text--bold'>{text.toLocaleString()}&nbsp;₽</span>
+                <span data-is-hidden={text == 0} className='text--normal'>&nbsp;До бесплатной доставки</span>
+                <span data-is-hidden={text != 0} className='text--normal'>Бесплатная доставка</span>
             </div>
             <div ref={refInline} className={`${style.inline}`}>
                 <div style={{ width: `calc(${width}% + 20px)` }} className={`${style.line}`} />
