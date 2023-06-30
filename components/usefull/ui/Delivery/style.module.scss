@@ -52,6 +52,11 @@
             transform: translateX(0);
         }
     }
+
+    @media screen and (max-width: 360px) {
+        margin-top: 20px;
+        margin-bottom: 20px;
+    }
 }
 
 .text {
@@ -62,6 +67,12 @@
     
     >* {
         white-space: nowrap;
+    }
+
+    @media screen and (max-width: 360px) {
+        left: -15px;
+        bottom: -20px;
+        position: absolute;
     }
 
     // @include media-breakpoint(xxl-up) {
