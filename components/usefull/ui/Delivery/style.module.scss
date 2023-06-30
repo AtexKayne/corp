@@ -56,6 +56,10 @@
     @media screen and (max-width: 360px) {
         margin-top: 20px;
         margin-bottom: 20px;
+
+        &[data-active='true'] .text {
+            margin-left: 14px;
+        }
     }
 }
 

@@ -286,11 +286,12 @@ function FilledBasket({ items, setItems }) {
                         <InputSelectAll isChecked={isChecked} onAfterComplete={selectAllHandler} text='Выбрать все' />
                     </div>
                     <div ref={refInputWrapper}>
-                        {items.map(item => {
+                        {items.map((item, index) => {
                             if (item.max !== 0) {
                                 return <ProductCard
                                     item={item}
                                     key={item.id}
+                                    index={index}
                                     deleteItem={deleteItem}
                                     returnedItem={returnedItem}
                                     onChangeCount={changeCount}
@@ -384,7 +385,7 @@ function BasketLackItems({ lackItems, setLackItems, setItems, deleteItem, return
     )
 }
 
-function ProductCard({ item, selectHandler, returnedItem, deleteItem, onChangeCount }) {
+function ProductCard({ item, selectHandler, returnedItem, deleteItem, onChangeCount, index }) {
     const animationProduct = useAnimationControls()
     const [isControlOpen, setIsControlOpen] = useState(false)
     const [isFavourite, setIsFavourite] = useState('В избранное')
@@ -445,7 +446,7 @@ function ProductCard({ item, selectHandler, returnedItem, deleteItem, onChangeCo
     }, [returnedItem])
 
     return (
-        <motion.div ref={refItem} animate={animationProduct} transition={{ duration: 0.4 }} initial={{ marginTop: 16, paddingTop: 16 }} className={style.product}>
+        <motion.div data-index={index} ref={refItem} animate={animationProduct} transition={{ duration: 0.4 }} initial={{ marginTop: 16, paddingTop: 16 }} className={style.product}>
             <div className={style.controls}>
                 <div onClick={favouriteHandler} className={style.control}>
                     <Favourite external={style.favourite} info={item} width='16' height='16' />
@@ -459,6 +460,11 @@ function ProductCard({ item, selectHandler, returnedItem, deleteItem, onChangeCo
             <div onClick={toggleControlsHandler} data-open={isControlOpen} className={style.settings}>
                 <Icon name='settings' width='16' height='16' />
                 <Icon name='close' width='16' height='16' />
+                {index === 0 && selectHandler
+                    ? <Onboarding />
+                    : null
+                }
+
             </div>
             <div data-open={isControlOpen} className={style.productInner}>
                 <InputCheckbox external={`${style.checkbox} ${selectHandler === false ? style.checkboxDisabled : ''}`} onAfterComplete={onChangeHandler} />
@@ -567,5 +573,27 @@ function BasketTotalEmpty({ summ }) {
                 </div>
             </div>
         </motion.div>
+    )
+}
+
+function Onboarding() {
+    const [isOnboard, setIsOnboard] = useState(false)
+    const clickHandler = () => {
+        setIsOnboard(false)
+        document.removeEventListener('click', clickHandler)
+    }
+
+    useEffect(() => {
+        setTimeout(() => {
+            setIsOnboard(true)
+            document.addEventListener('click', clickHandler)
+        }, 800)
+    }, [])
+
+    return (
+        <div data-active={isOnboard} onClick={() => setIsOnboard(false)} className={`${style.onboard} is-hidden--xl-up`}>
+            <div className={`${style.onboardLink} text--t5 text--bold text--upper`}>Понятно</div>
+            <div className={`${style.onboardText} text--p4 text--normal`}>Нажмите, чтобы добавить товар в избранное или удалить товар из корзины</div>
+        </div>
     )
 }
