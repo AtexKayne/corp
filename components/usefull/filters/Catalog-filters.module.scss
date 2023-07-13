@@ -1,0 +1,119 @@
+@import '../../../styles/mixins/helpers/media';
+@import '../../../styles/mixins/helpers/adaptive-value';
+
+.filterModalWrapper {
+    left: 0;
+    right: 0;
+    top: -1px;
+    opacity: 0;
+    z-index: 15;
+    bottom: -1px;
+    position: fixed;
+    pointer-events: none;
+    transition-delay: .7s;
+
+    &[data-open='true'] {
+        opacity: 1;
+        pointer-events: all;
+        transition-delay: 0s;
+
+        .filterModalLayout {
+            opacity: .7;
+            transition-delay: 0s;
+        }
+
+        .filterModalContent {
+            transition-delay: .2s;
+            transform: translateX(0);
+        }
+    }
+
+    @include media-breakpoint(lg-up) {
+        &[data-open='false'] {
+            .filterModalLayout {
+                margin-right: -12px; // Иначе дрыгает
+            }
+        }
+    }
+}
+
+.filterModalLayout {
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    opacity: 0;
+    cursor: pointer;
+    transition: .3s;
+    position: absolute;
+    transition-delay: .1s;
+    background-color: #112233;
+
+    @include media-breakpoint(md-up) {
+        transition: .5s;
+    }
+}
+
+.filterModalContent {
+    top: 0;
+    right: 0;
+    bottom: 0;
+    height: 100vh;
+    display: flex;
+    position: fixed;
+    overflow-y: auto;
+    min-height: 100vh;
+    max-height: 100vh;
+    overflow-x: hidden;
+    flex-direction: column;
+    transition: .3s ease-in-out;
+    transform: translateX(100vw);
+    background-color: var(--t-background);
+    width: adaptive-value((
+        xs: 100vw,
+        md: 620px,
+        lg: 452px,
+        xl: 528px,
+        xxl: 684px,
+        xxxl: 684px
+    ));
+    padding: adaptive-value((
+        xs: 16px 16px 0,
+        md: 28px 32px 0,
+        lg: 28px 48px 0,
+        xl: 28px 72px 0,
+    ));
+
+    @include media-breakpoint(md-up) {
+        transition-duration: .5s;
+    }
+}
+
+.filterModalClose {
+    width: 0;
+    height: 0;
+    z-index: 2;
+    cursor: pointer;
+    position: relative;
+    transition: .3s color;
+    align-self: flex-start;
+
+    &::after {
+        top: -10px;
+        left: -10px;
+        content: '';
+        right: -30px;
+        bottom: -30px;
+        position: absolute;
+    }
+
+    @include media-breakpoint(md-up) {
+        align-self: flex-end;
+
+        &:hover {
+            color: var(--t-primary);
+        }
+    }
+}
+
+

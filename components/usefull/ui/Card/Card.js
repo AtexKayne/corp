@@ -8,7 +8,6 @@ import { globalState } from '../../../helpers/globalState'
 import { isEqual } from '../../../helpers/isEqual'
 import CardDescrption from './CardDescrption/CardDescrption'
 
-
 export default function Card({ info, mode = 'normal', onChangeCount = () => { } }) {
     // @TODO Постарайся от этого избавиться
     const [count, setCount] = useState(info.basket ?? 0)

@@ -1,6 +1,6 @@
-@import '../../mixins/helpers/media';
-@import '../../mixins/helpers/adaptive-value';
-@import '../../extends/_text-sizes';
+@import '../../styles/mixins/helpers/media';
+@import '../../styles/mixins/helpers/adaptive-value';
+@import '../../styles/extends/_text-sizes';
 
 .container {
     display: flex;
@@ -208,33 +208,12 @@
 }
 
 .navInner {
+    left: 0;
     right: 0;
     display: flex;
-    position: unset;
+    position: absolute;
     align-items: center;
     justify-content: space-between;
-    left: adaptive-value((
-        xs: 0,
-        xl: 196px,
-        xxl: 280px,
-        xxxl: 344px
-    ));
-
-    
-    @include media-breakpoint(xl-up) {
-        width: auto;
-        position: absolute;
-
-        &[data-toggled='true'] {
-            left: 0;
-            padding-left: 0;
-            pointer-events: none;
-            
-            .navFiller {
-                display: block;
-            }
-        }
-    }
 }
 
 .navFiller {
@@ -627,29 +606,15 @@
     width: 100%;
     display: grid;
     grid-gap: 16px;
-    // transition-delay: .5s;
     grid-auto-rows: max-content;
-    grid-template-columns: repeat(3, 1fr);
+    grid-template-columns: repeat(2, 1fr);
 
-    @include media-breakpoint(xl-up) {
-        padding-left: 32px;
-
-        &[data-show='true'] {
-            padding-left: 0;
-            grid-template-columns: repeat(4, 1fr);
-        }
-    }
-
-    @include media-breakpoint(lg) {
+    @include media-breakpoint(lg-up) {
         grid-template-columns: repeat(4, 1fr);
     }
 
     @include media-breakpoint(md) {
         grid-template-columns: repeat(3, 1fr);
-    }
-
-    @include media-breakpoint(sm-down) {
-        grid-template-columns: repeat(2, 1fr);
     }
 
     @media (max-width: 374px) {
@@ -741,11 +706,7 @@
 // Usefull
 .pagination {
     width: 100%;
-    padding: 16px 16px 20px 48px;
-
-    &[data-open='true'] {
-        padding: 16px 16px 20px;
-    }
+    padding: 32px 16px 20px;
 
     .showBtn {
         min-height: 60px;

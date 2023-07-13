@@ -5,7 +5,7 @@ import { debounce } from '../../helpers/debounce'
 import { globalState } from '../../helpers/globalState'
 import Icon from '../../Icon'
 
-export default function InputRange({ min, max, code, reset = '' }) {
+export default function InputRange_({ min, max, code, reset = '' }) {
     const [isChanged, setIsChanged] = useState(false)
     const [rangeValue, setRangeValue] = useState([min, max])
     const [valusesLocale, setValusesLocale] = useState({ min: 0, max: 0 })

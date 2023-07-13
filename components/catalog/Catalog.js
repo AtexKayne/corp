@@ -1,14 +1,11 @@
-import { useRouter } from 'next/router'
 import { useState, useEffect, useRef } from 'react'
-import { debounce } from '../../components/helpers/debounce'
 import { motion, useAnimationControls } from 'framer-motion'
 import { globalState } from '../../components/helpers/globalState'
-import { cards, filters } from '../../components/helpers/constants'
-import style from '../../styles/module/Catalog/Catalog.module.scss'
+import { cards } from '../../components/helpers/constants'
 
-import Link from 'next/link'
 import Image from 'next/image'
 import Icon from '../../components/Icon'
+import style from './Catalog.module.scss'
 import Card from '../usefull/ui/Card/Card'
 import Dropdown from '../../components/usefull/Dropdown'
 import Favourite from '../../components/usefull/Favourite'
@@ -17,213 +14,44 @@ import ColorPicker from '../../components/usefull/form/ColorPicker'
 import ItemsPicker from '../../components/usefull/form/ItemsPicker'
 import InputSwitch from '../../components/usefull/form/InputSwitch'
 import ItemChecker from '../../components/usefull/form/ItemChecker'
+import CatalogFilters from '../usefull/filters/CatalogFilters'
 
 export default function Catalog({ detail }) {
-    const c = detail.currentCategory
+    const info = detail.currentCategory
     const isBrands = detail.isBrands || detail.isPromo
-    const [countSelectedFilters, setCountSelectedFilters] = useState(0)
-    const [isSidebarHidden, setIsSidebarHidden] = useState('new')
-    const [activeCategory, setActiveCategory] = useState(c.id)
-    const [selectedFilter, setSelectedFilter] = useState({})
-    const [categoryName, setCategoryName] = useState(c.name)
-    const [titleOpacity, setTitleOpacity] = useState(false)
-    const [isPrevButton, setIsPrevButton] = useState(true)
     const [products, setProducts] = useState('updated')
-    const [filters, setFilters] = useState(c.filter)
-    const [info, setInfo] = useState(c)
-    const refCategories = useRef(null)
-    const refIsToggled = useRef(false)
-    const refTimeout = useRef(false)
+    const [filters, setFilters] = useState(info.filter)
+    const [isFilterOpen, setIsFilterOpen] = useState(false)
     const refNav = useRef(null)
-    const router = useRouter()
 
     const updateProducts = () => {
         setProducts('updated')
         setTimeout(() => setProducts(cards), 1500)
     }
 
-    const documentClickHandler = event => {
-        const parent = event.target.closest(`.${style.wrapper}`)
-        if (!parent) {
-            setIsSidebarHidden(true)
-            document.removeEventListener('click', documentClickHandler)
-        }
-    }
-
-    const toggleSidebar = () => {
-        const filler = refNav.current.querySelector(`.${style.navFiller}`)
-        const selector = refNav.current.querySelector(`.${style.selector}`).childNodes[0]
-        filler.style.width = `${selector.clientWidth + 16}px`
-
-        if (window.innerWidth < globalState.sizes.xl && isSidebarHidden) {
-            setTimeout(() => {
-                document.addEventListener('click', documentClickHandler)
-            }, 100);
-        }
-
-        refIsToggled.current = !isSidebarHidden
-        setIsSidebarHidden(!isSidebarHidden)
-    }
-
-    const routerPush = url => {
-        const link = url.includes('catalog/') ? url.split('catalog/')[1] : url
-        router.push(link, undefined, { scroll: false })
-        window.scrollTo({
-            top: 0,
-            behavior: 'smooth'
-        })
-    }
-
-    const closeWrapper = () => {
-        if (window.innerWidth >= globalState.sizes.xl) return
-        setTimeout(() => setIsSidebarHidden(true), 600)
-    }
-
-    const updateCategoryName = name => {
-        setTitleOpacity(true)
-        setTimeout(() => {
-            setCategoryName(name)
-            setTitleOpacity(false)
-        }, 300)
-    }
-
-    const selectCategory = info => {
-        refCategories.current.style.pointerEvents = 'none'
-        setInfo(info)
-        setActiveCategory(info.id)
-        updateCategoryName(info.name)
-        setFilters(info.filter)
-        routerPush(info.url)
-        updateProducts()
-        // closeWrapper()
-        setTimeout(() => refCategories.current.style.pointerEvents = '', 1500)
-    }
-
-    const resetSelection = () => {
-        setActiveCategory(false)
-        updateCategoryName('Каталог товаров')
-        setFilters(false)
-        routerPush('main')
-        updateProducts()
-        refCategories.current.querySelectorAll(`.${style.categoryWrapper}`).forEach(el => {
-            el.setAttribute('data-selected', 'false')
-        })
-        const prevItem = refCategories.current.querySelector(`.${style.active}`)
-        if (prevItem) prevItem.classList.remove(style.active)
-    }
-
     const openFilters = event => {
         event.preventDefault()
-        setFilters(() => {
-            if (info.filter) {
-                globalState.modal.open('filters', true, info.filter)
-                return info.filter
-            } else return false
-        })
-
+        globalState.body.addClass('overflow-hidden')
+        setIsFilterOpen(true)
     }
 
     const sortHandler = data => {
-        if (!data) return
-        const value = data.getAttribute('data-value')
-        if (!value) return
 
-        globalState.catalog.setSelectedFilter(prev => {
-            const prevCopy = Object.assign({}, prev)
-            prevCopy.sort = value
-            return prevCopy
-        })
     }
-
-    const recursiveSelect = item => {
-        const parent = item.parentElement
-        if (parent.classList.contains(style.categoryWrapper)) {
-            parent.setAttribute('data-selected', 'true')
-            recursiveSelect(parent)
-        }
-    }
-
-    const resizeHandler = () => {
-        if (window.innerWidth < globalState.sizes.xl) setIsSidebarHidden(true)
-        else setIsSidebarHidden(refIsToggled.current)
-    }
-
-    const debounceResize = debounce(resizeHandler, 400)
 
     useEffect(() => {
-        globalState.catalog = {
-            setSelectedFilter,
-        }
         setProducts(cards)
-        setIsSidebarHidden(window.innerWidth < globalState.sizes.xl)
-        window.addEventListener('resize', debounceResize)
-
-        if (!activeCategory || isBrands) return
-        const active = refCategories.current.querySelector(`[data-id="${activeCategory}"]`)
-
-        if (active) {
-            refCategories.current.querySelectorAll(`.${style.categoryWrapper}`).forEach(el => {
-                el.setAttribute('data-selected', 'none')
-            })
-            active.querySelector(`.${style.category}`).classList.add(style.active)
-            active.setAttribute('data-selected', true)
-            recursiveSelect(active)
-            active.childNodes.forEach(el => {
-                if (el.classList.contains(style.categoryWrapper)) {
-                    el.setAttribute('data-selected', false)
-                }
-            })
-        }
-
-        // setIsPrevButton(globalState.path.length > 2 && globalState.path[globalState.path.length - 1].includes('/product/'))
-
-        return () => {
-            window.removeEventListener('resize', debounceResize)
-        }
     }, [])
-
-    useEffect(() => {
-        globalState.catalog.selectedFilter = selectedFilter
-
-        if (refTimeout.current) clearTimeout(refTimeout.current)
-        refTimeout.current = setTimeout(() => {
-            let countFilters = 0
-            for (const key in globalState.catalog.selectedFilter) {
-                if (Object.hasOwnProperty.call(globalState.catalog.selectedFilter, key)) {
-                    const element = globalState.catalog.selectedFilter[key];
-                    if (Array.isArray(element)) {
-                        if (key !== 'price') {
-                            if (element.length) countFilters++
-                        } else {
-                            if (element[0] !== 0 || element[1] !== 15000) countFilters++
-                        }
-                    }
-                    if (element === true) countFilters++
-                }
-            }
-            refTimeout.current = false
-            setCountSelectedFilters(countFilters)
-            updateProducts()
-        }, 200)
-    }, [selectedFilter])
 
     return (
         <>
-            <Head
-                info={info}
-                isBrands={isBrands}
-                isPromo={detail.isPromo}
-                categoryName={categoryName}
-                titleOpacity={titleOpacity}
-                toggleSidebar={toggleSidebar}
-                isSidebarHidden={isSidebarHidden} />
-
+            <Head info={info} isBrands={isBrands} isPromo={detail.isPromo} categoryName={info.name} />
+            
             <div className={style.navContainer}>
-                {isBrands ? null : <FastFilter updated={[filters, info]} />}
+                {isBrands ? null : <FastFilter />}
 
                 <div ref={refNav} className={`${style.nav} pb-2`}>
-                    <SidebarHead activeCategory={activeCategory} toggleSidebar={toggleSidebar} isBrands={isBrands} />
-                    <div data-toggled={isSidebarHidden && isSidebarHidden !== 'new'} className={`${style.navInner} pl-1:xl pr-1:xl`}>
+                    <div className={`${style.navInner}`}>
                         <div className={style.navFiller} />
                         <div className='is-hidden--lg-down text--t5 text--bold text--upper text--color-small'>НАЙДЕНО 668 ТОВАРОВ</div>
                         <Dropdown title='Популярные' external='text--t5 text--bold text--upper' afterChose={sortHandler}>
@@ -234,57 +62,29 @@ export default function Catalog({ detail }) {
                                 <span data-value='price-up' className='text--t4'>Цена по убыванию</span>
                             </>
                         </Dropdown>
-                        <a
-                            href='#'
-                            onClick={openFilters}
-                            style={{ display: filters ? 'block' : 'none' }}
-                            className='is-hidden--xl-up'>
+                        <a href='#' onClick={openFilters}>
                             <span className='text--t5 link text--bold text--upper'>фильтры</span>
-                            <span data-selected={!!countSelectedFilters} className={style.filterLinkIcon}>{countSelectedFilters}</span>
                         </a>
                     </div>
                 </div>
             </div>
 
             <div className={style.container}>
-                <div data-hidden={isSidebarHidden} className={`${style.wrapper} ${isBrands ? style.wrapperBrand : ''}`}>
-                    {!isBrands
-                        ? <div ref={refCategories} className={`${style.categories}`} data-selected={!!activeCategory}>
-                            <Addition />
-
-                            <div onClick={resetSelection} className={`${style.catalogPrev} text--t4 text--bold`}>
-                                <span>Каталог товаров</span>
-                            </div>
-
-                            <Categories categories={detail.categories} selectCategory={selectCategory} />
-                        </div> : null
-                    }
-
-                    {filters && filters.length
-                        ? <div className={style.filters}>
-                            {
-                                filters.map(filter => <Filter key={filter.id} name={filter.name} code={filter.code} />)
-                            }
-                        </div>
-                        : null
-                    }
-                </div>
-
                 <div style={{ width: '100%' }} className='d-flex flex--column'>
-                    <div className={`${style.countItemsMob} is-hidden--xl-up text--t6 text--bold text--upper text--color-small`}>НАЙДЕНО 668 ТОВАРОВ</div>
+                    <PreviousButton />
 
-                    <PreviousButton isPrevButton={isPrevButton} isSidebarHidden={isSidebarHidden} />
+                    <CardList products={products} />
 
-                    <CardList products={products} isSidebarHidden={isSidebarHidden} />
-
-                    <Pagination isSidebarHidden={isSidebarHidden} />
+                    <Pagination />
                 </div>
             </div>
+            
+            <CatalogFilters filters={filters} setFilters={setFilters} isFilterOpen={isFilterOpen} setIsFilterOpen={setIsFilterOpen} />
         </>
     )
 }
 
-function Head({ toggleSidebar, isSidebarHidden, categoryName, titleOpacity, isBrands, isPromo, info }) {
+function Head({ categoryName, isBrands, isPromo, info }) {
     const [imageLogo, setImageLogo] = useState('/icons/icon-empty.svg')
     const [imageOverlay, setImageOverlay] = useState(null)
     const [themeHead, setThemeHead] = useState('ui-light')
@@ -310,7 +110,7 @@ function Head({ toggleSidebar, isSidebarHidden, categoryName, titleOpacity, isBr
         return (
             <div className={`${themeHead} ${imageOverlay ? 'mb-2 mb-3.5:md mb-4:lg mb-5:xl mb-6:xxxl' : 'mb-1.5 mb-2:md mb-3:xxl'}`}>
                 {imageOverlay
-                    ? <div className={`${style.imageOverlay} ${categoryName.length >= 20 ? style.imageOverlayFull : '' }`}>
+                    ? <div className={`${style.imageOverlay} ${categoryName.length >= 20 ? style.imageOverlayFull : ''}`}>
                         <Image src={imageOverlay} layout='fill' alt={info.name} />
                     </div> : null
                 }
@@ -327,7 +127,7 @@ function Head({ toggleSidebar, isSidebarHidden, categoryName, titleOpacity, isBr
                         }
 
                         <div className={`${style.head} ${isPromo ? 'mb-0.5 mb-1:xl' : 'mb-0.5 mb-0.6:xl mb-1.5:xxxl'}`}>
-                            <div data-shown={!isSidebarHidden} data-opacity={titleOpacity} className={`${style.title}`}>
+                            <div className={`${style.title}`}>
                                 <h1 className={`text--a2 text--bold is-decorative`}>{categoryName}</h1>
                             </div>
                             <div className={style.headAddition}>
@@ -354,9 +154,8 @@ function Head({ toggleSidebar, isSidebarHidden, categoryName, titleOpacity, isBr
         return (
             <div className={`${style.head} row mb-2 pt-1.5`}>
 
-                <div data-shown={!isSidebarHidden} data-opacity={titleOpacity} className={`${style.title}`}>
-                    <h1 onClick={toggleSidebar} className={`text--a2 text--bold`}>{categoryName}</h1>
-                    <Icon name='dropdown' external={`${style.titleArrow} is-hidden--xl-up`} width='20' height='20' />
+                <div className={`${style.title}`}>
+                    <h1 className={`text--a2 text--bold`}>{categoryName}</h1>
                 </div>
 
                 {info ? <Share isBrands={isBrands} name={info.name} /> : null}
@@ -382,17 +181,6 @@ function ColorCircle({ isFullSize = false }) {
 
     useEffect(() => {
         setTimeout(onboard, 600)
-
-        // To generate clipPath
-        // const precision = 24;
-        // const radius = 4;
-        // const c = [...Array(precision)].map((_, i) => {
-        //     const a = -i / (precision - 1) * Math.PI * 2;
-        //     const x = Math.cos(a) * radius + 50;
-        //     const y = Math.sin(a) * radius + 50;
-        //     return `${x.toFixed(2).replace('.00', '')}% ${y.toFixed(2).replace('.00', '')}%`
-        // })
-        // console.log(`polygon(100% 50%, 100% 100%, 0 100%, 0 0, 100% 0, 100% 50%, ${c.join(',')})`);
     }, [])
 
     if (isFullSize) {
@@ -605,11 +393,7 @@ function Share({ name, isPromo, isBrands }) {
 
     const copyHandler = () => {
         setIsOpen(false)
-        globalState.popover.setTextPrimary(`${isBrands ? 'Бренд' : 'Раздел'} ${name}`)
-        globalState.popover.setTextSecondary('ссылка скопирована в буфер обмена')
-        globalState.popover.setImage(false)
-        globalState.popover.setIsBasket(false)
-        globalState.popover.setIsOpen(true)
+        globalState.popover.open([`${isBrands ? 'Бренд' : 'Раздел'} ${name}`, 'ссылка скопирована в буфер обмена'], false)
     }
 
     return (
@@ -638,179 +422,7 @@ function Share({ name, isPromo, isBrands }) {
     )
 }
 
-function Filter({ name, code }) {
-    const { colors, brands, pitanie, proizvodstvo, ves, type } = filters
-    const min = 0
-    const max = 15000
-
-    const [isOpen, setIsOpen] = useState(true)
-    const [selectedFilters, setSelectedFilters] = useState(0)
-
-    const toggleHandler = () => {
-        if (isOpen) {
-            const values = globalState.catalog.selectedFilter[code]
-            if (code !== 'market' && code !== 'available' && code !== 'price') {
-                if (values && values.length) setSelectedFilters(values.length)
-                else setSelectedFilters(0)
-            } else if (code === 'price') {
-                if (values && values.length && values[0] !== min && values[1] !== max)
-                    setSelectedFilters(' ')
-                else setSelectedFilters(0)
-            }
-        }
-
-        setIsOpen(!isOpen)
-    }
-
-    if (code !== 'market' && code !== 'available' && code !== 'hits' && code !== 'discont') {
-        return (
-            <div data-open={isOpen} className={style.filter}>
-                <div onClick={toggleHandler} className={style.filterHeader}>
-                    <div className='text--t5 text--upper text--bold'>
-                        <div className='p-relative'>
-                            <span>{name}</span>
-                            {selectedFilters !== 0
-                                ? <span className={style.filterIcon}>{selectedFilters}</span>
-                                : null
-                            }
-
-                        </div>
-                    </div>
-                    <Icon name='chevronUp' width='16' height='16' />
-                </div>
-
-                {code === 'price' ? <InputRange min={min} max={max} code={code} /> : null}
-                {code === 'color' ? <ColorPicker colors={colors} code={code} /> : null}
-                {code === 'brand' ? <ItemsPicker items={brands} code={code} /> : null}
-                {code === 'pitanie' ? <ItemsPicker items={pitanie} code={code} /> : null}
-                {code === 'proizvodstvo' ? <ItemsPicker items={proizvodstvo} code={code} /> : null}
-                {code === 'weight_filter' || code === 'ves' ? <ItemsPicker items={ves} code={code} /> : null}
-                {code === 'vid' ? <ItemsPicker items={type} code={code} /> : null}
-
-            </div>
-        )
-    } else {
-        return (
-            <div className={style.checker}>
-                {code === 'market' || code === 'available' || code === 'hits' || code === 'discont'
-                    ? <ItemChecker text={name} code={code} /> : null
-                }
-            </div>
-        )
-    }
-}
-
-function Addition() {
-    return (
-        <div className={style.additional}>
-            <Link href={`/catalog/hit`}>
-                <a href={`/catalog/hit`} className='d-flex flex--align-center mb-2'>
-                    <Image src='/images/catalog/categorys/hit-xs.svg' width='24' height='24' alt='Хиты' />
-                    <div className='ml-0.5 pr-1:xxl col text--t4 d-flex flex--between flex--align-center'>
-                        <span>Хиты</span>
-                        <Icon external={style.categoryIcon} name='chevronRight' width='12' height='16' />
-                    </div>
-                </a>
-            </Link>
-            <Link href={`/catalog/new`}>
-                <a href={`/catalog/new`} className='d-flex flex--align-center mb-2'>
-                    <Image src='/images/catalog/categorys/new-xs.svg' width='24' height='24' alt='Новинки' />
-                    <div className='ml-0.5 pr-1:xxl col text--t4 d-flex flex--between flex--align-center'>
-                        <span>Новинки</span>
-                        <Icon external={style.categoryIcon} name='chevronRight' width='12' height='16' />
-                    </div>
-                </a>
-            </Link>
-        </div>
-    )
-}
-
-function Categories({ categories, selectCategory }) {
-    if (!categories) return null
-    const refWrapper = useRef(null)
-
-    const recursiveSelection = target => {
-        const parent = target.parentElement
-        if (parent.classList.contains(style.categoryWrapper)) {
-            parent.setAttribute('data-selected', true)
-            recursiveSelection(parent)
-        }
-    }
-
-    const select = (category, event) => {
-        const target = event.target
-        const parent = target.parentElement
-        const siblings = parent.childNodes
-        const prevItem = refWrapper.current.querySelector(`.${style.active}`)
-        let siblingsCount = 0
-
-        if (prevItem) prevItem.classList.remove(style.active)
-        target.classList.add(style.active)
-
-        refWrapper.current.querySelectorAll(`.${style.categoryWrapper}`).forEach(el => {
-            el.setAttribute('data-selected', 'none')
-        })
-
-        recursiveSelection(target)
-
-        siblings.forEach(el => {
-            if (el.classList.contains(style.categoryWrapper)) {
-                el.setAttribute('data-selected', false)
-
-                if (el.childElementCount > 1) siblingsCount++
-            }
-        })
-
-        if (!siblingsCount) {
-            parent.parentElement.childNodes.forEach(el => {
-                if (el.classList.contains(style.categoryWrapper) && el.getAttribute('data-selected') !== 'true') {
-                    el.setAttribute('data-selected', false)
-                }
-            })
-        }
-
-        selectCategory(category)
-    }
-
-    return (
-        <div className='pr-1:xxl' ref={refWrapper}>
-            {categories.map(include1 => (
-                <div data-selected='false' data-id={include1.id} key={include1.id} className={style.categoryWrapper}>
-                    <div key={include1.id} onClick={e => select(include1, e)} className={style.category}>
-                        <span className='is-decorative'>{include1.name}</span>
-                        <Icon external={`${style.categoryIcon} is-decorative`} name='chevronRight' width='12' height='16' />
-                    </div>
-
-                    {include1.include_sections
-                        ? include1.include_sections.map(include2 => (
-                            <div data-selected='false' data-id={include2.id} key={include2.id} className={style.categoryWrapper}>
-                                <div key={include2.id} onClick={e => select(include2, e)} className={style.category}>{include2.name}</div>
-
-                                {include2.include_sections
-                                    ? include2.include_sections.map(include3 => (
-                                        <div data-selected='false' data-id={include3.id} key={include3.id} className={style.categoryWrapper}>
-                                            <div key={include3.id} onClick={e => select(include3, e)} className={style.category}>{include3.name}</div>
-
-                                            {include3.include_sections
-                                                ? include3.include_sections.map(include4 => (
-                                                    <div data-selected='false' data-id={include4.id} key={include4.id} className={style.categoryWrapper}>
-                                                        <div key={include4.id} onClick={e => select(include4, e)} className={style.category}>{include4.name}</div>
-                                                    </div>
-                                                )) : null
-                                            }
-                                        </div>
-                                    )) : null
-                                }
-                            </div>
-                        )) : null
-                    }
-                </div>
-            ))}
-        </div>
-    )
-}
-
-function PreviousButton({ isSidebarHidden, isPrevButton }) {
+function PreviousButton({ isPrevButton = true }) {
     return (
         <div data-hidden={!isPrevButton} className={`${style.previousButton} btn btn--primary`}>
             <span className='text--upper text--p5 text--sparse text--bold'>показать предыдущие</span>
@@ -818,12 +430,12 @@ function PreviousButton({ isSidebarHidden, isPrevButton }) {
     )
 }
 
-function Pagination({ isSidebarHidden }) {
+function Pagination({ }) {
     const countSelect = () => {
 
     }
     return (
-        <div data-open={isSidebarHidden} className={`${style.pagination}`}>
+        <div className={`${style.pagination}`}>
             <div className={`${style.showBtn} btn btn--primary btn--fill`}>
                 <span className='text--upper text--p5 text--sparse text--bold'>показать еще</span>
             </div>
@@ -851,30 +463,11 @@ function Pagination({ isSidebarHidden }) {
     )
 }
 
-function SidebarHead({ activeCategory, toggleSidebar, isBrands }) {
-    return (
-        <div className={`${style.wrapper} is-hidden--lg-down`}>
-            <div data-selected={!!activeCategory} className={`${style.selector} d-flex flex--align-center text--t5 text--upper text--bold`}>
-                {isBrands
-                    ? <span className={`is-hidden--lg-down`}>Фильтры</span>
-                    : <>
-                        <span>Категории</span>
-                        <span className={`${style.sidebarFilterText} is-hidden--xl`}>&nbsp;и фильтры</span>
-                    </>
-                }
-
-                <div className='mr-0.5' />
-                <InputSwitch onAfterChange={toggleSidebar} isActive={true} />
-            </div>
-        </div>
-    )
-}
-
-function CardList({ products, isSidebarHidden }) {
+function CardList({ products }) {
     const fillers = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12]
     if (products === 'updated') {
         return (
-            <div data-show={isSidebarHidden} className={style.cardsContainer}>
+            <div className={style.cardsContainer}>
                 {fillers.map(product => (
                     <div key={product} className={style.cardFiller}>
                         <div className={style.cardFillerImage} />
@@ -892,14 +485,12 @@ function CardList({ products, isSidebarHidden }) {
     if (!products || !products.length) return null
 
     return (
-        <div data-show={isSidebarHidden} className={style.cardsContainer}>
-            {
-                products.map(product => (
-                    <div key={product.id} className={style.cardWrapper}>
-                        <Card info={product} updated={[isSidebarHidden]} />
-                    </div>
-                ))
-            }
+        <div className={style.cardsContainer}>
+            {products.map(product => (
+                <div key={product.id} className={style.cardWrapper}>
+                    <Card info={product} />
+                </div>
+            ))}
         </div>
     )
 }
