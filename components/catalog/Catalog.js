@@ -17,10 +17,10 @@ import ItemChecker from '../../components/usefull/form/ItemChecker'
 import CatalogFilters from '../usefull/filters/CatalogFilters'
 
 export default function Catalog({ detail }) {
-    const info = detail.currentCategory
+    // console.log(detail.filter);
     const isBrands = detail.isBrands || detail.isPromo
     const [products, setProducts] = useState('updated')
-    const [filters, setFilters] = useState(info.filter)
+    const [filters, setFilters] = useState(detail.filter)
     const [isFilterOpen, setIsFilterOpen] = useState(false)
     const refNav = useRef(null)
 
@@ -41,12 +41,13 @@ export default function Catalog({ detail }) {
 
     useEffect(() => {
         setProducts(cards)
+        // initFilters()
     }, [])
 
     return (
         <>
-            <Head info={info} isBrands={isBrands} isPromo={detail.isPromo} categoryName={info.name} />
-            
+            <Head info={detail} isBrands={isBrands} isPromo={detail.isPromo} categoryName={detail.name} />
+
             <div className={style.navContainer}>
                 {isBrands ? null : <FastFilter />}
 
@@ -78,7 +79,7 @@ export default function Catalog({ detail }) {
                     <Pagination />
                 </div>
             </div>
-            
+
             <CatalogFilters filters={filters} setFilters={setFilters} isFilterOpen={isFilterOpen} setIsFilterOpen={setIsFilterOpen} />
         </>
     )

@@ -59,29 +59,20 @@
     right: 0;
     bottom: 0;
     height: 100vh;
-    display: flex;
     position: fixed;
-    overflow-y: auto;
+    overflow: hidden;
     min-height: 100vh;
     max-height: 100vh;
-    overflow-x: hidden;
-    flex-direction: column;
     transition: .3s ease-in-out;
     transform: translateX(100vw);
     background-color: var(--t-background);
     width: adaptive-value((
         xs: 100vw,
-        md: 620px,
-        lg: 452px,
-        xl: 528px,
-        xxl: 684px,
-        xxxl: 684px
+        md: 468px,
     ));
     padding: adaptive-value((
-        xs: 16px 16px 0,
-        md: 28px 32px 0,
-        lg: 28px 48px 0,
-        xl: 28px 72px 0,
+        xs: 16px,
+        md: 28px 48px 28px 0,
     ));
 
     @include media-breakpoint(md-up) {
@@ -89,14 +80,58 @@
     }
 }
 
+.scrollContent {
+    height: 100%;
+    display: flex;
+    overflow-y: auto;
+    padding-left: 48px;
+    padding-right: 28px;
+    flex-direction: column;
+    width: calc(100% + 28px);
+
+    &::-webkit-scrollbar {
+        width: 2px;
+        margin-right: 0;
+    }
+    
+    &::-webkit-scrollbar-track {
+        background: var(--t-lightest);
+    }
+    
+    &::-webkit-scrollbar-thumb {
+        border: none;
+        border-radius: 5px;
+        background-color: var(--t-dark);
+    }
+}
+
+.filterModalBackground {
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    opacity: 0;
+    z-index: 3;
+    transition: .2s;
+    position: absolute;
+    pointer-events: none;
+    background-color: var(--t-background);
+
+    &[data-updated='true'] {
+        opacity: 0.7;
+        pointer-events: all;
+    }
+}
+
 .filterModalClose {
     width: 0;
+    top: 28px;
     height: 0;
     z-index: 2;
+    right: 48px;
     cursor: pointer;
-    position: relative;
+    position: absolute;
     transition: .3s color;
-    align-self: flex-start;
 
     &::after {
         top: -10px;
@@ -115,5 +150,3 @@
         }
     }
 }
-
-

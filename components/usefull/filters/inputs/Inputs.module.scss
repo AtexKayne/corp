@@ -1,0 +1,241 @@
+@import '../../../../styles/mixins/helpers/media';
+@import '../../../../styles/mixins/helpers/adaptive-value';
+
+.container {
+    margin-top: 30px;
+    position: relative;
+}
+
+.wrapper {
+
+    &[data-open='true'] {
+        .icon {
+            transform: rotate(180deg);
+        }
+    }
+
+    @include media-breakpoint(lg-up) {
+        overflow: hidden;
+        
+        // &[data-open='false'] {
+        //     height: 40px;
+        // }
+    }
+}
+
+.filterReset {
+    top: 2px;
+    left: -24px;
+    width: 18px;
+    height: 18px;
+    display: flex;
+    cursor: pointer;
+    position: absolute;
+    border-radius: 50%;
+    align-items: center;
+    color: var(--t-primary);
+    justify-content: center;
+    background-color: var(--t-background);
+    // animation: rippleResetIcon 1s linear 0.3s 1;
+    box-shadow: 0px 2px 9px 0px rgba(0, 0, 0, 0.15);
+
+    &:hover {
+        color: color-use(text);
+    }
+
+    &::after {
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        content: '';
+        z-index: -1;
+        opacity: 0.0;
+        position: absolute;
+        border-radius: 50%;
+        background: var(--t-primary);
+        animation: rippleResetIcon 1s cubic-bezier(.65,0,.34,1) 0s 1;
+    }
+
+    &[data-active='false'] {
+        opacity: 0;
+        pointer-events: none;
+
+        &::after {
+            animation: none;
+        }
+    }
+}
+
+@keyframes rippleResetIcon {
+    from { opacity: 1; transform: scale3d(0.75,0.75,1); }
+    to   { opacity: 0; transform: scale3d(3,3,1); }
+}
+
+.title {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    @include media-breakpoint(lg-up) {
+        cursor: pointer;
+
+        &:hover {
+            color: var(--t-primary);
+        }
+    }
+}
+
+.titleCount {
+    opacity: 1;
+    height: 18px;
+    padding: 0 6px;
+    min-width: 18px;
+    font-size: 10px;
+    transition: .3s;
+    font-weight: 700;
+    border-radius: 32px;
+    align-items: center;
+    display: inline-flex;
+    justify-content: center;
+    color: var(--t-background);
+    transform: translate(8px, -1px);
+    background-color: var(--t-primary);
+
+    &[data-selected='false'] {
+        opacity: 0;
+    }
+}
+
+.icon {
+    transition: .4s;
+
+    @include media-breakpoint(md-down) {
+        transform: rotate(90deg);
+    }
+}
+
+.priceList {
+    padding: 0 10px;
+    margin-top: 30px;
+    margin-bottom: 10px;
+}
+
+.itemList {
+    margin-right: 7px;
+
+    &::-webkit-scrollbar {
+        width: 2px;
+        margin-right: 0;
+    }
+    
+    &::-webkit-scrollbar-track {
+        background: var(--t-lightest);
+    }
+    
+    &::-webkit-scrollbar-thumb {
+        border: none;
+        border-radius: 5px;
+        background-color: var(--t-dark);
+    }
+
+    @include media-breakpoint(lg-up) {
+        margin-top: 18px;
+        overflow-y: auto;
+        max-height: 308px;
+    }
+}
+
+.includeCheckboxWrapper {
+
+    &[data-open='true'] {
+        .includeCheckboxIcon {
+            transform: rotate(180deg);
+        }
+    }
+
+    @include media-breakpoint(lg-up) {
+        overflow: hidden;
+        
+        // &[data-open='false'] {
+        //     height: 40px;
+        // }
+    }
+}
+
+.includeCheckboxList {
+    padding-left: 36px;
+}
+
+.includeCheckboxTitle {
+    height: 44px;
+    display: flex;
+    cursor: pointer;
+    align-items: center;
+
+    >* {
+        transition: .3s;
+        margin-right: 12px;
+    }
+
+    @include media-breakpoint(lg-up) {
+        &:hover {
+            color: var(--t-primary);
+        }
+    }
+}
+
+.checkbox {
+    height: 44px;
+    display: flex;
+    font-size: 16px;
+    align-items: center;
+
+    @include media-breakpoint(lg-up) {
+        cursor: pointer;
+
+        &:hover {
+            .boxIcon {
+                border-color: var(--t-primary);
+            }
+
+            &[data-selected='true'] .boxIcon {
+                filter: brightness(0.9);
+            }
+        }
+    }
+}
+
+.boxIcon {
+    width: 20px;
+    height: 20px;
+    min-width: 20px;
+    min-height: 20px;
+    transition: 0.2s;
+    position: relative;
+    margin-right: 16px;
+    border-radius: 4px;
+    border: 2px solid var(--t-text);
+    transition-property: background-color;
+    transition-timing-function: cubic-bezier(0,1.5,1,-0.5);
+
+    [data-selected='true'] & {
+        border-color: var(--t-primary);
+        background-color: var(--t-primary);
+
+        >* {
+            opacity: 1;
+        }
+    }
+
+    >* {
+        top: 0;
+        left: 1px;
+        opacity: 0;
+        width: 15px;
+        height: 15px;
+        transition: .3s;
+        position: absolute;
+        color: var(--t-background);
+    }
+}

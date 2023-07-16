@@ -62,8 +62,51 @@ export const _filters = {
         { value: 'Вид 3', isSelected: false },
         { value: 'Вид 4', isSelected: false },
         { value: 'Вид 5', isSelected: false },
+    ],
+    cats: [
+        { value: 'Категория 1', isSelected: false, include: null },
+        {
+            value: 'Категория 2', isSelected: false, include: [
+                { value: 'Категория 2-1', isSelected: false, include: null },
+                { value: 'Категория 2-2', isSelected: false, include: null },
+                { value: 'Категория 2-3', isSelected: false, include: null },
+                { value: 'Категория 2-4', isSelected: false, include: null },
+                { value: 'Категория 2-5', isSelected: false, include: null },
+            ]
+        },
+        { value: 'Категория 3', isSelected: false, include: null },
+        {
+            value: 'Категория 4', isSelected: false, include: [
+                { value: 'Категория 4-1', isSelected: false, include: null },
+                { value: 'Категория 4-2', isSelected: false, include: null },
+                { value: 'Категория 4-3', isSelected: false, include: null },
+                { value: 'Категория 4-4', isSelected: false, include: null },
+            ]
+        },
+        { value: 'Категория 5', isSelected: false, include: null },
+        {
+            value: 'Категория 6', isSelected: false, include: [
+                { value: 'Категория 6-1', isSelected: false, include: null },
+                { value: 'Категория 6-2', isSelected: false, include: null },
+            ]
+        },
+        { value: 'Категория 7', isSelected: false, include: null },
     ]
 }
+
+export const filters = [
+    { id: 0, code: "category", name: "Категории", values: [..._filters.cats] },
+    { id: 1, code: "price", name: "Цена", values: [450, 10000] },
+    { id: 2, code: "brand", name: "Бренд", values: [..._filters.brands] },
+    { id: 3, code: "vid", name: "Вид товара", values: [..._filters.vid] },
+    { id: 4, code: "proizvodstvo", name: "Производство", values: [..._filters.proizvodstvo] },
+    { id: 5, code: "ves", name: "Вес", values: [..._filters.ves] },
+    { id: 6, code: "pitanie", name: "Питание", values: [..._filters.pitanie] },
+    { id: 7, code: "colors", name: "Цвет", values: [..._filters.colors] },
+    { id: 8, code: 'market', name: 'Новинки' },
+    { id: 9, code: 'hits', name: 'Хиты' },
+    { id: 10, code: 'discont', name: 'Со скидкой' },
+]
 
 export const cats = {
     "success": true,
@@ -71,6 +114,7 @@ export const cats = {
         {
             id: 1,
             filter: [
+                { id: 0, code: "category", name: "Категории", values: [..._filters.cats] },
                 { id: 1, code: "price", name: "Цена", values: [450, 10000] },
                 { id: 2, code: "brand", name: "Бренд", values: [..._filters.brands] },
                 { id: 3, code: "vid", name: "Вид товара", values: [..._filters.vid] },
@@ -438,6 +482,30 @@ export const cats = {
             ]
         },
     ]
+}
+
+export const cat = {
+    "success": true,
+    "data": {
+        id: 1,
+        filter: [
+            { id: 0, code: "category", name: "Категории", values: [..._filters.cats] },
+            { id: 1, code: "price", name: "Цена", values: [450, 10000] },
+            { id: 2, code: "brand", name: "Бренд", values: [..._filters.brands] },
+            { id: 3, code: "vid", name: "Вид товара", values: [..._filters.vid] },
+            { id: 4, code: "proizvodstvo", name: "Производство", values: [..._filters.proizvodstvo] },
+            { id: 5, code: "ves", name: "Вес", values: [..._filters.ves] },
+            { id: 6, code: "pitanie", name: "Питание", values: [..._filters.pitanie] },
+            { id: 7, code: "colors", name: "Цвет", values: [..._filters.colors] },
+            { id: 8, code: 'market', name: 'Новинки' },
+            { id: 9, code: 'hits', name: 'Хиты' },
+            { id: 10, code: 'discont', name: 'Со скидкой' },
+        ],
+        coloristic: null,
+        url: "1-level",
+        name: "Первый уровень 1",
+        parent_id: null,
+    },
 }
 
 export const catalogNav = {
