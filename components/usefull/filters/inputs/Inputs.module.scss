@@ -335,8 +335,7 @@
     margin-right: 16px;
     border-radius: 4px;
     border: 2px solid var(--t-text);
-    transition-property: background-color;
-    transition-timing-function: cubic-bezier(0,1.5,1,-0.5);
+    transition: .3s background-color cubic-bezier(0,1.5,1,-0.5), .3s border-color .2s;
 
     [data-selected='true'] & {
         border-color: var(--t-primary);
