@@ -11,7 +11,7 @@ export default function InputCheckboxList({ info, filters, onAfterChange }) {
 
     const toggleWrapper = () => {
         if (window.innerWidth > globalState.sizes.lg) {
-            const height = isOpen ? 40 : 'auto'
+            const height = isOpen ? 36 : 'auto'
             setIsOpen(!isOpen)
             animateWrapper.start({ height, transition: { duration: 0.3 } })
         }
@@ -38,7 +38,7 @@ export default function InputCheckboxList({ info, filters, onAfterChange }) {
             <motion.div
                 data-open={isOpen}
                 animate={animateWrapper}
-                initial={{ height: 40 }}
+                initial={{ height: 36 }}
                 className={style.wrapper}
                 data-disabled={info.isDisabled}>
 
@@ -52,7 +52,7 @@ export default function InputCheckboxList({ info, filters, onAfterChange }) {
                             {countSelected}
                         </div>
                     </span>
-                    <Icon external={style.icon} name='chevronUp' width='16' height='16' />
+                    <Icon external={style.icon} name='chevronDown' width='16' height='16' />
                 </div>
                 {info.values && info.values.length
                     ? <div className={`${style.itemList}`}>

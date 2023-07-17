@@ -33,7 +33,7 @@
 }
 
 .filterReset {
-    top: 2px;
+    top: -2px;
     left: -24px;
     width: 18px;
     height: 18px;
@@ -241,10 +241,6 @@
         .checkerIconCircle {
             transform: translateX(16px);
         }
-
-        &:hover .checkerIcon {
-            filter: brightness(0.94);
-        }
     }
 
     .checkerIcon {
@@ -271,6 +267,12 @@
 
     .checkerText {
         margin-left: 12px;
+    }
+
+    @include media-breakpoint(lg-up) {
+        &:hover .checkerIcon {
+            filter: brightness(0.94);
+        }
     }
 }
 

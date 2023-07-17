@@ -11,7 +11,7 @@ export default function InputCats({ info, filters, onAfterChange }) {
 
     const toggleWrapper = () => {
         if (window.innerWidth > globalState.sizes.lg) {
-            const height = isOpen ? 40 : 'auto'
+            const height = isOpen ? 36 : 'auto'
             setIsOpen(!isOpen)
             animateWrapper.start({ height, transition: { duration: 0.3 } })
         }
@@ -40,7 +40,7 @@ export default function InputCats({ info, filters, onAfterChange }) {
 
     return (
         <div className={`${style.container}`}>
-            <motion.div data-open={isOpen} animate={animateWrapper} initial={{ height: 40 }} className={style.wrapper}>
+            <motion.div data-open={isOpen} animate={animateWrapper} initial={{ height: 36 }} className={style.wrapper}>
                 <div onClick={resetHandler} data-active={!!countSelected} className={`${style.filterReset}`} >
                     <Icon name='close' width='7' height='7' />
                 </div>
@@ -51,7 +51,7 @@ export default function InputCats({ info, filters, onAfterChange }) {
                             {countSelected}
                         </div>
                     </span>
-                    <Icon external={style.icon} name='chevronUp' width='16' height='16' />
+                    <Icon external={style.icon} name='chevronDown' width='16' height='16' />
                 </div>
                 <div className={`${style.itemList}`}>
                     {info.values.map(item => {
@@ -75,16 +75,16 @@ function ChecboxInclude({ item, onAfterChange }) {
 
     const toggleWrapper = () => {
         if (window.innerWidth > globalState.sizes.lg) {
-            const height = isOpen ? 40 : 'auto'
+            const height = isOpen ? 36 : 'auto'
             setIsOpen(!isOpen)
             animateWrapper.start({ height, transition: { duration: 0.3 } })
         }
     }
 
     return (
-        <motion.div data-open={isOpen} animate={animateWrapper} initial={{ height: 40 }} className={style.includeCheckboxWrapper}>
+        <motion.div data-open={isOpen} animate={animateWrapper} initial={{ height: 36 }} className={style.includeCheckboxWrapper}>
             <div onClick={toggleWrapper} className={style.includeCheckboxTitle}>
-                <Icon external={style.includeCheckboxIcon} name='chevronUp' width='16' height='16' />
+                <Icon external={style.includeCheckboxIcon} name='chevronDown' width='16' height='16' />
                 {item.value}
             </div>
             <div className={`${style.includeCheckboxList}`}>
