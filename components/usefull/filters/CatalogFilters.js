@@ -5,16 +5,29 @@ import { globalState } from '../../helpers/globalState'
 import InputRange from './inputs/InputRange'
 import InputCheckboxList from './inputs/InputCheckboxList'
 import InputCats from './inputs/InputCats'
+import { word } from '../../helpers/wordTranslator'
+import InputChecker from './inputs/InputChecker'
 
 export default function CatalogFilters({ filters, setFilters, isFilterOpen, setIsFilterOpen }) {
+    const [isExistFilters, setIsExistFilters] = useState(false)
     const [isUpdated, setIsUpdated] = useState(false)
+    const [count, setCount] = useState(568)
+
     const closeHandler = () => {
         setIsFilterOpen(false)
         globalState.body.removeClass('overflow-hidden')
     }
 
+    const resetAllHandler = () => {
+        const encoded = JSON.stringify([...filters])
+        const replaced = encoded.replaceAll('"isSelected":true', '"isSelected":false')
+        const decoded = JSON.parse(replaced)
+        setFilters(decoded)
+    }
+
     const findAllSelected = arr => {
         const result = {}
+        let newIsExistFilters = false
         arr.forEach((item, index) => {
             if (!item.values || !item.values.length) return
             item.values.forEach((value, i) => {
@@ -22,6 +35,7 @@ export default function CatalogFilters({ filters, setFilters, isFilterOpen, setI
                     const isExist = typeof result[item.code] === 'string'
                     if (isExist) result[item.code] += '|' + value.value
                     else result[item.code] = value.value
+                    newIsExistFilters = true
                 }
                 if (item.code !== 'category' || !value.include) return
                 value.include.forEach((subcat, a) => {
@@ -29,18 +43,21 @@ export default function CatalogFilters({ filters, setFilters, isFilterOpen, setI
                         const isExist = typeof result[item.code] === 'string'
                         if (isExist) result[item.code] += '|' + subcat.value
                         else result[item.code] = subcat.value
+                        newIsExistFilters = true
                     }
                 })
             })
         })
 
-        setTimeout(() => setIsUpdated(true), 100)
+        setIsUpdated(true)
         setTimeout(() => {
             const query = new URLSearchParams(result).toString()
             const location = window.location.href.split('?')[0]
-            const encoded = `${location}?${decodeURI(query)}`
+            const encoded = `${location}${query ? '?' : ''}${decodeURI(query)}`
             window.history.pushState('', '', encoded)
+            setCount(Math.floor(Math.random() * 2000))
             setIsUpdated(false)
+            setIsExistFilters(newIsExistFilters)
         }, 1000)
     }
 
@@ -56,11 +73,23 @@ export default function CatalogFilters({ filters, setFilters, isFilterOpen, setI
                 <div className={`pb-1 text--t1 text--bold text--upper text--center`}>
                     фильтры
                 </div>
+                <div onClick={resetAllHandler} data-is-hidden={!isExistFilters} className={`${style.resetButton}`}>
+                    <span className='text--upper text--t6 text--bold text--sparse text--color-primary'>
+                        сбросить
+                    </span>
+                </div>
                 <div onClick={closeHandler} className={style.filterModalClose}>
                     <Icon name='close' width='20' height='20' />
                 </div>
                 <div className={`${style.scrollContent}`}>
                     {filters.map(filter => <Filter key={filter.code} filters={filters} setFilters={setFilters} info={filter} />)}
+                </div>
+                <div className={`${style.buttonContainer}`}>
+                    <div onClick={closeHandler} fill='true' d-size='md' theme='primary' className='button'>
+                        <span className='text--upper text--p5 text--bold text--sparse'>
+                            Показать {word(count, ['товар', 'товара', 'товаров'])}
+                        </span>
+                    </div>
                 </div>
             </div>
         </div>
@@ -69,7 +98,7 @@ export default function CatalogFilters({ filters, setFilters, isFilterOpen, setI
 
 
 function Filter({ info, filters, setFilters }) {
-    const code = info.code
+    const filterType = info.filterType
 
     const categoryCheck = data => {
         const newFilters = [...filters]
@@ -110,8 +139,15 @@ function Filter({ info, filters, setFilters }) {
         return newFilters
     }
 
+    const checkerCheck = type => {
+        const newFilters = [...filters]
+        const indexF = filters.findIndex(item => item.code === type)
+        newFilters[indexF].isSelected = !newFilters[indexF].isSelected
+        return newFilters
+    }
+
     function extractStringBetweenWords(str, firstWord, secondWord) {
-        const regex = new RegExp(`${ firstWord }(.*?)${ secondWord }`)
+        const regex = new RegExp(`${firstWord}(.*?)${secondWord}`)
         const match = str.match(regex)
         return match ? match[1] : ''
     }
@@ -132,33 +168,26 @@ function Filter({ info, filters, setFilters }) {
             return
         } else if (type === 'category') {
             newFilters = categoryCheck(data)
-        } else {
+        } else if (isPicker) {
             newFilters = pickerCheck(type, data)
+        } else if (isChecker) {
+            newFilters = checkerCheck(type)
         }
-        console.log(newFilters);
 
-        setFilters(newFilters)
+        if (newFilters) setFilters(newFilters)
     }
 
-    const isChecker = code === 'market'
-        || code === 'available'
-        || code === 'hits'
-        || code === 'discont'
+    const isChecker = filterType === 'checkboxItem'
+    const isPicker = filterType === 'checkboxList'
 
-    const isPicker = code === 'brand'
-        || code === 'pitanie'
-        || code === 'proizvodstvo'
-        || code === 'weight_filter'
-        || code === 'ves'
-        || code === 'type'
-        || code === 'vid'
-
-    if (code === 'category') {
+    if (filterType === 'categoryList') {
         return <InputCats info={info} filters={filters} onAfterChange={inputsChangeHandler} />
-    } else if (code === 'price') {
+    } else if (filterType === 'priceRange') {
         return <InputRange info={info} filters={filters} onAfterChange={inputsChangeHandler} />
     } else if (isPicker) {
         return <InputCheckboxList info={info} filters={filters} onAfterChange={inputsChangeHandler} />
+    } else if (isChecker) {
+        return <InputChecker info={info} onAfterChange={inputsChangeHandler} />
     }
 
 

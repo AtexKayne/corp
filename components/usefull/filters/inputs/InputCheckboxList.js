@@ -27,17 +27,25 @@ export default function InputCheckboxList({ info, filters, onAfterChange }) {
 
     useEffect(() => {
         const thisFilter = filters.find(item => item.code === info.code)
-        const count = thisFilter.values.filter(element => element.isSelected).length
-        setCountSelected(count)
+        if (thisFilter.values && thisFilter.values.length) {
+            const count = thisFilter.values.filter(element => element.isSelected).length
+            setCountSelected(count)
+        }
     }, [filters])
 
     return (
         <div className={`${style.container}`}>
-            <motion.div data-open={isOpen} animate={animateWrapper} initial={{ height: 40 }} className={style.wrapper}>
+            <motion.div
+                data-open={isOpen}
+                animate={animateWrapper}
+                initial={{ height: 40 }}
+                className={style.wrapper}
+                data-disabled={info.isDisabled}>
+
                 <div onClick={resetHandler} data-active={!!countSelected} className={`${style.filterReset}`} >
                     <Icon name='close' width='7' height='7' />
                 </div>
-                <div onClick={toggleWrapper} className={`${style.title}`}>
+                <div onClick={toggleWrapper} className={`${style.title} text--t3 text--upper`}>
                     <span>
                         {info.name}
                         <div data-selected={!!countSelected} className={`${style.titleCount}`}>
@@ -46,20 +54,24 @@ export default function InputCheckboxList({ info, filters, onAfterChange }) {
                     </span>
                     <Icon external={style.icon} name='chevronUp' width='16' height='16' />
                 </div>
-                <div className={`${style.itemList}`}>
-                    {info.values.map(item => <Checkbox key={item.value} isSelected={item.isSelected} item={item} onAfterChange={checkboxChange} />)}
-                </div>
+                {info.values && info.values.length
+                    ? <div className={`${style.itemList}`}>
+                        {info.values.map(item => <Checkbox key={item.value} item={item} onAfterChange={checkboxChange} />)}
+                    </div>
+                    : null
+                }
+
             </motion.div>
         </div>
     )
 }
 
-function Checkbox({ item, isSelected, onAfterChange }) {
+function Checkbox({ item, onAfterChange }) {
     const clickHandler = () => {
         onAfterChange(item)
     }
     return (
-        <div onClick={clickHandler} data-selected={isSelected} className={`${style.checkbox}`}>
+        <div onClick={clickHandler} data-disabled={item.isDisabled} data-selected={item.isSelected} className={`${style.checkbox}`}>
             <div className={`${style.boxIcon}`}>
                 <Icon name='check' width='15' height='15' />
             </div>

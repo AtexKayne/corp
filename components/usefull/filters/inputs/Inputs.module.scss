@@ -2,8 +2,12 @@
 @import '../../../../styles/mixins/helpers/adaptive-value';
 
 .container {
-    margin-top: 30px;
     position: relative;
+    margin-bottom: 30px;
+
+    &:first-child {
+        margin-top: 30px;
+    }
 }
 
 .wrapper {
@@ -12,6 +16,11 @@
         .icon {
             transform: rotate(180deg);
         }
+    }
+
+    &[data-disabled='true'] {
+        opacity: .5;
+        pointer-events: none;
     }
 
     @include media-breakpoint(lg-up) {
@@ -191,6 +200,11 @@
     font-size: 16px;
     align-items: center;
 
+    &[data-disabled='true'] {
+        opacity: .5;
+        pointer-events: none;
+    }
+
     @include media-breakpoint(lg-up) {
         cursor: pointer;
 
@@ -203,6 +217,60 @@
                 filter: brightness(0.9);
             }
         }
+    }
+}
+
+.checker {
+    display: flex;
+    cursor: pointer;
+    align-items: center;
+    margin-bottom: 16px;
+
+    &[data-disabled='true'] {
+        pointer-events: none;
+        
+        .checkerIcon {
+            opacity: 0.5;
+        }
+    }
+
+    &[data-active='true'] {
+        .checkerIcon {
+            background-color: var(--t-primary);
+        }
+        .checkerIconCircle {
+            transform: translateX(16px);
+        }
+
+        &:hover .checkerIcon {
+            filter: brightness(0.94);
+        }
+    }
+
+    .checkerIcon {
+        width: 41px;
+        height: 24px;
+        padding: 4px;
+        transition: .4s;
+        border-radius: 20px;
+        transition-delay: .2s;
+        background-color: var(--t-lighter);
+        transition-property: background-color;
+        // transition-timing-function: cubic-bezier(0,1.5,1,-0.5);
+    }
+
+    .checkerIconCircle {
+        width: 16px;
+        height: 16px;
+        transition: .3s;
+        border-radius: 50%;
+        transition-delay: .2s;
+        background-color: var(--t-background);
+        transition-timing-function: cubic-bezier(.75,.1,.25,.9);
+    }
+
+    .checkerText {
+        margin-left: 12px;
     }
 }
 

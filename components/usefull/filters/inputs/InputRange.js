@@ -89,7 +89,7 @@ export default function InputRange({ info, onAfterChange }) {
     return (
         <div className={style.container}>
             <motion.div data-open={isOpen} animate={animateWrapper} initial={{ height: 40 }} className={style.wrapper}>
-                <div onClick={toggleWrapper} className={`${style.title}`}>
+                <div onClick={toggleWrapper} className={`${style.title} text--t3 text--upper`}>
                     <span>{info.name}</span>
                     <Icon external={style.icon} name='chevronUp' width='16' height='16' />
                 </div>

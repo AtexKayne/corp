@@ -63,6 +63,7 @@
     overflow: hidden;
     min-height: 100vh;
     max-height: 100vh;
+    padding-top: 16px;
     transition: .3s ease-in-out;
     transform: translateX(100vw);
     background-color: var(--t-background);
@@ -70,24 +71,20 @@
         xs: 100vw,
         md: 468px,
     ));
-    padding: adaptive-value((
-        xs: 16px,
-        md: 28px 48px 28px 0,
-    ));
 
-    @include media-breakpoint(md-up) {
+    @include media-breakpoint(lg-up) {
+        padding-top: 28px;
         transition-duration: .5s;
     }
 }
 
 .scrollContent {
-    height: 100%;
     display: flex;
     overflow-y: auto;
-    padding-left: 48px;
-    padding-right: 28px;
     flex-direction: column;
-    width: calc(100% + 28px);
+    width: calc(100% - 20px);
+    height: calc(100% - 148px);
+    padding: 0px 40px 0px 48px;
 
     &::-webkit-scrollbar {
         width: 2px;
@@ -105,6 +102,14 @@
     }
 }
 
+.buttonContainer {
+    bottom: 0;
+    width: 100%;
+    height: 112px;
+    position: absolute;
+    padding: 16px 48px 36px;
+}
+
 .filterModalBackground {
     top: 0;
     left: 0;
@@ -112,23 +117,29 @@
     bottom: 0;
     opacity: 0;
     z-index: 3;
-    transition: .2s;
+    transition: 0s;
     position: absolute;
     pointer-events: none;
     background-color: var(--t-background);
 
     &[data-updated='true'] {
-        opacity: 0.7;
         pointer-events: all;
     }
+}
+
+.resetButton {
+    top: 25px;
+    right: 48px;
+    cursor: pointer;
+    position: absolute;
 }
 
 .filterModalClose {
     width: 0;
     top: 28px;
     height: 0;
+    left: 48px;
     z-index: 2;
-    right: 48px;
     cursor: pointer;
     position: absolute;
     transition: .3s color;

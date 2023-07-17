@@ -44,7 +44,7 @@ export default function InputCats({ info, filters, onAfterChange }) {
                 <div onClick={resetHandler} data-active={!!countSelected} className={`${style.filterReset}`} >
                     <Icon name='close' width='7' height='7' />
                 </div>
-                <div onClick={toggleWrapper} className={`${style.title}`}>
+                <div onClick={toggleWrapper} className={`${style.title} text--t3 text--upper`}>
                     <span>
                         {info.name}
                         <div data-selected={!!countSelected} className={`${style.titleCount}`}>
@@ -57,7 +57,7 @@ export default function InputCats({ info, filters, onAfterChange }) {
                     {info.values.map(item => {
                         return item.include && item.include.length
                             ? <ChecboxInclude key={item.value} item={item} onAfterChange={checkboxChange} />
-                            : <Checkbox key={item.value} isSelected={item.isSelected} item={item} onAfterChange={checkboxChange} />
+                            : <Checkbox key={item.value} item={item} onAfterChange={checkboxChange} />
                     })}
                 </div>
             </motion.div>
@@ -88,18 +88,18 @@ function ChecboxInclude({ item, onAfterChange }) {
                 {item.value}
             </div>
             <div className={`${style.includeCheckboxList}`}>
-                {item.include.map(item => <Checkbox key={item.value} isSelected={item.isSelected} item={item} onAfterChange={checkboxChange} />)}
+                {item.include.map(item => <Checkbox key={item.value} item={item} onAfterChange={checkboxChange} />)}
             </div>
         </motion.div>
     )
 }
 
-function Checkbox({ item, isSelected, onAfterChange }) {
+function Checkbox({ item, onAfterChange }) {
     const clickHandler = () => {
         onAfterChange(item)
     }
     return (
-        <div onClick={clickHandler} data-selected={isSelected} className={`${style.checkbox}`}>
+        <div onClick={clickHandler} data-selected={item.isSelected} className={`${style.checkbox}`}>
             <div className={`${style.boxIcon}`}>
                 <Icon name='check' width='15' height='15' />
             </div>
