@@ -35,6 +35,20 @@ export default function Catalog({ detail }) {
         setIsFilterOpen(true)
     }
 
+    const selectFastFilter = item => {
+        // console.log(item);
+        const encoded = JSON.stringify([...filters])
+        let replaced = encoded.replaceAll('"isSelected":true', '"isSelected":false')
+        item.settings.forEach(set => {
+            set.values.forEach(value => {
+                // "value":"Категория 1","isSelected":false
+                replaced = replaced.replace(`"value":"${value}","isSelected":false`, `"value":"${value}","isSelected":true`)
+            })
+        })
+        const decoded = JSON.parse(replaced)
+        setFilters(decoded)
+    }
+
     const sortHandler = data => {
 
     }
@@ -80,7 +94,13 @@ export default function Catalog({ detail }) {
                 </div>
             </div>
 
-            <CatalogFilters filters={filters} setFilters={setFilters} isFilterOpen={isFilterOpen} setIsFilterOpen={setIsFilterOpen} />
+            <CatalogFilters
+                filters={filters}
+                setFilters={setFilters}
+                isFilterOpen={isFilterOpen}
+                fastFilters={detail.fastFilters}
+                setIsFilterOpen={setIsFilterOpen}
+                selectFastFilter={selectFastFilter} />
         </>
     )
 }

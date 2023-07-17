@@ -155,6 +155,55 @@
     }
 }
 
+.fastFilterList {
+    display: flex;
+    margin-right: 7px;
+
+    &::-webkit-scrollbar {
+        width: 2px;
+        margin-right: 0;
+    }
+    
+    &::-webkit-scrollbar-track {
+        background: var(--t-lightest);
+    }
+    
+    &::-webkit-scrollbar-thumb {
+        border: none;
+        border-radius: 5px;
+        background-color: var(--t-dark);
+    }
+
+    @include media-breakpoint(lg-up) {
+        flex-wrap: wrap;
+        margin-top: 18px;
+        overflow-y: auto;
+        max-height: 308px;
+    }
+}
+
+.fastFilterItem {
+    cursor: pointer;
+    transition: .3s;
+    border-radius: 4px;
+    padding: 9px 12px 7px;
+    margin: 2px 8px 8px 0px;
+    background-color: var(--t-light);
+
+    &:hover {
+        filter: brightness(0.9);
+    }
+
+    &[data-active='true'] {
+        color: var(--t-background);
+        background-color: var(--t-dark);
+    }
+
+    &:last-child {
+        margin-right: 0;
+    }
+}
+
 .includeCheckboxWrapper {
 
     &[data-open='true'] {

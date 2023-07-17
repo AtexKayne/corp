@@ -111,7 +111,7 @@ export const filters = [
 
 export const fastFilters = [
     {
-        name: 'Быстрый фильтр 1', settings: [
+        name: 'Фильтр 1', settings: [
             { code: 'brand', values: ['ANDIS', 'BEARDBURYS'] },
             { code: 'vid', values: ['Вид 2'] },
             { code: 'pitanie', values: ['Проводные', 'Беспроводные', 'Комбинированные'] },
@@ -125,28 +125,28 @@ export const fastFilters = [
         ]
     },
     {
-        name: 'Быстрый фильтр 3', settings: [
+        name: 'Test 3', settings: [
             { code: 'brand', values: ['ANDIS 2'] },
             { code: 'ves', values: ['170 г', '200 г'] },
             { code: 'pitanie', values: ['Проводные',] },
         ]
     },
     {
-        name: 'Быстрый фильтр 4', settings: [
+        name: 'test filter 4', settings: [
             { code: 'brand', values: ['ANDIS 2'] },
             { code: 'ves', values: ['170 г', '200 г'] },
             { code: 'pitanie', values: ['Проводные',] },
         ]
     },
     {
-        name: 'Быстрый фильтр 5', settings: [
+        name: 'фильтр 5', settings: [
             { code: 'brand', values: ['ANDIS 2'] },
             { code: 'ves', values: ['170 г', '200 г'] },
             { code: 'pitanie', values: ['Проводные',] },
         ]
     },
     {
-        name: 'Быстрый фильтр 6', settings: [
+        name: 'T 6', settings: [
             { code: 'brand', values: ['ANDIS 2'] },
             { code: 'ves', values: ['170 г', '200 г'] },
             { code: 'pitanie', values: ['Проводные',] },
@@ -162,7 +162,7 @@ export const cat = {
         coloristic: null,
         url: "1-level",
         name: "Первый уровень 1",
-        fastFilter: [...fastFilters]
+        fastFilters: [...fastFilters]
     },
 }
 

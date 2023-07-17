@@ -7,8 +7,10 @@ import InputCheckboxList from './inputs/InputCheckboxList'
 import InputCats from './inputs/InputCats'
 import { word } from '../../helpers/wordTranslator'
 import InputChecker from './inputs/InputChecker'
+import FastFilter from './inputs/FastFilter'
+import { extractStringBetweenWords } from '../../helpers/extractString'
 
-export default function CatalogFilters({ filters, setFilters, isFilterOpen, setIsFilterOpen }) {
+export default function CatalogFilters({ filters, setFilters, isFilterOpen, setIsFilterOpen, fastFilters, selectFastFilter }) {
     const [isExistFilters, setIsExistFilters] = useState(false)
     const [isUpdated, setIsUpdated] = useState(false)
     const [count, setCount] = useState(568)
@@ -62,6 +64,12 @@ export default function CatalogFilters({ filters, setFilters, isFilterOpen, setI
     }
 
     useEffect(() => {
+        const fastFilters = document.querySelectorAll('.js-fast-filters')
+        fastFilters.forEach(element => {
+            const active = element.querySelector('[data-active="true"]')
+            if (!active) return
+            active.setAttribute('data-active', false)
+        })
         findAllSelected(filters)
     }, [filters])
 
@@ -82,6 +90,7 @@ export default function CatalogFilters({ filters, setFilters, isFilterOpen, setI
                     <Icon name='close' width='20' height='20' />
                 </div>
                 <div className={`${style.scrollContent}`}>
+                    <FastFilter items={fastFilters} onAfterChange={selectFastFilter} />
                     {filters.map(filter => <Filter key={filter.code} filters={filters} setFilters={setFilters} info={filter} />)}
                 </div>
                 <div className={`${style.buttonContainer}`}>
@@ -144,12 +153,6 @@ function Filter({ info, filters, setFilters }) {
         const indexF = filters.findIndex(item => item.code === type)
         newFilters[indexF].isSelected = !newFilters[indexF].isSelected
         return newFilters
-    }
-
-    function extractStringBetweenWords(str, firstWord, secondWord) {
-        const regex = new RegExp(`${firstWord}(.*?)${secondWord}`)
-        const match = str.match(regex)
-        return match ? match[1] : ''
     }
 
     const resetHandler = type => {
