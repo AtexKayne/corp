@@ -41,7 +41,7 @@ function FilterItem({ item, onAfterChange }) {
         if (prevActive) prevActive.setAttribute('data-active', 'false')
         setTimeout(() => {
             target.setAttribute('data-active', 'true')
-        }, 400)
+        }, 150)
         onAfterChange(item)
     }
 
