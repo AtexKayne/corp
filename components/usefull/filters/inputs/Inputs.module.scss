@@ -457,7 +457,6 @@
         padding: 4px;
         transition: .4s;
         border-radius: 20px;
-        transition-delay: .2s;
         background-color: var(--t-lighter);
         transition-property: background-color;
         // transition-timing-function: cubic-bezier(0,1.5,1,-0.5);
@@ -468,7 +467,6 @@
         height: 16px;
         transition: .3s;
         border-radius: 50%;
-        transition-delay: .2s;
         background-color: var(--t-background);
         transition-timing-function: cubic-bezier(.75,.1,.25,.9);
     }
