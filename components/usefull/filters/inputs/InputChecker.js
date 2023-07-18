@@ -1,5 +1,6 @@
 import { useState, useEffect, useRef } from 'react'
 import style from './Inputs.module.scss'
+import Icon from '../../../Icon'
 
 export default function InputChecker({ info, onAfterChange }) {
     const clickHandler = () => {
@@ -14,6 +15,10 @@ export default function InputChecker({ info, onAfterChange }) {
 
             <div className={`${style.checkerText} text--t4`}>
                 {info.name}
+                {info.code === 'delivery'
+                    ? <Icon external={style.checkerTextIcon} name='delivery' width='16' height='16' />
+                    : null
+                }
             </div>
         </div>
     )

@@ -65,8 +65,25 @@ export default function InputRange({ info, onAfterChange }) {
 
     const changeInput = (event, input) => {
         const target = event.target
-        const val = parseInt(target.value)
+        let val = parseInt(target.value)
+        if (Number.isNaN(val)) val = 0
         target.value = val
+    }
+
+    const keyDownHandler = event => {
+        const key = event.keyCode
+        if (key === 13) {
+            event.preventDefault()
+            return event.target.blur()
+        }
+    }
+
+    const resetHandler = () => {
+        setRangeValue([min, max])
+        refInputMin.current.value = toLoc(min)
+        refInputMax.current.value = toLoc(max)
+        setDataFocus({min: false, max: false})
+        if (typeof onAfterChange === 'function') onAfterChange('price', [min, max])
     }
 
     const afterChangeHandler = info => {
@@ -89,8 +106,16 @@ export default function InputRange({ info, onAfterChange }) {
     return (
         <div className={style.container}>
             <motion.div data-open={isOpen} animate={animateWrapper} initial={{ height: 36 }} className={style.wrapper}>
+                <div onClick={resetHandler} data-active={dataFocus.min || dataFocus.max} className={`${style.filterReset}`} >
+                    <Icon name='close' width='7' height='7' />
+                </div>
                 <div onClick={toggleWrapper} className={`${style.title} text--t3 text--upper`}>
-                    <span>{info.name}</span>
+                    <span>
+                        {info.name}
+                        <div data-selected={dataFocus.min || dataFocus.max} className={`${style.titleCountPrice}`}>
+
+                        </div>
+                    </span>
                     <Icon external={style.icon} name='chevronUp' width='16' height='16' />
                 </div>
                 <div className={style.priceList}>
@@ -100,6 +125,7 @@ export default function InputRange({ info, onAfterChange }) {
                             ref={refInputMin}
                             className='input'
                             onFocus={focusHandler}
+                            onKeyDown={keyDownHandler}
                             onBlur={event => blurHandler(event, 'min')}
                             onChange={event => changeInput(event, 'min')}
                             data-focus={dataFocus.min} />
@@ -109,6 +135,7 @@ export default function InputRange({ info, onAfterChange }) {
                             ref={refInputMax}
                             className='input'
                             onFocus={focusHandler}
+                            onKeyDown={keyDownHandler}
                             onBlur={event => blurHandler(event, 'max')}
                             onChange={event => changeInput(event, 'max')}
                             data-focus={dataFocus.max} />

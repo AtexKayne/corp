@@ -155,6 +155,12 @@ function Filter({ info, filters, setFilters }) {
         return newFilters
     }
 
+    const priceCheck = data => {
+        const newFilters = [...filters]
+        // [450, 10000]
+        return newFilters
+    }
+
     const resetHandler = type => {
         const jsonFilter = JSON.stringify([...filters])
         const extracted = extractStringBetweenWords(jsonFilter, `code":"${type}"`, `,{"id"`);
@@ -168,7 +174,7 @@ function Filter({ info, filters, setFilters }) {
         if (data === 'reset') {
             newFilters = resetHandler(type)
         } else if (type === 'price') {
-            return
+            newFilters = priceCheck(data)
         } else if (type === 'category') {
             newFilters = categoryCheck(data)
         } else if (isPicker) {

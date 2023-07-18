@@ -71,9 +71,10 @@ function Checkbox({ item, onAfterChange }) {
         onAfterChange(item)
     }
     return (
-        <div onClick={clickHandler} data-disabled={item.isDisabled} data-selected={item.isSelected} className={`${style.checkbox}`}>
+        <div onClick={clickHandler} data-selected={item.isSelected} className={`${style.checkbox}`}>
             <div className={`${style.boxIcon}`}>
-                <Icon name='check' width='15' height='15' />
+                <div className={`${style.iconBorder}`} />
+                <Icon external={style.iconAccept} name='checkAnim' width='24' height='24' />
             </div>
             {item.value}
         </div>

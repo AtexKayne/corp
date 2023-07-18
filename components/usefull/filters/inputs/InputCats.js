@@ -75,33 +75,34 @@ function ChecboxInclude({ item, onAfterChange }) {
 
     const toggleWrapper = () => {
         if (window.innerWidth > globalState.sizes.lg) {
-            const height = isOpen ? 36 : 'auto'
+            const height = isOpen ? 44 : 'auto'
             setIsOpen(!isOpen)
             animateWrapper.start({ height, transition: { duration: 0.3 } })
         }
     }
 
     return (
-        <motion.div data-open={isOpen} animate={animateWrapper} initial={{ height: 36 }} className={style.includeCheckboxWrapper}>
-            <div onClick={toggleWrapper} className={style.includeCheckboxTitle}>
+        <motion.div data-open={isOpen} animate={animateWrapper} initial={{ height: 44 }} className={style.includeCheckboxWrapper}>
+            <div onClick={toggleWrapper} className={`${style.includeCheckboxTitle} text--t3`}>
                 <Icon external={style.includeCheckboxIcon} name='chevronDown' width='16' height='16' />
                 {item.value}
             </div>
             <div className={`${style.includeCheckboxList}`}>
-                {item.include.map(item => <Checkbox key={item.value} item={item} onAfterChange={checkboxChange} />)}
+                {item.include.map(item => <Checkbox key={item.value} item={item} isInclude={true} onAfterChange={checkboxChange} />)}
             </div>
         </motion.div>
     )
 }
 
-function Checkbox({ item, onAfterChange }) {
+function Checkbox({ item, onAfterChange, isInclude }) {
     const clickHandler = () => {
         onAfterChange(item)
     }
     return (
-        <div onClick={clickHandler} data-selected={item.isSelected} className={`${style.checkbox}`}>
+        <div onClick={clickHandler} data-selected={item.isSelected} className={`${style.checkbox} ${isInclude ? 'text--t4' : 'text--t3'}`}>
             <div className={`${style.boxIcon}`}>
-                <Icon name='check' width='15' height='15' />
+                <div className={`${style.iconBorder}`} />
+                <Icon external={style.iconAccept} name='checkAnim' width='24' height='24' />
             </div>
             {item.value}
         </div>

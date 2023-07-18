@@ -77,12 +77,13 @@
 }
 
 @keyframes rippleResetIcon {
-    from { opacity: 1; transform: scale3d(0.75,0.75,1); }
+    from { opacity: 1; transform: scale3d(0.95,0.95,1); }
     to   { opacity: 0; transform: scale3d(3,3,1); }
 }
 
 .title {
     display: flex;
+    padding-top: 2px;
     align-items: center;
     justify-content: space-between;
 
@@ -107,6 +108,22 @@
     align-items: center;
     display: inline-flex;
     justify-content: center;
+    color: var(--t-background);
+    transform: translate(8px, -1px);
+    background-color: var(--t-primary);
+
+    &[data-selected='false'] {
+        opacity: 0;
+    }
+}
+
+.titleCountPrice {
+    opacity: 1;
+    width: 8px;
+    height: 8px;
+    transition: .3s;
+    border-radius: 50%;
+    display: inline-flex;
     color: var(--t-background);
     transform: translate(8px, -1px);
     background-color: var(--t-primary);
@@ -233,7 +250,7 @@
 
     >* {
         transition: .3s;
-        margin-right: 12px;
+        margin-right: 18px;
     }
 
     @include media-breakpoint(lg-up) {
@@ -243,9 +260,14 @@
     }
 }
 
+.includeCheckboxIcon {
+    margin-left: 2px;
+}
+
 .checkbox {
     height: 44px;
     display: flex;
+    cursor: pointer;
     font-size: 16px;
     align-items: center;
 
@@ -254,16 +276,62 @@
         pointer-events: none;
     }
 
+    &[data-selected='true'] {
+        .iconBorder {
+            border-width: 12px;
+            border-color: var(--t-primary);
+            transition: .3s border-width, .1s border-color .0s;
+        }
+
+        .iconAccept{
+            path {
+                stroke-dashoffset: 200px;
+                stroke-dasharray: 100px, 100px;
+            }
+        }
+    }
+
+    .boxIcon {
+        width: 20px;
+        height: 20px;
+        min-width: 20px;
+        min-height: 20px;
+        overflow: hidden;
+        position: relative;
+        margin-right: 16px;
+        border-radius: 2px;
+    }
+
+    .iconBorder {
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        position: absolute;
+        border-radius: 2px;
+        border: 2px solid var(--t-text);
+        transition: .3s border-width, .1s border-color .2s;
+    }
+
+    .iconAccept {
+        top: -2px;
+        left: -2px;
+        position: absolute;
+        color: var(--t-background);
+        
+        path {
+            transition: .3s .2s;
+            stroke-dashoffset: 0px;
+            stroke-dasharray: 0px, 100px;
+        }
+    }
+
     @include media-breakpoint(lg-up) {
-        cursor: pointer;
 
         &:hover {
-            .boxIcon {
+            .iconBorder {
                 border-color: var(--t-primary);
-            }
-
-            &[data-selected='true'] .boxIcon {
-                filter: brightness(0.9);
+                transition: .3s border-width, .1s border-color;
             }
         }
     }
@@ -316,6 +384,8 @@
 
     .checkerText {
         margin-left: 12px;
+        align-items: center;
+        display: inline-flex;
     }
 
     @include media-breakpoint(lg-up) {
@@ -323,38 +393,8 @@
             filter: brightness(0.94);
         }
     }
-}
 
-.boxIcon {
-    width: 20px;
-    height: 20px;
-    min-width: 20px;
-    min-height: 20px;
-    transition: 0.3s;
-    position: relative;
-    margin-right: 16px;
-    border-radius: 4px;
-    border: 2px solid var(--t-text);
-    transition: .3s background-color cubic-bezier(0,1.5,1,-0.5), .3s border-color .2s;
-
-    [data-selected='true'] & {
-        border-color: var(--t-primary);
-        background-color: var(--t-primary);
-
-        >* {
-            opacity: 1;
-            transition-delay: .2s;
-        }
-    }
-
-    >* {
-        top: 0;
-        left: 1px;
-        opacity: 0;
-        width: 15px;
-        height: 15px;
-        transition: .3s;
-        position: absolute;
-        color: var(--t-background);
+    .checkerTextIcon {
+        margin-left: 4px;
     }
 }
