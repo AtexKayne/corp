@@ -13,6 +13,7 @@ body {
     &.overflow-hidden {
         overflow: hidden;
         max-height: 100vh;
+        max-height: 100dvh;
 
         @include media-breakpoint(lg-up) {
             margin-right: 12px; // Иначе дрыгается

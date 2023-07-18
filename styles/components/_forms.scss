@@ -80,10 +80,6 @@
         cursor: pointer;
         transition: .3s;
         position: absolute;
-
-        &:hover {
-            color: var(--t-primary);
-        }
     }
 
     &__empty {
@@ -102,6 +98,14 @@
     .input[data-changed='true'] ~ .input-search__icon-clear,
     .input:focus ~ .input-search__icon-clear {
         opacity: 1;
+    }
+
+    @include media-breakpoint(lg-up) {
+        &__icon-clear {
+            &:hover {
+                color: var(--t-primary);
+            }
+        }
     }
 }
 

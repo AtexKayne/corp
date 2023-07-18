@@ -40,6 +40,7 @@ export default function InputRange({ info, onAfterChange }) {
         const newRangeValue = []
         if (input === 'max') {
             newRangeValue.push(rangeValue[0])
+            val = !val || val === min ? max : val
             newRangeValue.push(val)
         } else {
             newRangeValue.push(val)
@@ -82,7 +83,7 @@ export default function InputRange({ info, onAfterChange }) {
         setRangeValue([min, max])
         refInputMin.current.value = toLoc(min)
         refInputMax.current.value = toLoc(max)
-        setDataFocus({min: false, max: false})
+        setDataFocus({ min: false, max: false })
         if (typeof onAfterChange === 'function') onAfterChange('price', [min, max])
     }
 
@@ -112,9 +113,7 @@ export default function InputRange({ info, onAfterChange }) {
                 <div onClick={toggleWrapper} className={`${style.title} is-hidden--md-down text--t3 text--upper`}>
                     <span>
                         {info.name}
-                        <div data-selected={dataFocus.min || dataFocus.max} className={`${style.titleCountPrice}`}>
-
-                        </div>
+                        <div data-selected={dataFocus.min || dataFocus.max} className={`${style.titleCountPrice}`} />
                     </span>
                     <Icon external={style.icon} name='chevronUp' width='16' height='16' />
                 </div>

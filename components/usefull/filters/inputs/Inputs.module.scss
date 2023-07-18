@@ -211,11 +211,11 @@
         left: 0;
         z-index: 3;
         width: 468px;
-        height: 100vh;
         overflow-y: auto;
         position: absolute;
         overflow-x: hidden;
-        padding: 25px 32px 16px;
+        padding: 25px 16px 16px;
+        height: calc(100dvh - 92px);
         transition: .4s ease-in-out;
         transform: translateX(100vw);
         background-color: var(--t-background);
@@ -227,7 +227,6 @@
 
     @include media-breakpoint(sm-down) {
         width: 100vw;
-        height: 100dvh;
     }
 
     @include media-breakpoint(lg-up) {
@@ -271,6 +270,23 @@
         overflow-x: auto;
         padding: 0 32px 0 40px;
         margin: 16px -32px 0 -40px;
+
+        &::-webkit-scrollbar {
+            width: 0;
+            height: 0;
+            opacity: 0;
+            display: none;
+            visibility: hidden;
+            background-color:transparent;
+        }
+
+        &::-webkit-scrollbar-thumb {
+            border: none;
+            display: none;
+            border-radius: 0;
+            visibility: hidden;
+            background-color:transparent;
+        }
     }
 
     @include media-breakpoint(lg-up) {
@@ -287,8 +303,8 @@
     transition: .3s;
     border-radius: 4px;
     white-space: nowrap;
+    margin: 2px 8px 0 0;
     padding: 9px 12px 7px;
-    margin: 2px 8px 8px 0px;
     background-color: var(--t-light);
 
     &[data-active='true'] {
@@ -301,6 +317,8 @@
     }
 
     @include media-breakpoint(lg-up) {
+        margin: 2px 8px 8px 0px;
+
         &:hover {
             filter: brightness(0.9);
         }
@@ -490,7 +508,7 @@
 
 .resetButton {
     top: 28px;
-    right: 32px;
+    right: 16px;
     position: absolute;
 }
 
