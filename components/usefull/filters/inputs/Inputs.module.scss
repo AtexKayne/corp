@@ -98,6 +98,10 @@
             animation: none;
         }
     }
+
+    @include media-breakpoint(md-down) {
+        display: none;
+    }
 }
 
 @keyframes rippleResetIcon {
