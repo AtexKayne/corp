@@ -282,10 +282,6 @@
     margin: 2px 8px 8px 0px;
     background-color: var(--t-light);
 
-    &:hover {
-        filter: brightness(0.9);
-    }
-
     &[data-active='true'] {
         color: var(--t-background);
         background-color: var(--t-dark);
@@ -293,6 +289,12 @@
 
     &:last-child {
         margin-right: 0;
+    }
+
+    @include media-breakpoint(lg-up) {
+        &:hover {
+            filter: brightness(0.9);
+        }
     }
 }
 
