@@ -7,6 +7,7 @@ import { globalState } from '../../../helpers/globalState'
 export default function InputCats({ info, filters, onAfterChange }) {
     const [countSelected, setCountSelected] = useState(0)
     const [isOpen, setIsOpen] = useState(false)
+    const [isActive, setIsActive] = useState(false)
     const animateWrapper = useAnimationControls()
 
     const toggleWrapper = () => {
@@ -14,11 +15,17 @@ export default function InputCats({ info, filters, onAfterChange }) {
             const height = isOpen ? 36 : 'auto'
             setIsOpen(!isOpen)
             animateWrapper.start({ height, transition: { duration: 0.3 } })
+        } else {
+            setIsActive(true)
         }
     }
 
     const checkboxChange = item => {
         onAfterChange(info.code, item)
+    }
+
+    const closeListHandler = () => {
+        setIsActive(false)
     }
 
     const resetHandler = () => {
@@ -53,7 +60,19 @@ export default function InputCats({ info, filters, onAfterChange }) {
                     </span>
                     <Icon external={style.icon} name='chevronDown' width='16' height='16' />
                 </div>
-                <div className={`${style.itemList}`}>
+                <div data-active={isActive} className={`${style.itemList}`}>
+                    <div className={`${style.listTitle} text--t5 text--bold text--upper`}>
+                        <span onClick={closeListHandler} className='is-extended'>
+                            <Icon name='chevronLeft' width='16' height='16' />
+                        </span>
+                        <span>{info.name}</span>
+                        <div/>
+                        <div onClick={resetHandler} className={`${style.resetButton}`}>
+                            <span data-is-hidden={!countSelected} className='text--upper text--t6 text--bold text--sparse text--color-primary'>
+                                сбросить
+                            </span>
+                        </div>
+                    </div>
                     {info.values.map(item => {
                         return item.include && item.include.length
                             ? <ChecboxInclude key={item.value} item={item} onAfterChange={checkboxChange} />
@@ -74,11 +93,9 @@ function ChecboxInclude({ item, onAfterChange }) {
     }
 
     const toggleWrapper = () => {
-        if (window.innerWidth > globalState.sizes.lg) {
-            const height = isOpen ? 44 : 'auto'
-            setIsOpen(!isOpen)
-            animateWrapper.start({ height, transition: { duration: 0.3 } })
-        }
+        const height = isOpen ? 44 : 'auto'
+        setIsOpen(!isOpen)
+        animateWrapper.start({ height, transition: { duration: 0.3 } })
     }
 
     return (

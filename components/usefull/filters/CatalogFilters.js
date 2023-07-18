@@ -78,7 +78,10 @@ export default function CatalogFilters({ filters, setFilters, isFilterOpen, setI
             <div onClick={closeHandler} className={style.filterModalLayout} />
             <div className={style.filterModalContent}>
                 <div data-updated={isUpdated} className={`${style.filterModalBackground}`} />
-                <div className={`pb-1 text--t1 text--bold text--upper text--center`}>
+                <div className={`pb-1 text--t1 text--bold text--upper text--center is-hidden--md-down`}>
+                    фильтры
+                </div>
+                <div className={`pb-1 text--t5 text--bold text--upper text--center is-hidden--lg-up`}>
                     фильтры
                 </div>
                 <div onClick={resetAllHandler} data-is-hidden={!isExistFilters} className={`${style.resetButton}`}>

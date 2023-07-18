@@ -17,7 +17,7 @@ export default function FastFilter({ items, onAfterChange }) {
     }
 
     return (
-        <div className={`${style.container} js-fast-filters`}>
+        <div className={`${style.container} ${style.containerFastFilters} js-fast-filters`}>
             <motion.div data-open={isOpen} animate={animateWrapper} initial={{ height: 36 }} className={style.wrapper}>
                 <div onClick={toggleWrapper} className={`${style.title} text--t3 text--upper`}>
                     <span>Быстрые фильтры</span>

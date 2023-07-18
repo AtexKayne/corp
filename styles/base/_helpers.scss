@@ -20,6 +20,20 @@
     display: none!important;
 }
 
+.is-extended {
+    cursor: pointer;
+    position: relative;
+
+    &::before {
+        top: -20px;
+        left: -20px;
+        content: '';
+        right: -20px;
+        bottom: -20px;
+        position: absolute;
+    }
+}
+
 .is-invisible {
     opacity: 0;
     pointer-events: none;

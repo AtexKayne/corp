@@ -104,12 +104,12 @@ export default function InputRange({ info, onAfterChange }) {
     }, [])
 
     return (
-        <div className={style.container}>
-            <motion.div data-open={isOpen} animate={animateWrapper} initial={{ height: 36 }} className={style.wrapper}>
+        <div className={`${style.container} ${style.containerPrice}`}>
+            <motion.div data-open={isOpen} animate={animateWrapper} initial={{ height: 36 }} className={`${style.wrapper} ${style.wrapperPrice}`}>
                 <div onClick={resetHandler} data-active={dataFocus.min || dataFocus.max} className={`${style.filterReset}`} >
                     <Icon name='close' width='7' height='7' />
                 </div>
-                <div onClick={toggleWrapper} className={`${style.title} text--t3 text--upper`}>
+                <div onClick={toggleWrapper} className={`${style.title} is-hidden--md-down text--t3 text--upper`}>
                     <span>
                         {info.name}
                         <div data-selected={dataFocus.min || dataFocus.max} className={`${style.titleCountPrice}`}>

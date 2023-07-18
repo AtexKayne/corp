@@ -2,30 +2,54 @@
 @import '../../../../styles/mixins/helpers/adaptive-value';
 
 .container {
-    position: relative;
+    order: 1;
     margin-bottom: 30px;
 
     &:first-child {
         margin-top: 30px;
     }
+
+    @include media-breakpoint(md-down) {
+        // order: 0;
+    }
+
+    @include media-breakpoint(lg-up) {
+        position: relative;
+    }
+}
+
+.containerFastFilters,
+.containerPrice {
+    @include media-breakpoint(md-down) {
+        order: 0;
+
+        .icon {
+            display: none;
+        }
+    }
 }
 
 .wrapper {
-
-    &[data-open='true'] {
-        .icon {
-            transform: rotate(180deg);
-        }
-    }
 
     &[data-disabled='true'] {
         opacity: .5;
         pointer-events: none;
     }
 
+    @include media-breakpoint(md-down) {
+        height: auto!important;
+
+        
+    }
+
     @include media-breakpoint(lg-up) {
         overflow: hidden;
         
+        &[data-open='true'] {
+            .icon {
+                transform: rotate(180deg);
+            }
+        }
         // &[data-open='false'] {
         //     height: 40px;
         // }
@@ -83,12 +107,17 @@
 
 .title {
     display: flex;
+    cursor: pointer;
     padding-top: 2px;
     align-items: center;
     justify-content: space-between;
 
+    @include media-breakpoint(md-down) {
+        font-weight: 400;
+        text-transform: none;
+    }
+
     @include media-breakpoint(lg-up) {
-        cursor: pointer;
 
         &:hover {
             color: var(--t-primary);
@@ -137,14 +166,17 @@
     transition: .4s;
 
     @include media-breakpoint(md-down) {
-        transform: rotate(90deg);
+        transform: rotate(-90deg);
     }
 }
 
 .priceList {
     padding: 0 10px;
-    margin-top: 30px;
     margin-bottom: 10px;
+
+    @include media-breakpoint(lg-up) {
+        margin-top: 30px;
+    }
 }
 
 .itemList {
@@ -165,6 +197,30 @@
         background-color: var(--t-dark);
     }
 
+    @include media-breakpoint(md-down) {
+        top: 0;
+        left: 0;
+        z-index: 3;
+        width: 468px;
+        height: 100vh;
+        overflow-y: auto;
+        position: absolute;
+        overflow-x: hidden;
+        padding: 25px 32px 16px;
+        transition: .4s ease-in-out;
+        transform: translateX(100vw);
+        background-color: var(--t-background);
+
+        &[data-active='true'] {
+            transform: translateX(0);
+        }
+    }
+
+    @include media-breakpoint(sm-down) {
+        width: 100vw;
+        height: 100dvh;
+    }
+
     @include media-breakpoint(lg-up) {
         margin-top: 18px;
         overflow-y: auto;
@@ -172,12 +228,23 @@
     }
 }
 
+.listTitle {
+    display: flex;
+    align-items: center;
+    padding-bottom: 16px;
+    justify-content: space-between;
+
+    @include media-breakpoint(lg-up) {
+        display: none;
+    }
+}
+
 .fastFilterList {
     display: flex;
-    margin-right: 7px;
-
+    
     &::-webkit-scrollbar {
         width: 2px;
+        height: 0px;
         margin-right: 0;
     }
     
@@ -191,11 +258,18 @@
         background-color: var(--t-dark);
     }
 
+    @include media-breakpoint(md-down) {
+        overflow-x: auto;
+        padding: 0 32px 0 40px;
+        margin: 16px -32px 0 -40px;
+    }
+
     @include media-breakpoint(lg-up) {
         flex-wrap: wrap;
         margin-top: 18px;
         overflow-y: auto;
         max-height: 308px;
+        margin-right: 7px;
     }
 }
 
@@ -203,6 +277,7 @@
     cursor: pointer;
     transition: .3s;
     border-radius: 4px;
+    white-space: nowrap;
     padding: 9px 12px 7px;
     margin: 2px 8px 8px 0px;
     background-color: var(--t-light);
@@ -222,24 +297,21 @@
 }
 
 .includeCheckboxWrapper {
+    overflow: hidden;
 
     &[data-open='true'] {
         .includeCheckboxIcon {
             transform: rotate(180deg);
         }
     }
-
-    @include media-breakpoint(lg-up) {
-        overflow: hidden;
-        
-        // &[data-open='false'] {
-        //     height: 40px;
-        // }
-    }
 }
 
 .includeCheckboxList {
     padding-left: 36px;
+
+    >*:last-child {
+        margin-bottom: 16px;
+    }
 }
 
 .includeCheckboxTitle {
@@ -251,6 +323,10 @@
     >* {
         transition: .3s;
         margin-right: 18px;
+    }
+
+    @include media-breakpoint(md-down) {
+        font-weight: 400;
     }
 
     @include media-breakpoint(lg-up) {
@@ -285,7 +361,6 @@
 
         .iconAccept{
             path {
-                stroke-dashoffset: 200px;
                 stroke-dasharray: 100px, 100px;
             }
         }
@@ -326,6 +401,10 @@
         }
     }
 
+    @include media-breakpoint(md-down) {
+        font-weight: 400;
+    }
+
     @include media-breakpoint(lg-up) {
 
         &:hover {
@@ -338,6 +417,7 @@
 }
 
 .checker {
+    order: 1;
     display: flex;
     cursor: pointer;
     align-items: center;
@@ -397,4 +477,10 @@
     .checkerTextIcon {
         margin-left: 4px;
     }
+}
+
+.resetButton {
+    top: 28px;
+    right: 32px;
+    position: absolute;
 }
