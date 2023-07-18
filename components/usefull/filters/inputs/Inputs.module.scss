@@ -504,3 +504,9 @@
         display: none;
     }
 }
+
+.searchMobile {
+    @include media-breakpoint(lg-up) {
+        display: none;
+    }
+}
