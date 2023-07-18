@@ -61,8 +61,12 @@ export default function InputCheckboxList({ info, filters, onAfterChange }) {
                     </span>
                     <Icon external={style.icon} name='chevronDown' width='16' height='16' />
                 </div>
+                {info.values.length > 7
+                    ? <Search />
+                    : null
+                }
                 {info.values && info.values.length
-                    ? <div data-active={isActive} className={`${style.itemList}`}>
+                    ? <div data-active={isActive} className={`${style.itemList} js-search-container`}>
                         <div className={`${style.listTitle} text--t5 text--bold text--upper`}>
                             <span onClick={closeListHandler} className='is-extended'>
                                 <Icon name='chevronLeft' width='16' height='16' />
@@ -75,12 +79,71 @@ export default function InputCheckboxList({ info, filters, onAfterChange }) {
                                 </span>
                             </div>
                         </div>
+                        {info.values.length > 7
+                            ? <Search isMobile={true} />
+                            : null
+                        }
                         {info.values.map(item => <Checkbox key={item.value} item={item} onAfterChange={checkboxChange} />)}
                     </div>
                     : null
                 }
 
             </motion.div>
+        </div>
+    )
+}
+
+function Search({ isMobile }) {
+    const [isSearched, setIsSearched] = useState(false)
+    const refInput = useRef(null)
+    const refSearch = useRef(null)
+    const refSearchChildren = useRef(null)
+
+    const blurHandler = () => {
+        refInput.current.setAttribute('data-changed', !!refInput.current.value)
+    }
+
+    const changeHandler = event => {
+        let items = 0
+        const value = event.target.value.toLowerCase()
+
+        refSearchChildren.current.forEach(element => {
+            const isContains = element.innerText.toLowerCase().includes(value)
+            element.style.display = isContains ? '' : 'none'
+            if (!isContains) items++
+        })
+        setIsSearched(items === refSearchChildren.current.length)
+    }
+
+    const clearHandler = () => {
+        refInput.current.value = ''
+        refInput.current.focus()
+        const event = { target: refInput.current }
+        changeHandler(event)
+    }
+
+    useEffect(() => {
+        if (isMobile) {
+            refSearchChildren.current = Array.from(
+                refSearch.current.closest('.js-search-container').children
+            ).filter((_, index) => index !== 0 && index !== 1)
+        } else {
+            refSearchChildren.current = Array.from(
+                refSearch.current.parentElement.querySelector('.js-search-container').children
+            )
+        }
+    }, [])
+
+    return (
+        <div ref={refSearch} className={`${isMobile ? style.searchMobile : style.search}`}>
+            <label className='input-search mb-1'>
+                <input ref={refInput} onBlur={blurHandler} onChange={changeHandler} type='text' className='input' placeholder='Поиск' />
+                <Icon external='input-search__icon' name='search' width='18' height='18' />
+                <span onClick={clearHandler} className='input-search__icon-clear'>
+                    <Icon name='close' width='18' height='18' />
+                </span>
+            </label>
+            <div data-searched={isSearched} className='input-search__empty text--t2 text--normal text--color-disabled'>Ничего не найдено</div>
         </div>
     )
 }

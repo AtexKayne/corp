@@ -36,10 +36,15 @@
         pointer-events: none;
     }
 
+    &[data-open='false'] {
+        .search {
+            opacity: 0;
+            transition: .1s .2s;
+        }
+    }
+
     @include media-breakpoint(md-down) {
         height: auto!important;
-
-        
     }
 
     @include media-breakpoint(lg-up) {
@@ -489,4 +494,13 @@
     top: 28px;
     right: 32px;
     position: absolute;
+}
+
+.search {
+    padding-top: 20px;
+    margin-right: 0px;
+
+    @include media-breakpoint(md-down) {
+        display: none;
+    }
 }
