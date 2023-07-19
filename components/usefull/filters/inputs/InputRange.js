@@ -9,6 +9,7 @@ export default function InputRange({ info, onAfterChange }) {
     const min = info.values[0]
     const max = info.values[1]
     const [dataFocus, setDataFocus] = useState({ min: false, max: false })
+    const [isFocused, setIsFocused] = useState(false)
     const [rangeValue, setRangeValue] = useState([min, max])
     const [isOpen, setIsOpen] = useState(false)
 
@@ -49,12 +50,14 @@ export default function InputRange({ info, onAfterChange }) {
         setRangeValue(newRangeValue)
         target.value = toLoc(val)
         updateDataFocus(newRangeValue)
+        setIsFocused(false)
         if (typeof onAfterChange === 'function') onAfterChange('price', newRangeValue)
     }
 
     const focusHandler = event => {
         const value = toNum(event.target.value)
         event.target.value = value
+        setIsFocused(true)
     }
 
     const changeHandler = info => {
@@ -140,7 +143,7 @@ export default function InputRange({ info, onAfterChange }) {
                             data-focus={dataFocus.max} />
                     </div>
 
-                    <div className=''>
+                    <div className={isFocused ? 'is-decorative' : ''}>
                         <Range
                             range
                             min={min}
