@@ -10,7 +10,7 @@ import InputChecker from './inputs/InputChecker'
 import FastFilter from './inputs/FastFilter'
 import { extractStringBetweenWords } from '../../helpers/extractString'
 
-export default function CatalogFilters({ filters, setFilters, isFilterOpen, setIsFilterOpen, fastFilters, selectFastFilter }) {
+export default function CatalogFilters({ filters, selectFilters, isFilterOpen, setIsFilterOpen, fastFilters, selectFastFilter, resetAllHandler }) {
     const [isExistFilters, setIsExistFilters] = useState(false)
     const [isUpdated, setIsUpdated] = useState(false)
     const [count, setCount] = useState(568)
@@ -19,44 +19,11 @@ export default function CatalogFilters({ filters, setFilters, isFilterOpen, setI
         setIsFilterOpen(false)
         globalState.body.removeClass('overflow-hidden')
     }
-
-    const resetAllHandler = () => {
-        const encoded = JSON.stringify([...filters])
-        const replaced = encoded.replaceAll('"isSelected":true', '"isSelected":false')
-        const decoded = JSON.parse(replaced)
-        setFilters(decoded)
-    }
-
-    const findAllSelected = arr => {
-        const result = {}
-        let newIsExistFilters = false
-        arr.forEach((item, index) => {
-            if (!item.values || !item.values.length) return
-            item.values.forEach((value, i) => {
-                if (value.isSelected) {
-                    const isExist = typeof result[item.code] === 'string'
-                    if (isExist) result[item.code] += '|' + value.value
-                    else result[item.code] = value.value
-                    newIsExistFilters = true
-                }
-                if (item.code !== 'category' || !value.include) return
-                value.include.forEach((subcat, a) => {
-                    if (subcat.isSelected) {
-                        const isExist = typeof result[item.code] === 'string'
-                        if (isExist) result[item.code] += '|' + subcat.value
-                        else result[item.code] = subcat.value
-                        newIsExistFilters = true
-                    }
-                })
-            })
-        })
-
+    
+    const updateParams = arr => {
+        const newIsExistFilters = JSON.stringify([...arr]).includes('"isSelected":true')
         setIsUpdated(true)
         setTimeout(() => {
-            const query = new URLSearchParams(result).toString()
-            const location = window.location.href.split('?')[0]
-            const encoded = `${location}${query ? '?' : ''}${decodeURI(query)}`
-            window.history.pushState('', '', encoded)
             setCount(Math.floor(Math.random() * 2000))
             setIsUpdated(false)
             setIsExistFilters(newIsExistFilters)
@@ -64,13 +31,7 @@ export default function CatalogFilters({ filters, setFilters, isFilterOpen, setI
     }
 
     useEffect(() => {
-        const fastFilters = document.querySelectorAll('.js-fast-filters')
-        fastFilters.forEach(element => {
-            const active = element.querySelector('[data-active="true"]')
-            if (!active) return
-            active.setAttribute('data-active', false)
-        })
-        findAllSelected(filters)
+        updateParams(filters)
     }, [filters])
 
     return (
@@ -94,7 +55,7 @@ export default function CatalogFilters({ filters, setFilters, isFilterOpen, setI
                 </div>
                 <div className={`${style.scrollContent}`}>
                     <FastFilter items={fastFilters} onAfterChange={selectFastFilter} />
-                    {filters.map(filter => <Filter key={filter.code} filters={filters} setFilters={setFilters} info={filter} />)}
+                    {filters.map(filter => <Filter key={filter.code} filters={filters} onAfterChange={selectFilters} info={filter} />)}
                 </div>
                 <div className={`${style.buttonContainer}`}>
                     <div onClick={closeHandler} fill='true' d-size='md' theme='primary' className='button'>
@@ -109,7 +70,7 @@ export default function CatalogFilters({ filters, setFilters, isFilterOpen, setI
 }
 
 
-function Filter({ info, filters, setFilters }) {
+function Filter({ info, filters, onAfterChange }) {
     const filterType = info.filterType
 
     const categoryCheck = data => {
@@ -186,7 +147,7 @@ function Filter({ info, filters, setFilters }) {
             newFilters = checkerCheck(type)
         }
 
-        if (newFilters) setFilters(newFilters)
+        onAfterChange(newFilters)
     }
 
     const isChecker = filterType === 'checkboxItem'

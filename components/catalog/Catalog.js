@@ -9,24 +9,89 @@ import style from './Catalog.module.scss'
 import Card from '../usefull/ui/Card/Card'
 import Dropdown from '../../components/usefull/Dropdown'
 import Favourite from '../../components/usefull/Favourite'
-import InputRange from '../../components/usefull/form/InputRange'
-import ColorPicker from '../../components/usefull/form/ColorPicker'
-import ItemsPicker from '../../components/usefull/form/ItemsPicker'
-import InputSwitch from '../../components/usefull/form/InputSwitch'
-import ItemChecker from '../../components/usefull/form/ItemChecker'
 import CatalogFilters from '../usefull/filters/CatalogFilters'
 
 export default function Catalog({ detail }) {
-    // console.log(detail.filter);
     const isBrands = detail.isBrands || detail.isPromo
-    const [products, setProducts] = useState('updated')
-    const [filters, setFilters] = useState(detail.filter)
+
+    const [isExistFilters, setIsExistFilters] = useState(false)
     const [isFilterOpen, setIsFilterOpen] = useState(false)
-    const refNav = useRef(null)
+    const [filters, setFilters] = useState(detail.filter)
+    const [products, setProducts] = useState('updated')
+
+    const selectFilters = arr => {
+        if (arr) setFilters(arr)
+    }
+
+    const resetAllHandler = () => {
+        const encoded = JSON.stringify([...filters])
+        const replaced = encoded.replaceAll('"isSelected":true', '"isSelected":false')
+        const decoded = JSON.parse(replaced)
+        selectFilters(decoded)
+    }
+
+    const selectFastFilter = item => {
+        const encoded = JSON.stringify([...filters])
+        let replaced = encoded.replaceAll('"isSelected":true', '"isSelected":false')
+        item.settings.forEach(set => {
+            set.values.forEach(value => {
+                replaced = replaced.replace(`"value":"${value}","isSelected":false`, `"value":"${value}","isSelected":true`)
+            })
+        })
+        const decoded = JSON.parse(replaced)
+        selectFilters(decoded)
+    }
+
+    const updateSelectedFilters = arr => {
+        const result = {}
+        let newIsExistFilters = false
+        arr.forEach((item, index) => {
+            if (!item.values || !item.values.length) return
+            item.values.forEach((value, i) => {
+                if (value.isSelected) {
+                    const isExist = typeof result[item.code] === 'string'
+                    if (isExist) result[item.code] += '|' + value.value
+                    else result[item.code] = value.value
+                    newIsExistFilters = true
+                }
+                if (item.code !== 'category' || !value.include) return
+                value.include.forEach((subcat, a) => {
+                    if (subcat.isSelected) {
+                        const isExist = typeof result[item.code] === 'string'
+                        if (isExist) result[item.code] += '|' + subcat.value
+                        else result[item.code] = subcat.value
+                        newIsExistFilters = true
+                    }
+                })
+            })
+        })
+
+        setIsExistFilters(newIsExistFilters)
+
+        setTimeout(() => {
+            const query = new URLSearchParams(result).toString()
+            const location = window.location.href.split('?')[0]
+            const encoded = `${location}${query ? '?' : ''}${decodeURI(query)}`
+            window.history.pushState('', '', encoded)
+        }, 1000)
+    }
+
+    const updateFastFilters = () => {
+        const fastFilters = document.querySelectorAll('.js-fast-filters')
+        fastFilters.forEach(element => {
+            const active = element.querySelector('[data-active="true"]')
+            if (!active) return
+            active.setAttribute('data-active', false)
+        })
+    }
 
     const updateProducts = () => {
-        setProducts('updated')
-        setTimeout(() => setProducts(cards), 1500)
+        // setProducts('updated')
+        // setTimeout(() => setProducts(cards), 1500)
+    }
+
+    const sortHandler = data => {
+
     }
 
     const openFilters = event => {
@@ -35,54 +100,28 @@ export default function Catalog({ detail }) {
         setIsFilterOpen(true)
     }
 
-    const selectFastFilter = item => {
-        // console.log(item);
-        const encoded = JSON.stringify([...filters])
-        let replaced = encoded.replaceAll('"isSelected":true', '"isSelected":false')
-        item.settings.forEach(set => {
-            set.values.forEach(value => {
-                // "value":"Категория 1","isSelected":false
-                replaced = replaced.replace(`"value":"${value}","isSelected":false`, `"value":"${value}","isSelected":true`)
-            })
-        })
-        const decoded = JSON.parse(replaced)
-        setFilters(decoded)
-    }
-
-    const sortHandler = data => {
-
-    }
+    useEffect(() => {
+        updateProducts()
+        updateFastFilters()
+        updateSelectedFilters(filters)
+    }, [filters])
 
     useEffect(() => {
         setProducts(cards)
-        // initFilters()
     }, [])
 
     return (
         <>
             <Head info={detail} isBrands={isBrands} isPromo={detail.isPromo} categoryName={detail.name} />
 
-            <div className={style.navContainer}>
-                {isBrands ? null : <FastFilter />}
-
-                <div ref={refNav} className={`${style.nav} pb-2`}>
-                    <div className={`${style.navInner}`}>
-                        <div className={style.navFiller} />
-                        <div className='is-hidden--lg-down text--t5 text--bold text--upper text--color-small'>НАЙДЕНО 668 ТОВАРОВ</div>
-                        <Dropdown title='Популярные' external='text--t5 text--bold text--upper' afterChose={sortHandler}>
-                            <>
-                                <span data-value='popular' data-active='true' className='text--t4'>Популярные</span>
-                                <span data-value='new' className='text--t4'>Новинки</span>
-                                <span data-value='price-down' className='text--t4'>Цена по возрастанию</span>
-                                <span data-value='price-up' className='text--t4'>Цена по убыванию</span>
-                            </>
-                        </Dropdown>
-                        <a href='#' onClick={openFilters}>
-                            <span className='text--t5 link text--bold text--upper'>фильтры</span>
-                        </a>
-                    </div>
-                </div>
-            </div>
+            <Nav
+                isBrands={isBrands}
+                sortHandler={sortHandler}
+                openFilters={openFilters}
+                isExistFilters={isExistFilters}
+                fastFilters={detail.fastFilters}
+                resetAllHandler={resetAllHandler}
+                selectFastFilter={selectFastFilter} />
 
             <div className={style.container}>
                 <div style={{ width: '100%' }} className='d-flex flex--column'>
@@ -96,12 +135,39 @@ export default function Catalog({ detail }) {
 
             <CatalogFilters
                 filters={filters}
-                setFilters={setFilters}
                 isFilterOpen={isFilterOpen}
+                selectFilters={selectFilters}
                 fastFilters={detail.fastFilters}
+                resetAllHandler={resetAllHandler}
                 setIsFilterOpen={setIsFilterOpen}
                 selectFastFilter={selectFastFilter} />
         </>
+    )
+}
+
+function Nav({ isBrands, sortHandler, openFilters, fastFilters, selectFastFilter, isExistFilters, resetAllHandler }) {
+    return (
+        <div className={style.navContainer}>
+            {isBrands ? null : <FastFilter fastFilters={fastFilters} onAfterChange={selectFastFilter} resetAllHandler={resetAllHandler} />}
+
+            <div className={`${style.nav} pb-2`}>
+                <div className={`${style.navInner}`}>
+                    <div className={style.navFiller} />
+                    <div className='is-hidden--lg-down text--t5 text--bold text--upper text--color-small'>НАЙДЕНО 668 ТОВАРОВ</div>
+                    <Dropdown title='Популярные' external='text--t5 text--bold text--upper' afterChose={sortHandler}>
+                        <>
+                            <span data-value='popular' data-active='true' className='text--t4'>Популярные</span>
+                            <span data-value='new' className='text--t4'>Новинки</span>
+                            <span data-value='price-down' className='text--t4'>Цена по возрастанию</span>
+                            <span data-value='price-up' className='text--t4'>Цена по убыванию</span>
+                        </>
+                    </Dropdown>
+                    <a href='#' onClick={openFilters}>
+                        <span className='text--t5 link text--bold text--upper'>фильтры</span>
+                    </a>
+                </div>
+            </div>
+        </div>
     )
 }
 
@@ -237,31 +303,17 @@ function ColorCircle({ isFullSize = false }) {
     }
 }
 
-function FastFilter({ items, updated }) {
+function FastFilter({ onAfterChange, fastFilters, resetAllHandler }) {
     const scrollPixels = 200
     const refWrapper = useRef(0)
     const refInner = useRef(null)
     const refScrollPos = useRef(0)
     const refScrollLimit = useRef(2)
     const refScrollOfset = useRef(0)
-    const refTimestamp = useRef(false)
     const refIsStartDrag = useRef(false)
     const animateInner = useAnimationControls()
     const [position, setPosition] = useState(false)
-    const [activeFilter, setActiveFilter] = useState(false)
     const [dragConstraints, setDragConstraints] = useState(0)
-
-    const itemList = [
-        'Ножевые блоки',
-        'Ножевые блоки 2',
-        'Насадки на машинки',
-        'Насадки на машинки 2',
-        'Машинки для стрижки',
-        'Уход за бородой и усами',
-        'Уход за бородой и усами 2',
-        'Спрей и жидкость для ножей',
-        'Спрей и жидкость для ножей 2',
-    ]
 
     const scrollTo = to => {
         if (to == 'prev') {
@@ -319,17 +371,35 @@ function FastFilter({ items, updated }) {
         setDragConstraints(refWrapper.current.clientWidth - dragWidth)
     }
 
-    const clickHandler = index => {
-        if (refIsStartDrag.current) return
-        if (index === activeFilter) setActiveFilter(() => {
-            setTimeout(calculateScroll, 400)
-            return false
-        })
-        else setActiveFilter(() => {
-            setTimeout(calculateScroll, 400)
-            return index
-        })
+    const clickHandler = (event, item) => {
+        const target = event.target
+        // setTimeout(calculateScroll, 400)
+        if (target.getAttribute('data-active') === 'true') return resetAllHandler()
+        const fastFiltersContainer = document.querySelectorAll('.js-fast-filters')
+        const value = target.innerText
+        onAfterChange(item)
+        setTimeout(() => {
+            fastFiltersContainer.forEach(container => {
+                const items = container.querySelectorAll('.js-fast-filters-item')
+                items.forEach(item => {
+                    item.setAttribute('data-active', item.innerText === value)
+                })
+            })
+        }, 150)
     }
+
+    // const clickHandler = (index, item) => {
+    //     if (refIsStartDrag.current) return
+    //     if (index === activeFilter) setActiveFilter(() => {
+    //         setTimeout(calculateScroll, 400)
+    //         return false
+    //     })
+    //     else setActiveFilter(() => {
+    //         setTimeout(calculateScroll, 400)
+    //         return index
+    //     })
+    //     onAfterChange(item)
+    // }
 
     useEffect(() => {
         setTimeout(() => {
@@ -354,7 +424,7 @@ function FastFilter({ items, updated }) {
                 setPosition('start')
             } else setPosition('none')
         }, 2500)
-    }, updated)
+    }, [])
 
     return (
         <div className={style.fastFilterContainer}>
@@ -362,7 +432,7 @@ function FastFilter({ items, updated }) {
                 <Icon name='chevronLeft' width='18' height='18' />
             </div>
 
-            <div ref={refWrapper} className={style.fastFilterWrapper}>
+            <div ref={refWrapper} className={`${style.fastFilterWrapper} js-fast-filters`}>
                 <motion.div
                     drag='x'
                     ref={refInner}
@@ -371,12 +441,12 @@ function FastFilter({ items, updated }) {
                     onDragStart={dragStartHandler}
                     className={style.fastFilterInner}
                     dragConstraints={{ right: 0, left: dragConstraints }}>
-                    {itemList.map((item, index) => (
+                    {fastFilters.map((item, index) => (
                         <div
-                            key={item}
-                            data-active={index === activeFilter}
-                            onClick={() => clickHandler(index)}
-                            className={`${style.fastFilterItem} text--p5 text--upper`}>{item}
+                            key={item.name}
+                            onClick={event => clickHandler(event, item)}
+                            className={`${style.fastFilterItem} js-fast-filters-item text--p5 text--upper`}>
+                            {item.name}
                         </div>
                     ))}
                 </motion.div>

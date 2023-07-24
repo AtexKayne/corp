@@ -6,37 +6,18 @@ import { motion, useAnimationControls } from 'framer-motion'
 import Icon from './Icon'
 import Link from 'next/link'
 import Image from 'next/image'
-import HeaderNav from './usefull/ui/HeaderNav/HeaderNav'
 import style from '../styles/module/Header.module.scss'
+import HeaderNav from './usefull/ui/HeaderNav/HeaderNav'
 
 export default function Header() {
-    const scrolloffset = 300
     const refHeader = useRef(null)
-    const refRabbit = useRef(null)
-    const refIsHandled = useRef(false)
     const refThemeDefault = useRef('ui-light')
+    const [isFixed, setIsFixed] = useState(false)
     const [theme, setTheme] = useState('ui-light')
     const [navIsOpen, setNavIsOpen] = useState(false)
-
-    const [themeImage, setThemeImage] = useState('ui-light')
-    const [isTranslated, setIsTranslated] = useState(false)
-    const [isHeaderFixed, setIsHeaderFixed] = useState(false)
-    const [isRabbitFixed, setIsRabbitFixed] = useState(false)
     const [isHeaderHover, setIsHeaderHover] = useState(false)
-    const animateHeader = useAnimationControls()
 
-    const hoverEnterHandler = () => {
-        setIsTranslated(true)
-        setIsRabbitFixed(false)
-        setThemeLight()
-    }
-
-    const hoverLeaveHandler = () => {
-        setThemeDefault()
-        if (window.scrollY <= scrolloffset || !!navIsOpen) return
-        setIsTranslated(false)
-        setIsRabbitFixed(true)
-    }
+    const refFixed = useRef(null)
 
     const setThemeLight = () => {
         setTheme('ui-light')
@@ -54,69 +35,18 @@ export default function Header() {
     }
 
     const openNavHandler = type => {
-        setNavIsOpen(prev => {
-            if (isHeaderFixed) {
-                setIsTranslated(true)
-                setIsHeaderFixed(true)
-                setIsRabbitFixed(false)
-            }
-            return prev !== type ? type : false
-        })
+
     }
 
     const scrollHandler = () => {
-        setThemeDefault()
         const scroll = window.scrollY
-        refRabbit.current.style.pointerEvents = 'none'
-        if (refIsHandled.current) clearInterval(refIsHandled.current)
-        if (scroll > scrolloffset) {
-            setIsHeaderFixed(true)
-            setIsRabbitFixed(true)
-            setIsTranslated(false)
-        } else {
-            setIsHeaderFixed(false)
-            setIsRabbitFixed(false)
-        }
-
-        refIsHandled.current = setTimeout(() => {
-            if (!refRabbit.current) return
-            refRabbit.current.style.pointerEvents = 'all'
-        }, 300)
-    }
-
-    const debounceScroll = debounce(scrollHandler, 5)
-
-    const getTranslate = () => {
-        const ww = window.innerWidth
-        let translate = 0
-        if (ww >= globalState.sizes.xxl) translate = -59
-        else if (ww < globalState.sizes.xxl && ww >= globalState.sizes.xl) translate = -51
-        else if (ww < globalState.sizes.xl && ww >= globalState.sizes.lg) translate = -45
-        // else if (ww < globalState.sizes.lg && ww >= globalState.sizes.md) translate = 
-        return translate
+        const newIsFixed = scroll > 60
+        refFixed.current.dataset.active = newIsFixed
+        setIsFixed(newIsFixed)
     }
 
     useEffect(() => {
-        if (isHeaderFixed) {
-            animateHeader.start({ position: 'fixed', y: -180, transition: { duration: 0 } })
-        } else {
-            animateHeader.start({ position: 'absolute', y: 0, transition: { duration: 0 } })
-        }
-    }, [isHeaderFixed])
-
-    useEffect(() => {
-        if (!isHeaderFixed) return
-        const yPosition = getTranslate()
-        if (isTranslated) {
-            animateHeader.start({ y: yPosition, transition: { duration: 0.4 } })
-        } else {
-            animateHeader.start({ y: -180, transition: { duration: 0.4 } })
-        }
-    }, [isTranslated])
-
-
-    useEffect(() => {
-        window.addEventListener('scroll', debounceScroll, { passive: true })
+        window.addEventListener('scroll', scrollHandler, { passive: true })
 
         const toggleClass = className => {
             const classList = document.querySelector('html').classList
@@ -136,7 +66,7 @@ export default function Header() {
         globalState.header = { setTheme: setHeaderTheme }
 
         return () => {
-            window.removeEventListener('scroll', debounceScroll)
+            window.removeEventListener('scroll', scrollHandler)
         }
     }, [])
 
@@ -147,7 +77,6 @@ export default function Header() {
                     <div data-hover={isHeaderHover} className='header-hover'></div>
 
                     <div className={`${style.top} ${style.textt4} text--regular is-hidden--md-down`} >
-
                         <div className={style.group}>
                             <a className='link active' href='#' rel='nofollow'>RedHare Market</a>
                             <a className='link' href='#' rel='nofollow'>RedHare Обучение</a>
@@ -169,14 +98,7 @@ export default function Header() {
                 </div>
             </header>
 
-            <motion.div
-                animate={animateHeader}
-                data-active={isTranslated}
-                onMouseEnter={setThemeLight}
-                onMouseLeave={hoverLeaveHandler}
-                className={`${style.fixedContainer} ${theme}`}
-            >
-
+            <div ref={refFixed} data-active={false} onMouseEnter={setThemeLight} className={`${style.fixedContainer} ${theme}`}>
                 <div className={`${style.fixedContainerInnerTablet} is-hidden--lg-up`}>
                     <div className={`${style.top} ${style.textt4} text--regular`}>
                         <div className={style.groupMD}>
@@ -254,21 +176,21 @@ export default function Header() {
                             </a>
                         </Link>
 
-                        <div className={`${style.catalogBtn} btn btn--md btn--secondary`}>
+                        <div onClick={() => openNavHandler('catalog')} className={`${style.catalogBtn} btn btn--md ${isFixed ? 'btn--label' : 'btn--secondary'}`}>
                             <div className='btn__icon'>
                                 <Icon width='20' height='20' external='is-hidden--lg-down' name='catalogMD' />
                                 <Icon width='16' height='16' external='is-hidden--xl-up' name='catalogMD' />
                             </div>
-                            <span onClick={() => openNavHandler('catalog')} className='btn__text is-hidden--xxl-down'>Каталог товаров</span>
-                            <span onClick={() => openNavHandler('catalog')} className='btn__text is-hidden--xxxl-up'>Каталог</span>
+                            <span className='btn__text is-hidden--xxl-down'>Каталог товаров</span>
+                            <span className='btn__text is-hidden--xxxl-up'>Каталог</span>
                         </div>
 
-                        <div className='btn btn--label btn--md'>
+                        <div onClick={() => openNavHandler('brand')} className='btn btn--label btn--md'>
                             <div className='btn__icon '>
                                 <Icon width='22' height='22' external='is-hidden--lg-down' name='brandsMD' />
                                 <Icon width='18' height='18' external='is-hidden--xl-up' name='brandsMD' />
                             </div>
-                            <span onClick={() => openNavHandler('brand')} className='btn__text'>Бренды</span>
+                            <span className='btn__text'>Бренды</span>
                         </div>
                     </div>
 
@@ -289,18 +211,9 @@ export default function Header() {
                         <AuthBtn size='20' />
                     </div>
                 </div>
-            </motion.div>
-
-            <div
-                ref={refRabbit}
-                data-active={isRabbitFixed}
-                onClick={hoverEnterHandler}
-                onMouseOver={hoverEnterHandler}
-                className={`${style.rabbit}`}>
-                <Image src='/images/layout/logo-lg.svg' layout='fill' alt='RedHair market' />
             </div>
 
-            <HeaderNav isOpen={navIsOpen} setIsOpen={setNavIsOpen} isHeaderFixed={isHeaderFixed} />
+            <HeaderNav isOpen={navIsOpen} setIsOpen={setNavIsOpen} isHeaderFixed={false} />
         </>
     )
 }
@@ -309,7 +222,7 @@ function AuthBtn({ size }) {
     const [isAuth, setIsAuth] = useState(false)
 
     const authHandler = () => {
-        globalState.modal.open('auth', true, {type: 'auth'})
+        globalState.modal.open('auth', true, { type: 'auth' })
     }
 
     useEffect(() => {
@@ -331,7 +244,7 @@ function AuthBtn({ size }) {
 function AuthMobile() {
     const authHandler = () => {
         if (!globalState.auth.isAuth) {
-            globalState.modal.open('auth', true, {type: 'auth'})
+            globalState.modal.open('auth', true, { type: 'auth' })
         }
     }
 

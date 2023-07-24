@@ -36,17 +36,21 @@ function FilterItem({ item, onAfterChange }) {
     const selectHandler = event => {
         const target = event.target
         if (target.getAttribute('data-active') === 'true') return
-        const parent = target.parentNode
-        const prevActive = parent.querySelector('[data-active="true"]')
-        if (prevActive) prevActive.setAttribute('data-active', 'false')
-        setTimeout(() => {
-            target.setAttribute('data-active', 'true')
-        }, 150)
+        const fastFiltersContainer = document.querySelectorAll('.js-fast-filters')
+        const value = target.innerText
         onAfterChange(item)
+        setTimeout(() => {
+            fastFiltersContainer.forEach(container => {
+                const items = container.querySelectorAll('.js-fast-filters-item')
+                items.forEach(item => {
+                    item.setAttribute('data-active', item.innerText === value)
+                })
+            })
+        }, 150)
     }
 
     return (
-        <div onClick={selectHandler} className={`${style.fastFilterItem} text--upper text--t6 text--normal`}>
+        <div onClick={selectHandler} className={`${style.fastFilterItem} js-fast-filters-item text--upper text--t6 text--normal`}>
             {item.name}
         </div>
     )
