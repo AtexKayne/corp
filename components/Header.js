@@ -198,7 +198,7 @@ export default function Header() {
                         <div className='btn btn--empty btn--sm'><Icon width='21' height='21' name='searchMD' /></div>
                         <div className='btn btn--empty btn--sm'><Icon width='24' height='21' name='heartMD' /></div>
                         <Basket />
-                        <AuthBtn size='25' />
+                        <AuthBtn size='25' isFixed={isFixed} />
                     </div>
 
                     <div className={`${style.groupSM} is-hidden--xl-up`}>
@@ -218,7 +218,7 @@ export default function Header() {
     )
 }
 
-function AuthBtn({ size }) {
+function AuthBtn({ size, isFixed }) {
     const [isAuth, setIsAuth] = useState(false)
 
     const authHandler = () => {
@@ -238,7 +238,7 @@ function AuthBtn({ size }) {
             <div onClick={() => setIsAuth(false)} className={`btn btn--empty btn--sm p-relative`}>
                 <Icon name='person' width={size} height={size} />
             </div>
-        ) : <div onClick={authHandler} className={`${style.textt6} btn btn--tetriary btn--md text--bold ml-0.5`}>ВОЙТИ</div>
+        ) : <div onClick={authHandler} className={`${style.textt6} btn ${isFixed ? 'btn--label' : 'btn--tetriary'} btn--md text--bold ml-0.5`}>ВОЙТИ</div>
 }
 
 function AuthMobile() {
