@@ -199,6 +199,8 @@
     }
 }
 
+.tagsContainer {}
+
 .nav {
     display: flex;
     flex-wrap: wrap;
@@ -229,6 +231,16 @@
 .navFiller {
     height: 1em;
     display: none;
+
+    @include media-breakpoint(xxl) {
+        display: block;
+        margin-left: -122px;
+    }
+
+    @include media-breakpoint(xxxl) {
+        display: block;
+        margin-left: -270px;
+    }
 }
 
 // Fast filters

@@ -172,7 +172,7 @@ function Nav({ isBrands, sortHandler, openFilters, fastFilters, selectFastFilter
 
             <div ref={refNav} data-active={false} className={`${style.nav} pb-2`}>
                 <div className={`${style.navInner}`}>
-                    <div className={style.navFiller} />
+                    
                     <Dropdown title='Популярные' external='text--t5 text--bold text--upper' afterChose={sortHandler}>
                         <>
                             <span data-value='popular' data-active='true' className='text--t4'>Популярные</span>
@@ -181,12 +181,56 @@ function Nav({ isBrands, sortHandler, openFilters, fastFilters, selectFastFilter
                             <span data-value='price-up' className='text--t4'>Цена по убыванию</span>
                         </>
                     </Dropdown>
+                    <div className={style.navFiller} />
                     <div className='is-hidden--lg-down text--t5 text--bold text--upper text--color-small'>НАЙДЕНО 668 ТОВАРОВ</div>
-                    
-                    <a href='#' className='d-flex flex--center' onClick={openFilters}>
-                        <span className='text--t5 link text--bold text--upper'>фильтры</span>
-                        <Icon external='ml-0.5' name='filter' width='16' height='16' />
-                    </a>
+                    <div className={`${style.tagsContainer} d-flex`}>
+                        <div className='mr-3 d-flex flex--center'>
+                            <span className='text--t5 link text--bold text--upper mr-0.5'>Вид</span>
+                            <svg className=' c-pointer' width="74" height="18" viewBox="0 0 74 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <g clip-path="url(#clip0_1030_341251)">
+                                    <rect width="7.28574" height="7.28574" rx="0.266667" fill="#112233" />
+                                    <rect y="10.7148" width="7.28574" height="7.28574" rx="0.266667" fill="#112233" />
+                                    <rect x="10.7129" width="7.28574" height="7.28574" rx="0.266667" fill="#112233" />
+                                    <rect x="10.7129" y="10.7148" width="7.28574" height="7.28574" rx="0.266667" fill="#112233" />
+                                </g>
+                                <g clip-path="url(#clip1_1030_341251)">
+                                    <g clip-path="url(#clip2_1030_341251)">
+                                        <rect x="28" width="7.875" height="4.5" rx="0.266667" fill="#E5E5E5" />
+                                        <rect x="38.125" width="7.875" height="4.5" rx="0.266667" fill="#E5E5E5" />
+                                        <rect x="28" y="6.75" width="7.875" height="4.5" rx="0.266667" fill="#E5E5E5" />
+                                        <rect x="38.125" y="6.75" width="7.875" height="4.5" rx="0.266667" fill="#E5E5E5" />
+                                        <rect x="28" y="13.5" width="7.875" height="4.5" rx="0.266667" fill="#E5E5E5" />
+                                        <rect x="38.125" y="13.5" width="7.875" height="4.5" rx="0.266667" fill="#E5E5E5" />
+                                    </g>
+                                </g>
+                                <g clip-path="url(#clip3_1030_341251)">
+                                    <rect x="56" width="9" height="7.875" rx="0.266667" fill="#E5E5E5" />
+                                    <rect x="56" y="10.125" width="5.625" height="7.875" rx="0.266667" fill="#E5E5E5" />
+                                    <rect x="68.375" width="5.625" height="7.875" rx="0.266667" fill="#E5E5E5" />
+                                    <rect x="65" y="10.125" width="9" height="7.875" rx="0.266667" fill="#E5E5E5" />
+                                </g>
+                                <defs>
+                                    <clipPath id="clip0_1030_341251">
+                                        <rect width="18" height="18" fill="white" />
+                                    </clipPath>
+                                    <clipPath id="clip1_1030_341251">
+                                        <rect width="18" height="18" fill="white" transform="translate(28)" />
+                                    </clipPath>
+                                    <clipPath id="clip2_1030_341251">
+                                        <rect width="18" height="18" fill="white" transform="translate(28)" />
+                                    </clipPath>
+                                    <clipPath id="clip3_1030_341251">
+                                        <rect width="18" height="18" fill="white" transform="translate(56)" />
+                                    </clipPath>
+                                </defs>
+                            </svg>
+
+                        </div>
+                        <a href='#' className='d-flex flex--center' onClick={openFilters}>
+                            <span className='text--t5 link text--bold text--upper'>фильтры</span>
+                            <Icon external='ml-0.5' name='filter' width='16' height='16' />
+                        </a>
+                    </div>
                 </div>
             </div>
         </div>
