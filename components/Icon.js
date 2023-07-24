@@ -52,6 +52,7 @@ export default function Icon({ name, external = '', width = 16, height = 16, siz
             deliveryS:      dynamic(() => import('../public/icons/icon-delivery-s.svg'),     { ssr: false }),
             delivery:       dynamic(() => import('../public/icons/icon-delivery.svg'),       { ssr: false }),
             checkAnim:      dynamic(() => import('../public/icons/icon-check-animated.svg'), { ssr: false }),
+            filter:         dynamic(() => import('../public/icons/icon-filter.svg'),         { ssr: false }),
             // 
         }
         const Component = dynamicComponents[iconName]

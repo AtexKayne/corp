@@ -146,14 +146,33 @@ export default function Catalog({ detail }) {
 }
 
 function Nav({ isBrands, sortHandler, openFilters, fastFilters, selectFastFilter, isExistFilters, resetAllHandler }) {
+    const refNav = useRef(null)
+
+    const scrollHandler = () => {
+        const scroll = window.scrollY
+        console.log(scroll);
+        const newIsFixed = scroll > 292
+        refNav.current.dataset.active = newIsFixed
+    }
+
+    useEffect(() => {
+        window.addEventListener('scroll', scrollHandler, { passive: true })
+        const offset = refNav.current.getBoundingClientRect().left
+        refNav.current.style.left = `${offset}px`
+        refNav.current.style.right = `${offset}px`
+
+        return () => {
+            window.removeEventListener('scroll', scrollHandler)
+        }
+    }, [])
+
     return (
         <div className={style.navContainer}>
             {isBrands ? null : <FastFilter fastFilters={fastFilters} onAfterChange={selectFastFilter} resetAllHandler={resetAllHandler} />}
 
-            <div className={`${style.nav} pb-2`}>
+            <div ref={refNav} data-active={false} className={`${style.nav} pb-2`}>
                 <div className={`${style.navInner}`}>
                     <div className={style.navFiller} />
-                    <div className='is-hidden--lg-down text--t5 text--bold text--upper text--color-small'>НАЙДЕНО 668 ТОВАРОВ</div>
                     <Dropdown title='Популярные' external='text--t5 text--bold text--upper' afterChose={sortHandler}>
                         <>
                             <span data-value='popular' data-active='true' className='text--t4'>Популярные</span>
@@ -162,8 +181,11 @@ function Nav({ isBrands, sortHandler, openFilters, fastFilters, selectFastFilter
                             <span data-value='price-up' className='text--t4'>Цена по убыванию</span>
                         </>
                     </Dropdown>
-                    <a href='#' onClick={openFilters}>
+                    <div className='is-hidden--lg-down text--t5 text--bold text--upper text--color-small'>НАЙДЕНО 668 ТОВАРОВ</div>
+                    
+                    <a href='#' className='d-flex flex--center' onClick={openFilters}>
                         <span className='text--t5 link text--bold text--upper'>фильтры</span>
+                        <Icon external='ml-0.5' name='filter' width='16' height='16' />
                     </a>
                 </div>
             </div>

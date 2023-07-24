@@ -190,9 +190,11 @@
 
 .navContainer {
     display: flex;
+    position: relative;
     flex-direction: column-reverse;
 
     @include media-breakpoint(lg-up) {
+        height: 113px;
         flex-direction: column;
     }
 }
@@ -200,7 +202,15 @@
 .nav {
     display: flex;
     flex-wrap: wrap;
-    position: relative;
+    position: static;
+    background-color: var(--t-background);
+
+    &[data-active='true'] {
+        top: 97px;
+        z-index: 8;
+        bottom: auto;
+        position: fixed;
+    }
 
     >* {
         width: 100%;
