@@ -187,14 +187,14 @@ function Nav({ isBrands, sortHandler, openFilters, fastFilters, selectFastFilter
                         <div className='mr-3 d-flex flex--center'>
                             <span className='text--t5 link text--bold text--upper mr-0.5'>Вид</span>
                             <svg className=' c-pointer' width="74" height="18" viewBox="0 0 74 18" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                <g clip-path="url(#clip0_1030_341251)">
+                                <g clipPath="url(#clip0_1030_341251)">
                                     <rect width="7.28574" height="7.28574" rx="0.266667" fill="#112233" />
                                     <rect y="10.7148" width="7.28574" height="7.28574" rx="0.266667" fill="#112233" />
                                     <rect x="10.7129" width="7.28574" height="7.28574" rx="0.266667" fill="#112233" />
                                     <rect x="10.7129" y="10.7148" width="7.28574" height="7.28574" rx="0.266667" fill="#112233" />
                                 </g>
-                                <g clip-path="url(#clip1_1030_341251)">
-                                    <g clip-path="url(#clip2_1030_341251)">
+                                <g clipPath="url(#clip1_1030_341251)">
+                                    <g clipPath="url(#clip2_1030_341251)">
                                         <rect x="28" width="7.875" height="4.5" rx="0.266667" fill="#E5E5E5" />
                                         <rect x="38.125" width="7.875" height="4.5" rx="0.266667" fill="#E5E5E5" />
                                         <rect x="28" y="6.75" width="7.875" height="4.5" rx="0.266667" fill="#E5E5E5" />
@@ -203,7 +203,7 @@ function Nav({ isBrands, sortHandler, openFilters, fastFilters, selectFastFilter
                                         <rect x="38.125" y="13.5" width="7.875" height="4.5" rx="0.266667" fill="#E5E5E5" />
                                     </g>
                                 </g>
-                                <g clip-path="url(#clip3_1030_341251)">
+                                <g clipPath="url(#clip3_1030_341251)">
                                     <rect x="56" width="9" height="7.875" rx="0.266667" fill="#E5E5E5" />
                                     <rect x="56" y="10.125" width="5.625" height="7.875" rx="0.266667" fill="#E5E5E5" />
                                     <rect x="68.375" width="5.625" height="7.875" rx="0.266667" fill="#E5E5E5" />
