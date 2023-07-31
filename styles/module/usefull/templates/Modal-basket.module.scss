@@ -93,10 +93,13 @@
         }
     }
 
-    &[data-index='0'] {
-        z-index: 10;
+    &:first-child {
 
-        [data-active='true'] ~ .settings {
+        .onboard {
+            display: block;
+        }
+
+        &[data-active='true'] ~ .settings {
             opacity: 1;
             pointer-events: none;
         }
@@ -669,6 +672,7 @@
     z-index: 2;
     top: -290px;
     width: 618px;
+    display: none;
     right: -297px;
     height: 618px;
     position: absolute;

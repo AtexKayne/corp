@@ -162,6 +162,4 @@ function Filter({ info, filters, onAfterChange }) {
     } else if (isChecker) {
         return <InputChecker info={info} onAfterChange={inputsChangeHandler} />
     }
-
-
 }

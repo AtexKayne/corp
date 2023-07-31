@@ -286,12 +286,11 @@ function FilledBasket({ items, setItems }) {
                         <InputSelectAll isChecked={isChecked} onAfterComplete={selectAllHandler} text='Выбрать все' />
                     </div>
                     <div ref={refInputWrapper}>
-                        {items.map((item, index) => {
+                        {items.map((item) => {
                             if (item.max !== 0) {
                                 return <ProductCard
                                     item={item}
                                     key={item.id}
-                                    index={index}
                                     deleteItem={deleteItem}
                                     returnedItem={returnedItem}
                                     onChangeCount={changeCount}
@@ -385,7 +384,7 @@ function BasketLackItems({ lackItems, setLackItems, setItems, deleteItem, return
     )
 }
 
-function ProductCard({ item, selectHandler, returnedItem, deleteItem, onChangeCount, index }) {
+function ProductCard({ item, selectHandler, returnedItem, deleteItem, onChangeCount }) {
     const animationProduct = useAnimationControls()
     const [isControlOpen, setIsControlOpen] = useState(false)
     const [isFavourite, setIsFavourite] = useState('В избранное')
@@ -446,7 +445,7 @@ function ProductCard({ item, selectHandler, returnedItem, deleteItem, onChangeCo
     }, [returnedItem])
 
     return (
-        <motion.div data-index={index} ref={refItem} animate={animationProduct} transition={{ duration: 0.4 }} initial={{ marginTop: 16, paddingTop: 16 }} className={style.product}>
+        <motion.div ref={refItem} animate={animationProduct} transition={{ duration: 0.4 }} initial={{ marginTop: 16, paddingTop: 16 }} className={style.product}>
             <div className={style.controls}>
                 <div onClick={favouriteHandler} className={style.control}>
                     <Favourite external={style.favourite} info={item} width='16' height='16' />
@@ -457,10 +456,7 @@ function ProductCard({ item, selectHandler, returnedItem, deleteItem, onChangeCo
                     <span className='text--t4'>Удалить</span>
                 </div>
             </div>
-            {index === 0 && selectHandler
-                ? <Onboarding />
-                : null
-            }
+            {selectHandler ? <Onboarding /> : null}
             <div onClick={toggleControlsHandler} data-open={isControlOpen} className={style.settings}>
                 <Icon name='settings' width='16' height='16' />
                 <Icon name='close' width='16' height='16' />
