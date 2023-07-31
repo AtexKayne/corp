@@ -1,18 +1,47 @@
 .rc-slider {
+    width: 100%;
+    height: 14px;
+    padding: 5px 0;
+    position: relative;
+    touch-action: none;
+    border-radius: 6px;
+    box-sizing: border-box;
+    -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+
     &-rail {
+        width: 100%;
+        position: absolute;
+        border-radius: 6px;
         height: 1px !important;
+        background-color: #e9e9e9;
         transform: translateY(4px) !important;
         background-color: var(--t-text) !important;
     }
 
     &-track {
+        height: 4px;
+        position: absolute;
+        border-radius: 6px;
         height: 1px !important;
         opacity: 100% !important;
         transform: translateY(4px) !important;
         background-color: var(--t-primary) !important;
     }
 
+    &-step {
+        width: 100%;
+        height: 4px;
+        position: absolute;
+        pointer-events: none;
+        background: transparent;
+    }
+
     &-handle {
+        margin-top: -5px;
+        border-radius: 50%;
+        position: absolute;
+        touch-action: pan-x;
+        border-style: solid;
         opacity: 1 !important;
         width: 20px !important;
         height: 20px !important;
@@ -25,6 +54,10 @@
 
     &-handle-dragging {
         border-color: var(--t-primary) !important;
+    }
+
+    * {
+        -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
     }
 }
 
