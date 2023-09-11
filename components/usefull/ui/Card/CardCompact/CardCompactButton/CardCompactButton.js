@@ -7,7 +7,6 @@ import NotifyButton from '../../NotifyButton/NotifyButton'
 
 export default function CardCompactButton({ count, info, onUpdateInBasket }) {
     const [isOpen, setIsOpen] = useState(false)
-    const [isRinged, setIsRinged] = useState(false)
 
     const buyHandler = () => {
         setIsOpen(true)
@@ -21,7 +20,7 @@ export default function CardCompactButton({ count, info, onUpdateInBasket }) {
 
     if (!info.max) {
         return (
-            <div data-ringed={isRinged} className={style.buttonContainer}>
+            <div className={style.buttonContainer}>
                 <NotifyButton name={info.primaryName} external={style.notify} image={info.images[0]} />
             </div>
         )

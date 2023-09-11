@@ -18,12 +18,21 @@
 
     [data-hover='true'] &[data-active='true'] {
         .button {
-            transform: scaleX(0);
+            opacity: 0;
+            transition: .2s opacity 0.2s;
         }
 
         .counter {
             opacity: 1;
-            transform: scaleX(1);
+            width: 160px;
+            pointer-events: all;
+            background-color: var(--t-light);
+            transition: 0s opacity, 0.3s width ease-out, 0.2s background-color .2s;
+
+            >* {
+                opacity: 1;
+                transition: 0.3s opacity .3s;
+            }
         }
     }
 
@@ -67,18 +76,19 @@
 .button {
     top: 0;
     right: 0;
+    z-index: 1;
     width: 68px;
     height: 44px;
     display: flex;
     cursor: pointer;
-    transition: .1s;
     position: absolute;
     border-radius: 8px;
     align-items: center;
-    transform-origin: left;
+    // transform-origin: left;
     justify-content: center;
     color: var(--t-background);
     background-color: var(--t-primary);
+    transition: 0.3s transform, 0.1s opacity;
 
     &[data-active='false'] .buttonCount {
         display: none;
@@ -87,6 +97,10 @@
     &[data-active='true'] {
         color: var(--t-primary);
         background-color: var(--t-light);
+    }
+
+    >span {
+        transform: translateX(-1px);
     }
 }
 
@@ -100,14 +114,38 @@
     top: 0;
     right: 0;
     opacity: 0;
+    z-index: 3;
+    width: 68px;
     height: 44px;
-    transition: .1s;
     position: absolute;
-    transform: scaleX(0);
+    border-radius: 8px;
+    pointer-events: none;
     transform-origin: right;
+    background-color: var(--t-primary);
+    transition: 0.3s width ease-in, 0.1s opacity 0.4s, 0.3s background-color;
+
+    [data-active='true'] & {
+        background-color: var(--t-light);
+    }
     
     >* {
+        opacity: 0;
+        z-index: 2;
         height: 100%;
+        // position: relative;
+        transition: 0.2s opacity;
+
+        &::before {
+            top: -10px;
+            z-index: 1;
+            left: -30px;
+            width: 30px;
+            content: '';
+            bottom: -10px;
+            position: absolute;
+            background: linear-gradient(90deg, rgba(255,255,255,0) 0%, rgba(255,255,255,1) 100%);
+            
+        }
     }
 }
 

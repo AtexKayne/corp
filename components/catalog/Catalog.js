@@ -644,9 +644,7 @@ function CardList({ products, mode }) {
     return (
         <div data-mode={mode} className={style.cardsContainer}>
             {products.map(product => (
-                <div key={product.id} className={style.cardWrapper}>
-                    <Card info={product} mode={mode} />
-                </div>
+                <Card key={product.id} info={product} mode={mode} />
             ))}
         </div>
     )

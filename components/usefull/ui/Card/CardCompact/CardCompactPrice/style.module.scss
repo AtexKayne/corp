@@ -1,6 +1,7 @@
 .price {
     width: auto;
     display: flex;
+    min-width: 130px;
     text-align: right;
     align-items: flex-end;
     flex-direction: column;
@@ -11,9 +12,8 @@
 }
 
 .priceOld {
+    margin-top: 6px;
     position: relative;
-    align-self: center;
-    transform: translateY(1px);
     color: var(--c-_light-gray);
 
     &::after {
