@@ -3,7 +3,7 @@ import { globalState } from '../../../../helpers/globalState'
 import style from './style.module.scss'
 import Icon from '../../../../Icon'
 
-export default function NotifyButton({ name, image }) {
+export default function NotifyButton({ name, image, external = '' }) {
     const [isRinged, setIsRinged] = useState(false)
     const [isNotify, setIsNotify] = useState(false)
 
@@ -30,7 +30,7 @@ export default function NotifyButton({ name, image }) {
             data-active={isNotify}
             data-shaked={isRinged}
             onClick={notificationClickHandler}
-            className={`${style.notify} button`}>
+            className={`${style.notify} ${external} button`}>
 
             <span className='text--upper text--p5 text--bold mr-0.8'>{isNotify ? 'сообщим' : 'сообщить'}</span>
             <span className={style.iconBell}>

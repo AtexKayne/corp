@@ -11,7 +11,7 @@ export default function Breadcrumbs({ link, theme }) {
         const clientWidth = refInner.current.clientWidth
 
         setTimeout(() => {
-            if (scrollWidth <= clientWidth) return
+            if (scrollWidth <= clientWidth || !refBreadcrumbs.current) return
             refBreadcrumbs.current.scrollTo({
                 left: scrollWidth,
                 behavior: 'smooth'

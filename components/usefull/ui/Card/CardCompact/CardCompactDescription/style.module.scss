@@ -1,0 +1,14 @@
+.container {
+    width: 100%;
+    cursor: pointer;
+    
+    > div {
+        transition: .3s;
+    }
+
+    &:hover {
+        > div:nth-child(2) {
+            color: var(--t-primary);
+        }
+    }
+}

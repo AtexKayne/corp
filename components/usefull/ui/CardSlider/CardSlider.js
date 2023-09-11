@@ -3,7 +3,7 @@ import { Swiper, SwiperSlide } from 'swiper/react'
 import { Navigation } from 'swiper'
 import Icon from '../../../Icon'
 import { useRef, useState, useEffect } from 'react'
-import Card from '../Card/Card'
+import Card from '../Card/CardNormal'
 import { globalState } from '../../../helpers/globalState'
 import { debounce } from '../../../helpers/debounce'
 

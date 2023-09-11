@@ -13,7 +13,7 @@ import CatalogFilters from '../usefull/filters/CatalogFilters'
 
 export default function Catalog({ detail }) {
     const isBrands = detail.isBrands || detail.isPromo
-
+    const [mode, setMode] = useState('compact')
     const [isExistFilters, setIsExistFilters] = useState(false)
     const [isFilterOpen, setIsFilterOpen] = useState(false)
     const [filters, setFilters] = useState(detail.filter)
@@ -127,7 +127,7 @@ export default function Catalog({ detail }) {
                 <div style={{ width: '100%' }} className='d-flex flex--column'>
                     <PreviousButton />
 
-                    <CardList products={products} />
+                    <CardList products={products} mode={mode} />
 
                     <Pagination />
                 </div>
@@ -172,7 +172,7 @@ function Nav({ isBrands, sortHandler, openFilters, fastFilters, selectFastFilter
 
             <div ref={refNav} data-active={false} className={`${style.nav} pb-2`}>
                 <div className={`${style.navInner}`}>
-                    
+
                     <Dropdown title='Популярные' external='text--t5 text--bold text--upper' afterChose={sortHandler}>
                         <>
                             <span data-value='popular' data-active='true' className='text--t4'>Популярные</span>
@@ -620,11 +620,11 @@ function Pagination({ }) {
     )
 }
 
-function CardList({ products }) {
+function CardList({ products, mode }) {
     const fillers = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12]
     if (products === 'updated') {
         return (
-            <div className={style.cardsContainer}>
+            <div data-mode={mode} className={style.cardsContainer}>
                 {fillers.map(product => (
                     <div key={product} className={style.cardFiller}>
                         <div className={style.cardFillerImage} />
@@ -642,10 +642,10 @@ function CardList({ products }) {
     if (!products || !products.length) return null
 
     return (
-        <div className={style.cardsContainer}>
+        <div data-mode={mode} className={style.cardsContainer}>
             {products.map(product => (
                 <div key={product.id} className={style.cardWrapper}>
-                    <Card info={product} />
+                    <Card info={product} mode={mode} />
                 </div>
             ))}
         </div>

@@ -1,0 +1,116 @@
+@import '../../../../../../styles/mixins/helpers/media';
+
+.buttonContainer {
+    opacity: 0;
+    display: block;
+    transition: .3s;
+    min-width: 102px;
+    min-height: 44px;
+    position: relative;
+
+    &[data-active='true'] {
+        opacity: 1;
+    }
+
+    [data-hover='true'] & {
+        opacity: 1;
+    }
+
+    [data-hover='true'] &[data-active='true'] {
+        .button {
+            transform: scaleX(0);
+        }
+
+        .counter {
+            opacity: 1;
+            transform: scaleX(1);
+        }
+    }
+
+    * {
+        user-select: none;
+    }
+
+    .notify {
+        width: 68px;
+        height: 44px;
+        
+        >span:first-child {
+            display: none;
+        }
+
+        >span:last-child {
+            text-align: left;
+
+            >* {
+                left: 0;
+            }
+        }
+    }
+    
+    @include media-breakpoint(lg-down) {
+        opacity: 1;
+
+        &[data-active='true'] {
+            .button {
+                transform: scaleX(0);
+            }
+    
+            .counter {
+                opacity: 1;
+                transform: scaleX(1);
+            }
+        }
+    }
+}
+
+.button {
+    top: 0;
+    right: 0;
+    width: 68px;
+    height: 44px;
+    display: flex;
+    cursor: pointer;
+    transition: .1s;
+    position: absolute;
+    border-radius: 8px;
+    align-items: center;
+    transform-origin: left;
+    justify-content: center;
+    color: var(--t-background);
+    background-color: var(--t-primary);
+
+    &[data-active='false'] .buttonCount {
+        display: none;
+    }
+
+    &[data-active='true'] {
+        color: var(--t-primary);
+        background-color: var(--t-light);
+    }
+}
+
+.buttonCount {
+    margin-left: 9px;
+    color: var(--t-text);
+    display: inline-block;
+}
+
+.counter {
+    top: 0;
+    right: 0;
+    opacity: 0;
+    height: 44px;
+    transition: .1s;
+    position: absolute;
+    transform: scaleX(0);
+    transform-origin: right;
+    
+    >* {
+        height: 100%;
+    }
+}
+
+.profiBtn {
+    width: 68px;
+}

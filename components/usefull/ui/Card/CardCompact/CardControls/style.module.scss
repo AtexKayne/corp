@@ -1,0 +1,90 @@
+@import '../../../../../../styles/mixins/helpers/media';
+
+.controls {
+    top: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 1;
+    position: absolute;
+
+    @include media-breakpoint(xl-up) {
+        display: none;
+    }
+}
+
+.settings {
+    z-index: 2;
+    width: 16px;
+    height: 16px;
+    display: flex;
+    cursor: pointer;
+    position: relative;
+    align-items: center;
+    justify-content: center;
+    
+    &[data-open='true'] {
+        >*:first-child {
+            opacity: 1;
+        }
+    }
+    
+    &[data-open='false'] {
+        >*:last-child {
+            opacity: 1;
+        }
+    }
+    
+    >* {
+        opacity: 0;
+        transition: .3s;
+        position: absolute;
+    }
+}
+
+.params {
+    top: 0;
+    z-index: 1;
+    right: 33px;
+    height: 100%;
+    display: flex;
+    overflow: hidden;
+    position: absolute;
+    border-radius: 8px;
+    pointer-events: none;
+}
+
+.favourite {
+    width: 72px;
+    height: 100%;
+    pointer-events: all;
+    background-color: var(--c-_yellow);
+
+    .favouriteInner {
+        width: 100%;
+        height: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: var(--t-background);
+        transform: translateX(6px);
+    }
+}
+
+.basket {
+    width: 68px;
+    height: 100%;
+    display: flex;
+    cursor: pointer;
+    transition: .3s;
+    overflow: hidden;
+    align-items: center;
+    pointer-events: all;
+    color: var(--t-text);
+    justify-content: center;
+    background-color: var(--t-light);
+}
+
+[data-current='false'] .basket {
+    width: 0;
+    opacity: 0;
+}
