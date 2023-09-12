@@ -1,11 +1,12 @@
 .price {
     width: auto;
     display: flex;
-    min-width: 130px;
+    // min-width: 130px;
     text-align: right;
     align-items: flex-end;
     flex-direction: column;
-
+    transform: none!important;
+    
     >*{
         display: inline-block;
     }

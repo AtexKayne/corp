@@ -127,6 +127,21 @@
         position: relative;
         border-radius: 8px;
         background-color: var(--t-background);
+
+        >div {
+            transition-delay: .4s;
+            transition-duration: .3s;
+            transition-property: transform;
+            transition-timing-function: ease-out;
+        }
+
+        &[data-offset='true'] {
+            >div {
+                transition-delay: 0s;
+                transform: translateX(-110px);
+                transition-timing-function: ease-out;
+            }
+        }
     }
 
     @include media-breakpoint(lg-down) {
@@ -134,7 +149,7 @@
         padding-right: 32px;
         
         .cardInner {
-            padding: 12px;
+            padding: 12px 12px 12px 0;
             // border-top-right-radius: 0;
             box-shadow: none !important;
             // border-bottom-right-radius: 0;

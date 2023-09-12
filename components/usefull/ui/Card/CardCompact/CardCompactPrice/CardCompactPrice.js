@@ -17,12 +17,12 @@ export default function CardCompactPrice({ info, count, onUpdateInBasket }) {
             }
 
             {info.max === 0
-                ? <div className={` text--t2 text--normal pb-0.8`}>
+                ? <div style={{ minWidth: '130px' }} className={` text--t2 text--normal pb-0.8`}>
                     <span className='text--no-wrap'>Нет в наличии</span>
                 </div> : null
             }
 
-            <CardCompactButton count={count} info={info} onUpdateInBasket={onUpdateInBasket}/>
-        </div>
+            <CardCompactButton count={count} info={info} onUpdateInBasket={onUpdateInBasket} />
+        </div >
     )
 }

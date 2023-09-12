@@ -4,6 +4,7 @@
 
 .container {
     display: flex;
+    margin-top: 32px;
     padding-bottom: adaptive-value((
         xs: 40px,
         md: 60px,

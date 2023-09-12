@@ -10,8 +10,12 @@ export default function CardCompactButton({ count, info, onUpdateInBasket }) {
 
     const buyHandler = () => {
         setIsOpen(true)
-        onUpdateInBasket({ value: 1, isMin: false, isMax: false })
-        globalState.popover.open([info.primaryName, 'ТЕПЕРЬ В КОРЗИНЕ'], info.images[0], true)
+        if (!count) {
+            onUpdateInBasket({ value: 1, isMin: false, isMax: false })
+            globalState.popover.open([info.primaryName, 'ТЕПЕРЬ В КОРЗИНЕ'], info.images[0], true)
+        } else {
+            onUpdateInBasket({ value: count, isMin: false, isMax: false })
+        }
     }
 
     const profiClickHandler = () => {

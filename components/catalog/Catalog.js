@@ -125,7 +125,7 @@ export default function Catalog({ detail }) {
 
             <div className={style.container}>
                 <div style={{ width: '100%' }} className='d-flex flex--column'>
-                    <PreviousButton />
+                    <PreviousButton isPrevButton={false} />
 
                     <CardList products={products} mode={mode} />
 

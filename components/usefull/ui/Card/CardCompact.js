@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useRef } from 'react'
 import style from './style.module.scss'
 import { globalState } from '../../../helpers/globalState'
 import { isEqual } from '../../../helpers/isEqual'
@@ -11,15 +11,51 @@ export default function CardCompact({ info, mode, onChangeCount = () => { } }) {
     // @TODO Постарайся от этого избавиться
     const [count, setCount] = useState(info.basket ?? 0)
     const [isHover, setIsHover] = useState(false)
+    const [isOffseted, setIsOffseted] = useState(false)
     const [isControlOpen, setIsControlOpen] = useState(false)
-    const mouseEnterHandler = () => setIsHover(true)
-    const mouseLeaveHandler = () => setIsHover(false)
+    const refTimeout = useRef(null)
+
+    const mouseEnterHandler = () => {
+        // if (window.innerWidth <= globalState.sizes.lg) return
+        setIsHover(true)
+    }
+
+    const mouseLeaveHandler = () => {
+        // if (window.innerWidth <= globalState.sizes.lg) return
+        setIsHover(false)
+    }
+
+    const scrollHandler = () => {
+        setIsHover(false)
+        setIsOffseted(false)
+        if (refTimeout.current) clearTimeout(refTimeout.current)
+        window.removeEventListener('scroll', scrollHandler)
+    }
 
     const updateHandler = ({ value, isMax, isMin }) => {
         // setCount(val)
         onChangeCount(value, false, info)
-        if (value === 0) setTimeout(() => setCount(value), 300)
-        else setCount(value)
+        if (value === 0) {
+            setTimeout(() => setCount(value), 300)
+            if (window.innerWidth <= globalState.sizes.lg) {
+                setIsHover(false)
+                setIsOffseted(false)
+                if (refTimeout.current) clearTimeout(refTimeout.current)
+            }
+        } else {
+            setCount(value)
+            if (window.innerWidth <= globalState.sizes.lg) {
+                setIsHover(true)
+                setIsOffseted(true)
+                window.addEventListener('scroll', scrollHandler)
+                if (refTimeout.current) clearTimeout(refTimeout.current)
+                refTimeout.current = setTimeout(() => {
+                    setIsHover(false)
+                    setIsOffseted(false)
+                    window.removeEventListener('scroll', scrollHandler)
+                }, 6000)
+            }
+        }
 
         if (isMax) {
             globalState.popover.open([info.primaryName, 'Максимум для этого заказа'], info.images[0])
@@ -67,9 +103,9 @@ export default function CardCompact({ info, mode, onChangeCount = () => { } }) {
             className={style.cardCompact}
             onMouseEnter={mouseEnterHandler}
             onMouseLeave={mouseLeaveHandler}
-            style={{'--offset-controls': count ? '-132px' : '-62px'}}>
+            style={{ '--offset-controls': count ? '-132px' : '-62px' }}>
             <CardControls setIsControlOpen={setIsControlOpen} isControlOpen={isControlOpen} onUpdateInBasket={updateHandler} info={info} />
-            <div className={style.cardInner}>
+            <div data-offset={isOffseted} className={style.cardInner}>
                 <CardCompactImages images={info.images} count={count} info={info} isFavourite={false} />
                 <CardCompactDescription info={info} />
                 <CardCompactPrice info={info} count={count} onUpdateInBasket={updateHandler} />
