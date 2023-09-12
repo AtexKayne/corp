@@ -27,11 +27,11 @@
             width: 160px;
             pointer-events: all;
             background-color: var(--t-light);
-            transition: 0s opacity, 0.3s width ease-out, 0.2s background-color .2s;
+            transition: 0s opacity, 0.2s width ease-out, 0.2s background-color .2s;
 
             >* {
                 opacity: 1;
-                transition: 0.3s opacity .3s;
+                transition: 0.2s opacity .2s;
             }
         }
     }
@@ -124,7 +124,7 @@
     transform-origin: right;
     background-color: var(--t-primary);
     -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
-    transition: 0.3s width ease-in, 0.1s opacity 0.4s, 0.3s background-color;
+    transition: 0.2s width ease-in, 0.1s opacity 0.3s, 0.2s background-color;
 
     [data-active='true'] & {
         background-color: var(--t-light);
