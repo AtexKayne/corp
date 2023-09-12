@@ -10,10 +10,12 @@ export default function CardControls({ onUpdateInBasket, info, setIsControlOpen,
     }
 
     const closeControls = event => {
-        const target = event.target
-        console.log(event, target.closest(`.${style.params}`));
-        if (target.closest(`.${style.params}`)) return
+        if (event.type === 'click') {
+            const target = event.target
+            if (target.closest(`.${style.params}`)) return
+        }
         setIsControlOpen(false)
+        window.removeEventListener('scroll', closeControls)
         document.body.removeEventListener('click', closeControls)
     }
 
@@ -25,6 +27,7 @@ export default function CardControls({ onUpdateInBasket, info, setIsControlOpen,
     const toggleControlsHandler = () => {
         if (!isControlOpen) {
             setTimeout(() => {
+                window.addEventListener('scroll', closeControls)
                 document.body.addEventListener('click', closeControls)
             }, 100);
         }

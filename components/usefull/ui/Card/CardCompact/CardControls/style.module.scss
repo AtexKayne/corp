@@ -21,16 +21,19 @@
     position: relative;
     align-items: center;
     justify-content: center;
+    -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
     
     &[data-open='true'] {
         >*:first-child {
             opacity: 1;
+            transform: rotate(-90deg);
         }
     }
     
     &[data-open='false'] {
         >*:last-child {
             opacity: 1;
+            transform: rotate(90deg);
         }
     }
     

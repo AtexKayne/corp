@@ -10,6 +10,7 @@ import Card from '../usefull/ui/Card/Card'
 import Dropdown from '../../components/usefull/Dropdown'
 import Favourite from '../../components/usefull/Favourite'
 import CatalogFilters from '../usefull/filters/CatalogFilters'
+import { debounce } from '../helpers/debounce'
 
 export default function Catalog({ detail }) {
     const isBrands = detail.isBrands || detail.isPromo
@@ -147,30 +148,50 @@ export default function Catalog({ detail }) {
 
 function Nav({ isBrands, sortHandler, openFilters, fastFilters, selectFastFilter, isExistFilters, resetAllHandler }) {
     const refNav = useRef(null)
+    const refContainer = useRef(null)
+    const refOffsetHeight = useRef(0)
 
     const scrollHandler = () => {
         const scroll = window.scrollY
-        console.log(scroll);
-        const newIsFixed = scroll > 292
+        const newIsFixed = scroll > refOffsetHeight.current
         refNav.current.dataset.active = newIsFixed
     }
 
+    const debounceResize = debounce(() => {
+        const offset = refContainer.current.getBoundingClientRect().left
+        refNav.current.style.paddingLeft = `${offset}px`
+        refNav.current.style.paddingRight = `${offset}px`
+        
+        if (window.innerWidth > globalState.sizes.lg) {
+            refOffsetHeight.current = 292
+        } else {
+            refOffsetHeight.current = 198
+        }
+    }, 1000)
+
     useEffect(() => {
         window.addEventListener('scroll', scrollHandler, { passive: true })
-        const offset = refNav.current.getBoundingClientRect().left
-        refNav.current.style.left = `${offset}px`
-        refNav.current.style.right = `${offset}px`
+        window.addEventListener('resize', debounceResize)
+        const offset = refContainer.current.getBoundingClientRect().left
+        refNav.current.style.paddingLeft = `${offset}px`
+        refNav.current.style.paddingRight = `${offset}px`
+        if (window.innerWidth > globalState.sizes.lg) {
+            refOffsetHeight.current = 292
+        } else {
+            refOffsetHeight.current = 198
+        }
 
         return () => {
             window.removeEventListener('scroll', scrollHandler)
+            window.removeEventListener('resize', debounceResize)
         }
     }, [])
 
     return (
-        <div className={style.navContainer}>
+        <div ref={refContainer} className={style.navContainer}>
             {isBrands ? null : <FastFilter fastFilters={fastFilters} onAfterChange={selectFastFilter} resetAllHandler={resetAllHandler} />}
 
-            <div ref={refNav} data-active={false} className={`${style.nav} pb-2`}>
+            <div ref={refNav} data-active={false} className={`${style.nav}`}>
                 <div className={`${style.navInner}`}>
 
                     <Dropdown title='Популярные' external='text--t5 text--bold text--upper' afterChose={sortHandler}>
