@@ -622,6 +622,181 @@ export const cards = [
     },
 ]
 
+export const cardsCompact = [
+    {
+        id: 91,
+        images: [
+            '/images/catalog/products/image-1.jpg',
+        ],
+        primaryName: 'мини-утюжок для волос голубой',
+        secondaryName: 'MURASHKA light blue',
+        art: 5415,
+        price: {
+            actual: '440',
+            old: '550' // Can be empty
+        },
+        max: 10,
+    },
+    {
+        id: 92,
+        images: [
+            '/images/catalog/products/image-2.jpg',
+        ],
+        primaryName: 'Глина для укладки волос',
+        secondaryName: 'Lock Stock & Barrel 85 karats original clay',
+        art: 119025,
+        price: {
+            actual: '1 273',
+        },
+        max: 0,
+    },
+    {
+        id: 93,
+        images: [
+            '/images/catalog/products/image-3.jpg',
+        ],
+        primaryName: 'Шампунь №4 для жирной кожи головы',
+        secondaryName: 'System 4 shale oil shampo',
+        price: {
+            actual: 931,
+        },
+        bonuses: 28,
+        art: 5415,
+        max: 880,
+        values: [
+            '100 мл', '200 мл', '500мл'
+        ],
+    },
+    {
+        id: 94,
+        images: [
+            '/images/catalog/products/image-4.jpg',
+        ],
+        primaryName: 'Бальзам для бороды',
+        secondaryName: 'BEARDBURYS beard balm',
+        value: '500 мл',
+        price: {
+            actual: '2 931',
+            old: '3 299' // Can be empty
+        },
+        bonuses: 30,
+        art: 5416,
+        link: '500',
+        max: 85,
+    },
+    {
+        id: 95,
+        images: [
+            '/images/product/image-7.jpg',
+            '/images/product/image-8.jpg',
+        ],
+        primaryName: 'Canway SZ-A7116-4 blue',
+        secondaryName: 'Расческа с хвостиком',
+        value: '',
+        color: { name: 'Голубой', iconColor: '#00BEFF' },
+        price: {
+            actual: 277,
+        },
+        bonuses: 24,
+        art: 'SZ-A7116-4',
+        link: '100',
+        max: 109,
+    },
+    {
+        id: 96,
+        images: [
+            '/images/catalog/products/image-5.jpg',
+        ],
+        primaryName: 'Машинка для стрижки',
+        secondaryName: 'WAHL corded clipper legend 8147-416',
+        price: {
+            actual: '12 300',
+            old: '16 160' // Can be empty
+        },
+        max: 10,
+    },
+    {
+        id: 97,
+        images: [
+            '/images/catalog/products/image-6.jpg',
+        ],
+        price: {
+            actual: '1 132 300',
+            old: '1 216 160' // Can be empty
+        },
+        primaryName: 'Шейвер для бритья',
+        secondaryName: 'WAHL shaver finale lithium 8164-116',
+        art: 372000081,
+        max: 10,
+    },
+    {
+        id: 98,
+        images: [
+            '/images/catalog/products/image-7.jpg',
+        ],
+        primaryName: 'Машинка для стрижки',
+        secondaryName: 'WAHL corded clipper legend 8147-416',
+        price: {
+            actual: '13 160',
+            old: '16 160' // Can be empty
+        },
+        max: 10,
+    },
+    {
+        id: 99,
+        images: [
+            '/images/catalog/products/image-8.jpg',
+        ],
+        primaryName: 'Ножницы прямые',
+        secondaryName: 'KATACHI 5,5 k0655 basic cut',
+        price: {
+            actual: '1 700',
+        },
+        max: 10,
+    },
+    {
+        id: 910,
+        images: [
+            '/images/catalog/products/image-9.jpg',
+        ],
+        primaryName: 'Набор насадок на машинку',
+        secondaryName: 'WAHL guide combs for balding 3070-100',
+        price: {
+            actual: '780',
+            old: '789' // Can be empty
+        },
+        max: 10,
+    },
+    {
+        id: 911,
+        images: [
+            '/images/catalog/products/image-10.jpg',
+        ],
+        primaryName: 'Шампунь №4 для жирной кожи головы',
+        secondaryName: 'System 4 shale oil shampo',
+        value: '100 мл',
+        price: {
+            actual: '931',
+            old: '1 231' // Can be empty
+        },
+        max: 10,
+    },
+    {
+        id: 912,
+        images: [
+            '/images/catalog/products/image-11.jpg',
+        ],
+        primaryName: 'Бальзам для бороды',
+        secondaryName: 'BEARDBURYS beard balm',
+        value: '100 мл',
+        price: {
+            actual: '22 167',
+            old: '316 160' // Can be empty
+        },
+        max: 10,
+    },
+]
+
 export const basket = [
     {
         id: 41,

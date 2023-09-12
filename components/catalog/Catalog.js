@@ -1,7 +1,7 @@
 import { useState, useEffect, useRef } from 'react'
 import { motion, useAnimationControls } from 'framer-motion'
 import { globalState } from '../../components/helpers/globalState'
-import { cards } from '../../components/helpers/constants'
+import { cardsCompact as cards } from '../../components/helpers/constants'
 
 import Image from 'next/image'
 import Icon from '../../components/Icon'
@@ -161,7 +161,7 @@ function Nav({ isBrands, sortHandler, openFilters, fastFilters, selectFastFilter
         const offset = refContainer.current.getBoundingClientRect().left
         refNav.current.style.paddingLeft = `${offset}px`
         refNav.current.style.paddingRight = `${offset}px`
-        
+
         if (window.innerWidth > globalState.sizes.lg) {
             refOffsetHeight.current = 292
         } else {
@@ -205,47 +205,58 @@ function Nav({ isBrands, sortHandler, openFilters, fastFilters, selectFastFilter
                     <div className={style.navFiller} />
                     <div className='is-hidden--lg-down text--t5 text--bold text--upper text--color-small'>НАЙДЕНО 668 ТОВАРОВ</div>
                     <div className={`${style.tagsContainer} d-flex`}>
-                        <div className='mr-3 d-flex flex--center'>
-                            <span className='text--t5 link text--bold text--upper mr-0.5'>Вид</span>
-                            <svg className=' c-pointer' width="74" height="18" viewBox="0 0 74 18" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                <g clipPath="url(#clip0_1030_341251)">
-                                    <rect width="7.28574" height="7.28574" rx="0.266667" fill="#112233" />
-                                    <rect y="10.7148" width="7.28574" height="7.28574" rx="0.266667" fill="#112233" />
-                                    <rect x="10.7129" width="7.28574" height="7.28574" rx="0.266667" fill="#112233" />
-                                    <rect x="10.7129" y="10.7148" width="7.28574" height="7.28574" rx="0.266667" fill="#112233" />
-                                </g>
-                                <g clipPath="url(#clip1_1030_341251)">
-                                    <g clipPath="url(#clip2_1030_341251)">
-                                        <rect x="28" width="7.875" height="4.5" rx="0.266667" fill="#E5E5E5" />
-                                        <rect x="38.125" width="7.875" height="4.5" rx="0.266667" fill="#E5E5E5" />
-                                        <rect x="28" y="6.75" width="7.875" height="4.5" rx="0.266667" fill="#E5E5E5" />
-                                        <rect x="38.125" y="6.75" width="7.875" height="4.5" rx="0.266667" fill="#E5E5E5" />
-                                        <rect x="28" y="13.5" width="7.875" height="4.5" rx="0.266667" fill="#E5E5E5" />
-                                        <rect x="38.125" y="13.5" width="7.875" height="4.5" rx="0.266667" fill="#E5E5E5" />
+                        <div className='mr-2 mr-3:md d-flex flex--center'>
+                            <span className='text--t5 link text--bold text--upper'>Вид</span>
+                            <div className={style.viewMode}>
+                                <svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <g clipPath="url(#clip0_1707_39249)">
+                                        <rect x="0.000976562" width="5.66668" height="5.66668" rx="0.266667" fill="#E5E5E5" />
+                                        <rect x="0.000976562" y="8.33398" width="5.66668" height="5.66668" rx="0.266667" fill="#E5E5E5" />
+                                        <rect x="8.33398" width="5.66668" height="5.66668" rx="0.266667" fill="#E5E5E5" />
+                                        <rect x="8.33398" y="8.33398" width="5.66668" height="5.66668" rx="0.266667" fill="#E5E5E5" />
                                     </g>
-                                </g>
-                                <g clipPath="url(#clip3_1030_341251)">
-                                    <rect x="56" width="9" height="7.875" rx="0.266667" fill="#E5E5E5" />
-                                    <rect x="56" y="10.125" width="5.625" height="7.875" rx="0.266667" fill="#E5E5E5" />
-                                    <rect x="68.375" width="5.625" height="7.875" rx="0.266667" fill="#E5E5E5" />
-                                    <rect x="65" y="10.125" width="9" height="7.875" rx="0.266667" fill="#E5E5E5" />
-                                </g>
-                                <defs>
-                                    <clipPath id="clip0_1030_341251">
-                                        <rect width="18" height="18" fill="white" />
-                                    </clipPath>
-                                    <clipPath id="clip1_1030_341251">
-                                        <rect width="18" height="18" fill="white" transform="translate(28)" />
-                                    </clipPath>
-                                    <clipPath id="clip2_1030_341251">
-                                        <rect width="18" height="18" fill="white" transform="translate(28)" />
-                                    </clipPath>
-                                    <clipPath id="clip3_1030_341251">
-                                        <rect width="18" height="18" fill="white" transform="translate(56)" />
-                                    </clipPath>
-                                </defs>
-                            </svg>
+                                    <defs>
+                                        <clipPath id="clip0_1707_39249">
+                                            <rect width="14" height="14" fill="white" />
+                                        </clipPath>
+                                    </defs>
+                                </svg>
 
+                                <svg data-active='true' width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <g clipPath="url(#clip0_1707_39256)">
+                                        <g clipPath="url(#clip1_1707_39256)">
+                                            <rect width="6.125" height="3.5" rx="0.266667" fill="#112233" />
+                                            <rect x="7.875" width="6.125" height="3.5" rx="0.266667" fill="#112233" />
+                                            <rect y="5.25" width="6.125" height="3.5" rx="0.266667" fill="#112233" />
+                                            <rect x="7.875" y="5.25" width="6.125" height="3.5" rx="0.266667" fill="#112233" />
+                                            <rect y="10.5" width="6.125" height="3.5" rx="0.266667" fill="#112233" />
+                                            <rect x="7.875" y="10.5" width="6.125" height="3.5" rx="0.266667" fill="#112233" />
+                                        </g>
+                                    </g>
+                                    <defs>
+                                        <clipPath id="clip0_1707_39256">
+                                            <rect width="14" height="14" fill="white" />
+                                        </clipPath>
+                                        <clipPath id="clip1_1707_39256">
+                                            <rect width="14" height="14" fill="white" />
+                                        </clipPath>
+                                    </defs>
+                                </svg>
+
+                                <svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <g clipPath="url(#clip0_1707_39267)">
+                                        <rect width="7" height="6.125" rx="0.266667" fill="#E5E5E5" />
+                                        <rect y="7.875" width="4.375" height="6.125" rx="0.266667" fill="#E5E5E5" />
+                                        <rect x="9.625" width="4.375" height="6.125" rx="0.266667" fill="#E5E5E5" />
+                                        <rect x="7" y="7.875" width="7" height="6.125" rx="0.266667" fill="#E5E5E5" />
+                                    </g>
+                                    <defs>
+                                        <clipPath id="clip0_1707_39267">
+                                            <rect width="14" height="14" fill="white" />
+                                        </clipPath>
+                                    </defs>
+                                </svg>
+                            </div>
                         </div>
                         <a href='#' className='d-flex flex--center' onClick={openFilters}>
                             <span className='text--t5 link text--bold text--upper'>фильтры</span>

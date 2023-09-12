@@ -43,7 +43,7 @@ export default function CardCompactButton({ count, info, onUpdateInBasket }) {
     return (
         <div data-open={isOpen} data-active={!!count} className={style.buttonContainer}>
             <div data-active={!!count} onClick={buyHandler} className={`${style.button}`}>
-                <Icon name='basket' width='18' height='18' />
+                <Icon name='basket' width='20' height='18' />
                 <div className={`${style.buttonCount} text--t6 text--bold`}>
                     {count}
                 </div>

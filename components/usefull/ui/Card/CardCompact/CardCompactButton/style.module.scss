@@ -138,15 +138,15 @@
         transition: 0.2s opacity;
 
         &::before {
-            top: -10px;
+            top: -14px;
             z-index: 1;
-            left: -30px;
-            width: 30px;
-            content: '';
-            bottom: -10px;
+            left: -26px;
+            width: 65px;
+            content: "";
+            bottom: -15px;
             position: absolute;
-            background: linear-gradient(90deg, rgba(255,255,255,0) 0%, rgba(255,255,255,1) 100%);
-            
+            background: linear-gradient(90deg, rgba(255,255,255,0) 0%, rgba(255,255,255,1) 30%);
+            clip-path: polygon(0% 0%, 0% 100%, 40% 100%, 41% 20%, 100% 20%, 100% 80%, 40% 80%, 40% 100%, 100% 100%, 100% 0%);
         }
     }
 }

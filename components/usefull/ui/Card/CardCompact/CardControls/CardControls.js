@@ -20,7 +20,7 @@ export default function CardControls({ onUpdateInBasket, info, setIsControlOpen,
     }
 
     const removeHandler = () => {
-        onUpdateInBasket(0)
+        onUpdateInBasket({ value: 0, isMax: false, isMin: true })
         setIsControlOpen(false)
     }
 

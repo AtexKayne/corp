@@ -197,6 +197,21 @@
 
 .tagsContainer {}
 
+.viewMode {
+    display: flex;
+
+    >* {
+        cursor: pointer;
+        margin-left: 8px;
+    }
+
+    @include media-breakpoint(lg-down) {
+        >*:not([data-active='true']) {
+            display: none;
+        }
+    }
+}
+
 .nav {
     left: 0;
     right: 0;

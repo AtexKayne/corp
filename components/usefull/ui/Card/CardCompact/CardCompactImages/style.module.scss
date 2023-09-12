@@ -7,8 +7,8 @@
     flex-shrink: 0;
     cursor: pointer;
     overflow: hidden;
+    margin-right: 8px;
     position: relative;
-    margin-right: 12px;
     border-radius: 6px;
 
     .image {
@@ -27,6 +27,7 @@
         width: 100px;
         height: 100px;
         min-width: 100px;
+        margin-right: 12px;
 
         &:hover {
             .image img {

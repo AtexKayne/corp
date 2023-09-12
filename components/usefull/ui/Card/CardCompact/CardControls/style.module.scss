@@ -18,28 +18,31 @@
     height: 16px;
     display: flex;
     cursor: pointer;
+    transition: 0.3s;
     position: relative;
     align-items: center;
+    color: var(--t-small);
     justify-content: center;
     -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
     
     &[data-open='true'] {
+        transform: rotate(0deg);
+
         >*:first-child {
-            opacity: 1;
-            transform: rotate(-90deg);
+            display: flex;
         }
     }
     
     &[data-open='false'] {
+        transform: rotate(90deg);
+
         >*:last-child {
-            opacity: 1;
-            transform: rotate(90deg);
+            display: flex;
         }
     }
     
     >* {
-        opacity: 0;
-        transition: .3s;
+        display: none;
         position: absolute;
     }
 }
@@ -61,6 +64,7 @@
     height: 100%;
     pointer-events: all;
     background-color: var(--c-_yellow);
+    -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
 
     .favouriteInner {
         width: 100%;
@@ -85,6 +89,7 @@
     color: var(--t-text);
     justify-content: center;
     background-color: var(--t-light);
+    -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
 }
 
 [data-current='false'] .basket {

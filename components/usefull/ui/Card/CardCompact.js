@@ -13,6 +13,7 @@ export default function CardCompact({ info, mode, onChangeCount = () => { } }) {
     const [isHover, setIsHover] = useState(false)
     const [isOffseted, setIsOffseted] = useState(false)
     const [isControlOpen, setIsControlOpen] = useState(false)
+    const refInner = useRef(null)
     const refTimeout = useRef(null)
 
     const mouseEnterHandler = () => {
@@ -25,16 +26,23 @@ export default function CardCompact({ info, mode, onChangeCount = () => { } }) {
         setIsHover(false)
     }
 
-    const scrollHandler = () => {
-        setIsHover(false)
-        setIsOffseted(false)
+    const focusHandler = () => {
+        console.log(234);
         if (refTimeout.current) clearTimeout(refTimeout.current)
-        window.removeEventListener('scroll', scrollHandler)
+    }
+
+    const blurHandler = () => {
+        if (refTimeout.current) clearTimeout(refTimeout.current)
+        refTimeout.current = setTimeout(() => {
+            setIsHover(false)
+            setIsOffseted(false)
+        }, 4000)
     }
 
     const updateHandler = ({ value, isMax, isMin }) => {
         // setCount(val)
         onChangeCount(value, false, info)
+
         if (value === 0) {
             setTimeout(() => setCount(value), 300)
             if (window.innerWidth <= globalState.sizes.lg) {
@@ -47,13 +55,11 @@ export default function CardCompact({ info, mode, onChangeCount = () => { } }) {
             if (window.innerWidth <= globalState.sizes.lg) {
                 setIsHover(true)
                 setIsOffseted(true)
-                window.addEventListener('scroll', scrollHandler)
                 if (refTimeout.current) clearTimeout(refTimeout.current)
                 refTimeout.current = setTimeout(() => {
                     setIsHover(false)
                     setIsOffseted(false)
-                    window.removeEventListener('scroll', scrollHandler)
-                }, 6000)
+                }, 4000)
             }
         }
 
@@ -74,6 +80,12 @@ export default function CardCompact({ info, mode, onChangeCount = () => { } }) {
     }
 
     useEffect(() => {
+        const input = refInner.current.querySelector('input')
+        if (input) {
+            input.addEventListener('blur', blurHandler)
+            input.addEventListener('focus', focusHandler)
+        }
+
         if (!globalState.basket.count) return
         // const basketStorage = globalState.basket.items
         // const newInfo = {...info}
@@ -92,6 +104,13 @@ export default function CardCompact({ info, mode, onChangeCount = () => { } }) {
         // setCountInBasket(newInfo.values[0].basket)
         // setActiveValue(newInfo.values[0])
         // setValues(newInfo.values)
+
+        return () => {
+            if (input) {
+                input.removeEventListener('blur', blurHandler)
+                input.removeEventListener('focus', focusHandler)
+            }
+        }
     }, [])
 
     return (
@@ -105,7 +124,7 @@ export default function CardCompact({ info, mode, onChangeCount = () => { } }) {
             onMouseLeave={mouseLeaveHandler}
             style={{ '--offset-controls': count ? '-132px' : '-62px' }}>
             <CardControls setIsControlOpen={setIsControlOpen} isControlOpen={isControlOpen} onUpdateInBasket={updateHandler} info={info} />
-            <div data-offset={isOffseted} className={style.cardInner}>
+            <div ref={refInner} data-offset={isOffseted} className={style.cardInner}>
                 <CardCompactImages images={info.images} count={count} info={info} isFavourite={false} />
                 <CardCompactDescription info={info} />
                 <CardCompactPrice info={info} count={count} onUpdateInBasket={updateHandler} />

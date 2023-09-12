@@ -279,6 +279,7 @@
     position: absolute;
     color: var(--t-small);
     transform: rotate(90deg);
+    -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
 
     &::before {
         top: -20px;
