@@ -151,6 +151,7 @@ export default function Counter({ info, onAfterChange, max, count }) {
             <input
                 type='tel'
                 ref={refInput}
+                autoComplete='off'
                 onBlur={blurHandler}
                 data-shake={isShaked}
                 onChange={changeHandler}

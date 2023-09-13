@@ -5,6 +5,7 @@ export const getFakeInput = () => {
     fakeInput.style.opacity = 0
     fakeInput.style.height = 0
     fakeInput.style.fontSize = '30px'
+    fakeInput.setAttribute('autocomplete', 'off')
     document.body.prepend(fakeInput)
     fakeInput.focus()
     return fakeInput
