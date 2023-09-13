@@ -129,8 +129,11 @@
 
 .popoverImage+.popoverText {
     margin-left: 12px;
-    max-width: calc(90% - 70px);
-    min-width: calc(90% - 70px);
+
+    @include media-breakpoint(md-down) {
+        max-width: calc(90% - 70px);
+        min-width: calc(90% - 70px);
+    }
 }
 
 .popoverBasket {
