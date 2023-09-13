@@ -24,7 +24,7 @@ export default function CardCompactButton({ count, info, onUpdateInBasket }) {
 
     if (!info.max) {
         return (
-            <div className={style.buttonContainer}>
+            <div className={style.buttonNotifyContainer}>
                 <NotifyButton name={info.secondaryName} external={style.notify} image={info.images[0]} />
             </div>
         )
@@ -32,8 +32,8 @@ export default function CardCompactButton({ count, info, onUpdateInBasket }) {
 
     if (info.isProfi) {
         return (
-            <div className={style.buttonContainer}>
-                <div theme='tetriary' d-size='sm' onClick={profiClickHandler} className={`button ${style.profiBtn}`}>
+            <div className={style.buttonProfiContainer}>
+                <div d-size='sm' onClick={profiClickHandler} className={`button ${style.profiBtn}`}>
                     <Icon name='rabbit' width='18' height='18' />
                 </div>
             </div>
