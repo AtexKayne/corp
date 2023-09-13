@@ -26,6 +26,7 @@ export default function CardControls({ onUpdateInBasket, info, setIsControlOpen,
 
     const toggleControlsHandler = () => {
         setIsOffseted(false)
+        window.focus()
         if (!isControlOpen) {
             setTimeout(() => {
                 window.addEventListener('scroll', closeControls)
