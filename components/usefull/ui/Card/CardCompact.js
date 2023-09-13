@@ -24,10 +24,13 @@ export default function CardCompact({ info, mode, onChangeCount = () => { } }) {
     const mouseLeaveHandler = () => {
         // if (window.innerWidth <= globalState.sizes.lg) return
         setIsHover(false)
+        if (refTimeout.current) {
+            setIsOffseted(false)
+            clearTimeout(refTimeout.current)
+        }
     }
 
     const focusHandler = () => {
-        console.log(234);
         if (refTimeout.current) clearTimeout(refTimeout.current)
     }
 
