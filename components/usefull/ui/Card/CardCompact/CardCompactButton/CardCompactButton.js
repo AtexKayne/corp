@@ -10,6 +10,7 @@ export default function CardCompactButton({ count, info, onUpdateInBasket }) {
 
     const buyHandler = () => {
         setIsOpen(true)
+        window.focus()
         if (!count) {
             onUpdateInBasket({ value: 1, isMin: false, isMax: false })
             globalState.popover.open([info.secondaryName, 'ТЕПЕРЬ В КОРЗИНЕ'], info.images[0], true)
