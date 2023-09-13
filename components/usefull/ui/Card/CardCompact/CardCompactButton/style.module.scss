@@ -5,18 +5,21 @@
     min-width: 102px;
     min-height: 44px;
     position: relative;
-    
-    [data-hover='true'] & .notify {
-        color: var(--t-background);
-        background-color: #EFBE1F;
+
+    @include media-breakpoint(md-up) {
+        [data-hover='false'] & .notify {
+            color: #EFBE1F;
+            background-color: #F5F6FA;
+        }
     }
+    
     
     .notify {
         width: 68px;
         height: 44px;
         transition: .2s;
-        color: #EFBE1F;
-        background-color: #F5F6FA;
+        color: var(--t-background);
+        background-color: #EFBE1F;
         
         >span:first-child {
             display: none;
@@ -39,10 +42,20 @@
     min-height: 44px;
     position: relative;
 
-    [data-hover='true'] & .profiBtn {
+    .profiBtn {
+        width: 68px;
+        transition: .3s;
         color: var(--t-background);
         background-color: #11244D;
     }
+
+    @include media-breakpoint(md-up) {
+        [data-hover='false'] & .profiBtn {
+            color: #11244D;
+            background-color: #F5F6FA;
+        }
+    }
+
 }
 
 .buttonContainer {
@@ -179,9 +192,4 @@
     }
 }
 
-.profiBtn {
-    width: 68px;
-    transition: .3s;
-    color: #11244D;
-    background-color: #F5F6FA;
-}
+
