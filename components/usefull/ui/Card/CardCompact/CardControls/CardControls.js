@@ -28,6 +28,7 @@ export default function CardControls({ onUpdateInBasket, info, setIsControlOpen,
         setIsOffseted(false)
         window.focus()
         if (!isControlOpen) {
+            setIsHover(true)
             setTimeout(() => {
                 window.addEventListener('scroll', closeControls)
                 document.body.addEventListener('click', closeControls)
