@@ -663,6 +663,7 @@ export const cardsCompact = [
         bonuses: 28,
         art: 5415,
         max: 880,
+        isProfi: true,
         values: [
             '100 мл', '200 мл', '500мл'
         ],

@@ -16,7 +16,7 @@
         opacity: 1;
     }
 
-    [data-hover='true'] &[data-active='true'] {
+    [data-hover='true']:not([data-open='true']) &[data-active='true'] {
         .button {
             opacity: 0;
             transition: .2s opacity 0.2s;
@@ -123,6 +123,7 @@
     pointer-events: none;
     transform-origin: right;
     background-color: var(--t-primary);
+    outline: 10px solid var(--t-background);
     -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
     transition: 0.2s width ease-in, 0.1s opacity 0.3s, 0.2s background-color;
 
@@ -138,15 +139,14 @@
         transition: 0.2s opacity;
 
         &::before {
-            top: -14px;
-            z-index: 1;
-            left: -26px;
-            width: 65px;
+            top: -11px;
+            z-index: -8;
+            left: -35px;
+            width: 35px;
             content: "";
-            bottom: -15px;
+            bottom: -11px;
             position: absolute;
-            background: linear-gradient(90deg, rgba(255,255,255,0) 0%, rgba(255,255,255,1) 30%);
-            clip-path: polygon(0% 0%, 0% 100%, 40% 100%, 41% 20%, 100% 20%, 100% 80%, 40% 80%, 40% 100%, 100% 100%, 100% 0%);
+            background: linear-gradient(90deg, rgba(255, 255, 255, 0) 0%, rgb(255, 255, 255) 70%);
         }
     }
 }

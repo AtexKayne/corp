@@ -3,7 +3,7 @@ import style from './style.module.scss'
 import Icon from '../../../../../Icon'
 import Favourite from '../../../../Favourite'
 
-export default function CardControls({ onUpdateInBasket, info, setIsControlOpen, isControlOpen }) {
+export default function CardControls({ onUpdateInBasket, info, setIsControlOpen, setIsOffseted, isControlOpen, setIsHover }) {
     const infoUpdated = {
         primary: info.primaryName,
         image: info.images[0]
@@ -25,11 +25,14 @@ export default function CardControls({ onUpdateInBasket, info, setIsControlOpen,
     }
 
     const toggleControlsHandler = () => {
+        setIsOffseted(false)
         if (!isControlOpen) {
             setTimeout(() => {
                 window.addEventListener('scroll', closeControls)
                 document.body.addEventListener('click', closeControls)
             }, 100);
+        } else {
+            setIsHover(false)
         }
         setIsControlOpen(prev => !prev)
     }

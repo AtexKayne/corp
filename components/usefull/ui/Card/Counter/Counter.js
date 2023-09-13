@@ -135,8 +135,20 @@ export default function Counter({ info, onAfterChange, max, count }) {
         refIsAnimated.current = false
     }
 
+    const windowBlurHandler = () => {
+        const { value } = checkValue()
+        setIsSelected(false)
+        onAfterChange({ value: Math.max(value, 1), isMax: false, isMin: false })
+        document.body.removeEventListener('mousedown', documentClick)
+    }
+
     useEffect(() => {
         checkValue(count)
+        window.addEventListener('blur', windowBlurHandler)
+
+        return () => {
+            window.removeEventListener('blur', windowBlurHandler)
+        }
     }, [])
 
     return (

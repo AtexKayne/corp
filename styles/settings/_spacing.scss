@@ -24,6 +24,7 @@ $spacing-css-sm-variable: (
 
 $spacing-classname-list: (
     '0': 0px,
+    '0.25': calc(var(--spacing) * 0.25),
     '0.5': calc(var(--spacing) * 0.5),
     '0.6': calc(var(--spacing) * 0.6),
     '0.8': calc(var(--spacing) * 0.8),

@@ -15,31 +15,36 @@ export default function CardCompact({ info, mode, onChangeCount = () => { } }) {
     const [isControlOpen, setIsControlOpen] = useState(false)
     const refInner = useRef(null)
     const refTimeout = useRef(null)
+    const refIsFocus = useRef(false)
 
     const mouseEnterHandler = () => {
         // if (window.innerWidth <= globalState.sizes.lg) return
         setIsHover(true)
+        setIsOffseted(false)
     }
 
     const mouseLeaveHandler = () => {
+        if (refIsFocus.current) return
         // if (window.innerWidth <= globalState.sizes.lg) return
         setIsHover(false)
-        if (refTimeout.current) {
-            setIsOffseted(false)
-            clearTimeout(refTimeout.current)
-        }
+        setIsOffseted(false)
+        clearTimeout(refTimeout.current)
     }
 
     const focusHandler = () => {
+        setIsHover(true)
+        refIsFocus.current = true
         if (refTimeout.current) clearTimeout(refTimeout.current)
     }
 
     const blurHandler = () => {
+        refIsFocus.current = false
+
         if (refTimeout.current) clearTimeout(refTimeout.current)
         refTimeout.current = setTimeout(() => {
             setIsHover(false)
             setIsOffseted(false)
-        }, 4000)
+        }, 500)
     }
 
     const updateHandler = ({ value, isMax, isMin }) => {
@@ -67,10 +72,10 @@ export default function CardCompact({ info, mode, onChangeCount = () => { } }) {
         }
 
         if (isMax) {
-            globalState.popover.open([info.primaryName, 'Максимум для этого заказа'], info.images[0])
+            globalState.popover.open([info.secondaryName, 'Максимум для этого заказа'], info.images[0])
         }
         if (isMin) {
-            globalState.popover.open([info.primaryName, 'БОЛЬШЕ НЕ В КОРЗИНЕ'], info.images[0])
+            globalState.popover.open([info.secondaryName, 'БОЛЬШЕ НЕ В КОРЗИНЕ'], info.images[0])
         }
 
         // setValues(prev => {
@@ -126,7 +131,14 @@ export default function CardCompact({ info, mode, onChangeCount = () => { } }) {
             onMouseEnter={mouseEnterHandler}
             onMouseLeave={mouseLeaveHandler}
             style={{ '--offset-controls': count ? '-132px' : '-62px' }}>
-            <CardControls setIsControlOpen={setIsControlOpen} isControlOpen={isControlOpen} onUpdateInBasket={updateHandler} info={info} />
+            <CardControls
+                info={info}
+                setIsHover={setIsHover}
+                setIsOffseted={setIsOffseted}
+                isControlOpen={isControlOpen}
+                onUpdateInBasket={updateHandler}
+                setIsControlOpen={setIsControlOpen}
+            />
             <div ref={refInner} data-offset={isOffseted} className={style.cardInner}>
                 <CardCompactImages images={info.images} count={count} info={info} isFavourite={false} />
                 <CardCompactDescription info={info} />

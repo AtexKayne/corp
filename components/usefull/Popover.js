@@ -123,6 +123,7 @@ export default function Popover() {
         if (Math.abs(refTouch.current.offset) > 30) {
             removeItemImmediatly(refTouch.current.parent)
         }
+        if (!refTouch.current || !refTouch.current.parent) return
         refTouch.current.parent.style.transform = 'translateY(0)'
         refTouch.current.y = false
         refTouch.current.offset = false

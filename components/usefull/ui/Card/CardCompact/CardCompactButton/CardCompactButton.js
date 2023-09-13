@@ -12,7 +12,7 @@ export default function CardCompactButton({ count, info, onUpdateInBasket }) {
         setIsOpen(true)
         if (!count) {
             onUpdateInBasket({ value: 1, isMin: false, isMax: false })
-            globalState.popover.open([info.primaryName, 'ТЕПЕРЬ В КОРЗИНЕ'], info.images[0], true)
+            globalState.popover.open([info.secondaryName, 'ТЕПЕРЬ В КОРЗИНЕ'], info.images[0], true)
         } else {
             onUpdateInBasket({ value: count, isMin: false, isMax: false })
         }
@@ -25,7 +25,7 @@ export default function CardCompactButton({ count, info, onUpdateInBasket }) {
     if (!info.max) {
         return (
             <div className={style.buttonContainer}>
-                <NotifyButton name={info.primaryName} external={style.notify} image={info.images[0]} />
+                <NotifyButton name={info.secondaryName} external={style.notify} image={info.images[0]} />
             </div>
         )
     }
