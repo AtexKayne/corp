@@ -59,47 +59,47 @@
 }
 
 .buttonContainer {
-    opacity: 0;
+    // opacity: 0;
     display: block;
-    transition: .3s;
+    // transition: .3s;
     min-width: 102px;
     min-height: 44px;
     position: relative;
 
-    &[data-active='true'] {
-        opacity: 1;
-    }
+    // &[data-active='true'] {
+    //     opacity: 1;
+    // }
 
-    [data-hover='true'] & {
-        opacity: 1;
-    }
+    // [data-hover='true'] & {
+    //     opacity: 1;
+    // }
 
-    [data-hover='true']:not([data-open='true']) &[data-active='true'] {
-        .button {
-            opacity: 0;
-            transition: .2s opacity 0.2s;
-        }
+    // [data-hover='true']:not([data-open='true']) &[data-active='true'] {
+    //     .button {
+    //         opacity: 0;
+    //         transition: .2s opacity 0.2s;
+    //     }
 
-        .counter {
-            opacity: 1;
-            width: 160px;
-            pointer-events: all;
-            background-color: var(--t-light);
-            transition: 0s opacity, 0.2s width ease-out, 0.2s background-color .2s;
+    //     .counter {
+    //         opacity: 1;
+    //         width: 160px;
+    //         pointer-events: all;
+    //         background-color: var(--t-light);
+    //         transition: 0s opacity, 0.2s width ease-out, 0.2s background-color .2s;
 
-            >* {
-                opacity: 1;
-                transition: 0.2s opacity .2s;
-            }
-        }
-    }
+    //         >* {
+    //             opacity: 1;
+    //             transition: 0.2s opacity .2s;
+    //         }
+    //     }
+    // }
 
     * {
         user-select: none;
     }
     
     @include media-breakpoint(lg-down) {
-        opacity: 1;
+        // opacity: 1;
 
         // &[data-active='true'] {
         //     .button {
@@ -129,20 +129,24 @@
     justify-content: center;
     color: var(--t-background);
     background-color: var(--t-primary);
-    transition: 0.3s transform, 0.1s opacity;
+    // transition: 0.3s transform, 0.1s opacity;
     -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
 
     &[data-active='false'] .buttonCount {
         display: none;
     }
 
-    &[data-active='true'] {
-        color: var(--t-primary);
-        background-color: var(--t-light);
-    }
+    // &[data-active='true'] {
+    //     color: var(--t-primary);
+    //     background-color: var(--t-light);
+    // }
 
     >span {
         transform: translateX(-1px);
+    }
+
+    @include media-breakpoint(lg-up) {
+        opacity: 0;
     }
 }
 
@@ -157,7 +161,7 @@
     right: 0;
     opacity: 0;
     z-index: 3;
-    width: 68px;
+    // width: 68px;
     height: 44px;
     position: absolute;
     border-radius: 8px;
@@ -166,18 +170,18 @@
     background-color: var(--t-primary);
     outline: 10px solid var(--t-background);
     -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
-    transition: 0.2s width ease-in, 0.1s opacity 0.3s, 0.2s background-color;
+    // transition: 0.2s width ease-in, 0.1s opacity 0.3s, 0.2s background-color;
 
     [data-active='true'] & {
         background-color: var(--t-light);
     }
     
-    >* {
+    .counterModule {
         opacity: 0;
         z-index: 2;
         height: 100%;
-        // position: relative;
-        transition: 0.2s opacity;
+        position: relative;
+        // transition: 0.2s opacity;
 
         &::before {
             top: -11px;

@@ -3,7 +3,7 @@ import CardBuy from '../../CardBuy/CardBuy'
 import CardCompactButton from '../CardCompactButton/CardCompactButton'
 import style from './style.module.scss'
 
-export default function CardCompactPrice({ info, count, onUpdateInBasket }) {
+export default function CardCompactPrice({ info, count, onUpdateInBasket, animate }) {
 
     return (
         <div className={style.price}>
@@ -22,7 +22,7 @@ export default function CardCompactPrice({ info, count, onUpdateInBasket }) {
                 </div> : null
             }
 
-            <CardCompactButton count={count} info={info} onUpdateInBasket={onUpdateInBasket} />
+            <CardCompactButton animate={animate} count={count} info={info} onUpdateInBasket={onUpdateInBasket} />
         </div >
     )
 }

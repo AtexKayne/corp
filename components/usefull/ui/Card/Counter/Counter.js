@@ -24,7 +24,7 @@ export default function Counter({ info, onAfterChange, max, count }) {
     const shake = () => {
         setIsShaked(true)
         setTimeout(() => setIsShaked(false), 1000)
-        globalState.popover.open([info.primaryName, 'Максимум для этого заказа'], info.images[0])
+        // globalState.popover.open([info.primaryName, 'Максимум для этого заказа'], info.images[0])
     }
 
     const checkValue = checked => {
@@ -135,21 +135,21 @@ export default function Counter({ info, onAfterChange, max, count }) {
         refIsAnimated.current = false
     }
 
-    const windowBlurHandler = () => {
-        const { value } = checkValue()
-        setIsSelected(false)
-        onAfterChange({ value: Math.max(value, 1), isMax: false, isMin: false })
-        document.body.removeEventListener('mousedown', documentClick)
-    }
+    // const windowBlurHandler = () => {
+    //     const { value } = checkValue()
+    //     setIsSelected(false)
+    //     onAfterChange({ value: Math.max(value, 1), isMax: false, isMin: false })
+    //     document.body.removeEventListener('mousedown', documentClick)
+    // }
 
     useEffect(() => {
         checkValue(count)
-        window.addEventListener('blur', windowBlurHandler)
+        // window.addEventListener('blur', windowBlurHandler)
 
         return () => {
-            window.removeEventListener('blur', windowBlurHandler)
+            // window.removeEventListener('blur', windowBlurHandler)
         }
-    }, [])
+    }, [count])
 
     return (
         <div data-active={isSelected} className={`${style.cardCountSelector} text--p5 text--bold`}>
