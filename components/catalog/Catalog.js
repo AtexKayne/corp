@@ -19,6 +19,7 @@ export default function Catalog({ detail }) {
     const [isFilterOpen, setIsFilterOpen] = useState(false)
     const [filters, setFilters] = useState(detail.filter)
     const [products, setProducts] = useState('updated')
+    console.log('test');
 
     const selectFilters = arr => {
         if (arr) setFilters(arr)
