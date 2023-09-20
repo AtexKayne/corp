@@ -1,5 +1,5 @@
 // import { useState, useEffect, useRef } from 'react'
-import CardBuy from '../../CardBuy/CardBuy'
+// import CardBuy from '../../CardBuy/CardBuy'
 import CardCompactButton from '../CardCompactButton/CardCompactButton'
 import style from './style.module.scss'
 

@@ -9,7 +9,7 @@ export default function CardCompactImages({ images, count, animate, info, label 
         image: images[0]
     }
     return (
-        <motion.div animate={animate.inner} className={style.container}>
+        <motion.div animate={animate.inner} data-label={label} data-count={count} className={style.container}>
             <div className={style.image}>
                 <Image layout='fill' alt={'product card image'} src={images[0]} />
             </div>

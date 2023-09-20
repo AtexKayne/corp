@@ -5,7 +5,7 @@ import CardValues from './CardValues/CardValues'
 import CardPrice from './CardPrice/CardPrice'
 import CardBuy from './CardBuy/CardBuy'
 import { globalState } from '../../../helpers/globalState'
-import { isEqual } from '../../../helpers/isEqual'
+// import { isEqual } from '../../../helpers/isEqual'
 import CardDescrption from './CardDescrption/CardDescrption'
 
 export default function CardNormal({ info, mode, onChangeCount = () => { } }) {

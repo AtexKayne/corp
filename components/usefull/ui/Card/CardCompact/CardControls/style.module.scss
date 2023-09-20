@@ -1,4 +1,4 @@
-@import '../../../../../../styles/mixins/helpers/media';
+@import "../../../../../../styles/mixins/helpers/media";
 
 .controls {
     top: 0;
@@ -24,24 +24,24 @@
     color: var(--t-small);
     justify-content: center;
     -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
-    
-    &[data-open='true'] {
+
+    &[data-open="true"] {
         transform: rotate(0deg);
 
-        >*:first-child {
+        > *:first-child {
             display: flex;
         }
     }
-    
-    &[data-open='false'] {
+
+    &[data-open="false"] {
         transform: rotate(90deg);
 
-        >*:last-child {
+        > *:last-child {
             display: flex;
         }
     }
-    
-    >* {
+
+    > * {
         display: none;
         position: absolute;
     }
@@ -82,7 +82,7 @@
     height: 100%;
     display: flex;
     cursor: pointer;
-    transition: .3s;
+    transition: 0.3s;
     overflow: hidden;
     align-items: center;
     pointer-events: all;
@@ -92,7 +92,7 @@
     -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
 }
 
-[data-current='false'] .basket {
+[data-current="false"] .basket {
     width: 0;
     opacity: 0;
 }

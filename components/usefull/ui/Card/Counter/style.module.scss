@@ -1,5 +1,5 @@
-@import '../../../../../styles/mixins/helpers/media';
-@import '../../../../../styles/mixins/helpers/adaptive-value';
+@import "../../../../../styles/mixins/helpers/media";
+@import "../../../../../styles/mixins/helpers/adaptive-value";
 
 .counterInput {
     width: 100%;
@@ -12,10 +12,10 @@
     justify-content: center;
     text-transform: uppercase;
     -moz-appearance: textfield;
-    user-select: all!important;
+    user-select: all !important;
     background-color: var(--t-light);
 
-    &[data-shake='true'] {
+    &[data-shake="true"] {
         animation: shake 1s ease;
     }
 
@@ -54,7 +54,7 @@
 .counterDiv {
     width: 100%;
     display: flex;
-    transition: .3s;
+    transition: 0.3s;
     overflow: hidden;
     flex-basis: 100%;
     align-items: center;
@@ -80,13 +80,13 @@
     border-radius: 8px;
     background-color: var(--t-light);
 
-    &[data-active='false'] {
+    &[data-active="false"] {
         .counterBtnAccept {
             display: none;
         }
     }
 
-    &[data-active='true'] {
+    &[data-active="true"] {
         .counterInput,
         .counterBtnAccept {
             display: flex;
@@ -111,14 +111,14 @@
     border-radius: 8px;
     background-color: var(--t-light);
 
-    &[data-active='false'] {
+    &[data-active="false"] {
         .counterBtnReject,
         .counterBtnAccept {
             display: none;
         }
     }
 
-    &[data-active='true'] {
+    &[data-active="true"] {
         .counterInput,
         .counterBtnAccept,
         .counterBtnReject {
@@ -139,27 +139,26 @@
     cursor: pointer;
     min-width: 40px;
     align-items: center;
-    transition: .3s color;
+    transition: 0.3s color;
     justify-content: center;
     -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
 
-    >*{
-        pointer-events: none;
-    }
-    
-    &[data-disabled='true'] {
-        opacity: .3;
+    > * {
         pointer-events: none;
     }
 
-    
+    &[data-disabled="true"] {
+        opacity: 0.3;
+        pointer-events: none;
+    }
+
     @include media-breakpoint(md-up) {
         min-width: 50px;
-        
-        [data-hover='false'] & {
+
+        [data-hover="false"] & {
             pointer-events: none;
         }
-        
+
         &:hover {
             color: var(--t-primary);
         }

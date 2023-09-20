@@ -19,7 +19,6 @@ export default function Catalog({ detail }) {
     const [isFilterOpen, setIsFilterOpen] = useState(false)
     const [filters, setFilters] = useState(detail.filter)
     const [products, setProducts] = useState('updated')
-    console.log('test');
 
     const selectFilters = arr => {
         if (arr) setFilters(arr)
@@ -266,6 +265,8 @@ function Nav({ isBrands, sortHandler, openFilters, fastFilters, selectFastFilter
                     </div>
                 </div>
             </div>
+
+            <div className='is-hidden--xl-up text--t5 text--bold text--upper text--center text--color-small'>НАЙДЕНО 668 ТОВАРОВ</div>
         </div>
     )
 }

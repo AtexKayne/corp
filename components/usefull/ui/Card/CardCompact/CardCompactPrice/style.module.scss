@@ -5,10 +5,20 @@
     text-align: right;
     align-items: flex-end;
     flex-direction: column;
-    transform: none!important;
-    
-    >*{
+    transform: none !important;
+
+    > * {
         display: inline-block;
+    }
+
+    @media screen and (max-width: 320px) {
+        display: flex;
+        align-items: flex-start;
+
+        .priceOld {
+            margin-top: 0;
+            margin-left: 8px;
+        }
     }
 }
 
@@ -22,7 +32,7 @@
         left: 1px;
         right: -2px;
         height: 2px;
-        content: '';
+        content: "";
         position: absolute;
         transform-origin: left;
         background-color: var(--t-primary);

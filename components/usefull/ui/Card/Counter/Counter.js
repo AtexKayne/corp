@@ -3,7 +3,7 @@ import { motion, useAnimationControls } from 'framer-motion'
 import { useState, useEffect, useRef } from 'react'
 import style from './style.module.scss'
 import Icon from '../../../../Icon'
-import { globalState } from '../../../../helpers/globalState'
+// import { globalState } from '../../../../helpers/globalState'
 
 export default function Counter({ info, onAfterChange, max, count }) {
     const [dispayedCount, setDispayedCount] = useState(count)
@@ -65,12 +65,19 @@ export default function Counter({ info, onAfterChange, max, count }) {
         document.body.removeEventListener('mousedown', documentClick)
     }
 
+    const blurWindowHandler = () => {
+        rejectHandler()
+        refInput.current.blur()
+        window.removeEventListener('blur', blurWindowHandler)
+    }
+
     const openInput = () => {
         refSafeValue.current = count
         refInput.current.value = count
         setIsSelected(true)
         const fakeInput = getFakeInput()
         const fakeMeta = getMetaScale()
+        window.addEventListener('blur', blurWindowHandler)
         document.body.addEventListener('mousedown', documentClick)
 
         setTimeout(() => {
@@ -83,6 +90,7 @@ export default function Counter({ info, onAfterChange, max, count }) {
 
     const blurHandler = () => {
         refAccept.current.click()
+        window.removeEventListener('blur', blurWindowHandler)
     }
 
     const changeHandler = () => {
@@ -100,13 +108,14 @@ export default function Counter({ info, onAfterChange, max, count }) {
     }
 
     const keyDownHandler = event => {
-        if (event.keyCode === 13) {
+        if (event.keyCode === 27) {
+            rejectHandler()
+        } else if (event.keyCode === 13) {
             const { value } = checkValue()
             setIsSelected(false)
             onAfterChange({ value: Math.max(value, 1), isMax: false, isMin: false })
             document.body.removeEventListener('mousedown', documentClick)
-        }
-        else if (event.keyCode === 38) {
+        } else if (event.keyCode === 38) {
             const newValue = +refInput.current.value + 1
             if (newValue <= max) refInput.current.value = newValue
         } else if (event.keyCode === 40) {
@@ -123,9 +132,8 @@ export default function Counter({ info, onAfterChange, max, count }) {
         setDispayedCount(Math.max(+count, 1))
 
         if (newValue) {
-            const strValue = '' + newValue
             const pos = increment + 1 ? -40 : 40
-            await animateCount.start({ y: pos, minWidth: `${strValue.length * 5 + 8}px`, transition: { duration: 0.2, ease: 'anticipate' } })
+            await animateCount.start({ y: pos, transition: { duration: 0.2, ease: 'anticipate' } })
             await animateCount.start({ y: pos * - 1, transition: { duration: 0 } })
         }
 
@@ -144,6 +152,8 @@ export default function Counter({ info, onAfterChange, max, count }) {
 
     useEffect(() => {
         checkValue(count)
+        const countStr = '' + count
+        animateCount.start({ minWidth: `${countStr.length * 6 + 8}px` })
         // window.addEventListener('blur', windowBlurHandler)
 
         return () => {

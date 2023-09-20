@@ -1,12 +1,12 @@
 import React, { useState, useEffect, useRef } from 'react'
 import style from './style.module.scss'
 import { globalState } from '../../../helpers/globalState'
-import { isEqual } from '../../../helpers/isEqual'
+// import { isEqual } from '../../../helpers/isEqual'
 import CardCompactImages from './CardCompact/CardCompactImages/CardCompactImages'
 import CardCompactDescription from './CardCompact/CardCompactDescription/CardCompactDescription'
 import CardCompactPrice from './CardCompact/CardCompactPrice/CardCompactPrice'
 import CardControls from './CardCompact/CardControls/CardControls'
-import { motion, useAnimationControls } from 'framer-motion'
+import { useAnimationControls } from 'framer-motion'
 
 export default function CardCompact({ info, mode, onChangeCount = () => { } }) {
     // @TODO Постарайся от этого избавиться

@@ -59,58 +59,17 @@
 }
 
 .buttonContainer {
-    // opacity: 0;
     display: block;
-    // transition: .3s;
     min-width: 102px;
     min-height: 44px;
     position: relative;
 
-    // &[data-active='true'] {
-    //     opacity: 1;
-    // }
-
-    // [data-hover='true'] & {
-    //     opacity: 1;
-    // }
-
-    // [data-hover='true']:not([data-open='true']) &[data-active='true'] {
-    //     .button {
-    //         opacity: 0;
-    //         transition: .2s opacity 0.2s;
-    //     }
-
-    //     .counter {
-    //         opacity: 1;
-    //         width: 160px;
-    //         pointer-events: all;
-    //         background-color: var(--t-light);
-    //         transition: 0s opacity, 0.2s width ease-out, 0.2s background-color .2s;
-
-    //         >* {
-    //             opacity: 1;
-    //             transition: 0.2s opacity .2s;
-    //         }
-    //     }
-    // }
-
     * {
         user-select: none;
     }
-    
-    @include media-breakpoint(lg-down) {
-        // opacity: 1;
 
-        // &[data-active='true'] {
-        //     .button {
-        //         transform: scaleX(0);
-        //     }
-    
-        //     .counter {
-        //         opacity: 1;
-        //         transform: scaleX(1);
-        //     }
-        // }
+    @media screen and (max-width: 320px) {
+        min-width: 100%;
     }
 }
 
@@ -125,21 +84,14 @@
     position: absolute;
     border-radius: 8px;
     align-items: center;
-    // transform-origin: left;
     justify-content: center;
     color: var(--t-background);
     background-color: var(--t-primary);
-    // transition: 0.3s transform, 0.1s opacity;
     -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
 
     &[data-active='false'] .buttonCount {
         display: none;
     }
-
-    // &[data-active='true'] {
-    //     color: var(--t-primary);
-    //     background-color: var(--t-light);
-    // }
 
     >span {
         transform: translateX(-1px);
@@ -147,6 +99,11 @@
 
     @include media-breakpoint(lg-up) {
         opacity: 0;
+    }
+
+    @media screen and (max-width: 320px) {
+        width: 100%;
+        min-width: 100%;
     }
 }
 
@@ -161,7 +118,6 @@
     right: 0;
     opacity: 0;
     z-index: 3;
-    // width: 68px;
     height: 44px;
     position: absolute;
     border-radius: 8px;
@@ -170,7 +126,6 @@
     background-color: var(--t-primary);
     outline: 10px solid var(--t-background);
     -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
-    // transition: 0.2s width ease-in, 0.1s opacity 0.3s, 0.2s background-color;
 
     [data-active='true'] & {
         background-color: var(--t-light);
@@ -181,7 +136,6 @@
         z-index: 2;
         height: 100%;
         position: relative;
-        // transition: 0.2s opacity;
 
         &::before {
             top: -11px;
@@ -193,6 +147,11 @@
             position: absolute;
             background: linear-gradient(90deg, rgba(255, 255, 255, 0) 0%, rgb(255, 255, 255) 70%);
         }
+    }
+
+    @media screen and (max-width: 320px) {
+        width: 100%;
+        min-width: 100%;
     }
 }
 
