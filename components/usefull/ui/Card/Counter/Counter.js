@@ -92,6 +92,10 @@ export default function Counter({ info, onAfterChange, max, count }) {
 
     const blurHandler = () => {
         refAccept.current.click()
+        const { value } = checkValue()
+        setIsSelected(false)
+        onAfterChange({ value: Math.max(value, 1), isMax: false, isMin: false })
+        document.body.removeEventListener('mousedown', documentClick)
         window.removeEventListener('blur', blurWindowHandler)
     }
 
