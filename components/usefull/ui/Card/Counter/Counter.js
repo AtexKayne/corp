@@ -3,6 +3,7 @@ import { motion, useAnimationControls } from 'framer-motion'
 import { useState, useEffect, useRef } from 'react'
 import style from './style.module.scss'
 import Icon from '../../../../Icon'
+import { globalState } from '../../../../helpers/globalState'
 // import { globalState } from '../../../../helpers/globalState'
 
 export default function Counter({ info, onAfterChange, max, count }) {
@@ -78,8 +79,9 @@ export default function Counter({ info, onAfterChange, max, count }) {
         const fakeInput = getFakeInput()
         const fakeMeta = getMetaScale()
         window.addEventListener('blur', blurWindowHandler)
-        document.body.addEventListener('mousedown', documentClick)
-
+        if (window.innerWidth > globalState.sizes.md) {
+            document.body.addEventListener('mousedown', documentClick)
+        }
         setTimeout(() => {
             refInput.current.focus()
             fakeInput.remove()
