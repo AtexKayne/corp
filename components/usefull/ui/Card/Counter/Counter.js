@@ -117,10 +117,7 @@ export default function Counter({ info, onAfterChange, max, count }) {
         if (event.keyCode === 27) {
             rejectHandler()
         } else if (event.keyCode === 13) {
-            const { value } = checkValue()
-            setIsSelected(false)
-            onAfterChange({ value: Math.max(value, 1), isMax: false, isMin: false })
-            document.body.removeEventListener('mousedown', documentClick)
+            refInput.current.blur()
         } else if (event.keyCode === 38) {
             const newValue = +refInput.current.value + 1
             if (newValue <= max) refInput.current.value = newValue

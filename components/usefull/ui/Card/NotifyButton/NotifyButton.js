@@ -33,10 +33,12 @@ export default function NotifyButton({ name, image, external = '' }) {
             className={`${style.notify} ${external} button`}>
 
             <span className='text--upper text--p5 text--bold mr-0.8'>{isNotify ? 'сообщим' : 'сообщить'}</span>
-            <span className={style.iconBell}>
+            <span className='is-visible--xxs text--upper text--sparse text--t6 text--bold'>Сообщить</span>
+            <span className={`${style.iconBell} is-hidden--xxs`}>
                 <Icon name='bell' width='16' height='16' />
                 <Icon name='bellFill' width='16' height='16' />
             </span>
+
         </div>
     )
 

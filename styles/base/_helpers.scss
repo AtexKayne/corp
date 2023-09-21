@@ -10,14 +10,14 @@
     position: absolute !important;
 }
 
-*[data-is-invisible='true'] {
+*[data-is-invisible="true"] {
     opacity: 0;
-    transition: .3s;
+    transition: 0.3s;
     pointer-events: none;
 }
 
-*[data-is-hidden='true'] {
-    display: none!important;
+*[data-is-hidden="true"] {
+    display: none !important;
 }
 
 .is-extended {
@@ -27,7 +27,7 @@
     &::before {
         top: -20px;
         left: -20px;
-        content: '';
+        content: "";
         right: -20px;
         bottom: -20px;
         position: absolute;
@@ -52,18 +52,38 @@
 }
 
 .is-overflow-hidden {
-    overflow: hidden
+    overflow: hidden;
 }
 
 .overflow-fix {
     @extend %overflow-fix;
 }
 
+.is-hidden--xxs {
+    @media screen and (max-width: 320px) {
+        display: none !important;
+    }
+}
+
+.is-visible--xxs {
+    display: none;
+
+    @media screen and (max-width: 320px) {
+        display: block;
+    }
+}
+
+.mr-1\:xxs {
+    @media screen and (max-width: 320px) {
+        margin-right: var(--spacing) !important;
+    }
+}
+
 .c-pointer {
     cursor: pointer;
 
     @include media-breakpoint(lg-up) {
-        transition: .3s;
+        transition: 0.3s;
 
         &:hover {
             color: color-use(primary);
@@ -76,21 +96,49 @@
     transform: scaleY(0.95);
 }
 
-.d-none { display: none; }
-.d-flex { display: flex; }
-.d-block { display: block; }
-.d-inline {display: inline; }
+.d-none {
+    display: none;
+}
+.d-flex {
+    display: flex;
+}
+.d-block {
+    display: block;
+}
+.d-inline {
+    display: inline;
+}
 
 .flex {
-    &--wrap { flex-wrap: wrap; }
-    &--column { flex-direction: column; }
-    &--align-center { align-items: center; }
-    &--between { justify-content: space-between; }
-    &--justify-end { justify-content: flex-end; }
-    &--justify-center { justify-content: center; }
-    &--column-reverse { flex-direction: column-reverse; }
-    &--center { align-items: center; justify-content: center; }
-    &--end { align-items: flex-end; justify-content: flex-end; }
+    &--wrap {
+        flex-wrap: wrap;
+    }
+    &--column {
+        flex-direction: column;
+    }
+    &--align-center {
+        align-items: center;
+    }
+    &--between {
+        justify-content: space-between;
+    }
+    &--justify-end {
+        justify-content: flex-end;
+    }
+    &--justify-center {
+        justify-content: center;
+    }
+    &--column-reverse {
+        flex-direction: column-reverse;
+    }
+    &--center {
+        align-items: center;
+        justify-content: center;
+    }
+    &--end {
+        align-items: flex-end;
+        justify-content: flex-end;
+    }
     &--wrap-sm-down {
         @include media-breakpoint(sm-down) {
             flex-wrap: wrap;

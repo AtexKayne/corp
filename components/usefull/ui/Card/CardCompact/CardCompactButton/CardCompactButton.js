@@ -36,7 +36,8 @@ export default function CardCompactButton({ count, info, onUpdateInBasket, anima
         return (
             <div className={style.buttonProfiContainer}>
                 <div d-size='sm' onClick={profiClickHandler} className={`button ${style.profiBtn}`}>
-                    <Icon name='rabbit' width='18' height='18' />
+                    <Icon external='is-hidden--xxs' name='rabbit' width='18' height='18' />
+                    <span className='is-visible--xxs text--upper text--sparse text--t6 text--bold'>Для профи</span>
                 </div>
             </div>
         )
@@ -45,7 +46,8 @@ export default function CardCompactButton({ count, info, onUpdateInBasket, anima
     return (
         <div data-open={isOpen} data-active={!!count} className={style.buttonContainer}>
             <motion.div animate={animate.button} data-active={!!count} onClick={buyHandler} className={`${style.button}`}>
-                <Icon name='basket' width='20' height='18' />
+                <Icon external='is-hidden--xxs' name='basket' width='20' height='18' />
+                <span className='is-visible--xxs text--upper text--sparse text--t6 text--bold'>в корзину</span>
                 <div className={`${style.buttonCount} text--t6 text--bold`}>
                     {count}
                 </div>

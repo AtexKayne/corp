@@ -205,8 +205,8 @@ function Nav({ isBrands, sortHandler, openFilters, fastFilters, selectFastFilter
                     <div className={style.navFiller} />
                     <div className='is-hidden--lg-down text--t5 text--bold text--upper text--color-small'>НАЙДЕНО 668 ТОВАРОВ</div>
                     <div className={`${style.tagsContainer} d-flex`}>
-                        <div className='mr-2 mr-3:md d-flex flex--center'>
-                            <span className='text--t5 link text--bold text--upper'>Вид</span>
+                        <div className='mr-2 mr-3:md d-flex flex--center mr-1:xxs'>
+                            <span className='text--t5 link text--bold text--upper is-hidden--xxs'>Вид</span>
                             <div className={style.viewMode}>
                                 <svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
                                     <g clipPath="url(#clip0_1707_39249)">
