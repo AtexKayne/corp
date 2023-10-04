@@ -2,6 +2,9 @@ import { useState, useEffect } from 'react'
 import style from './style.module.scss'
 
 export default function CardValues({ info, mode }) {
+    console.log(info.values, info.color);
+
+    if (!info.values && !info.color) return null
 
     return (
         <div className={`${style.values}`}>
@@ -14,43 +17,26 @@ export default function CardValues({ info, mode }) {
 }
 
 function Color({ color, mode }) {
-    const [iconStyle, setIconStyle] = useState('')
-    useEffect(() => {
-        // let newIconStyle = ''
-        // if (color.name.toLowerCase() === 'белый') {
-        //     newIconStyle = 'iconColorWhite'
-        // } else if (color.name.toLowerCase() === 'разноцветный') {
-        //     newIconStyle = 'iconColorFull'
-        // }
-        // setIconStyle(newIconStyle)
-    }, [])
-
     return (
         <div className='iconColorVariant'>
-            <span className={`iconColor ${iconStyle}`}
-            //    style={{ backgroundColor: color.iconColor }}
-            />
+            <span data-color={color.toLowerCase()} className={`iconColor`} />
 
-            <div className=''>
-                {/* <div className='text--t4 text--normal'>{color.name}</div> */}
-            </div>
+            <div className='text--t4 text--normal'>{color}</div>
         </div>
     )
 }
 
-function Volume({ value, values, mode }) {
+function Volume({ values, mode }) {
     return (
-        <div className={`${style.volumePicker} text--t6 text--normal`}>
-            {/* <div data-disabled={false} data-active={mode !== 'inline'}>{value}</div>
+        <div style={{ '--count-values': `"${values.length}"` }} className={`${style.volumePicker} text--t6 text--normal`}>
             {values && values.length && mode !== 'inline'
-                ? values.map(item => {
-                    if (item === value) return null
+                ? values.map((item, index) => {
                     return (
-                        <div key={item} data-disabled={true} data-active={false}>
+                        <div key={item} data-disabled={true} data-active={index === 0}>
                             {item}
                         </div>
                     )
-                }) : null} */}
+                }) : null}
         </div>
     )
 }

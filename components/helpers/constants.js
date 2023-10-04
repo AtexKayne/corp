@@ -694,7 +694,7 @@ export const cardsCompact = [
         primaryName: 'Canway SZ-A7116-4 blue',
         secondaryName: 'Расческа с хвостиком',
         value: '',
-        color: { name: 'Голубой', iconColor: '#00BEFF' },
+        color: 'Голубой',
         price: {
             actual: 277,
         },

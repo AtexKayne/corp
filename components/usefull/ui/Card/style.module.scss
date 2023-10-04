@@ -11,14 +11,16 @@
     &[data-hover="true"] {
         z-index: 2;
         box-shadow: 0px 10px 30px 2px #69748633;
-
-        .buyBtn {
-            opacity: 1;
-        }
     }
 
     @include media-breakpoint(lg-down) {
         box-shadow: none !important;
+    }
+
+    .buyBtn {
+        right: 16px;
+        bottom: 16px;
+        position: absolute;
     }
 }
 
@@ -189,12 +191,5 @@
                 align-items: flex-start;
             }
         }
-    }
-}
-
-.buyBtn {
-    @include media-breakpoint(xl-up) {
-        opacity: 0;
-        transition: 0.3s;
     }
 }

@@ -8,22 +8,12 @@ import CardControls from './CardControls/CardControls'
 import { useAnimationControls } from 'framer-motion'
 import { globalState } from '../../../../helpers/globalState'
 
-export default function CardCompact({ info, mode, onChangeCount = () => { } }) {
+export default function CardCompact({ info, mode, animate, onChangeCount = () => { } }) {
     // @TODO Постарайся от этого избавиться
     const [count, setCount] = useState(info.basket ?? 0)
     const [isHover, setIsHover] = useState(false)
     const [isControlOpen, setIsControlOpen] = useState(false)
-    const animateCounter = useAnimationControls()
-    const animateModule = useAnimationControls()
-    const animateButton = useAnimationControls()
-    const animateInner = useAnimationControls()
-    const animate = {
-        counter: animateCounter,
-        button: animateButton,
-        module: animateModule,
-        inner: animateInner
-    }
-    // const animateVariants = {}
+
     const refInner = useRef(null)
     const refTimeout = useRef(null)
     const refIsFocus = useRef(false)
@@ -141,15 +131,6 @@ export default function CardCompact({ info, mode, onChangeCount = () => { } }) {
         return animate.module.start({ opacity: 1, transition: { duration: 0.1 } })
     }
 
-    useEffect(() => {
-        if (isHover) {
-            refAnimated.current = showEnter()
-        } else {
-            if (refAnimated.current) refAnimated.current.then(showLeave)
-            else showLeave()
-        }
-    }, [isHover])
-
     const focusHandler = () => {
         setIsHover(true)
         refIsFocus.current = true
@@ -169,7 +150,6 @@ export default function CardCompact({ info, mode, onChangeCount = () => { } }) {
         const prevValue = count
         onChangeCount(value, false, info)
         setCount(value)
-        // setIsHover(true)
 
         const isMobile = window.innerWidth <= globalState.sizes.lg
 
@@ -198,14 +178,6 @@ export default function CardCompact({ info, mode, onChangeCount = () => { } }) {
         if (isMin) {
             globalState.popover.open([info.secondaryName, 'БОЛЬШЕ НЕ В КОРЗИНЕ'], info.images[0])
         }
-
-        // setValues(prev => {
-        //     const update = [...prev]
-        //     const index = update.findIndex(element => element.value === activeValue.value)
-        //     update[index].basket = val
-        //     globalState.basket.update({ val, activeValue, info })
-        //     return update
-        // })
     }
 
     const mouseEnterHandler = async () => {
@@ -218,16 +190,9 @@ export default function CardCompact({ info, mode, onChangeCount = () => { } }) {
         if (window.innerWidth <= globalState.sizes.lg) return
 
         setIsHover(false)
-        // clearTimeout(refTimeout.current)
     }
 
-    useEffect(() => {
-        const input = refInner.current.querySelector('input')
-        if (input) {
-            input.addEventListener('blur', blurHandler)
-            input.addEventListener('focus', focusHandler)
-        }
-
+    const setStartedValue = () => {
         if (!globalState.basket.count) return
         // const basketStorage = globalState.basket.items
         // const newInfo = {...info}
@@ -246,6 +211,16 @@ export default function CardCompact({ info, mode, onChangeCount = () => { } }) {
         // setCountInBasket(newInfo.values[0].basket)
         // setActiveValue(newInfo.values[0])
         // setValues(newInfo.values)
+    }
+
+    useEffect(() => {
+        const input = refInner.current.querySelector('input')
+        if (input) {
+            input.addEventListener('blur', blurHandler)
+            input.addEventListener('focus', focusHandler)
+        }
+
+        setStartedValue()
 
         return () => {
             if (input) {
@@ -254,6 +229,15 @@ export default function CardCompact({ info, mode, onChangeCount = () => { } }) {
             }
         }
     }, [])
+
+    useEffect(() => {
+        if (isHover) {
+            refAnimated.current = showEnter()
+        } else {
+            if (refAnimated.current) refAnimated.current.then(showLeave)
+            else showLeave()
+        }
+    }, [isHover])
 
     return (
         <div

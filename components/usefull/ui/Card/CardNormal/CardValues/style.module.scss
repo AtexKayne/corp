@@ -22,12 +22,6 @@
             color: var(--c-_light-gray);
             background-color: transparent;
         }
-
-        &:hover,
-        &[data-active='true'] {
-            color: var(--t-text);
-            background-color: var(--c-_light);
-        }
     }
 }
 

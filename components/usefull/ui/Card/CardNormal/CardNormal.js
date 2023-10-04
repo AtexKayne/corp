@@ -13,7 +13,7 @@ export default function CardNormal({ info, mode, onChangeCount = () => { } }) {
     const [count, setCount] = useState(info.basket ?? 0)
     const [isHover, setIsHover] = useState(false)
     const mouseEnterHandler = () => setIsHover(true)
-    const mouseLeaveHandler = () => setIsHover(false)
+    const mouseLeaveHandler = () => setIsHover(true)
 
     const updateHandler = ({ value, isMax, isMin }) => {
         // setCount(val)
@@ -70,7 +70,7 @@ export default function CardNormal({ info, mode, onChangeCount = () => { } }) {
             <CardPrice info={info} mode={mode} count={count} />
             <CardValues info={info} mode={mode} />
 
-            <div className={`${style.buyBtn} mt-2`}>
+            <div className={`${style.buyBtn}`}>
                 <CardBuy info={info} count={count} onUpdateInBasket={updateHandler} />
             </div>
         </div>
