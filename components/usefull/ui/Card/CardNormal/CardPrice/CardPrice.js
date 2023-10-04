@@ -42,11 +42,6 @@ export default function CardPrice({ info, mode, count }) {
             {!info.isProfi && info.max !== 0
                 ? <div className={`${style.priceContainer} text--t2 text--normal pb-0.8`}>
 
-                    <span data-hidden={!count} className={`${style.basket} text--t5 text--normal text--color-primary`}>
-                        <Icon name='basket' width='19' height='16' />
-                        <span>{count} шт x</span>
-                    </span>
-
                     <span ref={refSumm} className={style.price}>
                         <span>{summ} ₽</span>
                         {info.price.old

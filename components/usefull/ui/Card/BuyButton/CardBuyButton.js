@@ -1,12 +1,12 @@
 import { useState, useEffect, useRef } from 'react'
 import style from './style.module.scss'
-import Icon from '../../../../../Icon'
-import Counter from '../../Counter/Counter'
-import { globalState } from '../../../../../helpers/globalState'
-import NotifyButton from '../../NotifyButton/NotifyButton'
+import Icon from '../../../../Icon'
+import Counter from '../Counter/Counter'
+import { globalState } from '../../../../helpers/globalState'
+import NotifyButton from '../NotifyButton/NotifyButton'
 import { motion } from 'framer-motion'
 
-export default function CardCompactButton({ count, info, onUpdateInBasket, animate }) {
+export default function CardBuyButton({ count, info, onUpdateInBasket, animate }) {
     const [isOpen, setIsOpen] = useState(false)
 
     const buyHandler = () => {
@@ -45,7 +45,7 @@ export default function CardCompactButton({ count, info, onUpdateInBasket, anima
 
     return (
         <div data-open={isOpen} data-active={!!count} className={style.buttonContainer}>
-            <motion.div animate={animate.button} data-active={!!count} onClick={buyHandler} className={`${style.button}`}>
+            <motion.div animate={animate.button} data-active={!!count} onClick={buyHandler} className={`${style.button} js-button`}>
                 <Icon external='is-hidden--xxs' name='basket' width='20' height='18' />
                 <span className='is-visible--xxs text--upper text--sparse text--t6 text--bold'>в корзину</span>
                 <div className={`${style.buttonCount} text--t6 text--bold`}>

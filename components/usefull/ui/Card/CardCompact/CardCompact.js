@@ -214,6 +214,15 @@ export default function CardCompact({ info, mode, animate, onChangeCount = () =>
     }
 
     useEffect(() => {
+        if (isHover) {
+            refAnimated.current = showEnter()
+        } else {
+            if (refAnimated.current) refAnimated.current.then(showLeave)
+            else showLeave()
+        }
+    }, [isHover])
+
+    useEffect(() => {
         const input = refInner.current.querySelector('input')
         if (input) {
             input.addEventListener('blur', blurHandler)
@@ -229,15 +238,6 @@ export default function CardCompact({ info, mode, animate, onChangeCount = () =>
             }
         }
     }, [])
-
-    useEffect(() => {
-        if (isHover) {
-            refAnimated.current = showEnter()
-        } else {
-            if (refAnimated.current) refAnimated.current.then(showLeave)
-            else showLeave()
-        }
-    }, [isHover])
 
     return (
         <div

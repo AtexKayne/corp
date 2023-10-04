@@ -2,9 +2,8 @@ import { useState, useEffect } from 'react'
 import style from './style.module.scss'
 
 export default function CardValues({ info, mode }) {
-    console.log(info.values, info.color);
-
-    if (!info.values && !info.color) return null
+    console.log(info, mode);
+    if ((!info.values && !info.color) || mode === 'inline') return null
 
     return (
         <div className={`${style.values}`}>

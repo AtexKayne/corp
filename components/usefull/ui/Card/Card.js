@@ -2,7 +2,7 @@ import CardNormal from './CardNormal/CardNormal'
 import CardCompact from './CardCompact/CardCompact'
 import { useAnimationControls } from 'framer-motion'
 
-export default function Card({ info, mode = 'normal' }) {
+export default function Card({ info, mode = 'normal', onChangeCount = () => false }) {
     const animateCounter = useAnimationControls()
     const animateModule = useAnimationControls()
     const animateButton = useAnimationControls()
@@ -15,8 +15,8 @@ export default function Card({ info, mode = 'normal' }) {
     }
     
     if (mode === 'normal' || mode === 'inline') {
-        return <CardNormal info={info} animate={animate} mode={mode} />
+        return <CardNormal animate={animate} onChangeCount={onChangeCount} info={info} mode={mode} />
     } else if (mode === 'compact') {
-        return <CardCompact animate={animate} info={info} mode={mode} />
+        return <CardCompact animate={animate} onChangeCount={onChangeCount} info={info} mode={mode} />
     }
 }

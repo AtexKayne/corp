@@ -122,8 +122,9 @@
 
 .buttonCount {
     margin-left: 9px;
+    align-items: center;
     color: var(--t-text);
-    display: inline-block;
+    display: inline-flex;
 }
 
 .counter {
