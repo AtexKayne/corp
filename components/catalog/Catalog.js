@@ -14,7 +14,7 @@ import { debounce } from '../helpers/debounce'
 
 export default function Catalog({ detail }) {
     const isBrands = detail.isBrands || detail.isPromo
-    const [mode, setMode] = useState('compact')
+    const [mode, setMode] = useState('normal')
     const [isExistFilters, setIsExistFilters] = useState(false)
     const [isFilterOpen, setIsFilterOpen] = useState(false)
     const [filters, setFilters] = useState(detail.filter)
@@ -116,6 +116,7 @@ export default function Catalog({ detail }) {
             <Head info={detail} isBrands={isBrands} isPromo={detail.isPromo} categoryName={detail.name} />
 
             <Nav
+                setMode={setMode}
                 isBrands={isBrands}
                 sortHandler={sortHandler}
                 openFilters={openFilters}
@@ -146,7 +147,7 @@ export default function Catalog({ detail }) {
     )
 }
 
-function Nav({ isBrands, sortHandler, openFilters, fastFilters, selectFastFilter, isExistFilters, resetAllHandler }) {
+function Nav({ isBrands, sortHandler, openFilters, fastFilters, selectFastFilter, isExistFilters, resetAllHandler, setMode }) {
     const refNav = useRef(null)
     const refContainer = useRef(null)
     const refOffsetHeight = useRef(0)
@@ -168,6 +169,10 @@ function Nav({ isBrands, sortHandler, openFilters, fastFilters, selectFastFilter
             refOffsetHeight.current = 198
         }
     }, 1000)
+
+    const updateMode = mode => {
+        setMode(mode)
+    }
 
     useEffect(() => {
         window.addEventListener('scroll', scrollHandler, { passive: true })
@@ -208,7 +213,7 @@ function Nav({ isBrands, sortHandler, openFilters, fastFilters, selectFastFilter
                         <div className='mr-2 mr-3:md d-flex flex--center mr-1:xxs'>
                             <span className='text--t5 link text--bold text--upper is-hidden--xxs'>Вид</span>
                             <div className={style.viewMode}>
-                                <svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <svg onClick={() => updateMode('normal')} width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
                                     <g clipPath="url(#clip0_1707_39249)">
                                         <rect x="0.000976562" width="5.66668" height="5.66668" rx="0.266667" fill="#E5E5E5" />
                                         <rect x="0.000976562" y="8.33398" width="5.66668" height="5.66668" rx="0.266667" fill="#E5E5E5" />
@@ -222,7 +227,7 @@ function Nav({ isBrands, sortHandler, openFilters, fastFilters, selectFastFilter
                                     </defs>
                                 </svg>
 
-                                <svg data-active='true' width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <svg  onClick={() => updateMode('compact')} data-active='true' width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
                                     <g clipPath="url(#clip0_1707_39256)">
                                         <g clipPath="url(#clip1_1707_39256)">
                                             <rect width="6.125" height="3.5" rx="0.266667" fill="#112233" />

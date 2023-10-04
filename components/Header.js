@@ -6,7 +6,7 @@ import { motion, useAnimationControls } from 'framer-motion'
 import Icon from './Icon'
 import Link from 'next/link'
 import Image from 'next/image'
-import style from '../styles/module/Header.module.scss'
+import style from '/styles/module/Header.module.scss'
 import HeaderNav from './usefull/ui/HeaderNav/HeaderNav'
 
 export default function Header() {

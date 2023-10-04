@@ -1,5 +1,5 @@
 import { globalState } from '../../helpers/globalState'
-import style from '../../../styles/module/usefull/templates/Modal-profi.module.scss'
+import style from '/styles/module/usefull/templates/Modal-profi.module.scss'
 
 export default function ModalProfi() {
     const clickHandler = () => {

@@ -2,7 +2,7 @@ import Icon from '../../components/Icon'
 import { useState, useEffect, useRef } from 'react'
 import { globalState } from '../helpers/globalState'
 import { motion, useAnimationControls } from 'framer-motion'
-import style from '../../styles/module/Product/Product-buy-button.module.scss'
+import style from '/styles/module/Product/Product-buy-button.module.scss'
 import Favourite from '../usefull/Favourite'
 
 

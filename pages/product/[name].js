@@ -1,7 +1,7 @@
 import { useState, useEffect, useRef } from 'react'
 import { debounce } from '../../components/helpers/debounce'
 import { globalState } from '../../components/helpers/globalState'
-import style from '../../styles/module/Product/Product.module.scss'
+import style from '/styles/module/Product/Product.module.scss'
 import { product, product1, product2, product3, product4, product5 } from '../../components/helpers/constants'
 
 import Link from 'next/link'

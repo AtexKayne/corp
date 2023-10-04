@@ -4,7 +4,7 @@ import { debounce } from '../helpers/debounce'
 import { useState, useEffect, useRef } from 'react'
 import { globalState } from '../helpers/globalState'
 import { motion, useAnimationControls } from 'framer-motion'
-import style from '../../styles/module/Product/Product-gallery.module.scss'
+import style from '/styles/module/Product/Product-gallery.module.scss'
 
 // @TODO Переписать фунуции переключения слайдов по свайпу.
 export default function Gallery({ images = [], alt = '' }) {

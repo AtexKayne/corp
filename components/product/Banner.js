@@ -1,6 +1,6 @@
 import Image from 'next/image'
 import { useState, useEffect, useRef } from 'react'
-import style from '../../styles/module/Product/Banner.module.scss'
+import style from '/styles/module/Product/Banner.module.scss'
 import Card from '../usefull/ui/Card/Card'
 
 export default function Banner({ items, title, description, images }) {

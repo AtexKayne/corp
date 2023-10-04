@@ -1,10 +1,10 @@
 import { useState, useEffect } from 'react'
-import style from './style.module.scss'
+import style from '../style.module.scss'
 import CardImages from './CardImages/CardImages'
 import CardValues from './CardValues/CardValues'
 import CardPrice from './CardPrice/CardPrice'
 import CardBuy from './CardBuy/CardBuy'
-import { globalState } from '../../../helpers/globalState'
+import { globalState } from '../../../../helpers/globalState'
 // import { isEqual } from '../../../helpers/isEqual'
 import CardDescrption from './CardDescrption/CardDescrption'
 

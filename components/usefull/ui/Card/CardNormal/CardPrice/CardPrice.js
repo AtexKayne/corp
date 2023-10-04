@@ -1,6 +1,6 @@
 import { useState, useEffect, useRef } from 'react'
 import style from './style.module.scss'
-import Icon from '../../../../Icon'
+import Icon from '../../../../../Icon'
 
 export default function CardPrice({ info, mode, count }) {
     const [summ, setSumm] = useState(info.price.actual.toLocaleString())

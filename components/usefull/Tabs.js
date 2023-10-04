@@ -1,5 +1,5 @@
 import { useState, useEffect, useRef } from 'react'
-import style from '../../styles/module/usefull/Tabs.module.scss'
+import style from '/styles/module/usefull/Tabs.module.scss'
 
 
 export default function Tabs({ tabs, children }) {

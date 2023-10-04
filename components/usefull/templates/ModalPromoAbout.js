@@ -1,5 +1,5 @@
 import { globalState } from '../../helpers/globalState'
-import style from '../../../styles/module/usefull/templates/Modal-brand-about.module.scss'
+import style from '/styles/module/usefull/templates/Modal-brand-about.module.scss'
 
 export default function ModalBrandAbout({ data }) {
     const clickHandler = () => {

@@ -1,6 +1,6 @@
-@import "../../styles/mixins/helpers/media";
-@import "../../styles/mixins/helpers/adaptive-value";
-@import "../../styles/extends/_text-sizes";
+@import "/styles/mixins/helpers/media";
+@import "/styles/mixins/helpers/adaptive-value";
+@import "/styles/extends/_text-sizes";
 
 .container {
     display: flex;

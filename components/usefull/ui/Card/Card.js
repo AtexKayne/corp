@@ -1,5 +1,5 @@
-import CardNormal from './CardNormal'
-import CardCompact from './CardCompact'
+import CardNormal from './CardNormal/CardNormal'
+import CardCompact from './CardCompact/CardCompact'
 
 export default function Card({ info, mode = 'normal' }) {
     if (mode === 'normal' || mode === 'inline') {

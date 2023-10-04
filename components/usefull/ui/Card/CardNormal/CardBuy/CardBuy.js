@@ -1,9 +1,9 @@
 import { useState, useEffect, useRef } from 'react'
-import { globalState } from '../../../../helpers/globalState'
 import style from './style.module.scss'
-import Counter from '../Counter/Counter'
-import NotifyButton from '../NotifyButton/NotifyButton'
-import ProfiButton from '../ProfiButton/ProfiButton'
+import Counter from '../../Counter/Counter'
+import NotifyButton from '../../NotifyButton/NotifyButton'
+import ProfiButton from '../../ProfiButton/ProfiButton'
+import { globalState } from '../../../../../helpers/globalState'
 
 export default function CardBuy({ info, onUpdateInBasket, count }) {
     const [isEmpty, setIsEmpty] = useState(false)

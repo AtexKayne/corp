@@ -1,6 +1,6 @@
 import Icon from './Icon'
 import Image from 'next/image'
-import style from '../styles/module/Footer.module.scss'
+import style from '/styles/module/Footer.module.scss'
 
 export default function Footer() {
     return (

@@ -1,5 +1,5 @@
 import { globalState } from '../../helpers/globalState'
-import style from '../../../styles/module/usefull/templates/Modal-price-info.module.scss'
+import style from '/styles/module/usefull/templates/Modal-price-info.module.scss'
 import Icon from '../../Icon'
 
 export default function ModalPriceInfo() {

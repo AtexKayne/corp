@@ -1,7 +1,7 @@
 import { filters } from '../../helpers/constants'
 import { useState, useEffect, useRef } from 'react'
 import { globalState } from '../../helpers/globalState'
-import style from '../../../styles/module/usefull/templates/Modal-filters.module.scss'
+import style from '/styles/module/usefull/templates/Modal-filters.module.scss'
 
 import Icon from '../../Icon'
 import InputRange from '../../../components/usefull/form/InputRange'

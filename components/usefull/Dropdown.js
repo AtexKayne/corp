@@ -1,6 +1,6 @@
 import Icon from '../Icon'
 import { useState, useEffect, useRef } from 'react'
-import style from '../../styles/module/usefull/Dropdown.module.scss'
+import style from '/styles/module/usefull/Dropdown.module.scss'
 
 export default function Dropdown({ children, title, external = '', afterChose }) {
     const [isOpen, setIsOpen] = useState(false)

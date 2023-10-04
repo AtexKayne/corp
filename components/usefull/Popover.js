@@ -1,6 +1,6 @@
 import { useState, useEffect, useRef } from 'react'
 import { globalState } from '../helpers/globalState'
-import style from '../../styles/module/usefull/Popover.module.scss'
+import style from '/styles/module/usefull/Popover.module.scss'
 
 export default function Popover() {
     const [rightPosition, setRightPosition] = useState(0)

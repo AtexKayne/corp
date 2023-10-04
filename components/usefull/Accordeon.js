@@ -1,7 +1,7 @@
 import { debounce } from '../helpers/debounce'
 import { useState, useEffect, useRef } from 'react'
 import { globalState } from '../helpers/globalState'
-import style from '../../styles/module/usefull/Accordeon.module.scss'
+import style from '/styles/module/usefull/Accordeon.module.scss'
 
 export default function Accordeon({ children, title, open = false, updateHeight = false }) {
     const [isOpen, setIsOpen] = useState(open)

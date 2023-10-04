@@ -1,6 +1,6 @@
-import Link from 'next/link';
+import Link from 'next/link'
 import { useState, useEffect, useRef } from 'react'
-import style from '../styles/module/Breadcrumbs.module.scss'
+import style from '/styles/module/Breadcrumbs.module.scss'
 
 export default function Breadcrumbs({ link, theme }) {
     const refBreadcrumbs = useRef(null)

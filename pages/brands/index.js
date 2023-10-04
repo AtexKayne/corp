@@ -1,5 +1,5 @@
 import { brands } from '../../components/helpers/constants'
-import style from '../../styles/module/Brands/Brands.module.scss'
+import style from '/styles/module/Brands/Brands.module.scss'
 import { useState, useEffect, useRef } from 'react'
 
 import Link from 'next/link'

@@ -1,7 +1,7 @@
 import { debounce } from '../helpers/debounce'
 import { useState, useEffect, useRef } from 'react'
 import { motion, useAnimationControls } from 'framer-motion'
-import style from '../../styles/module/Product/Card.module.scss'
+import style from '/styles/module/Product/Card.module.scss'
 
 import Icon from '../Icon'
 import Image from 'next/image'

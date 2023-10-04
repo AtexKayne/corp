@@ -3,7 +3,7 @@ import { useState, useEffect, useRef } from 'react'
 import { motion, useAnimationControls } from 'framer-motion'
 import style from './style.module.scss'
 import Image from 'next/image'
-import { globalState } from '../../../../helpers/globalState'
+import { globalState } from '../../../../../helpers/globalState'
 
 export default function CardImages({ link = '/', images, mode, count }) {
     const [activeImage, setActiveImage] = useState(0)

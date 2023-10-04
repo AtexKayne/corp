@@ -2,7 +2,7 @@ import { useState, useEffect, useRef } from 'react'
 import { numWord } from '../../components/helpers/generator'
 import { favourite } from '../../components/helpers/constants'
 import { globalState } from '../../components/helpers/globalState'
-import style from '../../styles/module/Favourite/Favourite.module.scss'
+import style from '/styles/module/Favourite/Favourite.module.scss'
 
 import Link from 'next/link'
 import Image from 'next/image'

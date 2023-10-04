@@ -1,7 +1,7 @@
 import Icon from '../Icon'
 import { useState } from 'react'
 import { globalState } from '../helpers/globalState'
-import style from '../../styles/module/usefull/Favourite.module.scss'
+import style from '/styles/module/usefull/Favourite.module.scss'
 
 export default function Favourite({ width, height, info, size = '', isActive = false, external = '' }) {
     const [isFavourite, setIsFavourite] = useState(isActive)
