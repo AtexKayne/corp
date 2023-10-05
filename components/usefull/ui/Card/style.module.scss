@@ -4,9 +4,11 @@
 .card {
     width: 100%;
     padding: 16px;
+    display: flex;
     transition: 0.3s;
     border-radius: 8px;
     position: relative;
+    flex-direction: column;
 
     &[data-hover="true"] {
         z-index: 2;
@@ -191,5 +193,14 @@
                 align-items: flex-start;
             }
         }
+    }
+}
+
+.cardBasket {
+    display: flex;
+    flex-wrap: wrap;
+
+    @include media-breakpoint(xxl-up) {
+        flex-wrap: nowrap;
     }
 }

@@ -1,8 +1,8 @@
 import { useState, useEffect, useRef } from 'react'
 import style from './style.module.scss'
-import Icon from '../../../../Icon'
+import Icon from '../../../../../Icon'
 import Counter from '../Counter/Counter'
-import { globalState } from '../../../../helpers/globalState'
+import { globalState } from '../../../../../helpers/globalState'
 import NotifyButton from '../NotifyButton/NotifyButton'
 import { motion } from 'framer-motion'
 

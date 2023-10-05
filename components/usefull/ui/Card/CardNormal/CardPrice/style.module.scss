@@ -52,13 +52,20 @@
         display: none;
     }
 }
-
+[data-mode='normal'] {
+    .priceContainer {
+        height: 100%;
+        display: flex;
+        align-items: flex-end;
+    }
+}
 
 [data-mode='inline'] {
     
     .priceContainer {
         right: 0;
         padding: 0;
+        display: block;
         grid-area: price;
         text-align: right;
         position: absolute;

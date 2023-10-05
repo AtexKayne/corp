@@ -3,7 +3,9 @@
 
 .images {
     z-index: 1;
+    flex-grow: 0;
     display: block;
+    flex-shrink: 0;
     overflow: hidden;
     position: relative;
     border-radius: 8px;

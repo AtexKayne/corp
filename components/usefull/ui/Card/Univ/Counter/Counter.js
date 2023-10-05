@@ -1,9 +1,9 @@
-import { getFakeInput, getMetaScale } from '../../../../helpers/fakeDatas'
+import { getFakeInput, getMetaScale } from '../../../../../helpers/fakeDatas'
 import { motion, useAnimationControls } from 'framer-motion'
 import { useState, useEffect, useRef } from 'react'
 import style from './style.module.scss'
-import Icon from '../../../../Icon'
-import { globalState } from '../../../../helpers/globalState'
+import Icon from '../../../../../Icon'
+import { globalState } from '../../../../../helpers/globalState'
 // import { globalState } from '../../../../helpers/globalState'
 
 export default function Counter({ info, onAfterChange, max, count }) {

@@ -5,7 +5,7 @@ import style from './style.module.scss'
 import Image from 'next/image'
 import { globalState } from '../../../../../helpers/globalState'
 
-export default function CardImages({ link = '/', images, mode, count }) {
+export default function CardImages({ link = '/', images }) {
     const [activeImage, setActiveImage] = useState(0)
     const animateDrag = useAnimationControls()
     const refImages = useRef(null)
@@ -51,7 +51,7 @@ export default function CardImages({ link = '/', images, mode, count }) {
     }
 
     const mouseMoveHandler = event => {
-        if (window.innerWidth < globalState.sizes.lg || mode === 'inline') return
+        if (window.innerWidth < globalState.sizes.lg) return
         const c = event.clientX - refRect.current.x
         const t = refRect.current.width / images.length
         const r = Math.min(images.length - 1, Math.floor(c / t))
@@ -67,17 +67,10 @@ export default function CardImages({ link = '/', images, mode, count }) {
             <a
                 href={link}
                 ref={refImages}
+                className={`${style.images}`}
                 onMouseMove={mouseMoveHandler}
                 onMouseEnter={mouseEnterHandler}
-                onMouseLeave={() => setActiveImage(0)}
-                className={`${style.images} ${mode === 'inline' ? style.inline : ''}`}>
-
-                {mode === 'inline'
-                    ? <div data-is-hidden={count <= 1} className={`${style.labelCount} text--t6`}>
-                        x{count}
-                    </div>
-                    : null
-                }
+                onMouseLeave={() => setActiveImage(0)}>
 
                 <motion.div animate={animateDrag} drag='x' onDragEnd={dragEdHandler} >
                     {images.map((image, index) => (

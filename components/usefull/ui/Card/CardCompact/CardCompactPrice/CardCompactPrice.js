@@ -1,6 +1,6 @@
 // import { useState, useEffect, useRef } from 'react'
 // import CardBuy from '../../CardBuy/CardBuy'
-import CardBuyButton from '../../BuyButton/CardBuyButton'
+import CardBuyButton from '../../Univ/BuyButton/CardBuyButton'
 import style from './style.module.scss'
 
 export default function CardCompactPrice({ info, count, onUpdateInBasket, animate }) {

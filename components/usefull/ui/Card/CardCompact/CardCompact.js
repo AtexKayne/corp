@@ -5,10 +5,9 @@ import CardCompactImages from './CardCompactImages/CardCompactImages'
 import CardCompactDescription from './CardCompactDescription/CardCompactDescription'
 import CardCompactPrice from './CardCompactPrice/CardCompactPrice'
 import CardControls from './CardControls/CardControls'
-import { useAnimationControls } from 'framer-motion'
 import { globalState } from '../../../../helpers/globalState'
 
-export default function CardCompact({ info, mode, animate, onChangeCount = () => { } }) {
+export default function CardCompact({ info, animate, onChangeCount = () => { } }) {
     // @TODO Постарайся от этого избавиться
     const [count, setCount] = useState(info.basket ?? 0)
     const [isHover, setIsHover] = useState(false)
@@ -241,7 +240,6 @@ export default function CardCompact({ info, mode, animate, onChangeCount = () =>
 
     return (
         <div
-            data-mode={mode}
             data-hover={isHover}
             data-current={!!count}
             data-open={isControlOpen}

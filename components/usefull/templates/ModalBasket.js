@@ -463,7 +463,7 @@ function ProductCard({ item, selectHandler, returnedItem, deleteItem, onChangeCo
             </div>
             <div data-open={isControlOpen} className={style.productInner}>
                 <InputCheckbox external={`${style.checkbox} ${selectHandler === false ? style.checkboxDisabled : ''}`} onAfterComplete={onChangeHandler} />
-                <Card info={item} mode='inline' onChangeCount={onChangeCountHandler} />
+                <Card info={item} mode='basket' onChangeCount={onChangeCountHandler} />
             </div>
         </motion.div>
     )

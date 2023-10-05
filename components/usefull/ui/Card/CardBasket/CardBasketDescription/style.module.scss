@@ -1,0 +1,10 @@
+@import "/styles/mixins/helpers/media";
+
+.description {
+    padding: 0 16px;
+    width: calc(100% - 85px);
+
+    @include media-breakpoint(xxl-up) {
+        width: 100%;
+    }
+}

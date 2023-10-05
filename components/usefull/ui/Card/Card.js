@@ -1,5 +1,7 @@
 import CardNormal from './CardNormal/CardNormal'
 import CardCompact from './CardCompact/CardCompact'
+import CardBasket from './CardBasket/CardBasket'
+
 import { useAnimationControls } from 'framer-motion'
 
 export default function Card({ info, mode = 'normal', onChangeCount = () => false }) {
@@ -13,10 +15,12 @@ export default function Card({ info, mode = 'normal', onChangeCount = () => fals
         module: animateModule,
         inner: animateInner
     }
-    
-    if (mode === 'normal' || mode === 'inline') {
-        return <CardNormal animate={animate} onChangeCount={onChangeCount} info={info} mode={mode} />
+
+    if (mode === 'normal') {
+        return <CardNormal animate={animate} onChangeCount={onChangeCount} info={info} />
     } else if (mode === 'compact') {
-        return <CardCompact animate={animate} onChangeCount={onChangeCount} info={info} mode={mode} />
+        return <CardCompact animate={animate} onChangeCount={onChangeCount} info={info} />
+    } else if (mode === 'basket') {
+        return <CardBasket animate={animate} onChangeCount={onChangeCount} info={info} />
     }
 }

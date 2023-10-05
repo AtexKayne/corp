@@ -1,7 +1,7 @@
 import { useState, useEffect, useRef } from 'react'
-import { globalState } from '../../../../helpers/globalState'
+import { globalState } from '../../../../../helpers/globalState'
 import style from './style.module.scss'
-import Icon from '../../../../Icon'
+import Icon from '../../../../../Icon'
 
 export default function NotifyButton({ name, image, external = '' }) {
     const [isRinged, setIsRinged] = useState(false)

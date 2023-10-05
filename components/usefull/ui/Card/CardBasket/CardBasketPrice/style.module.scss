@@ -1,0 +1,58 @@
+@import "/styles/mixins/helpers/media";
+
+.container {
+    width: 100%;
+    min-width: 170px;
+    margin-left: 101px;
+
+    @include media-breakpoint(xxl-up) {
+        width: 170px;
+        margin-left: 0;
+    }
+}
+
+.price {
+    display: flex;
+    align-items: center;
+
+    >*:nth-child(2) {
+        margin-left: 6px;
+    }
+    
+    @include media-breakpoint(xxl-up) {
+        align-items: flex-end;
+        flex-direction: column;
+
+        >*:nth-child(2) {
+            margin-top: 6px;
+            margin-left: 0px;
+        }
+    }
+}
+
+.bonuses {
+    display: flex;
+    align-items: center;
+    
+    > *:last-child {
+        transform: translateY(1px);
+    }
+    
+    @include media-breakpoint(xxl-up) {
+        justify-content: flex-end;
+    }
+}
+
+.button {
+    z-index: 0;
+    width: 100%;
+    display: flex;
+    margin-top: 6px;
+    margin-top: 10px;
+    position: relative;
+    justify-content: flex-end;
+        
+    @include media-breakpoint(xxl-up) {
+        width: auto;
+    }
+}

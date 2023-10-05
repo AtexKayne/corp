@@ -1,34 +1,19 @@
-import { useState, useEffect, useRef } from 'react'
 import style from '../style.module.scss'
-import CardImages from './CardImages/CardImages'
-import CardValues from './CardValues/CardValues'
-import CardPrice from './CardPrice/CardPrice'
+import { useState, useEffect, useRef } from 'react'
 import { globalState } from '../../../../helpers/globalState'
-// import { isEqual } from '../../../helpers/isEqual'
-import CardDescrption from './CardDescrption/CardDescrption'
-import CardBuyButton from '../Univ/BuyButton/CardBuyButton'
+import CardBasketImages from './CardBasketImage/CardBasketImage'
+import CardBasketDescription from './CardBasketDescription/CardBasketDescription'
+import CardBasketPrice from './CardBasketPrice/CardBasketPrice'
 
-export default function CardNormal({ info, mode, animate, onChangeCount }) {
+export default function CardBasket({ info, animate, onChangeCount }) {
     // @TODO Постарайся от этого избавиться
     const [count, setCount] = useState(info.basket ?? 0)
-    const [isHover, setIsHover] = useState(false)
+    const [isHover, setIsHover] = useState(true)
 
     const refInner = useRef(null)
     const refTimeout = useRef(null)
     const refIsFocus = useRef(false)
     const refAnimated = useRef(false)
-
-    const mouseEnterHandler = async () => {
-        if (window.innerWidth <= globalState.sizes.lg) return
-        setIsHover(true)
-    }
-
-    const mouseLeaveHandler = async () => {
-        if (refIsFocus.current) return
-        if (window.innerWidth <= globalState.sizes.lg) return
-
-        setIsHover(false)
-    }
 
     const updateHandler = async ({ value, isMax, isMin }) => {
         const prevValue = count
@@ -189,44 +174,13 @@ export default function CardNormal({ info, mode, animate, onChangeCount }) {
         }, 500)
     }
 
-    const setStartedValue = () => {
-        if (!globalState.basket.count) return
-        // const basketStorage = globalState.basket.items
-        // const newInfo = {...info}
-        // let isExist = false
-        // info.values.forEach((item, index) => {
-        //     const element = { ...info }
-        //     element.values = [item]
-        //     isExist = isEqual(basketStorage, element)
-        //     if (isExist !== false) {
-        //         newInfo.values[index].basket = isExist.count
-        //     }
-        // })
-        // // console.log(isExist);
-        // // if (isExist) {
-        // // }
-        // setCountInBasket(newInfo.values[0].basket)
-        // setActiveValue(newInfo.values[0])
-        // setValues(newInfo.values)
-    }
-
     useEffect(() => {
-        if (isHover) {
-            refAnimated.current = showEnter()
-        } else {
-            if (refAnimated.current) refAnimated.current.then(showLeave)
-            else showLeave()
-        }
-    }, [isHover])
-
-    useEffect(() => {
+        showEnter()
         const input = refInner.current.querySelector('input')
         if (input) {
             input.addEventListener('blur', blurHandler)
             input.addEventListener('focus', focusHandler)
         }
-
-        setStartedValue()
 
         return () => {
             if (input) {
@@ -238,18 +192,13 @@ export default function CardNormal({ info, mode, animate, onChangeCount }) {
 
     return (
         <div
+            ref={refInner}
             data-hover={isHover}
-            className={style.card}
-            onMouseEnter={mouseEnterHandler}
-            onMouseLeave={mouseLeaveHandler}>
-            <CardImages images={info.images} link='/product/rp-no-coloristic' />
-            <CardDescrption info={info} classTitle={style.title} classText={style.text} />
-            <CardValues info={info} />
-            <CardPrice info={info} />
+            className={style.cardBasket}>
 
-            <div ref={refInner} className={`${style.buyBtn}`}>
-                <CardBuyButton animate={animate} info={info} count={count} onUpdateInBasket={updateHandler} />
-            </div>
+            <CardBasketImages link={info.link ?? '/'} image={info.images[0]} count={count} />
+            <CardBasketDescription info={info} link={info.link ?? '/'} />
+            <CardBasketPrice animate={animate} info={info} count={count} onUpdateInBasket={updateHandler} />
         </div>
     )
 }
