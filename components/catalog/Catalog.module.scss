@@ -215,6 +215,11 @@
     > * {
         cursor: pointer;
         margin-left: 8px;
+        color: var(--t-smallish);
+    }
+
+    > *[data-active="true"] {
+        color: var(--t-text);
     }
 
     @include media-breakpoint(lg-down) {
@@ -671,23 +676,37 @@
     grid-gap: 16px;
     min-width: 100%;
     grid-auto-rows: max-content;
-    
+
     @include media-breakpoint(lg-up) {
         margin: 0 -16px;
     }
 
     &[data-mode="normal"] {
+        margin: 0;
         grid-template-columns: repeat(2, 1fr);
-
+        
         @include media-breakpoint(lg-up) {
+            row-gap: 38px;
+            grid-gap: 24px;
             grid-template-columns: repeat(4, 1fr);
         }
 
+        @include media-breakpoint(xl-up) {
+            row-gap: 32px;
+            column-gap: 32px;
+        }
+
+        @include media-breakpoint(xxxl) {
+            column-gap: 40px;
+        }
+
         @include media-breakpoint(md) {
+            row-gap: 48px;
             grid-template-columns: repeat(3, 1fr);
         }
 
         @media (max-width: 374px) {
+            grid-gap: 40px;
             grid-template-columns: repeat(1, 1fr);
         }
     }

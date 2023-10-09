@@ -116,6 +116,7 @@ export default function Catalog({ detail }) {
             <Head info={detail} isBrands={isBrands} isPromo={detail.isPromo} categoryName={detail.name} />
 
             <Nav
+                mode={mode}
                 setMode={setMode}
                 isBrands={isBrands}
                 sortHandler={sortHandler}
@@ -147,7 +148,7 @@ export default function Catalog({ detail }) {
     )
 }
 
-function Nav({ isBrands, sortHandler, openFilters, fastFilters, selectFastFilter, isExistFilters, resetAllHandler, setMode }) {
+function Nav({ isBrands, sortHandler, openFilters, fastFilters, selectFastFilter, isExistFilters, resetAllHandler, mode, setMode }) {
     const refNav = useRef(null)
     const refContainer = useRef(null)
     const refOffsetHeight = useRef(0)
@@ -213,12 +214,12 @@ function Nav({ isBrands, sortHandler, openFilters, fastFilters, selectFastFilter
                         <div className='mr-2 mr-3:md d-flex flex--center mr-1:xxs'>
                             <span className='text--t5 link text--bold text--upper is-hidden--xxs'>Вид</span>
                             <div className={style.viewMode}>
-                                <svg onClick={() => updateMode('normal')} width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <svg onClick={() => updateMode('normal')} data-active={mode === 'normal'} width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
                                     <g clipPath="url(#clip0_1707_39249)">
-                                        <rect x="0.000976562" width="5.66668" height="5.66668" rx="0.266667" fill="#E5E5E5" />
-                                        <rect x="0.000976562" y="8.33398" width="5.66668" height="5.66668" rx="0.266667" fill="#E5E5E5" />
-                                        <rect x="8.33398" width="5.66668" height="5.66668" rx="0.266667" fill="#E5E5E5" />
-                                        <rect x="8.33398" y="8.33398" width="5.66668" height="5.66668" rx="0.266667" fill="#E5E5E5" />
+                                        <rect x="0.000976562" width="5.66668" height="5.66668" rx="0.266667" fill="currentColor" />
+                                        <rect x="0.000976562" y="8.33398" width="5.66668" height="5.66668" rx="0.266667" fill="currentColor" />
+                                        <rect x="8.33398" width="5.66668" height="5.66668" rx="0.266667" fill="currentColor" />
+                                        <rect x="8.33398" y="8.33398" width="5.66668" height="5.66668" rx="0.266667" fill="currentColor" />
                                     </g>
                                     <defs>
                                         <clipPath id="clip0_1707_39249">
@@ -227,15 +228,15 @@ function Nav({ isBrands, sortHandler, openFilters, fastFilters, selectFastFilter
                                     </defs>
                                 </svg>
 
-                                <svg  onClick={() => updateMode('compact')} data-active='true' width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <svg  onClick={() => updateMode('compact')} data-active={mode === 'compact'} width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
                                     <g clipPath="url(#clip0_1707_39256)">
                                         <g clipPath="url(#clip1_1707_39256)">
-                                            <rect width="6.125" height="3.5" rx="0.266667" fill="#112233" />
-                                            <rect x="7.875" width="6.125" height="3.5" rx="0.266667" fill="#112233" />
-                                            <rect y="5.25" width="6.125" height="3.5" rx="0.266667" fill="#112233" />
-                                            <rect x="7.875" y="5.25" width="6.125" height="3.5" rx="0.266667" fill="#112233" />
-                                            <rect y="10.5" width="6.125" height="3.5" rx="0.266667" fill="#112233" />
-                                            <rect x="7.875" y="10.5" width="6.125" height="3.5" rx="0.266667" fill="#112233" />
+                                            <rect width="6.125" height="3.5" rx="0.266667" fill="currentColor" />
+                                            <rect x="7.875" width="6.125" height="3.5" rx="0.266667" fill="currentColor" />
+                                            <rect y="5.25" width="6.125" height="3.5" rx="0.266667" fill="currentColor" />
+                                            <rect x="7.875" y="5.25" width="6.125" height="3.5" rx="0.266667" fill="currentColor" />
+                                            <rect y="10.5" width="6.125" height="3.5" rx="0.266667" fill="currentColor" />
+                                            <rect x="7.875" y="10.5" width="6.125" height="3.5" rx="0.266667" fill="currentColor" />
                                         </g>
                                     </g>
                                     <defs>
@@ -248,12 +249,12 @@ function Nav({ isBrands, sortHandler, openFilters, fastFilters, selectFastFilter
                                     </defs>
                                 </svg>
 
-                                <svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <svg width="14" height="14" data-active={mode === 'creative'} viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
                                     <g clipPath="url(#clip0_1707_39267)">
-                                        <rect width="7" height="6.125" rx="0.266667" fill="#E5E5E5" />
-                                        <rect y="7.875" width="4.375" height="6.125" rx="0.266667" fill="#E5E5E5" />
-                                        <rect x="9.625" width="4.375" height="6.125" rx="0.266667" fill="#E5E5E5" />
-                                        <rect x="7" y="7.875" width="7" height="6.125" rx="0.266667" fill="#E5E5E5" />
+                                        <rect width="7" height="6.125" rx="0.266667" fill="currentColor" />
+                                        <rect y="7.875" width="4.375" height="6.125" rx="0.266667" fill="currentColor" />
+                                        <rect x="9.625" width="4.375" height="6.125" rx="0.266667" fill="currentColor" />
+                                        <rect x="7" y="7.875" width="7" height="6.125" rx="0.266667" fill="currentColor" />
                                     </g>
                                     <defs>
                                         <clipPath id="clip0_1707_39267">

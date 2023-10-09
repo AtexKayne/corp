@@ -15,7 +15,7 @@ export default function CardValues({ info }) {
 
 function Color({ color }) {
     return (
-        <div className='pb-2'>
+        <div className='pb-0.8'>
             <div className='iconColorVariant'>
                 <span data-color={color.toLowerCase()} className={`iconColor`} />
 
@@ -27,7 +27,7 @@ function Color({ color }) {
 
 function Volume({ values }) {
     return (
-        <div style={{ '--count-values': `"${values.length}"` }} className={`${style.volumePicker} text--t6 text--normal pb-2`}>
+        <div style={{ '--count-values': `"+${values.length}"` }} className={`${style.volumePicker} text--t6 text--normal pb-0.8`}>
             {values && values.length
                 ? values.map((item, index) => {
                     return (

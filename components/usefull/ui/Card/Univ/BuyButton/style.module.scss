@@ -1,9 +1,10 @@
 @import '/styles/mixins/helpers/media';
 
 .buttonNotifyContainer {
-    display: block;
+    display: flex;
     min-height: 44px;
     position: relative;
+    justify-content: flex-end;
 
     @include media-breakpoint(md-up) {
         [data-hover='false'] & .notify {
@@ -42,10 +43,11 @@
 }
 
 .buttonProfiContainer {
-    display: block;
+    display: flex;
     // transition: .3s;
     min-height: 44px;
     position: relative;
+    justify-content: flex-end;
 
     .profiBtn {
         width: 68px;
@@ -136,8 +138,15 @@
     pointer-events: none;
     transform-origin: right;
     background-color: var(--t-primary);
-    outline: 10px solid var(--t-background);
     -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+    
+    &.outline {
+        outline: 10px solid var(--t-background);
+
+        .counterModule::before {
+            content: "";
+        }
+    }
 
     [data-active='true'] & {
         background-color: var(--t-light);
@@ -151,10 +160,9 @@
 
         &::before {
             top: -11px;
-            z-index: -8;
+            z-index: 8;
             left: -35px;
             width: 35px;
-            content: "";
             bottom: -11px;
             position: absolute;
             background: linear-gradient(90deg, rgba(255, 255, 255, 0) 0%, rgb(255, 255, 255) 70%);

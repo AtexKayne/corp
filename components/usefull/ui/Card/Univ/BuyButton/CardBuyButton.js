@@ -6,7 +6,7 @@ import { globalState } from '../../../../../helpers/globalState'
 import NotifyButton from '../NotifyButton/NotifyButton'
 import { motion } from 'framer-motion'
 
-export default function CardBuyButton({ count, info, onUpdateInBasket, animate }) {
+export default function CardBuyButton({ count, info, onUpdateInBasket, animate, outline = true }) {
     const [isOpen, setIsOpen] = useState(false)
 
     const buyHandler = () => {
@@ -52,9 +52,9 @@ export default function CardBuyButton({ count, info, onUpdateInBasket, animate }
                     {count}
                 </div>
             </motion.div>
-            <motion.div animate={animate.counter} initial={{ width: 68 }} className={`${style.counter}`}>
+            <motion.div animate={animate.counter} initial={{ width: 68 }} className={`${style.counter} ${outline ? style.outline : ''}`}>
                 <motion.div animate={animate.module} className={style.counterModule}>
-                    <Counter info={info} onAfterChange={onUpdateInBasket} max={info.max} count={count} />
+                    <Counter info={info} outline={outline} onAfterChange={onUpdateInBasket} max={info.max} count={count} />
                 </motion.div>
             </motion.div>
         </div>

@@ -8,7 +8,7 @@ import { globalState } from '../../../../helpers/globalState'
 import CardDescrption from './CardDescrption/CardDescrption'
 import CardBuyButton from '../Univ/BuyButton/CardBuyButton'
 
-export default function CardNormal({ info, mode, animate, onChangeCount }) {
+export default function CardNormal({ info, animate, onChangeCount }) {
     // @TODO Постарайся от этого избавиться
     const [count, setCount] = useState(info.basket ?? 0)
     const [isHover, setIsHover] = useState(false)
@@ -19,13 +19,13 @@ export default function CardNormal({ info, mode, animate, onChangeCount }) {
     const refAnimated = useRef(false)
 
     const mouseEnterHandler = async () => {
-        if (window.innerWidth <= globalState.sizes.lg) return
+        if (window.innerWidth <= globalState.sizes.md) return
         setIsHover(true)
     }
 
     const mouseLeaveHandler = async () => {
         if (refIsFocus.current) return
-        if (window.innerWidth <= globalState.sizes.lg) return
+        if (window.innerWidth <= globalState.sizes.md) return
 
         setIsHover(false)
     }
@@ -35,7 +35,7 @@ export default function CardNormal({ info, mode, animate, onChangeCount }) {
         onChangeCount(value, false, info)
         setCount(value)
 
-        const isMobile = window.innerWidth <= globalState.sizes.lg
+        const isMobile = window.innerWidth <= globalState.sizes.md
 
         if (isMobile) {
             if (value === 0) {
@@ -63,7 +63,7 @@ export default function CardNormal({ info, mode, animate, onChangeCount }) {
     }
 
     const hide = async () => {
-        const isMobile = window.innerWidth <= globalState.sizes.lg
+        const isMobile = window.innerWidth <= globalState.sizes.md
         if (isMobile) {
             animate.inner.start({ x: 0, transition: { duration: 0.2 } })
         }
@@ -87,12 +87,12 @@ export default function CardNormal({ info, mode, animate, onChangeCount }) {
 
     const open = async (prevValue) => {
         if (!!prevValue) return
-        const isMobile = window.innerWidth <= globalState.sizes.lg
+        const isMobile = window.innerWidth <= globalState.sizes.md
 
         await animate.counter.start({
-            background: '#E21B25',
-            pointerEvents: 'all',
             opacity: 1,
+            pointerEvents: 'all',
+            background: '#E21B25',
             transition: { duration: 0 }
         })
 
@@ -104,8 +104,8 @@ export default function CardNormal({ info, mode, animate, onChangeCount }) {
 
 
         await animate.counter.start({
+            width: '100%',
             background: '#F5F6FA',
-            width: 160,
             transition: { duration: 0.2 }
         })
 
@@ -113,7 +113,7 @@ export default function CardNormal({ info, mode, animate, onChangeCount }) {
     }
 
     const showEnter = async () => {
-        const isMobile = window.innerWidth <= globalState.sizes.lg
+        const isMobile = window.innerWidth <= globalState.sizes.md
 
         if (!count) {
             await animate.button.start({ background: '#E21B25', color: '#FFFFFF', transition: { duration: 0 } })
@@ -135,7 +135,7 @@ export default function CardNormal({ info, mode, animate, onChangeCount }) {
             await animate.button.start({ opacity: 0, transition: { duration: 0.1 } })
 
             await animate.counter.start({
-                width: 160,
+                width: '100%',
                 transition: { duration: 0.2 }
             })
 
@@ -144,7 +144,7 @@ export default function CardNormal({ info, mode, animate, onChangeCount }) {
     }
 
     const showLeave = async () => {
-        const isMobile = window.innerWidth <= globalState.sizes.lg
+        const isMobile = window.innerWidth <= globalState.sizes.md
         if (!count) {
             const opacity = isMobile ? 1 : 0
             await animate.button.start({ opacity, transition: { duration: 0.2 } })
@@ -245,10 +245,13 @@ export default function CardNormal({ info, mode, animate, onChangeCount }) {
             <CardImages images={info.images} link='/product/rp-no-coloristic' />
             <CardDescrption info={info} classTitle={style.title} classText={style.text} />
             <CardValues info={info} />
-            <CardPrice info={info} />
 
-            <div ref={refInner} className={`${style.buyBtn}`}>
-                <CardBuyButton animate={animate} info={info} count={count} onUpdateInBasket={updateHandler} />
+            <div className={`${style.cardFooter}`}>
+                <CardPrice info={info} />
+
+                <div ref={refInner} className={`${style.buyBtn}`}>
+                    <CardBuyButton animate={animate} info={info} count={count} outline={false} onUpdateInBasket={updateHandler} />
+                </div>
             </div>
         </div>
     )

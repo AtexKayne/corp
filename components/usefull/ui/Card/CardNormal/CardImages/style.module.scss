@@ -9,6 +9,7 @@
     overflow: hidden;
     position: relative;
     border-radius: 8px;
+    // margin: -16px -16px 0;
     height: adaptive-value(
         (
             xs: 180px,
@@ -19,6 +20,14 @@
             xxxl: 378px
         )
     );
+
+    @include media-breakpoint(lg-up) {
+        margin: -12px -8px 0;
+    }
+
+    @include media-breakpoint(xxl-up) {
+        margin: -16px -16px 0;
+    }
 
     > div {
         display: flex;

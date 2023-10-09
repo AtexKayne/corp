@@ -3,26 +3,48 @@
 
 .card {
     width: 100%;
-    padding: 16px;
     display: flex;
     transition: 0.3s;
-    border-radius: 8px;
     position: relative;
+    border-radius: 8px;
     flex-direction: column;
-
+    
     &[data-hover="true"] {
         z-index: 2;
         box-shadow: 0px 10px 30px 2px #69748633;
     }
-
-    @include media-breakpoint(lg-down) {
+    
+    @include media-breakpoint(md-down) {
         box-shadow: none !important;
     }
 
+    @include media-breakpoint(lg-up) {
+        padding: 12px 8px;
+    }
+    
+    @include media-breakpoint(xxl-up) {
+        padding: 16px;
+    }
+
     .buyBtn {
-        right: 16px;
-        bottom: 16px;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        // display: flex;
         position: absolute;
+        // justify-content: flex-end;
+    }
+
+    .cardFooter {
+        height: 100%;
+        display: flex;
+        position: relative;
+        align-items: flex-end;
+
+        // > *:nth-child() {
+        //     display: flex;
+        //     justify-content: flex-end;
+        // }
     }
 }
 

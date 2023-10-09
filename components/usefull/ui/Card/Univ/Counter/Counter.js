@@ -6,7 +6,7 @@ import Icon from '../../../../../Icon'
 import { globalState } from '../../../../../helpers/globalState'
 // import { globalState } from '../../../../helpers/globalState'
 
-export default function Counter({ info, onAfterChange, max, count }) {
+export default function Counter({ onAfterChange, max, count }) {
     const [dispayedCount, setDispayedCount] = useState(count)
     const [isSelected, setIsSelected] = useState(false)
     const [disabled, setDisabled] = useState(false)

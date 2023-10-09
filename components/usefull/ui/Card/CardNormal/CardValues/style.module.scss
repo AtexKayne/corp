@@ -1,3 +1,5 @@
+@import "/styles/mixins/helpers/media";
+
 .values {
     // display: flex;
 }
@@ -7,6 +9,7 @@
     flex-wrap: wrap;
 
     >* {
+        display: none;
         margin-right: 6px;
         margin-bottom: 6px;
         border-radius: 4px;
@@ -21,6 +24,36 @@
         &[data-active='false'] {
             color: var(--c-_light-gray);
             background-color: transparent;
+        }
+
+        &:first-child {
+            display: block;
+            position: relative;
+
+            &::after {
+                top: 0;
+                right: -28px;
+                min-width: 24px;
+                text-align: center;
+                position: absolute;
+                margin-bottom: 6px;
+                border-radius: 4px;
+                padding: 5px 4px 4px;
+                pointer-events: none;
+                text-transform: uppercase;
+                content: var(--count-values);
+                background-color: var(--c-_lightest);
+            }
+        }
+    }
+
+    @include media-breakpoint(xxl-up) {
+        >* {
+            display: block;
+
+            &:first-child::after {
+                display: none;
+            }
         }
     }
 }
