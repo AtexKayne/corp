@@ -1,4 +1,4 @@
-@import '/styles/mixins/helpers/media';
+@import "/styles/mixins/helpers/media";
 
 .buttonNotifyContainer {
     display: flex;
@@ -7,66 +7,90 @@
     justify-content: flex-end;
 
     @include media-breakpoint(md-up) {
-        [data-hover='false'] & .notify {
-            color: #EFBE1F;
-            background-color: #F5F6FA;
+        [data-hover="false"] & .notify {
+            color: #efbe1f;
+            background-color: #f5f6fa;
         }
     }
-    
-    
+
     .notify {
         width: 68px;
         height: 44px;
-        transition: .2s;
+        transition: 0.2s;
         color: var(--t-background);
-        background-color: #EFBE1F;
-        
-        >span:first-child {
+        background-color: #efbe1f;
+
+        > span:first-child {
             display: none;
         }
 
-        >span:last-child {
+        > span:last-child {
             text-align: left;
 
-            >* {
+            > * {
                 left: 0;
             }
         }
     }
 
     @media screen and (max-width: 320px) {
-        &, .notify {
+        &,
+        .notify {
             width: 100%;
             min-width: 100%;
+        }
+    }
+
+    @include media-breakpoint(xxxl) {
+        [data-mode='normal'] & {
+            min-width: 92px;
+            min-height: 60px;
+
+            .notify {
+                height: 60px;
+                min-width: 92px;
+            }
         }
     }
 }
 
 .buttonProfiContainer {
     display: flex;
-    // transition: .3s;
     min-height: 44px;
     position: relative;
     justify-content: flex-end;
 
     .profiBtn {
         width: 68px;
-        transition: .3s;
+        transition: 0.3s;
         color: var(--t-background);
-        background-color: #11244D;
+        background-color: #11244d;
     }
 
     @include media-breakpoint(md-up) {
-        [data-hover='false'] & .profiBtn {
-            color: #11244D;
-            background-color: #F5F6FA;
+        [data-hover="false"] & .profiBtn {
+            color: #11244d;
+            background-color: #f5f6fa;
         }
     }
 
     @media screen and (max-width: 320px) {
-        &, .profiBtn {
+        &,
+        .profiBtn {
             width: 100%;
             min-width: 100%;
+        }
+    }
+
+    @include media-breakpoint(xxxl) {
+        [data-mode='normal'] & {
+            min-width: 92px;
+            min-height: 60px;
+
+            .profiBtn {
+                height: 60px;
+                min-width: 92px;
+            }
         }
     }
 }
@@ -83,6 +107,13 @@
 
     @media screen and (max-width: 320px) {
         min-width: 100%;
+    }
+
+    @include media-breakpoint(xxxl) {
+        [data-mode='normal'] & {
+            min-width: 92px;
+            min-height: 60px;
+        }
     }
 }
 
@@ -102,11 +133,11 @@
     background-color: var(--t-primary);
     -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
 
-    &[data-active='false'] .buttonCount {
+    &[data-active="false"] .buttonCount {
         display: none;
     }
 
-    >span {
+    > span {
         transform: translateX(-1px);
     }
 
@@ -117,6 +148,13 @@
     @media screen and (max-width: 320px) {
         width: 100%;
         min-width: 100%;
+    }
+
+    @include media-breakpoint(xxxl) {
+        [data-mode='normal'] & {
+            min-width: 92px;
+            min-height: 60px;
+        }
     }
 }
 
@@ -139,7 +177,7 @@
     transform-origin: right;
     background-color: var(--t-primary);
     -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
-    
+
     &.outline {
         outline: 10px solid var(--t-background);
 
@@ -148,10 +186,10 @@
         }
     }
 
-    [data-active='true'] & {
+    [data-active="true"] & {
         background-color: var(--t-light);
     }
-    
+
     .counterModule {
         opacity: 0;
         z-index: 2;
@@ -174,5 +212,3 @@
         min-width: 100%;
     }
 }
-
-

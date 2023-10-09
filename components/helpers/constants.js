@@ -406,7 +406,7 @@ export const cards = [
             '/images/product/image-3.jpg',
         ],
         primaryName: 'Шейвер для бритья Шейвер для бритья Шейвер для бритья',
-        secondaryName: 'Wahl Shaver Finale Lithium 8164-116 Wahl Shaver Finale Lithium 8164-116 ',
+        secondaryName: 'WAHL Shaver Finale Lithium 8164-116 Shaver Finale Lithium 8164-116 ',
         price: {
             actual: '13 160',
             old: '16 160' // Can be empty
@@ -631,7 +631,7 @@ export const cardsCompact = [
             '/images/catalog/products/image-2.jpg',
         ],
         primaryName: 'Глина для укладки волос',
-        secondaryName: 'Lock Stock & Barrel 85 karats original clay',
+        secondaryName: 'LOCK STOCK & BARREL 85 karats original clay',
         art: 119025,
         price: {
             actual: '1 273',
@@ -644,7 +644,7 @@ export const cardsCompact = [
             '/images/catalog/products/image-3.jpg',
         ],
         primaryName: 'Шампунь №4 для жирной кожи головы',
-        secondaryName: 'System 4 shale oil shampo',
+        secondaryName: 'SYSTEM 4 shale oil shampo',
         price: {
             actual: 931,
         },
@@ -653,7 +653,7 @@ export const cardsCompact = [
         max: 880,
         isProfi: true,
         values: [
-            '100 мл', '200 мл', '500мл'
+            '100 мл', '200 мл', '500 мл'
         ],
     },
     {
@@ -679,7 +679,7 @@ export const cardsCompact = [
             '/images/product/image-7.jpg',
             '/images/product/image-8.jpg',
         ],
-        primaryName: 'Canway SZ-A7116-4 blue',
+        primaryName: 'CANWAY SZ-A7116-4 blue',
         secondaryName: 'Расческа с хвостиком',
         value: '',
         color: 'Голубой',
@@ -708,13 +708,15 @@ export const cardsCompact = [
         id: 97,
         images: [
             '/images/catalog/products/image-6.jpg',
+            '/images/catalog/products/image-5.jpg',
+            '/images/catalog/products/image-7.jpg',
         ],
         price: {
-            actual: '1 132 300',
-            old: '1 216 160' // Can be empty
+            actual: '132 300',
+            old: '216 160' // Can be empty
         },
-        primaryName: 'Шейвер для бритья',
-        secondaryName: 'WAHL shaver finale lithium 8164-116',
+        primaryName: 'Шейвер для бритья очень-очень длинный текст для теста заголовка карточки товара. И еще чуть-чуть',
+        secondaryName: 'WAHL shaver finale lithium 8164-116 еще один очень-очень длинный текст для теста карточки товара',
         art: 372000081,
         max: 10,
     },
@@ -762,7 +764,7 @@ export const cardsCompact = [
             '/images/catalog/products/image-10.jpg',
         ],
         primaryName: 'Шампунь №4 для жирной кожи головы',
-        secondaryName: 'System 4 shale oil shampo',
+        secondaryName: 'SYSTEM 4 shale oil shampo',
         value: '100 мл',
         price: {
             actual: '931',
@@ -791,9 +793,10 @@ export const basket = [
         id: 41,
         images: [
             '/images/product/image-0.jpg',
+            '/images/product/image-3.jpg',
         ],
         primaryName: 'Шейвер для бритья',
-        secondaryName: 'Wahl Shaver Finale Lithium 8164-116',
+        secondaryName: 'WAHL Shaver Finale Lithium 8164-116',
         price: {
             actual: '12 560',
             old: '16 160' // Can be empty
@@ -810,9 +813,10 @@ export const basket = [
         id: 42,
         images: [
             '/images/product/image-0.jpg',
+            '/images/product/image-1.jpg',
         ],
         primaryName: 'Шейвер для бритья',
-        secondaryName: 'Wahl Shaver Finale Lithium 8164-116',
+        secondaryName: 'WAHL Shaver Finale Lithium 8164-116',
         values: [
             '100 мл', '200 мл', '500мл'
         ],
@@ -834,7 +838,7 @@ export const basket = [
             '/images/product/image-0.jpg',
         ],
         primaryName: 'Шейвер для бритья',
-        secondaryName: 'Wahl Shaver Finale Lithium 8164-116',
+        secondaryName: 'WAHL Shaver Finale Lithium 8164-116',
         price: {
             actual: '250',
         },
@@ -848,7 +852,7 @@ export const basket = [
             '/images/product/image-0.jpg',
         ],
         primaryName: 'Шейвер для бритья',
-        secondaryName: 'Wahl Shaver Finale Lithium 8164-116',
+        secondaryName: 'WAHL Shaver Finale Lithium 8164-116',
         price: {
             actual: '442',
         },
@@ -863,7 +867,7 @@ export const basket = [
             '/images/product/image-0.jpg',
         ],
         primaryName: 'Шейвер для бритья',
-        secondaryName: 'Wahl Shaver Finale Lithium 8164-116 Wahl Shaver Finale Lithium 8164-116',
+        secondaryName: 'WAHL Shaver Finale Lithium 8164-116 Wahl Shaver Finale Lithium 8164-116',
         price: {
             actual: '500',
         },
@@ -877,7 +881,7 @@ export const basket = [
             '/images/product/image-5.jpg',
         ],
         primaryName: 'Шейвер для бритья',
-        secondaryName: 'Wahl Shaver Finale Lithium 8164-116',
+        secondaryName: 'WAHL Shaver Finale Lithium 8164-116',
         price: {
             actual: '200',
         },

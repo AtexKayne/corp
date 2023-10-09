@@ -9,6 +9,16 @@
     align-items: flex-start;
     justify-content: flex-start;
     max-width: calc(100% - 72px);
+
+    @include media-breakpoint(xxxl) {
+        font-size: 20px;
+        min-height: 60px;
+
+        >div {
+            font-size: 18px;
+            margin-top: 6px;
+        }
+    }
 }
 
 .basket {

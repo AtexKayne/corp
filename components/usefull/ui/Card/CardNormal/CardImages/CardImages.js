@@ -12,7 +12,7 @@ export default function CardImages({ link = '/', images }) {
     const refRect = useRef(false)
 
     const dragEdHandler = (_, dragInfo) => {
-        if (typeof window === 'undefined' || window.innerWidth > globalState.sizes.lg) return
+        if (typeof window === 'undefined' || window.innerWidth > globalState.sizes.lg || images.length === 1) return
         const offsetX = Math.abs(dragInfo.offset.x)
         const offsetY = Math.abs(dragInfo.offset.y)
         const imageWidth = refImages.current.clientWidth
@@ -51,7 +51,7 @@ export default function CardImages({ link = '/', images }) {
     }
 
     const mouseMoveHandler = event => {
-        if (window.innerWidth < globalState.sizes.lg) return
+        if (window.innerWidth < globalState.sizes.lg || images.length === 1) return
         const c = event.clientX - refRect.current.x
         const t = refRect.current.width / images.length
         const r = Math.min(images.length - 1, Math.floor(c / t))
@@ -79,11 +79,14 @@ export default function CardImages({ link = '/', images }) {
                         </div>
                     ))}
                 </motion.div>
-                <div className={`${style.nav}`}>
-                    {images.map((image, index) => (
-                        <div key={image} data-active={activeImage === index} />
-                    ))}
-                </div>
+                {images.length === 1
+                    ? null
+                    : <div className={`${style.nav}`}>
+                        {images.map((image, index) => (
+                            <div key={image} data-active={activeImage === index} />
+                        ))}
+                    </div>
+                }
             </a>
         </Link>
     )

@@ -39,6 +39,10 @@
         }
     }
 
+    @media screen and (max-width: 374px) {
+        height: calc(100vw - 32px);
+    }
+
     &:hover {
         .nav {
             opacity: 1;
@@ -91,6 +95,10 @@
         flex-shrink: 0;
         position: relative;
         width: calc(100% - 4px);
+    }
+
+    @media screen and (max-width: 374px) {
+        height: calc(100vw - 32px);
     }
 }
 

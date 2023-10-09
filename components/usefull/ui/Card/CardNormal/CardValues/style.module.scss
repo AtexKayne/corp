@@ -29,6 +29,7 @@
         &:first-child {
             display: block;
             position: relative;
+            color: var(--t-text);
 
             &::after {
                 top: 0;

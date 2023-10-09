@@ -1,0 +1,10 @@
+.text {
+    line-clamp: 2;
+    flex-shrink: 0;
+    display: block;
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    text-overflow: ellipsis;
+    -webkit-box-orient: vertical;
+}

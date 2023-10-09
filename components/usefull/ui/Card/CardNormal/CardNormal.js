@@ -27,7 +27,7 @@ export default function CardNormal({ info, animate, onChangeCount }) {
         if (refIsFocus.current) return
         if (window.innerWidth <= globalState.sizes.md) return
 
-        setIsHover(false)
+        // setIsHover(false)
     }
 
     const updateHandler = async ({ value, isMax, isMin }) => {
@@ -102,9 +102,9 @@ export default function CardNormal({ info, animate, onChangeCount }) {
 
         await animate.button.start({ opacity: 0, transition: { duration: 0.1 } })
 
-
+        const width = window.innerWidth > globalState.sizes.xxxl ? 160 : '100%'
         await animate.counter.start({
-            width: '100%',
+            width,
             background: '#F5F6FA',
             transition: { duration: 0.2 }
         })
@@ -134,8 +134,9 @@ export default function CardNormal({ info, animate, onChangeCount }) {
 
             await animate.button.start({ opacity: 0, transition: { duration: 0.1 } })
 
+            const width = window.innerWidth > globalState.sizes.xxxl ? 160 : '100%'
             await animate.counter.start({
-                width: '100%',
+                width,
                 transition: { duration: 0.2 }
             })
 
@@ -249,7 +250,7 @@ export default function CardNormal({ info, animate, onChangeCount }) {
             <div className={`${style.cardFooter}`}>
                 <CardPrice info={info} />
 
-                <div ref={refInner} className={`${style.buyBtn}`}>
+                <div ref={refInner} data-mode='normal' className={`${style.buyBtn}`}>
                     <CardBuyButton animate={animate} info={info} count={count} outline={false} onUpdateInBasket={updateHandler} />
                 </div>
             </div>
