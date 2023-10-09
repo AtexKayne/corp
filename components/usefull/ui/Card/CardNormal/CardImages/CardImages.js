@@ -4,8 +4,9 @@ import { motion, useAnimationControls } from 'framer-motion'
 import style from './style.module.scss'
 import Image from 'next/image'
 import { globalState } from '../../../../../helpers/globalState'
+import Icon from '../../../../../Icon'
 
-export default function CardImages({ link = '/', images }) {
+export default function CardImages({ link = '/', images, isDelivery }) {
     const [activeImage, setActiveImage] = useState(0)
     const animateDrag = useAnimationControls()
     const refImages = useRef(null)
@@ -71,6 +72,13 @@ export default function CardImages({ link = '/', images }) {
                 onMouseMove={mouseMoveHandler}
                 onMouseEnter={mouseEnterHandler}
                 onMouseLeave={() => setActiveImage(0)}>
+
+                {isDelivery
+                    ? <div className={style.delivery}>
+                        <Icon name='delivery' width='16' height='16' />
+                    </div>
+                    : null
+                }
 
                 <motion.div animate={animateDrag} drag='x' onDragEnd={dragEdHandler} >
                     {images.map((image, index) => (

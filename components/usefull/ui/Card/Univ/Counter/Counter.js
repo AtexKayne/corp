@@ -4,9 +4,8 @@ import { useState, useEffect, useRef } from 'react'
 import style from './style.module.scss'
 import Icon from '../../../../../Icon'
 import { globalState } from '../../../../../helpers/globalState'
-// import { globalState } from '../../../../helpers/globalState'
 
-export default function Counter({ onAfterChange, max, count }) {
+export default function Counter({ onAfterChange, max, count, info }) {
     const [dispayedCount, setDispayedCount] = useState(count)
     const [isSelected, setIsSelected] = useState(false)
     const [disabled, setDisabled] = useState(false)
@@ -16,6 +15,7 @@ export default function Counter({ onAfterChange, max, count }) {
     const refSafeValue = useRef(count)
     const refAccept = useRef(null)
     const refInput = useRef(null)
+    const refRej = useRef(null)
 
     const getValue = () => {
         const value = refInput.current.value
@@ -25,7 +25,7 @@ export default function Counter({ onAfterChange, max, count }) {
     const shake = () => {
         setIsShaked(true)
         setTimeout(() => setIsShaked(false), 1000)
-        // globalState.popover.open([info.primaryName, 'Максимум для этого заказа'], info.images[0])
+        globalState.popover.open([info.primaryName, 'Максимум для этого заказа'], info.images[0])
     }
 
     const checkValue = checked => {
@@ -40,9 +40,9 @@ export default function Counter({ onAfterChange, max, count }) {
         } else if (value >= max) {
             setDispayedCount(max)
             setDisabled('plus')
-            shake()
+            if (value > max) shake()
             value = max
-            isMax = true
+            isMax = false
         } else {
             if (!checked) setDispayedCount(value)
             setDisabled(false)
@@ -55,6 +55,7 @@ export default function Counter({ onAfterChange, max, count }) {
         const classList = event.target.classList
         const checkInput = classList.contains(style.counterInput)
         const checkRej = classList.contains(style.counterBtnReject)
+        refRej.current = checkRej
 
         if (checkInput || checkRej) return
 
@@ -91,6 +92,7 @@ export default function Counter({ onAfterChange, max, count }) {
     }
 
     const blurHandler = () => {
+        if (refRej.current) return
         refAccept.current.click()
         const { value } = checkValue()
         setIsSelected(false)
@@ -101,6 +103,7 @@ export default function Counter({ onAfterChange, max, count }) {
 
     const changeHandler = () => {
         const val = +refInput.current.value
+        if (val === 0) return refInput.current.value = ''
         const { value } = checkValue()
         if (val !== value) refInput.current.value = value
     }

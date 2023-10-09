@@ -613,6 +613,7 @@ export const cards = [
 export const cardsCompact = [
     {
         id: 91,
+        isDelivery: true,
         images: [
             '/images/catalog/products/image-1.jpg',
         ],
@@ -658,6 +659,7 @@ export const cardsCompact = [
     },
     {
         id: 94,
+        isDelivery: true,
         images: [
             '/images/catalog/products/image-4.jpg',
         ],
@@ -700,12 +702,12 @@ export const cardsCompact = [
         secondaryName: 'WAHL corded clipper legend 8147-416',
         price: {
             actual: '12 300',
-            old: '16 160' // Can be empty
         },
         max: 10,
     },
     {
         id: 97,
+        isDelivery: true,
         images: [
             '/images/catalog/products/image-6.jpg',
             '/images/catalog/products/image-5.jpg',
@@ -729,7 +731,6 @@ export const cardsCompact = [
         secondaryName: 'WAHL corded clipper legend 8147-416',
         price: {
             actual: '13 160',
-            old: '16 160' // Can be empty
         },
         max: 10,
     },
@@ -756,6 +757,9 @@ export const cardsCompact = [
             actual: '780',
             old: '789' // Can be empty
         },
+        values: [
+            '1 шт', '20 шт', '500 шт', '1500 шт'
+        ],
         max: 10,
     },
     {

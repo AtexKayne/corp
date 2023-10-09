@@ -7,6 +7,7 @@ import { globalState } from '../../../../helpers/globalState'
 // import { isEqual } from '../../../helpers/isEqual'
 import CardDescrption from './CardDescrption/CardDescrption'
 import CardBuyButton from '../Univ/BuyButton/CardBuyButton'
+import Favourite from '../../../Favourite'
 
 export default function CardNormal({ info, animate, onChangeCount }) {
     // @TODO Постарайся от этого избавиться
@@ -16,18 +17,21 @@ export default function CardNormal({ info, animate, onChangeCount }) {
     const refInner = useRef(null)
     const refTimeout = useRef(null)
     const refIsFocus = useRef(false)
+    const refIsHover = useRef(false)
     const refAnimated = useRef(false)
+
 
     const mouseEnterHandler = async () => {
         if (window.innerWidth <= globalState.sizes.md) return
+        refIsHover.current = true
         setIsHover(true)
     }
 
     const mouseLeaveHandler = async () => {
+        refIsHover.current = false
         if (refIsFocus.current) return
         if (window.innerWidth <= globalState.sizes.md) return
-
-        // setIsHover(false)
+        setIsHover(false)
     }
 
     const updateHandler = async ({ value, isMax, isMin }) => {
@@ -53,9 +57,9 @@ export default function CardNormal({ info, animate, onChangeCount }) {
             else refAnimated.current = open(prevValue)
         }
 
-        if (isMax) {
-            globalState.popover.open([info.secondaryName, 'Максимум для этого заказа'], info.images[0])
-        }
+        // if (isMax) {
+        //     globalState.popover.open([info.secondaryName, 'Максимум для этого заказа'], info.images[0])
+        // }
 
         if (isMin) {
             globalState.popover.open([info.secondaryName, 'БОЛЬШЕ НЕ В КОРЗИНЕ'], info.images[0])
@@ -69,10 +73,10 @@ export default function CardNormal({ info, animate, onChangeCount }) {
         }
         await animate.module.start({ opacity: 0, transition: { duration: 0.1 } })
 
-
+        const width = window.innerWidth > globalState.sizes.xxxl ? 92 : 68
         await animate.counter.start({
+            width,
             background: '#E21B25',
-            width: 68,
             transition: { duration: 0.2 }
         })
 
@@ -156,8 +160,9 @@ export default function CardNormal({ info, animate, onChangeCount }) {
 
             await animate.module.start({ opacity: 0, transition: { duration: 0.1 } })
 
+            const width = window.innerWidth > globalState.sizes.xxxl ? 92 : 68
             await animate.counter.start({
-                width: 68,
+                width,
                 transition: { duration: 0.2 }
             })
 
@@ -186,7 +191,7 @@ export default function CardNormal({ info, animate, onChangeCount }) {
 
         if (refTimeout.current) clearTimeout(refTimeout.current)
         refTimeout.current = setTimeout(() => {
-            setIsHover(false)
+            if (!refIsHover.current) setIsHover(false)
         }, 500)
     }
 
@@ -243,7 +248,8 @@ export default function CardNormal({ info, animate, onChangeCount }) {
             className={style.card}
             onMouseEnter={mouseEnterHandler}
             onMouseLeave={mouseLeaveHandler}>
-            <CardImages images={info.images} link='/product/rp-no-coloristic' />
+            <Favourite width='24' height='24' external={style.favourites} info={{ primary: info.secondaryName, image: info.images[0] }} />
+            <CardImages isDelivery={info.isDelivery} images={info.images} link='/product/rp-no-coloristic' />
             <CardDescrption info={info} classTitle={style.title} classText={style.text} />
             <CardValues info={info} />
 

@@ -16,6 +16,7 @@ export default function CardCompact({ info, animate, onChangeCount = () => { } }
     const refInner = useRef(null)
     const refTimeout = useRef(null)
     const refIsFocus = useRef(false)
+    const refIsHover = useRef(false)
     const refAnimated = useRef(false)
 
     const showEnter = async () => {
@@ -141,7 +142,7 @@ export default function CardCompact({ info, animate, onChangeCount = () => { } }
 
         if (refTimeout.current) clearTimeout(refTimeout.current)
         refTimeout.current = setTimeout(() => {
-            setIsHover(false)
+            if (!refIsHover.current) setIsHover(false)
         }, 500)
     }
 
@@ -181,10 +182,12 @@ export default function CardCompact({ info, animate, onChangeCount = () => { } }
 
     const mouseEnterHandler = async () => {
         if (window.innerWidth <= globalState.sizes.lg) return
+        refIsHover.current = true
         setIsHover(true)
     }
 
     const mouseLeaveHandler = async () => {
+        refIsHover.current = false
         if (refIsFocus.current) return
         if (window.innerWidth <= globalState.sizes.lg) return
 

@@ -133,17 +133,13 @@
     }
 }
 
-[data-mode="inline"] .images {
-    width: 85px;
-    height: 85px;
-    grid-area: image;
-
-    .image {
-        width: 85px;
-        height: 85px;
-    }
-
-    .nav {
-        display: none;
-    }
+.delivery {
+    top: 0;
+    left: 0;
+    z-index: 3;
+    padding: 12px 6px;
+    position: absolute;
+    color: var(--t-background);
+    border-radius: 12px 0 12px 0;
+    background-color: var(--t-text);
 }

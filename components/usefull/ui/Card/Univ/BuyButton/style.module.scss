@@ -211,4 +211,10 @@
         width: 100%;
         min-width: 100%;
     }
+
+    @include media-breakpoint(xxxl) {
+        [data-mode='normal'] & {
+            height: 60px;
+        }
+    }
 }
