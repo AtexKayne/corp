@@ -25,7 +25,12 @@
     }
 
     @media screen and (max-width: 320px) {
+        padding: 0;
         flex-direction: row;
+        
+        > span {
+            margin-bottom: 8px;
+        }
 
         > div {
             margin-left: 6px;
