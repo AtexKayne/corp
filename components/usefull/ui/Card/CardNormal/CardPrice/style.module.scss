@@ -10,7 +10,7 @@
     justify-content: flex-start;
     max-width: calc(100% - 72px);
 
-    >div {
+    > div {
         margin-top: 2px;
     }
 
@@ -18,9 +18,17 @@
         font-size: 20px;
         min-height: 60px;
 
-        >div {
+        > div {
             font-size: 18px;
             margin-top: 6px;
+        }
+    }
+
+    @media screen and (max-width: 320px) {
+        flex-direction: row;
+
+        > div {
+            margin-left: 6px;
         }
     }
 }
