@@ -80,20 +80,24 @@ export default function CardImages({ link = '/', images, isDelivery }) {
                     : null
                 }
 
-                <motion.div animate={animateDrag} drag='x' onDragEnd={dragEdHandler} >
-                    {images.map((image, index) => (
-                        <div key={image} data-active={activeImage === index} className={style.image}>
-                            <Image layout='fill' alt={'product card image'} src={image} />
-                        </div>
-                    ))}
-                </motion.div>
                 {images.length === 1
-                    ? null
-                    : <div className={`${style.nav}`}>
-                        {images.map((image, index) => (
-                            <div key={image} data-active={activeImage === index} />
-                        ))}
+                    ? <div data-active={true} className={style.image}>
+                        <Image layout='fill' alt='product card image' src={images[0]} />
                     </div>
+                    : <>
+                        <motion.div className={style.dragContainer} animate={animateDrag} drag='x' onDragEnd={dragEdHandler} >
+                            {images.map((image, index) => (
+                                <div key={image} data-active={activeImage === index} className={style.image}>
+                                    <Image layout='fill' alt='product card image' src={image} />
+                                </div>
+                            ))}
+                        </motion.div>
+                        <div className={`${style.nav}`}>
+                            {images.map((image, index) => (
+                                <div key={image} data-active={activeImage === index} />
+                            ))}
+                        </div>
+                    </>
                 }
             </a>
         </Link>

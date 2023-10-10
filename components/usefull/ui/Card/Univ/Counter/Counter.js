@@ -103,8 +103,8 @@ export default function Counter({ onAfterChange, max, count, info }) {
 
     const changeHandler = () => {
         const val = +refInput.current.value
-        if (val === 0) return refInput.current.value = ''
         const { value } = checkValue()
+        if (value === 0) return refInput.current.value = ''
         if (val !== value) refInput.current.value = value
     }
 

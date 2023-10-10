@@ -292,7 +292,7 @@
 
     .fastFilterPrev,
     .fastFilterNext {
-        top: 0px;
+        top: -2px;
         z-index: 2;
         width: 36px;
         height: 36px;
@@ -673,8 +673,9 @@
 
 .cardsContainer {
     display: grid;
-    grid-gap: 16px;
+    row-gap: 60px;
     min-width: 100%;
+    column-gap: 16px;
     grid-auto-rows: max-content;
 
     @include media-breakpoint(lg-up) {
@@ -687,7 +688,7 @@
         
         @include media-breakpoint(lg-up) {
             row-gap: 38px;
-            grid-gap: 24px;
+            column-gap: 24px;
             grid-template-columns: repeat(4, 1fr);
         }
 
@@ -706,7 +707,6 @@
         }
 
         @media (max-width: 374px) {
-            grid-gap: 40px;
             grid-template-columns: repeat(1, 1fr);
         }
     }

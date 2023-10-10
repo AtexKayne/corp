@@ -17,9 +17,13 @@
             lg: 197px,
             xl: 217px,
             xxl: 281px,
-            xxxl: 378px
+            xxxl: 381px
         )
     );
+
+    &:hover .nav {
+        opacity: 1;
+    }
 
     @include media-breakpoint(lg-up) {
         margin: -12px -8px 0;
@@ -27,10 +31,6 @@
 
     @include media-breakpoint(xxl-up) {
         margin: -16px -16px 0;
-    }
-
-    > div {
-        display: flex;
     }
 
     @include media-breakpoint(lg-up) {
@@ -42,23 +42,11 @@
     @media screen and (max-width: 374px) {
         height: calc(100vw - 32px);
     }
-
-    &:hover {
-        .nav {
-            opacity: 1;
-        }
-    }
 }
 
-.labelCount {
-    right: 0;
-    bottom: 0;
-    z-index: 2;
-    padding: 5px;
-    position: absolute;
-    color: var(--t-background);
-    border-radius: 8px 0 8px 0;
-    background-color: var(--c-_dark-lines);
+.dragContainer {
+    height: 100%;
+    display: flex;
 }
 
 .image {
@@ -69,16 +57,7 @@
     z-index: 1;
     transition: 0.1s;
     position: absolute;
-    height: adaptive-value(
-        (
-            xs: 180px,
-            md: 230px,
-            lg: 197px,
-            xl: 217px,
-            xxl: 281px,
-            xxxl: 378px
-        )
-    );
+    height: 100%;
 
     &[data-active="true"] {
         opacity: 1;
@@ -90,11 +69,10 @@
 
     @include media-breakpoint(md-down) {
         opacity: 1;
+        width: 100%;
         flex-grow: 0;
-        margin: 0 2px;
         flex-shrink: 0;
         position: relative;
-        width: calc(100% - 4px);
     }
 
     @media screen and (max-width: 374px) {
