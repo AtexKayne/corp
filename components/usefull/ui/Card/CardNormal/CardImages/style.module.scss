@@ -10,38 +10,49 @@
     position: relative;
     border-radius: 8px;
     // margin: -16px -16px 0;
-    height: adaptive-value(
-        (
-            xs: 180px,
-            md: 230px,
-            lg: 197px,
-            xl: 217px,
-            xxl: 281px,
-            xxxl: 381px
-        )
-    );
+    height: calc(100vw / 375 * 180);
 
     &:hover .nav {
         opacity: 1;
     }
 
+    @media screen and (max-width: 374px) {
+        height: calc(100vw - 32px);
+    }
+
+    @include media-breakpoint(md) {
+        height: calc(100vw / 720 * 230);
+    }
+
+    @include media-breakpoint(lg) {
+        height: calc(100vw / 880 * 197);
+    }
+
+    @include media-breakpoint(xl) {
+        height: calc(100vw / 1024 * 217);
+    }
+
+    @include media-breakpoint(xxl) {
+        height: calc(100vw / 1256 * 281);
+    }
+
+    @include media-breakpoint(xxxl) {
+        height: 381px;
+    }
+
     @include media-breakpoint(lg-up) {
         margin: -12px -8px 0;
+
+        > div {
+            transform: none !important;
+        }
     }
 
     @include media-breakpoint(xxl-up) {
         margin: -16px -16px 0;
     }
 
-    @include media-breakpoint(lg-up) {
-        > div {
-            transform: none !important;
-        }
-    }
-
-    @media screen and (max-width: 374px) {
-        height: calc(100vw - 32px);
-    }
+    
 }
 
 .dragContainer {
