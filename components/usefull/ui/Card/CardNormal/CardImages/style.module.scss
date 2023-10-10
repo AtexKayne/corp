@@ -10,7 +10,14 @@
     position: relative;
     border-radius: 8px;
     // margin: -16px -16px 0;
-    height: calc(100vw / 375 * 180);
+    height: adaptive-value((
+        xs: calc(100vw / 375 * 180),
+        md: calc(100vw / 720 * 230),
+        lg: calc(100vw / 880 * 197),
+        xl: calc(100vw / 1024 * 217),
+        xxl: calc(100vw / 1256 * 281),
+        xxxl: 381px
+    ));
 
     &:hover .nav {
         opacity: 1;
@@ -18,26 +25,6 @@
 
     @media screen and (max-width: 374px) {
         height: calc(100vw - 32px);
-    }
-
-    @include media-breakpoint(md) {
-        height: calc(100vw / 720 * 230);
-    }
-
-    @include media-breakpoint(lg) {
-        height: calc(100vw / 880 * 197);
-    }
-
-    @include media-breakpoint(xl) {
-        height: calc(100vw / 1024 * 217);
-    }
-
-    @include media-breakpoint(xxl) {
-        height: calc(100vw / 1256 * 281);
-    }
-
-    @include media-breakpoint(xxxl) {
-        height: 381px;
     }
 
     @include media-breakpoint(lg-up) {
