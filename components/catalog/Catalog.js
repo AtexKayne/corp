@@ -200,7 +200,7 @@ function Nav({ isBrands, sortHandler, openFilters, fastFilters, selectFastFilter
             <div ref={refNav} data-active={false} className={`${style.nav}`}>
                 <div className={`${style.navInner}`}>
 
-                    <Dropdown title='Популярные' external='text--t5 text--bold text--upper' afterChose={sortHandler}>
+                    <Dropdown title='Сортировка' external='text--t5 text--bold text--upper' afterChose={sortHandler}>
                         <>
                             <span data-value='popular' data-active='true' className='text--t4'>Популярные</span>
                             <span data-value='new' className='text--t4'>Новинки</span>

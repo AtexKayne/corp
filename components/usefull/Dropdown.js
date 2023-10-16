@@ -2,7 +2,7 @@ import Icon from '../Icon'
 import { useState, useEffect, useRef } from 'react'
 import style from '/styles/module/usefull/Dropdown.module.scss'
 
-export default function Dropdown({ children, title, external = '', afterChose }) {
+export default function Dropdown({ children, title, external = '', afterChose, isSeleect = false }) {
     const [isOpen, setIsOpen] = useState(false)
     const [activeValue, setActiveValue] = useState(title)
     const refChildList = useRef(null)
@@ -10,7 +10,7 @@ export default function Dropdown({ children, title, external = '', afterChose })
     const clickHandler = event => {
         setIsOpen(false)
         const target = event.target
-        setActiveValue(target.innerHTML)
+        if (isSeleect) setActiveValue(target.innerHTML)
         const prevActive = refChildList.current.querySelector('[data-active="true"]')
         if (prevActive) prevActive.setAttribute('data-active', false)
         target.setAttribute('data-active', true)

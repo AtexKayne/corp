@@ -170,6 +170,7 @@
     right: 0;
     opacity: 0;
     z-index: 3;
+    width: 68px;
     height: 44px;
     position: absolute;
     border-radius: 8px;
@@ -214,6 +215,7 @@
 
     @include media-breakpoint(xxxl) {
         [data-mode='normal'] & {
+            width: 92px;
             height: 60px;
         }
     }

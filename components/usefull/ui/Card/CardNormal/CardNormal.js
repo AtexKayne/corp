@@ -106,7 +106,7 @@ export default function CardNormal({ info, animate, onChangeCount }) {
 
         await animate.button.start({ opacity: 0, transition: { duration: 0.1 } })
 
-        const width = window.innerWidth > globalState.sizes.xxxl ? 160 : '100%'
+        const width = window.innerWidth > 1439 ? 160 : '100%'
         await animate.counter.start({
             width,
             background: '#F5F6FA',
@@ -138,7 +138,7 @@ export default function CardNormal({ info, animate, onChangeCount }) {
 
             await animate.button.start({ opacity: 0, transition: { duration: 0.1 } })
 
-            const width = window.innerWidth > globalState.sizes.xxxl ? 160 : '100%'
+            const width = window.innerWidth > 1439 ? 160 : '100%'
             await animate.counter.start({
                 width,
                 transition: { duration: 0.2 }

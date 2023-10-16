@@ -113,8 +113,12 @@
     top: 0;
     left: 0;
     z-index: 3;
-    padding: 12px 6px;
+    width: 28px;
+    height: 48px;
+    display: flex;
     position: absolute;
+    align-items: center;
+    justify-content: center;
     color: var(--t-background);
     border-radius: 12px 0 12px 0;
     background-color: var(--t-text);
