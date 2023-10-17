@@ -647,12 +647,13 @@ export const cardsCompact = [
         primaryName: 'Шампунь №4 для жирной кожи головы',
         secondaryName: 'SYSTEM 4 shale oil shampo',
         price: {
-            actual: 931,
+            actual: '1 931',
+            old: '2 931',
         },
         bonuses: 28,
         art: 5415,
         max: 880,
-        isProfi: true,
+        // isProfi: true,
         values: [
             '100 мл', '200 мл', '500 мл'
         ],
