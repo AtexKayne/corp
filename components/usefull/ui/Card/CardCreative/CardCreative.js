@@ -1,18 +1,19 @@
 import { useState, useEffect, useRef } from 'react'
 import style from '../style.module.scss'
-import CardImages from './CardImages/CardImages'
-import CardValues from './CardValues/CardValues'
-import CardPrice from './CardPrice/CardPrice'
+import CardCreativeImages from './CardCreativeImages/CardCreativeImages'
+import CardCreativeValues from './CardCreativeValues/CardCreativeValues'
+import CardCreativePrice from './CardCreativePrice/CardCreativePrice'
 import { globalState } from '../../../../helpers/globalState'
 // import { isEqual } from '../../../helpers/isEqual'
-import CardDescrption from './CardDescrption/CardDescrption'
+import CardCreativeDescrption from './CardCreativeDescrption/CardCreativeDescrption'
 import CardBuyButton from '../Univ/BuyButton/CardBuyButton'
 import Favourite from '../../../Favourite'
 
-export default function CardNormal({ info, animate, onChangeCount }) {
+export default function CardCreative({ info, animate, onChangeCount }) {
     // @TODO Постарайся от этого избавиться
     const [count, setCount] = useState(info.basket ?? 0)
     const [isHover, setIsHover] = useState(false)
+    const [favouriteClass, setFavouriteClass] = useState(style.favourites)
 
     const refInner = useRef(null)
     const refTimeout = useRef(null)
@@ -105,8 +106,7 @@ export default function CardNormal({ info, animate, onChangeCount }) {
         }
 
         await animate.button.start({ opacity: 0, transition: { duration: 0.1 } })
-
-        const width = window.innerWidth > 1439 ? 160 : '100%'
+        const width = refInner.current.clientWidth > 300 ? 160 : '100%'
         await animate.counter.start({
             width,
             background: '#F5F6FA',
@@ -138,7 +138,7 @@ export default function CardNormal({ info, animate, onChangeCount }) {
 
             await animate.button.start({ opacity: 0, transition: { duration: 0.1 } })
 
-            const width = window.innerWidth > 1439 ? 160 : '100%'
+            const width = refInner.current.clientWidth > 300 ? 160 : '100%'
             await animate.counter.start({
                 width,
                 transition: { duration: 0.1 }
@@ -226,6 +226,11 @@ export default function CardNormal({ info, animate, onChangeCount }) {
     }, [isHover])
 
     useEffect(() => {
+        const isGiant = refInner.current.clientWidth > 360
+        if (isGiant && window.innerWidth > globalState.sizes.md) {
+            setFavouriteClass(style.favouritesGiant)
+        }
+
         const input = refInner.current.querySelector('input')
         if (input) {
             input.addEventListener('blur', blurHandler)
@@ -245,16 +250,16 @@ export default function CardNormal({ info, animate, onChangeCount }) {
     return (
         <div
             data-hover={isHover}
-            className={style.card}
+            className={style.cardCreative}
             onMouseEnter={mouseEnterHandler}
             onMouseLeave={mouseLeaveHandler}>
-            <Favourite width='24' height='24' external={style.favourites} info={{ primary: info.secondaryName, image: info.images[0] }} />
-            <CardImages isDelivery={info.isDelivery} images={info.images} link='/product/rp-no-coloristic' />
-            <CardDescrption info={info} classTitle={style.title} classText={style.text} />
-            <CardValues info={info} />
+            <Favourite width='24' height='24' external={favouriteClass} info={{ primary: info.secondaryName, image: info.images[0] }} />
+            <CardCreativeImages isDelivery={info.isDelivery} images={info.images} link='/product/rp-no-coloristic' />
+            <CardCreativeDescrption info={info} classTitle={style.title} classText={style.text} />
+            <CardCreativeValues info={info} />
 
             <div className={`${style.cardFooter}`}>
-                <CardPrice info={info} />
+                <CardCreativePrice info={info} />
 
                 <div ref={refInner} data-mode='normal' className={`${style.buyBtn}`}>
                     <CardBuyButton animate={animate} info={info} count={count} outline={false} onUpdateInBasket={updateHandler} />

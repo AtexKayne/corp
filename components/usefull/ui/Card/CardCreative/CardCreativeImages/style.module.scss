@@ -1,0 +1,125 @@
+@import "/styles/mixins/helpers/media";
+@import "/styles/mixins/helpers/adaptive-value";
+
+.images {
+    z-index: 1;
+    flex-grow: 0;
+    display: block;
+    flex-shrink: 0;
+    overflow: hidden;
+    position: relative;
+    border-radius: 8px;
+    // margin: -16px -16px 0;
+    height: adaptive-value((
+        xs: calc(100vw / 375 * 180),
+        md: calc(100vw / 720 * 230),
+        lg: calc(100vw / 880 * 197),
+        xl: calc(100vw / 1024 * 217),
+        xxl: calc(100vw / 1256 * 281),
+        xxxl: 381px
+    ));
+
+    &:hover .nav {
+        opacity: 1;
+    }
+
+    @media screen and (max-width: 374px) {
+        height: calc(100vw - 32px);
+    }
+
+    @include media-breakpoint(lg-up) {
+        margin: -12px -8px 0;
+
+        > div {
+            transform: none !important;
+        }
+    }
+
+    @include media-breakpoint(xxl-up) {
+        margin: -16px -16px 0;
+    }
+
+    
+}
+
+.dragContainer {
+    height: 100%;
+    display: flex;
+}
+
+.image {
+    top: 0;
+    left: 0;
+    right: 0;
+    opacity: 0;
+    z-index: 1;
+    transition: 0.1s;
+    position: absolute;
+    height: 100%;
+
+    &[data-active="true"] {
+        opacity: 1;
+    }
+
+    img {
+        object-fit: cover;
+    }
+
+    @include media-breakpoint(md-down) {
+        opacity: 1;
+        width: 100%;
+        flex-grow: 0;
+        flex-shrink: 0;
+        position: relative;
+    }
+
+    @media screen and (max-width: 374px) {
+        height: calc(100vw - 32px);
+    }
+}
+
+.nav {
+    left: 0;
+    right: 0;
+    z-index: 2;
+    opacity: 0;
+    height: 2px;
+    bottom: 24px;
+    display: flex;
+    transition: 0.3s;
+    position: absolute;
+    justify-content: center;
+
+    > div {
+        width: 4px;
+        height: 4px;
+        transition: 0.3s;
+        margin-right: 4px;
+        border-radius: 3px;
+        background-color: var(--t-small);
+
+        &[data-active="true"] {
+            width: 14px;
+            background-color: var(--t-primary);
+        }
+    }
+
+    @include media-breakpoint(lg-down) {
+        opacity: 1;
+    }
+}
+
+.delivery {
+    top: 0;
+    left: 0;
+    z-index: 3;
+    width: 28px;
+    height: 48px;
+    display: flex;
+    position: absolute;
+    align-items: center;
+    justify-content: center;
+    color: var(--t-background);
+    border-radius: 12px 0 12px 0;
+    background-color: var(--t-text);
+}

@@ -1,0 +1,64 @@
+@import "/styles/mixins/helpers/media";
+
+.price {
+    padding: 4px 0;
+    min-height: 44px;
+    font-weight: 400;
+    position: relative;
+    display: inline-flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: flex-start;
+    max-width: calc(100% - 72px);
+    font-size: var(--price-size);
+
+    > div {
+        margin-top: 2px;
+        font-size: var(--subprice-size);
+    }
+
+    @include media-breakpoint(xxxl) {
+        // font-size: 20px;
+        // min-height: 60px;
+
+        // > div {
+        //     font-size: 18px;
+        //     margin-top: 6px;
+        // }
+    }
+
+    @media screen and (max-width: 320px) {
+        padding: 0;
+        flex-direction: row;
+        
+        > span {
+            margin-bottom: 16px;
+        }
+
+        > div {
+            margin-left: 6px;
+        }
+    }
+}
+
+.basket {
+    height: 1px;
+    align-items: center;
+    display: inline-flex;
+
+    &[data-hidden="true"] {
+        display: none;
+    }
+
+    > * {
+        margin-right: 8px;
+
+        &:last-child {
+            transform: translateY(2px);
+        }
+    }
+
+    @include media-breakpoint(lg-down) {
+        display: none;
+    }
+}

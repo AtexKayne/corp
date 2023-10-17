@@ -1,0 +1,21 @@
+.text {
+    line-clamp: 2;
+    flex-shrink: 0;
+    display: block;
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    text-overflow: ellipsis;
+    -webkit-box-orient: vertical;
+}
+
+.classTitle {
+    font-weight: 400;
+    text-transform: uppercase;
+    font-size: var(--subtitle-size);
+}
+
+.classText {
+    font-weight: 400;
+    font-size: var(--title-size);
+}

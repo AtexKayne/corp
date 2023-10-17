@@ -685,7 +685,7 @@
     &[data-mode="normal"] {
         margin: 0;
         grid-template-columns: repeat(2, 1fr);
-        
+
         @include media-breakpoint(lg-up) {
             row-gap: 38px;
             column-gap: 24px;
@@ -729,6 +729,100 @@
 
         @include media-breakpoint(xxxl) {
             column-gap: 88px;
+        }
+    }
+
+    &[data-mode="creative"] {
+        grid-gap: 0;
+        display: flex;
+        flex-wrap: wrap;
+        align-items: flex-start;
+        justify-content: space-between;
+
+        @include media-breakpoint(sm-down) {
+            > * {
+                width: 100%;
+                margin-bottom: 60px;
+
+                a {
+                    height: calc(100vw / 375 * 378);
+                }
+            }
+        }
+
+        @include media-breakpoint(md) {
+            > * {
+                margin-bottom: 48px;
+                width: calc(50% - 16px);
+
+                a {
+                    height: calc(100vw / 720 * 346);
+                }
+            }
+
+            > *:nth-child(3n) {
+                width: 100%;
+
+                a {
+                    height: calc(100vw / 720 * 726);
+                }
+            }
+        }
+
+        @include media-breakpoint(lg-up) {
+            margin: 0;
+
+            > * {
+                --title-size: 18px;
+                --subtitle-size: 14px;
+                --price-size: 20px;
+                --subprice-size: 16px;
+
+                margin-bottom: 50px;
+                width: adaptive-value(
+                    (
+                        xs: 0,
+                        lg: calc(25% - 12px),
+                        xl: calc(25% - 16px),
+                        xxxl: calc(25% - 20px)
+                    )
+                );
+            }
+
+            > *:nth-child(10n + 3),
+            > *:nth-child(10n + 4) {
+                --title-size: 28px;
+                --subtitle-size: 18px;
+                --price-size: 28px;
+                --subprice-size: 20px;
+
+                margin-bottom: 60px;
+                width: calc(50% - 10px);
+
+                a {
+                    height: adaptive-value(
+                        (
+                            xs: 0,
+                            lg: calc(100vw / 880 * 420),
+                            xl: calc(100vw / 1024 * 469),
+                            xxl: calc(100vw / 1256 * 597),
+                            xxxl: 806px
+                        )
+                    );
+                }
+            }
+
+            > *:nth-child(10n + 4) {
+                margin-top: adaptive-value(
+                    (
+                        xs: 0,
+                        lg: calc(100vw / 880 * -223),
+                        xl: calc(100vw / 1024 * -253),
+                        xxl: calc(100vw / 1256 * -316),
+                        xxxl: -424px
+                    )
+                );
+            }
         }
     }
 }

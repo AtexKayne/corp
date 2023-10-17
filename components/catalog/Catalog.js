@@ -14,7 +14,7 @@ import { debounce } from '../helpers/debounce'
 
 export default function Catalog({ detail }) {
     const isBrands = detail.isBrands || detail.isPromo
-    const [mode, setMode] = useState('normal')
+    const [mode, setMode] = useState('creative')
     const [isExistFilters, setIsExistFilters] = useState(false)
     const [isFilterOpen, setIsFilterOpen] = useState(false)
     const [filters, setFilters] = useState(detail.filter)
@@ -106,6 +106,12 @@ export default function Catalog({ detail }) {
         updateFastFilters()
         updateSelectedFilters(filters)
     }, [filters])
+
+    useEffect(() => {
+        if (mode === 'creative') {
+            // setProducts(cards)
+        }
+    }, [mode])
 
     useEffect(() => {
         setProducts(cards)
@@ -228,7 +234,7 @@ function Nav({ isBrands, sortHandler, openFilters, fastFilters, selectFastFilter
                                     </defs>
                                 </svg>
 
-                                <svg  onClick={() => updateMode('compact')} data-active={mode === 'compact'} width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <svg onClick={() => updateMode('compact')} data-active={mode === 'compact'} width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
                                     <g clipPath="url(#clip0_1707_39256)">
                                         <g clipPath="url(#clip1_1707_39256)">
                                             <rect width="6.125" height="3.5" rx="0.266667" fill="currentColor" />
@@ -249,7 +255,7 @@ function Nav({ isBrands, sortHandler, openFilters, fastFilters, selectFastFilter
                                     </defs>
                                 </svg>
 
-                                <svg width="14" height="14" data-active={mode === 'creative'} viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <svg onClick={() => updateMode('creative')} width="14" height="14" data-active={mode === 'creative'} viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
                                     <g clipPath="url(#clip0_1707_39267)">
                                         <rect width="7" height="6.125" rx="0.266667" fill="currentColor" />
                                         <rect y="7.875" width="4.375" height="6.125" rx="0.266667" fill="currentColor" />

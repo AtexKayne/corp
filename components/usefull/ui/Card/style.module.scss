@@ -64,6 +64,77 @@
     }
 }
 
+.cardCreative {
+    width: 100%;
+    display: flex;
+    transition: 0.3s;
+    position: relative;
+    border-radius: 8px;
+    flex-direction: column;
+
+    &[data-hover="true"] {
+        z-index: 2;
+        box-shadow: 0px 10px 30px 2px #69748633;
+    }
+
+    @include media-breakpoint(md-down) {
+        box-shadow: none !important;
+    }
+
+    @include media-breakpoint(lg-up) {
+        padding: 12px 8px;
+        // height: min-content;
+    }
+
+    @include media-breakpoint(xxl-up) {
+        padding: 16px;
+    }
+
+    @media screen and (max-width: 320px) {
+        .cardFooter {
+            margin-top: 0;
+            flex-direction: column;
+            align-items: flex-start;
+            justify-content: flex-start;
+
+            .buyBtn {
+                width: 100%;
+                margin-top: 6px;
+                position: relative;
+            }
+
+            > * {
+                height: auto;
+                min-height: 0;
+            }
+        }
+    }
+
+    .buyBtn {
+        left: 0;
+        right: 0;
+        bottom: 0;
+        // display: flex;
+        position: absolute;
+        // justify-content: flex-end;
+    }
+
+    .favourites {
+        top: 16px;
+        z-index: 4;
+        right: 20px;
+        position: absolute;
+    }
+
+    .favouritesGiant {
+        top: 32px;
+        z-index: 4;
+        right: 36px;
+        position: absolute;
+        transform: scale(1.3);
+    }
+}
+
 .cardFooter {
     height: 100%;
     display: flex;
