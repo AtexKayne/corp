@@ -769,14 +769,18 @@
             }
         }
 
+        
+
         @include media-breakpoint(lg-up) {
             margin: 0;
 
             > * {
-                --title-size: 18px;
-                --subtitle-size: 14px;
-                --price-size: 20px;
-                --subprice-size: 16px;
+                --subtitle-size: 12px;
+                --title-size: 16px;
+                --price-size: 18px;
+                --subprice-size: 14px;
+                --empty-size: 14px;
+                --values-size: 12px;
 
                 margin-bottom: 50px;
                 width: adaptive-value(
@@ -784,17 +788,19 @@
                         xs: 0,
                         lg: calc(25% - 12px),
                         xl: calc(25% - 16px),
-                        xxxl: calc(25% - 20px)
+                        xxxl: calc(25% - 40px)
                     )
                 );
             }
 
             > *:nth-child(10n + 3),
             > *:nth-child(10n + 4) {
-                --title-size: 28px;
                 --subtitle-size: 16px;
-                --price-size: 28px;
+                --title-size: 24px;
+                --values-size: 14px;
+                --price-size: 24px;
                 --subprice-size: 18px;
+                --empty-size: 24px;
 
                 margin-bottom: 60px;
                 width: calc(50% - 10px);
@@ -822,6 +828,29 @@
                         xxxl: -424px
                     )
                 );
+            }
+        }
+
+        @include media-breakpoint(xxxl) {
+            > * {
+                --title-size: 18px;
+                --subtitle-size: 14px;
+                --price-size: 20px;
+                --subprice-size: 16px;
+                --empty-size: 16px;
+                --values-size: 14px;
+            }
+
+            > *:nth-child(10n + 3),
+            > *:nth-child(10n + 4) {
+                --title-size: 28px;
+                --subtitle-size: 16px;
+                --price-size: 28px;
+                --subprice-size: 18px;
+                --empty-size: 24px;
+                --values-size: 14px;
+
+                width: calc(50% - 20px);
             }
         }
     }
