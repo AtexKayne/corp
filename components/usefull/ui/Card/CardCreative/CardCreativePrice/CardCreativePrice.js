@@ -12,9 +12,7 @@ export default function CardCreativePrice({ info }) {
     }
 
     if (info.isProfi) {
-        return (
-            <div className={`${style.price}`} />
-        )
+        return null
     }
 
     return (

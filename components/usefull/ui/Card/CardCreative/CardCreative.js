@@ -9,11 +9,11 @@ import CardCreativeDescrption from './CardCreativeDescrption/CardCreativeDescrpt
 import CardBuyButton from '../Univ/BuyButton/CardBuyButton'
 import Favourite from '../../../Favourite'
 
-export default function CardCreative({ info, animate, onChangeCount }) {
+export default function CardCreative({ info, animate, onChangeCount, index, nth }) {
     // @TODO Постарайся от этого избавиться
     const [count, setCount] = useState(info.basket ?? 0)
     const [isHover, setIsHover] = useState(false)
-    const [favouriteClass, setFavouriteClass] = useState(style.favourites)
+    const [isGiant, setIsGiant] = useState(false)
 
     const refInner = useRef(null)
     const refTimeout = useRef(null)
@@ -29,6 +29,7 @@ export default function CardCreative({ info, animate, onChangeCount }) {
     }
 
     const mouseLeaveHandler = async () => {
+        // return
         refIsHover.current = false
         if (refIsFocus.current) return
         if (window.innerWidth <= globalState.sizes.md) return
@@ -74,9 +75,9 @@ export default function CardCreative({ info, animate, onChangeCount }) {
         }
         await animate.module.start({ opacity: 0, transition: { duration: 0.1 } })
 
-        const width = window.innerWidth > globalState.sizes.xxxl ? 92 : 68
+        // const width = window.innerWidth > globalState.sizes.xxxl ? 92 : 68
         await animate.counter.start({
-            width,
+            width: 68,
             background: '#E21B25',
             transition: { duration: 0.1 }
         })
@@ -106,7 +107,7 @@ export default function CardCreative({ info, animate, onChangeCount }) {
         }
 
         await animate.button.start({ opacity: 0, transition: { duration: 0.1 } })
-        const width = refInner.current.clientWidth > 300 ? 160 : '100%'
+        const width = refInner.current.clientWidth > 260 || isGiant ? 160 : '100%'
         await animate.counter.start({
             width,
             background: '#F5F6FA',
@@ -138,7 +139,7 @@ export default function CardCreative({ info, animate, onChangeCount }) {
 
             await animate.button.start({ opacity: 0, transition: { duration: 0.1 } })
 
-            const width = refInner.current.clientWidth > 300 ? 160 : '100%'
+            const width = refInner.current.clientWidth > 260 || isGiant ? 160 : '100%'
             await animate.counter.start({
                 width,
                 transition: { duration: 0.1 }
@@ -160,9 +161,9 @@ export default function CardCreative({ info, animate, onChangeCount }) {
 
             await animate.module.start({ opacity: 0, transition: { duration: 0.1 } })
 
-            const width = window.innerWidth > globalState.sizes.xxxl ? 92 : 68
+            // const width = window.innerWidth > globalState.sizes.xxxl ? 92 : 68
             await animate.counter.start({
-                width,
+                width: 68,
                 transition: { duration: 0.1 }
             })
 
@@ -226,11 +227,10 @@ export default function CardCreative({ info, animate, onChangeCount }) {
     }, [isHover])
 
     useEffect(() => {
-        const isGiant = refInner.current.clientWidth > 360
-        if (isGiant && window.innerWidth > globalState.sizes.md) {
-            setFavouriteClass(style.favouritesGiant)
-        }
+        setIsGiant(nth.includes(index))
+    }, [nth])
 
+    useEffect(() => {
         const input = refInner.current.querySelector('input')
         if (input) {
             input.addEventListener('blur', blurHandler)
@@ -249,20 +249,24 @@ export default function CardCreative({ info, animate, onChangeCount }) {
 
     return (
         <div
+            data-giant={isGiant}
             data-hover={isHover}
-            className={style.cardCreative}
             onMouseEnter={mouseEnterHandler}
-            onMouseLeave={mouseLeaveHandler}>
-            <Favourite width='24' height='24' external={favouriteClass} info={{ primary: info.secondaryName, image: info.images[0] }} />
+            onMouseLeave={mouseLeaveHandler}
+            className={style.cardCreative}>
+
+            <Favourite width='24' height='24' external={style.favourites} info={{ primary: info.secondaryName, image: info.images[0] }} />
             <CardCreativeImages isDelivery={info.isDelivery} images={info.images} link='/product/rp-no-coloristic' />
-            <CardCreativeDescrption info={info} classTitle={style.title} classText={style.text} />
-            <CardCreativeValues info={info} />
+            <div className={`${style.cardCreativeBody}`}>
+                <CardCreativeDescrption info={info} classTitle={style.title} classText={style.text} />
+                <CardCreativeValues info={info} />
 
-            <div className={`${style.cardFooter}`}>
-                <CardCreativePrice info={info} />
+                <div className={`${style.cardFooter}`}>
+                    <CardCreativePrice info={info} />
 
-                <div ref={refInner} data-mode='normal' className={`${style.buyBtn}`}>
-                    <CardBuyButton animate={animate} info={info} count={count} outline={false} onUpdateInBasket={updateHandler} />
+                    <div ref={refInner} data-mode='creative' className={`${style.buyBtn}`}>
+                        <CardBuyButton animate={animate} info={info} count={count} outline={false} onUpdateInBasket={updateHandler} />
+                    </div>
                 </div>
             </div>
         </div>

@@ -143,6 +143,11 @@
 
     @include media-breakpoint(lg-up) {
         opacity: 0;
+        
+        [data-mode='creative'] [data-giant='true'] & {
+            left: 0;
+            right: auto;
+        }
     }
 
     @media screen and (max-width: 320px) {
@@ -211,6 +216,13 @@
     @media screen and (max-width: 320px) {
         width: 100%;
         min-width: 100%;
+    }
+
+    @include media-breakpoint(lg-up) {
+        [data-mode='creative'] [data-giant='true'] & {
+            left: 0;
+            right: auto;
+        }
     }
 
     @include media-breakpoint(xxxl) {

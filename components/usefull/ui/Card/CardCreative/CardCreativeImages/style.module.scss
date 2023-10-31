@@ -9,15 +9,41 @@
     overflow: hidden;
     position: relative;
     border-radius: 8px;
-    // margin: -16px -16px 0;
-    height: adaptive-value((
-        xs: calc(100vw / 375 * 180),
-        md: calc(100vw / 720 * 230),
-        lg: calc(100vw / 880 * 197),
-        xl: calc(100vw / 1024 * 217),
-        xxl: calc(100vw / 1256 * 281),
-        xxxl: 381px
-    ));
+
+    [data-giant="false"] & {
+        height: adaptive-value(
+            (
+                xs: calc(100vw / 375 * 378),
+                md: calc(100vw / 720 * 346),
+                lg: calc(100vw / 880 * 197),
+                xl: calc(100vw / 1024 * 217),
+                xxl: calc(100vw / 1256 * 280),
+                xxxl: 300px
+            )
+        );
+    }
+
+    [data-giant="true"] & {
+        width: adaptive-value(
+            (
+                xs: 100%,
+                lg: calc(100vw / 880 * 470),
+                xl: calc(100vw / 1024 * 380),
+                xxl: calc(100vw / 1256 * 470),
+                xxxl: 550px
+            )
+        );
+        height: adaptive-value(
+            (
+                xs: calc(100vw / 375 * 378),
+                md: calc(100vw / 720 * 500),
+                lg: calc(100vw / 880 * 330),
+                xl: calc(100vw / 1024 * 400),
+                xxl: calc(100vw / 1256 * 440),
+                xxxl: 540px
+            )
+        );
+    }
 
     &:hover .nav {
         opacity: 1;
@@ -28,18 +54,10 @@
     }
 
     @include media-breakpoint(lg-up) {
-        margin: -12px -8px 0;
-
         > div {
             transform: none !important;
         }
     }
-
-    @include media-breakpoint(xxl-up) {
-        margin: -16px -16px 0;
-    }
-
-    
 }
 
 .dragContainer {
