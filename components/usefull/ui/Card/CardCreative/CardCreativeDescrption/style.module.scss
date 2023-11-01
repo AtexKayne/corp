@@ -11,6 +11,16 @@
         -webkit-line-clamp: 2;
         text-overflow: ellipsis;
         -webkit-box-orient: vertical;
+
+        &:first-child {
+            line-clamp: 2;
+            -webkit-line-clamp: 2;
+        }
+
+        &:last-child {
+            line-clamp: 3;
+            -webkit-line-clamp: 3;
+        }
     }
 }
 
