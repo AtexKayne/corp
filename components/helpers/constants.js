@@ -30,7 +30,7 @@ export const product = {
             max: 880,
         },
     ],
-    isProfi: true,
+    // isProfi: true,
     forProfi: false,
     color: { image: '/images/product/variants/image-3.jpg', name: '8/74', text: 'Светлый коричнево-красный блонд' }
 }
@@ -638,9 +638,10 @@ export const cardsCompact = [
             old: '550' // Can be empty
         },
         max: 10,
-        values: [
-            '100 мл', '200 мл', '500 мл'
-        ],
+        // isProfi: true,
+        // values: [
+        //     '',
+        // ],
     },
     {
         id: 93,
@@ -838,7 +839,7 @@ export const cardsCompact = [
         bonuses: 28,
         art: 5415,
         max: 880,
-        isProfi: true,
+        // isProfi: true,
         // values: [
         //     '100 мл', '200 мл', '500 мл'
         // ],
