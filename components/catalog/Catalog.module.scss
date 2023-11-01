@@ -225,7 +225,7 @@
 
     @include media-breakpoint(lg-down) {
         pointer-events: none;
-        
+
         > *:not([data-active="true"]) {
             display: none;
         }
@@ -270,7 +270,13 @@
         width: 100%;
     }
 
-    @include media-breakpoint(lg-up) {
+    @include media-breakpoint(lg) {
+        &[data-position="fixedShown"] {
+            transform: translateY(92px);
+        }
+    }
+
+    @include media-breakpoint(xl-up) {
         &[data-position="fixedShown"] {
             transform: translateY(97px);
         }
