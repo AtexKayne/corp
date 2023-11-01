@@ -18,7 +18,7 @@ export default function CardCreativeImages({ link = '/', images, isDelivery }) {
         const offsetY = Math.abs(dragInfo.offset.y)
         const imageWidth = refImages.current.clientWidth
 
-        if (offsetX > 40 && offsetY < 40) {
+        if (offsetX > 20 && offsetY < 20) {
             if (dragInfo.offset.x > 0 && activeImage === 0) {
                 animateDrag.start({ x: 0, transition: { duration: 0.1 } })
                 return
