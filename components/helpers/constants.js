@@ -612,6 +612,19 @@ export const cards = [
 
 export const cardsCompact = [
     {
+        id: 92,
+        images: [
+            '/images/catalog/products/image-2.jpg',
+        ],
+        primaryName: 'Глина для укладки волос',
+        secondaryName: 'LOCK STOCK & BARREL 85 karats original clay',
+        art: 119025,
+        price: {
+            actual: '1 273',
+        },
+        max: 0,
+    },
+    {
         id: 91,
         isDelivery: true,
         images: [
@@ -625,19 +638,6 @@ export const cardsCompact = [
             old: '550' // Can be empty
         },
         max: 10,
-    },
-    {
-        id: 92,
-        images: [
-            '/images/catalog/products/image-2.jpg',
-        ],
-        primaryName: 'Глина для укладки волос',
-        secondaryName: 'LOCK STOCK & BARREL 85 karats original clay',
-        art: 119025,
-        price: {
-            actual: '1 273',
-        },
-        max: 0,
     },
     {
         id: 93,

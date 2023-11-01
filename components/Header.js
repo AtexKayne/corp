@@ -63,7 +63,7 @@ export default function Header() {
         }
 
         globalState.body = { addClass, removeClass, toggleClass }
-        globalState.header = { setTheme: setHeaderTheme }
+        globalState.header = { setTheme: setHeaderTheme, element: refFixed.current }
 
         return () => {
             window.removeEventListener('scroll', scrollHandler)

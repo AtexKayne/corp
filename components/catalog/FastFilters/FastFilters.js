@@ -13,7 +13,7 @@ export default function FastFilter({ onAfterChange, fastFilters, resetAllHandler
     const refScrollOfset = useRef(0)
     const refIsStartDrag = useRef(false)
     const animateInner = useAnimationControls()
-    const [position, setPosition] = useState(false)
+    const [position, setPosition] = useState('none')
     const [dragConstraints, setDragConstraints] = useState(0)
 
     const scrollTo = to => {
@@ -128,34 +128,37 @@ export default function FastFilter({ onAfterChange, fastFilters, resetAllHandler
     }, [])
 
     return (
-        <div className={style.fastFilterContainer}>
-            <div onClick={() => scrollTo('prev')} data-position={position === 'start' || position === 'none'} className={style.fastFilterPrev}>
-                <Icon name='chevronLeft' width='18' height='18' />
-            </div>
+        <>
+            <div className={style.fastFilterContainer}>
+                <div onClick={() => scrollTo('prev')} data-position={position === 'start' || position === 'none'} className={style.fastFilterPrev}>
+                    <Icon name='chevronLeft' width='18' height='18' />
+                </div>
 
-            <div ref={refWrapper} className={`${style.fastFilterWrapper} js-fast-filters`}>
-                <motion.div
-                    drag='x'
-                    ref={refInner}
-                    animate={animateInner}
-                    onDragEnd={dragEndHandler}
-                    onDragStart={dragStartHandler}
-                    className={style.fastFilterInner}
-                    dragConstraints={{ right: 0, left: dragConstraints }}>
-                    {fastFilters.map((item, index) => (
-                        <div
-                            key={item.name}
-                            onClick={event => clickHandler(event, item)}
-                            className={`${style.fastFilterItem} js-fast-filters-item text--p5 text--upper`}>
-                            {item.name}
-                        </div>
-                    ))}
-                </motion.div>
-            </div>
+                <div ref={refWrapper} className={`${style.fastFilterWrapper} js-fast-filters`}>
+                    <motion.div
+                        drag='x'
+                        ref={refInner}
+                        animate={animateInner}
+                        onDragEnd={dragEndHandler}
+                        onDragStart={dragStartHandler}
+                        className={style.fastFilterInner}
+                        dragConstraints={{ right: 0, left: dragConstraints }}>
+                        {fastFilters.map((item, index) => (
+                            <div
+                                key={item.name}
+                                onClick={event => clickHandler(event, item)}
+                                className={`${style.fastFilterItem} js-fast-filters-item text--p5 text--upper`}>
+                                {item.name}
+                            </div>
+                        ))}
+                    </motion.div>
+                </div>
 
-            <div onClick={() => scrollTo('next')} data-position={position === 'end' || position === 'none'} className={style.fastFilterNext}>
-                <Icon name='chevronRight' width='18' height='18' />
+                <div onClick={() => scrollTo('next')} data-position={position === 'end' || position === 'none'} className={style.fastFilterNext}>
+                    <Icon name='chevronRight' width='18' height='18' />
+                </div>
+                {/* <div className='is-hidden--xl-up text--t5 text--bold text--upper text--center text--color-small mt-1.5'>НАЙДЕНО 668 ТОВАРОВ</div> */}
             </div>
-        </div>
+        </>
     )
 }

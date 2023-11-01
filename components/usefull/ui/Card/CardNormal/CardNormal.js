@@ -149,7 +149,7 @@ export default function CardNormal({ info, animate, onChangeCount }) {
     }
 
     const showLeave = async () => {
-        const isMobile = window.innerWidth <= globalState.sizes.md
+        const isMobile = window.innerWidth <= globalState.sizes.lg
         if (!count) {
             const opacity = isMobile ? 1 : 0
             await animate.button.start({ opacity, transition: { duration: 0.1 } })

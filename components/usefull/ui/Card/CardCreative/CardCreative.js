@@ -150,7 +150,7 @@ export default function CardCreative({ info, animate, onChangeCount, index, nth 
     }
 
     const showLeave = async () => {
-        const isMobile = window.innerWidth <= globalState.sizes.md
+        const isMobile = window.innerWidth <= globalState.sizes.lg
         if (!count) {
             const opacity = isMobile ? 1 : 0
             await animate.button.start({ opacity, transition: { duration: 0.1 } })
@@ -258,7 +258,7 @@ export default function CardCreative({ info, animate, onChangeCount, index, nth 
             <Favourite width='24' height='24' external={style.favourites} info={{ primary: info.secondaryName, image: info.images[0] }} />
             <CardCreativeImages isDelivery={info.isDelivery} images={info.images} link='/product/rp-no-coloristic' />
             <div className={`${style.cardCreativeBody}`}>
-                <CardCreativeDescrption info={info} classTitle={style.title} classText={style.text} />
+                <CardCreativeDescrption info={info} classTitle={style.title} classText={style.text} link='/product/rp-no-coloristic' />
                 <CardCreativeValues info={info} />
 
                 <div className={`${style.cardFooter}`}>

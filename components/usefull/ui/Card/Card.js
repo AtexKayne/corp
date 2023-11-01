@@ -20,6 +20,10 @@ export default function Card({ info, mode = 'normal', onChangeCount = () => fals
         inner: animateInner
     }
 
+    // useEffect(() => {
+
+    // }, [])
+
     if (mode === 'normal') {
         return <CardNormal animate={animate} onChangeCount={onChangeCount} info={info} />
     } else if (mode === 'compact') {

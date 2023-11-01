@@ -14,6 +14,7 @@ export default function Nav({ isBrands, sortHandler, openFilters, fastFilters, s
 
     const debounceScroll = debounce(() => {
         const scroll = window.scrollY
+        console.log(scroll);
         const isScrollDown = scroll > refScroll.current
         refScroll.current = scroll
         let navPosition
@@ -25,18 +26,18 @@ export default function Nav({ isBrands, sortHandler, openFilters, fastFilters, s
             navPosition = 'absoluteShown'
         }
         refNav.current.dataset.position = navPosition
-    }, 40)
+    }, 10)
 
     const debounceResize = debounce(() => {
         const offset = refContainer.current.getBoundingClientRect().left
         refNav.current.style.paddingLeft = `${offset}px`
         refNav.current.style.paddingRight = `${offset}px`
 
-        if (window.innerWidth > globalState.sizes.lg) {
-            refOffsetHeight.current = 392
-        } else {
-            refOffsetHeight.current = 298
-        }
+        // if (window.innerWidth > globalState.sizes.lg) {
+        //     refOffsetHeight.current = 292
+        // } else {
+        //     refOffsetHeight.current = 298
+        // }
     }, 1000)
 
     const updateMode = mode => {
@@ -49,11 +50,14 @@ export default function Nav({ isBrands, sortHandler, openFilters, fastFilters, s
         const offset = refContainer.current.getBoundingClientRect().left
         refNav.current.style.paddingLeft = `${offset}px`
         refNav.current.style.paddingRight = `${offset}px`
-        if (window.innerWidth > globalState.sizes.lg) {
-            refOffsetHeight.current = 492
-        } else {
-            refOffsetHeight.current = 198
-        }
+        refOffsetHeight.current = refNav.current.getBoundingClientRect().top - globalState.header.element.clientHeight + window.scrollY
+        // refOffsetHeight.current = 298
+        console.log(globalState.header.element, refOffsetHeight.current);
+        // if (window.innerWidth > globalState.sizes.lg) {
+        //      = 492
+        // } else {
+        //     refOffsetHeight.current = 198
+        // }
 
         return () => {
             window.removeEventListener('scroll', debounceScroll)
@@ -139,8 +143,6 @@ export default function Nav({ isBrands, sortHandler, openFilters, fastFilters, s
                     </div>
                 </div>
             </div>
-
-            <div className='is-hidden--xl-up text--t5 text--bold text--upper text--center text--color-small'>НАЙДЕНО 668 ТОВАРОВ</div>
         </div>
     )
 }

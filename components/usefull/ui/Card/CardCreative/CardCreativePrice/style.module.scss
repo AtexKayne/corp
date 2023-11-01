@@ -1,4 +1,5 @@
 @import "/styles/mixins/helpers/media";
+@import "/styles/mixins/helpers/adaptive-value";
 
 .price {
     padding: 4px 0;
@@ -11,34 +12,80 @@
     justify-content: flex-start;
     max-width: calc(100% - 72px);
 
+    .actualPrice {
+        font-size: adaptive-value(
+            (
+                xs: 22px,
+                lg: 16px,
+                xxl: 20px,
+                xxxl: 22px
+            )
+        );
+    }
+
+    .priceEmpty {
+        color: var(--t-lighter);
+        font-size: adaptive-value(
+            (
+                xs: 22px,
+                lg: 16px,
+                xl: 16px,
+                xxl: 20px,
+                xxxl: 22px
+            )
+        );
+    }
+
     > div {
         margin-top: 2px;
+        font-size: adaptive-value(
+            (
+                xs: 16px,
+                lg: 12px,
+                xxl: 14px,
+                xxxl: 16px
+            )
+        );
     }
 
-    @include media-breakpoint(xxxl) {
-        // font-size: 20px;
-        // min-height: 60px;
+    [data-giant="true"] & {
+        .actualPrice {
+            font-size: adaptive-value(
+                (
+                    xs: 22px,
+                    md: 28px,
+                    lg: 24px,
+                    xl: 26px,
+                    xxl: 28px,
+                    xxxl: 28px
+                )
+            );
+        }
 
-        // > div {
-        //     font-size: 18px;
-        //     margin-top: 6px;
-        // }
-    }
-
-    @media screen and (max-width: 320px) {
-        padding: 0;
-        flex-direction: row;
-
-        > span {
-            margin-bottom: 16px;
+        .priceEmpty {
+            font-size: adaptive-value(
+                (
+                    xs: 22px,
+                    md: 28px,
+                    lg: 24px,
+                    xl: 26px,
+                    xxl: 28px,
+                    xxxl: 28px
+                )
+            );
         }
 
         > div {
-            margin-left: 6px;
+            font-size: adaptive-value(
+                (
+                    xs: 16px,
+                    md: 20px,
+                    lg: 16px,
+                    xl: 18px,
+                    xxl: 20px,
+                    xxxl: 20px
+                )
+            );
         }
-    }
-
-    &.priceEmpty {
-        // font-size: var(--empty-size);
     }
 }

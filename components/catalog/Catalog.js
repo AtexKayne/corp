@@ -129,7 +129,7 @@ export default function Catalog({ detail }) {
                 fastFilters={detail.fastFilters}
                 resetAllHandler={resetAllHandler}
                 selectFastFilter={selectFastFilter} />
-
+            <div className='is-hidden--xl-up text--t5 text--bold text--upper text--center text--color-small'>НАЙДЕНО 668 ТОВАРОВ</div>
             <div className={style.container}>
                 <div style={{ width: '100%' }} className='d-flex flex--column'>
                     <PreviousButton isPrevButton={false} />
@@ -216,8 +216,8 @@ function CardList({ products, mode }) {
                     break;
                 case 'xl':
                     for (let i = 0; i < 10; i++) {
-                        newNth.push(i * 8 + 1)
-                        newNth.push(i * 8 + 2)
+                        newNth.push(i * 11)
+                        newNth.push(i * 10 + 6 + i)
                     }
                     break;
                 case 'lg':
@@ -226,7 +226,6 @@ function CardList({ products, mode }) {
                     }
                     break;
                 case 'md':
-                    console.log('md');
                     for (let i = 0; i < 10; i++) {
                         newNth.push(i * 3 + 2)
                     }
@@ -241,7 +240,6 @@ function CardList({ products, mode }) {
                     break;
             }
         }
-        console.log(newNth, globalState);
         setNth(newNth)
     }
 

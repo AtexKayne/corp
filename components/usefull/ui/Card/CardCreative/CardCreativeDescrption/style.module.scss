@@ -18,6 +18,7 @@
     font-weight: 400;
     line-height: 1.3em;
     text-transform: uppercase;
+    color: var(--t-text) !important;
 
     [data-giant="false"] & {
         padding-top: 16px;
@@ -55,6 +56,11 @@
 .classText {
     font-weight: 400;
     line-height: 1.1em;
+    transition: 0.3s color;
+
+    [data-hover="true"] & {
+        color: var(--t-primary);
+    }
 
     [data-giant="false"] & {
         margin-top: 4px;
