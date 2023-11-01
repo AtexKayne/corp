@@ -12,9 +12,19 @@ export default function Nav({ isBrands, sortHandler, openFilters, fastFilters, s
     const refContainer = useRef(null)
     const refOffsetHeight = useRef(0)
 
+    const udpateViewMode = () => {
+        if (window.innerWidth > globalState.sizes.lg) return
+        let newMode = 'normal'
+        
+        if (mode === 'creative') newMode = 'normal'
+        else if (mode === 'normal') newMode = 'compact'
+        else if (mode === 'compact') newMode = 'creative'
+
+        setMode(newMode)
+    }
+
     const debounceScroll = debounce(() => {
         const scroll = window.scrollY
-        console.log(scroll);
         const isScrollDown = scroll > refScroll.current
         refScroll.current = scroll
         let navPosition
@@ -32,12 +42,6 @@ export default function Nav({ isBrands, sortHandler, openFilters, fastFilters, s
         const offset = refContainer.current.getBoundingClientRect().left
         refNav.current.style.paddingLeft = `${offset}px`
         refNav.current.style.paddingRight = `${offset}px`
-
-        // if (window.innerWidth > globalState.sizes.lg) {
-        //     refOffsetHeight.current = 292
-        // } else {
-        //     refOffsetHeight.current = 298
-        // }
     }, 1000)
 
     const updateMode = mode => {
@@ -51,13 +55,6 @@ export default function Nav({ isBrands, sortHandler, openFilters, fastFilters, s
         refNav.current.style.paddingLeft = `${offset}px`
         refNav.current.style.paddingRight = `${offset}px`
         refOffsetHeight.current = refNav.current.getBoundingClientRect().top - globalState.header.element.clientHeight + window.scrollY
-        // refOffsetHeight.current = 298
-        console.log(globalState.header.element, refOffsetHeight.current);
-        // if (window.innerWidth > globalState.sizes.lg) {
-        //      = 492
-        // } else {
-        //     refOffsetHeight.current = 198
-        // }
 
         return () => {
             window.removeEventListener('scroll', debounceScroll)
@@ -82,7 +79,7 @@ export default function Nav({ isBrands, sortHandler, openFilters, fastFilters, s
                         <div className={style.navFiller} />
                         <div className='is-hidden--lg-down text--t5 text--bold text--upper text--color-small'>НАЙДЕНО 668 ТОВАРОВ</div>
                         <div className={`${style.tagsContainer} d-flex`}>
-                            <div className='mr-2 mr-3:md d-flex flex--center mr-1:xxs'>
+                            <div onClick={udpateViewMode} className='mr-2 mr-3:md d-flex flex--center mr-1:xxs'>
                                 <span className='text--t5 link text--bold text--upper is-hidden--xxs'>Вид</span>
                                 <div className={style.viewMode}>
                                     <svg onClick={() => updateMode('normal')} data-active={mode === 'normal'} width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">

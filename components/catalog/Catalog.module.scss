@@ -224,6 +224,8 @@
     }
 
     @include media-breakpoint(lg-down) {
+        pointer-events: none;
+        
         > *:not([data-active="true"]) {
             display: none;
         }
@@ -257,7 +259,7 @@
     &[data-position="fixedHidden"] {
         position: fixed;
         transition: 0.3s transform;
-        transform: translateY(50px);
+        transform: translateY(40px);
     }
 
     &[data-position="absoluteShown"] {
