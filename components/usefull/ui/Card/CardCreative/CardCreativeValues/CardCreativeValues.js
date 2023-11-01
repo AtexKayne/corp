@@ -16,7 +16,7 @@ export default function CardCreativeValues({ info }) {
 function Color({ color }) {
     return (
         <div>
-            <div className='iconColorVariant'>
+            <div className={`${style.colorIcon} iconColorVariant`}>
                 <span data-color={color.toLowerCase()} className={`iconColor`} />
 
                 <div className='text--t4 text--normal'>{color}</div>

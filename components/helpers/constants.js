@@ -638,6 +638,9 @@ export const cardsCompact = [
             old: '550' // Can be empty
         },
         max: 10,
+        values: [
+            '100 мл', '200 мл', '500 мл'
+        ],
     },
     {
         id: 93,
@@ -693,6 +696,9 @@ export const cardsCompact = [
         art: 'SZ-A7116-4',
         link: '100',
         max: 109,
+        values: [
+            '100 мл', '200 мл', '500 мл'
+        ],
     },
     {
         id: 96,
@@ -833,9 +839,9 @@ export const cardsCompact = [
         art: 5415,
         max: 880,
         isProfi: true,
-        values: [
-            '100 мл', '200 мл', '500 мл'
-        ],
+        // values: [
+        //     '100 мл', '200 мл', '500 мл'
+        // ],
     },
     {
         id: 194,
@@ -854,6 +860,9 @@ export const cardsCompact = [
         art: 5416,
         link: '500',
         max: 85,
+        values: [
+            '100 мл', '200 мл', '500 мл'
+        ],
     },
     {
         id: 195,
@@ -884,6 +893,9 @@ export const cardsCompact = [
             actual: '12 300',
         },
         max: 10,
+        values: [
+            '100 мл', '200 мл', '500 мл'
+        ],
     },
     {
         id: 197,
@@ -901,6 +913,7 @@ export const cardsCompact = [
         secondaryName: 'WAHL shaver finale lithium 8164-116 еще один очень-очень длинный текст для теста карточки товара',
         art: 372000081,
         max: 10,
+        color: 'Черный',
     },
     {
         id: 198,
@@ -909,6 +922,7 @@ export const cardsCompact = [
         ],
         primaryName: 'Машинка для стрижки',
         secondaryName: 'WAHL corded clipper legend 8147-416',
+        color: 'Разноцветный',
         price: {
             actual: '13 160',
         },
@@ -925,6 +939,10 @@ export const cardsCompact = [
             actual: '1 700',
         },
         max: 10,
+        color: 'Разноцветный',
+        values: [
+            '100 мл', '200 мл', '500 мл'
+        ],
     },
     {
         id: 1910,
