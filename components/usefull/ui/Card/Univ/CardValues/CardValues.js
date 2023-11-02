@@ -15,11 +15,11 @@ export default function CardValues({ info }) {
 
 function Color({ color }) {
     return (
-        <div className='pb-0.5'>
-            <div className='iconColorVariant'>
+        <div>
+            <div className={`${style.colorIcon} iconColorVariant`}>
                 <span data-color={color.toLowerCase()} className={`iconColor`} />
 
-                <div className='text--t4 text--normal'>{color}</div>
+                <div>{color}</div>
             </div>
         </div>
     )
@@ -27,7 +27,7 @@ function Color({ color }) {
 
 function Volume({ values }) {
     return (
-        <div style={{ '--count-values': `"+${values.length}"` }} className={`${style.volumePicker} text--t6 text--normal pb-0.5`}>
+        <div style={{ '--count-values': `"+${values.length}"` }} className={`${style.volumePicker}`}>
             {values && values.length
                 ? values.map((item, index) => {
                     return (

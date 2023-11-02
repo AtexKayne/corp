@@ -75,7 +75,9 @@ export default function CardCreativeImages({ link = '/', images, isDelivery }) {
 
                 {isDelivery
                     ? <div className={style.delivery}>
-                        <Icon name='delivery' width='16' height='16' />
+                        <div className={style.deliveriIcon}>
+                            <Icon name='delivery' width='100%' height='100%' />
+                        </div>
                     </div>
                     : null
                 }

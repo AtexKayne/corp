@@ -9,15 +9,16 @@
     overflow: hidden;
     position: relative;
     border-radius: 8px;
-    // margin: -16px -16px 0;
-    height: adaptive-value((
-        xs: calc(100vw / 375 * 180),
-        md: calc(100vw / 720 * 230),
-        lg: calc(100vw / 880 * 197),
-        xl: calc(100vw / 1024 * 217),
-        xxl: calc(100vw / 1256 * 281),
-        xxxl: 381px
-    ));
+    height: adaptive-value(
+        (
+            xs: calc(100vw / 375 * 180),
+            md: calc(100vw / 720 * 230),
+            lg: calc(100vw / 880 * 197),
+            xl: calc(100vw / 1024 * 217),
+            xxl: calc(100vw / 1256 * 281),
+            xxxl: 300px
+        )
+    );
 
     &:hover .nav {
         opacity: 1;
@@ -28,18 +29,10 @@
     }
 
     @include media-breakpoint(lg-up) {
-        margin: -12px -8px 0;
-
         > div {
             transform: none !important;
         }
     }
-
-    @include media-breakpoint(xxl-up) {
-        margin: -16px -16px 0;
-    }
-
-    
 }
 
 .dragContainer {
@@ -104,7 +97,7 @@
         }
     }
 
-    @include media-breakpoint(lg-down) {
+    @include media-breakpoint(md-down) {
         opacity: 1;
     }
 }
@@ -122,4 +115,30 @@
     color: var(--t-background);
     border-radius: 12px 0 12px 0;
     background-color: var(--t-text);
+
+    .deliveriIcon {
+        width: 16px;
+        height: 16px;
+        display: flex;
+    }
+
+    @include media-breakpoint(lg) {
+        width: 24px;
+        height: 34px;
+
+        .deliveriIcon {
+            width: 13px;
+            height: 13px;
+        }
+    }
+
+    @include media-breakpoint(xl) {
+        width: 26px;
+        height: 37px;
+
+        .deliveriIcon {
+            width: 15px;
+            height: 15px;
+        }
+    }
 }

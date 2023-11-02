@@ -3,6 +3,9 @@ import { useState, useEffect } from 'react'
 
 export default function Icon({ name, external = '', width = 16, height = 16, size }) {
     const [LoadedIcon, setLoadedIcon] = useState(false)
+    const iconWidth = width.includes('%') ? width : +width
+    const iconHeight = width.includes('%') ? height : +height
+
     const loadIcon = iconName => {
         // const path = `../public/icons/icon-${iconName}.svg`
         const dynamicComponents = {
@@ -65,7 +68,7 @@ export default function Icon({ name, external = '', width = 16, height = 16, siz
     }, [])
 
     return (
-        <span className={`icon ${size ? 'icon--' + size : ''} ${external}`} style={{ width: +width, height: +height }}>
+        <span className={`icon ${size ? 'icon--' + size : ''} ${external}`} style={{ width: iconWidth, height: iconHeight }}>
             {LoadedIcon ? <LoadedIcon /> : null}
         </span>
     )

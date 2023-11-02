@@ -117,6 +117,7 @@ export default function FastFilter({ onAfterChange, fastFilters, resetAllHandler
                 const innerElements = Array.from(refInner.current.childNodes)
                 innerElements.forEach(el => dragWidth += el.clientWidth + 8)
                 setDragConstraints(refWrapper.current.clientWidth - dragWidth)
+                console.log(refWrapper.current.clientWidth - dragWidth);
 
                 refScrollLimit.current = Math.floor((dragWidth - clientWidth) / scrollPixels)
                 refScrollOfset.current = (dragWidth - clientWidth) / refScrollLimit.current
@@ -138,10 +139,12 @@ export default function FastFilter({ onAfterChange, fastFilters, resetAllHandler
                     <motion.div
                         drag='x'
                         ref={refInner}
+                        dragElastic={0.2}
                         animate={animateInner}
                         onDragEnd={dragEndHandler}
                         onDragStart={dragStartHandler}
                         className={style.fastFilterInner}
+                        dragTransition={{ bounceStiffness: 300, bounceDamping: 30 }}
                         dragConstraints={{ right: 0, left: dragConstraints }}>
                         {fastFilters.map((item, index) => (
                             <div

@@ -1,13 +1,13 @@
 import { useState, useEffect, useRef } from 'react'
 import style from '../style.module.scss'
 import CardCreativeImages from './CardCreativeImages/CardCreativeImages'
-import CardCreativeValues from './CardCreativeValues/CardCreativeValues'
 import CardCreativePrice from './CardCreativePrice/CardCreativePrice'
 import { globalState } from '../../../../helpers/globalState'
 // import { isEqual } from '../../../helpers/isEqual'
 import CardCreativeDescrption from './CardCreativeDescrption/CardCreativeDescrption'
 import CardBuyButton from '../Univ/BuyButton/CardBuyButton'
 import Favourite from '../../../Favourite'
+import CardValues from '../Univ/CardValues/CardValues'
 
 export default function CardCreative({ info, animate, onChangeCount, index, nth }) {
     // @TODO Постарайся от этого избавиться
@@ -254,12 +254,13 @@ export default function CardCreative({ info, animate, onChangeCount, index, nth 
             onMouseEnter={mouseEnterHandler}
             onMouseLeave={mouseLeaveHandler}
             className={style.cardCreative}>
-
-            <Favourite width='24' height='24' external={style.favourites} info={{ primary: info.secondaryName, image: info.images[0] }} />
+            <div className={`${style.favourites}`}>
+                <Favourite width='100%' height='100%' info={{ primary: info.secondaryName, image: info.images[0] }} />
+            </div>
             <CardCreativeImages isDelivery={info.isDelivery} images={info.images} link='/product/rp-no-coloristic' />
             <div className={`${style.cardCreativeBody}`}>
                 <CardCreativeDescrption info={info} classTitle={style.title} classText={style.text} link='/product/rp-no-coloristic' />
-                <CardCreativeValues info={info} />
+                <CardValues info={info} />
 
                 <div className={`${style.cardFooter}`}>
                     <CardCreativePrice info={info} />

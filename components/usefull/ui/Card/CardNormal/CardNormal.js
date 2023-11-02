@@ -1,7 +1,7 @@
 import { useState, useEffect, useRef } from 'react'
 import style from '../style.module.scss'
 import CardImages from './CardImages/CardImages'
-import CardValues from './CardValues/CardValues'
+import CardValues from '../Univ/CardValues/CardValues'
 import CardPrice from './CardPrice/CardPrice'
 import { globalState } from '../../../../helpers/globalState'
 // import { isEqual } from '../../../helpers/isEqual'
@@ -248,7 +248,9 @@ export default function CardNormal({ info, animate, onChangeCount }) {
             className={style.card}
             onMouseEnter={mouseEnterHandler}
             onMouseLeave={mouseLeaveHandler}>
-            <Favourite width='24' height='24' external={style.favourites} info={{ primary: info.secondaryName, image: info.images[0] }} />
+            <div className={`${style.favourites}`}>
+                <Favourite width='100%' height='100%' info={{ primary: info.secondaryName, image: info.images[0] }} />
+            </div>
             <CardImages isDelivery={info.isDelivery} images={info.images} link='/product/rp-no-coloristic' />
             <CardDescrption info={info} classTitle={style.title} classText={style.text} />
             <CardValues info={info} />

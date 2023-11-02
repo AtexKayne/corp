@@ -13,7 +13,7 @@ import { debounce } from '../helpers/debounce'
 
 export default function Catalog({ detail }) {
     const isBrands = detail.isBrands || detail.isPromo
-    const [mode, setMode] = useState('creative')
+    const [mode, setMode] = useState('normal')
     const [isExistFilters, setIsExistFilters] = useState(false)
     const [isFilterOpen, setIsFilterOpen] = useState(false)
     const [filters, setFilters] = useState(detail.filter)
@@ -217,7 +217,8 @@ function CardList({ products, mode }) {
                 case 'xl':
                     for (let i = 0; i < 10; i++) {
                         newNth.push(i * 11)
-                        newNth.push(i * 10 + 6 + i)
+                        const coef = i % 2 === 0 ? 6 : 5
+                        newNth.push(i * 10 + coef + i)
                     }
                     break;
                 case 'lg':

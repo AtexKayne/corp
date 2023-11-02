@@ -1,3 +1,6 @@
+@import "/styles/mixins/helpers/media";
+@import "/styles/mixins/helpers/adaptive-value";
+
 .text {
     line-clamp: 2;
     flex-shrink: 0;
@@ -7,4 +10,49 @@
     -webkit-line-clamp: 2;
     text-overflow: ellipsis;
     -webkit-box-orient: vertical;
+
+    &:first-child {
+        line-clamp: 2;
+        -webkit-line-clamp: 2;
+    }
+
+    &:last-child {
+        line-clamp: 3;
+        -webkit-line-clamp: 3;
+    }
+}
+
+.classTitle {
+    font-weight: 400;
+    padding-top: 16px;
+    line-height: 1.3em;
+    text-transform: uppercase;
+    color: var(--t-text) !important;
+
+    font-size: adaptive-value(
+        (
+            xs: 12px,
+            lg: 10px,
+            xxl: 12px
+        )
+    );
+}
+
+.classText {
+    margin-top: 4px;
+    font-weight: 400;
+    line-height: 1.1em;
+    transition: 0.3s color;
+    font-size: adaptive-value(
+        (
+            xs: 22px,
+            lg: 16px,
+            xxl: 20px,
+            xxxl: 22px
+        )
+    );
+
+    [data-hover="true"] & {
+        color: var(--t-primary);
+    }
 }

@@ -123,6 +123,8 @@
 
             .favourites {
                 right: auto;
+                width: 24px;
+                height: 24px;
                 left: adaptive-value(
                     (
                         lg: calc(100vw / 880 * 425),
@@ -257,22 +259,34 @@
     align-items: flex-end;
 }
 
-.card .favourites,
-.cardCreative .favourites {
+.favourites {
     top: 16px;
     z-index: 4;
-    opacity: 0;
     right: 20px;
     transition: 0.3s;
     position: absolute;
-}
+    width: adaptive-value(
+        (
+            xs: 24px,
+            lg: 18px,
+            xl: 20px,
+            xxl: 24px
+        )
+    );
+    height: adaptive-value(
+        (
+            xs: 24px,
+            lg: 18px,
+            xl: 20px,
+            xxl: 24px
+        )
+    );
 
-.favourites {
-    [data-hover="true"] & {
-        opacity: 1;
-    }
+    @include media-breakpoint(lg-up) {
+        opacity: 0;
 
-    @include media-breakpoint(md-down) {
-        opacity: 1 !important;
+        [data-hover="true"] & {
+            opacity: 1;
+        }
     }
 }

@@ -1,7 +1,15 @@
 @import "/styles/mixins/helpers/media";
+@import "/styles/mixins/helpers/adaptive-value";
 
 .values {
     margin: 16px 0;
+    font-weight: 400;
+    font-size: adaptive-value(
+        (
+            xs: 10px,
+            xl: 12px
+        )
+    );
 
     .colorIcon {
         span {
@@ -9,8 +17,8 @@
         }
 
         div {
-            transform: translate(-3px, 1px);
-            // text-transform: uppercase;
+            text-transform: uppercase;
+            transform: translate(-4px, 1px);
         }
     }
 }
@@ -19,19 +27,19 @@
     display: flex;
     flex-wrap: wrap;
 
-    >* {
+    > * {
         display: none;
         margin-right: 6px;
         border-radius: 4px;
-        padding: 0px 4px 4px 0;
         pointer-events: none;
+        padding: 0px 4px 4px 0;
         text-transform: uppercase;
 
-        &[data-disabled='true'] {
+        &[data-disabled="true"] {
             color: var(--c-_light-gray);
         }
 
-        &[data-active='false'] {
+        &[data-active="false"] {
             color: var(--c-_light-gray);
             background-color: transparent;
         }
@@ -42,28 +50,15 @@
             color: var(--t-text);
 
             &::after {
-                // top: 0;
-                // right: -28px;
-                // min-width: 24px;
-                // text-align: center;
-                // position: absolute;
-                // border-radius: 4px;
-                // padding: 5px 4px 4px;
-                // pointer-events: none;
-                // letter-spacing: 2px;
-                // text-transform: uppercase;
-                // content: var(--count-values);
-                // background-color: var(--c-_lightest);
-
                 top: -2px;
                 right: -28px;
                 min-width: 24px;
                 text-align: center;
                 position: absolute;
                 border-radius: 4px;
+                letter-spacing: 2px;
                 padding: 2px 4px 2px;
                 pointer-events: none;
-                letter-spacing: 2px;
                 text-transform: uppercase;
                 content: var(--count-values);
                 background-color: var(--c-_lightest);
@@ -72,7 +67,7 @@
     }
 
     @include media-breakpoint(xxl-up) {
-        >* {
+        > * {
             display: block;
 
             &:first-child::after {
