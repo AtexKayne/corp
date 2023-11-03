@@ -252,7 +252,7 @@ export default function CardNormal({ info, animate, onChangeCount }) {
                 <Favourite width='100%' height='100%' info={{ primary: info.secondaryName, image: info.images[0] }} />
             </div>
             <CardImages isDelivery={info.isDelivery} images={info.images} link='/product/rp-no-coloristic' />
-            <CardDescrption info={info} classTitle={style.title} classText={style.text} />
+            <CardDescrption info={info} link='/product/rp-no-coloristic' />
             <CardValues info={info} />
 
             <div className={`${style.cardFooter}`}>
