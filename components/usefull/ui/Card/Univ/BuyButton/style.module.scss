@@ -41,17 +41,17 @@
         }
     }
 
-    @include media-breakpoint(xxxl) {
-        [data-mode='normal'] & {
-            min-width: 92px;
-            min-height: 60px;
+    // @include media-breakpoint(xxxl) {
+    //     [data-mode='normal'] & {
+    //         min-width: 92px;
+    //         min-height: 60px;
 
-            .notify {
-                height: 60px;
-                min-width: 92px;
-            }
-        }
-    }
+    //         .notify {
+    //             height: 60px;
+    //             min-width: 92px;
+    //         }
+    //     }
+    // }
 }
 
 .buttonProfiContainer {
@@ -82,17 +82,17 @@
         }
     }
 
-    @include media-breakpoint(xxxl) {
-        [data-mode='normal'] & {
-            min-width: 92px;
-            min-height: 60px;
+    // @include media-breakpoint(xxxl) {
+    //     [data-mode='normal'] & {
+    //         min-width: 92px;
+    //         min-height: 60px;
 
-            .profiBtn {
-                height: 60px;
-                min-width: 92px;
-            }
-        }
-    }
+    //         .profiBtn {
+    //             height: 60px;
+    //             min-width: 92px;
+    //         }
+    //     }
+    // }
 }
 
 .buttonContainer {
@@ -109,12 +109,12 @@
         min-width: 100%;
     }
 
-    @include media-breakpoint(xxxl) {
-        [data-mode='normal'] & {
-            min-width: 92px;
-            min-height: 60px;
-        }
-    }
+    // @include media-breakpoint(xxxl) {
+    //     [data-mode='normal'] & {
+    //         min-width: 92px;
+    //         min-height: 60px;
+    //     }
+    // }
 }
 
 .button {
@@ -155,12 +155,12 @@
         min-width: 100%;
     }
 
-    @include media-breakpoint(xxxl) {
-        [data-mode='normal'] & {
-            min-width: 92px;
-            min-height: 60px;
-        }
-    }
+    // @include media-breakpoint(xxxl) {
+    //     [data-mode='normal'] & {
+    //         min-width: 92px;
+    //         min-height: 60px;
+    //     }
+    // }
 }
 
 .buttonCount {
@@ -225,10 +225,10 @@
         }
     }
 
-    @include media-breakpoint(xxxl) {
-        [data-mode='normal'] & {
-            width: 92px;
-            height: 60px;
-        }
-    }
+    // @include media-breakpoint(xxxl) {
+    //     [data-mode='normal'] & {
+    //         width: 92px;
+    //         height: 60px;
+    //     }
+    // }
 }

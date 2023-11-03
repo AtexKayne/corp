@@ -16,10 +16,9 @@
 
     @include media-breakpoint(xxxl) {
         font-size: 20px;
-        min-height: 60px;
 
         > div {
-            font-size: 18px;
+            font-size: 14px;
             margin-top: 6px;
         }
     }
@@ -35,27 +34,5 @@
         > div {
             margin-left: 6px;
         }
-    }
-}
-
-.basket {
-    height: 1px;
-    align-items: center;
-    display: inline-flex;
-
-    &[data-hidden="true"] {
-        display: none;
-    }
-
-    > * {
-        margin-right: 8px;
-
-        &:last-child {
-            transform: translateY(2px);
-        }
-    }
-
-    @include media-breakpoint(lg-down) {
-        display: none;
     }
 }
