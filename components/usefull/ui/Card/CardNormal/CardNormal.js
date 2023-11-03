@@ -73,7 +73,7 @@ export default function CardNormal({ info, animate, onChangeCount }) {
         }
         await animate.module.start({ opacity: 0, transition: { duration: 0.1 } })
 
-        const width = window.innerWidth > globalState.sizes.xxxl ? 92 : 68
+        const width = 68
         await animate.counter.start({
             width,
             background: '#E21B25',
@@ -160,7 +160,7 @@ export default function CardNormal({ info, animate, onChangeCount }) {
 
             await animate.module.start({ opacity: 0, transition: { duration: 0.1 } })
 
-            const width = window.innerWidth > globalState.sizes.xxxl ? 92 : 68
+            const width = 68
             await animate.counter.start({
                 width,
                 transition: { duration: 0.1 }
