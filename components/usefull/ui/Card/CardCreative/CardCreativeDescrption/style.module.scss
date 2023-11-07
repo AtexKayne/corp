@@ -26,14 +26,13 @@
 
 [data-giant="true"] {
     .text {
-        
         flex-shrink: 0;
         display: block;
         overflow: hidden;
         display: -webkit-box;
         text-overflow: ellipsis;
         -webkit-box-orient: vertical;
-        
+
         &:first-child {
             line-clamp: 2;
             -webkit-line-clamp: 2;
@@ -90,10 +89,6 @@
     line-height: 1.1em;
     transition: 0.3s color;
 
-    [data-hover="true"] & {
-        color: var(--t-primary);
-    }
-
     [data-giant="false"] & {
         margin-top: 4px;
         font-size: adaptive-value(
@@ -117,5 +112,11 @@
                 xxl: 28px
             )
         );
+    }
+
+    @include media-breakpoint(lg-up) {
+        [data-hover="true"] & {
+            color: var(--t-primary);
+        }
     }
 }

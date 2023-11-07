@@ -289,6 +289,10 @@
     @include media-breakpoint(lg-up) {
         opacity: 0;
 
+        &[data-active='true'] {
+            opacity: 1;
+        }
+
         [data-hover="true"] & {
             opacity: 1;
         }

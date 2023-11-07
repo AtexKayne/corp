@@ -1,6 +1,8 @@
 import { useState, useEffect } from 'react'
 import { globalState } from '../../components/helpers/globalState'
 import { cardsCompact as cards } from '../../components/helpers/constants'
+import { motion, useAnimationControls } from 'framer-motion'
+import { debounce } from '../helpers/debounce'
 
 import Icon from '../../components/Icon'
 import style from './Catalog.module.scss'
@@ -9,7 +11,6 @@ import Dropdown from '../../components/usefull/Dropdown'
 import CatalogFilters from '../usefull/filters/CatalogFilters'
 import Nav from './Nav/Nav'
 import Head from './Head/Head'
-import { debounce } from '../helpers/debounce'
 
 export default function Catalog({ detail }) {
     const isBrands = detail.isBrands || detail.isPromo
@@ -18,6 +19,7 @@ export default function Catalog({ detail }) {
     const [isFilterOpen, setIsFilterOpen] = useState(false)
     const [filters, setFilters] = useState(detail.filter)
     const [products, setProducts] = useState('updated')
+    const animateContainer = useAnimationControls()
 
     const selectFilters = arr => {
         if (arr) setFilters(arr)
@@ -100,6 +102,14 @@ export default function Catalog({ detail }) {
         setIsFilterOpen(true)
     }
 
+    const changeMode = async mode => {
+        window.scrollTo({ behavior: 'smooth', top: 0 })
+        await animateContainer.start({ opacity: 0, transition: { duration: 0.1 } })
+        setMode(mode)
+        await animateContainer.start({ y: 50, transition: { duration: 0.3 } })
+        animateContainer.start({ y: 0, opacity: 1, transition: { duration: 0.2, ease: 'easeInOut' } })
+    }
+
     useEffect(() => {
         updateProducts()
         updateFastFilters()
@@ -121,8 +131,8 @@ export default function Catalog({ detail }) {
             <Head info={detail} isBrands={isBrands} isPromo={detail.isPromo} categoryName={detail.name} />
             <Nav
                 mode={mode}
-                setMode={setMode}
                 isBrands={isBrands}
+                setMode={changeMode}
                 sortHandler={sortHandler}
                 openFilters={openFilters}
                 isExistFilters={isExistFilters}
@@ -130,7 +140,7 @@ export default function Catalog({ detail }) {
                 resetAllHandler={resetAllHandler}
                 selectFastFilter={selectFastFilter} />
             <div className='is-hidden--xl-up text--t5 text--bold text--upper text--center text--color-small'>НАЙДЕНО 668 ТОВАРОВ</div>
-            <div className={style.container}>
+            <motion.div animate={animateContainer} className={style.container}>
                 <div style={{ width: '100%' }} className='d-flex flex--column'>
                     <PreviousButton isPrevButton={false} />
 
@@ -138,7 +148,7 @@ export default function Catalog({ detail }) {
 
                     <Pagination />
                 </div>
-            </div>
+            </motion.div>
 
             <CatalogFilters
                 filters={filters}

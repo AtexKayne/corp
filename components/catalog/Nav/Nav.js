@@ -15,7 +15,7 @@ export default function Nav({ isBrands, sortHandler, openFilters, fastFilters, s
     const udpateViewMode = () => {
         if (window.innerWidth > globalState.sizes.lg) return
         let newMode = 'normal'
-        
+
         if (mode === 'creative') newMode = 'normal'
         else if (mode === 'normal') newMode = 'compact'
         else if (mode === 'compact') newMode = 'creative'
@@ -43,10 +43,6 @@ export default function Nav({ isBrands, sortHandler, openFilters, fastFilters, s
         refNav.current.style.paddingLeft = `${offset}px`
         refNav.current.style.paddingRight = `${offset}px`
     }, 1000)
-
-    const updateMode = mode => {
-        setMode(mode)
-    }
 
     useEffect(() => {
         window.addEventListener('scroll', debounceScroll, { passive: true })
@@ -82,21 +78,7 @@ export default function Nav({ isBrands, sortHandler, openFilters, fastFilters, s
                             <div onClick={udpateViewMode} className='mr-2 mr-3:md d-flex flex--center mr-1:xxs'>
                                 <span className='text--t5 link text--bold text--upper is-hidden--xxs'>Вид</span>
                                 <div className={style.viewMode}>
-                                    <svg onClick={() => updateMode('normal')} data-active={mode === 'normal'} width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                        <g clipPath="url(#clip0_1707_39249)">
-                                            <rect x="0.000976562" width="5.66668" height="5.66668" rx="0.266667" fill="currentColor" />
-                                            <rect x="0.000976562" y="8.33398" width="5.66668" height="5.66668" rx="0.266667" fill="currentColor" />
-                                            <rect x="8.33398" width="5.66668" height="5.66668" rx="0.266667" fill="currentColor" />
-                                            <rect x="8.33398" y="8.33398" width="5.66668" height="5.66668" rx="0.266667" fill="currentColor" />
-                                        </g>
-                                        <defs>
-                                            <clipPath id="clip0_1707_39249">
-                                                <rect width="14" height="14" fill="white" />
-                                            </clipPath>
-                                        </defs>
-                                    </svg>
-
-                                    <svg onClick={() => updateMode('compact')} data-active={mode === 'compact'} width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <svg onClick={() => setMode('compact')} data-active={mode === 'compact'} width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
                                         <g clipPath="url(#clip0_1707_39256)">
                                             <g clipPath="url(#clip1_1707_39256)">
                                                 <rect width="6.125" height="3.5" rx="0.266667" fill="currentColor" />
@@ -116,8 +98,7 @@ export default function Nav({ isBrands, sortHandler, openFilters, fastFilters, s
                                             </clipPath>
                                         </defs>
                                     </svg>
-
-                                    <svg onClick={() => updateMode('creative')} width="14" height="14" data-active={mode === 'creative'} viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <svg onClick={() => setMode('creative')} width="14" height="14" data-active={mode === 'creative'} viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
                                         <g clipPath="url(#clip0_1707_39267)">
                                             <rect width="7" height="6.125" rx="0.266667" fill="currentColor" />
                                             <rect y="7.875" width="4.375" height="6.125" rx="0.266667" fill="currentColor" />
@@ -126,6 +107,19 @@ export default function Nav({ isBrands, sortHandler, openFilters, fastFilters, s
                                         </g>
                                         <defs>
                                             <clipPath id="clip0_1707_39267">
+                                                <rect width="14" height="14" fill="white" />
+                                            </clipPath>
+                                        </defs>
+                                    </svg>
+                                    <svg onClick={() => setMode('normal')} data-active={mode === 'normal'} width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                        <g clipPath="url(#clip0_1707_39249)">
+                                            <rect x="0.000976562" width="5.66668" height="5.66668" rx="0.266667" fill="currentColor" />
+                                            <rect x="0.000976562" y="8.33398" width="5.66668" height="5.66668" rx="0.266667" fill="currentColor" />
+                                            <rect x="8.33398" width="5.66668" height="5.66668" rx="0.266667" fill="currentColor" />
+                                            <rect x="8.33398" y="8.33398" width="5.66668" height="5.66668" rx="0.266667" fill="currentColor" />
+                                        </g>
+                                        <defs>
+                                            <clipPath id="clip0_1707_39249">
                                                 <rect width="14" height="14" fill="white" />
                                             </clipPath>
                                         </defs>

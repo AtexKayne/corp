@@ -14,6 +14,7 @@ export default function CardCreative({ info, animate, onChangeCount, index, nth 
     const [count, setCount] = useState(info.basket ?? 0)
     const [isHover, setIsHover] = useState(false)
     const [isGiant, setIsGiant] = useState(false)
+    const [isFavourite, setIsFavourite] = useState(false)
 
     const refInner = useRef(null)
     const refTimeout = useRef(null)
@@ -217,6 +218,10 @@ export default function CardCreative({ info, animate, onChangeCount, index, nth 
         // setValues(newInfo.values)
     }
 
+    const favouriteHandler = isFavourite => {
+        setIsFavourite(isFavourite)
+    }
+
     useEffect(() => {
         if (isHover) {
             refAnimated.current = showEnter()
@@ -254,8 +259,8 @@ export default function CardCreative({ info, animate, onChangeCount, index, nth 
             onMouseEnter={mouseEnterHandler}
             onMouseLeave={mouseLeaveHandler}
             className={style.cardCreative}>
-            <div className={`${style.favourites}`}>
-                <Favourite width='100%' height='100%' info={{ primary: info.secondaryName, image: info.images[0] }} />
+            <div className={`${style.favourites}`} data-active={isFavourite}>
+                <Favourite width='100%' height='100%' onAfterChange={favouriteHandler} info={{ primary: info.secondaryName, image: info.images[0] }} />
             </div>
             <CardCreativeImages isDelivery={info.isDelivery} images={info.images} link='/product/rp-no-coloristic' />
             <div className={`${style.cardCreativeBody}`}>

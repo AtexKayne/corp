@@ -52,7 +52,9 @@
         )
     );
 
-    [data-hover="true"] & {
-        color: var(--t-primary);
+    @include media-breakpoint(lg-up) {
+        [data-hover="true"] & {
+            color: var(--t-primary);
+        }
     }
 }

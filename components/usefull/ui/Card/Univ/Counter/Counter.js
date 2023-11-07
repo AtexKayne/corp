@@ -25,7 +25,15 @@ export default function Counter({ onAfterChange, max, count, info }) {
     const shake = () => {
         setIsShaked(true)
         setTimeout(() => setIsShaked(false), 1000)
-        globalState.popover.open([info.primaryName, 'Максимум для этого заказа'], info.images[0])
+        if (window.innerWidth > globalState.sizes.md) {
+            globalState.popover.open(
+                [
+                    info.primaryName,
+                    'Максимум для этого заказа'
+                ],
+                info.images[0]
+            )
+        }
     }
 
     const checkValue = checked => {

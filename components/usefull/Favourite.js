@@ -3,7 +3,7 @@ import { useState } from 'react'
 import { globalState } from '../helpers/globalState'
 import style from '/styles/module/usefull/Favourite.module.scss'
 
-export default function Favourite({ width, height, info, size = '', isActive = false, external = '' }) {
+export default function Favourite({ width, height, info, size = '', isActive = false, external = '', onAfterChange }) {
     const [isFavourite, setIsFavourite] = useState(isActive)
     const iconWidth = width.includes('%') ? width : `${width}px`
     const iconHeight = width.includes('%') ? height : `${height}px`
@@ -16,6 +16,7 @@ export default function Favourite({ width, height, info, size = '', isActive = f
         globalState.popover.setTextSecondary(text)
         globalState.popover.setIsBasket(false)
         globalState.popover.setIsOpen(true)
+        if (typeof onAfterChange === 'function') onAfterChange(!isFavourite)
     }
 
     return (

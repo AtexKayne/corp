@@ -13,13 +13,13 @@ export default function CardNormal({ info, animate, onChangeCount }) {
     // @TODO Постарайся от этого избавиться
     const [count, setCount] = useState(info.basket ?? 0)
     const [isHover, setIsHover] = useState(false)
+    const [isFavourite, setIsFavourite] = useState(false)
 
     const refInner = useRef(null)
     const refTimeout = useRef(null)
     const refIsFocus = useRef(false)
     const refIsHover = useRef(false)
     const refAnimated = useRef(false)
-
 
     const mouseEnterHandler = async () => {
         if (window.innerWidth <= globalState.sizes.md) return
@@ -216,6 +216,10 @@ export default function CardNormal({ info, animate, onChangeCount }) {
         // setValues(newInfo.values)
     }
 
+    const favouriteHandler = isFavourite => {
+        setIsFavourite(isFavourite)
+    }
+
     useEffect(() => {
         if (isHover) {
             refAnimated.current = showEnter()
@@ -248,8 +252,8 @@ export default function CardNormal({ info, animate, onChangeCount }) {
             className={style.card}
             onMouseEnter={mouseEnterHandler}
             onMouseLeave={mouseLeaveHandler}>
-            <div className={`${style.favourites}`}>
-                <Favourite width='100%' height='100%' info={{ primary: info.secondaryName, image: info.images[0] }} />
+            <div className={`${style.favourites}`} data-active={isFavourite}>
+                <Favourite width='100%' height='100%' onAfterChange={favouriteHandler} info={{ primary: info.secondaryName, image: info.images[0] }} />
             </div>
             <CardImages isDelivery={info.isDelivery} images={info.images} link='/product/rp-no-coloristic' />
             <CardDescrption info={info} link='/product/rp-no-coloristic' />

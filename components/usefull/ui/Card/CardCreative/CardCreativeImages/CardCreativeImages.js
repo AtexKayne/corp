@@ -28,7 +28,7 @@ export default function CardCreativeImages({ link = '/', images, isDelivery }) {
                 animateDrag.start({ x: -imageWidth * (images.length - 1), transition: { duration: 0.1 } })
                 return
             }
-
+            
             if (dragInfo.offset.x < 0) {
                 setActiveImage(prev => {
                     prev++

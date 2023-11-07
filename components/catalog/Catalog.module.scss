@@ -221,6 +221,17 @@
 
     > *[data-active="true"] {
         color: var(--t-text);
+        pointer-events: none;
+    }
+
+    @include media-breakpoint(lg-up) {
+        > * {
+            transition: 0.3s;
+            
+            &:hover {
+                color: var(--t-primary);
+            }
+        }
     }
 
     @include media-breakpoint(lg-down) {
@@ -865,7 +876,7 @@
 // Usefull
 .pagination {
     width: 100%;
-    padding: 32px 16px 20px;
+    padding-top: 60px;
 
     .showBtn {
         min-height: 60px;
