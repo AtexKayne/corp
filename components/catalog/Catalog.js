@@ -103,6 +103,7 @@ export default function Catalog({ detail }) {
     }
 
     const changeMode = async mode => {
+        window.navigator?.vibrate?.(200)
         window.scrollTo({ behavior: 'smooth', top: 0 })
         await animateContainer.start({ opacity: 0, transition: { duration: 0.1 } })
         setMode(mode)
