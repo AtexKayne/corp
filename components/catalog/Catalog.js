@@ -14,7 +14,7 @@ import Head from './Head/Head'
 
 export default function Catalog({ detail }) {
     const isBrands = detail.isBrands || detail.isPromo
-    const [mode, setMode] = useState('normal')
+    const [mode, setMode] = useState('creative')
     const [isExistFilters, setIsExistFilters] = useState(false)
     const [isFilterOpen, setIsFilterOpen] = useState(false)
     const [filters, setFilters] = useState(detail.filter)
@@ -124,6 +124,9 @@ export default function Catalog({ detail }) {
 
     useEffect(() => {
         setProducts(cards)
+        setTimeout(() => {
+            animateContainer.start({ y: 0, opacity: 1, transition: { duration: 0.2, ease: 'easeInOut' } })
+        }, 300)
     }, [])
 
     return (
@@ -140,7 +143,7 @@ export default function Catalog({ detail }) {
                 resetAllHandler={resetAllHandler}
                 selectFastFilter={selectFastFilter} />
             <div className='is-hidden--xl-up text--t5 text--bold text--upper text--center text--color-small'>НАЙДЕНО 668 ТОВАРОВ</div>
-            <motion.div animate={animateContainer} className={style.container}>
+            <motion.div animate={animateContainer} initial={{ opacity: 0, y: 50 }} className={style.container}>
                 <div style={{ width: '100%' }} className='d-flex flex--column'>
                     <PreviousButton isPrevButton={false} />
 
