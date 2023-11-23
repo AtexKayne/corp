@@ -126,6 +126,13 @@ function ModalFilterWrapper({ children, name, isChanged }) {
 function Filter({ name, code }) {
     const { colors, brands, pitanie, proizvodstvo, ves } = filters
     const [isChanged, setIsChanged] = useState(false)
+    const itemCheckHandler = () => {
+        globalState.catalog.setSelectedFilter(prev => {
+            const prevCopy = Object.assign({}, prev)
+            prevCopy[code] = !isChecked
+            return prevCopy
+        })
+    }
 
     return (
         <div data-code={code} className={style.filterInner}>
@@ -161,7 +168,7 @@ function Filter({ name, code }) {
             }
             {code === 'market' || code === 'available' || code === 'hits' || code === 'discont' ?
                 <div className='pt-1.5'>
-                    <ItemChecker code={code} text={name} reset='сбросить' />
+                    <ItemChecker onAfterChange={itemCheckHandler} code={code} text={name} reset='сбросить' />
                 </div> : null
             }
         </div>

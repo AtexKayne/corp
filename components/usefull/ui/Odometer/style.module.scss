@@ -1,6 +1,7 @@
 .odometer {
     height: 1em;
     overflow: hidden;
+    // min-width: 300px;
     position: relative;
     display: inline-block;
 }
@@ -9,6 +10,7 @@
     opacity: 0;
     height: 47px;
     position: absolute;
+    white-space: nowrap;
     pointer-events: none;
 }
 
@@ -16,10 +18,12 @@
     top: 0;
     right: 2px;
     position: absolute;
+    white-space: nowrap;
 }
 
 .numberContainer {
     // text-align: center;
+    white-space: nowrap;
     display: inline-flex;
     flex-direction: column;
     transition: 1s transform cubic-bezier(.7, -0.23, .14, 1.15), 0.1s width linear;

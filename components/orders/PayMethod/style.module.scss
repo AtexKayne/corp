@@ -1,0 +1,26 @@
+@import "/styles/mixins/helpers/media";
+
+.payMethods {
+    width: 100%;
+    display: flex;
+    margin-top: 20px;
+    justify-content: space-between;
+
+    .payMethod {
+        height: 88px;
+        display: flex;
+        cursor: pointer;
+        transition: 0.3s;
+        border-radius: 8px;
+        align-items: center;
+        flex-direction: column;
+        width: calc(50% - 10px);
+        justify-content: center;
+        background-color: var(--t-light);
+
+        @include media-breakpoint(lg-up) {
+            &:hover {
+            }
+        }
+    }
+}

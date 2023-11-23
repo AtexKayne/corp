@@ -1005,7 +1005,7 @@ export const basket = [
             old: '16 160' // Can be empty
         },
         discount: [
-            {summ: 16160, name: 'Серебрянный статус'},
+            { summ: 16160, name: 'Серебрянный статус' },
         ],
         art: '5304',
         max: 700,
@@ -1028,8 +1028,8 @@ export const basket = [
             old: '16 160' // Can be empty
         },
         discount: [
-            {summ: 10000, name: 'Серебрянный статус'},
-            {summ: 6160, name: 'Скидка по акциям'}
+            { summ: 10000, name: 'Серебрянный статус' },
+            { summ: 6160, name: 'Скидка по акциям' }
         ],
         art: '53024',
         max: 5,
@@ -1096,12 +1096,12 @@ export const basket = [
 
 export const favourite = {
     brands: [
-        {id: 1, name: 'DS', logo: '/images/brands/logos/image-1.png', link: ''},
-        {id: 2, name: 'Sensido', logo: '/images/brands/logos/image-2.png', link: ''},
-        {id: 3, name: 'Reusel', logo: '/images/brands/logos/image-3.png', link: ''},
-        {id: 4, name: 'Feather', logo: '/images/brands/logos/image-4.png', link: ''},
-        {id: 5, name: 'DS', logo: '/images/brands/logos/image-1.png', link: ''},
-        {id: 6, name: 'Sensido', logo: '/images/brands/logos/image-2.png', link: ''},
+        { id: 1, name: 'DS', logo: '/images/brands/logos/image-1.png', link: '' },
+        { id: 2, name: 'Sensido', logo: '/images/brands/logos/image-2.png', link: '' },
+        { id: 3, name: 'Reusel', logo: '/images/brands/logos/image-3.png', link: '' },
+        { id: 4, name: 'Feather', logo: '/images/brands/logos/image-4.png', link: '' },
+        { id: 5, name: 'DS', logo: '/images/brands/logos/image-1.png', link: '' },
+        { id: 6, name: 'Sensido', logo: '/images/brands/logos/image-2.png', link: '' },
     ],
     products: [
         {
@@ -1166,10 +1166,10 @@ export const favourite = {
         },
     ],
     chapters: [
-        {id: 1, name: 'Машинки, тримеры, шейверы', link: ''},
-        {id: 2, name: 'Шейверы', link: ''},
-        {id: 3, name: 'Зажимы, распылители, щетки-сметки', link: ''},
-        {id: 4, name: 'Помады, воски, глины, крем', link: ''},
+        { id: 1, name: 'Машинки, тримеры, шейверы', link: '' },
+        { id: 2, name: 'Шейверы', link: '' },
+        { id: 3, name: 'Зажимы, распылители, щетки-сметки', link: '' },
+        { id: 4, name: 'Помады, воски, глины, крем', link: '' },
     ]
 }
 
@@ -1262,7 +1262,7 @@ export const brands = [
             { name: 'Y.S.Park', code: 'ds' },
         ]
     },
-    
+
 
 ]
 
@@ -1271,14 +1271,14 @@ export const promo = [
         id: 0,
         title: 'SensiDO Match -15%',
         description: 'Подчеркните свою индивидуальность с оттеночными бальзамами SensiDO Match',
-        images: {desktop: '/images/promo/image-1-xl.jpg', mobile: '/images/promo/image-1-sm.jpg'},
+        images: { desktop: '/images/promo/image-1-xl.jpg', mobile: '/images/promo/image-1-sm.jpg' },
         items: [cards[0], cards[1], cards[2], cards[3]]
     },
     {
         id: 1,
         title: 'Lock Stock & Barrel -35%',
         description: 'Только с 1 по 31 октября',
-        images: {desktop: '/images/promo/image-2-xl.jpg', mobile: '/images/promo/image-2-sm.jpg'},
+        images: { desktop: '/images/promo/image-2-xl.jpg', mobile: '/images/promo/image-2-sm.jpg' },
         items: [cards[0], cards[1], cards[2], cards[3]]
     },
 ]
@@ -1288,14 +1288,138 @@ export const set = [
         id: 0,
         title: 'Профессиональный барбер',
         description: 'Все, что нужно для рабочего стола профессионала',
-        images: {desktop: '/images/set/image-1-xl.jpg', mobile: '/images/set/image-1-xs.jpg'},
+        images: { desktop: '/images/set/image-1-xl.jpg', mobile: '/images/set/image-1-xs.jpg' },
         items: [cards[0], cards[1], cards[2], cards[3]]
     },
     {
         id: 1,
         title: 'Колорист SensiDO',
         description: 'Все, что нужно профессиональному колористу',
-        images: {desktop: '/images/set/image-2-xl.jpg', mobile: '/images/set/image-2-xs.jpg'},
+        images: { desktop: '/images/set/image-2-xl.jpg', mobile: '/images/set/image-2-xs.jpg' },
         items: [cards[0], cards[1], cards[2], cards[3]]
     },
 ]
+
+export const orders = {
+    userInfo: {
+        id: 1,
+        adress: null,
+        consignee: null,
+        callback: null,
+        redProgramm: null,
+        isProfi: false,
+    },
+    itemSet: [
+        {
+            isFreeDelivery: false,
+            items: [
+                {
+                    id: 1,
+                    image: '/images/catalog/products/image-1.jpg',
+                    count: 1,
+                    cost: 1250,
+                    redPoints: 25,
+                    discountInfo: [
+                        { name: 'Серебрянный уровень', value: 200 }
+                    ]
+                },
+                {
+                    id: 2,
+                    image: '/images/catalog/products/image-2.jpg',
+                    count: 4,
+                    cost: 1250,
+                    redPoints: 25,
+                    discountInfo: [
+                        { name: 'Серебрянный уровень', value: 200 }
+                    ]
+                },
+                {
+                    id: 3,
+                    image: '/images/catalog/products/image-3.jpg',
+                    count: 1,
+                    cost: 1250,
+                    redPoints: 25,
+                    discountInfo: [
+                        { name: 'Серебрянный уровень', value: 200 }
+                    ]
+                },
+                {
+                    id: 4,
+                    image: '/images/catalog/products/image-4.jpg',
+                    count: 1,
+                    cost: 1250,
+                    redPoints: 25,
+                    discountInfo: [
+                        { name: 'Серебрянный уровень', value: 200 }
+                    ]
+                },
+                {
+                    id: 5,
+                    image: '/images/catalog/products/image-5.jpg',
+                    count: 1,
+                    cost: 1250,
+                    redPoints: 25,
+                    discountInfo: [
+                        { name: 'Серебрянный уровень', value: 200 }
+                    ]
+                },
+                {
+                    id: 6,
+                    image: '/images/catalog/products/image-6.jpg',
+                    count: 1,
+                    cost: 1250,
+                    redPoints: 25,
+                    discountInfo: [
+                        { name: 'Серебрянный уровень', value: 200 }
+                    ]
+                },
+                {
+                    id: 7,
+                    image: '/images/catalog/products/image-7.jpg',
+                    count: 1,
+                    cost: 1250,
+                    redPoints: 25,
+                    discountInfo: [
+                        { name: 'Серебрянный уровень', value: 200 }
+                    ]
+                },
+                {
+                    id: 8,
+                    image: '/images/catalog/products/image-8.jpg',
+                    count: 1,
+                    cost: 1250,
+                    redPoints: 25,
+                    discountInfo: [
+                        { name: 'Серебрянный уровень', value: 200 }
+                    ]
+                },
+            ],
+        },
+        {
+            isFreeDelivery: true,
+            toFreeDelivery: 10000,
+            items: [
+                {
+                    id: 2,
+                    image: '/images/catalog/products/image-2.jpg',
+                    count: 2,
+                    cost: 1250,
+                    redPoints: 25,
+                    discountInfo: [
+                        { name: 'Серебрянный уровень', value: 200 }
+                    ]
+                },
+                {
+                    id: 3,
+                    image: '/images/catalog/products/image-3.jpg',
+                    count: 1,
+                    cost: 1250,
+                    redPoints: 25,
+                    discountInfo: [
+                        { name: 'Серебрянный уровень', value: 200 }
+                    ]
+                },
+            ],
+        }
+    ]
+}

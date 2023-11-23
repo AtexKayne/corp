@@ -5,6 +5,7 @@ import { fillArray } from '../../../helpers/fillArray'
 import { globalState } from '../../../helpers/globalState'
 
 export default function Odometer({ number }) {
+    console.log(number);
     const refLastCount = useRef(number)
     const refNumbersContainer = useRef(null)
     const refWrapper = useRef(null)
@@ -16,7 +17,7 @@ export default function Odometer({ number }) {
     const odometerHandler = async () => {
         if (refIsAnimated.current) return
         refIsAnimated.current = true
-        const width = refNumber.current.clientWidth
+        const width = refNumber.current.clientWidth + 2
         animateWrapper.start({ width: width })
         const children = Array.from(refNumbersContainer.current.children).reverse()
         const refChidren = Array.from(refNumber.current.children).reverse()
@@ -61,8 +62,9 @@ export default function Odometer({ number }) {
 
     useEffect(() => {
         const height = refNumber.current.clientHeight
+        const width = refNumber.current.clientWidth + 2
         refHeight.current = +height
-        animateWrapper.start({ height: height })
+        animateWrapper.start({ height, width })
     }, [])
 
 

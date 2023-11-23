@@ -1,0 +1,53 @@
+@import "/styles/mixins/helpers/media";
+@import "/styles/mixins/helpers/adaptive-value";
+@import "/styles/extends/_text-sizes";
+
+.container {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    
+    @include media-breakpoint(lg-up) {
+        // height: 100vh;
+        // overflow: hidden;
+        flex-direction: row;
+    }
+}
+
+.leftSide,
+.rightSide {
+    flex-grow: 0;
+    flex-shrink: 0;
+    // overflow-y: auto;
+    // max-height: 100vh;
+    // overflow-x: hidden;
+}
+
+.leftSide {
+    width: adaptive-value(
+        (
+            xs: 100%,
+            lg: 403px,
+            xl: 456px,
+            xxl: 572px,
+            xxxl: 768px
+        )
+    );
+}
+
+.rightSide {
+    width: adaptive-value(
+        (
+            xs: 100%,
+            lg: 313px,
+            xl: 348px,
+            xxl: 445px,
+            xxxl: 599px
+        )
+    );
+}
+
+.button {
+    margin-top: 64px;
+}

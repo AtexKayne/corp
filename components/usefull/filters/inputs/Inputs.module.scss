@@ -377,11 +377,6 @@
     font-size: 16px;
     align-items: center;
 
-    &[data-disabled='true'] {
-        opacity: .5;
-        pointer-events: none;
-    }
-
     &[data-selected='true'] {
         .iconBorder {
             border-width: 12px;
@@ -392,6 +387,23 @@
         .iconAccept{
             path {
                 stroke-dasharray: 100px, 100px;
+            }
+        }
+    }
+
+    &[data-disabled='true'] {
+        opacity: .5;
+        pointer-events: none;
+    }
+
+    &[data-disabled='true'][data-selected='true'] {
+        .iconBorder {
+            border-color: var(--t-tetriary);
+        }
+
+        .iconAccept{
+            path {
+                stroke: var(--t-disabled);
             }
         }
     }

@@ -3,6 +3,7 @@ import style from './Inputs.module.scss'
 import Icon from '../../../Icon'
 import { motion, useAnimationControls } from 'framer-motion'
 import { globalState } from '../../../helpers/globalState'
+import Checkbox from './Checkbox'
 
 export default function InputCheckboxList({ info, filters, onAfterChange }) {
     const [countSelected, setCountSelected] = useState(0)
@@ -83,7 +84,7 @@ export default function InputCheckboxList({ info, filters, onAfterChange }) {
                             ? <Search isMobile={true} />
                             : null
                         }
-                        {info.values.map(item => <Checkbox key={item.value} item={item} onAfterChange={checkboxChange} />)}
+                        {info.values.map(item => <Checkbox key={item.value} item={item} text={item.value} isSelected={item.isSelected} onAfterChange={checkboxChange} />)}
                     </div>
                     : null
                 }
@@ -144,21 +145,6 @@ function Search({ isMobile }) {
                 </span>
             </label>
             <div data-searched={isSearched} className='input-search__empty text--t2 text--normal text--color-disabled'>Ничего не найдено</div>
-        </div>
-    )
-}
-
-function Checkbox({ item, onAfterChange }) {
-    const clickHandler = () => {
-        onAfterChange(item)
-    }
-    return (
-        <div onClick={clickHandler} data-selected={item.isSelected} className={`${style.checkbox}`}>
-            <div className={`${style.boxIcon}`}>
-                <div className={`${style.iconBorder}`} />
-                <Icon external={style.iconAccept} name='checkAnim' width='24' height='24' />
-            </div>
-            {item.value}
         </div>
     )
 }

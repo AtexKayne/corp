@@ -1,0 +1,103 @@
+@import "/styles/mixins/helpers/media";
+
+.total {
+    overflow: hidden;
+
+    @include media-breakpoint(md-up) {
+        padding-right: 59px;
+    }
+}
+
+.totalContainer {
+    @include media-breakpoint(md-up) {
+        padding-right: 9px;
+    }
+}
+
+.totalLineSubs {
+    overflow: hidden;
+
+    .totalLine {
+        >span:first-child {
+            position: relative;
+            margin-right: 16px;
+            padding-left: 26px;
+
+            &::before {
+                left: 3px;
+                width: 7px;
+                height: 7px;
+                bottom: 5px;
+                content: '';
+                border-radius: 50%;
+                position: absolute;
+                background-color: var(--t-primary);
+            }
+        }
+    }
+}
+
+.totalSubOpener {
+
+    &[data-active='true'] {
+        cursor: pointer;
+        transition: .3s;
+
+        .subOpenIcon {
+            margin-left: 5px;
+            color: var(--t-primary);
+            transform: translateY(2px);
+        }
+
+        @include media-breakpoint(lg-up) {
+            &:hover {
+                color: var(--t-primary);
+            }
+        }
+    }
+
+    &[data-active='false'] {
+        pointer-events: none;
+        
+        .subOpenIcon {
+            display: none;
+        }
+    }
+
+    .subOpenIcon {
+        transition: .3s transform;
+    }
+
+    &[data-open='true'] {
+        .subOpenIcon {
+            transform: rotate(180deg) translateY(-2px);
+        }
+    }
+}
+
+.totalLine {
+    width: 100%;
+    display: flex;
+    margin-top: 20px;
+    align-items: flex-end;
+
+    >span:first-child {
+        margin-right: 16px;
+        white-space: nowrap;
+    }
+
+    >span:last-child {
+        margin-left: 16px;
+        white-space: nowrap;
+    }
+
+    div {
+        width: 100%;
+        opacity: .5;
+        border-bottom: 2px dotted var(--t-small);
+    }
+}
+
+.totalEmpty {
+    overflow: hidden;
+}

@@ -341,7 +341,7 @@ function FilledBasket({ items, setItems }) {
                 <div className={`${style.basketPrice}`}>
                     <div className='text--p4'>Итого</div>
                     <div className='text--nowrap text--p1 text--bold'>
-                        <Odometer number={summ} count={6} />
+                        <Odometer number={summ} />
                         <span style={{ transform: 'scale(0.95) translateY(-15px)' }} className='rub'>&nbsp;₽</span>
                     </div>
                 </div>
@@ -456,7 +456,7 @@ function ProductCard({ item, selectHandler, returnedItem, deleteItem, onChangeCo
                     <span className='text--t4'>Удалить</span>
                 </div>
             </div>
-            {selectHandler ? <Onboarding /> : null}
+            {/* {selectHandler ? <Onboarding /> : null} */}
             <div onClick={toggleControlsHandler} data-open={isControlOpen} className={style.settings}>
                 <Icon name='settings' width='16' height='16' />
                 <Icon name='close' width='16' height='16' />

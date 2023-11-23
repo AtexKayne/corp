@@ -1,0 +1,22 @@
+@import "/styles/mixins/helpers/media";
+
+.openerContainer {
+    width: 100%;
+    display: flex;
+    cursor: pointer;
+    align-items: center;
+    justify-content: space-between;
+
+    @include media-breakpoint(lg-up) {
+        &:hover {
+            .openerText {
+                color: var(--t-primary);
+            }
+        }
+    }
+}
+
+.openerText {
+    color: var(--t-text);
+    transition: 0.3s color;
+}
