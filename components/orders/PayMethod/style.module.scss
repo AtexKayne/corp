@@ -18,8 +18,15 @@
         justify-content: center;
         background-color: var(--t-light);
 
+        &[data-active="true"] {
+            color: var(--t-background);
+            background-color: var(--t-text);
+        }
+
         @include media-breakpoint(lg-up) {
             &:hover {
+                color: var(--t-background);
+                background-color: var(--t-text);
             }
         }
     }

@@ -6,12 +6,21 @@ export default function Delivery({ summ, maxSumm }) {
     const [width, setWidth] = useState(0)
     const [text, setText] = useState((maxSumm - summ))
     const refInline = useRef(null)
+    const refIsFitstLoad = useRef(true)
 
-    useEffect(() => {
+    const setParams = () => {
         const percent = Math.min(summ / maxSumm * 100, 100)
         setWidth(percent)
-        // setTranslateX(percent * (refInline.current.clientWidth / 100) + 20)
         setText(Math.max(maxSumm - summ, 0))
+    }
+    useEffect(() => {
+        setParams()
+        // setTimeout(setParams, 2000)
+        // if (refIsFitstLoad.current) {
+        //     refIsFitstLoad.current = false
+        // } else {
+        //     setParams()
+        // }
     }, [summ])
 
     return (

@@ -1,0 +1,25 @@
+@import '/styles/mixins/helpers/media';
+@import '/styles/mixins/helpers/adaptive-value';
+
+.orderSelecter {
+    cursor: pointer;
+    overflow: hidden;
+    padding: 25px 16px;
+    position: relative;
+    margin-bottom: 20px;
+    background-color: var(--t-light);
+}
+
+.selecterSvgUp,
+.selecterSvgDown {
+    right: 16px;
+    position: absolute;
+}
+
+.selecterSvgUp {
+    top: 0px;
+}
+
+.selecterSvgDown {
+    bottom: 0px;
+}

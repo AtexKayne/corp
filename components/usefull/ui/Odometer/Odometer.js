@@ -5,7 +5,6 @@ import { fillArray } from '../../../helpers/fillArray'
 import { globalState } from '../../../helpers/globalState'
 
 export default function Odometer({ number }) {
-    console.log(number);
     const refLastCount = useRef(number)
     const refNumbersContainer = useRef(null)
     const refWrapper = useRef(null)

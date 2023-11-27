@@ -1,6 +1,6 @@
 import { useState, useEffect, useRef } from 'react'
 import { productVariants } from '../../helpers/constants'
-import style from '/styles/module/usefull/templates/Modal-colors.module.scss'
+import style from './style-modules/Modal-colors.module.scss'
 import Link from 'next/link'
 import Image from 'next/image'
 

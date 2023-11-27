@@ -1,6 +1,6 @@
 import { useState, useEffect, useRef } from 'react'
 // import { colors } from '../../helpers/constants'
-import style from '/styles/module/usefull/templates/Modal-color-circle.module.scss'
+import style from './style-modules/Modal-color-circle.module.scss'
 import Link from 'next/link'
 import Image from 'next/image'
 import Icon from '../../Icon'

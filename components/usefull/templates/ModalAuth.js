@@ -2,7 +2,7 @@ import { useLottie } from 'lottie-react'
 import { useState, useEffect, useRef } from 'react'
 import { globalState } from '../../helpers/globalState'
 import loading from '../../../public/images/usefull/loading.json'
-import style from '/styles/module/usefull/templates/Modal-auth.module.scss'
+import style from './style-modules/Modal-auth.module.scss'
 
 import Icon from '../../Icon'
 import Image from 'next/image'

@@ -126,6 +126,7 @@ function LoadTemplate({ name, data }) {
             promoAbout: dynamic(() => import('./usefull/templates/ModalPromoAbout'), { ssr: false }),
             brandAbout: dynamic(() => import('./usefull/templates/ModalBrandAbout'), { ssr: false }),
             colorCircle: dynamic(() => import('./usefull/templates/ModalColorCircle'), { ssr: false }),
+            orderAdress: dynamic(() => import('./usefull/templates/ModalOrderAdress'), { ssr: false }),
             colorsSecond: dynamic(() => import('./usefull/templates/ModalColorsSecond'), { ssr: false }),
         }
         setLoadedTemplate(dynamicComponents[templateName])
