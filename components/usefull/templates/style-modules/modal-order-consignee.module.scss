@@ -1,0 +1,55 @@
+@import "/styles/mixins/helpers/media";
+@import "/styles/mixins/helpers/adaptive-value";
+
+.container {
+    overflow-y: auto;
+    height: calc(100% + 32px);
+    margin: adaptive-value(
+        (
+            xs: -16px -16px 0,
+            md: -28px -32px 0,
+            lg: -28px -48px 0,
+            xl: -28px -72px 0
+        )
+    );
+    padding: adaptive-value(
+        (
+            xs: 16px 16px 90px,
+            md: 28px 32px 90px,
+            lg: 28px 48px 90px,
+            xl: 28px 72px 90px
+        )
+    );
+}
+
+.fixedFooter {
+    left: 0;
+    bottom: 0;
+    z-index: 3;
+    right: 12px;
+    height: 80px;
+    position: fixed;
+    background-color: var(--t-background);
+    padding: adaptive-value(
+        (
+            xs: 10px 16px 0,
+            md: 10px 32px 0,
+            lg: 10px 48px 0,
+            xl: 10px 72px 0
+        )
+    );
+}
+
+.wrapperСonsignee {
+    height: 0;
+    overflow: hidden;
+}
+
+.iconDisabled {
+    right: 16px;
+    width: 18px;
+    bottom: 16px;
+    height: 18px;
+    position: absolute;
+    color: var(--t-disabled);
+}

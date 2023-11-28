@@ -36,10 +36,10 @@ export default function ({ detail }) {
             <div className={`${style.container}`}>
                 <div className={`${style.leftSide}`}>
                     <div className='pt-2'>
-                        <ModalOpener text='Выберите способ доставки' title='Адрес и способ доставки' />
+                        <ModalOpener text='Выберите способ доставки' title='Адрес и способ доставки' modalTemplate='orderAdress' />
                     </div>
                     <div className='pt-2.5'>
-                        <ModalOpener text='Выберите получателя' title='Получатель' />
+                        <ModalOpener text='Выберите получателя' title='Получатель' modalTemplate='orderСonsignee' />
                     </div>
                     <div className='pt-3'>
                         <ItemChecker code='phone' onAfterChange={itemCheckHandler} text='Подтвердить заказ по телефону' />

@@ -1,17 +1,73 @@
+import Icon from '../../Icon'
+import { globalState } from '../../helpers/globalState'
+import Input from '../form/Input'
 import style from './style-modules/modal-order-adress.module.scss'
 import { useRef, useEffect, useState } from 'react'
 
 export default function ModalOrderAdress({ data }) {
-    console.log(data);
+    const [step, setStep] = useState(1)
+    const [city, setCity] = useState('г. Москва')
+
+    const prevStepHandler = () => {
+        data.onAfrerChange('Выберите способ доставки')
+        setStep(1)
+    }
+
     return (
-        <div className={`${style.container}`}>
+        <div className={`${style.container} modal-steps`}>
+            <div className='modal-step1'>
+                <StepOne city={city} setCity={setCity} data={data} setStep={setStep} />
+            </div>
+            <div className='modal-step' data-step-active={step === 2}>
+                <div className='modal-step__head'>
+                    <div onClick={prevStepHandler} className='modal-step__prev is-extended'>
+                        <Icon name='chevronLeft' width='20' height='20' />
+                    </div>
+                    <div className='modal-step__title d-flex flex--align-center flex--center'>
+                        <span className='mr-0.5'>{city}</span>
+                        <Icon name='navigation' width='16' height='16' />
+                    </div>
+                </div>
+                <StepCourier city={city} setCity={setCity} data={data} setStep={setStep} />
+            </div>
+
+            <div className='modal-step' data-step-active={step === 3}>
+                <div className='modal-step__head'>
+                    <div onClick={prevStepHandler} className='modal-step__prev is-extended'>
+                        <Icon name='chevronLeft' width='20' height='20' />
+                    </div>
+                    <div className='modal-step__title d-flex flex--align-center flex--center'>
+                        <span className='mr-0.5'>{city}</span>
+                        <Icon name='navigation' width='16' height='16' />
+                    </div>
+                </div>
+                <StepAdress city={city} setCity={setCity} data={data} setStep={setStep} />
+            </div>
+        </div>
+    )
+}
+
+function StepOne({ city, setCity, data, setStep }) {
+    const courierSelect = () => {
+        data.onAfrerChange('Курьерская доставка')
+        setStep(2)
+    }
+
+    const adressSelect = () => {
+        data.onAfrerChange('Пункт выдачи заказов')
+
+        setStep(3)
+    }
+
+    return (
+        <>
             <div className='text--a3 text--bold pt-2'>Выберите способ доставки</div>
             <div className='d-flex flex--between flex--align-center mt-2'>
-                <div className='text--a4 text--bold'>г. Москва</div>
+                <div className='text--a4 text--bold'>{city}</div>
                 <div className='text--t6 text--sparse text--upper text--color-primary text--bold c-pointer'>Изменить</div>
             </div>
             <div className='mt-2'>
-                <div className={`${style.orderSelecter}`}>
+                <div onClick={courierSelect} className={`${style.orderSelecter}`}>
                     <div className='text--upper text--bold text--t5'>
                         курьер
                     </div>
@@ -19,7 +75,7 @@ export default function ModalOrderAdress({ data }) {
                         Доставка до двери
                     </div>
 
-                    <svg className={style.selecterSvgUp}  width="80" height="70" viewBox="0 0 80 70" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <svg className={style.selecterSvgUp} width="80" height="70" viewBox="0 0 80 70" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <path fillRule="evenodd" clipRule="evenodd" d="M8.24051 -7.11719H78.9409V58.6866H64.7323C64.5373 58.6866 64.3793 58.5285 64.3793 58.3336C64.3793 58.1387 64.5373 57.9807 64.7323 57.9807H78.2351V-6.41131H10.101L35.3119 15.936L15.0071 37.2208L1.17347 24.5816C1.02957 24.4501 1.0195 24.2269 1.15098 24.083C1.28245 23.9391 1.5057 23.929 1.6496 24.0605L14.9732 36.2337L34.2958 15.9786L8.24051 -7.11719Z" fill="#112233" />
                         <path fillRule="evenodd" clipRule="evenodd" d="M38.6116 23.0139C38.6414 22.8212 38.8218 22.6892 39.0144 22.719L51.6861 24.6803L71.4212 35.7421L71.2892 36.0366C70.3673 38.0938 69.0469 39.2965 67.5017 39.8664C65.9686 40.4318 64.2587 40.3581 62.5757 39.9538C59.757 39.2766 56.9206 37.6484 54.9166 36.3357L65.0523 58.1865C65.1343 58.3633 65.0574 58.5731 64.8806 58.6552C64.7038 58.7372 64.4939 58.6603 64.4119 58.4835L53.1967 34.3054L54.2641 35.0445C56.2301 36.4059 59.5205 38.4938 62.7406 39.2674C64.3471 39.6534 65.9028 39.7038 67.2574 39.2041C68.5299 38.7348 69.6648 37.7655 70.5085 36.0398L51.4522 25.3584L38.9064 23.4166C38.7138 23.3868 38.5818 23.2065 38.6116 23.0139Z" fill="#E21B25" />
                         <path fillRule="evenodd" clipRule="evenodd" d="M9.0957 31.9883H9.80159V58.1205H30.0937V58.8264H9.0957V31.9883Z" fill="#112233" />
@@ -28,7 +84,7 @@ export default function ModalOrderAdress({ data }) {
                     </svg>
 
                 </div>
-                <div className={`${style.orderSelecter}`}>
+                <div onClick={adressSelect} className={`${style.orderSelecter}`}>
                     <div className='text--upper text--bold text--t5'>
                         пункт выдачи заказов
                     </div>
@@ -36,7 +92,7 @@ export default function ModalOrderAdress({ data }) {
                         Самовывоз
                     </div>
 
-                    <svg  className={style.selecterSvgDown} width="80" height="72" viewBox="0 0 80 72" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <svg className={style.selecterSvgDown} width="80" height="72" viewBox="0 0 80 72" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <path fillRule="evenodd" clipRule="evenodd" d="M63.5293 23.4129H16.2352C9.60776 23.4129 4.23518 28.7855 4.23518 35.4129V66.2697H75.5293V35.4129C75.5293 28.7855 70.1567 23.4129 63.5293 23.4129ZM16.2352 22.707C9.21791 22.707 3.5293 28.3957 3.5293 35.4129V66.9755H76.2352V35.4129C76.2352 28.3957 70.5466 22.707 63.5293 22.707H16.2352Z" fill="#112233" />
                         <path fillRule="evenodd" clipRule="evenodd" d="M22.7788 23.4129H16.2352C9.60776 23.4129 4.23518 28.7855 4.23518 35.4129V66.2697H34.7788V35.4129C34.7788 28.7855 29.4062 23.4129 22.7788 23.4129ZM16.2352 22.707C9.21791 22.707 3.5293 28.3957 3.5293 35.4129V66.9755H35.4847V35.4129C35.4847 28.3957 29.7961 22.707 22.7788 22.707H16.2352Z" fill="#112233" />
                         <path fillRule="evenodd" clipRule="evenodd" d="M9.39258 60.1733C9.39258 59.9783 9.5506 59.8203 9.74552 59.8203H29.5615C29.7564 59.8203 29.9144 59.9783 29.9144 60.1733C29.9144 60.3682 29.7564 60.5262 29.5615 60.5262H9.74552C9.5506 60.5262 9.39258 60.3682 9.39258 60.1733Z" fill="#112233" />
@@ -47,6 +103,76 @@ export default function ModalOrderAdress({ data }) {
                     </svg>
 
                 </div>
+            </div>
+        </>
+    )
+}
+
+function StepCourier({ data }) {
+    const [isButtonActive, setIsButtonActive] = useState('true')
+    const refValue = useRef({})
+
+    const clickHandler = () => {
+        globalState.modal.open('orderСonsignee', true)
+    }
+
+    const changeHandler = (name, value) => {
+        refValue.current[name] = value
+        const text = value ? `${value}</br>Курьерская доставка` : 'Курьерская доставка'
+        data.onAfrerChange(text)
+        setIsButtonActive(!refValue.current.adressPrimary)
+    }
+
+    return (
+        <div className={`${style.courierForm}`}>
+            <div>
+                <div className='text--a3 text--bold pb-1 pt-2'>Добавить новый адрес</div>
+                <div className='pt-2'>
+                    <Input placeholder='Улица и дом *' name='adressPrimary' isCleared onChange={changeHandler} />
+                </div>
+                <div className='pt-2'>
+                    <Input placeholder='Квартира / офис' name='adressSecondary' isCleared onChange={changeHandler} />
+                </div>
+                <div className='pt-2'>
+                    <Input placeholder='Комментарий к адресу' name='adressComment' isCleared onChange={changeHandler} />
+                </div>
+            </div>
+            <div onClick={clickHandler} d-disabled={`${isButtonActive}`} fill='true' d-size='md' theme='primary' className='button'>
+                <span className='text--upper text--p5 text--bold text--sparse'>
+                    сохранить
+                </span>
+            </div>
+        </div>
+    )
+}
+
+function StepAdress({ }) {
+    const clickHandler = () => {
+
+    }
+
+    return (
+        <div className={`${style.stepAdress}`}>
+            <div className='text--a3 text--bold pb-1 pt-2'>Выберите удобный ПВЗ</div>
+            <div className={`${style.orderPoint} mt-2 mb-2`}>
+                <div className={`${style.pointBtn}`}>
+                    <div />
+                </div>
+                <div className={`${style.pointDescription}`}>
+                    <div className='text--upper text--t6 pb-0.5'>Почта россии</div>
+                    <div className='text--bold text--t4'>919338 г Москва, пр-кт Мира, 110/2</div>
+                    <div className='text--t5'>Почтомат - 919338</div>
+                    <div className='text--t5'>Доставка после 23 октября</div>
+                </div>
+                <div className={`${style.pointInfo}`}>
+                    <Icon name='info' width='16' height='16' />
+                </div>
+            </div>
+
+            <div onClick={clickHandler} d-disabled='true' fill='true' d-size='md' theme='primary' className='button'>
+                <span className='text--upper text--p5 text--bold text--sparse'>
+                    привезти сюда
+                </span>
             </div>
         </div>
     )

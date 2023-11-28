@@ -8,6 +8,7 @@ import Icon from '../../Icon'
 import Image from 'next/image'
 import InputMask from 'react-input-mask'
 import InputCode from '../form/InputCode'
+import InputPhone from '../form/InputPhone'
 
 export default function ModalAuth({ data }) {
     const [phone, setPhone] = useState('')
@@ -35,64 +36,29 @@ function AuthModalTitle({ type }) {
 
 function StepOne({ setStep, step, data, setPhone }) {
     const [isDisabled, setIsDisabled] = useState(true)
-    const [isNotEmpty, setIsNotEmpty] = useState(false)
     const refInput = useRef(null)
 
-    const getValueLength = () => refInput.current.value.replaceAll('_', '').replaceAll(' ', '').length
+    const getValueLength = value => value.replaceAll('_', '').replaceAll(' ', '').length
 
-    const changeHandler = () => {
-        setPhone(refInput.current.value)
-        setIsDisabled(getValueLength() !== 14)
+    const changeHandler = value => {
+        setPhone(value)
+        setIsDisabled(getValueLength(value) !== 14)
     }
 
     const validateHandler = () => {
-        if (getValueLength() === 14) setStep(2)
-    }
-
-    const clickHandler = () => {
-        refInput.current.setCursorToEnd()
-    }
-
-    const blurHandler = () => {
-        setIsNotEmpty(getValueLength !== 4)
-    }
-
-    const keyDownHandler = event => {
-        if (event.key !== 'Enter' && event.keyCode !== 13) return
         if (isDisabled) return
-        validateHandler()
-    }
-
-    const pasteHandler = event => {
-        event.preventDefault()
-        const paste = (event.clipboardData || window.clipboardData).getData('text')
-        const number = paste.replaceAll(/[^\d]/g, '').toString()
-        const numberArr = number.split('')
-        if (number.length > 9 && number.length < 15) {
-            let phone = ''
-
-            numberArr.forEach((n, i) => {
-                if (i === 0) phone += '+7'
-                else if (i === 1) phone += ` (${n}`
-                else if (i === 3) phone += `${n}) `
-                else if (i === 7 || i === 9) phone += ` ${n}`
-                else if (i < 11) phone += `${n}`
-            })
-
-            refInput.current.setInputValue(phone)
-            changeHandler()
-        }
-    }
-
-    const clearHandler = () => {
-        setIsNotEmpty(false)
-        refInput.current.setInputValue('')
-        refInput.current.getInputDOMNode().focus()
+        if (getValueLength(refInput.current.value) === 14) setStep(2)
     }
 
     useEffect(() => {
-        if (step === 1) refInput.current.getInputDOMNode().focus()
+        if (step === 1) refInput.current.focus()
     }, [step])
+
+    useEffect(() => {
+        const input = refInput.current.querySelector('input')
+        refInput.current = input
+        input.focus()
+    }, [])
 
     return (
         <div data-active={step === 1} className={style.stepOne}>
@@ -118,23 +84,8 @@ function StepOne({ setStep, step, data, setPhone }) {
                 <a className='link text--bold text--upper text--p6 text--color-primary' href='#'>Напишите в Telegram</a>
             </div>
 
-            <div className={style.inputMask}>
-                <div onClick={clearHandler} className={style.clearIcon}>
-                    <Icon name='close' width='16' height='16' />
-                </div>
-                <InputMask
-                    type='tel'
-                    maskChar='_'
-                    ref={refInput}
-                    className='input'
-                    onBlur={blurHandler}
-                    onClick={clickHandler}
-                    onPaste={pasteHandler}
-                    data-focus={isNotEmpty}
-                    onChange={changeHandler}
-                    onKeyDown={keyDownHandler}
-                    mask='+7 (999) 999 99 99'
-                    placeholder='+7 (___) ___ __ __' />
+            <div ref={refInput} className={style.inputMask}>
+                <InputPhone onAfterChange={changeHandler} onEnterHandler={validateHandler} />
             </div>
 
             <div data-disabled={isDisabled} onClick={validateHandler} className={`${style.btn} btn btn--md btn--fill ${isDisabled ? 'btn--grey' : 'btn--primary'}`}>

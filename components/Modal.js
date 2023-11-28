@@ -128,6 +128,8 @@ function LoadTemplate({ name, data }) {
             colorCircle: dynamic(() => import('./usefull/templates/ModalColorCircle'), { ssr: false }),
             orderAdress: dynamic(() => import('./usefull/templates/ModalOrderAdress'), { ssr: false }),
             colorsSecond: dynamic(() => import('./usefull/templates/ModalColorsSecond'), { ssr: false }),
+            orderСonsignee: dynamic(() => import('./usefull/templates/ModalOrderСonsignee'), { ssr: false }),
+            // Сonsignee
         }
         setLoadedTemplate(dynamicComponents[templateName])
     }

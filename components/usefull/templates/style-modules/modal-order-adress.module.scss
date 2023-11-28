@@ -1,13 +1,23 @@
-@import '/styles/mixins/helpers/media';
-@import '/styles/mixins/helpers/adaptive-value';
+@import "/styles/mixins/helpers/media";
+@import "/styles/mixins/helpers/adaptive-value";
+
+.container {
+    > * {
+        background-color: var(--t-background);
+    }
+}
 
 .orderSelecter {
     cursor: pointer;
     overflow: hidden;
-    padding: 25px 16px;
     position: relative;
     margin-bottom: 20px;
+    padding: 25px 16px 20px;
     background-color: var(--t-light);
+
+    > div:first-child {
+        margin-bottom: 4px;
+    }
 }
 
 .selecterSvgUp,
@@ -22,4 +32,50 @@
 
 .selecterSvgDown {
     bottom: 0px;
+}
+
+.courierForm {
+    display: flex;
+    flex-direction: column;
+    height: calc(100% - 60px);
+    justify-content: space-between;
+}
+
+.orderPoint {
+    display: flex;
+    padding: 16px 0;
+    border-radius: 8px;
+    background-color: var(--t-light);
+
+    .pointDescription {
+        width: 100%;
+    }
+
+    .pointBtn,
+    .pointInfo {
+        flex-grow: 0;
+        display: flex;
+        flex-shrink: 0;
+        cursor: pointer;
+        transition: .3s;
+        flex-basis: 60px;
+        justify-content: center;
+
+        &:hover {
+            color: var(--t-primary);
+        }
+    }
+
+    .pointBtn {
+        // margin-left: -16px;
+
+        > div {
+            width: 20px;
+            height: 20px;
+            flex-grow: 0;
+            flex-shrink: 0;
+            border-radius: 50%;
+            border: 1px solid currentColor;
+        }
+    }
 }
